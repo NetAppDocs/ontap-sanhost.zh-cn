@@ -1,0 +1,34 @@
+= 
+
+
+. 安装 Windows Host Utility Kit 7.1 以设置 FC 和 NVMe 通用的驱动程序参数。
+. 打开 MPIO 属性。
+. 从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。
++
+MPIO 可以识别 NVMe 设备，这些设备可在磁盘管理下查看。
+
+. 打开 * 磁盘管理 * 并转到 * 磁盘属性 * 。
+. 从 * MPIO * 选项卡中，单击 * 详细信息 * 。
+. 设置以下 MSDSM 设置：
++
+** PathVerifiedPeriod ： *
+** PathVerifyEnabled ： * 启用 *
+** RetransyCount ： *
+** RetransyInterval ： *
+** PDORemovedPeriod ： * 130 *
+
+
+. 选择 MPIO 策略 * 使用子集执行轮循 * 。
+. 更改注册表值：
++
+[listing]
+----
+HKLM\SYSTEM\CurrentControlSet\Services\mpio\Parameters\PathRecoveryInterval DWORD -> 30
+
+HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryInterval  DWORD-> 1
+----
+. 重新启动主机。
++
+现在， NVMe 配置已在 Windows 主机上完成。
+
+

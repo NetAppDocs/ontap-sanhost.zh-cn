@@ -1,0 +1,260 @@
+---
+sidebar: sidebar 
+permalink: nvme_ol_82.html 
+keywords: nvme, linux, oracle, 8.2 
+summary: 使用 ONTAP 为 Oracle Linux 8.2 设置 VME/FC 主机配置，包括示例 
+---
+= 适用于采用 ONTAP 的 Oracle Linux 8.2 的 NVMe/FC 主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 可支持性
+
+适用于 Oracle Linux 8.2 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.2 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 。
+
+
+
+== 已知限制
+
+无
+
+
+
+== 启用 NVMe/FC
+
+. 在服务器上安装 Oracle Linux 8.2 。
+. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# uname -r
+5.4.17-2011.1.2.el8uek.x86_64
+----
+. 升级 NVMe-CLI 软件包。原生 NVMe-CLI 软件包包含 NVMe/FC 自动连接脚本，用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 命名空间的 NetApp 插件。
++
+[listing]
+----
+# rpm -qa|grep nvme-cli
+nvme-cli-1.9-5.el8.x86_64
+----
+. 在 Oracle Linux 8.2 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
++
+[listing]
+----
+# cat /etc/nvme/hostnqn
+nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-97b3-1b5d986345d1
+----
++
+[listing]
+----
+::> vserver nvme subsystem host show -vserver vs_ol_nvme
+Vserver  Subsystem Host NQN
+----------- --------------- ----------------------------------------------------------
+vs_ol_nvme
+              nvme_ss_ol_1
+                                 nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-97b3-1b5d986345d1
+----
++
+如果 +hostnqn+ 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，以便与主机上 etc/nve/hostnqn 中的主机 NQN 字符串匹配。
+
+
+
+
+
+== 为 NVMe/FC 配置 Broadcom FC 适配器
+
+. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modelname
+LPe32002-M2
+LPe32002-M2
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modeldesc
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+----
+. 默认情况下， lpfc 中的 NVMe 支持已启用：
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
++
+较新的 lpfc 驱动程序（收件箱和发件箱）的 lpfc_enable_FC4_type 默认设置为 3 。因此，您无需在 /etc/modprobe.d/lpfc.conf 中明确设置此值。
+
+. 验证 NVMe/FC 启动程序端口是否已启用且能够查看目标端口，并且所有端口均已启动且正在运行。
++
+在以下示例中，仅启用了一个启动程序端口，并与两个目标 LIF 连接，如以下输出所示：
+
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x100000109b1c1204 WWNN x200000109b1c1204 DID x011d00 ONLINE
+NVME RPORT WWPN x203800a098dfdd91 WWNN x203700a098dfdd91 DID x010c07 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203900a098dfdd91 WWNN x203700a098dfdd91 DID x011507 TARGET DISCSRVC ONLINE
+
+NVME Statistics
+LS: Xmt 0000000f78 Cmpl 0000000f78 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002fe29bba Issue 000000002fe29bc4 OutIO 000000000000000a
+abort 00001bc7 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001e15 Err 0000d906
+
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x100000109b1c1205 WWNN x200000109b1c1205 DID x011900 ONLINE
+NVME RPORT WWPN x203d00a098dfdd91 WWNN x203700a098dfdd91 DID x010007 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203a00a098dfdd91 WWNN x203700a098dfdd91 DID x012a07 TARGET DISCSRVC ONLINE
+
+NVME Statistics
+LS: Xmt 0000000fa8 Cmpl 0000000fa8 Abort 00000000
+LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
+abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00001f50 Err 0000d9f8
+----
+
+
+
+
+== 正在验证 NVMe/FC
+
+. 验证以下 NVMe/FC 设置。
++
+[listing]
+----
+# cat /sys/module/nvme_core/parameters/multipath
+Y
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/model
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+round-robin
+round-robin
+----
++
+在上述示例中，两个命名空间映射到 Oracle Linux 8.2 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。
+
+. 验证是否已创建命名空间。
++
+[listing]
+----
+# nvme list
+Node                  SN                                            Model                                                Namespace Usage                            Format         FW Rev
+--------------------   ---------------------------------------  ----------------------------------------------- ----------------- ------------------------------- ---------------- ---------------
+/dev/nvme0n1     814vWBNRwf9HAAAAAAAB  NetApp ONTAP Controller                1                  85.90 GB / 85.90 GB     4 KiB + 0 B   FFFFFFFF
+/dev/nvme0n2     814vWBNRwf9HAAAAAAAB  NetApp ONTAP Controller                2                  85.90 GB / 85.90 GB     4 KiB + 0 B   FFFFFFFF
+/dev/nvme0n3     814vWBNRwf9HAAAAAAAB  NetApp ONTAP Controller                3                  85.90 GB / 85.90 GB     4 KiB + 0 B   FFFFFFFF
+----
+. 验证 ANA 路径的状态。
++
+[listing]
+----
+# nvme list-subsys /dev/nvme0n1
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:subsystem.nvme_ss_ol_1
+\
++- nvme0 fc traddr=nn-0x203700a098dfdd91:pn-0x203800a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
++- nvme1 fc traddr=nn-0x203700a098dfdd91:pn-0x203900a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
++- nvme2 fc traddr=nn-0x203700a098dfdd91:pn-0x203a00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
++- nvme3 fc traddr=nn-0x203700a098dfdd91:pn-0x203d00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
+----
+. 验证适用于 ONTAP 设备的 NetApp 插件。
++
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device                 Vserver                         Namespace Path                                                          NSID    UUID                                                             Size
+----------------------- ------------------------------ ----------------------------------------------------------------------- --------- ---------------------------------------------------------- ---------
+/dev/nvme0n1      vs_ol_nvme            /vol/ol_nvme_vol_1_1_0/ol_nvme_ns              1          72b887b1-5fb6-47b8-be0b-33326e2542e2   85.90GB
+/dev/nvme0n2      vs_ol_nvme            /vol/ol_nvme_vol_1_0_0/ol_nvme_ns              2          04bf9f6e-9031-40ea-99c7-a1a61b2d7d08    85.90GB
+/dev/nvme0n3      vs_ol_nvme            /vol/ol_nvme_vol_1_1_1/ol_nvme_ns              3          264823b1-8e03-4155-80dd-e904237014a4  85.90GB
+
+# nvme netapp ontapdevices -o json
+{
+"ONTAPdevices" : [
+    {
+        "Device" : "/dev/nvme0n1",
+        "Vserver" : "vs_ol_nvme",
+        "Namespace_Path" : "/vol/ol_nvme_vol_1_1_0/ol_nvme_ns",
+        "NSID" : 1,
+        "UUID" : "72b887b1-5fb6-47b8-be0b-33326e2542e2",
+        "Size" : "85.90GB",
+        "LBA_Data_Size" : 4096,
+        "Namespace_Size" : 20971520
+    },
+    {
+        "Device" : "/dev/nvme0n2",
+        "Vserver" : "vs_ol_nvme",
+        "Namespace_Path" : "/vol/ol_nvme_vol_1_0_0/ol_nvme_ns",
+        "NSID" : 2,
+        "UUID" : "04bf9f6e-9031-40ea-99c7-a1a61b2d7d08",
+        "Size" : "85.90GB",
+        "LBA_Data_Size" : 4096,
+        "Namespace_Size" : 20971520
+      },
+      {
+         "Device" : "/dev/nvme0n3",
+         "Vserver" : "vs_ol_nvme",
+         "Namespace_Path" : "/vol/ol_nvme_vol_1_1_1/ol_nvme_ns",
+         "NSID" : 3,
+         "UUID" : "264823b1-8e03-4155-80dd-e904237014a4",
+         "Size" : "85.90GB",
+         "LBA_Data_Size" : 4096,
+         "Namespace_Size" : 20971520
+       },
+  ]
+}
+
+----
+
+
+
+
+== 为 Broadcom NVMe/FC 启用 1 MB I/O 大小
+
+必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O
+
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+

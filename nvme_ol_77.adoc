@@ -1,0 +1,283 @@
+---
+sidebar: sidebar 
+permalink: nvme_ol_77.html 
+keywords: nvme, linux, oracle, 7.7 
+summary: 介绍如何使用 ONTAP 为适用于 Oracle Linux 7.7 的 NVMe/FC 配置 NVMe/FC 
+---
+= 适用于采用 ONTAP 的 Oracle Linux 7.7 的 NVMe/FC 主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 可支持性
+
+以下版本的 Oracle Linux 在 ONTAP 9.6 或更高版本上支持 NVMe/FC
+
+* 执行第 7.7 项
++
+OL 7.7 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。
+
++
+有关支持的最新配置列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+
+
+
+
+
+== 已知限制
+
+* NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。您可以使用 HBA 供应商提供的外部自动连接脚本。
+* 默认情况下，不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 OL 7.7 上启用 NVMe/FC 的章节提供了相关步骤。
+
+
+
+
+== 在 OL 7.7 上启用 NVMe
+
+. 确保已安装默认 Oracle Linux 7.7 内核。
+. 重新启动主机并验证它是否启动到指定的 OL 7.7 内核。
++
+[listing]
+----
+# uname -r
+4.14.35-1902.9.2.el7uek
+----
+. 升级到 NVMe-CLI-1.8.1-3.el7 软件包。
++
+[listing]
+----
+# rpm -qa|grep nvme-cli
+nvme-cli-1.8.1-3.el7.x86_64
+----
+. 在 ` /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules` 中将以下字符串作为单独的 udev 规则添加。这样可以为 NVMe 多路径启用轮循负载平衡。
++
+[listing]
+----
+# Enable round-robin for NetApp ONTAP
+ACTION==”add”, SUBSYSTEM==”nvme-subsystem”, ATTR{model}==”NetApp ONTAP Controller”, ATTR{iopolicy}=”round-robin
+----
+. 在 OL 7.7 主机上，检查 ` /etc/nve/hostnqn` 处的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
++
+[listing]
+----
+# cat /etc/nvme/hostnqn
+nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
+----
++
+[listing]
+----
+*> vserver nvme subsystem host show -vserver vs_nvme_10
+Vserver Subsystem Host NQN
+------- --------- -------------------------------------- -----------
+ol_157_nvme_ss_10_0
+nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
+----
+
+
+
+NOTE: 如果主机 NQN 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，使其与主机上 ` /etc/nve/hostnqn` 中的主机 NQN 字符串匹配。
+
+. 重新启动主机。
+
+
+
+
+== 为 NVMe/FC 配置 Broadcom FC 适配器
+
+. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modelname
+LPe32002-M2
+LPe32002-M2
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modeldesc
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+----
+. 复制并安装 Broadcom 发件箱自动连接脚本软件包。
++
+[listing]
+----
+# rpm -ivh nvmefc-connect-12.4.65.0-1.noarch.rpm
+----
+. 重新启动主机。
+. 验证您使用的是建议的 Broadcom lpfc 固件，原生收件箱驱动程序和外置自动连接软件包版本。有关支持的版本列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/fwrev
+12.4.243.17, sil-4.2.c
+12.4.243.17, sil-4.2.c
+
+# cat /sys/module/lpfc/version
+0:12.0.0.10
+
+# rpm -qa | grep nvmefc
+nvmefc-connect-12.4.65.0-1.noarch
+----
+. 验证 lpfc_enable_FC4_type 是否设置为 3 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
+. 验证启动程序端口是否已启动且正在运行。
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_name
+0x10000090fae0ec61
+0x10000090fae0ec62
+----
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_state
+Online
+Online
+----
+. 验证 NVMe/FC 启动程序端口是否已启用，正在运行且能够查看目标 LIF 。
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 NVME 2947 SCSI 2977 ELS 250
+NVME LPORT lpfc0 WWPN x10000090fae0ec61 WWNN x20000090fae0ec61 DID x012000 ONLINE
+NVME RPORT WWPN x202d00a098c80f09 WWNN x202c00a098c80f09 DID x010201 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203100a098c80f09 WWNN x202c00a098c80f09 DID x010601 TARGET DISCSRVC ONLINE
+NVME Statistics
+…
+----
+
+
+
+
+== 正在验证 NVMe/FC
+
+. 验证以下 NVMe/FC 设置。
++
+[listing]
+----
+# cat /sys/module/nvme_core/parameters/multipath
+Y
+
+# cat /sys/class/nvme-subsystem/nvme-subsys*/model
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+
+# cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+round-robin
+round-robin
+----
+. 验证是否已创建命名空间。
++
+[listing]
+----
+# nvme list
+Node SN Model Namespace Usage Format FW Rev
+---------------- -------------------- -----------------------
+/dev/nvme0n1 80BADBKnB/JvAAAAAAAC NetApp ONTAP Controller 1 53.69 GB / 53.69 GB 4 KiB + 0 B FFFFFFFF
+----
+. 验证 ANA 路径的状态。
++
+[listing]
+----
+# nvme list-subsys/dev/nvme0n1
+Nvme-subsysf0 – NQN=nqn.1992-08.com.netapp:sn.341541339b9511e8a9b500a098c80f09:subsystem.ol_157_nvme_ss_10_0
+\
++- nvme0 fc traddr=nn-0x202c00a098c80f09:pn-0x202d00a098c80f09 host_traddr=nn-0x20000090fae0ec61:pn-0x10000090fae0ec61 live optimized
++- nvme1 fc traddr=nn-0x207300a098dfdd91:pn-0x207600a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
++- nvme2 fc traddr=nn-0x207300a098dfdd91:pn-0x207500a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
++- nvme3 fc traddr=nn-0x207300a098dfdd91:pn-0x207700a098dfdd91 host traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live inaccessible
+----
+. 验证适用于 ONTAP 设备的 NetApp 插件。
++
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device   Vserver  Namespace Path             NSID   UUID   Size
+-------  -------- -------------------------  ------ ----- -----
+/dev/nvme0n1   vs_nvme_10       /vol/rhel_141_vol_10_0/ol_157_ns_10_0    1        55baf453-f629-4a18-9364-b6aee3f50dad   53.69GB
+
+# nvme netapp ontapdevices -o json
+{
+   "ONTAPdevices" : [
+   {
+        Device" : "/dev/nvme0n1",
+        "Vserver" : "vs_nvme_10",
+        "Namespace_Path" : "/vol/rhel_141_vol_10_0/ol_157_ns_10_0",
+         "NSID" : 1,
+         "UUID" : "55baf453-f629-4a18-9364-b6aee3f50dad",
+         "Size" : "53.69GB",
+         "LBA_Data_Size" : 4096,
+         "Namespace_Size" : 13107200
+    }
+]
+----
+
+
+
+
+== 为 Broadcom NVMe/FC 启用 1 MB I/O 大小
+
+必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O
+
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+
+
+== lpfc 详细日志记录
+
+. 您可以将 lpfc_log_verbose 驱动程序设置为以下任意值以记录 NVMe/FC 事件。
++
+[listing]
+----
+#define LOG_NVME 0x00100000 /* NVME general events. */
+#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
+#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
+#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
+----
+. 设置上述任一值后，运行 `dracut-f` 并重新启动主机。
+. 重新启动后，验证设置。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_log_verbose=0xf00083
+
+# cat /sys/module/lpfc/parameters/lpfc_log_verbose
+15728771
+----
+

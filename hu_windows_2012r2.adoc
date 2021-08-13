@@ -1,0 +1,212 @@
+---
+sidebar: sidebar 
+permalink: hu_windows_2012r2.html 
+keywords: windows, enterprise 
+summary: 将 Windows Server 2012 R2 与 ONTAP 结合使用 
+---
+= 将 Windows Server 2012 R2 与 ONTAP 结合使用
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 正在启动操作系统
+
+启动操作系统有两个选项：使用本地启动或 SAN 启动。要进行本地启动，请在本地硬盘（ SSD ， SATA ， RAID 等）上安装操作系统。有关 SAN 启动的信息，请参见以下说明。
+
+
+
+=== SAN 启动
+
+如果您选择使用 SAN 启动，则您的配置必须支持它。您可以使用 NetApp 互操作性表工具验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+
+. 将 SAN 启动 LUN 映射到主机。
+. 验证多个路径是否可用。请记住，只有在主机操作系统启动并在多个路径上运行后，多个路径才可用。
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+. 重新启动主机以验证启动是否成功。
+
+
+
+
+== 安装 Windows 修补程序
+
+建议在服务器上安装 * 最新的累积更新 * 。
+
+
+NOTE: 转至 link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2012_R2["Microsoft Update Catalog 2012 R2"^] 用于获取并安装适用于您的 Windows 版本的所需 Windows 修补程序的网站。
+
+. 从 Microsoft 支持站点下载修补程序。
+
+
+
+NOTE: 某些修补程序不能直接下载。在这种情况下，您需要向 Microsoft 支持人员请求给定的修补程序。
+
+. 按照 Microsoft 提供的说明安装修补程序。
+
+
+
+TIP: 许多修补程序都需要重新启动 Windows 主机，但您可以选择等待重新启动主机，直到安装或升级 Host Utilities 为止。
+
+
+
+== 安装 Windows Unified Host Utilities
+
+Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 link:https://mysupport.netapp.com/documentation/docweb/index.html?productID=62322&platformID=30462&language=en-US["WUHU 7.1 文档"^]。
+
+
+
+== 多路径
+
+如果 Windows 主机具有多条存储系统路径，则必须安装 MPIO 软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。
+
+在 Windows 系统上，任何 MPIO 解决方案的两个主要组件是 DSM 和 Windows MPIO 。在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO 。
+
+
+NOTE: 选择 MPIO 支持后， Windows Unified Host Utilities 将启用 Windows Server 2012 R2 的随附 MPIO 功能。
+
+
+
+== SAN 配置
+
+
+
+=== Non-ASA 配置
+
+对于非 ASA 配置，应存在两组具有不同优先级的路径。
+
+优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。
+
+优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。
+
+
+NOTE: 只有在没有优化路径可用时，才会使用非优化路径。
+
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
+
+image::nonasa.png[非 ASA]
+
+
+
+=== 全 SAN 阵列配置
+
+对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径；也就是说，它们由控制器提供服务，并在所有活动路径上发送 I/O 。
+
+image::asa.png[ASA]
+
+
+NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+
+
+
+== Hyper-V VHD 需要对齐才能获得最佳性能
+
+如果磁盘分区的数据块边界与底层 LUN 的块边界不对齐，则存储系统通常必须为每个操作系统块读取或写入完成两次块读取或写入。错位导致的额外块读取和写入可能会导致严重的性能问题。
+
+未对齐的原因是主启动记录定义的每个分区的起始扇区的位置。
+
+
+NOTE: 默认情况下， Windows Server 2016 创建的分区应对齐。
+
+使用 ONTAP PowerShell 工具包中的 `Get-NaVirtualDiskAlignment` cmdlet 检查分区是否与底层 LUN 对齐。如果分区对齐不正确，请使用 `修复 -NaVirtualDiskAlignment` cmdlet 创建对齐正确的新 VHD 文件。此 cmdlet 会将所有分区复制到新文件中。原始 VHD 文件不会被修改或删除。复制数据时，必须关闭虚拟机。
+
+您可以从 NetApp 社区下载 ONTAP PowerShell 工具包。您必须将 `Dataontap.zip` 文件解压缩到环境变量 ` %PSModulePath%` 指定的位置（或使用 `Install.ps1` 脚本为您执行此操作）。完成安装后，请使用 `SHow-NaHelp` cmdlet 获取 cmdlet 帮助。
+
+PowerShell 工具包仅支持具有 MBR 类型分区的固定大小 VHD 文件。不支持使用 Windows 动态磁盘或 GPT 分区的 VHD 。此外， PowerShell 工具包还要求最小分区大小为 4 GB 。较小的分区无法正确对齐。
+
+
+NOTE: 对于在 VHD 上使用 Grub 启动加载程序的 Linux 虚拟机，您需要在运行 PowerShell 工具包后更新启动配置。
+
+
+
+=== 使用 PowerShell 工具包更正 MBR 对齐后重新安装适用于 Linux 的 Grub 子系统
+
+在使用 Grub 启动加载程序的 Linux 子操作系统上使用 PowerShell 工具包对磁盘运行 `mbralign` 以更正 MBR 对齐后，您必须重新安装 Grub 以确保子操作系统正确启动。
+
+已对虚拟机的 VHD 文件完成 PowerShell 工具包 cmdlet 。本主题仅适用于使用 Grub 启动加载程序和 `SystemRescueCd` 的 Linux 子操作系统。
+
+. 为虚拟机挂载正确版本的 Linux 安装 CD 中磁盘 1 的 ISO 映像。
+. 在 Hyper-V Manager 中打开虚拟机的控制台。
+. 如果虚拟机正在运行并在 Grub 屏幕上挂起，请单击显示区域以确保其处于活动状态，然后单击 * Ctrl-Alt-Delete* 工具栏图标以重新启动虚拟机。如果虚拟机未运行，请启动它，然后立即单击显示区域以确保其处于活动状态。
+. 一旦看到 VMware BIOS 启动屏幕，请按一次 * Esc * 键。此时将显示启动菜单。
+. 在启动菜单中，选择 * CD-ROM * 。
+. 在 Linux 启动屏幕中，输入： `Linux rescue`
+. 采用 Anaconda/red 配置屏幕的默认值。网络连接是可选的。
+. 输入 `grub` 以启动 Grub
+. 如果此 VM 中只有一个虚拟磁盘，或者存在多个磁盘，但第一个是启动磁盘，请运行以下 Grub 命令：
+
+
+[listing]
+----
+root (hd0,0)
+setup (hd0)
+quit
+----
+如果虚拟机中有多个虚拟磁盘，并且启动磁盘不是第一个磁盘，或者您要通过从未对齐的备份 VHD 启动来修复 Grub ，请输入以下命令以确定启动磁盘：
+
+[listing]
+----
+find /boot/grub/stage1
+----
+然后运行以下命令：
+
+[listing]
+----
+root (boot_disk,0)
+setup (boot_disk)
+quit
+----
+
+NOTE: 请注意，上面的 `boot_disk` 是启动磁盘的实际磁盘标识符的占位符。
+
+. 按 * Ctrl-D* 退出。
+
+
+Linux 应急功能将关闭，然后重新启动。
+
+
+
+== 建议设置
+
+在使用 FC 的系统上，选择 MPIO 时，需要为 Emulex 和 QLogic FC HBA 设置以下超时值。
+
+对于 Emulex 光纤通道 HBA ：
+
+[cols="2*"]
+|===
+| 属性类型 | 属性值 
+
+
+| LinkTimeOut | 1. 
+
+
+| 节点超时 | 10 
+|===
+对于 QLogic 光纤通道 HBA ：
+
+[cols="2*"]
+|===
+| 属性类型 | 属性值 
+
+
+| LinkDownTimeOut | 1. 
+
+
+| PortDownRetransCount | 10 
+|===
+
+NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["《 Windows 7.1 Host Utilities 安装指南》"^]。
+
+
+
+== 已知限制
+
+Windows Server 2012 R2 没有已知问题。

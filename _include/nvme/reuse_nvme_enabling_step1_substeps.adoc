@@ -1,0 +1,25 @@
+= 
+
+
+. 备份 ` /etc/nvme/host*` 文件。
+. 如果您已手动编辑 `udev` 规则，请将其删除：
++
+[listing]
+----
+/lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules
+----
+. 执行升级。
+. 升级完成后，运行以下命令：
++
+[listing]
+----
+yum remove nvme-cli
+----
+. 在 ` /etc/nvme/` 中还原主机文件。
++
+[listing]
+----
+yum install nvmecli
+----
+. 将原始的 ` /etc/nve/host*` 内容从备份复制到 ` /etc/nvme/` 的实际主机文件。
+

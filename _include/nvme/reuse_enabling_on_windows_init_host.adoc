@@ -1,0 +1,15 @@
+= 
+
+
+按照以下步骤在 Windows 启动程序主机上启用 FC/NVMe ：
+
+. 在 Windows 主机上安装 OneCommand Manager 实用程序。
+. 在每个 HBA 启动程序端口上，设置以下 HBA 驱动程序参数：
++
+** EnableNVMe = 1
+** NVMEMode = 0
+** 限制传输大小 =1
+
+
+. 重新启动主机。
+

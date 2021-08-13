@@ -1,0 +1,30 @@
+---
+sidebar: sidebar 
+permalink: index.html 
+keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, 
+summary: SAN 主机文档 
+---
+= ONTAP SAN 主机配置
+:hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+此内容针对分发提供了有关如何为 NVMe ， iSCSI 和 FC 协议配置 ONTAP SAN 主机的指导。
+
+为了获得最佳性能并确保故障转移成功，请务必使用 ONTAP 存储正确配置 SAN 主机。这些文档介绍了如何快速设置最佳实践配置。
+
+对于 iSCSI 和 FC ，本文档将取代传统的 Linux Unified Host Utilities 指南。每个文档都特定于 Linux 的一个分发版和版本，因此您只能查看确切版本的信息。如果您的 Linux 版本尚未列出，请尽快查看。
+
+
+
+== 更多信息
+
+您可以在以下文档中找到基于 SAN 的追加信息配置：
+
+link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-asa-config/home.html["《全 SAN 阵列软件配置指南》"]
+
+

@@ -1,0 +1,213 @@
+---
+sidebar: sidebar 
+permalink: nvme_esxi_7.html 
+keywords: nvme, esxi, ontap 
+summary: 介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC 
+---
+= 适用于采用 ONTAP 的 ESXi 7.0 的 NVMe/FC 主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 可支持性
+
+ONTAP 9.7 或更高版本支持适用于 ESXi 7.0 的 NVMe/FC 。
+
+ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 。
+
+
+
+== 已知限制
+
+不支持以下功能：
+
+* RDM 映射
+* VVOL
+
+
+
+
+== 使用 ANA 启用 NVMe/FC
+
+. 禁用 HppManagementDegradedPaths 参数以提高与 ONTAP 的互操作性：
++
+[listing]
+----
+# esxcfg-advcfg -s 0 /Misc/HppManageDegradedPaths
+----
+. 重新启动主机。
+. 重新启动后，验证 HppManagementDegradedPaths 参数现在是否已禁用：
++
+[listing]
+----
+# esxcfg-advcfg -g /Misc/HppManageDegradedPaths
+Value of HppManageDegradedPaths is 0
+----
+. 检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
++
+.示例
+[listing]
+----
+# esxcli nvme info get
+Host NQN: nqn.2014-08.com.vmware:nvme:chat-54-113
+
+*> vserver nvme subsystem host show -vserver co_nv_fc_esx
+Vserver Subsystem Host NQN
+------- --------- ----------------------------------------------------------
+co_nv_fc_esx
+        subsys_chat_54_113_nvme
+                  nqn.2014-08.com.vmware:nvme:chat-54-113
+----
+
+
+
+
+== 为 NVMe/FC 配置 Broadcom FC 适配器
+
+. 安装建议的 lpfc 驱动程序，方法是将其复制到临时文件夹，然后执行以下命令：
++
+[listing]
+----
+# esxcli software vib install -d /tmp/t/Emulex-FCoE-FC-lpfc-12.4.224.0-offline-bundle-13621872.zip --no-sig-check
+Installation Result
+   Message: The update completed successfully, but the system needs to be rebooted for the changes to be effective.
+   Reboot Required: true
+   VIBs Installed: EMU_bootbank_lpfc_12.4.224.0-1OEM.688.0.0.13621872
+   VIBs Removed: EMU_bootbank_lpfc_12.4.211.6-1OEM.688.0.0.13621872
+   VIBs Skipped:
+----
+. 如有必要，请设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` ，以便在 lpfc 驱动程序中启用 NVMe/FC 支持：
++
+
+NOTE: 默认情况下， LPe35000 系列适配器会设置此参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此适配器，必须执行以下步骤。
+
++
+[listing]
+----
+# esxcli system module parameters set -m lpfc -p lpfc_enable_fc4_type=3
+----
+. 使用 elxmgmt 实用程序将 Broadcom FC 适配器固件升级到建议的版本：
++
+[listing]
+----
+# esxcli software vib install -d /tmp/t/Emulex-elxmgmt-6.8.7-12.4.211.7.zip --no-sig-check
+Installation Result
+   Message: The update completed successfully, but the system needs to be rebooted for the changes to be effective.
+   Reboot Required: true
+   VIBs Installed: EMU_bootbank_emu-esx-elxmgmt_12.4.211.7-01
+   VIBs Removed:
+   VIBs Skipped:
+…
+----
+. 重新启动主机。
+. 重新启动后，验证建议的 lpfc 驱动程序和适配器固件版本是否已应用且启动程序端口是否联机：
++
+[listing]
+----
+# esxcli storage san fc list
+ Adapter: vmhba3
+   Port ID: 010600
+   Node Name: 20:00:00:90:fa:e0:ec:8e
+   Port Name: 10:00:00:90:fa:e0:ec:8e
+   Speed: 32 Gbps
+   Port Type: NPort
+   Port State: ONLINE
+   Model Description: Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+   Hardware Version: 0000000c
+   OptionROM Version: 12.4.217.2
+   Firmware Version: 12.4.217.2
+   Driver Name: lpfc
+   DriverVersion: 12.4.224.0
+
+   Adapter: vmhba4
+   Port ID: 010F00
+   Node Name: 20:00:00:90:fa:e0:ec:8f
+   Port Name: 10:00:00:90:fa:e0:ec:8f
+   Speed: 32 Gbps
+   Port Type: NPort
+   Port State: ONLINE
+   Model Description: Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+   Hardware Version: 0000000c
+   OptionROM Version: 12.4.217.2
+   Firmware Version: 12.4.217.2
+   Driver Name: lpfc
+   DriverVersion: 12.4.224.0
+----
+
+
+
+
+== 正在验证 NVMe/FC
+
+. 验证是否已在 ESXi 主机上正确发现 ONTAP 目标 NVMe/FC 控制器：
++
+[listing]
+----
+# esxcli nvme controller list
+
+Name                                                                                                                             Controller Number  Adapter  Transport Type  Is Online
+-------------------------------------------------------------------------------------------------------------------------------  -----------------  -------  --------------  ---------
+nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_01#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                259  vmhba32  FC                  false
+nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_09#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                263  vmhba32  FC                  false
+nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_11#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                267  vmhba32  FC                  false
+nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_10#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                265  vmhba32  FC                  false
+nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_02#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                261  vmhba32  FC                  false
+----
+. 验证是否已正确创建 NVMe/FC 命名空间：
++
+以下示例中的 UUID 表示 NVMe/FC 命名空间设备。
+
++
+[listing]
+----
+#esxcfg-mpath -b
+uuid.0d12b7cd97344be8a53b7913f8f72f04 : NVMe Fibre Channel Disk (uuid.0d12b7cd97344be8a53b7913f8f72f04)
+   vmhba65:C0:T9:L30 LUN:30 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4d:00:a0:98:df:e3:d1
+   vmhba64:C0:T9:L30 LUN:30 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4c:00:a0:98:df:e3:d1
+   vmhba64:C0:T5:L30 LUN:30 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4a:00:a0:98:df:e3:d1
+   vmhba65:C0:T0:L30 LUN:30 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4b:00:a0:98:df:e3:d1
+
+uuid.49de7683950d47c9898f51443d893910 : NVMe Fibre Channel Disk (uuid.49de7683950d47c9898f51443d893910)
+   vmhba65:C0:T12:L39 LUN:39 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:27:00:a0:98:df:e3:d1
+   vmhba65:C0:T13:L39 LUN:39 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:29:00:a0:98:df:e3:d1
+   vmhba64:C0:T12:L39 LUN:39 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:3b:00:a0:98:df:e3:d1
+   vmhba64:C0:T13:L39 LUN:39 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:28:00:a0:98:df:e3:d1
+----
++
+
+NOTE: 在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须设置命名空间块大小 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。
+
++
+`vserver nvme namespace create -vserver vs_1 -path /vol/nssvol/namespace1 -size 100g -ostype vmware -block-size 512B`
+
++
+请参见 link:https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-cmpr-970%2Fvserver__nvme__namespace__create.html["有关其他详细信息，请参见 ONTAP 9 命令手册页"]。
+
+. 验证相应 NVMe/FC 命名空间设备的各个 ANA 路径的状态：
++
+[listing]
+----
+# esxcli storage hpp path list
+fc.20000090fae0ec8f:10000090fae0ec8f-fc.204900a098dfe3d1:204d00a098dfe3d1-uuid.1aa669c5376240a28ae47d8d549586ea
+   Runtime Name: vmhba65:C0:T9:L33
+   Device: uuid.1aa669c5376240a28ae47d8d549586ea
+   Device Display Name: NVMe Fibre Channel Disk (uuid.1aa669c5376240a28ae47d8d549586ea)
+   Path State: active
+
+fc.20000090fae0ec8e:10000090fae0ec8e-fc.204900a098dfe3d1:204a00a098dfe3d1-uuid.1aa669c5376240a28ae47d8d549586ea
+   Runtime Name: vmhba64:C0:T5:L33
+   Device: uuid.1aa669c5376240a28ae47d8d549586ea
+   Device Display Name: NVMe Fibre Channel Disk (uuid.1aa669c5376240a28ae47d8d549586ea)
+   Path State: standby
+----
+

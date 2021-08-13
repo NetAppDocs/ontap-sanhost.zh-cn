@@ -1,0 +1,252 @@
+---
+sidebar: sidebar 
+permalink: nvme_ol_81.html 
+keywords: nvme, linux, oracle, 8.1 
+summary: 使用 ONTAP 为 Oracle Linux 8.1 设置 VME/FC 主机配置，包括示例 
+---
+= 适用于采用 ONTAP 的 Oracle Linux 8.1 的 NVMe/FC 主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 可支持性
+
+适用于 Oracle Linux 8.1 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.1 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 。
+
+
+
+== 已知限制
+
+* NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。
+* 默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 8.1 上启用 NVMe/FC 的章节提供了相关步骤。
+* 在 Oracle Linux 8.1 上，不支持 NVMe/FC ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。
+
+
+
+
+== 启用 NVMe/FC
+
+. 在服务器上安装 Oracle Linux 8.1 。
+. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# uname -r
+5.4.17-2011.0.7.el8uek.x86_64
+----
+. 升级 NVMe-CLI 软件包。
++
+[listing]
+----
+# rpm -qa | grep nvmefc
+nvmefc-connect-12.6.61.0-1.noarch
+----
+. 在 /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules 中将以下字符串作为单独的 udev 规则添加。这样可以为 NVMe 多路径启用轮循负载平衡。
++
+[listing]
+----
+# cat /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules
+# Enable round-robin for NetApp ONTAP
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
+----
+. 在 Oracle Linux 8.1 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
++
+[listing]
+----
+# cat /etc/nvme/hostnqn
+nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
+----
++
+[listing]
+----
+*> vserver nvme subsystem host show -vserver vs_nvme_10
+Vserver Subsystem Host NQN
+------- --------- ----------------------------------------------------------
+Oracle Linux_141_nvme_ss_10_0
+nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
+----
++
+如果 +hostnqn+ 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，以便与主机上 etc/nve/hostnqn 中的主机 NQN 字符串匹配。
+
+. 重新启动主机。
+
+
+
+
+== 为 NVMe/FC 配置 Broadcom FC 适配器
+
+. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modelname
+LPe32002-M2
+LPe32002-M2
+----
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modeldesc
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+----
+. 默认情况下， lpfc 中的 NVMe 支持已启用：
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
++
+较新的 lpfc 驱动程序（收件箱和发件箱）的 lpfc_enable_FC4_type 默认设置为 3 。因此，您无需在 /etc/modprobe.d/lpfc.conf 中明确设置此值。
+
+. 接下来，安装建议的 lpfc 自动连接脚本：
++
+[listing]
+----
+# rpm -ivh nvmefc-connect-12.6.61.0-1.noarch.rpm
+----
+. 验证是否已安装自动连接脚本。
++
+[listing]
+----
+# rpm -qa | grep nvmefc
+nvmefc-connect-12.6.61.0-1.noarch
+----
+. 验证启动程序端口是否已启动且正在运行。
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_name
+0x10000090fae0ec61
+0x10000090fae0ec62
+
+# cat /sys/class/fc_host/host*/port_state
+Online
+Online
+----
+. 验证 NVMe/FC 启动程序端口是否已启用且能够查看目标端口，并且所有端口均已启动且正在运行。
++
+在以下示例中，仅启用了一个启动程序端口，并与两个目标 LIF 连接，如以下输出所示：
+
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 NVME 2947 SCSI 2947 ELS 250
+NVME LPORT lpfc0 WWPN x10000090fae0ec61 WWNN x20000090fae0ec61 DID x012000 ONLINE
+NVME RPORT WWPN x202d00a098c80f09 WWNN x202c00a098c80f09 DID x010201 TARGET DISCSRVC ONLINE
+NVME RPORT WWPN x203100a098c80f09 WWNN x202c00a098c80f09 DID x010601 TARGET DISCSRVC ONLINE
+----
+
+
+
+
+== 正在验证 NVMe/FC
+
+. 验证以下 NVMe/FC 设置。
++
+[listing]
+----
+# cat /sys/module/nvme_core/parameters/multipath
+Y
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/model
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+round-robin
+round-robin
+----
++
+在上述示例中，两个命名空间映射到 Oracle Linux 8.1 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。
+
+. 验证是否已创建命名空间。
++
+[listing]
+----
+# nvme list
+Node                SN                                           Model                                       Namespace Usage                              Format          FW Rev
+-------------------- --------------------------------------  ---------------------------------------- ----------------  -------------------------------  ----------------  -------------
+/dev/nvme0n1  814vWBNRwfBCAAAAAAAB NetApp ONTAP Controller        2                  107.37 GB / 107.37 GB  4 KiB + 0 B   FFFFFFFF
+/dev/nvme0n2  814vWBNRwfBCAAAAAAAB NetApp ONTAP Controller        3                  107.37 GB / 107.37 GB  4 KiB + 0 B   FFFFFFFF
+----
+. 验证 ANA 路径的状态。
++
+[listing]
+----
+# nvme list-subsys /dev/nvme0n1
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5a32407351c711eaaa4800a098df41bd:subsystem.test
+\
++- nvme0 fc traddr=nn-0x207300a098dfdd91:pn-0x207400a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live optimized
++- nvme1 fc traddr=nn-0x207300a098dfdd91:pn-0x207600a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live inaccessible
++- nvme2 fc traddr=nn-0x207300a098dfdd91:pn-0x207500a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live optimized
++- nvme3 fc traddr=nn-0x207300a098dfdd91:pn-0x207700a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live inaccessible
+----
+. 验证适用于 ONTAP 设备的 NetApp 插件。
++
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device   Vserver  Namespace Path             NSID   UUID   Size
+-------  -------- -------------------------  ------ ----- -----
+/dev/nvme0n1   vs_nvme_10       /vol/rhel_141_vol_10_0/ol_157_ns_10_0    1        55baf453-f629-4a18-9364-b6aee3f50dad   53.69GB
+
+# nvme netapp ontapdevices -o json
+{
+   "ONTAPdevices" : [
+   {
+        Device" : "/dev/nvme0n1",
+        "Vserver" : "vs_nvme_10",
+        "Namespace_Path" : "/vol/rhel_141_vol_10_0/ol_157_ns_10_0",
+         "NSID" : 1,
+         "UUID" : "55baf453-f629-4a18-9364-b6aee3f50dad",
+         "Size" : "53.69GB",
+         "LBA_Data_Size" : 4096,
+         "Namespace_Size" : 13107200
+    }
+]
+----
+
+
+
+
+== 为 Broadcom NVMe/FC 启用 1 MB I/O 大小
+
+必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O
+
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+

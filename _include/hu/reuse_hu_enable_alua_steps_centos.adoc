@@ -1,0 +1,15 @@
+= 
+
+
+要启用 ALUA 处理程序，请执行以下步骤：
+
+. 创建 initrd-image 的备份。
+. 将以下参数值附加到内核中，以使 ALUA 和非 ALUA 正常工作： `rdloaddriver=SCSI_DH_ALUA`
++
+....
+kernel /vmlinuz-2.6.32-358.6.1.el6.x86_64 ro root=/dev/mapper/ vg_ibmx355021082-lv_root rd_NO_LUKS rd_LVM_LV=vg_ibmx355021082/ lv_root LANG=en_US.UTF-8 rd_LVM_LV=vg_ibmx355021082/lv_swap rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet rdloaddriver=scsi_dh_alua
+....
+. 使用 `mkinitrd` 命令重新创建 initrd-image 。CentOS 6x 及更高版本使用以下命令之一： `mkinitrd -f /boot/ initrd-"uname -r".img uname -r` 或命令： `dracut -f`
+. 重新启动主机。
+. 验证 `cat /proc/cmdline` 命令的输出，以确保设置完成。
+

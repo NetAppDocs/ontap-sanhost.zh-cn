@@ -1,0 +1,222 @@
+---
+sidebar: sidebar 
+permalink: hu_solaris_113.html 
+keywords: host utilities, solaris, 113, netapp, ontap 
+summary: 介绍如何安装 Solaris 主机实用程序 
+---
+= 将 Solaris 11.3 与 NetApp ONTAP 结合使用
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 安装 Solaris Host Utilities
+
+您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的软件包。
+
+.步骤
+. 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"] 到主机上的目录。
+. 转到包含下载内容的目录。
+. 提取文件。
++
+以下示例将解压缩 SPARC 系统的文件。对于 x86-64 平台，请使用 x86/x64 软件包。
+
++
+`gunzip netapp_solaris host_utilities_6_2N20170913_0304_sparc.tar.gz`
+
+. 使用 `tar xvf` 命令解压缩文件。
++
+`tar xvf netapp_solaris host_utilities_6_2N20170913_0304_sparc.tar`
+
+. 将从 tar 文件提取的软件包添加到主机。
++
+`pkgadd -d NTAPSANTool.pkg`
+
++
+这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。
+
++
+要完成安装，您必须使用 `host_config` 命令为您的环境（此处为 MPxIO ）配置主机参数。
+
++
+`host_config` 命令的格式如下：
+
++
+` /opt/NTAP/SANToolkit/bin/host_config \<-setup>\<-protocol fcp_iscsi_mixed>\<-multipath mpxio_dmp> non> （ -noalua ）（ -mcc 60_90_120 ）`
+
++
+`host_config` 命令执行以下操作：
+
++
+** 对 x86 和 SPARC 系统的光纤通道和 SCSI 驱动程序进行设置更改
+** 为两种 MPxIO 配置提供 SCSI 超时设置
+** 设置 VID/PID 信息
+** 启用或禁用 ALUA
+** 为 x86 和 SPARC 系统配置 MPxIO 使用的 ALUA 设置以及 SCSI 驱动程序。
+
+
+. 重新启动主机。
+
+
+
+
+== SAN 工具包
+
+安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
+
+在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
+
+[listing]
+----
+#sanlun lun show
+
+controller(7mode)/                 device                                            host             lun
+vserver(Cmode)     lun-pathname    filename                                         adapter protocol  size  mode
+------------------------------------------------------------------------------------------------------
+data_vserver       /vol/vol1/lun1  /dev/rdsk/c0t600A098038314362692451465A2F4F39d0s2  qlc1  FCP       60g   C
+data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475d0s2  qlc1  FCP       20g   C
+----
+
+
+== SAN 启动
+
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+
+SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。
+
+您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 link:https://library.netapp.com/ecmdocs/ECMLP2748974/html/frameset.html["《 Solaris Host Utilities 安装和设置指南》"] 有关在 Solaris MPIO 环境中启动 SAN LUN 的详细信息。
+
+
+
+== 多路径
+
+多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。
+
+
+
+=== Non-ASA 配置
+
+对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
+
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+
+在 OS 原生 `mpathadm show lu <lun>` 命令中，每个 LUN 的 * 访问状态 * 部分会显示路径优先级。
+
+
+
+=== 全 SAN 阵列配置
+
+在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
+
+以下示例显示了 ONTAP LUN 的正确输出：
+
+对于 ASA 和非 ASA 配置， `sanlun` 命令的输出是相同的。
+
+在 OS 原生 `mpathadm show lu <lun>` 命令中，每个 LUN 的 * 访问状态 * 部分会显示路径优先级。
+
+[listing]
+----
+#sanlun lun show -pv sparc-s7-16-49:/vol/solaris_vol_1_0/solaris_lun
+
+                    ONTAP Path: sparc-s7-16-49:/vol/solaris_vol_1_0/solaris_lun
+                           LUN: 0
+                      LUN Size: 30g
+                   Host Device: /dev/rdsk/c0t600A098038314362692451465A2F4F39d0s2
+                          Mode: C
+            Multipath Provider: Sun Microsystems
+              Multipath Policy: Native
+----
+
+NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列（ ASA ）配置。
+
+
+
+== 建议设置
+
+以下是为采用 NetApp ONTAP LUN 的 Solaris 11.3 SPARC 和 x86_64 建议的一些参数设置。这些参数值由 Host Utilities 设置。
+
+[cols="2*"]
+|===
+| 参数 | 价值 
+
+
+| throttle_max | 8. 
+
+
+| not_ready_retries | 300 
+
+
+| busy_retries | 30 个 
+
+
+| reset_retries | 30 个 
+
+
+| throttle_min | 2. 
+
+
+| timeout_retries | 10 
+
+
+| 物理块大小 | 4096 
+|===
+
+
+=== MetroCluster 的建议设置
+
+默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp https://kb.netapp.com/app/answers/answer_view/a_id/1001373/loc/en_US["KB1001373"]。
+
+
+
+== Oracle Solaris 虚拟化
+
+* Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。
+* 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
+* NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
+* 仅使用虚拟化存储资源（例如 `vdskk` ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们不能直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"]。
+
+
+
+
+=== 建议的虚拟化设置
+
+如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。
+
+要验证修补程序，请执行以下操作：
+
+. 创建 zpool 。
+. 对 zpool 运行 `zdb -C` 并验证 * 磁盘移 * 的值是否为 12 。
++
+如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 vDC.conf 的内容。
+
++
+在 * 换档 * 显示值 12 之前，请勿继续操作。
+
+
+
+
+NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提供了修补程序。如果需要帮助确定最佳内核修补程序，请联系 Oracle 。
+
+
+
+== 已知问题和限制
+
+[cols="4*"]
+|===
+| NetApp 错误 ID | 标题 | Description | Oracle ID 
+
+
+| 1366780 | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 
+
+
+| 1368957 | "Solaris 11.x"cfgadm -c configure" 导致端到端 Emulex 配置出现 I/O 错误 " | 在 Emulex 端到端配置上运行 "cfgadm -c configure" 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复 | 不适用 
+|===

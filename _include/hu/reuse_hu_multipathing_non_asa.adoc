@@ -1,0 +1,4 @@
+= 
+
+
+您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。
