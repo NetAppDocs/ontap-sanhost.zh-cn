@@ -4,7 +4,7 @@ permalink: nvme_esxi_7.html
 keywords: nvme, esxi, ontap 
 summary: 介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC 
 ---
-= 适用于采用 ONTAP 的 ESXi 7.0 的 NVMe/FC 主机配置
+= 适用于采用 ONTAP 的 ESXi 7.0 的 NVMe-oF 主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1

@@ -1571,7 +1571,6 @@
   <block id="27903dacace5a068c1878082e92ceefc" category="paragraph">RHEL 6.8 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="fe88f0836c56baf22e2264574de8ae99" category="paragraph">RHEL 6.8 没有已知问题。</block>
   <block id="a17de31f593c35dc7c2994d38e007bb6" category="summary">介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC</block>
-  <block id="376f690ec79fb16bb99633d01910fd1f" category="doc">适用于采用 ONTAP 的 ESXi 7.0 的 NVMe/FC 主机配置</block>
   <block id="b72cc9bc0dbce24f442daa7d852c6367" category="paragraph">ONTAP 9.7 或更高版本支持适用于 ESXi 7.0 的 NVMe/FC 。</block>
   <block id="be1c319a30cb57cb6a92f5f7739450c7" category="paragraph">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="08753753c399c09f5431f7f503b1b422" category="paragraph">不支持以下功能：</block>
@@ -1944,7 +1943,6 @@
   <block id="7b77ca74daebfde9d9723cc5ef879cf8" category="sidebar">SAN Host Utilities</block>
   <block id="a4d5754af636a6318ee2ffcd80c52e27" category="sidebar">Linux Unified Host Utilities</block>
   <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
-  <block id="f0db7248566e408cd96fa9e079da6497" category="sidebar">NVMe/FC 主机配置</block>
   <block id="1aa66ef3a8e34a7a538960a80d2e1e31" category="sidebar">ESXi</block>
   <block id="01deebfa87b938c89ecb3dcb4effcbe2" category="sidebar">7.0</block>
   <block id="fdcd362ac5f5f9817e70642dd2a48bfd" category="sidebar">Oracle Linux</block>
@@ -2042,4 +2040,116 @@
   <block id="812daa291d1c26c02bbf300bc7c1bc8d" category="inline-link-macro">客户案例 -00088029</block>
   <block id="fd3470c9903d74a47900e4edf1fccfde" category="list-text">要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 <block ref="dd56d07272778fbf2351a1a6bf2d68f6" category="inline-link-macro-rx"></block> 和 <block ref="afafc6544ae1d28d7c258b8a10250602" category="inline-link-macro-rx"></block></block>
   <block id="11b4279628bd5bd99185024194584bba" category="sidebar">VMware vSphere 6.5 和 6.7</block>
+  <block id="e23d1316b6f8fd9d76ebc1a761f0ffa9" category="summary">如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机</block>
+  <block id="1124bd13d48eff16726e09da76f5e2b3" category="doc">适用于采用 ONTAP 的 RHEL 8.4 的 NVMe-oF 主机配置</block>
+  <block id="c86cc04a60faa82236164aaa2faeb7fd" category="paragraph">采用 ANA （非对称命名空间访问）的 RHEL 8.4 支持基于网络结构的 NVMe 或 NVMe-oF （包括 NVMe/FC 和其他传输）。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在 RHEL 8.4 和 ONTAP 上使用 ANA 作为目标的内核 NVMe 多路径中启用 NVMe-oF 的详细信息。</block>
+  <block id="98f770b0af18ca763421bac22b4b6805" category="section-title">功能</block>
+  <block id="b7474f811791dcc10dc5c4c83cd68ff8" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中包含 `nve-fc auto-connect` 脚本。您可以使用这些原生自动连接脚本，而不必安装外部供应商提供的出箱自动连接脚本。</block>
+  <block id="1edfd9e2cff717b737df6889a024b9e7" category="list-text">从 RHEL 8.2 开始，已在 `NVMe-CLI` 软件包中提供原生 `udev` 规则，该软件包可为 NVMe 多路径启用轮循负载平衡。您无需再手动创建此规则（如 RHEL 8.1 中所做的那样）。</block>
+  <block id="230e651755d5387d3a7fc2291f07bfec" category="list-text">从 RHEL 8.2 开始， NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以照常为 SCSI LUN 配置 `dm-multipath` ，从而生成 `mpath` 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。</block>
+  <block id="bd89f3a395591c17f8cb7f0aaea6cc0b" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中的 NetApp 插件还可以显示 ONTAP 命名空间的 ONTAP 详细信息。</block>
+  <block id="509e52d19112a7c7188376d101160b4c" category="paragraph">对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。</block>
+  <block id="c8fe594dab6cb1395df34d73b005c900" category="section-title">配置要求</block>
+  <block id="3eee338751e3c83a0f670d65776dc5bb" category="paragraph">请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
+  <block id="4ded790bbb27d5eadbd8717a3e61cb12" category="section-title">启用内核 NVMe 多路径</block>
+  <block id="6f77e42d8a2b806188775127fb18ff38" category="list-text">在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="74b34615858a2f42622b19603c1d7f9a" category="list-text">安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">示例</block>
+  <block id="6ba6a18088999d632ca174b9873a3b12" category="list-text">安装 `NVMe-CLI` 软件包：</block>
+  <block id="e71d1275a2744aceb8d59932f2e5fe56" category="list-text">启用内核 NVMe 多路径。</block>
+  <block id="341d2003e57255a58ea7b3a85806bbb8" category="list-text">在主机上，检查 ` /etc/nve/hostnqn` 处的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。示例</block>
+  <block id="f3852411c8956408a5a170c1d4d53651" category="admonition">如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令更新相应 ONTAP NVMe 子系统上的主机 NQN 字符串，以匹配主机上的主机 NQN 字符串 ` /etc/nve/hostnqn` 。</block>
+  <block id="de19b5a5ee04a9d75ed01f3017e72811" category="paragraph">如果要在同一主机上同时运行 NVMe 和 SCSI 共存的流量，建议分别对 ONTAP 命名空间使用内核 NVMe 多路径，而对 ONTAP LUN 使用 dm-multipath 。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。为此，可以将 enable_Foreign 设置添加到 ` /etc/multipath.conf` 文件中：</block>
+  <block id="2c4ca691e5adaf801e0bf8d274c9b482" category="list-text">运行 `systemctl restart multipathd` 命令以使新设置生效，从而重新启动 multipathd 守护进程。</block>
+  <block id="5d1b3cf5c2e1ac5de48898e0fc69d53b" category="section-title">正在配置 NVMe/FC</block>
+  <block id="3ea394f2d9cebf2dfc911ba5e025db7a" category="section-title">Broadcom/Emulex</block>
+  <block id="237ef25227ad60dc21bc575c8c5d3c91" category="list-text">验证您使用的是受支持的适配器。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的适配器的最新列表。</block>
+  <block id="26fa591732ddeff57790e5200f54f70c" category="list-text">验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的适配器驱动程序和固件版本的最新列表。</block>
+  <block id="46e2b7cc014d11d7552d6921801d0753" category="list-text">验证 lpfc_enable_FC4_type 是否设置为 3 。</block>
+  <block id="2defc9958244f438872605820e3ca11a" category="list-text">确认启动程序端口已启动且正在运行，并且您能够看到目标 LIF 。</block>
+  <block id="cf0ca1d2e48dec2abfc57cc3d3ad9bdd" category="section-title">启用 1 MB I/O 大小（可选）</block>
+  <block id="ebca1c9e44630148af4439559839580e" category="paragraph">ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是，对于 Broadcom NVMe/FC 主机 1 MB 大小的问题描述 I/O 请求， lpfc 参数 `lpfc_sg_seg_cnt` 也应从默认值 64 增加到 256 。请按照以下说明执行此操作：</block>
+  <block id="fec3fcd81ccab102d0ff0e385ca80b74" category="list-text">在相应的 `modprobe lpfc.conf` 文件中附加值 `256` ：</block>
+  <block id="e6dee1b64bbb79ed1de507cfbbc7c671" category="list-text">重新启动后，通过检查对应的 `sysfs` 值来验证是否已应用上述设置：</block>
+  <block id="7b76a53475a93743693ad9b9dd01576a" category="paragraph">现在， Broadcom FC-NVMe 主机应该能够在 ONTAP 命名空间设备上发送最多 1 MB 的 I/O 请求。</block>
+  <block id="2ca464fc1baee04e879e92c84915029a" category="section-title">Marvell/QLogic</block>
+  <block id="1af9cb3d6c724363f724486734a76f7f" category="paragraph">RHEL 8.4 GA 内核中包含的原生收件箱 `qla2xxx` 驱动程序具有最新的上游修复程序，这些修复程序对于 ONTAP 支持至关重要。</block>
+  <block id="01e99a43df9a9e103daa49144d80325a" category="list-text">使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="996bc8c555f8b2265c43a9a361d7bcd2" category="list-text">验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：</block>
+  <block id="089e48d3aaad855e742b80bcc5bb6d06" category="section-title">正在验证 NVMe-oF</block>
+  <block id="3aad3225f60de4118eb7263a1c0fbb28" category="list-text">验证是否已启用内核 NVMe 多路径：</block>
+  <block id="6a5f52acb9909dabaef5e01e83fd30f8" category="list-text">验证适当的 nve-of 设置， `model` set to `NetApp ONTAP Controller` and `load balancing OPoliciy` set to `round-robin` ，以使相应的 ONTAP 命名空间正确反映在主机上：</block>
+  <block id="26bcb9f1cb6f391f4b2c18e676bb458d" category="section-title">NVMe/FC</block>
+  <block id="5d65d3cf86dda19fb97a2b015461e1cf" category="list-text">验证 NVMe/FC ONTAP 命名空间是否正确反映在主机上。</block>
+  <block id="b2708b2bdf938da4bfba68e2a7b010b3" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。</block>
+  <block id="051ff3071e673676a5e48635fa7f872b" category="list-text">验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。</block>
+  <block id="7b7cf2f51a50fd1958747b87b9de79d0" category="paragraph">在对任何 NVMe/FC 故障开始任何故障排除之前，请确保您运行的配置符合 IMT 规范，然后继续执行以下步骤以调试任何主机端问题。</block>
+  <block id="b74dd8eaf171dc7bdadb4b02805e11ef" category="list-text">您可以将 `lpfc_log_verbose` 驱动程序设置为以下任意值以记录 NVMe/FC 事件：</block>
+  <block id="72eeec6a3c176f0aa6e7a2c82b9104d4" category="list-text">设置上述任一值后，运行 `dracut-f` 命令重新创建 `initramfs` 并重新启动主机。</block>
+  <block id="c6c4209c61e5d15f1cdf22504926d2ab" category="list-text">重新启动后，验证设置。</block>
+  <block id="e8211b68f4f8fe540f8a1f1df578cb9d" category="section-title">qla2xxx 详细日志记录</block>
+  <block id="7e1bab1590d0a1b7415ae6393834f5f0" category="paragraph">NVMe/FC 没有与 lpfc 驱动程序类似的特定 qla2xxx 日志记录。因此，您可以使用以下步骤设置常规 qla2xxx 日志记录级别：</block>
+  <block id="0199c49af15b1997cf6d2ddd0ea8adf4" category="list-text">将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。</block>
+  <block id="5d14823339a99ad173c461c5934c7795" category="list-text">运行 `dracut -f` 命令重新创建 `initramfs` ，然后重新启动主机。</block>
+  <block id="18c1ce7cd10cb855d9571af493e60d2f" category="list-text">重新启动后，验证是否已按如下所示应用详细日志记录：</block>
+  <block id="336bb1163b96188b27a0c400c9ed3e7e" category="section-title">常见 NVMe-CLI 错误和解决方法</block>
+  <block id="34df248e027a4c30ed1b7d088594b696" category="paragraph">下表显示了在 NVMe 发现， NVMe 连接或 NVMe 连接所有操作期间 `NVMe-CLI` 显示的错误以及解决方法：</block>
+  <block id="bd578ecd5b4e2ae0680ca3e17e20ed2a" category="cell">`NVMe-CLI` 显示的错误</block>
+  <block id="e8a5a7214d896558232c2e63f40a05c2" category="cell">可能的发生原因</block>
+  <block id="7aebfa1e2291377e040de92d7f7f335f" category="cell">临时解决策</block>
+  <block id="37ea58a1ef8410b6d6bf6ec383fdb9bb" category="cell">`无法写入 /dev/nve-Fabric ：参数` 无效</block>
+  <block id="e6abe40d88718ddd0b9bffc84a71160e" category="cell">语法不正确</block>
+  <block id="5db86bac1ba97f8a89650fb87fa3f00a" category="cell">确保对上述 NVMe 命令使用正确的语法。</block>
+  <block id="60059d5e6355695d881f6470b0b221b0" category="cell">`无法写入 /dev/nve-Fabric ：没有此类文件或目录`</block>
+  <block id="364d4f2f5f0f5b369d500a6d7ef097b8" category="cell">多个问题可能会触发此问题。将错误的参数传递给 NVMe 命令是常见原因之一。</block>
+  <block id="fd7607192f54bfc64a916ff4265b8284" category="list-text">确保已将正确的参数（例如正确的 WWNN 字符串， WWPN 字符串等）传递给命令。</block>
+  <block id="55fd3388a3964cd90c0a1fb25a5104e0" category="list-text">如果参数正确，但您仍看到此错误，请检查 ` /sys/class/scsi_host/host*/nve_info` 输出是否正确， NVMe 启动程序是否显示为 `Enabled` ， NVMe/FC 目标 LIF 是否正确显示在此处的远程端口部分下。示例</block>
+  <block id="0d996d199c6027dc68cd4cab85563b7c" category="list-text">如果目标 LIF 未在 nve_info 输出中显示为上述内容，请检查 ` /var/log/messages` 和 `dMesg` 输出中是否存在任何可疑的 NVMe/FC 故障，并相应地进行报告或修复。</block>
+  <block id="64ede1e6f2ef30c339f9a3e100f40cfc" category="cell">`没有要提取的发现日志条目`</block>
+  <block id="b0dfa52656cffd6e279876e38ade4449" category="cell">通常，如果未将 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统，或者在相应子系统中添加了不正确的 hostnqn 字符串，则会出现此情况。</block>
+  <block id="63de53510175cd2fa7213647b4db5fda" category="cell">确保已将确切的 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统中（通过 `vserver nvme subsystem host show` 命令进行验证）。</block>
+  <block id="abbdb018748bb6cd12284ad6c1685b67" category="cell">`无法写入 /dev/nve-Fabric ：操作已在进行中`</block>
+  <block id="225b7a6d4ea820127fe205c2526ea209" category="cell">查看控制器关联或指定操作是否已创建或正在创建。在上述自动连接脚本中可能会发生这种情况。</block>
+  <block id="3c7b3855799d1d584f0b34f56b7e8a85" category="cell">无对于 NVMe 发现，请尝试在一段时间后运行此命令。对于 NVMe connect and connect-all ，请运行 `nvme list` 命令以验证是否已在主机上创建并显示命名空间设备。</block>
+  <block id="5d58354522165b88ab742ec42aac9161" category="section-title">何时联系技术支持</block>
+  <block id="db4ed55dc4a3e29a642f71c4df28880b" category="paragraph">如果您仍面临问题，请收集以下文件和命令输出，并联系技术支持以进行进一步的分类：</block>
+  <block id="b5532e466b7ace9d1d9ddb98b57ec0d7" category="summary">介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP3 配置 NVMe/FC</block>
+  <block id="59788ae5607a12c1afe34deb1ad155a2" category="doc">适用于采用 ONTAP 的 SUSE Linux Enterprise Server 15 SP3 的 NVMe-oF 主机配置</block>
+  <block id="e70c1030d9edf847e05fc47a0de27a27" category="paragraph">采用 ANA （非对称命名空间访问）的 SUSE Linux Enterprise Server 15 SP3 （ SLES15 SP3 ）支持基于网络结构的 NVMe 或 NVMe-oF （包括 NVMe/FC 和其他传输）。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处详细介绍了如何在 SLES15 SP3 和 ONTAP 上使用 ANA 作为目标来启用采用内核 NVMe 多路径的 NVMe-oF 。</block>
+  <block id="9ecac4a21a7fe6b2f71d8fdffa72bb05" category="list-text">SLES15 SP3 支持 NVMe/FC 和其他传输。</block>
+  <block id="79b488f9eaea99a6d3f6667b30d733e5" category="list-text">NVMe-oF 不支持 sanlun 。因此，在 SLES15 SP3 上，不存在对 NVMe-oF 的 Lu 支持。您可以改用原生 NVMe-CLI 中包含的 NetApp 插件。此操作应适用于所有 NVMe-oF 传输。</block>
+  <block id="fcfc5ba070a0675d68aab9fb9f245c43" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以像往常一样为 SCSI LUN 配置 `dm-multipath` ，从而生成 mpath 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。</block>
+  <block id="1733de5a596dfd8c9179b7f061fe9051" category="paragraph">没有已知限制。</block>
+  <block id="42104bec91c2c82c24dfb75610f2ff97" category="section-title">配置要求</block>
+  <block id="a9253bb30315649124db4e36a8bdd239" category="paragraph">默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
+  <block id="83314818bb7c47b391616d0ff767a7de" category="section-title">NVMe-oF 启动程序包</block>
+  <block id="abc4d57007eba9b1d8b3f88edac97e68" category="list-text">验证 SLES15 SP3 MU 主机上是否已安装所需的内核和 NVMe-CLI MU 软件包。</block>
+  <block id="21c405f2155cb8a6afae52ce69ea30ba" category="paragraph">上述 NVMe-CLI MU 软件包现在包括以下内容：</block>
+  <block id="3f238133ff1343b363a48a7a2ab955af" category="list-text">* NVMe/FC 自动连接脚本 * —在还原命名空间的底层路径以及主机重新启动期间， NVMe/FC 自动（重新）连接所需的脚本：</block>
+  <block id="af10efe413074ce72e45cef98d1a362a" category="list-text">* NVMe udev rule* - 用于确保适用场景多路径循环负载平衡器默认 ONTAP 所有 ONTAP 命名空间的新 udev 规则：</block>
+  <block id="146ce4e7ccd084a734b4926d499af277" category="list-text">* 适用于 ONTAP 设备的 NetApp 插件 * —现有的 NetApp 插件现已进行修改，以处理 ONTAP 命名空间。</block>
+  <block id="4665175e405cb9e066318d3ddd80ff93" category="list-text">检查主机上 ` /etc/nve/hostnqn` 处的 hostnqn 字符串，并确保其与 ONTAP 阵列上相应子系统的 hostnqn 字符串正确匹配。例如：</block>
+  <block id="b798999f972d27360b79f67bf6d7645b" category="paragraph">根据主机上使用的 FC 适配器，继续执行以下步骤。</block>
+  <block id="a21a0934c34b47b51f7b0b4b6c4a96ec" category="list-text">验证您是否具有建议的适配器和固件版本。例如：</block>
+  <block id="72f2415a9be66a5eaab08e4f67bda85b" category="list-text">较新的 lpfc 驱动程序（收件箱和发件箱）已将 lpfc_enable_FC4_type 默认设置为 3 ，因此，您不再需要在 ` /etc/modprobe.d/lpfc.conf` 中明确设置此设置，然后重新创建 `initrd` 。默认情况下，已启用 `lpfc NVMe` 支持：</block>
+  <block id="bee4144b4cdc5aa41bc58db16ad45be9" category="list-text">现有的原生收件箱 lpfc 驱动程序已经是最新版本，并且与 NVMe/FC 兼容。因此，您无需安装 lpfc OOB 驱动程序。</block>
+  <block id="a4abd6014bb6c1f8fcd778d382d06818" category="list-text">验证启动程序端口是否已启动且正在运行。</block>
+  <block id="a9628073767b50f0ec03840bfa8b42ee" category="list-text">确认 NVMe/FC 启动程序端口已启用，并且您能够看到目标端口，并且所有端口均已启动且正在运行。在此示例中，仅启用了 1 个启动程序端口，并与两个目标 LIF 进行连接，如输出所示：</block>
+  <block id="8a63a773bcb6e38a1c50c4d46cff082a" category="section-title">启用 1 MB I/O 大小（可选）</block>
+  <block id="71c5f19320dfcd010a3a516b22ea8c97" category="list-text">在相应的 `modprobe lpfc.conf` 文件中附加值 256 ：</block>
+  <block id="55ad78f06d2638e9a96da0a59fba4662" category="list-text">重新启动后，通过检查相应的 sysfs 值来验证是否已应用上述设置：</block>
+  <block id="ef54403ad5ac94142bf694671621e4ae" category="paragraph">现在， Broadcom NVMe/FC 主机应该能够在 ONTAP 命名空间设备上最多发送 1 MB 的 I/O 请求。</block>
+  <block id="f18fb2dfb70f685c15bab5b5aedd018e" category="paragraph">较新的 SLES15 SP3 MU 内核中包含的原生收件箱 qla2xxx 驱动程序具有最新的上游修复程序，这些修复程序对于 ONTAP 支持至关重要。</block>
+  <block id="786d5eb75e325663513faf6273564ebf" category="list-text">验证您是否正在运行受支持的适配器驱动程序和固件版本，例如：</block>
+  <block id="79ba4cec11a87f2af036439169eabd6c" category="list-text">验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够用作 NVMe/FC 启动程序：</block>
+  <block id="c59affec436f2685c9cf2603d66c8362" category="paragraph">` # cat /sys/module/qla2xxx/parameters/ql2xnvmeenable 1`</block>
+  <block id="a0eb26e72e628156638ad8b9cea45ac5" category="list-text">通过检查以下各项验证是否确实已启用内核 NVMe 多路径：</block>
+  <block id="fb7b76993754f8ed5199f3ab54980e07" category="list-text">验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如，型号设置为 `NetApp ONTAP 控制器` ，负载平衡策略设置为 `round-robin` ）是否正确反映在主机上：</block>
+  <block id="c1102b7fecd5a1872e32e1bbdb99b583" category="list-text">验证是否已创建命名空间。例如：</block>
+  <block id="e4fc85b6ee79319b803b708e82a77e22" category="list-text">验证 ANA 路径的状态。例如：</block>
+  <block id="921fe189e88bd0fc8bf474a52f0138f7" category="list-text">验证 ONTAP 命名空间的 NetApp 插件。例如：</block>
+  <block id="80748b874d55c5038d34ce16a870e640" category="section-title">qla2xxx 详细日志记录</block>
+  <block id="38a517c65e7a4cfa6d1b781c6a6e35f4" category="cell">确保 NVMe 命令使用的语法正确。</block>
+  <block id="51062446fb213f15851b5dffb8352c2b" category="doc">适用于采用 ONTAP 的 ESXi 7.0 的 NVMe-oF 主机配置</block>
+  <block id="c93b085fcb8e1f8bc98e8da71741e760" category="sidebar">NVMe-oF 主机配置</block>
 </blocks>
