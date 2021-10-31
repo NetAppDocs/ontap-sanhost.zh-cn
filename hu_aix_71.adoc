@@ -35,16 +35,16 @@ summary: 介绍如何将 IBM AIX 7.1 与 ONTAP 结合使用
 . 转到包含下载内容的目录。
 . 解压缩文件并提取 SAN 工具包软件包。
 +
-`zcat ntap_aix_host_utilities_6.0.tar.Z` tar -xvf –
+`tar -xvf ntap_aix_host_utilities_6.1.tar.tgz`
 
 +
-解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.0` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
+解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
 
 . 安装 AIX MPIO ：
 +
-`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.0/MPIO NetApp.MPIO_Host_Utilities_Kit`
+`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
 
-. 安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.0/SAN_Tool_Kit netapp.SAN_toolkit`
+. 安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`
 . 重新启动主机。
 
 

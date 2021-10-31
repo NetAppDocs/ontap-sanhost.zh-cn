@@ -25,6 +25,8 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后，必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。
 
+NetApp AIX Host Utilities 6.1 是最新版本。此版本可解决先前版本中报告的内存泄漏问题描述。有关追加信息，请参见发行说明部分。
+
 .步骤
 . 登录到主机。
 +
@@ -36,16 +38,16 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 . 转到包含下载内容的目录。
 . 解压缩文件并提取 SAN 工具包软件包。
 +
-`zcat ntap_aix_host_utilities_6.0.tar.Z` tar -xvf –
+`tar -xvf ntap_aix_host_utilities_6.1.tar.gz`
 
 +
-解压缩文件时会创建以下目录： ntap_aix_host_utilities_6.0 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
+解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
 
 . 安装 AIX MPIO ：
 +
-`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.0/MPIO NetApp.MPIO_Host_Utilities_Kit`
+`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
 
-. 安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.0/SAN_Tool_Kit netapp.SAN_toolkit`
+. 安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`
 . 重新启动主机。
 
 
@@ -216,5 +218,11 @@ up     primary  path3  fcs1    fc_aix_4     1
 | NetApp 错误 ID | 标题 | Description | 合作伙伴 ID 
 
 
-| 1307653 | 在 SFO 故障和直接 IO 期间发现 VIOS 3.1.1.10 上的 I/O 问题 | 在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， vfchost 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述 |  
+| 1416221. | AIX 7200-05-01 在存储故障转移期间遇到虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）的 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL5 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上虚拟 iSCSI 磁盘（ hdisk ）的 `rw_timeout` 值将为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。根据 IBM 的要求，在应用 APAR - IJ34739 （即将发布的版本）后，我们可以使用 `chdev` 命令动态更改 rw_timeout 值。 |  
+
+
+| 1414700 | 在存储故障转移期间， AIX 7.2 TL04 的虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）发生 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL4 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上 vSCSI 适配器的 `rw_timeout` 值为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。 |  
+
+
+| 1307653 | 在 SFO 故障和直连 I/O 期间发现 VIOS 3.1.1.10 上的 I/O 问题 | 在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， `vfchost` 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述 |  
 |===

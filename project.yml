@@ -1,12 +1,5 @@
 ---
-settings:
-  name: SAN Host
-  internal:
-    pdf_enabled: true
-  prod:
-    pdf_enabled: true
-    harmony_enabled: true
-    langs: zh-cn,us-en,ja-jp
+settings: {}
 sidebar:
   entries:
   - title: 主页
@@ -17,6 +10,8 @@ sidebar:
       url: "/hu_luhu_71.html"
     - title: Windows Unified Host Utilities
       url: "/hu_wuhu_71.html"
+    - title: AIX Host Utilities
+      url: "/hu_aix_61.html"
   - title: NVMe-oF 主机配置
     entries:
     - title: ESXi
@@ -124,7 +119,7 @@ sidebar:
       - title: 虚拟机管理程序 8.
         url: "/hu_citrix_8x.html"
       - title: XenServer 7.
-        url: "/ hu_citrix_7x.html"
+        url: "/hu_citrix_7x.html"
     - title: ESXi
       entries:
       - title: VMware vSphere 7
@@ -139,6 +134,10 @@ sidebar:
       entries:
       - title: OL 8.
         entries:
+        - title: 8/4.
+          url: "/hu_ol_84.html"
+        - title: '8.3'
+          url: "/hu_ol_83.html"
         - title: '8.2'
           url: "/hu_ol_82.html"
         - title: '8.1'

@@ -1,0 +1,261 @@
+---
+sidebar: sidebar 
+permalink: hu_aix_61.html 
+keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
+summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用 
+---
+= AIX Host Utilities 6.1
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+
+
+== 前提条件
+
+.开始之前
+* 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
++
+您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"] 以验证您的配置。
+
+
+
+
+
+== SAN 工具包
+
+AIX Host Utilities 是一种 NetApp 主机软件，可在 IBM AIX 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
+
+* 示例 *
+
+在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
+
+[listing]
+----
+`#sanlun lun show all`
+
+controller(7mode)/ device host lun
+
+vserver(Cmode) lun-pathname filename adapter protocol size mode
+----------------------------------------------------------------
+data_vserver   /vol/vol1/lun1 hdisk0 fcs0    FCP      60g C
+data_vserver   /vol/vol2/lun2 hdisk0 fcs0    FCP      20g C
+data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
+data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
+----
+
+NOTE: 此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。
+
+
+NOTE: AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。
+
+
+
+== 安装 AIX Host Utilities
+
+上提供了 NetApp AIX Host Utilities 软件包 https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host%2BUtilities%2B-%2BSAN&platform=Linux["NetApp 支持站点"] 在经过压缩的 tar.gz 文件中。
+
+在将 AIX MPIO 与 NetApp ONTAP 存储结合使用时，必须安装 AIX 主机实用程序套件。
+
+您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。下载此文件后，您必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。
+
+* 步骤 *
+
+. 登录到主机。
++
+** 在 AIX 主机上，以 * 根 * 身份登录。
+** 在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 oem_setup_env 命令以成为 root 。
+
+
+. 从 NetApp 支持站点将包含 Host Utilities 的压缩文件副本下载到主机上的目录中。
+. 转到包含下载内容的目录。
+. 解压缩文件并提取 SAN 工具包软件包。
++
+`tar -xvf ntap_aix_host_utilities_6.1.tar.gz`
+
++
+解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
+
+. 安装 AIX MPIO ：
++
+`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
+
+. 安装 SAN 工具包：
++
+`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit netapp.SAN_toolkit`
+
+. 重新启动主机。
+. 验证安装。
++
+`sanlun 版本`
+
+
+
+
+
+== 命令参考示例
+
+
+
+=== 列出映射到主机的所有主机启动程序
+
+[listing]
+----
+# sanlun fcp show adapter -v
+bash-3.2# sanlun fcp show adapter -v
+adapter name: fcs0
+WWPN: 100000109b22e143
+WWNN: 200000109b22e143
+driver name: /usr/lib/drivers/pci/emfcdd
+model: df1000e31410150
+model description: FC Adapter
+serial number: YA50HY79S117
+hardware version: Not Available
+driver version: 7.2.5.0
+firmware version: 00012000040025700027
+Number of ports: 1
+port type: Fabric
+port state: Operational
+supported speed: 16 GBit/sec
+negotiated speed: Unknown
+OS device name: fcs0
+adapter name: fcs1
+WWPN: 100000109b22e144
+WWNN: 200000109b22e144
+driver name: /usr/lib/drivers/pci/emfcdd
+model: df1000e31410150
+model description: FC Adapter
+serial number: YA50HY79S117
+hardware version: Not Available
+driver version: 7.2.5.0
+firmware version: 00012000040025700027
+Number of ports: 1
+port type: Fabric
+port state: Operational
+supported speed: 16 GBit/sec
+negotiated speed: Unknown
+OS device name: fcs1
+bash-3.2#
+----
+
+
+=== 列出映射到主机的所有 LUN
+
+[listing]
+----
+# sanlun lun show -p -v all
+ONTAP Path: vs_aix_clus:/vol/gpfs_205p2_207p1_vol_0_8/aix_205p2_207p1_lun
+LUN: 88
+LUN Size: 15g
+Host Device: hdisk9
+Mode: C
+Multipath Provider: AIX Native
+Multipathing Algorithm: round_robin
+
+host    vserver  AIX   AIX MPIO
+path    path     MPIO  host      vserver      path
+state   type     path  adapter   LIF          priority
+-----------------------------------------------------
+up     primary   path0   fcs0    fc_aix_1     1
+up     primary   path1   fcs1    fc_aix_2     1
+up     secondary path2   fcs0    fc_aix_3     1
+up     secondary path3   fcs1    fc_aix_4     1
+----
+
+
+=== 列出从给定 SVM 映射到主机的所有 LUN
+
+[listing]
+----
+# sanlun lun show -p -v sanboot_unix
+
+ONTAP Path: sanboot_unix:/vol/aix_205p2_boot_0/boot_205p2_lun
+LUN: 0
+LUN Size: 80.0g
+Host Device: hdisk85
+Mode: C
+Multipath Provider: AIX Native
+Multipathing Algorithm: round_robin
+
+host    vserver    AIX   AIX MPIO
+path    path       MPIO  host    vserver    path
+state   type       path  adapter LIF        priority
+-------------------------------------------------
+up      primary    path0 fcs0    sanboot_1   1
+up      primary    path1 fcs1    sanboot_2   1
+up      secondary  path2 fcs0    sanboot_3   1
+up      secondary  path3 fcs1    sanboot_4   1
+----
+
+
+=== 列出映射到主机的给定 LUN 的所有属性
+
+[listing]
+----
+# sanlun lun show -p -v vs_aix_clus:/vol/gpfs_205p2_207p1_vol_0_8/aix_205p2_207p1_lun
+ONTAP Path: vs_aix_clus:/vol/gpfs_205p2_207p1_vol_0_8/aix_205p2_207p1_lun
+LUN: 88
+LUN Size: 15g
+Host Device: hdisk9
+Mode: C
+Multipath Provider: AIX Native
+Multipathing Algorithm: round_robin
+
+host     vserver   AIX   AIX MPIO
+path     path      MPIO  host     vserver   path
+state    type      path  adapter  LIF       priority
+---------------------------------------------------------
+up       primary   path0 fcs0    fc_aix_1   1
+up       primary   path1 fcs1    fc_aix_2   1
+up       secondary path2 fcs0    fc_aix_3   1
+up       secondary path3 fcs1    fc_aix_4   1
+----
+
+
+=== 按主机设备文件名列出 ONTAP LUN 属性
+
+[listing]
+----
+#sanlun lun show -d /dev/hdisk1
+controller(7mode)/
+device host lun
+vserver(Cmode)     lun-pathname
+-----------------------------------------------------------------------------
+vs_aix_clus       /vol/gpfs_205p2_207p1_vol_0_0/aix_205p2_207p1_lun
+
+filename adapter protocol size mode
+-----------------------------------
+hdisk1    fcs0    FCP     15g  C
+----
+
+
+=== 列出连接到主机的所有 SVM 目标 LIF WWPN
+
+[listing]
+----
+# sanlun lun show -wwpn
+controller(7mode)/
+target device host lun
+vserver(Cmode)          wwpn            lun-pathname
+--------------------------------------------------------------------------------
+
+vs_aix_clus          203300a098ba7afe  /vol/gpfs_205p2_207p1_vol_0_0/aix_205p2_207p1_lun
+vs_aix_clus          203300a098ba7afe  /vol/gpfs_205p2_207p1_vol_0_9/aix_205p2_207p1_lun
+vs_aix_clus          203300a098ba7afe  /vol/gpfs_205p2_207p1_vol_en_0_0/aix_205p2_207p1_lun_en
+vs_aix_clus          202f00a098ba7afe  /vol/gpfs_205p2_207p1_vol_en_0_1/aix_205p2_207p1_lun_en
+
+filename     adapter    size  mode
+-----------------------------------
+hdisk1       fcs0       15g    C
+hdisk10      fcs0       15g    C
+hdisk11      fcs0       15g    C
+hdisk12      fcs0       15g    C
+----
