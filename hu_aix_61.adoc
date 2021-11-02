@@ -21,7 +21,7 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 == 前提条件
 
-.开始之前
+.您需要什么？ #8217 ；将需要什么
 * 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
 +
 您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"] 以验证您的配置。
@@ -40,7 +40,7 @@ AIX Host Utilities 是一种 NetApp 主机软件，可在 IBM AIX 主机上提�
 
 [listing]
 ----
-`#sanlun lun show all`
+#sanlun lun show all
 
 controller(7mode)/ device host lun
 
