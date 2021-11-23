@@ -44,25 +44,27 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 +
 软件包将添加到 /opt/NTAP/SANToolkit/bin 目录。
 
-
-
++
 要完成安装，您必须使用 `host_config` 命令为您的环境（此处为 MPxIO ）配置主机参数。
 
++
 host_config 命令的格式如下：
 
++
 ` /opt/NTAP/SANToolkit/bin/host_config <-setup> <-protocol fcp_iscsi_mixed> <-multipath mpxio_dmp> non> （ -noalua ） [-mcc 60_90_120]`
 
++
 host_config 命令执行以下操作：
 
-* 对 x86 和 SPARC 系统的光纤通道和 SCSI 驱动程序进行设置更改
-* 为两种 MPxIO 配置提供 SCSI 超时设置
-* 设置 VID/PID 信息
-* 启用或禁用 ALUA
-* 为 x86 和 SPARC 系统配置 MPxIO 使用的 ALUA 设置以及 SCSI 驱动程序。
 +
-.. 重新启动主机。
+** 对 x86 和 SPARC 系统的光纤通道和 SCSI 驱动程序进行设置更改
+** 为两种 MPxIO 配置提供 SCSI 超时设置
+** 设置 VID/PID 信息
+** 启用或禁用 ALUA
+** 为 x86 和 SPARC 系统配置 MPxIO 使用的 ALUA 设置以及 SCSI 驱动程序。
 
 
+. 重新启动主机。
 
 
 
@@ -97,7 +99,7 @@ SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动
 
 == 多路径
 
-多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。/kernel/drv/fp.conf 中的默认设置更改为 mpxio-disable="no"
+多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。` /kernel/drv/fp.conf` 中的默认设置更改为 mpxio-disable="no" 。
 
 
 
@@ -179,22 +181,22 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 * Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。
 * 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
-* NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 link:link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
-* 仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 link:link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"]。
+* NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
+* 仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"]。
 
 
 
 
 === 建议的虚拟化设置
 
-如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建 vDC.conf 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。
+如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。
 
 要验证修补程序，请执行以下操作：
 
 . 创建 zpool 。
 . 对 zpool 运行 `zdb -C` 并验证 * 磁盘移 * 的值是否为 12 。
 +
-如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 vDC.conf 的内容。
+如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 `vDC.conf` 的内容。
 
 +
 在 * 换档 * 显示值 12 之前，请勿继续操作。
@@ -206,6 +208,36 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 
 
 
+== SnapMirror 业务连续性的建议设置
+
+为了确保在 SnapMirror 业务连续性（ SM-BC ）环境中发生计划外站点故障转移切换时 Solaris 客户端应用程序不会造成中断，需要在 Solaris 11.4 主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` ，以防止执行检测到冲突的代码路径。
+
+按照说明配置 override 参数：
+
+. 为连接到主机的 NetApp 存储类型创建配置文件 ` /etc/driver/drv/scsi_vhci.conf` ，并输入类似于以下内容的条目：
++
+[listing]
+----
+scsi-vhci-failover-override =
+"NETAPP  LUN","f_tpgs"
+----
+. 使用 `devprop` 和 `mdb` 命令验证是否已成功应用覆盖：
++
+`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl
+
++
+[listing]
+----
+svl_lun_wwn = 0xa002a1c8960 "600a098038313477543f524539787938"
+svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
+----
+
+
+
+NOTE: 应用 `scsI-vhcI-failover-override` 后， `conf` 将添加到 `svl_fPS_name` 中。有关追加信息以及对默认设置的建议更改，请参阅 NetApp 知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"]。
+
+
+
 == 已知问题和限制
 
 [cols="4*"]
@@ -213,13 +245,13 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 | NetApp 错误 ID | 标题 | Description | Oracle ID 
 
 
-| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 SSD.conf 中的配置移动到 sd.conf 。如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同 | （文档 ID 2595926.1 ） 
+| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同 | （文档 ID 2595926.1 ） 
 
 
 | 1366780 | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 
 
 
-| 1368957 | "Solaris 11.x"cfgadm -c configure" 导致端到端 Emulex 配置出现 I/O 错误 " | 在 Emulex 端到端配置上运行 "cfgadm -c configure" 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复 | 不适用 
+| 1368957 | "Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 " | 在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复 | 不适用 
 
 
 | 1345622 | 使用 OS 原生命令在使用 AA/pports 的 Solaris 主机上报告路径异常 | 使用 ASA 的 Solaris 11.4 出现间歇性路径报告问题 | 不适用 
