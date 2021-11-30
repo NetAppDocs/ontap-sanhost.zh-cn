@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: nvme_esxi_7.html 
 keywords: nvme, esxi, ontap 
-summary: 介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC 
+summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF 
 ---
-= 适用于采用 ONTAP 的 ESXi 7.0 的 NVMe-oF 主机配置
+= 适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -21,15 +21,22 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC
 
 == 可支持性
 
-ONTAP 9.7 或更高版本支持适用于 ESXi 7.0 的 NVMe/FC 。
+ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。
 
-ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 。
+
+
+== 功能
+
+* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。请参见  有关支持的最新配置和版本列表。
+* 从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。
+* 对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。
+
 
 
 
 == 已知限制
 
-不支持以下功能：
+不支持以下配置：
 
 * RDM 映射
 * VVOL
@@ -37,111 +44,81 @@ ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 
 
 
 
-== 使用 ANA 启用 NVMe/FC
+== 启用 NVMe/FC
 
-. 禁用 HppManagementDegradedPaths 参数以提高与 ONTAP 的互操作性：
+. 检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配：
 +
 [listing]
 ----
-# esxcfg-advcfg -s 0 /Misc/HppManageDegradedPaths
-----
-. 重新启动主机。
-. 重新启动后，验证 HppManagementDegradedPaths 参数现在是否已禁用：
-+
-[listing]
-----
-# esxcfg-advcfg -g /Misc/HppManageDegradedPaths
-Value of HppManageDegradedPaths is 0
-----
-. 检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
-+
-.示例
-[listing]
-----
-# esxcli nvme info get
-Host NQN: nqn.2014-08.com.vmware:nvme:chat-54-113
+# esxcli nvme  info get
+Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
-*> vserver nvme subsystem host show -vserver co_nv_fc_esx
-Vserver Subsystem Host NQN
-------- --------- ----------------------------------------------------------
-co_nv_fc_esx
-        subsys_chat_54_113_nvme
-                  nqn.2014-08.com.vmware:nvme:chat-54-113
+# vserver nvme subsystem host show -vserver vserver_nvme
+  Vserver Subsystem             Host NQN
+  ------- ------------------- ----------------------------------------
+  vserver_nvme ss_vserver_nvme nqn.2014-08.com.vmware:nvme:nvme-esx
 ----
 
 
 
 
-== 为 NVMe/FC 配置 Broadcom FC 适配器
+=== 配置 Broadcom/Emulex
 
-. 安装建议的 lpfc 驱动程序，方法是将其复制到临时文件夹，然后执行以下命令：
-+
-[listing]
-----
-# esxcli software vib install -d /tmp/t/Emulex-FCoE-FC-lpfc-12.4.224.0-offline-bundle-13621872.zip --no-sig-check
-Installation Result
-   Message: The update completed successfully, but the system needs to be rebooted for the changes to be effective.
-   Reboot Required: true
-   VIBs Installed: EMU_bootbank_lpfc_12.4.224.0-1OEM.688.0.0.13621872
-   VIBs Removed: EMU_bootbank_lpfc_12.4.211.6-1OEM.688.0.0.13621872
-   VIBs Skipped:
-----
-. 如有必要，请设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` ，以便在 lpfc 驱动程序中启用 NVMe/FC 支持：
-+
+. 请参见，检查所需驱动程序 / 固件是否支持此配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 
-NOTE: 默认情况下， LPe35000 系列适配器会设置此参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此适配器，必须执行以下步骤。
 
-+
+
+NOTE: 从 vSphere 7.0 Update 3 开始， `brcmnvmefc` 驱动程序不再可用。因此， `lpfc` 驱动程序现在包括先前随 `brcmnvmefc` 驱动程序提供的基于光纤通道的 NVMe （ NVMe/FC ）功能。
+
+
+NOTE: 默认情况下，已为 LPe35000 系列适配器设置 `lpfc_enable_FC4_type=3` 参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此命令，必须执行以下命令。
+
 [listing]
 ----
 # esxcli system module parameters set -m lpfc -p lpfc_enable_fc4_type=3
-----
-. 使用 elxmgmt 实用程序将 Broadcom FC 适配器固件升级到建议的版本：
-+
-[listing]
-----
-# esxcli software vib install -d /tmp/t/Emulex-elxmgmt-6.8.7-12.4.211.7.zip --no-sig-check
-Installation Result
-   Message: The update completed successfully, but the system needs to be rebooted for the changes to be effective.
-   Reboot Required: true
-   VIBs Installed: EMU_bootbank_emu-esx-elxmgmt_12.4.211.7-01
-   VIBs Removed:
-   VIBs Skipped:
-…
-----
-. 重新启动主机。
-. 重新启动后，验证建议的 lpfc 驱动程序和适配器固件版本是否已应用且启动程序端口是否联机：
-+
-[listing]
-----
-# esxcli storage san fc list
- Adapter: vmhba3
-   Port ID: 010600
-   Node Name: 20:00:00:90:fa:e0:ec:8e
-   Port Name: 10:00:00:90:fa:e0:ec:8e
-   Speed: 32 Gbps
-   Port Type: NPort
-   Port State: ONLINE
-   Model Description: Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
-   Hardware Version: 0000000c
-   OptionROM Version: 12.4.217.2
-   Firmware Version: 12.4.217.2
-   Driver Name: lpfc
-   DriverVersion: 12.4.224.0
 
-   Adapter: vmhba4
-   Port ID: 010F00
-   Node Name: 20:00:00:90:fa:e0:ec:8f
-   Port Name: 10:00:00:90:fa:e0:ec:8f
-   Speed: 32 Gbps
-   Port Type: NPort
-   Port State: ONLINE
-   Model Description: Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
-   Hardware Version: 0000000c
-   OptionROM Version: 12.4.217.2
-   Firmware Version: 12.4.217.2
-   Driver Name: lpfc
-   DriverVersion: 12.4.224.0
+#esxcli system module parameters list  -m lpfc | grep lpfc_enable_fc4_type
+lpfc_enable_fc4_type              int     3      Defines what FC4 types are supported
+
+#esxcli storage core adapter list
+HBA Name  Driver   Link State  UID                                   Capabilities         Description
+--------  -------  ----------  ------------------------------------  -------------------  -----------
+vmhba1    lpfc     link-up     fc.200000109b95456f:100000109b95456f  Second Level Lun ID  (0000:86:00.0) Emulex Corporation Emulex LPe36000 Fibre Channel Adapter    FC HBA
+vmhba2    lpfc     link-up     fc.200000109b954570:100000109b954570  Second Level Lun ID  (0000:86:00.1) Emulex Corporation Emulex LPe36000 Fibre Channel Adapter    FC HBA
+vmhba64   lpfc     link-up     fc.200000109b95456f:100000109b95456f                       (0000:86:00.0) Emulex Corporation Emulex LPe36000 Fibre Channel Adapter   NVMe HBA
+vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570                       (0000:86:00.1) Emulex Corporation Emulex LPe36000 Fibre Channel Adapter   NVMe HBA
+----
+
+
+=== 配置 Marvell/QLogic
+
+. 请参见，检查所需驱动程序 / 固件是否支持配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
++
+` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`
+
++
+
+NOTE: 默认情况下， QLE 277x 系列适配器会设置 `qlnativefc` driver 参数。要为 QLE 277x 系列适配器手动设置此命令，必须执行以下命令。
+
++
+[listing]
+----
+esxcfg-module -l | grep qlnativefc
+qlnativefc               4    1912
+----
+. 检查适配器上是否启用了 NVMe ：
++
+[listing]
+----
+  #esxcli storage core adapter list
+HBA Name  Driver      Link State  UID                                   Capabilities         Description
+--------  ----------  ----------  ------------------------------------  -------------------  -----------
+ vmhba3    qlnativefc  link-up     fc.20000024ff1817ae:21000024ff1817ae  Second Level Lun ID  (0000:5e:00.0) QLogic Corp QLE2742 Dual Port 32Gb Fibre Channel to PCIe Adapter    FC Adapter
+vmhba4    qlnativefc  link-up     fc.20000024ff1817af:21000024ff1817af  Second Level Lun ID  (0000:5e:00.1) QLogic Corp QLE2742 Dual Port 32Gb Fibre Channel to PCIe Adapter FC Adapter
+vmhba64   qlnativefc  link-up     fc.20000024ff1817ae:21000024ff1817ae                       (0000:5e:00.0) QLogic Corp QLE2742 Dual Port 32Gb Fibre Channel to PCIe Adapter  NVMe FC Adapter
+vmhba65   qlnativefc  link-up     fc.20000024ff1817af:21000024ff1817af                       (0000:5e:00.1) QLogic Corp QLE2742 Dual Port 32Gb Fibre Channel to PCIe Adapter  NVMe FC Adapter
 ----
 
 
@@ -149,19 +126,19 @@ Installation Result
 
 == 正在验证 NVMe/FC
 
-. 验证是否已在 ESXi 主机上正确发现 ONTAP 目标 NVMe/FC 控制器：
+. 验证 NVMe/FC 适配器是否列在 ESXi 主机上：
 +
 [listing]
 ----
-# esxcli nvme controller list
+# esxcli nvme adapter list
 
-Name                                                                                                                             Controller Number  Adapter  Transport Type  Is Online
--------------------------------------------------------------------------------------------------------------------------------  -----------------  -------  --------------  ---------
-nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_01#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                259  vmhba32  FC                  false
-nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_09#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                263  vmhba32  FC                  false
-nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_11#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                267  vmhba32  FC                  false
-nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_10#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                265  vmhba32  FC                  false
-nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_vm_02#vmhba32#204900a098dfe3d1:204a00a098dfe3d1                261  vmhba32  FC                  false
+Adapter  Adapter Qualified Name           Transport Type  Driver      Associated Devices
+-------  -------------------------------  --------------  ----------  ------------------
+vmhba64  aqn:qlnativefc:21000024ff1817ae  FC              qlnativefc
+vmhba65  aqn:qlnativefc:21000024ff1817af  FC              qlnativefc
+vmhba66  aqn:lpfc:100000109b579d9c 	      FC              lpfc
+vmhba67  aqn:lpfc:100000109b579d9d 	      FC              lpfc
+
 ----
 . 验证是否已正确创建 NVMe/FC 命名空间：
 +
@@ -170,44 +147,69 @@ nqn.1992-08.com.netapp:sn.e7f89c2c245d11e9975300a098dfce55:subsystem.interop_57_
 +
 [listing]
 ----
-#esxcfg-mpath -b
-uuid.0d12b7cd97344be8a53b7913f8f72f04 : NVMe Fibre Channel Disk (uuid.0d12b7cd97344be8a53b7913f8f72f04)
-   vmhba65:C0:T9:L30 LUN:30 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4d:00:a0:98:df:e3:d1
-   vmhba64:C0:T9:L30 LUN:30 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4c:00:a0:98:df:e3:d1
-   vmhba64:C0:T5:L30 LUN:30 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4a:00:a0:98:df:e3:d1
-   vmhba65:C0:T0:L30 LUN:30 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:49:00:a0:98:df:e3:d1 WWPN: 20:4b:00:a0:98:df:e3:d1
-
-uuid.49de7683950d47c9898f51443d893910 : NVMe Fibre Channel Disk (uuid.49de7683950d47c9898f51443d893910)
-   vmhba65:C0:T12:L39 LUN:39 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:27:00:a0:98:df:e3:d1
-   vmhba65:C0:T13:L39 LUN:39 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8f WWPN: 10:00:00:90:fa:e0:ec:8f  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:29:00:a0:98:df:e3:d1
-   vmhba64:C0:T12:L39 LUN:39 state:active fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:3b:00:a0:98:df:e3:d1
-   vmhba64:C0:T13:L39 LUN:39 state:standby fc Adapter: WWNN: 20:00:00:90:fa:e0:ec:8e WWPN: 10:00:00:90:fa:e0:ec:8e  Target: WWNN: 20:3a:00:a0:98:df:e3:d1 WWPN: 20:28:00:a0:98:df:e3:d1
+# esxcfg-mpath -b
+uuid.5084e29a6bb24fbca5ba076eda8ecd7e : NVMe Fibre Channel Disk (uuid.5084e29a6bb24fbca5ba076eda8ecd7e)
+   vmhba65:C0:T0:L1 LUN:1 state:active fc Adapter: WWNN: 20:00:34:80:0d:6d:72:69 WWPN: 21:00:34:80:0d:6d:72:69  Target: WWNN: 20:17:00:a0:98:df:e3:d1 WWPN: 20:2f:00:a0:98:df:e3:d1
+   vmhba65:C0:T1:L1 LUN:1 state:active fc Adapter: WWNN: 20:00:34:80:0d:6d:72:69 WWPN: 21:00:34:80:0d:6d:72:69  Target: WWNN: 20:17:00:a0:98:df:e3:d1 WWPN: 20:1a:00:a0:98:df:e3:d1
+   vmhba64:C0:T0:L1 LUN:1 state:active fc Adapter: WWNN: 20:00:34:80:0d:6d:72:68 WWPN: 21:00:34:80:0d:6d:72:68  Target: WWNN: 20:17:00:a0:98:df:e3:d1 WWPN: 20:18:00:a0:98:df:e3:d1
+   vmhba64:C0:T1:L1 LUN:1 state:active fc Adapter: WWNN: 20:00:34:80:0d:6d:72:68 WWPN: 21:00:34:80:0d:6d:72:68  Target: WWNN: 20:17:00:a0:98:df:e3:d1 WWPN: 20:19:00:a0:98:df:e3:d1
 ----
 +
 
-NOTE: 在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须设置命名空间块大小 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。
+NOTE: 在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须将命名空间块大小设置为 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。
 
 +
 `vserver nvme namespace create -vserver vs_1 -path /vol/nssvol/namespace1 -size 100g -ostype vmware -block-size 512B`
 
 +
-请参见 link:https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-cmpr-970%2Fvserver__nvme__namespace__create.html["有关其他详细信息，请参见 ONTAP 9 命令手册页"]。
+请参见 link:https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-cmpr%2FGUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["ONTAP 9 命令手册页"] 了解更多详细信息。
 
 . 验证相应 NVMe/FC 命名空间设备的各个 ANA 路径的状态：
 +
 [listing]
 ----
-# esxcli storage hpp path list
-fc.20000090fae0ec8f:10000090fae0ec8f-fc.204900a098dfe3d1:204d00a098dfe3d1-uuid.1aa669c5376240a28ae47d8d549586ea
-   Runtime Name: vmhba65:C0:T9:L33
-   Device: uuid.1aa669c5376240a28ae47d8d549586ea
-   Device Display Name: NVMe Fibre Channel Disk (uuid.1aa669c5376240a28ae47d8d549586ea)
+esxcli storage hpp path list -d uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201800a098dfe3d1-uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Runtime Name: vmhba64:C0:T0:L1
+   Device: uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Device Display Name: NVMe Fibre Channel Disk (uuid.5084e29a6bb24fbca5ba076eda8ecd7e)
    Path State: active
+   Path Config: {TPG_id=0,TPG_state=AO,RTP_id=0,health=UP}
 
-fc.20000090fae0ec8e:10000090fae0ec8e-fc.204900a098dfe3d1:204a00a098dfe3d1-uuid.1aa669c5376240a28ae47d8d549586ea
-   Runtime Name: vmhba64:C0:T5:L33
-   Device: uuid.1aa669c5376240a28ae47d8d549586ea
-   Device Display Name: NVMe Fibre Channel Disk (uuid.1aa669c5376240a28ae47d8d549586ea)
-   Path State: standby
+fc.200034800d6d7269:210034800d6d7269-fc.201700a098dfe3d1:201a00a098dfe3d1-uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Runtime Name: vmhba65:C0:T1:L1
+   Device: uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Device Display Name: NVMe Fibre Channel Disk (uuid.5084e29a6bb24fbca5ba076eda8ecd7e)
+   Path State: active
+   Path Config: {TPG_id=0,TPG_state=AO,RTP_id=0,health=UP}
+
+fc.200034800d6d7269:210034800d6d7269-fc.201700a098dfe3d1:202f00a098dfe3d1-uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Runtime Name: vmhba65:C0:T0:L1
+   Device: uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Device Display Name: NVMe Fibre Channel Disk (uuid.5084e29a6bb24fbca5ba076eda8ecd7e)
+   Path State: active unoptimized
+   Path Config: {TPG_id=0,TPG_state=ANO,RTP_id=0,health=UP}
+
+fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201900a098dfe3d1-uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Runtime Name: vmhba64:C0:T1:L1
+   Device: uuid.5084e29a6bb24fbca5ba076eda8ecd7e
+   Device Display Name: NVMe Fibre Channel Disk (uuid.5084e29a6bb24fbca5ba076eda8ecd7e)
+   Path State: active unoptimized
+   Path Config: {TPG_id=0,TPG_state=ANO,RTP_id=0,health=UP}
 ----
+
+
+
+
+== 已知问题描述
+
+* 从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为 https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654[] 了解详细信息。
+
+
+
+
+== 相关链接
+
+link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"]
+
 

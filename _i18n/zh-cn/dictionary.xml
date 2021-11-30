@@ -1561,28 +1561,11 @@
   <block id="d58ee726eea2726eefac984fb7e051d6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.8 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="27903dacace5a068c1878082e92ceefc" category="paragraph">RHEL 6.8 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="fe88f0836c56baf22e2264574de8ae99" category="paragraph">RHEL 6.8 没有已知问题。</block>
-  <block id="a17de31f593c35dc7c2994d38e007bb6" category="summary">介绍如何使用 ONTAP 为 ESXi 7.0 配置 NVMe/FC</block>
-  <block id="b72cc9bc0dbce24f442daa7d852c6367" category="paragraph">ONTAP 9.7 或更高版本支持适用于 ESXi 7.0 的 NVMe/FC 。</block>
-  <block id="be1c319a30cb57cb6a92f5f7739450c7" category="paragraph">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
-  <block id="08753753c399c09f5431f7f503b1b422" category="paragraph">不支持以下功能：</block>
   <block id="c668cdc14ab280f56b5bd154169478b4" category="list-text">RDM 映射</block>
   <block id="3e13b51705da8db259d545e125ffc1da" category="list-text">VVOL</block>
-  <block id="300281587fc3a09a1b5cc66e46ad1991" category="section-title">使用 ANA 启用 NVMe/FC</block>
-  <block id="36b2974be91af3fc42e62aea365b498f" category="list-text">禁用 HppManagementDegradedPaths 参数以提高与 ONTAP 的互操作性：</block>
-  <block id="63e4fe708eeba8073c75d549a821c535" category="list-text">重新启动后，验证 HppManagementDegradedPaths 参数现在是否已禁用：</block>
-  <block id="14a43fdd745010dbb52c9229f310003d" category="list-text">检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
-  <block id="cf073ab7c6ea40cb5922a23d51658f58" category="list-text">安装建议的 lpfc 驱动程序，方法是将其复制到临时文件夹，然后执行以下命令：</block>
-  <block id="ba36b31ee045b23ebbcb0b62da50dcc6" category="list-text">如有必要，请设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` ，以便在 lpfc 驱动程序中启用 NVMe/FC 支持：</block>
-  <block id="f35de46e1b108a6099f5fe30bd8adc4c" category="admonition">默认情况下， LPe35000 系列适配器会设置此参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此适配器，必须执行以下步骤。</block>
-  <block id="e4b9123268bea5952ea7997271bf0274" category="list-text">使用 elxmgmt 实用程序将 Broadcom FC 适配器固件升级到建议的版本：</block>
-  <block id="e7fa7591d922b66f76c40c12ec7361cc" category="list-text">重新启动后，验证建议的 lpfc 驱动程序和适配器固件版本是否已应用且启动程序端口是否联机：</block>
-  <block id="8c08e6f500ac4b171fc1f143ea3ec51f" category="list-text">验证是否已在 ESXi 主机上正确发现 ONTAP 目标 NVMe/FC 控制器：</block>
   <block id="de3db54bdaee137a1acbecdda0e70601" category="list-text">验证是否已正确创建 NVMe/FC 命名空间：</block>
   <block id="15c3697db0fe86ffcb67922b592b4977" category="paragraph">以下示例中的 UUID 表示 NVMe/FC 命名空间设备。</block>
-  <block id="57c0d239f3ce23bb8c8382a2fcfc98d8" category="admonition">在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须设置命名空间块大小 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。</block>
   <block id="393fa042be04dcc3bde30500dcf40209" category="paragraph">`vserver nvme namespace create -vserver vs_1 -path /vol/nssvol/namespace1 -size 100g -ostype vmware -block-size 512B`</block>
-  <block id="3c30f4539d9a10ed249d64d05254040a" category="inline-link-macro">有关其他详细信息，请参见 ONTAP 9 命令手册页</block>
-  <block id="0f6e5e67c901f7f53dabe7df88469f04" category="paragraph">请参见 <block ref="c1bc60021b086ad393d2eea7ec83113b" category="inline-link-macro-rx"></block>。</block>
   <block id="6a290a5d71dc6c05e5ec68fcd97cbe87" category="list-text">验证相应 NVMe/FC 命名空间设备的各个 ANA 路径的状态：</block>
   <block id="fbd83cf0e839e6dec73fa3ff243bb8c5" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.8</block>
   <block id="9ae2e2f0116f96b133ac014c223f3745" category="doc">将 CentOS 7.8 与 NetApp ONTAP 结合使用</block>
@@ -2134,7 +2117,6 @@
   <block id="921fe189e88bd0fc8bf474a52f0138f7" category="list-text">验证 ONTAP 命名空间的 NetApp 插件。例如：</block>
   <block id="80748b874d55c5038d34ce16a870e640" category="section-title">qla2xxx 详细日志记录</block>
   <block id="38a517c65e7a4cfa6d1b781c6a6e35f4" category="cell">确保 NVMe 命令使用的语法正确。</block>
-  <block id="51062446fb213f15851b5dffb8352c2b" category="doc">适用于采用 ONTAP 的 ESXi 7.0 的 NVMe-oF 主机配置</block>
   <block id="c93b085fcb8e1f8bc98e8da71741e760" category="sidebar">NVMe-oF 主机配置</block>
   <block id="be3d2421a8f8e1a506cd8ec6140627fb" category="paragraph">`tar -xvf ntap_aix_host_utilities_6.1.tar.tgz`</block>
   <block id="6a60f15d3addedaaeee9fbd5c320d06d" category="paragraph">解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit</block>
@@ -2199,4 +2181,35 @@
   <block id="d121177f120e7b50a6ec37a43d7ae4e6" category="cell">Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同</block>
   <block id="7fed5db563dfce62e3512e9c6fe716c1" category="cell">"Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 "</block>
   <block id="8b30a2a046838a554ec8551f6130f395" category="cell">在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
+  <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
+  <block id="38a445b35a68bb2b838316376b083c19" category="doc">适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置</block>
+  <block id="0f97c82c57e5402681bd180ec7889f9a" category="paragraph">ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。</block>
+  <block id="c8889953fea9b096fc742c823b9ddac5" category="list-text">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的最新配置和版本列表。</block>
+  <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。</block>
+  <block id="087c6f6069a3f1c08cb62e3d53029f80" category="list-text">对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。</block>
+  <block id="f19c49e2c5af4fdef9d76da8243928b8" category="paragraph">不支持以下配置：</block>
+  <block id="0baafa49aae4a0470bfc558baa32e371" category="list-text">检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配：</block>
+  <block id="a2da92c5d726acd949aaa27a8aa3153b" category="section-title">配置 Broadcom/Emulex</block>
+  <block id="e56d69f0e69f04701c7a1b09a587c569" category="list-text">请参见，检查所需驱动程序 / 固件是否支持此配置 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
+  <block id="9800cef048ddc104a174cdb11416156c" category="list-text">设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
+  <block id="bf7cba7a9056a716211324109312cd61" category="admonition">从 vSphere 7.0 Update 3 开始， `brcmnvmefc` 驱动程序不再可用。因此， `lpfc` 驱动程序现在包括先前随 `brcmnvmefc` 驱动程序提供的基于光纤通道的 NVMe （ NVMe/FC ）功能。</block>
+  <block id="460c25e7bb5010dbb0ff63a998a73cf9" category="admonition">默认情况下，已为 LPe35000 系列适配器设置 `lpfc_enable_FC4_type=3` 参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此命令，必须执行以下命令。</block>
+  <block id="eeeff75243446a5649a1a32a4fc8b74e" category="section-title">配置 Marvell/QLogic</block>
+  <block id="8d5a26a4d2f3f025597e9133142b8d98" category="list-text">请参见，检查所需驱动程序 / 固件是否支持配置 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
+  <block id="0ddb0350e0867842f11bd0619f22f3fc" category="list-text">设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
+  <block id="f86f2d0f74b3f5bda1a49097fcdecaeb" category="paragraph">` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`</block>
+  <block id="17627ac666e764dc705796280424855d" category="admonition">默认情况下， QLE 277x 系列适配器会设置 `qlnativefc` driver 参数。要为 QLE 277x 系列适配器手动设置此命令，必须执行以下命令。</block>
+  <block id="f54a7a2feae405d66c5089c08aa192af" category="list-text">检查适配器上是否启用了 NVMe ：</block>
+  <block id="262311c06b4d7e1d63d9ec53a8513969" category="list-text">验证 NVMe/FC 适配器是否列在 ESXi 主机上：</block>
+  <block id="a4e09728b21e07eb8de92849a3239079" category="admonition">在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须将命名空间块大小设置为 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。</block>
+  <block id="b19cff5a6d037faf5ffa796506cf839f" category="inline-link-macro">ONTAP 9 命令手册页</block>
+  <block id="00dd9dd32e06a9beeeb0fc320cce0405" category="paragraph">请参见 <block ref="4f969217d1de0d02a3bd1c6359fed6a8" category="inline-link-macro-rx"></block> 了解更多详细信息。</block>
+  <block id="e83464ce8bd634efb1f099c956ec64a8" category="section-title">已知问题描述</block>
+  <block id="7c6b30ab95aa6f3eeb2a6b9cbaf31f6c" category="list-text">从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
+  <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
+  <block id="0a7c052037789d22811592a15b7a2e17" category="inline-link-macro">NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x</block>
+  <block id="3b75e11b18639d68da47ed73f699970c" category="paragraph"><block ref="1100be8e2abfcb2872c044ea41e9a0d0" category="inline-link-macro-rx"></block>
+<block ref="d089a1bacb367057de993188e1176fc0" category="inline-link-macro-rx"></block>
+<block ref="e048af1dd602fa684e69d3fb3fe54824" category="inline-link-macro-rx"></block></block>
+  <block id="cd5f3c0e3d7017e6f7861dd8cdb0590c" category="sidebar">NVMe-oF ESXi</block>
 </blocks>

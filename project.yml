@@ -22,6 +22,7 @@ sidebar:
   - title: NVMe-oF 主机配置
     entries:
     - title: ESXi
+      pdf-filename: NVMe-oF ESXi
       entries:
       - title: '7.0'
         url: "/nvme_esxi_7.html"
