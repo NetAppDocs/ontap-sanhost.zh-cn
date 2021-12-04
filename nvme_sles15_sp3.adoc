@@ -42,19 +42,19 @@ summary: 介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP3 配置
 
 == 配置要求
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的配置的准确详细信息。
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
 
 
 
 == 启用内核 NVMe 多路径
 
-默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的配置的准确详细信息。
+默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
 
 
 
 == NVMe-oF 启动程序包
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的配置的准确详细信息。
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
 
 . 验证 SLES15 SP3 MU 主机上是否已安装所需的内核和 NVMe-CLI MU 软件包。
 +

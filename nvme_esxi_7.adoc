@@ -27,7 +27,7 @@ ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。
 
 == 功能
 
-* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。请参见  有关支持的最新配置和版本列表。
+* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。请参见  有关支持的最新配置和版本列表。
 * 从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。
 * 对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。
 
@@ -64,7 +64,7 @@ Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
 === 配置 Broadcom/Emulex
 
-. 请参见，检查所需驱动程序 / 固件是否支持此配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 请参见，检查所需驱动程序 / 固件是否支持此配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 . 设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 
 
@@ -93,7 +93,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 
 === 配置 Marvell/QLogic
 
-. 请参见，检查所需驱动程序 / 固件是否支持配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 请参见，检查所需驱动程序 / 固件是否支持配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 . 设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 +
 ` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`
@@ -162,7 +162,7 @@ NOTE: 在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此�
 `vserver nvme namespace create -vserver vs_1 -path /vol/nssvol/namespace1 -size 100g -ostype vmware -block-size 512B`
 
 +
-请参见 link:https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-cmpr%2FGUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["ONTAP 9 命令手册页"] 了解更多详细信息。
+请参见 link:https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-cmpr%2FGUID-5CB10C70-AC11-41C0-8C16-B4D0DF916E9B.html["ONTAP 9 命令手册页"^] 了解更多详细信息。
 
 . 验证相应 NVMe/FC 命名空间设备的各个 ANA 路径的状态：
 +
@@ -210,6 +210,6 @@ fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201900a098dfe3d1-uuid.5
 
 == 相关链接
 
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"]
+link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
 
 

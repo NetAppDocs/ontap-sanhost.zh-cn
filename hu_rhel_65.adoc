@@ -291,7 +291,7 @@ devices {
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=786571["786571"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE 主机挂起 / 路径故障 | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE （ QLE8242 ）主机挂起 / 路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB[0]=0x54 。计划 ISP 中止 " 消息，此消息会导致主机挂起 / 路径故障。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1068619["1068619"^] 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=801580["801580"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障 | 在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 " | link:https://bugzilla.redhat.com/show_bug.cgi?id=1068622["1068622"] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=801580["801580"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障 | 在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 " | link:https://bugzilla.redhat.com/show_bug.cgi?id=1068622["1068622"^] 
 |===
 
 

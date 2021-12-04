@@ -226,5 +226,5 @@ NOTE: 对于支持的配置， Citrix 虚拟机管理程序建议对所有基于
 | NetApp 错误 ID | 标题 | Description | Citrix Tracker ID 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1242343["1242343"^] | 存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC 的 Citrix Hypervisor 8.0 上的内核中断 | 在使用 QLogic QLE2742 32 GB HBA 的 Citrix Hypervisor 8.0 内核（ 4.19.0+1 ）上执行存储故障转移操作期间，可能会发生内核中断。此问题描述会提示重新启动操作系统并导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。您可以使用 vmcore 文件了解故障的发生原因。内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:https://tracker.citrix.com/browse/NETAPP-98["NetApp-98"] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1242343["1242343"^] | 存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC 的 Citrix Hypervisor 8.0 上的内核中断 | 在使用 QLogic QLE2742 32 GB HBA 的 Citrix Hypervisor 8.0 内核（ 4.19.0+1 ）上执行存储故障转移操作期间，可能会发生内核中断。此问题描述会提示重新启动操作系统并导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。您可以使用 vmcore 文件了解故障的发生原因。内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:https://tracker.citrix.com/browse/NETAPP-98["NetApp-98"^] 
 |===

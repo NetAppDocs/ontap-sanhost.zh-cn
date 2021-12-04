@@ -21,9 +21,9 @@ summary: 介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP2 配置
 
 == 可支持性
 
-在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。
+在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。
 
-有关支持的最新配置和版本列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+有关支持的最新配置和版本列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 
 
 
@@ -79,7 +79,7 @@ nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
 
 == 为 NVMe/FC 配置 Broadcom FC 适配器
 
-. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 +
 [listing]
 ----

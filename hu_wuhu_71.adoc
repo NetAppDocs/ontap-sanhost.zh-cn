@@ -353,7 +353,7 @@ Windows Unified Host Utilities 安装程序会根据您在安装期间所做的�
 
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. | 当您的服务器仅为 Windows Server 2008 ， Windows Server 2008 R2 ， Windows Server 2012 ， Windows Server 2012 R2 或 Windows Server 2016 时 
 |===
-请参见 https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Microsoft 文档"] 有关注册表参数的详细信息。
+请参见 https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Microsoft 文档"^] 有关注册表参数的详细信息。
 
 
 
@@ -406,7 +406,7 @@ Windows Unified Host Utilities 安装程序会根据您在安装期间所做的�
 
 NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例如，在 QLogic QConvergeConsole 程序中，参数显示为 `Link down Timeout` 。Host Utilities `fcconfig.ini` 文件会将此参数显示为 `LinkDownTimeOut` 或 `MPioLinkDownTimeOut` ，具体取决于是否指定了 MPIO 。但是，所有这些名称都引用相同的 HBA 参数。
 
-请参见 https://www.broadcom.com/support/download-search["Emulex"] 或 站点以了解有关超时参数的更多信息。
+请参见 https://www.broadcom.com/support/download-search["Emulex"^] 或 站点以了解有关超时参数的更多信息。
 
 
 
@@ -421,9 +421,9 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 * 如果重新启动后 iSCSI LUN 不可用，则必须验证目标是否在 Microsoft iSCSI 启动程序 GUI 的持久目标选项卡上列为持久目标。
 * 如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。
 * 对于运行 ONTAP 的存储控制器的光纤通道路径，您必须验证 FC 交换机是否使用目标 LIF 的 WWPN 进行分区，而不是使用节点上物理端口的 WWPN 进行分区。
-* 您必须查看 https://library-clnt.dmz.netapp.com/documentation/docweb/index.html?productID=62322&platformID=30462&language=en-US&access=a["Windows Host Utilities 发行说明"] 检查已知问题。发行说明包括一个已知问题和限制列表。
-* 您必须查看中的故障排除信息 https://docs.netapp.com/ontap-9/index.jsp["《 SAN 管理指南》"] 适用于您的 ONTAP 版本。
-* 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/["Bug Online"] 最近发现的问题。
+* 您必须查看 https://library-clnt.dmz.netapp.com/documentation/docweb/index.html?productID=62322&platformID=30462&language=en-US&access=a["Windows Host Utilities 发行说明"^] 检查已知问题。发行说明包括一个已知问题和限制列表。
+* 您必须查看中的故障排除信息 https://docs.netapp.com/ontap-9/index.jsp["《 SAN 管理指南》"^] 适用于您的 ONTAP 版本。
+* 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/["Bug Online"^] 最近发现的问题。
 * 在高级搜索下的错误类型字段中，您应选择 iSCSI - Windows ，然后单击转到。您应重复搜索错误类型 FCP -Windows 。
 * 您必须收集有关系统的信息。
 * 记录主机或存储系统控制台上显示的所有错误消息。
@@ -432,7 +432,7 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 * 如果无法解决此问题，您可以联系 NetApp 技术支持。
 
 
-http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"]
+http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]
 
 
 

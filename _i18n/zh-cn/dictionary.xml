@@ -101,7 +101,6 @@
   <block id="e1084bfbacc7e9ee1de94f35fce4fca3" category="doc">将 Solaris 11.3 与 NetApp ONTAP 结合使用</block>
   <block id="16dcd3f6f3bbebb1de9769e4045dbb3f" category="section-title">安装 Solaris Host Utilities</block>
   <block id="f4d76a41ec782faaf93445d4818eaab2" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的软件包。</block>
-  <block id="78a1a0931b35b11f116e411019a5a3a0" category="list-text">从下载包含 Host Utilities 的压缩文件的副本 <block ref="6b322a278b7c5d6b2edac3ac050a450c" category="inline-link-macro-rx"></block> 到主机上的目录。</block>
   <block id="c454d997c91275b70f2f0433fad3fe36" category="list-text">转到包含下载内容的目录。</block>
   <block id="88a1748445927988a69d31c53331a565" category="list-text">提取文件。</block>
   <block id="d18516a8d2909b9e174694d2d903b1be" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于 x86-64 平台，请使用 x86/x64 软件包。</block>
@@ -124,7 +123,6 @@
   <block id="ab282a630118bded723e0887eac42503" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="1c6d071c1749743e8ebf715f1c64c2a1" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="2dde53d56f3621a460e634d6d12b32a5" category="paragraph">SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。</block>
   <block id="5a7aaaebad4b1e6fdc00f4ada3d48417" category="inline-link-macro">《 Solaris Host Utilities 安装和设置指南》</block>
-  <block id="aa03ac14645e2c17683a72197f501704" category="paragraph">您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 <block ref="421c67fd3d11b6c4870f9b96b32042b7" category="inline-link-macro-rx"></block> 有关在 Solaris MPIO 环境中启动 SAN LUN 的详细信息。</block>
   <block id="39242df65d7d9cca33b0be6a74f57145" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。</block>
   <block id="56dcd6f4fc148f38b926523ede2073aa" category="section-title">Non-ASA 配置</block>
   <block id="d77810c832bfd20ceec8a3c51f948767" category="paragraph">对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
@@ -152,13 +150,10 @@
   <block id="f7efa4f864ae9b88d43527f4b14f750f" category="cell">4096</block>
   <block id="3d37ecaaa38a68cc4cb45fa6244e970c" category="section-title">MetroCluster 的建议设置</block>
   <block id="cb99705ba926b18eb56469f75cc39c4c" category="inline-link">KB1001373</block>
-  <block id="1fb8bba5f405c73b18263709df409ff5" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp<block ref="61537cb41dc1dd381c0b555837daf3ff" category="inline-link-rx"></block>。</block>
   <block id="8f9dff1e201aa562bc3dd3aafff4d268" category="section-title">Oracle Solaris 虚拟化</block>
   <block id="d73e6214e3336f5200c990aa71164cec" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。</block>
   <block id="5526d07285513042d4092f2ededbb3d5" category="list-text">在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。</block>
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">NetApp 互操作性表</block>
-  <block id="df48aea9d335a5ef493c18cd3fe613c1" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区<block ref="0dcaca7eb92fbe5b5da3bac4cebecc62" category="inline-link-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
-  <block id="79e459158828b6b83eaf29bef5bdfb7c" category="list-text">仅使用虚拟化存储资源（例如 `vdskk` ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们不能直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域<block ref="0dcaca7eb92fbe5b5da3bac4cebecc62" category="inline-link-rx"></block>。</block>
   <block id="5a691625528023b117e33add8f4779da" category="section-title">建议的虚拟化设置</block>
   <block id="a63c36dd82631ec1965478d89094624d" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
   <block id="d814467c80971fad7dc38d7544ce98d0" category="paragraph">要验证修补程序，请执行以下操作：</block>
@@ -228,26 +223,22 @@
   <block id="297f86e3f009c4831d4973ff8e686c8e" category="cell">500 （用于 AIX ）（独立 / 物理） 200 （用于 VIOC ）</block>
   <block id="c78667df66d3342c7fe6a58f227a56c1" category="cell">FC EN0G</block>
   <block id="52929637ce970c2251eb80190b86d5c8" category="inline-link-macro">NetApp KB1001318</block>
-  <block id="edb910c26185caa2ddf463f178cdf8b7" category="paragraph">默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 <block ref="3f99819b37f30088b0ed49990757ace3" category="inline-link-macro-rx"></block></block>
   <block id="fe0ab6ec217528ab607813727508be0a" category="paragraph">没有已知问题和限制。</block>
   <block id="063981d5e2e841e661249aba9ca9682a" category="summary">使用 ONTAP 为 Oracle Linux 8.1 设置 VME/FC 主机配置，包括示例</block>
   <block id="ab5f40e0204a9868aebbaee0226f0547" category="doc">适用于采用 ONTAP 的 Oracle Linux 8.1 的 NVMe/FC 主机配置</block>
   <block id="3a8ba1ff8824968961222d6b447b4973" category="section-title">可支持性</block>
   <block id="da160308e3b4b4a80bf1b72b5bdbedb8" category="inline-link-macro">Hardware Universe</block>
-  <block id="ce6f0c52a2d4368797772e1036dabbf0" category="paragraph">适用于 Oracle Linux 8.1 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.1 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="482723983a4f2af954e36ff41e567451" category="section-title">已知限制</block>
   <block id="77835a1b9432b93fd521ab9f863d3c08" category="list-text">NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="42824b1aefd5f24b6dcc64364263ea75" category="list-text">默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="dd1236487335da312131092e529f99af" category="list-text">在 Oracle Linux 8.1 上，不支持 NVMe/FC ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。</block>
   <block id="ea05ffc0f6f8f227481ba6edf37099d6" category="section-title">启用 NVMe/FC</block>
   <block id="3b5ac1dcd2533f5e278af9f8297049b5" category="list-text">在服务器上安装 Oracle Linux 8.1 。</block>
-  <block id="7176ff8884c46bce86ab9ab0fc1575b0" category="list-text">安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="9ec77828480f1a42c7e9c6fa09be9026" category="list-text">升级 NVMe-CLI 软件包。</block>
   <block id="3d8955b26bfbc81a964a71512390e793" category="list-text">在 /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules 中将以下字符串作为单独的 udev 规则添加。这样可以为 NVMe 多路径启用轮循负载平衡。</block>
   <block id="1a15bf20a800cdb72fc9ff90c8ba930a" category="list-text">在 Oracle Linux 8.1 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="435842f501e97880395ece733bcbdc4a" category="paragraph">如果 +hostnqn+ 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，以便与主机上 etc/nve/hostnqn 中的主机 NQN 字符串匹配。</block>
   <block id="d27af977823b8308d5d5cf4dc158a485" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
-  <block id="aeffb9ed7bed2ee87e06d07252c3b429" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="e1e5de918db5678c70186987c2c34177" category="list-text">默认情况下， lpfc 中的 NVMe 支持已启用：</block>
   <block id="2955b4c6f6584d3e46c78a90afeb2c7c" category="paragraph">较新的 lpfc 驱动程序（收件箱和发件箱）的 lpfc_enable_FC4_type 默认设置为 3 。因此，您无需在 /etc/modprobe.d/lpfc.conf 中明确设置此值。</block>
   <block id="f6819fa140833120f7f3801a144cc85c" category="list-text">接下来，安装建议的 lpfc 自动连接脚本：</block>
@@ -268,7 +259,6 @@
   <block id="681e25842821aed88b9536b9cde94730" category="list-text">验证 `lpfc_sg_seg_cnt` 是否为 256 。</block>
   <block id="911e585c5684ba9f5c2b87af879f4a13" category="summary">如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机</block>
   <block id="1e2ea077f54493b4670fb3cb63e05215" category="doc">适用于采用 ONTAP 的 RHEL 8.2 的 NVMe/FC 主机配置</block>
-  <block id="a323dc79dc8ddf470d729a2c332cbfc3" category="paragraph">对于 RHEL 8.2 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="c6669fd579995b65e30bee38f5da1a94" category="paragraph">对于 RHEL 8.2 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.2 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
   <block id="91c7ddf8268b6d667c9f0d48db1d52a2" category="section-title">在 RHEL 8.2 上启用 NVMe/FC</block>
   <block id="797aea72ebbc1431192817ec206cafb4" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.2 GA 。</block>
@@ -280,7 +270,6 @@
   <block id="29dfe6da86bf07e6603e28dfb347ad93" category="list-text">在 ` /etc/nvme/` 中还原主机文件。</block>
   <block id="6583872aab9c396f958f3f06d3512a9d" category="list-text">将原始的 ` /etc/nve/host*` 内容从备份复制到 ` /etc/nvme/` 的实际主机文件。</block>
   <block id="360ef025710e08a61d1403840b1b7d2f" category="list-text">安装完成后，验证您是否正在运行指定的 Red Hat Enterprise Linux 内核。</block>
-  <block id="bbce8f0ed284d01e3094dde5fe25d071" category="paragraph">请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="dd04c64108aac34c4bea60bf8e6c1a4d" category="list-text">安装 NVMe-CLI 软件包。</block>
   <block id="701947e628918eea072dd2f4c817f9ac" category="list-text">启用内核 NVMe 多路径。</block>
   <block id="72e702431882de8ed92aa1c2e3726dea" category="list-text">在 RHEL 8.2 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
@@ -289,7 +278,6 @@
   <block id="62304a27ab79f1e94b19449dd83b7fcc" category="paragraph">如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您应在 dm-multipath 中将 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。</block>
   <block id="4e9e6a353c31b00bcbf2e522fd8093c3" category="list-text">运行 `systemctl restart multipathd` 以重新启动 multipathd 守护进程。</block>
   <block id="08bfb2deaedf251a6a8ffe53e4d4bd4d" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
-  <block id="dc2d17c5e0da5b1387a98710aa62d7b4" category="paragraph">有关支持的适配器的最新列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="f89e24c920e9c7f547e3742a47871d9c" category="list-text">验证您使用的是受支持的适配器。</block>
   <block id="8cd46a779e9b68135d1a640170cd6b2e" category="list-text">验证 `lpfc_enable_FC4_type` 是否设置为 "* 3*" 。</block>
   <block id="41ec6565fe85097ed5372fdce96af64d" category="list-text">确认启动程序端口已启动且正在运行，并且可以查看目标 LIF 。</block>
@@ -304,7 +292,6 @@
   <block id="43a1ae88ecbcd358290c6d654acd3f5b" category="list-text">重新启动后，验证设置。</block>
   <block id="5fc5720a1a04d98fd8788b6a94e31e4e" category="summary">使用 ONTAP 为 Oracle Linux 7.8 设置 VME/FC 主机配置，包括示例</block>
   <block id="62eef3d72485420aaef57ae6f4135044" category="doc">适用于采用 ONTAP 的 Oracle Linux 7.8 的 NVMe/FC 主机配置</block>
-  <block id="31f793272fc270a640fb6b4bde9a8c0d" category="paragraph">适用于 Oracle Linux 7.8 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.8 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="cddebb777dcce0d200e1342fa6f70131" category="list-text">默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 7.8 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="c3283cf60ecf7c97f753acd8d8735312" category="list-text">在 Oracle Linux 7.8 上，不支持 NVMe/FC 的 sanlun ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。</block>
   <block id="fd58025e044ac8cc0f93e71ed39a3720" category="list-text">在服务器上安装 Oracle Linux 7.8 。</block>
@@ -560,7 +547,6 @@
   <block id="ccf6dcaf9d267935d140bb63387e1b16" category="section-title">列出给定 SVM 目标 LIF WWPN 在主机上看到的 ONTAP LUN</block>
   <block id="6bf77654a8e211c90c63557c6541b3a2" category="section-title">通知文件</block>
   <block id="d67213454856023fc9b29996cb21f0d6" category="inline-link-macro">Linux Unified Host Utilities 通知文件</block>
-  <block id="640ea572caf297952db88f71ff4eafd7" category="paragraph"><block ref="640ea572caf297952db88f71ff4eafd7" category="inline-link-macro-rx"></block></block>
   <block id="9571def175ecc3ee331559407e9d5ed4" category="summary">介绍如何使用 AIX 发现和配置 LUN</block>
   <block id="e93853ce3f41e3f009822b5ea83cbc28" category="doc">（不使用 PowerVM 的 AIX MPIO ）使用 AIX 发现和配置 LUN</block>
   <block id="e6e3f8fd2b82161da0a58fef26f9e35a" category="paragraph">如果在不使用 PowerVM 的情况下使用 AIX ，则可以使用 cfgmgr 命令使主机发现 LUN 。您无需重新启动主机即可发现 LUN 。要确认主机是否发现了 LUN ，您可以使用 sanlun 实用程序。</block>
@@ -764,7 +750,6 @@
   <block id="8d61b8bfb9dde8239ba049eb5b61cb3f" category="paragraph">Oracle Linux 7.6 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件</block>
   <block id="02cfb45c5eca5d228b8fdc27610724b9" category="admonition">要配置 Oracle Linux 7.6 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="01c1a2a180a79aab210cc480d73c73eb" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.6 。</block>
   <block id="9f1d7307449f2a1971a05bc6e54a02e9" category="inline-link-macro">1202736</block>
-  <block id="b112cf8fe866428e44d55115a79917f2" category="cell"><block ref="53fdb37625d5e59994403889bfc7b976" category="inline-link-macro-rx"></block></block>
   <block id="3b8a92ff3e01668248ad17ab6e44808a" category="cell">由于使用 QLogic QLE2742 适配器的 OL7U6 主机上的远程端口处于 " 不存在 " 状态，因此 LUN 在主机发现期间可能不可用</block>
   <block id="266caf48844d8cdb3bb559a8663357b3" category="cell">在主机发现期间，使用 QLogic QLE2742 适配器的 OL7U6 主机上的光纤通道（ Fibre Channel ， FC ）远程端口的状态可能会进入 " 不存在 " 状态。处于 " 不存在 " 状态的远程端口可能会使 LUN 的发生原因路径不可用。在存储故障转移期间，路径冗余可能会减少并导致 I/O 中断。您可以输入以下命令来检查远程端口状态： # cat /sys/class/fc_remote_ports/rport-*/port_state 以下是显示的输出示例：联机不存在联机</block>
   <block id="f95008d294f277e432261d458fe91c76" category="inline-link-macro">16613</block>
@@ -774,25 +759,21 @@
   <block id="110e0b5a03d1167053a9543acb43aacf" category="cell">在存储故障转移操作期间，使用 Qlogic （ QLE2672 ） 16 Gb FC HBA 运行的 Oracle Linux 7.6 会发生内核中断</block>
   <block id="c0bf7a084fa2c4a01bd1c93955f36853" category="cell">在使用 Qlogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，由于内核发生崩溃，发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
   <block id="81853dc778186bff64ba4b47dacfe8aa" category="inline-link-macro">16606</block>
-  <block id="ef9920c2fff3fdb621acea2fc716058e" category="cell"><block ref="ef9920c2fff3fdb621acea2fc716058e" category="inline-link-macro-rx"></block></block>
   <block id="f9de5b33d228fc7a257b05e2d0b6c683" category="inline-link-macro">1204451</block>
   <block id="3c392133be4d94a24a2bafbe80d3f9fa" category="cell"><block ref="e4f067f2a87df9a65f3b48107d7ac51a" category="inline-link-macro-rx"></block></block>
   <block id="4b97d2c9a1fc0afb4fde2570b328366a" category="cell">在存储故障转移操作期间，使用 Qlogic （ QLE2742 ） 32 Gb FC HBA 运行的 Oracle Linux 7.6 可能会发生内核中断</block>
   <block id="a41dd8fa5c4b21d6d565247a17260afc" category="cell">在使用 Qlogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，内核可能会因发生崩溃而发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
   <block id="3f38fd6bbb9e743a2fb63f16cfbbbe8c" category="inline-link-macro">16605</block>
-  <block id="82a008dd7019a83292879903d4fe8512" category="cell"><block ref="82a008dd7019a83292879903d4fe8512" category="inline-link-macro-rx"></block></block>
   <block id="d6c0c50761ad6452637a662cef9b7c83" category="inline-link-macro">1204352</block>
   <block id="49c68535f9d278fae88a21a2b48a79ef" category="cell"><block ref="2d73099ef4fd4b2be1ad69d22e7490ca" category="inline-link-macro-rx"></block></block>
   <block id="233dfa37455a25cad0ff70b82758fd04" category="cell">在存储故障转移操作期间，使用 Emulex （ LPe32002 — M2 ） 32 Gb FC HBA 运行的 Oracle Linux 7.6 可能会发生内核中断</block>
   <block id="de4751a6623d2dc19176d3eefc40a63a" category="cell">在使用 Emulex LPe32002 — M2 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，内核可能会因发生崩溃而发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
   <block id="b3a5a6df0cf1dfc30882b20f8a493092" category="inline-link-macro">16607</block>
-  <block id="060dce39151e27063af5c2408dd90f68" category="cell"><block ref="060dce39151e27063af5c2408dd90f68" category="inline-link-macro-rx"></block></block>
   <block id="1be16d281967c5fd1105ba268364fdff" category="inline-link-macro">11246134.</block>
   <block id="596f5900897f794536e4fd09d9e67d1b" category="cell"><block ref="b642b2365a114acdecf31316d612089a" category="inline-link-macro-rx"></block></block>
   <block id="6493a407c9bbe979a9aad945277aad29" category="cell">在存储故障转移操作期间，使用 Emulex LPe16002B-M6 16G FC HBA 运行的 Oracle Linux 7.6 和 UEK5U2 内核上的 I/O 未进度</block>
   <block id="310e18c99baea86232364acadb939a15" category="cell">在运行了 Emulex LPe16002B-M6 16G 光纤通道（ FC ）主机总线适配器（ HBA ）的 UEK5U2 内核的 Oracle Linux 7.6 上执行存储故障转移操作期间， I/O 进度可能会因报告被阻止而停止。存储故障转移操作报告从 " 联机 " 状态更改为 " 已阻止 " 状态，从而导致读取和写入操作延迟。操作成功完成后，报告将无法返回到 " 联机 " 状态，并继续保持 " 已阻止 " 状态。</block>
   <block id="65ddc1f88e46d28edac152bdb47193e0" category="inline-link-macro">16852</block>
-  <block id="58576b07cbb17050e8d50a783e99f5ad" category="cell"><block ref="58576b07cbb17050e8d50a783e99f5ad" category="inline-link-macro-rx"></block></block>
   <block id="7f7d7442869ba0a43e1c8a7628283fb6" category="inline-link-macro">1246327</block>
   <block id="425d6a0675c65fcbb55962fe041d3750" category="cell"><block ref="2fc4638611f41ecf99c51cb3b7693e41" category="inline-link-macro-rx"></block></block>
   <block id="803346e13fcd7415573e4bec58e22f89" category="cell">存储故障转移操作期间， QLogic QLE2672 16G 主机上的远程端口状态被阻止</block>
@@ -814,13 +795,11 @@
   <block id="2eb230255bdd45a2ff65ed6cf50006b8" category="doc">适用于采用 ONTAP 的 RHEL 8.1 的 NVMe/FC 主机配置</block>
   <block id="d3ee6ae724222bd797217eee4ad1f96b" category="paragraph">以下版本的 RHEL 在 ONTAP 9.6 或更高版本上支持 NVMe/FC ：</block>
   <block id="2e3750c608ef9c088598a72e91ddb608" category="list-text">RHEL 8.1</block>
-  <block id="e4b894a34574b10ac85ab4614275ac93" category="paragraph">RHEL 8.1 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe 和 SCSI 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="23573be9c7dbe4494659f6a90bc05b8a" category="list-text">NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。您可以使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="1293e1b1ae6bd1e6a01f05541df9ce9f" category="list-text">默认情况下， NVMe 多路径处于禁用状态。必须手动启用它。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="0d683aa46dbb260c50031bd00c3f5e6f" category="list-text">默认情况下，不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="ae656c348a91ed19fd61ce8a9dbdde83" category="section-title">在 RHEL 8.1 上启用 NVMe/FC</block>
   <block id="1f66f3a5a69d2cce3c5a6e2c4cee2b1a" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.1 。</block>
-  <block id="504714493e527fc21e46868de42bdc8b" category="list-text">安装完成后，验证您是否正在运行指定的 Red Hat Enterprise Linux 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="6f72b48df47d9c45155f84a6cbab74f6" category="list-text">安装 NVMe-CLI-1.8.1-3.el8 软件包。</block>
   <block id="e8b45cd7975466cea80842914943b27f" category="list-text">在 RHEL 8.1 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="2ea0bf6794f8a5c2e251d97b7658ded2" category="admonition">如果主机 NQN 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，使其与主机上 /etc/nve/hostnqn 中的主机 NQN 字符串匹配。</block>
@@ -888,7 +867,6 @@
   <block id="6b41fb8eea99b0d8d062e30f5b71d616" category="summary">适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置</block>
   <block id="20a78b272b5f3dce057f1a808d44d00c" category="paragraph">对于 Windows Server 2019 ， ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="959ca5b147c021ab1f2cf1f45d4db6bb" category="paragraph">请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。</block>
-  <block id="629b7ec6c77c38de3f66cb1d51a543a8" category="paragraph">请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="e069702f93877aa76c32a99b6780156b" category="paragraph">ONTAP NVMe/FC 不支持 Windows 故障转移集群（ WFC ），因为 ONTAP 当前不支持对 NVMe/FC 进行永久性预留。</block>
   <block id="f834e9106683e94a02939e2811ebbee2" category="admonition">Broadcom 提供的适用于 Windows NVMe/FC 的外部驱动程序并非真正的 NVMe/FC 驱动程序，而是一个转换式 SCSI ⇄ NVMe 驱动程序。这种转换开销不一定会影响性能，但它会抵消 NVMe/FC 的性能优势。因此，在 Windows 服务器上， NVMe/FC 和 FCP 性能是相同的，而在 Linux 等其他操作系统上， NVMe/FC 性能明显优于 FCP 。</block>
   <block id="39b7faff23431f32a2b72b5ec0a759cc" category="section-title">在 Windows 启动程序主机上启用 NVMe/FC</block>
@@ -997,8 +975,6 @@
   <block id="eb40a1520d522d20939a9321ce7560a9" category="doc">适用于采用 ONTAP 的 Oracle Linux 7.7 的 NVMe/FC 主机配置</block>
   <block id="440dd386d307a6307c7ea4b97237db4b" category="paragraph">以下版本的 Oracle Linux 在 ONTAP 9.6 或更高版本上支持 NVMe/FC</block>
   <block id="c433a0a97578fca4897042ceac31a2c1" category="list-text">执行第 7.7 项</block>
-  <block id="d92fc53c311d7c1e79bfbf1122c293a1" category="paragraph">OL 7.7 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe 和 SCSI 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
-  <block id="af65dbb24aa7b38c58303d4a61123311" category="paragraph">有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="6d02bb87c6003e111f060b4c7c94d2dd" category="list-text">NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。您可以使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="dc69820103be29718e2c8cd51f522a8d" category="list-text">默认情况下，不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 OL 7.7 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="94cd205e440aaaa92c530c6ab9af2238" category="section-title">在 OL 7.7 上启用 NVMe</block>
@@ -1008,9 +984,7 @@
   <block id="b7992936b0d1e93c6666410fa59b459b" category="list-text">在 ` /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules` 中将以下字符串作为单独的 udev 规则添加。这样可以为 NVMe 多路径启用轮循负载平衡。</block>
   <block id="4a08b4cdc752d6b56372551f5eaf5055" category="list-text">在 OL 7.7 主机上，检查 ` /etc/nve/hostnqn` 处的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="7fa8390ac8c114f16d588d79fe36a1ee" category="admonition">如果主机 NQN 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，使其与主机上 ` /etc/nve/hostnqn` 中的主机 NQN 字符串匹配。</block>
-  <block id="926dfb14160c0ca205f10f65bfd13886" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="769627b30441d87c853de2b1343baa09" category="list-text">复制并安装 Broadcom 发件箱自动连接脚本软件包。</block>
-  <block id="44b090e520c0cbc7c33d34a94236cc0d" category="list-text">验证您使用的是建议的 Broadcom lpfc 固件，原生收件箱驱动程序和外置自动连接软件包版本。有关支持的版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="f3a17d79f6544740456771291527984d" category="summary">介绍如何将 Oracle Linux 6.5 与 ONTAP 结合使用</block>
   <block id="7892153bfe939e17bf485f5fd993312f" category="doc">将 Oracle Linux 6.5 与 NetApp ONTAP 结合使用</block>
   <block id="a7612c1b52cef63443272a841e63f053" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="3b4b1f1818c7805cf81dfa92e64600a8" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -1120,8 +1094,6 @@
   <block id="1793cac86fac919fc2d9ce3ee8be0a5b" category="doc">适用于采用 ONTAP 的 SUSE Linux Enterprise Server 15 SP1 的 NVMe/FC 主机配置</block>
   <block id="583e457484849f189a3e543adfcbfa01" category="paragraph">以下版本的 ONTAP 9.6 或更高版本支持 NVMe/FC ：</block>
   <block id="f2803bf30a3eaf1cf725f98652c23d14" category="list-text">SLES15 SP1</block>
-  <block id="7223c31169aa6a600cbbacfb6ceba868" category="paragraph">SLES15 SP1 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
-  <block id="7e852267635d5019a3ce858042ef3ac6" category="paragraph">有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="b8bcc67e9c36e9d4f18d613df77d7151" category="paragraph">无NVMe-CLI 软件包中包含原生 NVMe/FC 自动连接脚本。您可以在 SLES15 SP1 上使用原生收件箱 lpfc 驱动程序。</block>
   <block id="dc9ea227b088df839bbad386005bd492" category="section-title">在 SLES15 SP1 上启用 NVMe/FC</block>
   <block id="2faf433f2b14b03d43c24261953419bc" category="list-text">升级到建议的 SLES15 SP2 MU 内核</block>
@@ -1149,9 +1121,6 @@
   <block id="891d3d61b8fac48b3a3480b3a2f6d3c9" category="inline-link-macro">《全 SAN 阵列软件配置指南》</block>
   <block id="a76193f5d9397d9c49ca283a20ccf649" category="inline-link-macro">《 SAN 管理指南》</block>
   <block id="8cb9ee34636093f5ba25008ebc7b7287" category="inline-link-macro">《 SAN 配置指南》</block>
-  <block id="43abaa1405c150da2bfc4b21a13f6307" category="paragraph"><block ref="cc02477b87c986c19fc4b80e533fea2f" category="inline-link-macro-rx"></block>
-<block ref="09510031e3b885bf6ab04e2618106734" category="inline-link-macro-rx"></block>
-<block ref="d0db4892abafd865db9787e6cfa26ae2" category="inline-link-macro-rx"></block></block>
   <block id="f75fbeea110530ab4a9306fd42a5e085" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 6.8</block>
   <block id="e42b8222d080edbca329cec5517236ac" category="doc">将 Oracle Linux 6.8 与 NetApp ONTAP 结合使用</block>
   <block id="c2c3cb3deab4f22710adbed9c6148ed1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="0da8e8d8e04d92cff39dc5df78f41efc" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -1175,7 +1144,6 @@
   <block id="736c980a1fb2f447faa0dedf6080305f" category="paragraph">本文档将为采用 FC ， FCoE 和 iSCSI 协议的 Red Hat Enterprise Linux 和 Oracle Linux （基于 RHCK ）平台的 Veritas Storage Foundation 6 系列版本提供有关 ONTAP SAN 主机配置设置的指导。</block>
   <block id="5116d27ab3c67a2413a9afe024b82a38" category="summary">如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机</block>
   <block id="af59960049c1f2bff52a1746f8d7c912" category="doc">适用于采用 ONTAP 的 RHEL 8.3 的 NVMe/FC 主机配置</block>
-  <block id="1264edc5d877a4366a8fc34ebee169f2" category="paragraph">对于 RHEL 8.3 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.3 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="c7bc96121734b19b104696509562ddf4" category="paragraph">对于 RHEL 8.3 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.3 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
   <block id="fddddf6122e8647dce249a89db031406" category="section-title">在 RHEL 8.3 上启用 NVMe/FC</block>
   <block id="23cd3fb20334805933445d4e9e38f375" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.3 GA 。</block>
@@ -1224,7 +1192,6 @@
   <block id="46b5e459ba83be6f3933222f42a4caac" category="cell">在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障</block>
   <block id="a62e4298a14b3b2b0eed1e03a1901a18" category="cell">在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 "</block>
   <block id="b6e351fa03836020bf63aed76e03399a" category="inline-link-macro">1068622</block>
-  <block id="da9242a19e2d73365453559382adb25e" category="cell"><block ref="da9242a19e2d73365453559382adb25e" category="inline-link-macro-rx"></block></block>
   <block id="480c1af29fcb3cc17dbe8a841a6a3c06" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.2</block>
   <block id="2257e3be4a13feb6dc7ad6ff9a38404a" category="doc">将 CentOS 8.2 与 NetApp ONTAP 结合使用</block>
   <block id="6cb3a6c6bbd7cf8c1ab700ad4342bed1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5791c19afbac364267fc3567cae2ba34" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -1395,7 +1362,6 @@
   <block id="42dde1eb61f6c2638c5d044047417179" category="cell">HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval</block>
   <block id="46a467f98c686e7e623f63c2bcb194ea" category="cell">当您的服务器仅为 Windows Server 2008 ， Windows Server 2008 R2 ， Windows Server 2012 ， Windows Server 2012 R2 或 Windows Server 2016 时</block>
   <block id="c57dcf0db9f722653d2df0250b192c2f" category="inline-link">Microsoft 文档</block>
-  <block id="ef56d34d9e0c3d5184148a5b8d42e6e6" category="paragraph">请参见<block ref="357cc52f0624875aa1a6ac85cb040290" category="inline-link-rx"></block> 有关注册表参数的详细信息。</block>
   <block id="820c80a71d25737a6640c8135c800297" category="section-title">Windows Host Utilities 设置的 FC HBA 值</block>
   <block id="9f76dab9681402d9cca8872103fdd39b" category="paragraph">在使用光纤通道的系统上， Host Utilities 安装程序会为 Emulex 和 QLogic FC HBA 设置所需的超时值。对于 Emulex 光纤通道 HBA ，在选择 MPIO 时，安装程序会设置以下参数：</block>
   <block id="fcadb00a391febcf36774dc51d9e5b31" category="paragraph">对于 Emulex 光纤通道 HBA ，如果未选择 MPIO ，安装程序将设置以下参数：</block>
@@ -1404,7 +1370,6 @@
   <block id="db9c6223eee8c0b14343e2e99a36dcd1" category="admonition">根据程序的不同，这些参数的名称可能会略有不同。例如，在 QLogic QConvergeConsole 程序中，参数显示为 `Link down Timeout` 。Host Utilities `fcconfig.ini` 文件会将此参数显示为 `LinkDownTimeOut` 或 `MPioLinkDownTimeOut` ，具体取决于是否指定了 MPIO 。但是，所有这些名称都引用相同的 HBA 参数。</block>
   <block id="8f0fd19a2d99e6260c0b4e6513b7638c" category="inline-link">Emulex</block>
   <block id="bf37856a0dcc40508065787e2d49c8c3" category="inline-link">QLogic</block>
-  <block id="0c327a67748ac7f7fb8dde132b1acb89" category="paragraph">请参见<block ref="c32d5138d375494435bcd0b1eae78d9d" category="inline-link-rx"></block> 或<block ref="d4b412c01b28224e963f944b178a747b" category="inline-link-rx"></block> 站点以了解有关超时参数的更多信息。</block>
   <block id="231cf4c70d866b616c21baddaeed0696" category="section-title">故障排除</block>
   <block id="2c288505019ef3576beff6f1a1c6a2f6" category="paragraph">本节介绍 Windows Host Utilities 的一般故障排除技术。请务必查看最新的发行说明以了解已知问题和解决方案。</block>
   <block id="2ddc4523fe736e4292509794836285a1" category="list-title">可从不同方面确定可能的互操作性问题</block>
@@ -1415,10 +1380,7 @@
   <block id="e8197b03c53adb4c255babbea70b0dbb" category="list-text">如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。</block>
   <block id="7cfb60f9be60bdb510439f18ec6998be" category="list-text">对于运行 ONTAP 的存储控制器的光纤通道路径，您必须验证 FC 交换机是否使用目标 LIF 的 WWPN 进行分区，而不是使用节点上物理端口的 WWPN 进行分区。</block>
   <block id="1ecdb3fa7b640490717a296d259753d7" category="inline-link">Windows Host Utilities 发行说明</block>
-  <block id="2ee0d2b281290a6c863e57e4d4a21480" category="list-text">您必须查看<block ref="2cf3cb62594322ccc0fab255bdee813e" category="inline-link-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
-  <block id="3937e54cfdc5c33e5dda755704c8e417" category="list-text">您必须查看中的故障排除信息<block ref="fb1c865da623429f3f2fb9a813d8096f" category="inline-link-rx"></block> 适用于您的 ONTAP 版本。</block>
   <block id="e96e50bb8a7d5f2a62a9ad0cd0c6527c" category="inline-link">Bug Online</block>
-  <block id="3a354cbdced09ce519de80fa3c30155b" category="list-text">您必须进行搜索<block ref="252aa747144a7c794a82b6ba844c9634" category="inline-link-rx"></block> 最近发现的问题。</block>
   <block id="5ffc88b316abd29a91a8fb106f64fd57" category="list-text">在高级搜索下的错误类型字段中，您应选择 iSCSI - Windows ，然后单击转到。您应重复搜索错误类型 FCP -Windows 。</block>
   <block id="ced4243fdbfe6d3a74734c24ffd00df8" category="list-text">您必须收集有关系统的信息。</block>
   <block id="7ecf9ab560fece14bab7a58f25439b02" category="list-text">记录主机或存储系统控制台上显示的所有错误消息。</block>
@@ -1427,9 +1389,6 @@
   <block id="bd68ec6c51cae2556d9fd0a47c25a261" category="list-text">如果无法解决此问题，您可以联系 NetApp 技术支持。</block>
   <block id="6f4e4d9fbe846fd8bf7decf7dcffbd63" category="inline-link">NetApp 文档</block>
   <block id="69893000f4da30e1e42922cbcf8dac0e" category="inline-link">NetApp Bug Online</block>
-  <block id="5a0963ada99e07d34a9835371e00b78d" category="paragraph"><block ref="d38df2295bfe768071dcfe28649a9438" category="inline-link-rx"></block>
-<block ref="45ece4b767882e37029a899408a90e1e" category="inline-link-rx"></block>
-<block ref="4d6312917d6c42e852b24f4cdf21281d" category="inline-link-rx"></block></block>
   <block id="ecb499de8f5e24bad886b86ed7d44f3e" category="section-title">了解 Host Utilities 对 FC HBA 驱动程序设置的更改</block>
   <block id="39aea57d05192500d96bea0e7cf2f41c" category="paragraph">在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，系统会检查多个参数，在某些情况下会对这些参数进行修改。</block>
   <block id="b65e3a71c2c6298818d74981c3e3d216" category="paragraph">如果检测到 MS DSM for Windows MPIO ，则 Host Utilities 会为以下参数设置值：</block>
@@ -1517,7 +1476,6 @@
   <block id="38e584f52f25fb096dead8f8866657b0" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="f736929b1834226891236b2c0b0b218e" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.4 。</block>
   <block id="a57fd33007e3d579c230eadee6c70cda" category="summary">使用 ONTAP 为 Oracle Linux 7.9 设置 VME/FC 主机配置，包括示例</block>
   <block id="ed635118a854903a3b0358da07cc869e" category="doc">适用于采用 ONTAP 的 Oracle Linux 7.9 的 NVMe/FC 主机配置</block>
-  <block id="9cef78b94fd6eefd69a46f3a05766a20" category="paragraph">适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="a636ca8cde3102effb73bcff59dece16" category="list-text">在 `NVMe-CLI` 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="9195b1ff49ab8ce4810203a23cb03425" category="list-text">默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 7.9 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="78f6b6d7760fddd70fbadef88b92f437" category="list-text">在 Oracle Linux 7.9 上，不支持 NVMe/FC ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。</block>
@@ -1728,7 +1686,6 @@
   <block id="abbe770f7d2ca2eefbb79e84ca40a521" category="paragraph">请参见<block ref="77ab0bbf377853176c70e55d32dcb81a" category="inline-link-rx"></block> 适用于特定版本的 ONTAP 工具或适用于特定版本的 vSphere 和 ONTAP 的原有 VASA Provider 。</block>
   <block id="3dffa984dadf9ff0006ee9cebd3b04b9" category="inline-link-macro">TR-4597</block>
   <block id="7bc192063f45f04afc8d24a8ef003835" category="inline-link-macro">TR-4400</block>
-  <block id="1c0113d8c230b5606ecb6f40c38139cf" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="163d36f329d77686b160ce60afa6779f" category="inline-link-macro-rx"></block> 和 <block ref="db13b24e05866930cfa36e6c69ff0506" category="inline-link-macro-rx"></block></block>
   <block id="2fc5bc49d904cb53f5585cd77321f50e" category="section-title">ATS 锁定</block>
   <block id="4218c50587ec231bafd431433feea5e0" category="paragraph">对于与 VAAI 兼容的存储和升级的 VMFS5 ， ATS 锁定是 * 必填项 * 。要与 ONTAP LUN 实现适当的互操作性和最佳的 VMFS 共享存储 I/O 性能，必须锁定 ATS 。有关启用 ATS 锁定的详细信息，请参见 VMware 文档。</block>
   <block id="f4f70727dc34561dfde1a3c529b6205c" category="cell">设置</block>
@@ -1766,11 +1723,8 @@
   <block id="784c795c066fdf3c4713aae58af639ff" category="paragraph">没有已知问题。</block>
   <block id="f8ec0f3aa329ebfedf13a79184b7867e" category="section-title">相关链接</block>
   <block id="c2e11c6f1a87d8cf2bf465e9c2562bdb" category="inline-link-macro">TR-4597 ：采用 ONTAP 的 VMware vSphere</block>
-  <block id="e8d76cf0fb48e9402ef120576ce03442" category="list-text"><block ref="e8d76cf0fb48e9402ef120576ce03442" category="inline-link-macro-rx"></block></block>
   <block id="52f50d0f0ab285059648c7da67b4b07f" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
-  <block id="d00f3afc34af64c1f6923b84353fdf60" category="list-text"><block ref="d00f3afc34af64c1f6923b84353fdf60" category="inline-link-macro-rx"></block></block>
   <block id="929c9a7053ca6d930b0835cb93342235" category="inline-link-macro">采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP</block>
-  <block id="59f5bd19ece12952dca729a7cdc93458" category="list-text"><block ref="59f5bd19ece12952dca729a7cdc93458" category="inline-link-macro-rx"></block></block>
   <block id="51a78203e5d6aa30e5bcafd469a2d2be" category="summary">介绍如何将 SUSE Linux Enterprise Server 12 SP5 与 ONTAP 结合使用</block>
   <block id="b865018bdf70bd30fce954190d63da4f" category="doc">将 SUSE Linux Enterprise Server 12 SP5 与 NetApp ONTAP 结合使用</block>
   <block id="9a6a6fde9dc0b6c6cf58bb4752be3433" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="84c7846e7158b0d270be911eb58ad456" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -1798,7 +1752,6 @@
   <block id="70b7cc349994a5289908b02781aee538" category="paragraph">` /opt/NTAP/SANToolkit/bin/host_config &lt;-setup&gt; &lt;-protocol fcp_iscsi_mixed&gt; &lt;-multipath mpxio_dmp&gt; non&gt; （ -noalua ） [-mcc 60_90_120]`</block>
   <block id="d9fcab23624dae4606baf44f146b1fdc" category="paragraph">host_config 命令执行以下操作：</block>
   <block id="ecfc86e5d43962233e80fa4638ea4b1e" category="paragraph">以下是为采用 NetApp ONTAP LUN 的 Solaris 11.4 SPARC 和 x86_64 建议的一些参数设置。这些参数值由 Host Utilities 设置。有关 Solaris 11.4 系统的其他设置，请参见 Oracle 文档 ID ： 2595926.1</block>
-  <block id="933bb8225ec3c23e4014532b9dab5382" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp <block ref="8cbb31454ac1fbea4971870d4da70405" category="inline-link-macro-rx"></block>。</block>
   <block id="90fbed0fe328b6c16dbe12568b1cb193" category="paragraph">要验证修补程序，请执行以下操作：</block>
   <block id="dd1e6355fcc2ca3c16ece42015663e00" category="cell">1362435</block>
   <block id="393cfee0a3b5d3e706f8a0cdeefa3ed8" category="cell">Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改</block>
@@ -1832,7 +1785,6 @@
   <block id="f32d48cf755668783343d18d81af5662" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="13be8945161aaeca52d4e4a694080916" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.0 。</block>
   <block id="ce33fe68519e0e2d14428572a71c7569" category="summary">使用 ONTAP 为 Oracle Linux 8.2 设置 VME/FC 主机配置，包括示例</block>
   <block id="89d62bb3e0891fdc6a601122dddc0440" category="doc">适用于采用 ONTAP 的 Oracle Linux 8.2 的 NVMe/FC 主机配置</block>
-  <block id="0ff22dd7b0f5651b2a0257bfa84a3f43" category="paragraph">适用于 Oracle Linux 8.2 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.2 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="983e45d9f14c8e4b92b207877e7cabb0" category="paragraph">无</block>
   <block id="444ce06dcc32d405185ecb72eb5ab7a2" category="list-text">在服务器上安装 Oracle Linux 8.2 。</block>
   <block id="4aab3393d576bcf2907352ae44a0a440" category="list-text">升级 NVMe-CLI 软件包。原生 NVMe-CLI 软件包包含 NVMe/FC 自动连接脚本，用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 命名空间的 NetApp 插件。</block>
@@ -1852,7 +1804,6 @@
   <block id="6e1a60a2cc9775d5b4dfd69be66dfce4" category="paragraph">Windows Server 2016 没有已知问题。</block>
   <block id="9f48bd68eb80a61379f6dd65620bec8c" category="summary">介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP2 配置 NVMe/FC</block>
   <block id="b7c80370e68c20a6d2b05ca2d022abbe" category="doc">适用于采用 ONTAP 的 SUSE Linux Enterprise Server 15 SP2 的 NVMe/FC 主机配置</block>
-  <block id="9f1c92ee835f1347980e214aec2ccf51" category="paragraph">在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
   <block id="9da90f594305db99019fb1bba6ef50a4" category="section-title">在 SLES15 SP2 上启用 NVMe/FC</block>
   <block id="c131de8824918e42917022e80562a0e1" category="list-text">升级到建议的 SLES15 SP2 MU 内核版本。</block>
   <block id="47a1a789b24d958d3c073bab6e64e3b4" category="list-text">升级原生 NVMe-CLI 软件包。</block>
@@ -1884,7 +1835,6 @@
   <block id="f55b5d03a0416a1f3b022e8726d40ab4" category="cell">存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC 的 Citrix Hypervisor 8.0 上的内核中断</block>
   <block id="4a51081f62917f0c91cd1e1d09bd2d71" category="cell">在使用 QLogic QLE2742 32 GB HBA 的 Citrix Hypervisor 8.0 内核（ 4.19.0+1 ）上执行存储故障转移操作期间，可能会发生内核中断。此问题描述会提示重新启动操作系统并导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。您可以使用 vmcore 文件了解故障的发生原因。内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
   <block id="b008e43caaecb8f7dd34101d0643e3bf" category="inline-link-macro">NetApp-98</block>
-  <block id="5c865ccb3282797998a0af980707f644" category="cell"><block ref="5c865ccb3282797998a0af980707f644" category="inline-link-macro-rx"></block></block>
   <block id="a6dc6c62ee31196ca4228a01ceaf054f" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.6</block>
   <block id="bb416c7f83582cb630ec7e8f1451631f" category="doc">将 Red Hat Enterprise Linux 7.6 与 NetApp ONTAP 结合使用</block>
   <block id="4802d87aa5a1f81f51753e6e62f1e804" category="paragraph">RHEL 7.6 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1988,7 +1938,6 @@
   <block id="305f59462ece50f24122d41e4561fcfa" category="paragraph">NetApp 不建议此时更改任何 VVOL 设置的默认值。</block>
   <block id="bc84423f783fae0183076ce886ba6bf5" category="paragraph">对于与 VAAI 兼容的存储和升级的 VMFS5 ， ATS 锁定是 * 必填项 * 。要与 ONTAP LUN 实现适当的互操作性和最佳的 VMFS 共享存储 I/O 性能，必须锁定 ATS 。有关启用 ATS 锁定的详细信息，请参见 VMware 文档。</block>
   <block id="5efa0da94bf6845724aa837362401b61" category="inline-link">ONTAP 文档</block>
-  <block id="42c1045702b3c57f4b0e62fae2255829" category="admonition">为映射到 VMware vSphere 的所有 LUN 启用 space-alloc 设置，以便 UNMAP 正常工作。有关详细信息，请参见<block ref="1b5bf6d1f916294fa8ea9a493a557114" category="inline-link-rx"></block>。</block>
   <block id="702847a1dee0319e79e5728553de2882" category="paragraph">使用以下命令验证 `HardwareAcceleratedLocking` 设置：</block>
   <block id="77ecd0ddc58e5ddd5a2b264f1971a10d" category="paragraph">使用以下命令验证 IOPS 设置。</block>
   <block id="59ed189d97df48789ab17ac76d264c5a" category="paragraph">使用以下命令验证 QFullSampleSize</block>
@@ -2005,7 +1954,6 @@
   <block id="b9204431a0ed79e40e8c590858bc11e4" category="cell">在 Emulex 适配器上测试期间出现 PLOGI 问题描述</block>
   <block id="67b58a320d747fcd4cbacaf620e097ed" category="inline-link-macro">客户案例 -00088028</block>
   <block id="812daa291d1c26c02bbf300bc7c1bc8d" category="inline-link-macro">客户案例 -00088029</block>
-  <block id="fd3470c9903d74a47900e4edf1fccfde" category="list-text">要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 <block ref="dd56d07272778fbf2351a1a6bf2d68f6" category="inline-link-macro-rx"></block> 和 <block ref="afafc6544ae1d28d7c258b8a10250602" category="inline-link-macro-rx"></block></block>
   <block id="11b4279628bd5bd99185024194584bba" category="sidebar">VMware vSphere 6.5 和 6.7</block>
   <block id="e23d1316b6f8fd9d76ebc1a761f0ffa9" category="summary">如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机</block>
   <block id="1124bd13d48eff16726e09da76f5e2b3" category="doc">适用于采用 ONTAP 的 RHEL 8.4 的 NVMe-oF 主机配置</block>
@@ -2017,10 +1965,7 @@
   <block id="bd89f3a395591c17f8cb7f0aaea6cc0b" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中的 NetApp 插件还可以显示 ONTAP 命名空间的 ONTAP 详细信息。</block>
   <block id="509e52d19112a7c7188376d101160b4c" category="paragraph">对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。</block>
   <block id="c8fe594dab6cb1395df34d73b005c900" category="section-title">配置要求</block>
-  <block id="3eee338751e3c83a0f670d65776dc5bb" category="paragraph">请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
   <block id="4ded790bbb27d5eadbd8717a3e61cb12" category="section-title">启用内核 NVMe 多路径</block>
-  <block id="6f77e42d8a2b806188775127fb18ff38" category="list-text">在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
-  <block id="74b34615858a2f42622b19603c1d7f9a" category="list-text">安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">示例</block>
   <block id="6ba6a18088999d632ca174b9873a3b12" category="list-text">安装 `NVMe-CLI` 软件包：</block>
   <block id="e71d1275a2744aceb8d59932f2e5fe56" category="list-text">启用内核 NVMe 多路径。</block>
@@ -2030,8 +1975,6 @@
   <block id="2c4ca691e5adaf801e0bf8d274c9b482" category="list-text">运行 `systemctl restart multipathd` 命令以使新设置生效，从而重新启动 multipathd 守护进程。</block>
   <block id="5d1b3cf5c2e1ac5de48898e0fc69d53b" category="section-title">正在配置 NVMe/FC</block>
   <block id="3ea394f2d9cebf2dfc911ba5e025db7a" category="section-title">Broadcom/Emulex</block>
-  <block id="237ef25227ad60dc21bc575c8c5d3c91" category="list-text">验证您使用的是受支持的适配器。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的适配器的最新列表。</block>
-  <block id="26fa591732ddeff57790e5200f54f70c" category="list-text">验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的适配器驱动程序和固件版本的最新列表。</block>
   <block id="46e2b7cc014d11d7552d6921801d0753" category="list-text">验证 lpfc_enable_FC4_type 是否设置为 3 。</block>
   <block id="2defc9958244f438872605820e3ca11a" category="list-text">确认启动程序端口已启动且正在运行，并且您能够看到目标 LIF 。</block>
   <block id="cf0ca1d2e48dec2abfc57cc3d3ad9bdd" category="section-title">启用 1 MB I/O 大小（可选）</block>
@@ -2088,7 +2031,6 @@
   <block id="fcfc5ba070a0675d68aab9fb9f245c43" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以像往常一样为 SCSI LUN 配置 `dm-multipath` ，从而生成 mpath 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。</block>
   <block id="1733de5a596dfd8c9179b7f061fe9051" category="paragraph">没有已知限制。</block>
   <block id="42104bec91c2c82c24dfb75610f2ff97" category="section-title">配置要求</block>
-  <block id="a9253bb30315649124db4e36a8bdd239" category="paragraph">默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
   <block id="83314818bb7c47b391616d0ff767a7de" category="section-title">NVMe-oF 启动程序包</block>
   <block id="abc4d57007eba9b1d8b3f88edac97e68" category="list-text">验证 SLES15 SP3 MU 主机上是否已安装所需的内核和 NVMe-CLI MU 软件包。</block>
   <block id="21c405f2155cb8a6afae52ce69ea30ba" category="paragraph">上述 NVMe-CLI MU 软件包现在包括以下内容：</block>
@@ -2143,13 +2085,11 @@
   <block id="62769ac5811a4b0727cd77616bb3d368" category="paragraph">Oracle Linux 8.4 没有已知问题。</block>
   <block id="4447162ab1e53ae3a7c371586690d068" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="1cf241ba8c9adec487a38ecfba1ee9ce" category="inline-link-macro-rx"></block> 一节。</block>
   <block id="07bbb49e67f00330a23f48abec1ddfeb" category="doc">AIX Host Utilities 6.1</block>
-  <block id="7523cbe6bf00a77f54b30eb25ef39eae" category="paragraph">您可以使用<block ref="e19686e34cf1063cebe94895ceb29ebc" category="inline-link-rx"></block> 以验证您的配置。</block>
   <block id="baadc517f232b835410bb5a5975c2d71" category="paragraph">AIX Host Utilities 是一种 NetApp 主机软件，可在 IBM AIX 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
   <block id="fcd0175f66a20efc7cd1c6567f9a5578" category="paragraph">在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。</block>
   <block id="df806afef9dae5d43f20297c99fb14ca" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
   <block id="d87eaccfcc7f1ce59c39e647ad0ee108" category="admonition">AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。</block>
   <block id="1677bade87b8d78a9e17903200fc98b0" category="section-title">安装 AIX Host Utilities</block>
-  <block id="2874804481e21069fd56b2ba6d9a48ee" category="paragraph">上提供了 NetApp AIX Host Utilities 软件包<block ref="1e0e3ba3a1388f793e3365711e83f625" category="inline-link-rx"></block> 在经过压缩的 tar.gz 文件中。</block>
   <block id="9e4f19eef336dfad151cb4dba23dc1eb" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。下载此文件后，您必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。</block>
   <block id="4839d2f25cc35b249d5db15efa1afd75" category="paragraph">* 步骤 *</block>
   <block id="03bb76916332762e5c74abd3925ef3a5" category="list-text">在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 oem_setup_env 命令以成为 root 。</block>
@@ -2166,8 +2106,6 @@
   <block id="069c43556e66148f1f1eeabd7e9e7872" category="sidebar">AIX Host Utilities</block>
   <block id="095f17ad6c7f706c5fa881fa28d2b0e2" category="sidebar">XenServer 7.</block>
   <block id="7818dfcab7a1c05d51aa00ac15f3beac" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。` /kernel/drv/fp.conf` 中的默认设置更改为 mpxio-disable="no" 。</block>
-  <block id="8802d931d27e076bee343aab852197ac" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 <block ref="5fba20747e2f398f3da76ea0bd825023" category="inline-link-macro-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
-  <block id="ff93671647385f59b8f76dc681e2b6bb" category="list-text">仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 <block ref="5fba20747e2f398f3da76ea0bd825023" category="inline-link-macro-rx"></block>。</block>
   <block id="1014a6a04423d551549d409e08fbcc51" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
   <block id="26aa8c05766be362fe2c469284c66a45" category="paragraph">如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 `vDC.conf` 的内容。</block>
   <block id="83b783cc8aa7959a24d34b681bbc1fd2" category="section-title">SnapMirror 业务连续性的建议设置</block>
@@ -2177,25 +2115,21 @@
   <block id="b6fdbb065aa5e5c1bf0f5af8ad73ca53" category="list-text">使用 `devprop` 和 `mdb` 命令验证是否已成功应用覆盖：</block>
   <block id="570f5761e2e0bfb396196b06d19e21b0" category="paragraph">`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl</block>
   <block id="5492ce934067a932652b5c7aa5dd991b" category="inline-link">Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置</block>
-  <block id="5f6238b0613143f4b4f548b5f60bc85c" category="admonition">应用 `scsI-vhcI-failover-override` 后， `conf` 将添加到 `svl_fPS_name` 中。有关追加信息以及对默认设置的建议更改，请参阅 NetApp 知识库文章<block ref="5f8ebca4127b56f5ebdfcb3e105e60fb" category="inline-link-rx"></block>。</block>
   <block id="d121177f120e7b50a6ec37a43d7ae4e6" category="cell">Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同</block>
   <block id="7fed5db563dfce62e3512e9c6fe716c1" category="cell">"Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 "</block>
   <block id="8b30a2a046838a554ec8551f6130f395" category="cell">在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
   <block id="38a445b35a68bb2b838316376b083c19" category="doc">适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置</block>
   <block id="0f97c82c57e5402681bd180ec7889f9a" category="paragraph">ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。</block>
-  <block id="c8889953fea9b096fc742c823b9ddac5" category="list-text">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="fa1df8fa5bd5687b2a7a37f825b8b1a9" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。请参见 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block> 有关支持的最新配置和版本列表。</block>
   <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。</block>
   <block id="087c6f6069a3f1c08cb62e3d53029f80" category="list-text">对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。</block>
   <block id="f19c49e2c5af4fdef9d76da8243928b8" category="paragraph">不支持以下配置：</block>
   <block id="0baafa49aae4a0470bfc558baa32e371" category="list-text">检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配：</block>
   <block id="a2da92c5d726acd949aaa27a8aa3153b" category="section-title">配置 Broadcom/Emulex</block>
-  <block id="e56d69f0e69f04701c7a1b09a587c569" category="list-text">请参见，检查所需驱动程序 / 固件是否支持此配置 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="9800cef048ddc104a174cdb11416156c" category="list-text">设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
   <block id="bf7cba7a9056a716211324109312cd61" category="admonition">从 vSphere 7.0 Update 3 开始， `brcmnvmefc` 驱动程序不再可用。因此， `lpfc` 驱动程序现在包括先前随 `brcmnvmefc` 驱动程序提供的基于光纤通道的 NVMe （ NVMe/FC ）功能。</block>
   <block id="460c25e7bb5010dbb0ff63a998a73cf9" category="admonition">默认情况下，已为 LPe35000 系列适配器设置 `lpfc_enable_FC4_type=3` 参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此命令，必须执行以下命令。</block>
   <block id="eeeff75243446a5649a1a32a4fc8b74e" category="section-title">配置 Marvell/QLogic</block>
-  <block id="8d5a26a4d2f3f025597e9133142b8d98" category="list-text">请参见，检查所需驱动程序 / 固件是否支持配置 <block ref="872b36a5ffce0c4aa0127d5d145a3e60" category="inline-link-macro-rx"></block>。</block>
   <block id="0ddb0350e0867842f11bd0619f22f3fc" category="list-text">设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
   <block id="f86f2d0f74b3f5bda1a49097fcdecaeb" category="paragraph">` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`</block>
   <block id="17627ac666e764dc705796280424855d" category="admonition">默认情况下， QLE 277x 系列适配器会设置 `qlnativefc` driver 参数。要为 QLE 277x 系列适配器手动设置此命令，必须执行以下命令。</block>
@@ -2203,13 +2137,78 @@
   <block id="262311c06b4d7e1d63d9ec53a8513969" category="list-text">验证 NVMe/FC 适配器是否列在 ESXi 主机上：</block>
   <block id="a4e09728b21e07eb8de92849a3239079" category="admonition">在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须将命名空间块大小设置为 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。</block>
   <block id="b19cff5a6d037faf5ffa796506cf839f" category="inline-link-macro">ONTAP 9 命令手册页</block>
-  <block id="00dd9dd32e06a9beeeb0fc320cce0405" category="paragraph">请参见 <block ref="4f969217d1de0d02a3bd1c6359fed6a8" category="inline-link-macro-rx"></block> 了解更多详细信息。</block>
   <block id="e83464ce8bd634efb1f099c956ec64a8" category="section-title">已知问题描述</block>
   <block id="7c6b30ab95aa6f3eeb2a6b9cbaf31f6c" category="list-text">从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
   <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="0a7c052037789d22811592a15b7a2e17" category="inline-link-macro">NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x</block>
-  <block id="3b75e11b18639d68da47ed73f699970c" category="paragraph"><block ref="1100be8e2abfcb2872c044ea41e9a0d0" category="inline-link-macro-rx"></block>
-<block ref="d089a1bacb367057de993188e1176fc0" category="inline-link-macro-rx"></block>
-<block ref="e048af1dd602fa684e69d3fb3fe54824" category="inline-link-macro-rx"></block></block>
   <block id="cd5f3c0e3d7017e6f7861dd8cdb0590c" category="sidebar">NVMe-oF ESXi</block>
+  <block id="ff09581cb2c13d8ad132e71c1320dc7e" category="cell"><block ref="108e2d22c5beb633cb3cfe03baa4f66f" category="inline-link-macro-rx"></block></block>
+  <block id="8286a7d77eb7d53445229f3c12d8c18f" category="cell"><block ref="8286a7d77eb7d53445229f3c12d8c18f" category="inline-link-macro-rx"></block></block>
+  <block id="109d2ee1c560df7a2148394570cdbc69" category="cell"><block ref="109d2ee1c560df7a2148394570cdbc69" category="inline-link-macro-rx"></block></block>
+  <block id="2152e4c49c3814e1e3bba79274326fde" category="cell"><block ref="2152e4c49c3814e1e3bba79274326fde" category="inline-link-macro-rx"></block></block>
+  <block id="5193fa62de727bc1b09d9ac908612e4d" category="cell"><block ref="5193fa62de727bc1b09d9ac908612e4d" category="inline-link-macro-rx"></block></block>
+  <block id="c38f9cb37e7246171df1cd59fb277c46" category="paragraph"><block ref="c38f9cb37e7246171df1cd59fb277c46" category="inline-link-macro-rx"></block></block>
+  <block id="193e9a3a22ec18786f1a8e1dccfdc4ac" category="list-text">从下载包含 Host Utilities 的压缩文件的副本 <block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block> 到主机上的目录。</block>
+  <block id="72f260df571f27a8db9ec89d6a6496b6" category="paragraph">您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 <block ref="cf44bc918cdfd261cca787c802f63045" category="inline-link-macro-rx"></block> 有关在 Solaris MPIO 环境中启动 SAN LUN 的详细信息。</block>
+  <block id="bb07e47b42aa48376a913354e1a94c0f" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp <block ref="9c0611c5ceabd8da2106dbd75573cd48" category="inline-link-macro-rx"></block>。</block>
+  <block id="692dca145cf34dacba629a9ddf6d4c42" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
+  <block id="73710dbb0bb38e18d8eb3c739564246e" category="list-text">仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block>。</block>
+  <block id="2a8cf5b2d9486c637aaa9e7f5fb2bbf3" category="admonition">应用 `scsI-vhcI-failover-override` 后， `conf` 将添加到 `svl_fPS_name` 中。有关追加信息以及对默认设置的建议更改，请参阅 NetApp 知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
+  <block id="f58813ca14ecba2def986836fee74fc0" category="paragraph">适用于 Oracle Linux 8.1 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.1 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="0a9d709578599cebfffb10775d3641a7" category="list-text">安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="3a70a917bfcb66912a844601f3334965" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="48041afc31abe79fadb7695b8cbfd4f7" category="list-text">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的最新配置和版本列表。</block>
+  <block id="b0a76d3d3c0c115749b76b173897a127" category="list-text">请参见，检查所需驱动程序 / 固件是否支持此配置 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="3c5ff01a1cadf5679b57603dbc59e554" category="list-text">请参见，检查所需驱动程序 / 固件是否支持配置 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="9a85ce7daf00cd97d2ba489c461c944f" category="paragraph">请参见 <block ref="6bc1436da9f0920d54a0f738830d902f" category="inline-link-macro-rx"></block> 了解更多详细信息。</block>
+  <block id="d1456688e4d9e6236e75dfb01f3ed2ec" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
+<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
+<block ref="feedbf2928c5a2b3814dd0d36cd7d240" category="inline-link-macro-rx"></block></block>
+  <block id="ab29bda450e857b3672661ee0b1f2ec3" category="paragraph">请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="901e57ec934f2bb4dcf9c00499d469dc" category="paragraph">您可以使用<block ref="d30d99bceb137a364ff5b7be97ceac80" category="inline-link-rx"></block> 以验证您的配置。</block>
+  <block id="64d9950f8626931b9146221eb8361c4a" category="paragraph">上提供了 NetApp AIX Host Utilities 软件包<block ref="c333bb24ac578f01b89e18c713c1294b" category="inline-link-rx"></block> 在经过压缩的 tar.gz 文件中。</block>
+  <block id="dffe2b4e459efd8935c7c22b9718180f" category="paragraph">对于 RHEL 8.3 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.3 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="5b905783a11f0709eab070d439f4bebe" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="7e7451dacba473800a5cdbb40e615ba6" category="paragraph">有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="2d3e43ea7c8c91fc0a78b6056554ec91" category="paragraph">适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="d77815b1cf8addecd8d2fb23c9878c4a" category="paragraph">请参见<block ref="cc2304a59b5feaeebd0c5646fd22caf0" category="inline-link-rx"></block> 有关注册表参数的详细信息。</block>
+  <block id="489cce922da01c521eefedb275b4f00b" category="paragraph">请参见<block ref="6d63c8366c015331075fa86de38975e8" category="inline-link-rx"></block> 或<block ref="4399df604c07a452cc084d95811dafae" category="inline-link-rx"></block> 站点以了解有关超时参数的更多信息。</block>
+  <block id="0fed378af4cbd540fdc5e90359bce3a1" category="list-text">您必须查看<block ref="215c50dc894cd826b5531420c000ab39" category="inline-link-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
+  <block id="0b10f822d26382a922afd1635db5de2d" category="list-text">您必须查看中的故障排除信息<block ref="766939a89871d4c04af2f6ac1ab2650b" category="inline-link-rx"></block> 适用于您的 ONTAP 版本。</block>
+  <block id="9083840fa5bcf62c5684d884151ab69b" category="list-text">您必须进行搜索<block ref="9f91bb070a65615e92f64b6a068e1d9d" category="inline-link-rx"></block> 最近发现的问题。</block>
+  <block id="3809aec0d76653aef580fe5a05c2ceea" category="paragraph"><block ref="b1540a3ec25c7d8277b499a1cc1d920b" category="inline-link-rx"></block>
+<block ref="37fb4b1646680720393f2c3367174dbe" category="inline-link-rx"></block>
+<block ref="787134229d52d08fef0caa9611cbbc06" category="inline-link-rx"></block></block>
+  <block id="78ba88bcc67458c1a5065ee8f68514e8" category="paragraph">默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 <block ref="682b92f396ad2229bd62e99c5a518610" category="inline-link-macro-rx"></block></block>
+  <block id="63de1f29f867ea5090af94f0fe852e73" category="paragraph">对于 RHEL 8.2 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="fe11a5d007b30b19387669fa13d0bc9d" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
+  <block id="62ec2bcab7e05f6212dbc5211b403a26" category="list-text">在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="224db9a3769a259ebd077f30d2c7de7b" category="list-text">安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="558772c2923356166b7dbc78142c82d1" category="list-text">验证您使用的是受支持的适配器。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的适配器的最新列表。</block>
+  <block id="b683fa7bfd2f7f01ea49576352757cd5" category="list-text">验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的适配器驱动程序和固件版本的最新列表。</block>
+  <block id="2e53ec06e83c9a95dd9bd79e6e91794d" category="paragraph">OL 7.7 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
+  <block id="2ccdf4b56d3a99d20857e20e044bf1ca" category="paragraph">有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="9f845ca5de3d71f2c5f7eed4864a12b4" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="1e5bb2c5d5a9a2921f17983d8f8db70b" category="list-text">验证您使用的是建议的 Broadcom lpfc 固件，原生收件箱驱动程序和外置自动连接软件包版本。有关支持的版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="2a0a4348e3cfffb7106ae13ae6827b6d" category="paragraph">适用于 Oracle Linux 8.2 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.2 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="772d04265dc6e94b3e6f5c725fbf42e6" category="paragraph"><block ref="e1df9b7b8db07e2cb30146cd5a6e04ef" category="inline-link-macro-rx"></block>
+<block ref="414cc440da9b8860f85936c8ca7199d3" category="inline-link-macro-rx"></block>
+<block ref="c70054656a6156c5d554f172fbb27a7a" category="inline-link-macro-rx"></block></block>
+  <block id="6fa026cc896a9aa46993e867a29d973c" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="52e81e11040c41825151f9c7710055f2" category="inline-link-macro-rx"></block> 和 <block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
+  <block id="24b832a3c490bb4e76193c9ae615cd2b" category="admonition">为映射到 VMware vSphere 的所有 LUN 启用 space-alloc 设置，以便 UNMAP 正常工作。有关详细信息，请参见<block ref="ecbbd19c2959ac5708c6c4723def4492" category="inline-link-rx"></block>。</block>
+  <block id="1ce6b82da1e4c8ef0696742f32ee8517" category="list-text">要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 <block ref="0b49ef6859bcc6d029643944be119d56" category="inline-link-macro-rx"></block> 和 <block ref="ea34cfa716537242c2b4837bb8c55109" category="inline-link-macro-rx"></block></block>
+  <block id="8a515fe16331b7269862c5871e55c7e4" category="list-text"><block ref="8a515fe16331b7269862c5871e55c7e4" category="inline-link-macro-rx"></block></block>
+  <block id="5306229c164cfe6b066f8442f64d8268" category="list-text"><block ref="5306229c164cfe6b066f8442f64d8268" category="inline-link-macro-rx"></block></block>
+  <block id="69c554c1475a518cc1bc743c147bcae6" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp<block ref="c1922a8e804b8190c0daa8263ddd5748" category="inline-link-rx"></block>。</block>
+  <block id="ffc3e17a9258b28dbcb840e63a4da4d4" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区<block ref="0a2387641ef9263b02d75ca03cdebda2" category="inline-link-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
+  <block id="ce5e3ba4f12b670c7cec88d808b05d5b" category="list-text">仅使用虚拟化存储资源（例如 `vdskk` ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们不能直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域<block ref="0a2387641ef9263b02d75ca03cdebda2" category="inline-link-rx"></block>。</block>
+  <block id="3773c551729981917923f39164f9b765" category="paragraph">RHEL 8.1 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="091178f03b60ed6adc2d05dbdc73a202" category="list-text">安装完成后，验证您是否正在运行指定的 Red Hat Enterprise Linux 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="806bc64df06f53e39492ea141c1547ac" category="paragraph">适用于 Oracle Linux 7.8 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.8 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="f74952756a69cdbe7cccca5faf46e6cc" category="cell"><block ref="f74952756a69cdbe7cccca5faf46e6cc" category="inline-link-macro-rx"></block></block>
+  <block id="e4e8c2e3b1f2a437f2ee78761c02d287" category="paragraph">SLES15 SP1 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
+  <block id="038caf673b7c529c453a9844cbb5d6c4" category="paragraph">有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
+  <block id="2f7555fd65fd6100208812dc33a35c6e" category="list-text"><block ref="2f7555fd65fd6100208812dc33a35c6e" category="inline-link-macro-rx"></block></block>
+  <block id="53e0316343afe978271ccd43b743d05a" category="paragraph">在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
+  <block id="443e8164d670e55b2388725ef1a0bda5" category="paragraph">默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
 </blocks>

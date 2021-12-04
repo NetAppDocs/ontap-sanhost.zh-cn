@@ -25,7 +25,7 @@ summary: 适用于采用 ONTAP 的 Windows Server 2012 R2 的 NVMe/FC 主机配�
 
 请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。
 
-请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 。
+请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 。
 
 
 

@@ -21,7 +21,7 @@ summary: 使用 ONTAP 为 Oracle Linux 7.9 设置 VME/FC 主机配置，包括�
 
 == 可支持性
 
-适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 。
+适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 。
 
 
 
@@ -37,7 +37,7 @@ summary: 使用 ONTAP 为 Oracle Linux 7.9 设置 VME/FC 主机配置，包括�
 == 启用 NVMe/FC
 
 . 在服务器上安装 Oracle Linux 7.9 。
-. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 +
 [listing]
 ----
@@ -85,7 +85,7 @@ nqn.2014-08.org.nvmexpress:uuid:497ad959-e6d0-4987-8dc2-a89267400874
 
 == 为 NVMe/FC 配置 Broadcom FC 适配器
 
-. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"]。
+. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 +
 [listing]
 ----

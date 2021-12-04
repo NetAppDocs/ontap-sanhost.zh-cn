@@ -44,14 +44,14 @@ summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机
 
 == 配置要求
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的配置的准确详细信息。
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
 
 
 
 == 启用内核 NVMe 多路径
 
-. 在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关最新的受支持版本列表。
-. 安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关最新的受支持版本列表。
+. 在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
 +
 示例
 
@@ -119,7 +119,7 @@ defaults {
 
 === Broadcom/Emulex
 
-. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的适配器的最新列表。
+. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器的最新列表。
 +
 [listing]
 ----
@@ -130,7 +130,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"] 有关支持的适配器驱动程序和固件版本的最新列表。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器驱动程序和固件版本的最新列表。
 +
 [listing]
 ----
