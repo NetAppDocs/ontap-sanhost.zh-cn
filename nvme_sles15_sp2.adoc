@@ -162,7 +162,7 @@ FCP CMPL: xb 0000159d Err 000135c3
 
 
 
-== 正在验证 NVMe/FC
+== 验证 NVMe/FC
 
 . 验证以下 NVMe/FC 设置。
 +

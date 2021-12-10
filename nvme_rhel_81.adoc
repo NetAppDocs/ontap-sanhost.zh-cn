@@ -183,7 +183,7 @@ NVME Statistics
 
 
 
-== 正在验证 NVMe/FC
+== 验证 NVMe/FC
 
 . 验证以下 NVMe/FC 设置。
 +

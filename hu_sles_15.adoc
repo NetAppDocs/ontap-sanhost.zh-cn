@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_suse_12SP5.html 
-keywords: host utilities, suse linux enterprise server 12 SP5, suse, linux, 12 SP5, netapp, ontap 
-summary: 介绍如何将 SUSE Linux Enterprise Server 12 SP5 与 ONTAP 结合使用 
+permalink: hu_sles_15.html 
+keywords: host utilities, suse linux enterprise server 15, suse, linux, 15, netapp, ontap 
+summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 
 ---
-= 将 SUSE Linux Enterprise Server 12 SP5 与 NetApp ONTAP 结合使用
+= 将 SUSE Linux Enterprise Server 15 与 NetApp ONTAP 结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -57,7 +57,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91704;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=84067;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -76,7 +76,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == 多路径
 
-对于 SUSE Linux Enterprise Server 12 SP5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于 SUSE Linux Enterprise Server 15 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -113,15 +113,15 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 [listing]
 ----
-#multipath -ll
+# multipath -ll
 3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-|-+- policy='service-time 0' prio=50 status=active
+size=80G  features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=enabled
 | |- 11:0:1:0 sdj 8:144 active ready running
 | |- 11:0:2:0 sdr 65:16 active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-|- 11:0:0:0 sdb 8:i6 active ready running
-|- 12:0:0:0 sdz 65:144 active ready running
+ |- 11:0:0:0 sdb 8:i6 active ready running
+ |- 12:0:0:0 sdz 65:144 active ready running
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
@@ -130,7 +130,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 == 建议设置
 
-对 SUSE Linux Enterprise Server 12 SP5 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
+对 SUSE Linux Enterprise Server 15 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
 
 首次创建此文件时，您可能需要启用并启动多路径服务。
 
@@ -239,16 +239,17 @@ blacklist {
 [listing]
 ----
 defaults {
- path_checker readsector0
- no_path_retry fail
+   path_checker      readsector0
+   no_path_retry      fail
 }
+
 devices {
- device {
- vendor "NETAPP "
- product "LUN.*"
- no_path_retry queue
- path_checker tur
- }
+   device {
+      vendor         "NETAPP  "
+      product         "LUN.*"
+      no_path_retry     queue
+      path_checker      tur
+   }
 }
 ----
 
@@ -260,7 +261,7 @@ devices {
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293["1284293"^] | 存储故障转移操作期间，使用 QLogic QLE2562 8 Gb FC HBA 的 SLES12 SP5 上发生内核中断 | 使用 QLogic QLE2562 光纤通道（ FC ）主机总线适配器（ HBA ）对 SLES12 SP5 内核执行存储故障转移操作期间，发生内核中断。内核中断会导致 SLES12 SP5 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2562 HBA 事件的存储故障转移会影响 "thread_info ： ffff8aedf723c2c0" 模块。通过查找以下字符串在 vmcore 文件中找到此事件： " [thread_info ： ffff8aedf723c2c0]" 。内核中断后，重新启动主机操作系统以使其能够恢复。然后重新启动应用程序。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1157966["1157966"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1154309["1154309"^] | 重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式 | 重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式。维护模式将变为单用户模式，并显示以下消息： `为维护提供 root 密码（或按 Control-D 继续）` | link:https://bugzilla.suse.com/show_bug.cgi?id=1104173["1104173"^] 
 |===
 
 

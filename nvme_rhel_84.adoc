@@ -38,7 +38,9 @@ summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机
 
 == 已知限制
 
-对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。
+* 对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。
+* 由于出现未解决的问题， RHEL 8.4 上的 NVMe/TCP 仍是一项技术预览功能。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.4_release_notes/index#technology-preview_file-systems-and-storage["RHEL 8.4 发行说明"^] 了解详细信息。
+
 
 
 
@@ -113,7 +115,7 @@ defaults {
 
 
 
-== 正在配置 NVMe/FC
+== 配置 NVMe/FC
 
 
 
@@ -215,7 +217,7 @@ options lpfc lpfc_sg_seg_cnt=256
 
 RHEL 8.4 GA 内核中包含的原生收件箱 `qla2xxx` 驱动程序具有最新的上游修复程序，这些修复程序对于 ONTAP 支持至关重要。
 
-* 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----
@@ -223,7 +225,7 @@ RHEL 8.4 GA 内核中包含的原生收件箱 `qla2xxx` 驱动程序具有最新
 QLE2742 FW:v9.06.02 DVR:v10.02.00.104-k
 QLE2742 FW:v9.06.02 DVR:v10.02.00.104-k
 ----
-* 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：
+. 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：
 +
 [listing]
 ----
@@ -234,92 +236,215 @@ QLE2742 FW:v9.06.02 DVR:v10.02.00.104-k
 
 
 
-== 正在验证 NVMe-oF
+== 配置 NVMe/TCP
 
-* 验证是否已启用内核 NVMe 多路径：
+与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
+
+* * 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。
+* * 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。
+
+
+要轻松地承受 ONTAP 故障转移事件（例如 SFO ），建议通过调整 `Ctrl_los_tm` timer 来设置较长的重试时间，例如 30 分钟。详细信息如下：
+
+. 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
++
+[listing]
+----
+# nvme discover -t tcp -w 192.168.1.8 -a 192.168.1.51
+Discovery Log Number of Records 10, Generation counter 119
+=====Discovery Log Entry 0======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 0
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_1
+traddr: 192.168.2.56
+sectype: none
+=====Discovery Log Entry 1======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 1
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_1
+traddr: 192.168.1.51
+sectype: none
+=====Discovery Log Entry 2======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 0
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_2
+traddr: 192.168.2.56
+sectype: none
+...
+----
+. 验证其他 NVMe/TCP 启动程序 - 目标 LIF 组合是否能够成功提取发现日志页面数据。例如：
++
+[listing]
+----
+# nvme discover -t tcp -w 192.168.1.8 -a 192.168.1.52
+# nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
+# nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
+----
+. 对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在连接期间使用较长的 `Ctrl_los_TMOT` 时间段（例如 30 分钟，可通过 ` -l 1800` 进行设置），以便在发生路径丢失时重试较长时间。例如：
++
+[listing]
+----
+# nvme connect-all -t tcp -w 192.168.1.8 -a 192.168.1.51 -l 1800
+# nvme connect-all -t tcp -w 192.168.1.8 -a 192.168.1.52 -l 1800
+# nvme connect-all -t tcp -w 192.168.2.9 -a 192.168.2.56 -l 1800
+# nvme connect-all -t tcp -w 192.168.2.9 -a 192.168.2.57 -l 1800
+----
+
+
+
+
+== 验证 NVMe-oF
+
+. 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：
 +
 [listing]
 ----
 # cat /sys/module/nvme_core/parameters/multipath
 Y
 ----
-* 验证适当的 nve-of 设置， `model` set to `NetApp ONTAP Controller` and `load balancing OPoliciy` set to `round-robin` ，以使相应的 ONTAP 命名空间正确反映在主机上：
+. 验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如， `model` set to `NetApp ONTAP Controller` and `load balancing OPolicy` set to `round-robin` ）是否正确反映在主机上：
 +
 [listing]
 ----
 # cat /sys/class/nvme-subsystem/nvme-subsys*/model
 NetApp ONTAP Controller
 NetApp ONTAP Controller
+
 # cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
 round-robin
 round-robin
 ----
-
-
-
-
-== NVMe/FC
-
-. 验证 NVMe/FC ONTAP 命名空间是否正确反映在主机上。
+. 验证 ONTAP 命名空间是否正确反映在主机上。例如：
 +
-示例
+[listing]
+----
+# nvme list
+Node           SN                    Model                   Namespace
+------------   --------------------- ---------------------------------
+/dev/nvme0n1   81CZ5BQuUNfGAAAAAAAB  NetApp ONTAP Controller   1
+
+Usage                Format         FW Rev
+-------------------  -----------    --------
+85.90 GB / 85.90 GB  4 KiB + 0 B    FFFFFFFF
+----
++
+另一个示例：
 
 +
 [listing]
 ----
 # nvme list
-Node         SN                    Model                  Namespace Usage
--------      -----------------     -------------          --------- ------------
-/dev/nvme0n1 814vWBNRwf9HAAAAAAAB  NetApp ONTAP Controller   1      85.90 GB / 85.90 GB
+Node           SN                    Model                   Namespace
+------------   --------------------- ---------------------------------
+/dev/nvme0n1   81CYrBQuTHQFAAAAAAAC  NetApp ONTAP Controller   1
 
-Format       FW Rev
-------       -------
-4 KiB + 0 B  FFFFFFFF
+Usage                Format         FW Rev
+-------------------  -----------    --------
+85.90 GB / 85.90 GB  4 KiB + 0 B    FFFFFFFF
 ----
-. 验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。
+. 验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。例如：
 +
-示例
+[listing, subs="+quotes"]
+----
+# nvme list-subsys /dev/nvme1n1
+nvme-subsys1 - NQN=nqn.1992-08.com.netapp:sn.04ba0732530911ea8e8300a098dfdd91:subsystem.nvme_145_1
+\
++- nvme2 fc traddr=nn-0x208100a098dfdd91:pn-0x208200a098dfdd91 host_traddr=nn-0x200000109b579d5f:pn-0x100000109b579d5f live *non-optimized*
++- nvme3 fc traddr=nn-0x208100a098dfdd91:pn-0x208500a098dfdd91 host_traddr=nn-0x200000109b579d5e:pn-0x100000109b579d5e live *non-optimized*
++- nvme4 fc traddr=nn-0x208100a098dfdd91:pn-0x208400a098dfdd91 host_traddr=nn-0x200000109b579d5e:pn-0x100000109b579d5e live *optimized*
++- nvme6 fc traddr=nn-0x208100a098dfdd91:pn-0x208300a098dfdd91 host_traddr=nn-0x200000109b579d5f:pn-0x100000109b579d5f live *optimized*
+----
++
+另一个示例：
 
 +
 [listing, subs="+quotes"]
 ----
-# nvme list-subsys /dev/nvme0n1
-nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:subsystem.nvme_141_1
+#nvme list-subsys /dev/nvme0n1
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.37ba7d9cbfba11eba35dd039ea165514:subsystem.nvme_114_tcp_1
 \
-+- nvme0 fc traddr=nn-0x203700a098dfdd91:pn-0x203800a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live *inaccessible*
-+- nvme1 fc traddr=nn-0x203700a098dfdd91:pn-0x203900a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 live *inaccessible*
-+- nvme2 fc traddr=nn-0x203700a098dfdd91:pn-0x203a00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live *optimized*
-+- nvme3 fc traddr=nn-0x203700a098dfdd91:pn-0x203d00a098dfdd91 host_traddr=nn-0x200000109b1c1205:pn-0x100000109b1c1205 live *optimized*
++- nvme0 tcp traddr=192.168.2.36 trsvcid=4420 host_traddr=192.168.1.4 live *optimized*
++- nvme1 tcp traddr=192.168.1.31 trsvcid=4420 host_traddr=192.168.1.4 live *optimized*
++- nvme10 tcp traddr=192.168.2.37 trsvcid=4420 host_traddr=192.168.1.4 live *non-optimized*
++- nvme11 tcp traddr=192.168.1.32 trsvcid=4420 host_traddr=192.168.1.4 live *non-optimized*
++- nvme20 tcp traddr=192.168.2.36 trsvcid=4420 host_traddr=192.168.2.5 live *optimized*
++- nvme21 tcp traddr=192.168.1.31 trsvcid=4420 host_traddr=192.168.2.5 live *optimized*
++- nvme30 tcp traddr=192.168.2.37 trsvcid=4420 host_traddr=192.168.2.5 live *non-optimized*
++- nvme31 tcp traddr=192.168.1.32 trsvcid=4420 host_traddr=192.168.2.5 live *non-optimized*
 ----
-. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。
+. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如：
 +
-示例
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device       Vserver          Namespace Path
+---------    -------          --------------------------------------------------
+/dev/nvme1n1 vserver_fcnvme_145 /vol/fcnvme_145_vol_1_0_0/fcnvme_145_ns
+
+NSID  UUID                                   Size
+----  ------------------------------         ------
+1      23766b68-e261-444e-b378-2e84dbe0e5e1  85.90GB
+
+
+# nvme netapp ontapdevices -o json
+{
+"ONTAPdevices" : [
+     {
+       "Device" : "/dev/nvme1n1",
+       "Vserver" : "vserver_fcnvme_145",
+       "Namespace_Path" : "/vol/fcnvme_145_vol_1_0_0/fcnvme_145_ns",
+       "NSID" : 1,
+       "UUID" : "23766b68-e261-444e-b378-2e84dbe0e5e1",
+       "Size" : "85.90GB",
+       "LBA_Data_Size" : 4096,
+       "Namespace_Size" : 20971520
+     }
+  ]
+}
+----
++
+另一个示例：
 
 +
 [listing]
 ----
 # nvme netapp ontapdevices -o column
-Device        Vserver         Namespace Path                            NSID
---------     -----------      ---------------------------               -------
-/dev/nvme0n1  vs_fcnvme_141   /vol/fcnvme_141_vol_1_1_0/fcnvme_141_ns    1
-UUID                                   Size
------                                  --------
-72b887b1-5fb6-47b8-be0b-33326e2542e2   85.90GB
+Device       Vserver          Namespace Path
+---------    -------          --------------------------------------------------
+/dev/nvme0n1 vs_tcp_114       /vol/tcpnvme_114_1_0_1/tcpnvme_114_ns
+
+NSID  UUID                                   Size
+----  ------------------------------         ------
+1      a6aee036-e12f-4b07-8e79-4d38a9165686  85.90GB
+
 
 # nvme netapp ontapdevices -o json
 {
-"ONTAPdevices" : [
-    {
-        "Device" : "/dev/nvme0n1",
-        "Vserver" : "vs_fcnvme_141",
-        "Namespace_Path" : "/vol/fcnvme_141_vol_1_1_0/fcnvme_141_ns",
-        "NSID" : 1,
-        "UUID" : "72b887b1-5fb6-47b8-be0b-33326e2542e2",
-        "Size" : "85.90GB",
-        "LBA_Data_Size" : 4096,
-        "Namespace_Size" : 20971520
-    }
+     "ONTAPdevices" : [
+     {
+          "Device" : "/dev/nvme0n1",
+           "Vserver" : "vs_tcp_114",
+          "Namespace_Path" : "/vol/tcpnvme_114_1_0_1/tcpnvme_114_ns",
+          "NSID" : 1,
+          "UUID" : "a6aee036-e12f-4b07-8e79-4d38a9165686",
+          "Size" : "85.90GB",
+          "LBA_Data_Size" : 4096,
+          "Namespace_Size" : 20971520
+       }
   ]
+
 }
 ----
 

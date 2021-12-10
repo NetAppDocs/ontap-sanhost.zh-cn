@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_suse_12.html 
-keywords: host utilities, suse linux enterprise server 12, suse, linux, 12, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 
+permalink: hu_sles_15SP1.html 
+keywords: host utilities, suse linux enterprise server 15 sp1, suse, linux, 15 sp1, netapp, ontap 
+summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP1 
 ---
-= 将 SUSE Linux Enterprise Server 12 与 NetApp ONTAP 结合使用
+= 将 SUSE Linux Enterprise Server 15 SP1 与 NetApp ONTAP 结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -57,7 +57,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=68964;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=84067;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -76,7 +76,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == 多路径
 
-对于 SUSE Linux Enterprise Server 12 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于 SUSE Linux Enterprise Server 15 SP1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -115,13 +115,13 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 ----
 # multipath -ll
 3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+size=80G  features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 11:0:1:0 sdj 8:144 active ready running
 | |- 11:0:2:0 sdr 65:16 active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-|- 11:0:0:0 sdb 8:i6 active ready running
-|- 12:0:0:0 sdz 65:144 active ready running
+ |- 11:0:0:0 sdb 8:i6 active ready running
+ |- 12:0:0:0 sdz 65:144 active ready running
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
@@ -130,7 +130,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 == 建议设置
 
-对 SUSE Linux Enterprise Server 12 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
+对 SUSE Linux Enterprise Server 15 SP1 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
 
 首次创建此文件时，您可能需要启用并启动多路径服务。
 
@@ -193,13 +193,16 @@ blacklist {
 | fast_io_fail_sMO | 5. 
 
 
-| features | "3 queue_if_no_path pG_init_retries 50" 
+| features | "2 pG_INIT_retries 50" 
 
 
 | flush_on_last_del | 是的。 
 
 
 | 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
 
 
 | path_checker | "TUR" 
@@ -231,39 +234,34 @@ blacklist {
 
 | 供应商 | NetApp 
 |===
-以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `detect_prio` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
+以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]
 ----
 defaults {
- path_checker readsector0
- detect_prio no
- }
+   path_checker      readsector0
+   no_path_retry      fail
+}
+
 devices {
- device {
- vendor "NETAPP "
- product "LUN.*"
- path_checker tur
- detect_prio yes
- }
+   device {
+      vendor         "NETAPP  "
+      product         "LUN.*"
+      no_path_retry     queue
+      path_checker      tur
+   }
 }
 ----
 
 
 == 已知问题和限制
 
-[cols="4*"]
+[cols="4"]
 |===
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=873555["873555"^] | 在本地启动时启动多路径期间， SCSI_DH_ALUA 模块未加载 | SCSI_DH_ALUA 是一个 Linux ALUA 设备处理程序模块。在本地启动的 multipathd 启动期间，不会加载此数据。由于此原因，虽然在目标端启用了 ALUA ，但不会加载设备处理程序。 | link:https://bugzilla.suse.com/show_bug.cgi?id=908529["908529"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863584["863584"^] | 在 SLES12 上创建 DM 设备时，屏幕上会显示消息 " 发现冲突的设备节点 "/dev/mapper/360xx" | 您可能会发现在 SLES 12 的 /dev/mapper 目录下创建指向 DM 设备的链接失败，并看到消息 "Conflicting device node '/dev/mapper/360xx" found" 。 | link:https://bugzilla.suse.com/show_bug.cgi?id=903001["903001"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=847490["84749"^] | 多路径守护进程显示了 SLES 12 上的路径故障 | 在存储或网络结构发生 I/O 故障期间，您可能会发现 SLES12 多路径守护进程上的路径故障。 | link:https://bugzilla.novell.com/show_bug.cgi?id=890854["890854"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246622["1246622"^] | 在存储故障转移操作期间，使用 Emulex LPe12002 8 Gb FC 的 SLES15SP1 上的远程端口传输到阻止状态。 | 在存储故障转移操作期间，使用 Emulex LPe12002 8 Gb 光纤通道（ FC ）的 SLES15SP1 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。 有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。 此状态可能会导致多路径层的 LUN 路径出现 " 故障 " ，并导致这些 LUN 的 I/O 中断。您可以根据以下示例命令检查 remoteport 的详细信息： -- cat /sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/port_name cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/rport_state | link:https://bugzilla.suse.com/show_bug.cgi?id=1139137["1139137"^] 
 |===
 
 

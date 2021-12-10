@@ -101,7 +101,7 @@ HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryIn
 
 
 
-== 正在验证 NVMe/FC
+== 验证 NVMe/FC
 
 . 验证端口类型是否为 FC+NVMe 。
 +

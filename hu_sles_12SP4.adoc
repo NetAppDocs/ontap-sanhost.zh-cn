@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_suse_12SP3.html 
-keywords: host utilities, suse linux enterprise server 12 SP3, suse, linux, 12 SP3, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP3 
+permalink: hu_sles_12SP4.html 
+keywords: host utilities, suse linux enterprise server 12 SP4, suse, linux, 12 SP4, netapp, ontap 
+summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP4 
 ---
-= 将 SUSE Linux Enterprise Server 12 SP3 与 NetApp ONTAP 结合使用
+= 将 SUSE Linux Enterprise Server 12 SP4 与 NetApp ONTAP 结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -57,7 +57,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=80043;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=86528;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -76,7 +76,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == 多路径
 
-对于 SUSE Linux Enterprise Server 12 SP3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于 SUSE Linux Enterprise Server 12 SP4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP4 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -113,9 +113,9 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 [listing]
 ----
-# multipath -ll
+#multipath -ll
 3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handler' hwhandler='1 alua' wp=rw
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 11:0:1:0 sdj 8:144 active ready running
 | |- 11:0:2:0 sdr 65:16 active ready running
@@ -130,7 +130,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 == 建议设置
 
-对 SUSE Linux Enterprise Server 12 SP3 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
+对 SUSE Linux Enterprise Server 12 SP4 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
 
 首次创建此文件时，您可能需要启用并启动多路径服务。
 
@@ -255,25 +255,8 @@ devices {
 
 == 已知问题和限制
 
-[cols="4*"]
-|===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+对于 SUSE Linux Enterprise Server 12 SP4 ，没有已知问题。
 
-
-| link:https://https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | 在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042847["1042847"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089561["1089561"^] | 在存储故障转移操作期间，在采用 Emulex LPe32002 32 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe32002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_free_hbq+76" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_free_hbq+76 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042807["1042807"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117248["1117248"^] | 在存储故障转移操作期间，在使用 QLogic QLE2562 8 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 QLogic QLE2562 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，由于内核发生崩溃，观察到内核中断。内核崩溃会导致操作系统重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/ 目录下生成 vmcore 文件。发生内核崩溃时，可以使用 vmcore 文件来了解故障的发生原因。示例：在这种情况下，在 "blk_final_request+289" 模块中观察到崩溃。它会使用以下字符串记录在 vmcore 文件中： "Exception RIP ： blk_final_request+289" 内核中断后，您可以通过重新启动主机操作系统来恢复操作系统。您可以根据需要重新启动应用程序。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062496["1062496"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117261["1117261"^] | 在存储故障转移操作期间，在具有 Qlogic QLE2662 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Qlogic QLE2662 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 " 未知或无效地址 " 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中—异常 RIP ：未知或无效地址。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062508["1062508"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117274["1117274"^] | 在存储故障转移操作期间，在使用 Emulex LPe16002 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Emulex LPe16002 HBA 对 Sles12sp3 内核（ kernel-default-4.4.87% -3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 "raw_spin_lock_irqsav+30" 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中：–异常 RIP ： _raw_spin_lock_irqsav+30 。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062514["1062514"^] 
-|===
 
 
 == 发行说明

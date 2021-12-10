@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_suse_15.html 
-keywords: host utilities, suse linux enterprise server 15, suse, linux, 15, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 
+permalink: hu_sles_15SP2.html 
+keywords: host utilities, suse linux enterprise server 15 sp2, suse, linux, 15 sp2, netapp, ontap 
+summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP2 
 ---
-= 将 SUSE Linux Enterprise Server 15 与 NetApp ONTAP 结合使用
+= 将 SUSE Linux Enterprise Server 15 SP2 与 NetApp ONTAP 结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -76,61 +76,33 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == 多路径
 
-对于 SUSE Linux Enterprise Server 15 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于 SUSE Linux Enterprise Server 15 SP2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。使用 ` +multipath -ll+` 命令验证 ONTAP LUN 的设置。
 
-您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
+应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
 
-
-
-=== 全 SAN 阵列配置
-
-在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
-
-以下示例显示了 ONTAP LUN 的正确输出：
-
-[listing]
-----
-# multipath -ll
-3600a0980383034466b2b4a3775474859 dm-3 NETAPP,LUN C-Mode
-size=20G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
-|-+- policy='round-robin 0' prio=50 status=active
-| |- 1:0:8:1  sdb 8:16 active ready running
-| `- 2:0:8:1  sdd 8:48 active ready running
-`-+- policy='round-robin 0' prio=10 status=enabled
-  |- 1:0:9:1  sdc 8:32 active ready running
-  `- 2:0:9:1  sde 8:64 active ready running
-----
-
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
-
-
-
-=== Non-ASA 配置
-
-对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
-
-以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
 
 [listing]
 ----
 # multipath -ll
 3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
-size=80G  features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=enabled
 | |- 11:0:1:0 sdj 8:144 active ready running
 | |- 11:0:2:0 sdr 65:16 active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
- |- 11:0:0:0 sdb 8:i6 active ready running
- |- 12:0:0:0 sdz 65:144 active ready running
+|- 11:0:0:0 sdb 8:i6 active ready running
+|- 12:0:0:0 sdz 65:144 active ready running
 ----
-
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
+请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
 
 
 
 == 建议设置
 
-对 SUSE Linux Enterprise Server 15 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
+对 SUSE Linux Enterprise Server 15 SP2 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。
+
+要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
 
 首次创建此文件时，您可能需要启用并启动多路径服务。
 
@@ -176,7 +148,7 @@ blacklist {
 
 您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
 
-[cols="2*"]
+[cols="2"]
 |===
 | 参数 | 正在设置 ... 
 
@@ -242,7 +214,6 @@ defaults {
    path_checker      readsector0
    no_path_retry      fail
 }
-
 devices {
    device {
       vendor         "NETAPP  "
@@ -256,12 +227,25 @@ devices {
 
 == 已知问题和限制
 
-[cols="4*"]
+[cols="1,1,3,1"]
 |===
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1154309["1154309"^] | 重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式 | 重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式。维护模式将变为单用户模式，并显示以下消息： `为维护提供 root 密码（或按 Control-D 继续）` | link:https://bugzilla.suse.com/show_bug.cgi?id=1104173["1104173"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1308744["1308744"^] | 完成 SLES15SP2 操作系统安装后，从 SAN 启动 iSCSI 无法使用静态 IP 配置启动  a| 
+使用静态 IP 配置完成 SLES 15 SP2 操作系统安装后， iSCSI 已通过 sanboot 的 LUN 无法启动。每次使用静态 IP 配置时都会发生启动失败。这会导致服务器拒绝继续启动过程，并显示以下错误消息：
+
+[listing]
+----
+dracut-cmdline[241]: warning: Empty autoconf values default to dhcp
+
+dracut: FATAL: FATAL: For argument ip=eth4:static, setting client-ip does not make sense for dhcp
+
+dracut: Refusing to continue
+
+reboot: System halted
+
+----| link:https://bugzilla.suse.com/show_bug.cgi?id=1167494["1167494"^] 
 |===
 
 

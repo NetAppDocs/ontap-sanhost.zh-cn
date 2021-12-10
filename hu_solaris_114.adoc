@@ -212,6 +212,9 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 
 为了确保在 SnapMirror 业务连续性（ SM-BC ）环境中发生计划外站点故障转移切换时 Solaris 客户端应用程序不会造成中断，需要在 Solaris 11.4 主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` ，以防止执行检测到冲突的代码路径。
 
+
+NOTE: 从 ONTAP 9.1.1 开始， Solaris 11.4 主机支持 SM-BC 设置配置。
+
 按照说明配置 override 参数：
 
 . 为连接到主机的 NetApp 存储类型创建配置文件 ` /etc/driver/drv/scsi_vhci.conf` ，并输入类似于以下内容的条目：
@@ -245,7 +248,7 @@ NOTE: 应用 `scsI-vhcI-failover-override` 后， `conf` 将添加到 `svl_fPS_n
 | NetApp 错误 ID | 标题 | Description | Oracle ID 
 
 
-| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同 | （文档 ID 2595926.1 ） 
+| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。 | （文档 ID 2595926.1 ） 
 
 
 | 1366780 | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 

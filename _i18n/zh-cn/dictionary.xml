@@ -260,7 +260,6 @@
   <block id="911e585c5684ba9f5c2b87af879f4a13" category="summary">如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机</block>
   <block id="1e2ea077f54493b4670fb3cb63e05215" category="doc">适用于采用 ONTAP 的 RHEL 8.2 的 NVMe/FC 主机配置</block>
   <block id="c6669fd579995b65e30bee38f5da1a94" category="paragraph">对于 RHEL 8.2 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.2 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
-  <block id="91c7ddf8268b6d667c9f0d48db1d52a2" category="section-title">在 RHEL 8.2 上启用 NVMe/FC</block>
   <block id="797aea72ebbc1431192817ec206cafb4" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.2 GA 。</block>
   <block id="219a0c52523adf3bd5e0b81ca98a88a1" category="paragraph">如果使用 `yum update/upgrade` 从 RHEL 8.1 升级到 RHEL 8.2 ，则您的 ` /etc/nve/host*` 文件可能会丢失。要避免文件丢失，请执行以下操作：</block>
   <block id="6af8ec9e9e6b66a700434d4b32213979" category="list-text">备份 ` /etc/nvme/host*` 文件。</block>
@@ -277,7 +276,6 @@
   <block id="b041c12317a88da69581757a98db42d2" category="list-text">更新 `enable_Foreign` Setting _ （ optional ） _ 。</block>
   <block id="62304a27ab79f1e94b19449dd83b7fcc" category="paragraph">如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您应在 dm-multipath 中将 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。</block>
   <block id="4e9e6a353c31b00bcbf2e522fd8093c3" category="list-text">运行 `systemctl restart multipathd` 以重新启动 multipathd 守护进程。</block>
-  <block id="08bfb2deaedf251a6a8ffe53e4d4bd4d" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
   <block id="f89e24c920e9c7f547e3742a47871d9c" category="list-text">验证您使用的是受支持的适配器。</block>
   <block id="8cd46a779e9b68135d1a640170cd6b2e" category="list-text">验证 `lpfc_enable_FC4_type` 是否设置为 "* 3*" 。</block>
   <block id="41ec6565fe85097ed5372fdce96af64d" category="list-text">确认启动程序端口已启动且正在运行，并且可以查看目标 LIF 。</block>
@@ -526,7 +524,6 @@
   <block id="ffdedbe1187a1ddb0d5c60a0ac382630" category="paragraph">Linux Unified Host Utilities 是一款 NetApp 主机软件，可在 Linux 主机上提供命令行工具包。</block>
   <block id="00c00a19ea488ceb63e99f408a6b6118" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
   <block id="7f239a97a66cea4e3bb767698099b430" category="admonition">Citrix XenServer ， Oracle VM 和 Red Hat Enterprise Virtualization Hypervisor 不支持 SAN 工具包。</block>
-  <block id="a5f62b5d93ce24d7bc8e70566fdf99f9" category="section-title">安装 Linux Unified Host Utilities</block>
   <block id="afd7ebe87c934a3e70afff3d554de044" category="paragraph">上提供了 NetApp Linux Unified Host Utilities 软件包 <block ref="6669d666f8f453569510bbfca28c3a1e" category="inline-link-macro-rx"></block> 在 32 位或 64 位 .rpm 文件中。</block>
   <block id="c361420559f71f223ab1528978c7f7d3" category="list-text">如果当前已安装 Linux Unified Host Utilities 版本，请使用以下命令将其删除：</block>
   <block id="e373b253d3dda0488582e96b90463674" category="paragraph">`rpm -e NetApp_Linux_unified_host_utilities_7-1`</block>
@@ -798,7 +795,6 @@
   <block id="23573be9c7dbe4494659f6a90bc05b8a" category="list-text">NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。您可以使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="1293e1b1ae6bd1e6a01f05541df9ce9f" category="list-text">默认情况下， NVMe 多路径处于禁用状态。必须手动启用它。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="0d683aa46dbb260c50031bd00c3f5e6f" category="list-text">默认情况下，不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
-  <block id="ae656c348a91ed19fd61ce8a9dbdde83" category="section-title">在 RHEL 8.1 上启用 NVMe/FC</block>
   <block id="1f66f3a5a69d2cce3c5a6e2c4cee2b1a" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.1 。</block>
   <block id="6f72b48df47d9c45155f84a6cbab74f6" category="list-text">安装 NVMe-CLI-1.8.1-3.el8 软件包。</block>
   <block id="e8b45cd7975466cea80842914943b27f" category="list-text">在 RHEL 8.1 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
@@ -869,16 +865,13 @@
   <block id="959ca5b147c021ab1f2cf1f45d4db6bb" category="paragraph">请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。</block>
   <block id="e069702f93877aa76c32a99b6780156b" category="paragraph">ONTAP NVMe/FC 不支持 Windows 故障转移集群（ WFC ），因为 ONTAP 当前不支持对 NVMe/FC 进行永久性预留。</block>
   <block id="f834e9106683e94a02939e2811ebbee2" category="admonition">Broadcom 提供的适用于 Windows NVMe/FC 的外部驱动程序并非真正的 NVMe/FC 驱动程序，而是一个转换式 SCSI ⇄ NVMe 驱动程序。这种转换开销不一定会影响性能，但它会抵消 NVMe/FC 的性能优势。因此，在 Windows 服务器上， NVMe/FC 和 FCP 性能是相同的，而在 Linux 等其他操作系统上， NVMe/FC 性能明显优于 FCP 。</block>
-  <block id="39b7faff23431f32a2b72b5ec0a759cc" category="section-title">在 Windows 启动程序主机上启用 NVMe/FC</block>
   <block id="e2e5374e9a78d7eca1de41fc5244e80e" category="paragraph">按照以下步骤在 Windows 启动程序主机上启用 FC/NVMe ：</block>
   <block id="410517e1f795e6fa809a7ff5630e2bdd" category="list-text">在 Windows 主机上安装 OneCommand Manager 实用程序。</block>
   <block id="7d182740e5fe1d15ec7f97f69178b4a8" category="list-text">在每个 HBA 启动程序端口上，设置以下 HBA 驱动程序参数：</block>
   <block id="1d71ea83cceb2b7470e1c54838adb506" category="list-text">EnableNVMe = 1</block>
   <block id="814e9f528f5fa391cd6774e57a5c651c" category="list-text">NVMEMode = 0</block>
   <block id="12975cfd6b02fcd31121a100cbbb128c" category="list-text">限制传输大小 =1</block>
-  <block id="15073977329d14efdfd11145dffe8b6e" category="section-title">在 Windows 中为 NVMe/FC 配置 Broadcom FC 适配器</block>
   <block id="95feeb984f6b07e38a54290d155380fb" category="paragraph">在 Windows 环境中使用适用于 FC/NVMe 的 Broadcom 适配器时，每个主机总线适配器（ HBA ）端口都会关联一个 ` +hostnqn+` 。` +hostnqn+` 的格式如下。</block>
-  <block id="59e36e11002bf35ba2eff660df2a7fa5" category="section-title">在 Windows 主机上为 NVMe 设备启用 MPIO</block>
   <block id="410fc92241ee85585a89a22f4f38a389" category="list-text">安装 Windows Host Utility Kit 7.1 以设置 FC 和 NVMe 通用的驱动程序参数。</block>
   <block id="cc6f38a02ffcad6a7b76b5c9c2a8a868" category="list-text">打开 MPIO 属性。</block>
   <block id="8eff5eebf9f16bb0e2893ae3c5998da1" category="list-text">从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。</block>
@@ -1095,7 +1088,6 @@
   <block id="583e457484849f189a3e543adfcbfa01" category="paragraph">以下版本的 ONTAP 9.6 或更高版本支持 NVMe/FC ：</block>
   <block id="f2803bf30a3eaf1cf725f98652c23d14" category="list-text">SLES15 SP1</block>
   <block id="b8bcc67e9c36e9d4f18d613df77d7151" category="paragraph">无NVMe-CLI 软件包中包含原生 NVMe/FC 自动连接脚本。您可以在 SLES15 SP1 上使用原生收件箱 lpfc 驱动程序。</block>
-  <block id="dc9ea227b088df839bbad386005bd492" category="section-title">在 SLES15 SP1 上启用 NVMe/FC</block>
   <block id="2faf433f2b14b03d43c24261953419bc" category="list-text">升级到建议的 SLES15 SP2 MU 内核</block>
   <block id="c7f1791a3f59c536386990c900c326c1" category="list-text">升级到建议的 NVMe-CLI MU 版本。</block>
   <block id="bc22120b8e6d0a4466dfd9ad5afc5302" category="paragraph">此 NVMe-CLI 软件包包含原生 NVMe/FC 自动连接脚本，因此您无需在 SLES15 SP1 主机上安装 Broadcom 提供的外部 NVMe/FC 自动连接脚本。此软件包还包括用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 设备的 NetApp 插件。</block>
@@ -1145,7 +1137,6 @@
   <block id="5116d27ab3c67a2413a9afe024b82a38" category="summary">如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机</block>
   <block id="af59960049c1f2bff52a1746f8d7c912" category="doc">适用于采用 ONTAP 的 RHEL 8.3 的 NVMe/FC 主机配置</block>
   <block id="c7bc96121734b19b104696509562ddf4" category="paragraph">对于 RHEL 8.3 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.3 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
-  <block id="fddddf6122e8647dce249a89db031406" category="section-title">在 RHEL 8.3 上启用 NVMe/FC</block>
   <block id="23cd3fb20334805933445d4e9e38f375" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.3 GA 。</block>
   <block id="a5846cf11c0c17a2d80c96a138e56624" category="paragraph">如果使用 `yum update/upgrade` 从 RHEL 8.2 升级到 RHEL 8.3 ，则您的 ` /etc/nve/host*` 文件可能会丢失。要避免文件丢失，请执行以下操作：</block>
   <block id="d72d2f5661cb55b44d10f141c8b04ac2" category="list-text">安装完成后，验证您是否正在运行指定的 Red Hat Enterprise Linux 内核。</block>
@@ -1234,7 +1225,6 @@
   <block id="ab595e8644eb54589f5d769321b11cc4" category="cell">显示 Host Utilities 和光纤通道 HBA 的版本。</block>
   <block id="86d6299bc9dab5266c5f61d0a0769264" category="section-title">Host Utilities 支持的配置</block>
   <block id="298aa3c26f019d0f6b504317238a932c" category="paragraph">Host Utilities 支持不同的 Windows 主机配置，协议和多路径选项。有关详细信息，请参见<block ref="b7322bec4509d45107de6de43ca1f517" category="inline-link-rx"></block>。</block>
-  <block id="5b3a9fa20478b26e7ea15ea46644a084" category="section-title">验证主机和存储系统配置</block>
   <block id="700f2514d3d4cc2ed02cb06d8b922b2d" category="paragraph">在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。</block>
   <block id="84d4097a38ff264dfaf97e1cec24b529" category="list-text">在中检查支持的配置<block ref="49d81d143d5c8b402603532056154481" category="inline-link-rx"></block>。</block>
   <block id="bd723d0221300797678f431604539bd8" category="list-text">在 SAN 主机文档中检查相应主机所需的修补程序。</block>
@@ -1243,7 +1233,6 @@
   <block id="dafd8a261adaf4e33c8e8c74baa71755" category="list-text">验证布线</block>
   <block id="15ced0ef88b79c27417b95cc4a6474e1" category="inline-link">《 E 系列硬件布线指南》</block>
   <block id="cafd168860d065bea642129c676fb74b" category="paragraph">请参见<block ref="2744dab6503b7f979c6d72cc92b97ead" category="inline-link-rx"></block> 适用于您的 ONTAP 或版本<block ref="7643eb4b4270eeecb6e78fb73c2b55ef" category="inline-link-rx"></block> 有关布线和配置的详细信息。</block>
-  <block id="3e67359a79ec497225784501ca8bc5cd" category="section-title">配置 FC HBA 和交换机</block>
   <block id="2e008f03754d21e3e30e89cf876e8ee9" category="paragraph">安装并配置一个或多个受支持的光纤通道主机总线适配器（ HBA ），以便通过光纤通道连接到存储系统。</block>
   <block id="e587941559542f4bb52a631692177820" category="paragraph">Windows Host Utilities 安装程序可设置所需的光纤通道 HBA 设置。</block>
   <block id="c3d598ac12a38035761ac67dd2d3b26c" category="admonition">请勿手动更改 HBA 设置。</block>
@@ -1252,7 +1241,6 @@
   <block id="3e91c57c67e020fa2082b3156c291656" category="list-text">将 HBA 连接到光纤通道交换机或直接连接到存储系统。</block>
   <block id="da5fa056b637a7c594dc5b4948883a78" category="list-text">根据您的光纤通道交换机文档在光纤通道交换机上创建分区。</block>
   <block id="8ba8e9600aa5fe1856a6c832a6ffbf24" category="list-text">对于 ONTAP ，请按 WWPN 对交换机进行分区。请务必使用 LIF 的 WWPN ，而不是存储控制器上物理端口的 WWPN 。有关详细信息，请参见<block ref="2744dab6503b7f979c6d72cc92b97ead" category="inline-link-rx"></block>。</block>
-  <block id="1a2f65348002638352627c360e327e79" category="section-title">安装 Host Utilities</block>
   <block id="cba7a46b47ee782d37f614612d6714bf" category="paragraph">安装程序将安装 Host Utilities 软件包并设置 Windows 注册表和 HBA 设置。</block>
   <block id="e7d199a440305344018a3dcee24603f3" category="paragraph">您必须指定在安装 Windows Unified Host Utilities 软件包时是否包括多路径支持。安装程序将提示您选择以下选项。您也可以从 Windows 命令提示符处运行静默（无人参与）安装。</block>
   <block id="76969a36155d2f41fc6cc3bd3faff244" category="list-title">多路径支持</block>
@@ -1260,13 +1248,11 @@
   <block id="fbd31ea3fdae76c6a359637b72bf307f" category="list-text">只有在使用存储系统的单一路径时，才选择 no MPIO 。</block>
   <block id="10ec3af27fbabd40ad7f78d2ae382eab" category="list-text">MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系统不支持多路径 I/O 。</block>
   <block id="2bda8bdf9c148a3475b6419dbef7b61e" category="list-text">对于 Hyper-V 子系统，如果选择多路径支持，则原始（直通）磁盘不会显示在子操作系统中。您可以使用原始磁盘，也可以使用 MPIO ，但不能在子操作系统中同时使用这两者。</block>
-  <block id="90404c8efc2347f6685b503a55ed25f9" category="section-title">以交互方式安装 Host Utilities</block>
   <block id="7adf526813192a4918ba930c993f4b28" category="paragraph">要以交互方式安装 Host Utilities 软件包，您必须运行 Host Utilities 安装程序并按照提示进行操作。</block>
   <block id="c59a9f651efe466b52d6d9b22a24e7e3" category="list-text">从下载可执行文件<block ref="3725c06f412bedb14ffd610de312875d" category="inline-link-rx"></block>。</block>
   <block id="df776515e4da3918278817418cdc66da" category="list-text">更改为下载可执行文件的目录。</block>
   <block id="b7257ab94652805de6957d07e5e43772" category="list-text">运行 `NetApp_windows_host_utilities_7.1_x64` 文件，然后按照屏幕上的说明进行操作。</block>
   <block id="257dcf2363da5a069ec4e8bae654f70b" category="list-text">出现提示时重新启动 Windows 主机。</block>
-  <block id="352927b5b221062218301869e264630e" category="section-title">从命令行安装 Host Utilities</block>
   <block id="a2436a786307cd54318e85b5df862902" category="list-text">您可以通过在 Windows 命令提示符处输入相应的命令来执行 Host Utilities 的静默（无人参与）安装。</block>
   <block id="75c7a353b83869ae4b4cb9f9fb69e5e6" category="list-text">Host Utilities 安装包必须位于 Windows 主机可访问的路径中。</block>
   <block id="2239414c285fcd71ad8b61a344213951" category="list-text">按照以交互方式安装 Host Utilities 的说明获取安装包。</block>
@@ -1277,26 +1263,20 @@
   <block id="5f14b300c5e18c32b0b38aa5bf839405" category="list-text">多路径用于指定是否安装 MPIO 支持。允许值为 0 表示否， 1 表示是</block>
   <block id="d2be6501ceb690ba78b41107c58d6583" category="list-text">`inst_path` 是安装 Host Utilities 文件的路径。默认路径为 `C ： \Program Files\NetApp\Windows Host Utilities\` 。</block>
   <block id="890a07d387ffd294a936bcac066a8ae6" category="admonition">要查看用于日志记录和其他功能的标准 Microsoft 安装程序（ MSI ）选项，请在 Windows 命令提示符处输入 `msiexec /help` 。例如： `msiexec /i install.msi /quiet /l* v &lt;install.log&gt; LOGVERBOSE=1`</block>
-  <block id="f0d8a8c18d776a5aae124141ae30f6b3" category="section-title">升级 Host Utilities</block>
   <block id="7bb379db3ee977ec330c6d5473d7840e" category="paragraph">新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照以交互方式安装 Host Utilities 的说明获取安装包。</block>
-  <block id="399280d2d7805893e83f28e267fb9e2b" category="section-title">以交互方式升级 Host Utilities</block>
   <block id="1190124555424f6326b153d14c7adeb6" category="list-text">运行可执行文件并按照屏幕上的说明进行操作。</block>
   <block id="2504be0abfa0e38f5e8ec8a80a553f1c" category="list-text">重新启动后检查主机实用程序的版本：</block>
   <block id="66781c83be9419c35d019947ae0068ec" category="list-text">打开 * 控制面板 * 。</block>
   <block id="cebe6c0d66495ac766f2ce01667acc64" category="list-text">转至 * 程序和功能 * 并检查主机实用程序版本。</block>
-  <block id="1939c386cbadc8196904cbddd1e6b178" category="section-title">从命令行升级 Host Utilities</block>
   <block id="c80764d9771483d83514d497263d6330" category="paragraph">您可以通过在 Windows 命令提示符处输入相应的命令来对新的主机实用程序执行静默（无人值守）安装。New Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照以交互方式安装 Host Utilities 的说明获取安装包。</block>
   <block id="bcc399c91db54844c3b376842a4f3c86" category="list-text">其中 `installer` 是 CPU 架构的 ` .msi` 文件的名称。</block>
-  <block id="7d670a61e60e6eeeffca3898d437e639" category="section-title">修复和删除 Windows Host Utilities</block>
   <block id="c178dcdfca17ddc357e6800e5e2c4673" category="paragraph">您可以使用 Host Utilities 安装程序的修复选项更新 HBA 和 Windows 注册表设置。您可以通过交互方式或从 Windows 命令行删除 Host Utilities 。</block>
-  <block id="3d0d4b7fd9a1f2718fd860822b0d8403" category="section-title">以交互方式修复或删除 Windows Host Utilities</block>
   <block id="7c92b3f845b88c515561fb27069fe2b1" category="paragraph">修复选项可使用所需设置更新 Windows 注册表和光纤通道 HBA 。您也可以完全删除 Host Utilities 。</block>
   <block id="711138f720855df955713474378ff64f" category="list-text">打开 Windows * 程序和功能 * （ Windows Server 2012 R2 ， Windows Server 2016 ， Windows Server 2019 ）。</block>
   <block id="48f1bd432df23e2412cf8104e6fde4be" category="list-text">选择 * NetApp Windows Unified Host Utilities* 。</block>
   <block id="e825f597d53c4a593117f3470853a08a" category="list-text">单击 * 更改 * 。</block>
   <block id="f0b103058dcb98efdefadbb3e8f5dac1" category="list-text">根据需要单击 * 修复 * 或 * 删除 * 。</block>
   <block id="dfeda2d1e42f7611b114b2bfaff373fc" category="list-text">按照屏幕上的说明进行操作。</block>
-  <block id="b645aaef58e0784e282b83d3496ac962" category="section-title">从命令行修复或删除 Windows Host Utilities</block>
   <block id="b3feb76448a84d7100b57e2a2f35a0ee" category="paragraph">修复选项可使用所需设置更新 Windows 注册表和光纤通道 HBA 。您也可以从 Windows 命令行中完全删除 Host Utilities 。</block>
   <block id="15ad01350a70108c16a55f92e8c91669" category="list-text">在 Windows 命令行上输入以下命令以修复 Windows Host Utilities ：</block>
   <block id="f2826ecf8f19cfb5deadf4b1e5ad291b" category="paragraph">`msiexec ｛ /uninstall _ /f]installer.msi 【静默】`</block>
@@ -1389,7 +1369,6 @@
   <block id="bd68ec6c51cae2556d9fd0a47c25a261" category="list-text">如果无法解决此问题，您可以联系 NetApp 技术支持。</block>
   <block id="6f4e4d9fbe846fd8bf7decf7dcffbd63" category="inline-link">NetApp 文档</block>
   <block id="69893000f4da30e1e42922cbcf8dac0e" category="inline-link">NetApp Bug Online</block>
-  <block id="ecb499de8f5e24bad886b86ed7d44f3e" category="section-title">了解 Host Utilities 对 FC HBA 驱动程序设置的更改</block>
   <block id="39aea57d05192500d96bea0e7cf2f41c" category="paragraph">在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，系统会检查多个参数，在某些情况下会对这些参数进行修改。</block>
   <block id="b65e3a71c2c6298818d74981c3e3d216" category="paragraph">如果检测到 MS DSM for Windows MPIO ，则 Host Utilities 会为以下参数设置值：</block>
   <block id="3986e9b1c8119799165486b5ff61b51e" category="list-text">LinkTimeOut —定义物理链路关闭后主机端口在恢复 I/O 之前等待的时间长度（以秒为单位）。</block>
@@ -1398,7 +1377,6 @@
   <block id="7b89c0aff4542bf5f5ea1fc402d480ec" category="list-text">HBA 供应商</block>
   <block id="ae16ed955084b1c877e3a933f4fbfdc3" category="list-text">是否正在使用多路径软件（ MPIO ）</block>
   <block id="75dc39fa847b274e3577c0b41c12ca55" category="paragraph">您可以通过运行 Windows Host Utilities 安装程序的修复选项来更正 HBA 设置。</block>
-  <block id="95358b8fdfe79e8838bdc331c1e06a61" category="section-title">验证 FC 系统上的 Emulex HBA 驱动程序设置</block>
   <block id="4a85dbbf9a9bc0625df7f37ec97b9783" category="paragraph">如果您使用的是光纤通道系统，则必须验证 Emulex HBA 驱动程序设置。HBA 上的每个端口都必须具有这些设置。</block>
   <block id="c6e28ac86a9fffeb9329e96a567e805d" category="list-text">打开 OnCommand 管理器。</block>
   <block id="97c9736a45363b1ba4f09672230268a7" category="list-text">从列表中选择相应的 HBA ，然后单击 * 驱动程序参数 * 选项卡。</block>
@@ -1409,7 +1387,6 @@
   <block id="ccced21e51a721c50f51f6c3f3036790" category="list-text">如果您不使用 MPIO 软件，请确保您具有以下驱动程序设置：</block>
   <block id="730d30c215230d17c52d7e401e2064f9" category="list-text">LinkTimeOut — 30</block>
   <block id="22548d7cd420698e76efb8e7d13153d9" category="list-text">节点超时 - 120</block>
-  <block id="6f95af3276dfe5a6368d3e08d44a3fb5" category="section-title">验证 FC 系统上的 QLogic HBA 驱动程序设置</block>
   <block id="3767a34ee23bead3aa4d693d624cb2f4" category="paragraph">在 FC 系统上，您需要验证 QLogic HBA 驱动程序设置。HBA 上的每个端口都必须具有这些设置。</block>
   <block id="447ad67efb25e2f13e7339e054e28117" category="list-text">打开 QConvergeConsole ，然后单击工具栏上的 * 连接 * 。</block>
   <block id="f28b4049315bc495c21ad547c3409030" category="paragraph">此时将显示连接到主机对话框。</block>
@@ -1804,7 +1781,6 @@
   <block id="6e1a60a2cc9775d5b4dfd69be66dfce4" category="paragraph">Windows Server 2016 没有已知问题。</block>
   <block id="9f48bd68eb80a61379f6dd65620bec8c" category="summary">介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP2 配置 NVMe/FC</block>
   <block id="b7c80370e68c20a6d2b05ca2d022abbe" category="doc">适用于采用 ONTAP 的 SUSE Linux Enterprise Server 15 SP2 的 NVMe/FC 主机配置</block>
-  <block id="9da90f594305db99019fb1bba6ef50a4" category="section-title">在 SLES15 SP2 上启用 NVMe/FC</block>
   <block id="c131de8824918e42917022e80562a0e1" category="list-text">升级到建议的 SLES15 SP2 MU 内核版本。</block>
   <block id="47a1a789b24d958d3c073bab6e64e3b4" category="list-text">升级原生 NVMe-CLI 软件包。</block>
   <block id="3c4bf282fc2deeb24018cd11152fa91c" category="paragraph">此原生 NVMe-CLI 软件包包含 NVMe/FC 自动连接脚本，用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 命名空间的 NetApp 插件。</block>
@@ -1871,7 +1847,6 @@
   <block id="971455e5b307f416baac0cb24b710792" category="sidebar">7.7</block>
   <block id="8b6f93f33bce541c7f50f8aff637e2e1" category="sidebar">RHEL</block>
   <block id="5e20d6ed7744f334ad7deb3cea4d5905" category="sidebar">8.3</block>
-  <block id="2c0526d5d94fbc2342ad73325ce3fb9f" category="sidebar">SUSE</block>
   <block id="1b1e6d45b618db5397c656f0df1d4b85" category="sidebar">15 SP2</block>
   <block id="7ceb3cac51dbf44c807f7e83fabc5016" category="sidebar">15 SP1</block>
   <block id="ea6b2efbdd4255a9f1b3bbc6399b58f4" category="sidebar">2019 年</block>
@@ -1912,10 +1887,8 @@
   <block id="bf3e0fdab36bb430e7fb32be5ece1f81" category="sidebar">RHEL 6</block>
   <block id="3c9435015579e19dc2fb6312a2258ab5" category="sidebar">11.4</block>
   <block id="b831e71b782a1e06e4e5f24e84680fb6" category="sidebar">11.3</block>
-  <block id="48444920f5d3dc5ca10603e4ef420490" category="sidebar">SUSE 15</block>
   <block id="69c19d98f4f48c8896fd184009821de0" category="sidebar">15 SP3</block>
   <block id="9bf31c7ff062936a96d3c8bd1f8f2ff3" category="sidebar">15</block>
-  <block id="c3c8b7ab3c89b34c98020dd228855901" category="sidebar">SUSE 12</block>
   <block id="4c90e16f7f2b83a83d6dd672d659e083" category="sidebar">12 SP 5</block>
   <block id="a47c430c317a092f7d88d084b56bc66f" category="sidebar">12 SP 4</block>
   <block id="0f2332b87469d1228e7997195bf8c1cd" category="sidebar">12 SP 3</block>
@@ -1965,7 +1938,6 @@
   <block id="bd89f3a395591c17f8cb7f0aaea6cc0b" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中的 NetApp 插件还可以显示 ONTAP 命名空间的 ONTAP 详细信息。</block>
   <block id="509e52d19112a7c7188376d101160b4c" category="paragraph">对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。</block>
   <block id="c8fe594dab6cb1395df34d73b005c900" category="section-title">配置要求</block>
-  <block id="4ded790bbb27d5eadbd8717a3e61cb12" category="section-title">启用内核 NVMe 多路径</block>
   <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">示例</block>
   <block id="6ba6a18088999d632ca174b9873a3b12" category="list-text">安装 `NVMe-CLI` 软件包：</block>
   <block id="e71d1275a2744aceb8d59932f2e5fe56" category="list-text">启用内核 NVMe 多路径。</block>
@@ -1973,11 +1945,9 @@
   <block id="f3852411c8956408a5a170c1d4d53651" category="admonition">如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令更新相应 ONTAP NVMe 子系统上的主机 NQN 字符串，以匹配主机上的主机 NQN 字符串 ` /etc/nve/hostnqn` 。</block>
   <block id="de19b5a5ee04a9d75ed01f3017e72811" category="paragraph">如果要在同一主机上同时运行 NVMe 和 SCSI 共存的流量，建议分别对 ONTAP 命名空间使用内核 NVMe 多路径，而对 ONTAP LUN 使用 dm-multipath 。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。为此，可以将 enable_Foreign 设置添加到 ` /etc/multipath.conf` 文件中：</block>
   <block id="2c4ca691e5adaf801e0bf8d274c9b482" category="list-text">运行 `systemctl restart multipathd` 命令以使新设置生效，从而重新启动 multipathd 守护进程。</block>
-  <block id="5d1b3cf5c2e1ac5de48898e0fc69d53b" category="section-title">正在配置 NVMe/FC</block>
   <block id="3ea394f2d9cebf2dfc911ba5e025db7a" category="section-title">Broadcom/Emulex</block>
   <block id="46e2b7cc014d11d7552d6921801d0753" category="list-text">验证 lpfc_enable_FC4_type 是否设置为 3 。</block>
   <block id="2defc9958244f438872605820e3ca11a" category="list-text">确认启动程序端口已启动且正在运行，并且您能够看到目标 LIF 。</block>
-  <block id="cf0ca1d2e48dec2abfc57cc3d3ad9bdd" category="section-title">启用 1 MB I/O 大小（可选）</block>
   <block id="ebca1c9e44630148af4439559839580e" category="paragraph">ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是，对于 Broadcom NVMe/FC 主机 1 MB 大小的问题描述 I/O 请求， lpfc 参数 `lpfc_sg_seg_cnt` 也应从默认值 64 增加到 256 。请按照以下说明执行此操作：</block>
   <block id="fec3fcd81ccab102d0ff0e385ca80b74" category="list-text">在相应的 `modprobe lpfc.conf` 文件中附加值 `256` ：</block>
   <block id="e6dee1b64bbb79ed1de507cfbbc7c671" category="list-text">重新启动后，通过检查对应的 `sysfs` 值来验证是否已应用上述设置：</block>
@@ -1986,13 +1956,6 @@
   <block id="1af9cb3d6c724363f724486734a76f7f" category="paragraph">RHEL 8.4 GA 内核中包含的原生收件箱 `qla2xxx` 驱动程序具有最新的上游修复程序，这些修复程序对于 ONTAP 支持至关重要。</block>
   <block id="01e99a43df9a9e103daa49144d80325a" category="list-text">使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="996bc8c555f8b2265c43a9a361d7bcd2" category="list-text">验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：</block>
-  <block id="089e48d3aaad855e742b80bcc5bb6d06" category="section-title">正在验证 NVMe-oF</block>
-  <block id="3aad3225f60de4118eb7263a1c0fbb28" category="list-text">验证是否已启用内核 NVMe 多路径：</block>
-  <block id="6a5f52acb9909dabaef5e01e83fd30f8" category="list-text">验证适当的 nve-of 设置， `model` set to `NetApp ONTAP Controller` and `load balancing OPoliciy` set to `round-robin` ，以使相应的 ONTAP 命名空间正确反映在主机上：</block>
-  <block id="26bcb9f1cb6f391f4b2c18e676bb458d" category="section-title">NVMe/FC</block>
-  <block id="5d65d3cf86dda19fb97a2b015461e1cf" category="list-text">验证 NVMe/FC ONTAP 命名空间是否正确反映在主机上。</block>
-  <block id="b2708b2bdf938da4bfba68e2a7b010b3" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。</block>
-  <block id="051ff3071e673676a5e48635fa7f872b" category="list-text">验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。</block>
   <block id="7b7cf2f51a50fd1958747b87b9de79d0" category="paragraph">在对任何 NVMe/FC 故障开始任何故障排除之前，请确保您运行的配置符合 IMT 规范，然后继续执行以下步骤以调试任何主机端问题。</block>
   <block id="b74dd8eaf171dc7bdadb4b02805e11ef" category="list-text">您可以将 `lpfc_log_verbose` 驱动程序设置为以下任意值以记录 NVMe/FC 事件：</block>
   <block id="72eeec6a3c176f0aa6e7a2c82b9104d4" category="list-text">设置上述任一值后，运行 `dracut-f` 命令重新创建 `initramfs` 并重新启动主机。</block>
@@ -2044,7 +2007,6 @@
   <block id="bee4144b4cdc5aa41bc58db16ad45be9" category="list-text">现有的原生收件箱 lpfc 驱动程序已经是最新版本，并且与 NVMe/FC 兼容。因此，您无需安装 lpfc OOB 驱动程序。</block>
   <block id="a4abd6014bb6c1f8fcd778d382d06818" category="list-text">验证启动程序端口是否已启动且正在运行。</block>
   <block id="a9628073767b50f0ec03840bfa8b42ee" category="list-text">确认 NVMe/FC 启动程序端口已启用，并且您能够看到目标端口，并且所有端口均已启动且正在运行。在此示例中，仅启用了 1 个启动程序端口，并与两个目标 LIF 进行连接，如输出所示：</block>
-  <block id="8a63a773bcb6e38a1c50c4d46cff082a" category="section-title">启用 1 MB I/O 大小（可选）</block>
   <block id="71c5f19320dfcd010a3a516b22ea8c97" category="list-text">在相应的 `modprobe lpfc.conf` 文件中附加值 256 ：</block>
   <block id="55ad78f06d2638e9a96da0a59fba4662" category="list-text">重新启动后，通过检查相应的 sysfs 值来验证是否已应用上述设置：</block>
   <block id="ef54403ad5ac94142bf694671621e4ae" category="paragraph">现在， Broadcom NVMe/FC 主机应该能够在 ONTAP 命名空间设备上最多发送 1 MB 的 I/O 请求。</block>
@@ -2053,10 +2015,6 @@
   <block id="79ba4cec11a87f2af036439169eabd6c" category="list-text">验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够用作 NVMe/FC 启动程序：</block>
   <block id="c59affec436f2685c9cf2603d66c8362" category="paragraph">` # cat /sys/module/qla2xxx/parameters/ql2xnvmeenable 1`</block>
   <block id="a0eb26e72e628156638ad8b9cea45ac5" category="list-text">通过检查以下各项验证是否确实已启用内核 NVMe 多路径：</block>
-  <block id="fb7b76993754f8ed5199f3ab54980e07" category="list-text">验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如，型号设置为 `NetApp ONTAP 控制器` ，负载平衡策略设置为 `round-robin` ）是否正确反映在主机上：</block>
-  <block id="c1102b7fecd5a1872e32e1bbdb99b583" category="list-text">验证是否已创建命名空间。例如：</block>
-  <block id="e4fc85b6ee79319b803b708e82a77e22" category="list-text">验证 ANA 路径的状态。例如：</block>
-  <block id="921fe189e88bd0fc8bf474a52f0138f7" category="list-text">验证 ONTAP 命名空间的 NetApp 插件。例如：</block>
   <block id="80748b874d55c5038d34ce16a870e640" category="section-title">qla2xxx 详细日志记录</block>
   <block id="38a517c65e7a4cfa6d1b781c6a6e35f4" category="cell">确保 NVMe 命令使用的语法正确。</block>
   <block id="c93b085fcb8e1f8bc98e8da71741e760" category="sidebar">NVMe-oF 主机配置</block>
@@ -2089,7 +2047,6 @@
   <block id="fcd0175f66a20efc7cd1c6567f9a5578" category="paragraph">在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。</block>
   <block id="df806afef9dae5d43f20297c99fb14ca" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
   <block id="d87eaccfcc7f1ce59c39e647ad0ee108" category="admonition">AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。</block>
-  <block id="1677bade87b8d78a9e17903200fc98b0" category="section-title">安装 AIX Host Utilities</block>
   <block id="9e4f19eef336dfad151cb4dba23dc1eb" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。下载此文件后，您必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。</block>
   <block id="4839d2f25cc35b249d5db15efa1afd75" category="paragraph">* 步骤 *</block>
   <block id="03bb76916332762e5c74abd3925ef3a5" category="list-text">在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 oem_setup_env 命令以成为 root 。</block>
@@ -2115,7 +2072,6 @@
   <block id="b6fdbb065aa5e5c1bf0f5af8ad73ca53" category="list-text">使用 `devprop` 和 `mdb` 命令验证是否已成功应用覆盖：</block>
   <block id="570f5761e2e0bfb396196b06d19e21b0" category="paragraph">`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl</block>
   <block id="5492ce934067a932652b5c7aa5dd991b" category="inline-link">Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置</block>
-  <block id="d121177f120e7b50a6ec37a43d7ae4e6" category="cell">Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同</block>
   <block id="7fed5db563dfce62e3512e9c6fe716c1" category="cell">"Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 "</block>
   <block id="8b30a2a046838a554ec8551f6130f395" category="cell">在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
@@ -2141,7 +2097,6 @@
   <block id="7c6b30ab95aa6f3eeb2a6b9cbaf31f6c" category="list-text">从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
   <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="0a7c052037789d22811592a15b7a2e17" category="inline-link-macro">NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x</block>
-  <block id="cd5f3c0e3d7017e6f7861dd8cdb0590c" category="sidebar">NVMe-oF ESXi</block>
   <block id="ff09581cb2c13d8ad132e71c1320dc7e" category="cell"><block ref="108e2d22c5beb633cb3cfe03baa4f66f" category="inline-link-macro-rx"></block></block>
   <block id="8286a7d77eb7d53445229f3c12d8c18f" category="cell"><block ref="8286a7d77eb7d53445229f3c12d8c18f" category="inline-link-macro-rx"></block></block>
   <block id="109d2ee1c560df7a2148394570cdbc69" category="cell"><block ref="109d2ee1c560df7a2148394570cdbc69" category="inline-link-macro-rx"></block></block>
@@ -2173,7 +2128,6 @@
   <block id="2d3e43ea7c8c91fc0a78b6056554ec91" category="paragraph">适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="d77815b1cf8addecd8d2fb23c9878c4a" category="paragraph">请参见<block ref="cc2304a59b5feaeebd0c5646fd22caf0" category="inline-link-rx"></block> 有关注册表参数的详细信息。</block>
   <block id="489cce922da01c521eefedb275b4f00b" category="paragraph">请参见<block ref="6d63c8366c015331075fa86de38975e8" category="inline-link-rx"></block> 或<block ref="4399df604c07a452cc084d95811dafae" category="inline-link-rx"></block> 站点以了解有关超时参数的更多信息。</block>
-  <block id="0fed378af4cbd540fdc5e90359bce3a1" category="list-text">您必须查看<block ref="215c50dc894cd826b5531420c000ab39" category="inline-link-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
   <block id="0b10f822d26382a922afd1635db5de2d" category="list-text">您必须查看中的故障排除信息<block ref="766939a89871d4c04af2f6ac1ab2650b" category="inline-link-rx"></block> 适用于您的 ONTAP 版本。</block>
   <block id="9083840fa5bcf62c5684d884151ab69b" category="list-text">您必须进行搜索<block ref="9f91bb070a65615e92f64b6a068e1d9d" category="inline-link-rx"></block> 最近发现的问题。</block>
   <block id="3809aec0d76653aef580fe5a05c2ceea" category="paragraph"><block ref="b1540a3ec25c7d8277b499a1cc1d920b" category="inline-link-rx"></block>
@@ -2211,4 +2165,62 @@
   <block id="2f7555fd65fd6100208812dc33a35c6e" category="list-text"><block ref="2f7555fd65fd6100208812dc33a35c6e" category="inline-link-macro-rx"></block></block>
   <block id="53e0316343afe978271ccd43b743d05a" category="paragraph">在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
   <block id="443e8164d670e55b2388725ef1a0bda5" category="paragraph">默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
+  <block id="6332394e52d860951e446b20a9580794" category="section-title">安装 Linux Unified Host Utilities</block>
+  <block id="2bde94f95676c1c2bd32242e8415c1f8" category="admonition">从 ONTAP 9.1.1 开始， Solaris 11.4 主机支持 SM-BC 设置配置。</block>
+  <block id="b2868986ab4f89d873eb88548fa648bb" category="cell">Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。</block>
+  <block id="dd31b82b57542d64583398514e1838f4" category="section-title">启用 NVMe/FC</block>
+  <block id="6d2964de8c046289cdcfaebf91369e08" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
+  <block id="30184b2ffcd5459f75061dc63a6b8c62" category="section-title">验证 NVMe/FC</block>
+  <block id="bb145463d4b33f8a2c6719372c1e8d1d" category="section-title">为 Broadcom NVMe/FC 启用 1 MB I/O 大小</block>
+  <block id="025c962221700c78eb1d525adb016ea6" category="section-title">在 Windows 启动程序主机上启用 NVMe/FC</block>
+  <block id="073bde40ca4f1c0bc9a2024c00df60ac" category="section-title">在 Windows 中为 NVMe/FC 配置 Broadcom FC 适配器</block>
+  <block id="6d50f9a166e2b5b5cadd884e2bfaf99a" category="section-title">在 Windows 主机上为 NVMe 设备启用 MPIO</block>
+  <block id="3377da1c4bfbeb041c695fd90b5b51f8" category="section-title">安装 AIX Host Utilities</block>
+  <block id="20ef4219f8282a156b90a588df2efcd7" category="section-title">在 RHEL 8.3 上启用 NVMe/FC</block>
+  <block id="bf2fd4f30d4d99e83aea737d5c100ea0" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
+  <block id="c0a6e0dc55b98c30081b044a2713737b" category="section-title">验证主机和存储系统配置</block>
+  <block id="93d35d1948374a90e0c2dc20afe8976a" category="section-title">配置 FC HBA 和交换机</block>
+  <block id="b60c7a8315c7b9d353b5fda462709b16" category="section-title">安装 Host Utilities</block>
+  <block id="96d192942ad7d0399b1d3c052048858e" category="section-title">以交互方式安装 Host Utilities</block>
+  <block id="b9f1aba85711fc915cd6550e3ca2e6e7" category="section-title">从命令行安装 Host Utilities</block>
+  <block id="07ee9e83df0d4150e93a9ee4baf057dc" category="section-title">升级 Host Utilities</block>
+  <block id="30274a5c03a68dfb0e3da27a1cd33fa4" category="section-title">以交互方式升级 Host Utilities</block>
+  <block id="dd50cfcc5c296046208fa46e968e0119" category="section-title">从命令行升级 Host Utilities</block>
+  <block id="71a1238a2a3eb2842a1147f88470407a" category="section-title">修复和删除 Windows Host Utilities</block>
+  <block id="7ec91814b4b8031452953e60444fdac1" category="section-title">以交互方式修复或删除 Windows Host Utilities</block>
+  <block id="e4ab25c62c74b247f110cc0ddf4a7128" category="section-title">从命令行修复或删除 Windows Host Utilities</block>
+  <block id="9781d69195e9bb9dad9ea221e352929d" category="list-text">您必须查看<block ref="c98f6369245de310035299ae832b1997" category="inline-link-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
+  <block id="46795771824c20823fe2d0312b584a17" category="section-title">了解 Host Utilities 对 FC HBA 驱动程序设置所做的更改</block>
+  <block id="afe3961340d8bd7d749848a97e031049" category="section-title">验证 FC 系统上的 Emulex HBA 驱动程序设置</block>
+  <block id="884960c052ad072d600fae7dc861c0c6" category="section-title">验证 FC 系统上的 QLogic HBA 驱动程序设置</block>
+  <block id="fa9e69db74b196178518c663016c3abe" category="section-title">在 RHEL 8.2 上启用 NVMe/FC</block>
+  <block id="dec4201e999d968c719dedcc36a07302" category="inline-link">RHEL 8.4 发行说明</block>
+  <block id="260a3557d08efe46355d18910743ceaa" category="list-text">由于出现未解决的问题， RHEL 8.4 上的 NVMe/TCP 仍是一项技术预览功能。请参见<block ref="bb64a8145ae27872979820bfd89ab97b" category="inline-link-rx"></block> 了解详细信息。</block>
+  <block id="da5c98f4248ec7387bdaa6db8341fdef" category="section-title">启用内核 NVMe 多路径</block>
+  <block id="c98fed57553daff5a2cf2fa022d54254" category="section-title">配置 NVMe/FC</block>
+  <block id="c0aa648bd7e5700f1ad07528684facf8" category="section-title">启用 1 MB I/O 大小（可选）</block>
+  <block id="f4091bd53ceacc19d9ac766c9cdb9866" category="section-title">配置 NVMe/TCP</block>
+  <block id="02ec5a6431274b50044361aad326cbdc" category="paragraph">与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：</block>
+  <block id="524fa08703d908aeca5cccda70508020" category="list-text">* 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。</block>
+  <block id="5ac8d4417219a758cb216b44e499a52a" category="list-text">* 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。</block>
+  <block id="237af845a336c688dd92384a771f5c92" category="paragraph">要轻松地承受 ONTAP 故障转移事件（例如 SFO ），建议通过调整 `Ctrl_los_tm` timer 来设置较长的重试时间，例如 30 分钟。详细信息如下：</block>
+  <block id="9f291dc2ffc26a15b15d66dfbe7c03c7" category="list-text">验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：</block>
+  <block id="cdad7a1e7e4e6d6a5603c6ee5b84a18b" category="list-text">验证其他 NVMe/TCP 启动程序 - 目标 LIF 组合是否能够成功提取发现日志页面数据。例如：</block>
+  <block id="c3f202b40a54d75b57fbe1fedd71b1e7" category="list-text">对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在连接期间使用较长的 `Ctrl_los_TMOT` 时间段（例如 30 分钟，可通过 ` -l 1800` 进行设置），以便在发生路径丢失时重试较长时间。例如：</block>
+  <block id="55ab77cd94d55aaa364453f7cf104285" category="section-title">验证 NVMe-oF</block>
+  <block id="d59a70bb68888f817286630067489719" category="list-text">验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如， `model` set to `NetApp ONTAP Controller` and `load balancing OPolicy` set to `round-robin` ）是否正确反映在主机上：</block>
+  <block id="6d678a1cb8ddbf76f2e82d8950f207e7" category="list-text">验证 ONTAP 命名空间是否正确反映在主机上。例如：</block>
+  <block id="cb7e37c4b617b6aeee210c14100c98d5" category="paragraph">另一个示例：</block>
+  <block id="726d293820a3b92756d72e370482b755" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。例如：</block>
+  <block id="a4301741972a8d72156639b6c35de92e" category="list-text">验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如：</block>
+  <block id="a0e093a126a5a6ecc36e81f130400025" category="section-title">在 RHEL 8.1 上启用 NVMe/FC</block>
+  <block id="130b6ac09e01287394faa2f305ddde82" category="section-title">在 SLES15 SP1 上启用 NVMe/FC</block>
+  <block id="7f281a8c95a2d1ea3fef7e5b156beee5" category="section-title">在 SLES15 SP2 上启用 NVMe/FC</block>
+  <block id="f7a582d94c3c08d29da52684240c7e5e" category="section-title">启用 1 MB I/O 大小（可选）</block>
+  <block id="7988dd645d080901aa85637adea3c152" category="sidebar">NVMeoF ESXi</block>
+  <block id="e0f04c85d16be7d67287c02eeb4c1ca8" category="sidebar">NVMeF RHEL</block>
+  <block id="6450317152c5c108daebac9e8e1a387c" category="sidebar">SLES</block>
+  <block id="2f9c81bcc0340cf8ca367c73fc2605c3" category="sidebar">NVMeoF SLES</block>
+  <block id="f77a693c238b55e124aad6c742f7abd9" category="sidebar">SLES 15</block>
+  <block id="9a5aadcd2f712e90b04bd1524cdd6dc4" category="sidebar">SLES 12</block>
 </blocks>

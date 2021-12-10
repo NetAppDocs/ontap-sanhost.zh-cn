@@ -137,7 +137,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 
 
 
-== 正在验证 NVMe/FC
+== 验证 NVMe/FC
 
 . 验证以下 NVMe/FC 设置。
 +
