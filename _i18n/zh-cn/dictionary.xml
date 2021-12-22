@@ -1798,8 +1798,6 @@
   <block id="a51f869a9a131effa58d99e63266e02d" category="summary">介绍如何在 ONTAP 中使用 Citrix 虚拟机管理程序 8.x</block>
   <block id="e9cb7b8f17e8f27f0130bdc68558c4cc" category="doc">将 Citrix 虚拟机管理程序与 NetApp ONTAP 结合使用</block>
   <block id="b4fb72e88112026a3055df686f0141d6" category="paragraph">本文档提供了有关使用 FC ， FCoE 和 iSCSI 协议的 Citrix 虚拟机管理程序 8 系列操作系统版本的 ONTAP SAN 主机配置设置的指导。</block>
-  <block id="34468ed6ec9e2e21b7d020a702e2759a" category="paragraph">Citrix 虚拟机管理程序中的多路径支持基于设备映射程序多路径组件。不会自动为提供给虚拟机管理程序的所有 LUN 创建设备映射程序节点，只有在存储管理层（ API ）正在使用 LUN 时才会配置设备映射程序节点。Citrix Hypervisor Storage Manager API 插件可自动激活和停用多路径节点。</block>
-  <block id="ec2f0ee8cb8f6fcbb5558bd05bb411a3" category="paragraph">由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix 虚拟机管理程序的标准供应商文档。</block>
   <block id="dfdecabe17f4f61a0c5b353fdc3dfeef" category="paragraph">Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
   <block id="4d9e4d5a080304464911deeebee0a0b3" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
   <block id="258e01d6ca463cd89e79be409a5b9398" category="paragraph">在此示例中，对于 Citrix 虚拟机管理程序 8.x ， `sda` 是列入黑名单所需的本地 SCSI 磁盘。</block>
@@ -2223,4 +2221,25 @@
   <block id="2f9c81bcc0340cf8ca367c73fc2605c3" category="sidebar">NVMeoF SLES</block>
   <block id="f77a693c238b55e124aad6c742f7abd9" category="sidebar">SLES 15</block>
   <block id="9a5aadcd2f712e90b04bd1524cdd6dc4" category="sidebar">SLES 12</block>
+  <block id="d87433b06a0f03952a4dc973f5315687" category="paragraph">对于 Citrix 虚拟机管理程序（ CH ） 8.x ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CH 8.x 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。您可以使用 ` /sbin/mpathutil` status 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 角色的 LUN 的示例多路径输出。</block>
+  <block id="d6001c34c29bb04684b5c07f3b8c9209" category="section-title">全 SAN 阵列（ ASA ）配置</block>
+  <block id="c17362e9d01452047d060a128e8e3634" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径，这意味着它们由控制器提供服务，并通过所有活动路径发送 I/O 。</block>
+  <block id="15e8bfaa3c1b932b597dedce3820fa11" category="paragraph">以下示例显示了具有四个主动 / 优化路径的 ONTAP LUN 的正确输出：</block>
+  <block id="093280d0b1b888a2d2861cdc763f5f54" category="cell">`detect_prio`</block>
+  <block id="d4f9e6cd04344d6033229cebcf82d8e6" category="cell">`dev_los_TMOs`</block>
+  <block id="0b45dcda8325354552a9f3f77a81fb12" category="cell">`故障恢复`</block>
+  <block id="f723063a7c67a9c4d6dc09fcc9258bc0" category="cell">`fast_io_fail_sm`</block>
+  <block id="9b1acf92108be93042969ae0cd15c662" category="cell">`功能`</block>
+  <block id="51639d9d920527eeeeb339933ef1d388" category="cell">`flush_on_last_del`</block>
+  <block id="dd3d09a74b9822f94f3022c45d6d89eb" category="cell">`hardware_handler`</block>
+  <block id="7793f55f663016533cfccea244686d20" category="cell">`path_checker`</block>
+  <block id="0229f06974ddf0fbb6c8163410252381" category="cell">`path_grouping_policy`</block>
+  <block id="100ea8f1ede2192d241e4386cfe3c479" category="cell">`path_selector`</block>
+  <block id="06d7756e9ce36c56b9cea270ed31aa7d" category="cell">`Polling _interval`</block>
+  <block id="5b64d224179378eb0872e824614167de" category="cell">`prio`</block>
+  <block id="dc2ba82454a2923edf99404df680c7ee" category="cell">`产品`</block>
+  <block id="aaa74fa881bc5ea07b9b9aef23bb28ab" category="cell">`retain Attached _hw_handler`</block>
+  <block id="1b1f4bb4b35ee6994917bd6527d2e343" category="cell">`rr_weight`</block>
+  <block id="677641ebec419b9c5915ed13974b0c07" category="cell">`user_friendly_names`</block>
+  <block id="34fed3385bd742bd2b178de283f371b7" category="cell">`vendor`</block>
 </blocks>

@@ -46,9 +46,28 @@ summary: 介绍如何在 ONTAP 中使用 Citrix 虚拟机管理程序 8.x
 
 == 多路径
 
-Citrix 虚拟机管理程序中的多路径支持基于设备映射程序多路径组件。不会自动为提供给虚拟机管理程序的所有 LUN 创建设备映射程序节点，只有在存储管理层（ API ）正在使用 LUN 时才会配置设备映射程序节点。Citrix Hypervisor Storage Manager API 插件可自动激活和停用多路径节点。
+对于 Citrix 虚拟机管理程序（ CH ） 8.x ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CH 8.x 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。您可以使用 ` /sbin/mpathutil` status 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 角色的 LUN 的示例多路径输出。
 
-由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix 虚拟机管理程序的标准供应商文档。
+
+
+=== 全 SAN 阵列（ ASA ）配置
+
+对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径，这意味着它们由控制器提供服务，并通过所有活动路径发送 I/O 。
+
+以下示例显示了具有四个主动 / 优化路径的 ONTAP LUN 的正确输出：
+
+....
+# mpathutil status
+3600a09803830344674244a357579386a dm-13 NETAPP  ,LUN C-Mode
+size=30G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+policy='service-time 0' prio=50 status=active
+  |- 11:0:7:1    sdfi   130:64   active ready running
+  |- 11:0:9:1    sdiy  8:288     active ready running
+  |- 11:0:10:1  sdml 69:464   active ready running
+  |- 11:0:11:1  sdpt  131:304  active ready running
+....
+
+NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
 
 
 
@@ -58,30 +77,23 @@ Citrix 虚拟机管理程序中的多路径支持基于设备映射程序多路�
 
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
 
-[listing]
-----
+....
 # mpathutil status
-show topology
-3600a098038303458772450714535317a dm-0 NETAPP  , LUN C-Mode
-size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+3600a09803830344674244a357579386a dm-13 NETAPP  ,LUN C-Mode
+size=30G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 2:0:2:0   sdc   8:32    active ready running
-| |- 12:0:5:0  sdn   8:208   active ready running
-| |- 2:0:6:0   sdg   8:96    active ready running
-| `- 12:0:0:0  sdi   8:128   active ready running
-`-+-`policy='service-time 0' prio=10 status=enabled
-  |- 2:0:0:0   sda   8:0     active ready running
-  |- 2:0:1:0   sdb   8:16    active ready running
-  |- 12:0:3:0  sd1   8:176   active ready running
-  `-12:0:6:0   sdo   8:224   active ready running
-[root@sanhost ~]#
-----
+ |- 1:0:0:11   sde   8:64    active ready running
+`- 12:0:8:11  sdua  66:544  active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+   |- 1:0:9:11   sddo  71:96   active ready running
+   `- 12:0:26:11 sdyt  129:720 active ready running
+....
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
 
 
 
-=== 建议设置
+== 建议设置
 
 Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。
 
@@ -146,55 +158,55 @@ blacklist {
 | 参数 | 正在设置 ... 
 
 
-| detect_prio | 是的。 
+| `detect_prio` | 是的。 
 
 
-| dev_los_TMO | " 无限 " 
+| `dev_los_TMOs` | " 无限 " 
 
 
-| 故障恢复 | 即时 
+| `故障恢复` | 即时 
 
 
-| fast_io_fail_sMO | 5. 
+| `fast_io_fail_sm` | 5. 
 
 
-| features | "3 queue_if_no_path pG_init_retries 50" 
+| `功能` | "3 queue_if_no_path pG_init_retries 50" 
 
 
-| flush_on_last_del | 是的。 
+| `flush_on_last_del` | 是的。 
 
 
-| 硬件处理程序 | 0 
+| `hardware_handler` | 0 
 
 
-| path_checker | "TUR" 
+| `path_checker` | "TUR" 
 
 
-| path_grouping_policy | "Group_by-prio" 
+| `path_grouping_policy` | "Group_by-prio" 
 
 
-| path_selector | " 服务时间 0" 
+| `path_selector` | " 服务时间 0" 
 
 
-| Polling interval | 5. 
+| `Polling _interval` | 5. 
 
 
-| PRIO | ONTAP 
+| `prio` | ONTAP 
 
 
-| 产品 | lun.* 
+| `产品` | lun.* 
 
 
-| Retain Attached Hw_handler | 是的。 
+| `retain Attached _hw_handler` | 是的。 
 
 
-| rr_weight | " 统一 " 
+| `rr_weight` | " 统一 " 
 
 
-| user_friendly_names | 否 
+| `user_friendly_names` | 否 
 
 
-| 供应商 | NetApp 
+| `vendor` | NetApp 
 |===
 以下示例说明了如何更正被覆盖的默认值。在这种情况下， * 多路径 .conf * 文件定义了与 ONTAP LUN 不兼容的 * 路径检查程序 * 和 * 检测 _prio* 值。如果由于连接到主机的其他 SAN 阵列而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 

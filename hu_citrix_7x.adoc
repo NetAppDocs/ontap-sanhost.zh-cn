@@ -146,55 +146,55 @@ blacklist {
 | 参数 | 正在设置 ... 
 
 
-| detect_prio | 是的。 
+| `detect_prio` | 是的。 
 
 
-| dev_los_TMO | " 无限 " 
+| `dev_los_TMOs` | " 无限 " 
 
 
-| 故障恢复 | 即时 
+| `故障恢复` | 即时 
 
 
-| fast_io_fail_sMO | 5. 
+| `fast_io_fail_sm` | 5. 
 
 
-| features | "3 queue_if_no_path pG_init_retries 50" 
+| `功能` | "3 queue_if_no_path pG_init_retries 50" 
 
 
-| flush_on_last_del | 是的。 
+| `flush_on_last_del` | 是的。 
 
 
-| 硬件处理程序 | 0 
+| `hardware_handler` | 0 
 
 
-| path_checker | "TUR" 
+| `path_checker` | "TUR" 
 
 
-| path_grouping_policy | "Group_by-prio" 
+| `path_grouping_policy` | "Group_by-prio" 
 
 
-| path_selector | " 服务时间 0" 
+| `path_selector` | " 服务时间 0" 
 
 
-| Polling interval | 5. 
+| `Polling _interval` | 5. 
 
 
-| PRIO | ONTAP 
+| `prio` | ONTAP 
 
 
-| 产品 | lun.* 
+| `产品` | lun.* 
 
 
-| Retain Attached Hw_handler | 是的。 
+| `retain Attached _hw_handler` | 是的。 
 
 
-| rr_weight | " 统一 " 
+| `rr_weight` | " 统一 " 
 
 
-| user_friendly_names | 否 
+| `user_friendly_names` | 否 
 
 
-| 供应商 | NetApp 
+| `vendor` | NetApp 
 |===
 以下示例说明了如何更正被覆盖的默认值。在这种情况下， * 多路径 .conf * 文件定义了与 ONTAP LUN 不兼容的 * 路径检查程序 * 和 * 检测 _prio* 值。如果由于连接到主机的其他 SAN 阵列而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
