@@ -124,7 +124,7 @@ vmhba65   qlnativefc  link-up     fc.20000024ff1817af:21000024ff1817af          
 
 
 
-== 正在验证 NVMe/FC
+== 验证 NVMe/FC
 
 . 验证 NVMe/FC 适配器是否列在 ESXi 主机上：
 +

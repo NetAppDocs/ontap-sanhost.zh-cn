@@ -2079,11 +2079,9 @@
   <block id="087c6f6069a3f1c08cb62e3d53029f80" category="list-text">对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。</block>
   <block id="f19c49e2c5af4fdef9d76da8243928b8" category="paragraph">不支持以下配置：</block>
   <block id="0baafa49aae4a0470bfc558baa32e371" category="list-text">检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配：</block>
-  <block id="a2da92c5d726acd949aaa27a8aa3153b" category="section-title">配置 Broadcom/Emulex</block>
   <block id="9800cef048ddc104a174cdb11416156c" category="list-text">设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
   <block id="bf7cba7a9056a716211324109312cd61" category="admonition">从 vSphere 7.0 Update 3 开始， `brcmnvmefc` 驱动程序不再可用。因此， `lpfc` 驱动程序现在包括先前随 `brcmnvmefc` 驱动程序提供的基于光纤通道的 NVMe （ NVMe/FC ）功能。</block>
   <block id="460c25e7bb5010dbb0ff63a998a73cf9" category="admonition">默认情况下，已为 LPe35000 系列适配器设置 `lpfc_enable_FC4_type=3` 参数。要为 LPe32000 系列和 LPe31000 系列适配器手动设置此命令，必须执行以下命令。</block>
-  <block id="eeeff75243446a5649a1a32a4fc8b74e" category="section-title">配置 Marvell/QLogic</block>
   <block id="0ddb0350e0867842f11bd0619f22f3fc" category="list-text">设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。</block>
   <block id="f86f2d0f74b3f5bda1a49097fcdecaeb" category="paragraph">` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`</block>
   <block id="17627ac666e764dc705796280424855d" category="admonition">默认情况下， QLE 277x 系列适配器会设置 `qlnativefc` driver 参数。要为 QLE 277x 系列适配器手动设置此命令，必须执行以下命令。</block>
@@ -2242,4 +2240,7 @@
   <block id="1b1f4bb4b35ee6994917bd6527d2e343" category="cell">`rr_weight`</block>
   <block id="677641ebec419b9c5915ed13974b0c07" category="cell">`user_friendly_names`</block>
   <block id="34fed3385bd742bd2b178de283f371b7" category="cell">`vendor`</block>
+  <block id="3226f4c6b2d594c2a4e8db91fcc55341" category="section-title">配置 Broadcom/Emulex</block>
+  <block id="63d2eef6ffb1f9f0f6a378b0692f6dd3" category="section-title">配置 Marvell/QLogic</block>
+  <block id="b1db54564fe54a4c74a975b18a791532" category="sidebar">7.x</block>
 </blocks>
