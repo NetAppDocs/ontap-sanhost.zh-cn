@@ -5,8 +5,9 @@ settings:
     pdf_enabled: true
   prod:
     pdf_enabled: true
-    harmony_enabled: true
+    harmony_enabled: false
     langs: zh-cn,us-en,ja-jp
+  langs: zh-cn,us-en,ja-jp
 sidebar:
   entries:
   - title: 主页
@@ -196,6 +197,8 @@ sidebar:
       entries:
       - title: RHEL 8
         entries:
+        - title: '8.5'
+          url: "/hu_rhel_85.html"
         - title: 8/4.
           url: "/hu_rhel_84.html"
         - title: '8.3'

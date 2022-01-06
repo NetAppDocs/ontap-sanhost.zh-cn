@@ -2243,4 +2243,11 @@
   <block id="3226f4c6b2d594c2a4e8db91fcc55341" category="section-title">配置 Broadcom/Emulex</block>
   <block id="63d2eef6ffb1f9f0f6a378b0692f6dd3" category="section-title">配置 Marvell/QLogic</block>
   <block id="b1db54564fe54a4c74a975b18a791532" category="sidebar">7.x</block>
+  <block id="61092b92c56a8527051cc09db7ffcf96" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.5</block>
+  <block id="741d2402053ca439d535ee1e7db603b7" category="doc">将 Red Hat Enterprise Linux 8.5 与 NetApp ONTAP 结合使用</block>
+  <block id="10a8491b4d5d18409c61a4a90c61750b" category="section-title">安装 Linux Unified Host Utilities</block>
+  <block id="5297043b43f5cb19511228a79f308d23" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.5 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。RHEL 8.5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
+  <block id="685ee6c581bc2df3a8910672a2af1ac3" category="paragraph">RHEL 8.5 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
+  <block id="85970e65e1203ba97f80413235d75970" category="paragraph">RHEL 8.5 没有已知问题。</block>
+  <block id="845e85fa64a2d6037055beba19fe0bd8" category="sidebar">8.5</block>
 </blocks>
