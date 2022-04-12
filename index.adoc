@@ -25,6 +25,6 @@ summary: SAN 主机文档
 
 您可以在以下文档中找到基于 SAN 的追加信息配置：
 
-link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-asa-config/home.html["《全 SAN 阵列软件配置指南》"^]
-
-
+link:https://docs.netapp.com/us-en/ontap/task_asa_software_configuration.html["《全 SAN 阵列软件配置指南》"^]
+link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["《 SAN 管理指南》"^]
+link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html["《 SAN 配置指南》"^]

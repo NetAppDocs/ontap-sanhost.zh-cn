@@ -21,7 +21,7 @@ summary: 介绍如何在 ONTAP 中使用 CentOS 7.2
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用  验证所需的配置。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
 强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 

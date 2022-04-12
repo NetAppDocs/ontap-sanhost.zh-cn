@@ -1,0 +1,217 @@
+---
+sidebar: sidebar 
+permalink: hu_solaris_62.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用 
+---
+= Solaris Host Utilities 6.2
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+.您需要什么？ #8217 ；将需要什么
+* 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
+
+
+您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
+
+
+
+== SAN 工具包
+
+Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
+
+在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
+
+[listing]
+----
+#sanlun lun show all
+controller(7mode)/ device host lun
+vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
+-----------------------------------------------------------------------------------------------------------------------------------
+data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
+
+
+----
+
+NOTE: 此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。
+
+
+
+== 安装 Solaris Host Utilities
+
+Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主 Host Utilities 环境包括：
+
+* 在使用 SPARC 处理器或 X86/64 处理器的系统上，使用光纤通道（ FC ）或 iSCSI 协议的 MPxIO 的原生 操作系统。
+* 在使用 SPARC 处理器的系统上使用 FC 或 iSCSI 协议，在使用 X86/64 处理器的系统上使用 iSCSI 协议的 Veritas 动态多路径（ DMP ）。
+
+
+
+NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 以压缩文件格式为您的处理器提供支持。您可以从支持站点下载适用于您的环境的 Host Utilities 软件包。
+
+.步骤
+. 以 root 用户身份登录到主机。
+. 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 到主机上的目录。
++
+在编写本文档时，压缩的文件名为：
+
++
+** SPARC CPU ： `NetApp_Solaris_host_utilities_6_2_sparc.tar.gz`
+** x86/x64 CPU ： `NetApp_Solaris_host_utilities_6_2_amd.tar.gz`
+
+
+. 转到包含下载内容的目录。
+. 使用 gunzip 命令解压缩文件
++
+` # gunzip netapp_solaris host_utilities_6_2_sparc.tar.gz`
+
+. 解压缩文件。您可以使用 `tar xvf` 命令执行此操作。
++
+` # tar xvf netapp_solaris host_utilities_6_2_sparc.tar`
+
+. 将从 tar 文件提取的软件包添加到主机。您可以使用 `pkgadd` 命令执行此操作。
++
+这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。以下示例使用 `pkgadd` 命令安装 Solaris 安装包：
+
++
+` # pkgadd -d ./NTAPSANTool.pkg`
+
+. 使用 `pkginfo` 命令或 `ls - al` 命令确认工具包已成功安装。
++
+[listing]
+----
+# ls -alR /opt/NTAP/SANToolkit
+/opt/NTAP/SANToolkit:
+total 1038
+drwxr-xr-x   3 root     sys            4 Jul 22  2019 .
+drwxr-xr-x   3 root     sys            3 Jul 22  2019 ..
+drwxr-xr-x   2 root     sys            6 Jul 22  2019 bin
+-r-xr-xr-x   1 root     sys       432666 Sep 13  2017 NOTICES.PDF
+
+/opt/NTAP/SANToolkit/bin:
+total 7962
+drwxr-xr-x   2 root     sys            6 Jul 22  2019 .
+drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
+-r-xr-xr-x   1 root     sys      2308252 Sep 13  2017 host_config
+-r-xr-xr-x   1 root     sys          995 Sep 13  2017 san_version
+-r-xr-xr-x   1 root     sys      1669204 Sep 13  2017 sanlun
+-r-xr-xr-x   1 root     sys          677 Sep 13  2017 vidpid.dat
+
+# (cd /usr/share/man/man1; ls -al host_config.1 sanlun.1)
+-r-xr-xr-x   1 root     sys        12266 Sep 13  2017 host_config.1
+-r-xr-xr-x   1 root     sys         9044 Sep 13  2017 sanlun.1
+----
+. 完成后，您必须使用 ` /opt/NTAP/SANToolkit/bin/host_config` 命令为您的环境配置主机参数：
++
+** MPxIO
+** Veritas DMP
+
+
+. 验证安装。
++
+`sanlun 版本`
+
+
+
+
+
+== 命令参考示例
+
+
+
+=== 列出映射到主机的所有主机启动程序
+
+[listing]
+----
+# sanlun fcp show adapter -v
+adapter name:      qlc3
+WWPN:              21000024ff17a301
+WWNN:              20000024ff17a301
+driver name:       qlc
+model:             7335902
+model description: 7115462, Oracle Storage Dual-Port 32 Gb Fibre Channel PCIe HBA
+serial number:     463916R+1720333838
+hardware version:  Not Available
+driver version:    210226-5.10
+firmware version:  8.08.04
+Number of ports:   1 of 2
+port type:         Fabric
+port state:        Operational
+supported speed:   8 GBit/sec, 16 GBit/sec, 32 GBit/sec
+negotiated speed:  32 GBit/sec
+OS device name:    /dev/cfg/c7
+
+adapter name:      qlc2
+WWPN:              21000024ff17a300
+WWNN:              20000024ff17a300
+driver name:       qlc
+model:             7335902
+model description: 7115462, Oracle Storage Dual-Port 32 Gb Fibre Channel PCIe HBA
+serial number:     463916R+1720333838
+hardware version:  Not Available
+driver version:    210226-5.10
+firmware version:  8.08.04
+Number of ports:   2 of 2
+port type:         Fabric
+port state:        Operational
+supported speed:   8 GBit/sec, 16 GBit/sec, 32 GBit/sec
+negotiated speed:  16 GBit/sec
+OS device name:    /dev/cfg/c6
+----
+
+
+=== 列出映射到主机的所有 LUN
+
+[listing]
+----
+# sanlun lun show -p -v all
+
+                    ONTAP Path: data_vserver:/vol1/lun1
+                           LUN: 1
+                      LUN Size: 10g
+                   Host Device: /dev/rdsk/c0t600A0980383044485A3F4E694E4F775Ad0s2
+                          Mode: C
+            Multipath Provider: Sun Microsystems
+              Multipath Policy: Native
+
+----
+
+
+=== 列出从给定 SVM/ 映射到主机的所有 LUN 列出映射到主机的给定 LUN 的所有属性
+
+[listing]
+----
+# sanlun lun show -p -v sanboot_unix`
+ONTAP Path: sanboot_unix:/vol/sol_boot/sanboot_lun
+                           LUN: 0
+                      LUN Size: 180.0g
+
+----
+
+
+=== 按主机设备文件名列出 ONTAP LUN 属性
+
+[listing]
+----
+# sanlun lun show all
+
+controller(7mode/E-Series)/                                         device
+vserver(cDOT/FlashRay)       lun-pathname                           filename
+---------------------------------------------------------------------------------------------------------------
+sanboot_unix                 /vol/sol_193_boot/chatsol_193_sanboot /dev/rdsk/c0t600A098038304437522B4E694E4A3043d0s2
+
+host adapter    protocol lun size   product
+---------------------------------------------
+qlc3            FCP      180.0g     cDOT
+----

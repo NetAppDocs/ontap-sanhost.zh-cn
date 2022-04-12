@@ -2141,9 +2141,6 @@
   <block id="9f845ca5de3d71f2c5f7eed4864a12b4" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="1e5bb2c5d5a9a2921f17983d8f8db70b" category="list-text">验证您使用的是建议的 Broadcom lpfc 固件，原生收件箱驱动程序和外置自动连接软件包版本。有关支持的版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="2a0a4348e3cfffb7106ae13ae6827b6d" category="paragraph">适用于 Oracle Linux 8.2 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.2 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
-  <block id="772d04265dc6e94b3e6f5c725fbf42e6" category="paragraph"><block ref="e1df9b7b8db07e2cb30146cd5a6e04ef" category="inline-link-macro-rx"></block>
-<block ref="414cc440da9b8860f85936c8ca7199d3" category="inline-link-macro-rx"></block>
-<block ref="c70054656a6156c5d554f172fbb27a7a" category="inline-link-macro-rx"></block></block>
   <block id="6fa026cc896a9aa46993e867a29d973c" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="52e81e11040c41825151f9c7710055f2" category="inline-link-macro-rx"></block> 和 <block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
   <block id="24b832a3c490bb4e76193c9ae615cd2b" category="admonition">为映射到 VMware vSphere 的所有 LUN 启用 space-alloc 设置，以便 UNMAP 正常工作。有关详细信息，请参见<block ref="ecbbd19c2959ac5708c6c4723def4492" category="inline-link-rx"></block>。</block>
   <block id="1ce6b82da1e4c8ef0696742f32ee8517" category="list-text">要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 <block ref="0b49ef6859bcc6d029643944be119d56" category="inline-link-macro-rx"></block> 和 <block ref="ea34cfa716537242c2b4837bb8c55109" category="inline-link-macro-rx"></block></block>
@@ -2175,7 +2172,6 @@
   <block id="20ef4219f8282a156b90a588df2efcd7" category="section-title">在 RHEL 8.3 上启用 NVMe/FC</block>
   <block id="bf2fd4f30d4d99e83aea737d5c100ea0" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
   <block id="c0a6e0dc55b98c30081b044a2713737b" category="section-title">验证主机和存储系统配置</block>
-  <block id="93d35d1948374a90e0c2dc20afe8976a" category="section-title">配置 FC HBA 和交换机</block>
   <block id="b60c7a8315c7b9d353b5fda462709b16" category="section-title">安装 Host Utilities</block>
   <block id="96d192942ad7d0399b1d3c052048858e" category="section-title">以交互方式安装 Host Utilities</block>
   <block id="b9f1aba85711fc915cd6550e3ca2e6e7" category="section-title">从命令行安装 Host Utilities</block>
@@ -2253,4 +2249,49 @@
   <block id="c22c65685ac3f8701da1a00c478b1333" category="cell">1447287</block>
   <block id="778fd215ce10bd514de565e6df2b1758" category="cell">在 SM-BC 配置中，隔离主集群上的 AINFO 事件会导致 HP-UX 主机暂时中断</block>
   <block id="6f80f2e204ff92f2e954367d70413775" category="cell">如果在 SnapMirror 业务连续性（ SM-BC ）配置中的隔离主集群上发生自动计划外故障转移（ AUFO ）事件，则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
+  <block id="71a803ec7e0a7413f38513eccfb51d23" category="doc">HPUX Host Utilities 6.0</block>
+  <block id="9e1ea4643210fa4abca0c804c4fe3eec" category="paragraph">您可以使用 <block ref="1c6d071c1749743e8ebf715f1c64c2a1" category="inline-link-macro-rx"></block> 以验证您的配置。</block>
+  <block id="3112cdbeaee6d9032c13b95ac8d4dc32" category="paragraph">HPUX Host Utilities 是一款 NetApp 主机软件，可在 HPUX 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
+  <block id="d4fafab7425136eae505dcc30fe94743" category="section-title">安装 HPUX Host Utilities</block>
+  <block id="235ab8a9f571fa3f1ae7daa2b9e3a1c3" category="paragraph">可从上获取 NetApp HPUX Host Utilities 软件包 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 在压缩文件中。</block>
+  <block id="e6836ae92ec45bf946aba470c3ee98e5" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block>。下载文件后，必须在安装之前对其进行解压缩。</block>
+  <block id="dd0ef0f389a16b505e475797a7b752ac" category="list-text">从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 连接到 HP-UX 主机。</block>
+  <block id="5eaf61000f0f261f2e4793f7e336889a" category="list-text">输入以下命令解压缩 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` 文件：</block>
+  <block id="93b6e09e96afb8006209af84f438ca2b" category="paragraph">` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
+  <block id="d10caeaed75e8947d0e8840674994b68" category="paragraph">系统会将提取的软件置于您将存储库文件解压缩到的目录中。</block>
+  <block id="2a346f59c525e5728cec25bf9a377f2f" category="list-text">输入以下命令以安装软件：</block>
+  <block id="2d903390e509c4d2f6da1a4d0787b5b6" category="paragraph">` # swinstall -s /storage_path`</block>
+  <block id="999cc5e84fec57fdd157e6fdacc5c96a" category="paragraph">`dept_path` 提供存储库文件的路径和名称。</block>
+  <block id="e661cef1335457aaa4b6047327cfb656" category="paragraph">`swinstall` 命令可运行一个安装脚本，用于验证 HP-UX 设置的状态。如果您的系统满足要求，此脚本会将 `sanlun` 实用程序和诊断脚本安装在 ` /opt/netapp/santools/bin` 目录中。</block>
+  <block id="96e0cae7407a65fe53018dd9c13dbbe7" category="section-title">配置 FC HBA 和交换机</block>
+  <block id="4305e9936b83d45d04d4e15cb3f002d2" category="paragraph"><block ref="e5534403168e57c1e34879bb31a5b6d6" category="inline-link-macro-rx"></block>
+<block ref="414cc440da9b8860f85936c8ca7199d3" category="inline-link-macro-rx"></block>
+<block ref="c70054656a6156c5d554f172fbb27a7a" category="inline-link-macro-rx"></block></block>
+  <block id="13875804930272cb7e31a51605d09c65" category="doc">Solaris Host Utilities 6.2</block>
+  <block id="408c1c436b88f56a9e4cf815ca520ffc" category="list-text">为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。</block>
+  <block id="8f3b9d0cc42d20c0623a5f0990c4181e" category="paragraph">Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
+  <block id="ad13fbfcd593d66a0a805929eb221e19" category="section-title">安装 Solaris Host Utilities</block>
+  <block id="03b4fa4e47ce5a6711a2ad9d886d63b4" category="paragraph">Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主 Host Utilities 环境包括：</block>
+  <block id="4dae86ccd354e19dab3d36ea3289ddf9" category="list-text">在使用 SPARC 处理器或 X86/64 处理器的系统上，使用光纤通道（ FC ）或 iSCSI 协议的 MPxIO 的原生 操作系统。</block>
+  <block id="bcbce11571c35a16833e1cad61fe922b" category="list-text">在使用 SPARC 处理器的系统上使用 FC 或 iSCSI 协议，在使用 X86/64 处理器的系统上使用 iSCSI 协议的 Veritas 动态多路径（ DMP ）。</block>
+  <block id="62f9b54c9ec5d04b22835a93b9aa1fa6" category="admonition">上提供了 NetApp Solaris Host Utilities 软件包 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 以压缩文件格式为您的处理器提供支持。您可以从支持站点下载适用于您的环境的 Host Utilities 软件包。</block>
+  <block id="fea59de608f0d3ad102d8ee095187049" category="list-text">以 root 用户身份登录到主机。</block>
+  <block id="9b81dac243940d3f9c3490234e86754f" category="list-text">从下载包含 Host Utilities 的压缩文件的副本 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 到主机上的目录。</block>
+  <block id="b2d33f0e0e850a2d778dfce3637f0b06" category="paragraph">在编写本文档时，压缩的文件名为：</block>
+  <block id="9957056b4d6f0788b84485f7f408d79d" category="list-text">SPARC CPU ： `NetApp_Solaris_host_utilities_6_2_sparc.tar.gz`</block>
+  <block id="8b2e8dcabd2803cfffe6d347e740d632" category="list-text">x86/x64 CPU ： `NetApp_Solaris_host_utilities_6_2_amd.tar.gz`</block>
+  <block id="4b9b8c4fa4d1eb96283d16c11c709e8e" category="list-text">使用 gunzip 命令解压缩文件</block>
+  <block id="1f2423b6dd7c87600c006dd4fe70055e" category="paragraph">` # gunzip netapp_solaris host_utilities_6_2_sparc.tar.gz`</block>
+  <block id="72f9fed930907b19e060560561469054" category="list-text">解压缩文件。您可以使用 `tar xvf` 命令执行此操作。</block>
+  <block id="d35a857c138589666873eef37b70bd9c" category="paragraph">` # tar xvf netapp_solaris host_utilities_6_2_sparc.tar`</block>
+  <block id="963069b30b9e059f13bf53eb0a7cfbfe" category="list-text">将从 tar 文件提取的软件包添加到主机。您可以使用 `pkgadd` 命令执行此操作。</block>
+  <block id="0c91635f19857d5fe1642e137ecfe86f" category="paragraph">这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。以下示例使用 `pkgadd` 命令安装 Solaris 安装包：</block>
+  <block id="e0da89c5b7248a8324e10a5d7c6af64f" category="paragraph">` # pkgadd -d ./NTAPSANTool.pkg`</block>
+  <block id="230a086a88f004fde1f1d6cfcc3f4f87" category="list-text">使用 `pkginfo` 命令或 `ls - al` 命令确认工具包已成功安装。</block>
+  <block id="43993f1d866abd26f6850284c50866b3" category="list-text">完成后，您必须使用 ` /opt/NTAP/SANToolkit/bin/host_config` 命令为您的环境配置主机参数：</block>
+  <block id="cdfd79e32ab8a821a843e89d91bdcd8d" category="list-text">MPxIO</block>
+  <block id="8ae046464e598978903e62c0c706373c" category="list-text">Veritas DMP</block>
+  <block id="a335fa6e5bef06439b229f8adabc7dfe" category="section-title">列出从给定 SVM/ 映射到主机的所有 LUN 列出映射到主机的给定 LUN 的所有属性</block>
+  <block id="19b1462d6d0a4e6e5b814edb100a77c6" category="sidebar">HPUX Host Utilities</block>
+  <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
 </blocks>

@@ -27,7 +27,7 @@ ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。
 
 == 功能
 
-* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。请参见  有关支持的最新配置和版本列表。
+* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的最新配置和版本列表。
 * 从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。
 * 对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。
 
@@ -211,5 +211,5 @@ fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201900a098dfe3d1-uuid.5
 == 相关链接
 
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
-
-
+link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
+link:https://kb.vmware.com/s/article/83370["NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x"^]

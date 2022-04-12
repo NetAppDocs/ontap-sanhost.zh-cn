@@ -66,7 +66,7 @@ Host Utilities 支持不同的 Windows 主机配置，协议和多路径选项�
 
 . 验证布线
 +
-请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^] 适用于您的 ONTAP 或版本 有关布线和配置的详细信息。
+请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^] 适用于您的 ONTAP 或版本 https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
 
 
 
@@ -406,7 +406,7 @@ Windows Unified Host Utilities 安装程序会根据您在安装期间所做的�
 
 NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例如，在 QLogic QConvergeConsole 程序中，参数显示为 `Link down Timeout` 。Host Utilities `fcconfig.ini` 文件会将此参数显示为 `LinkDownTimeOut` 或 `MPioLinkDownTimeOut` ，具体取决于是否指定了 MPIO 。但是，所有这些名称都引用相同的 HBA 参数。
 
-请参见 https://www.broadcom.com/support/download-search["Emulex"^] 或 站点以了解有关超时参数的更多信息。
+请参见 https://www.broadcom.com/support/download-search["Emulex"^] 或 https://driverdownloads.qlogic.com/QLogicDriverDownloads_UI/Netapp_search.aspx["QLogic"^] 站点以了解有关超时参数的更多信息。
 
 
 
@@ -433,8 +433,8 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 
 
 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]
-
-
+https://mysupport.netapp.com/portal/documentation["NetApp 文档"^]
+https://mysupport.netapp.com/NOW/cgi-bin/bol["NetApp Bug Online"^]
 
 
 

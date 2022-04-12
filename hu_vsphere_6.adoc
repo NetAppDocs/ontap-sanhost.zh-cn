@@ -190,7 +190,7 @@ NetApp 不建议此时更改任何 VVOL 设置的默认值。
 
 请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 适用于特定版本的 ONTAP 工具或适用于特定版本的 vSphere 和 ONTAP 的原有 VASA Provider 。
 
-有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^] 和 
+有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^] 和 link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400"^]
 
 
 
@@ -319,7 +319,7 @@ naa.600a098038304731783f506670553355
 
 == 相关链接
 
-* 要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 link:https://cert.vmware.com/caas/support/case/00088028["客户案例 -00088028"^] 和 
+* 要使用 ONTAP 访问 TR-4597- VMware vSphere ，请参见 link:https://cert.vmware.com/caas/support/case/00088028["客户案例 -00088028"^] 和 link:https://cert.vmware.com/caas/support/case/00088029["客户案例 -00088029"^]
 * link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
 * link:https://kb.vmware.com/s/article/83370["采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP"^]
 
