@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 要启动多路径守护进程，必须存在 multipath.conf 文件，但您可以使用以下命令创建一个空的零字节文件： `touch /etc/multipath.conf` 首次创建此文件时，可能需要启用并启动多路径服务。

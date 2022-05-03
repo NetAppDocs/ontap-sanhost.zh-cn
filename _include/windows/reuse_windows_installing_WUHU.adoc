@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 link:https://mysupport.netapp.com/documentation/docweb/index.html?productID=62322&platformID=30462&language=en-US["WUHU 7.1 文档"^]。

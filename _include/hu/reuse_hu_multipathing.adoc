@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。

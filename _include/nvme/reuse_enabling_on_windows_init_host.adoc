@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 按照以下步骤在 Windows 启动程序主机上启用 FC/NVMe ：

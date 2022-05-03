@@ -1,4 +1,5 @@
 = ASM 镜像
+:allow-uri-read: 
 
 
 

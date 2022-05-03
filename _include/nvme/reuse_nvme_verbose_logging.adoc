@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 您可以将 lpfc_log_verbose 驱动程序设置为以下任意值以记录 NVMe/FC 事件。

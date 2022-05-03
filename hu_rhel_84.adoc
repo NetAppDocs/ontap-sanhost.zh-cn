@@ -8,6 +8,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.4
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

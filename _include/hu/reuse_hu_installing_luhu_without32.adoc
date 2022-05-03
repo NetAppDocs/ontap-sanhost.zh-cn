@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 在 64 位 .rpm 文件中。

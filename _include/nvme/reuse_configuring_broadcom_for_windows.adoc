@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 在 Windows 环境中使用适用于 FC/NVMe 的 Broadcom 适配器时，每个主机总线适配器（ HBA ）端口都会关联一个 ` +hostnqn+` 。` +hostnqn+` 的格式如下。

@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 如果您选择使用 SAN 启动，则您的配置必须支持它。您可以使用 NetApp 互操作性表工具验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。

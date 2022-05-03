@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。

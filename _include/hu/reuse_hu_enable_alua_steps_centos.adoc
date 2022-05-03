@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 要启用 ALUA 处理程序，请执行以下步骤：

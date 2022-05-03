@@ -8,6 +8,7 @@ summary: Windows Unified Host Utilities 包含一个安装程序，用于设置�
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

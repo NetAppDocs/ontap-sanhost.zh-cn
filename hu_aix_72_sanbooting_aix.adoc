@@ -8,6 +8,7 @@ summary: 介绍如何使用 AIX 发现和配置 LUN
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

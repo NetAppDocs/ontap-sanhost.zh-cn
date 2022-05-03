@@ -8,6 +8,7 @@ summary: 使用 ONTAP 为 Oracle Linux 7.8 设置 VME/FC 主机配置，包括�
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

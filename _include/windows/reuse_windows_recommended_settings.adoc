@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 在使用 FC 的系统上，选择 MPIO 时，需要为 Emulex 和 QLogic FC HBA 设置以下超时值。

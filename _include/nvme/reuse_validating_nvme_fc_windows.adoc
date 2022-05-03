@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 验证端口类型是否为 FC+NVMe 。

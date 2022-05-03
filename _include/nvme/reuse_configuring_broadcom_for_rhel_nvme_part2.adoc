@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 验证 `lpfc_enable_FC4_type` 是否设置为 "* 3*" 。

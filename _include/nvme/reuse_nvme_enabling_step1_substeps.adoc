@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 备份 ` /etc/nvme/host*` 文件。

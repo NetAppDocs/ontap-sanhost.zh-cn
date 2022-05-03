@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 验证以下 NVMe/FC 设置。

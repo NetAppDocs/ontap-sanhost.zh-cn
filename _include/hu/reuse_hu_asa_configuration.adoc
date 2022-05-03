@@ -1,4 +1,5 @@
 = 全 SAN 阵列配置
+:allow-uri-read: 
 
 
 

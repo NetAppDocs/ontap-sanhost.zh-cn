@@ -8,6 +8,7 @@ summary: 适用于采用 ONTAP 的 Windows Server 2012 R2 的 NVMe/FC 主机配�
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

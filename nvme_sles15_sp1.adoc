@@ -8,6 +8,7 @@ summary: 介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP1 配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

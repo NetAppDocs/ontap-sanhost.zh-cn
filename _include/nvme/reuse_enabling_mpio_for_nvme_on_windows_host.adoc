@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 安装 Windows Host Utility Kit 7.1 以设置 FC 和 NVMe 通用的驱动程序参数。

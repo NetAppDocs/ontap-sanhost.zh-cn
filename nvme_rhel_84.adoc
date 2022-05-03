@@ -8,6 +8,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

@@ -8,6 +8,7 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
+:allow-uri-read: 
 :toc: 
 :toclevels: 1
 :nofooter: 

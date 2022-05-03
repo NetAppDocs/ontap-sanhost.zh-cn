@@ -1,4 +1,5 @@
 = 
+:allow-uri-read: 
 
 
 . 从 Microsoft 支持站点下载修补程序。

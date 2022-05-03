@@ -6,6 +6,7 @@ summary: SAN 主机文档
 ---
 = ONTAP SAN 主机配置
 :hardbreaks:
+:allow-uri-read: 
 :nofooter: 
 :icons: font
 :linkattrs: 
