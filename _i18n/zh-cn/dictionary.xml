@@ -2294,4 +2294,11 @@
   <block id="a335fa6e5bef06439b229f8adabc7dfe" category="section-title">列出从给定 SVM/ 映射到主机的所有 LUN 列出映射到主机的给定 LUN 的所有属性</block>
   <block id="19b1462d6d0a4e6e5b814edb100a77c6" category="sidebar">HPUX Host Utilities</block>
   <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
+  <block id="072bbeb072deda2033d37a6e9af67b96" category="summary">介绍如何在ONTAP 中使用Oracle Linux 8.5</block>
+  <block id="bebf74152cdc0b8f2233ff49a9112052" category="doc">将Oracle Linux 8.5与NetApp ONTAP 结合使用</block>
+  <block id="5afff738a58f6889eebdd3efb2f2c405" category="paragraph">对于Oracle Linux (OL) 8.5、/etc/multipath.conf文件必须存在、但您不需要对该文件进行特定更改。OL 8.5是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
+  <block id="d361bd25a0b2583985eb39dd89875090" category="paragraph">Oracle Linux 8.5操作系统经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件</block>
+  <block id="2e4318e2eccbd53d66a800f6dabff27f" category="admonition">要配置Oracle Linux 8.5 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="7e47a54075763937d25ec51fa82726e1" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.5。</block>
+  <block id="2e4b1a8e103650d2f0fe4c61f4f8d5fb" category="paragraph">Oracle Linux 8.5没有已知问题。</block>
+  <block id="5d90071a09878a695a26d84f9a4f073b" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="b5087b96e856dc400373808e0f627382" category="inline-link-macro-rx"></block> 一节。</block>
 </blocks>
