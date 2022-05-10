@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: hu_citrix_8x.html 
-keywords: host utilities, citrix, hypervisor, 8.0, 8.1, 8.2, netapp, ontap 
+keywords: host utilities, citrix, hypervisor, 8.0, 8.1, 8.2, netapp, ontap, sanhost 
 summary: 介绍如何在 ONTAP 中使用 Citrix 虚拟机管理程序 8.x 
 ---
 = 将 Citrix 虚拟机管理程序与 NetApp ONTAP 结合使用
