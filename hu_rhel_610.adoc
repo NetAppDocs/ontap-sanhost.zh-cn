@@ -187,7 +187,9 @@ blacklist {
 ....
 
 
-您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
+您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。
+
+下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
 
 [cols="2*"]
 |===
