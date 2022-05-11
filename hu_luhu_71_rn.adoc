@@ -1,0 +1,162 @@
+---
+sidebar: sidebar 
+permalink: hu_luhu_71_rn.html 
+keywords: host utilities, linux, 7.1, netapp, ontap, release, notes 
+summary: 《Linux Unified Host Utilities 7.1发行说明》 
+---
+= 《Linux Unified Host Utilities 7.1发行说明》
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+本发行说明文档包含Linux Unified Host Utilities 7.1版的最新信息、包括有关已知问题和限制、任何重要注意事项、新功能和增强功能的更新。此外、还介绍了自发布Host Utilities以来可能发现的任何问题。
+
+
+
+== 关于Linux Unified Host Utilities 7.1版
+
+Linux Unified Host Utilities支持多个Linux操作系统。使用Host Utilities可以将Linux主机连接到NetApp存储系统。
+
+Linux Unified Host Utilities 7.1仍支持以下版本的Linux：
+
+* Red Hat Enterprise Linux
+* SUSE Linux Enterprise Server
+* Oracle Linux
+* Oracle VM
+* Citrix XenServer
+* Veritas
+
+
+
+NOTE: 有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+Host Utilities软件以32位和64位.rpm文件的形式提供。您可以从下载适用于您的主机架构的正确.rpm文件和文档 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^]。
+
+有关安装和设置的说明、请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_luhu_71.html["《 Linux Unified Host Utilities 7.1 安装指南》"]。
+
+
+
+== 7.1版中的新增功能
+
+Linux Host Utilities现在称为_Linux Unified Host Utilities_、因为它支持运行SANtricity 的NetApp E系列存储系统以及运行ONTAP 的AFF 和FAS 系统。
+
+
+NOTE: 本文档中提及的Host Utilities或Linux Host Utilities均指Linux Unified Host Utilities。
+
+* 此版本的Linux Unified Host Utilities支持经过调整的软件包、用于在Red Hat Enterprise Linux 6和7主机上设置服务器配置文件并提高I/O性能。
+* Linux Unified Host Utilities 7.1仍支持以下版本：
++
+** Red Hat Enterprise Linux
+** SUSE Linux Enterprise Server
+** Oracle Linux
+** Oracle VM
+** Citrix XenServer
+** Veritas
+
+
+* Red Hat Enterprise Linux 6和7现在具有一个经过调整的软件包、其中包含`tuned-adm`命令、可根据环境在主机上设置不同的服务器配置文件。
++
+** 其中包括一个企业存储配置文件、用于使用企业存储阵列中的LUN的配置。您也可以将Red Hat Enterprise Linux的虚拟子系统配置文件用作子虚拟机。使用这些经过调整的软件包可以显著提高ONTAP 的吞吐量和延迟。
+
+
+
+
+
+NOTE: 在初始版本之后、NetApp将继续与Host Utilities配合使用、以增加对功能的支持。有关支持的功能以及已添加的新功能的最新信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+
+
+== 新增功能和增强功能
+
+随着新信息的提供、发行说明会在不同产品版本之间进行更新。
+
+
+
+=== 7.1增强功能
+
+* 此版本支持以下功能：
++
+** SUSE Linux Enterprise Server 15系列
+** Oracle VM 3.2系列
+** Oracle Linux 6和7系列
+** Red Hat Enterprise Linux 6和7系列
+** SUSE Linux Enterprise Server 11 SP4
+** KVM和XEN、RHEV-6.4和6.5
+** Citrix XenServer参数
+
+
+* 增加了对Emulex和Qlogic中32 Gb光纤通道适配器的支持。
+* 在SLES12SP1、OL7.2、RHEL7.2和RHEL 6.8中修复了`sanlun lun show -p getting SIGABRT`。
+* 扩展了对Red Hat Linux 6.8、Oracle Linux 6.8、XenServer 7.0、Oracle VM 3.3系列和Oracle VM 3.4系列操作系统的支持。
+
+
+
+
+== 已知问题和限制
+
+[cols="10, 30"]
+|===
+| NetApp 错误 ID | Description 
+
+
+| 1457017 | `sanlun`安装问题与`libdevmapper.so`和`libnl.so`库相关的警告消息。这些警告不会影响`sanlun` kit的功能。 
+|===
+link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。
+
+您可能需要使用的一些关键字组合和错误类型包括：
+
+* FCP—Linux
+* iSCSI—Linux
+
+
+请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["ONTAP SAN主机配置文档"] 有关主机操作系统设置和配置的详细信息。
+
+
+
+== 关于SAN主机配置文档
+
+有关SAN Host Utilities的文档、请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["ONTAP SAN主机配置文档"]。ONTAP SAN主机配置文档是累积的、涵盖所有当前的SAN主机版本。各个版本之间的任何功能差异都会在上下文中注明。
+
+
+
+=== 追加信息
+
+
+
+==== 使用与Linux内核捆绑的驱动程序时建议使用的默认值
+
+在设置使用原生 的FC环境时、如果此驱动程序是与Linux内核捆绑在一起的收件箱驱动程序、则可以使用这些驱动程序的默认值。在使用iSCSI解决方案 软件的iSCSI环境中、您需要根据所使用的操作系统版本手动设置某些建议值。
+
+
+
+== 从何处查找产品文档和其他信息
+
+您可以访问所有NetApp产品的文档、并在NetApp公司站点的产品文档页面上查找其他产品信息资源、例如技术报告和白皮书。
+
+*配置和管理ONTAP 存储系统*
+
+* 。 link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["《ONTAP 软件设置指南》"^] 适用于您的ONTAP 版本
+* 。 link:https://docs.netapp.com/us-en/ontap/san-management/index.html["《ONTAP SAN管理指南》"^] 适用于您的ONTAP 版本
+* 。 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["《 ONTAP 发行说明》"^] 适用于您的ONTAP 版本
+
+
+*配置和管理E系列存储系统*
+
+* 适用于您的协议的《SANtricity 存储管理器Windows配置和配置快速指南》
+* 适用于您的操作系统、协议和SANtricity 版本的《SANtricity 存储管理器配置和配置快速指南》。
+* 适用于您的SANtricity 版本的《SANtricity 存储管理器软件安装参考》。
+* 适用于您的SANtricity 版本的《SANtricity 存储管理器多路径驱动程序指南》。
+* 适用于您的SANtricity 版本的《SANtricity 存储管理器发行说明》。
+
+
+转至 link:https://docs.netapp.com/us-en/e-series/getting-started/index.html["E 系列文档"] 查找SANtricity 相关文档。

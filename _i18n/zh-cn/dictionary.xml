@@ -2301,4 +2301,72 @@
   <block id="2e4318e2eccbd53d66a800f6dabff27f" category="admonition">要配置Oracle Linux 8.5 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="7e47a54075763937d25ec51fa82726e1" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.5。</block>
   <block id="2e4b1a8e103650d2f0fe4c61f4f8d5fb" category="paragraph">Oracle Linux 8.5没有已知问题。</block>
   <block id="5d90071a09878a695a26d84f9a4f073b" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="b5087b96e856dc400373808e0f627382" category="inline-link-macro-rx"></block> 一节。</block>
+  <block id="870d3ab5f8bca6f13651e1aa38ee6783" category="summary">《Linux Unified Host Utilities 7.1发行说明》</block>
+  <block id="7a14880cd1144b4db863930b81a2f16e" category="doc">《Linux Unified Host Utilities 7.1发行说明》</block>
+  <block id="ac5c0d1e2c9f556405ba5d0ebcee7448" category="paragraph">本发行说明文档包含Linux Unified Host Utilities 7.1版的最新信息、包括有关已知问题和限制、任何重要注意事项、新功能和增强功能的更新。此外、还介绍了自发布Host Utilities以来可能发现的任何问题。</block>
+  <block id="114f5567a26fcd42b3a2049490c5f4b2" category="section-title">关于Linux Unified Host Utilities 7.1版</block>
+  <block id="fcb3d433efb9ae3f476517ca8e33cd39" category="paragraph">Linux Unified Host Utilities支持多个Linux操作系统。使用Host Utilities可以将Linux主机连接到NetApp存储系统。</block>
+  <block id="2c4f9a2d7ffae41716c3bea741995926" category="paragraph">Linux Unified Host Utilities 7.1仍支持以下版本的Linux：</block>
+  <block id="c73bbd3786350b0a8d3577d82afdf489" category="list-text">Red Hat Enterprise Linux</block>
+  <block id="4ae0b3e9c82d7212e106b8d937d888f9" category="list-text">SUSE Linux Enterprise Server</block>
+  <block id="f777d0936a10c30e434b6808f6124eaa" category="list-text">Oracle VM</block>
+  <block id="12d3f37fc10bb62fe3297b7457e90417" category="list-text">Citrix XenServer</block>
+  <block id="6c670cc4f12f5e52c8291d35c3932068" category="admonition">有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 <block ref="454ffc53fb26d285d765b8fbe8c25a5d" category="inline-link-macro-rx"></block>。</block>
+  <block id="fb30f31b8baeae42f69695791942e3a3" category="paragraph">Host Utilities软件以32位和64位.rpm文件的形式提供。您可以从下载适用于您的主机架构的正确.rpm文件和文档 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block>。</block>
+  <block id="838cc8ab1454bd7f8f1150dacfe96313" category="inline-link-macro">《 Linux Unified Host Utilities 7.1 安装指南》</block>
+  <block id="cbdbfecfc2f9103a31c93551a8ca2169" category="paragraph">有关安装和设置的说明、请参见 <block ref="060c9cd2a0a348a800de9ed8d9bd6071" category="inline-link-macro-rx"></block>。</block>
+  <block id="b94fc34822dc8386e2ca5393f191ce8d" category="section-title">7.1版中的新增功能</block>
+  <block id="43ec90f5f7e8651a9ba069c9d5119a36" category="paragraph">Linux Host Utilities现在称为_Linux Unified Host Utilities_、因为它支持运行SANtricity 的NetApp E系列存储系统以及运行ONTAP 的AFF 和FAS 系统。</block>
+  <block id="3401add29441e486a87e080c062d2319" category="admonition">本文档中提及的Host Utilities或Linux Host Utilities均指Linux Unified Host Utilities。</block>
+  <block id="4209f01684e986e98bd7db997f06ed37" category="list-text">此版本的Linux Unified Host Utilities支持经过调整的软件包、用于在Red Hat Enterprise Linux 6和7主机上设置服务器配置文件并提高I/O性能。</block>
+  <block id="bf82089ceffc1db6d2dda7875edaa5e4" category="list-text">Linux Unified Host Utilities 7.1仍支持以下版本：</block>
+  <block id="3a1e716823ca631a43c0c3de405a1e4b" category="list-text">Red Hat Enterprise Linux 6和7现在具有一个经过调整的软件包、其中包含`tuned-adm`命令、可根据环境在主机上设置不同的服务器配置文件。</block>
+  <block id="30b4768014d8a013f1f593b8afe6fb38" category="list-text">其中包括一个企业存储配置文件、用于使用企业存储阵列中的LUN的配置。您也可以将Red Hat Enterprise Linux的虚拟子系统配置文件用作子虚拟机。使用这些经过调整的软件包可以显著提高ONTAP 的吞吐量和延迟。</block>
+  <block id="df9acd1db1992fc307ada4549840fbbd" category="admonition">在初始版本之后、NetApp将继续与Host Utilities配合使用、以增加对功能的支持。有关支持的功能以及已添加的新功能的最新信息、请参见 <block ref="454ffc53fb26d285d765b8fbe8c25a5d" category="inline-link-macro-rx"></block>。</block>
+  <block id="94648c6bfe4e5f155249afe8baa0af7c" category="section-title">新增功能和增强功能</block>
+  <block id="4cdb57a14ff056cba74062a20d5038e4" category="paragraph">随着新信息的提供、发行说明会在不同产品版本之间进行更新。</block>
+  <block id="98f0e8f6ac68ca9ce5c40038e9c315fc" category="section-title">7.1增强功能</block>
+  <block id="a3ccaa134ff70292247596c1510e2f49" category="list-text">此版本支持以下功能：</block>
+  <block id="9085058ee40c6aea4b4062d815f10796" category="list-text">SUSE Linux Enterprise Server 15系列</block>
+  <block id="9644255060b40cdfcd8ea1615fe043fa" category="list-text">Oracle VM 3.2系列</block>
+  <block id="5658a750ca0f24bc92094b686b6258d0" category="list-text">Oracle Linux 6和7系列</block>
+  <block id="d216058d64b318d5b9cf23cae02c1ab3" category="list-text">Red Hat Enterprise Linux 6和7系列</block>
+  <block id="bb45e555ad5e8fd7b39ad7055ae2fee5" category="list-text">SUSE Linux Enterprise Server 11 SP4</block>
+  <block id="5f8af70f22329002dbdbc795c806cfc6" category="list-text">KVM和XEN、RHEV-6.4和6.5</block>
+  <block id="49a50d4f58561eda25bfce1e3b33701a" category="list-text">Citrix XenServer参数</block>
+  <block id="e3084fdb2d5ea6f0f2ce41358fd37dbd" category="list-text">增加了对Emulex和Qlogic中32 Gb光纤通道适配器的支持。</block>
+  <block id="931f0d754b7a3bfa5cb9a801cdf5a87c" category="list-text">在SLES12SP1、OL7.2、RHEL7.2和RHEL 6.8中修复了`sanlun lun show -p getting SIGABRT`。</block>
+  <block id="de1ff84cb81890d47939fb29d21e29d4" category="list-text">扩展了对Red Hat Linux 6.8、Oracle Linux 6.8、XenServer 7.0、Oracle VM 3.3系列和Oracle VM 3.4系列操作系统的支持。</block>
+  <block id="2813f127dc58929fb553bc32684c2e46" category="section-title">已知问题和限制</block>
+  <block id="8b777dc32f2f743eb513fca0bfd52348" category="cell">1457017</block>
+  <block id="0078173d6c66e3e11217e80e4ecc1d1b" category="cell">`sanlun`安装问题与`libdevmapper.so`和`libnl.so`库相关的警告消息。这些警告不会影响`sanlun` kit的功能。</block>
+  <block id="fa43a065e595f68c9747ec1c332db0fe" category="paragraph"><block ref="830162a7c9ab7fc626354bdc7e06a36f" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。</block>
+  <block id="25fca6d5f6b8d10f692a7f66ee2eee3c" category="paragraph">您可能需要使用的一些关键字组合和错误类型包括：</block>
+  <block id="c47c6ba2c86eeee1e865b8ee90c66641" category="list-text">FCP—Linux</block>
+  <block id="6dd1573a0335bb03fdc0c8231d802e5a" category="list-text">iSCSI—Linux</block>
+  <block id="cd0071277804a942902cc16cb5e9cda4" category="inline-link-macro">ONTAP SAN主机配置文档</block>
+  <block id="5787cd6f0fbd05d03decbef0348d1b18" category="paragraph">请参见 <block ref="bb9994c78007f3d6549ad9b3eb7dd244" category="inline-link-macro-rx"></block> 有关主机操作系统设置和配置的详细信息。</block>
+  <block id="398a7031b2f8b7650a0d5fa0fd16f3f8" category="section-title">关于SAN主机配置文档</block>
+  <block id="04dc63ffa7a6d95f3385a8886f05dc01" category="paragraph">有关SAN Host Utilities的文档、请参见 <block ref="bb9994c78007f3d6549ad9b3eb7dd244" category="inline-link-macro-rx"></block>。ONTAP SAN主机配置文档是累积的、涵盖所有当前的SAN主机版本。各个版本之间的任何功能差异都会在上下文中注明。</block>
+  <block id="0f68b904e33d9ac04605aecc958bcf52" category="section-title">追加信息</block>
+  <block id="45f46864d42785de56264eca6e97bee1" category="section-title">使用与Linux内核捆绑的驱动程序时建议使用的默认值</block>
+  <block id="987c26774efa908312fb01ff50e7e858" category="paragraph">在设置使用原生 的FC环境时、如果此驱动程序是与Linux内核捆绑在一起的收件箱驱动程序、则可以使用这些驱动程序的默认值。在使用iSCSI解决方案 软件的iSCSI环境中、您需要根据所使用的操作系统版本手动设置某些建议值。</block>
+  <block id="7431f7a183aa9cfe2910bb761205485d" category="section-title">从何处查找产品文档和其他信息</block>
+  <block id="c5079a4f9245d0085178c5ad194bac89" category="paragraph">您可以访问所有NetApp产品的文档、并在NetApp公司站点的产品文档页面上查找其他产品信息资源、例如技术报告和白皮书。</block>
+  <block id="3ff27b1e3325a6e4ca7c06c3dec9d13c" category="paragraph">*配置和管理ONTAP 存储系统*</block>
+  <block id="86236b49ff131485c2b4de4baab79770" category="inline-link-macro">《ONTAP 软件设置指南》</block>
+  <block id="5bfadca807c3aa6dc047b074d813aff4" category="list-text">。 <block ref="eb97e344065e5b8076466213afb4528b" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="e14a95309ebbad9203e12ea129172d1e" category="inline-link-macro">《ONTAP SAN管理指南》</block>
+  <block id="0088ffe866af761d6d172abf73c2504c" category="list-text">。 <block ref="dcbc5977eb4eae232288be25155552fa" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="626a7cbe056796bcb1c158b143866230" category="inline-link-macro">《 ONTAP 发行说明》</block>
+  <block id="a60d936499718f3c1e7b5ddddae45c91" category="list-text">。 <block ref="6991a2ee8a93b15fb816a46b15ea0677" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="77fcedc082e9efc45f62c54e77698ccc" category="paragraph">*配置和管理E系列存储系统*</block>
+  <block id="027a98b335c07e30bf607b1f1bca9a1f" category="list-text">适用于您的协议的《SANtricity 存储管理器Windows配置和配置快速指南》</block>
+  <block id="1dd312da5024844045e50a58abaf9db6" category="list-text">适用于您的操作系统、协议和SANtricity 版本的《SANtricity 存储管理器配置和配置快速指南》。</block>
+  <block id="353be7c67f0bea9221f8808465816d0c" category="list-text">适用于您的SANtricity 版本的《SANtricity 存储管理器软件安装参考》。</block>
+  <block id="adacfb21d59059a5b9d11b1957fbacb1" category="list-text">适用于您的SANtricity 版本的《SANtricity 存储管理器多路径驱动程序指南》。</block>
+  <block id="eb6dfbdfc2c6cfdacfb27a9630c40334" category="list-text">适用于您的SANtricity 版本的《SANtricity 存储管理器发行说明》。</block>
+  <block id="5f93f381aa8df330451fa5b834f54def" category="inline-link-macro">E 系列文档</block>
+  <block id="476ffa3f7602d624a09df7aa5753ffef" category="paragraph">转至 <block ref="9baa7224a8255cea231b31bb3cb8d26c" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
+  <block id="2c0074fce84282581b2b52e56eacf78e" category="sidebar">安装LUhu 7.1</block>
 </blocks>
