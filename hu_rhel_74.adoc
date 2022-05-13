@@ -276,4 +276,4 @@ RHEL 7.4 没有已知问题。
 
 === ASM 镜像
 
-ASM 镜像可能需要更改 Linux 多路径设置，以使 ASM 能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。
+ASM镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。
