@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_veritas_7x.html 
-keywords: host utilities, veritas, infoscale, 7, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
+permalink: hu_veritas_8x.html 
+keywords: host utilities, veritas, infoscale, 8, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
 summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置设置的指导 
 ---
-= 将适用于 Linux 的 Veritas Infoscale 7 与 NetApp ONTAP 结合使用
+= 将适用于Linux的Veritas Infoscale 8与NetApp ONTAP 结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -22,7 +22,7 @@ summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置
 
 == 简介
 
-本文档将为采用 FC ， FCoE 和 iSCSI 协议的 Red Hat Enterprise Linux 和 Oracle Linux （基于 RHCK ）平台的 Veritas Infoscale 存储基础 7 系列版本提供有关 ONTAP SAN 主机配置设置的指导。
+本文档提供了有关采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于RHCK)平台的Veritas Infoscale存储基础8系列版本的ONTAP SAN主机配置设置的指导。
 
 
 
@@ -119,7 +119,7 @@ sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
 # vxdmpadm list dmpnode dmpnodename=sfrac0_47 | grep asl
 asl        = libvxnetapp.so
 # vxddladm listversion |grep libvxnetapp.so
-libvxnetapp.so              vm-7.4-rev-1    6.1
+libvxnetapp.so                  vm-8.0.0-rev-1   8.0
 
 # rpm -qa |grep VRTSaslapm
 VRTSaslapm-x.x.x.0000-RHEL8.X86_64
@@ -154,7 +154,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 
 
-=== Non-ASA 配置
+== Non-ASA 配置
 
 对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
 
