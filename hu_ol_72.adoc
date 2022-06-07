@@ -247,9 +247,6 @@ NOTE: 要配置 Oracle Linux 7.2 RedHat Enterprise Kernel （ RHCK ），请使�
 Oracle Linux 7.2 没有已知问题。
 
 
-NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_72.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 7.2 。
-
-
 
 == 发行说明
 

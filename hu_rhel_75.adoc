@@ -271,6 +271,9 @@ devices {
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
+| 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 | 不适用 
+
+
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1139053["1139053"^] | 在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL7.5 发生内核中断 | 在使用 QLogic QLE2672 16 Gb 光纤通道主机总线适配器对 RHEL7U5 内核执行存储故障转移操作期间，内核发生崩溃。内核崩溃导致 RHEL 7.5 重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/directory 下生成 vmcore 文件。vmcore 文件用于了解故障的发生原因。在这种情况下，在 vmcore 文件中使用以下字符串记录的 "get_next_timer_interruption+440" 模块中观察到崩溃： " 【异常 RIP ： get_next_timer_interruption+440] 】发生内核中断后，您可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1542564["1542564"^] 
 
 

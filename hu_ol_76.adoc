@@ -234,6 +234,9 @@ NOTE: 要配置 Oracle Linux 7.6 RedHat Enterprise Kernel （ RHCK ），请使�
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
+| 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 | 不适用 
+
+
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1202736["1202736"^] | 由于使用 QLogic QLE2742 适配器的 OL7U6 主机上的远程端口处于 " 不存在 " 状态，因此 LUN 在主机发现期间可能不可用 | 在主机发现期间，使用 QLogic QLE2742 适配器的 OL7U6 主机上的光纤通道（ Fibre Channel ， FC ）远程端口的状态可能会进入 " 不存在 " 状态。处于 " 不存在 " 状态的远程端口可能会使 LUN 的发生原因路径不可用。在存储故障转移期间，路径冗余可能会减少并导致 I/O 中断。您可以输入以下命令来检查远程端口状态： # cat /sys/class/fc_remote_ports/rport-*/port_state 以下是显示的输出示例：联机不存在联机 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=16613["16613"^] 
 
 
@@ -251,9 +254,6 @@ NOTE: 要配置 Oracle Linux 7.6 RedHat Enterprise Kernel （ RHCK ），请使�
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | 存储故障转移操作期间， QLogic QLE2672 16G 主机上的远程端口状态被阻止 | 在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=16853["16853"^] 
 |===
-
-NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_76.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 7.6 。
-
 
 
 == 发行说明

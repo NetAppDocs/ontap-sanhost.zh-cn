@@ -264,7 +264,7 @@ devices {
 
 == 已知问题和限制
 
-有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_72.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 7.2 。
+CentOS 7.2没有已知问题。
 
 
 
