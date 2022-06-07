@@ -277,35 +277,27 @@
     </div>
   </div>
   <div class="n-property-bar__toolbar">
-    <!-- Start Language Selector --><div id="ie-i18n" class="n-property-bar__lang-selector">
-      <div id="ie-i18n-menu">
-      <span class="ie-i18n-lang">简体中文</span>
-        <button class="ie-i18n-icon-container" type="button">
+    <!-- Start Language Selector --><div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+      <div class="custom-dropdown-select custom-dropdown-select-lang">
+      <span class="lang-name">简体中文</span>
           <svg class="n-globe__icon" aria-labelledby="title">
             <title>globe</title>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/ontap-sanhost/common/svg/sprite.svg#globe"></use>
           </svg>
         </button>
       </div>
-      <div id="n-property-navigation-bar__menu--language-selector" class="ie-i18n-results-container n-menu n-menu--v3 n-menu--is-active" style="display: none;">
-        <div class="n-language-selector-menu">
-          <ul class="n-menu__list">
-            <li class="n-menu__list-column">
-              <ul class="n-menu__list"><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/us-en/ontap-sanhost/hu_ol_76.html" class="n-menu__header-text"><span translate="no" class="notranslate">English</span></a>
-                </li><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/ja-jp/ontap-sanhost/hu_ol_76.html" class="n-menu__header-text"><span translate="no" class="notranslate">日本語</span></a>
-                </li><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/ko-kr/ontap-sanhost/hu_ol_76.html" class="n-menu__header-text"><span translate="no" class="notranslate">한국어</span></a>
-                </li><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/zh-cn/ontap-sanhost/hu_ol_76.html" class="n-menu__header-text"><span translate="no" class="notranslate">简体中文</span></a>
-                </li><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/zh-tw/ontap-sanhost/hu_ol_76.html" class="n-menu__header-text"><span translate="no" class="notranslate">繁體中文</span></a>
-                </li></ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+
+      <ul class="custom-dropdown-menu"><li>
+          <a href="https://docs.netapp.com/zh-cn/ontap-sanhost/hu_ol_76.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/us-en/ontap-sanhost/hu_ol_76.html" target="_self"><span translate="no" class="notranslate">English</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ja-jp/ontap-sanhost/hu_ol_76.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-tw/ontap-sanhost/hu_ol_76.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ko-kr/ontap-sanhost/hu_ol_76.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
+        </li></ul>
     </div><!-- End Language Selector -->
 
     <div class="n-property-bar__cta"></div>
@@ -1414,7 +1406,7 @@
     $("#toggleContainerPdf").toggle('display');
     $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
   });
-</script><div class="sidebar-nav-container">
+</script><div class="sidebar-nav-container" id="mysidebardiv">
   <ul id="mysidebar" class="nav"><li class=" "><a class="na-navbar-padding" href="/zh-cn/ontap-sanhost/index.html">
         主页
       </a></li><li class="subfolders "><a href="#">
@@ -1803,7 +1795,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-05-13 18:23:13 +0000">05/13/2022</time>
+    <time datetime="2022-06-07 16:39:35 +0000">06/07/2022</time>
     
   
 
@@ -2147,6 +2139,12 @@ devices {
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1440718</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 <a href="https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7" target="_blank" rel="noopener">"NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"</a>。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不适用</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&amp;Display=1202736" target="_blank" rel="noopener">"1202736"</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">由于使用 QLogic QLE2742 适配器的 OL7U6 主机上的远程端口处于 " 不存在 " 状态，因此 LUN 在主机发现期间可能不可用</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">在主机发现期间，使用 QLogic QLE2742 适配器的 OL7U6 主机上的光纤通道（ Fibre Channel ， FC ）远程端口的状态可能会进入 " 不存在 " 状态。处于 " 不存在 " 状态的远程端口可能会使 LUN 的发生原因路径不可用。在存储故障转移期间，路径冗余可能会减少并导致 I/O 中断。您可以输入以下命令来检查远程端口状态： # cat /sys/class/fc_remote_ports/rport-*/port_state 以下是显示的输出示例：联机不存在联机</p></td>
@@ -2184,18 +2182,6 @@ devices {
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/ontap-sanhost/images/note.svg" alt="注">
-</td>
-<td class="content">
-有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <a href="hu_rhel_76.html#known-problems-and-limitations">"已知问题"</a> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.6 。
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -2355,4 +2341,5 @@ devices {
     </script>
     <script src='/zh-cn/ontap-sanhost/js/www-ntap.js'></script>
     <script src='/zh-cn/ontap-sanhost/js/tabbed-blocks.js'></script>
+    <script src='/zh-cn/ontap-sanhost/js/sidebar.js'></script>
   </body></html>
