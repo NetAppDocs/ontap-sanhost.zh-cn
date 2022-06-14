@@ -2373,4 +2373,42 @@
   <block id="3c0005e386c72a025042c9cd742e78cf" category="paragraph">CentOS 7.2没有已知问题。</block>
   <block id="4a77bd6ca1098e847cb75095287cdf8d" category="paragraph">CentOS 7.3没有已知问题。</block>
   <block id="ebc6dd08dd10ab545441a995fcd41e3f" category="paragraph">CentOS 7.1没有已知问题。</block>
+  <block id="4391e4a69364ebb845d6562846716af4" category="doc">《AIX Host Utilities 6.1发行说明》</block>
+  <block id="81bca837c40611da67f18f391bb32923" category="paragraph">本发行说明文档包含有关AIX Host Utilities 6.1版的最新信息、包括有关已知问题、限制以及配置和管理ONTAP 存储系统的更新。</block>
+  <block id="ebdfd2288177a34c60438efc134f52c4" category="paragraph">当有关使用AIX Host Utilities的新信息可用时、发行说明文档将进行更新。</block>
+  <block id="cfbc0c9386472f86132990683d16796f" category="section-title">关于AIX Host Utilities 6.1版</block>
+  <block id="f418c08cd071f42a28a07d007dd30c34" category="paragraph">您可以使用AIX Host Utilities将AIX主机连接到NetApp存储。AIX Host Utilities支持多种环境以及FC、FCoE和iSCSI协议。支持的环境包括AIX MPIO (原生 OS)和PowerVM。</block>
+  <block id="66c2d1ced882bffc99d6170e17a232ef" category="paragraph">有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 <block ref="7ce73c7ae176dd6b577d1c14b445f0cd" category="inline-link-macro-rx"></block>。</block>
+  <block id="3f26b03249bcf33b72a6e9f71d4c4282" category="paragraph">有关PowerVM功能的详细信息、请参见IBM PowerVM实时分区移动红皮书。</block>
+  <block id="7388ad4cb5a7feb6810701b52e7fcead" category="paragraph">Host Utilities软件打包为一个压缩文件。您可以从NetApp支持站点下载经过压缩的文件和文档。ONTAP SAN主机配置提供了有关安装和设置主机实用程序以使用您的环境和协议的说明。</block>
+  <block id="96fc0af94642a00891e1f664446fd1e7" category="admonition">您必须为集群模式Data ONTAP 部署中的所有FC和FCoE启动程序启用动态跟踪。</block>
+  <block id="156a1e571b521a8e82a746701d96aeca" category="section-title">AIX Host Utilities 6.1增强功能</block>
+  <block id="40289338bc754c0009f5e9a173f6e09a" category="list-text">AIX Host Utilities 6.1增加了对早期版本的AIX主机操作系统中发生的内存故障问题描述 的支持。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。MPIO和相关ODM保持不变。</block>
+  <block id="1d453c5c717af73a82e2d6b6cedf1fce" category="section-title">固定问题描述</block>
+  <block id="31e6a451d2627922bc41740af153d931" category="cell">BugID</block>
+  <block id="ce88cf74aded8b7f41efd83d007f21f2" category="inline-link-macro">872113</block>
+  <block id="91100cceb259d6da4a14b08359cc3eb8" category="cell"><block ref="91100cceb259d6da4a14b08359cc3eb8" category="inline-link-macro-rx"></block></block>
+  <block id="3a2f9996a60f471edd9edae7099e1d69" category="cell">在发生原因 某些版本的AIX主机操作系统上、`sanlun lun show–p`命令可能会出现内存故障</block>
+  <block id="74aed4fe3d0a3c89158ce037c3d1305f" category="cell">运行`sanlun lun show -p`命令时报告了AIX核心转储的间歇实例。Sanlun的`lun show -p`选项可为主机上发现的所有LUN提供多路径信息。它会对这些信息进行排列、以显示哪个SCSI设备来自哪个LUN、路径状态(主设备或二级设备)以及其他详细信息。但是、在某些运行`sanlun lun show -p`命令的AIX主机发生原因 上、可能会出现内存故障。只有在使用`-p`选项运行sanlun命令时、才会出现此问题描述。</block>
+  <block id="18dfadbcd8c4c8fb9d50fac0fb3aeb16" category="paragraph">要高效使用Host Utilities、您应注意、性能可能会受到特定功能的已知问题(例如网络)或Host Utilities不支持的功能(例如特定版本的操作系统)的影响。</block>
+  <block id="b066ca6122c9857ad1ee3a44f18cc5e7" category="cell">错误 ID</block>
+  <block id="31a061fd71807c34f31d154d95c10691" category="inline-link-macro">1069147</block>
+  <block id="e8c18173fb06e0c2666a1fd7a0fbe17b" category="cell"><block ref="e8c18173fb06e0c2666a1fd7a0fbe17b" category="inline-link-macro-rx"></block></block>
+  <block id="cad62af5cd7e448be659302e1eba73b4" category="cell">AIX HU Sanlun报告的HBA速度不正确</block>
+  <block id="64c42781be8a2208b9ffdc60d28bc076" category="cell">运行`sanlun fcp show adapter–v`命令时、报告sanlun显示不正确的HBA速度的实例。`sanlun fcp show adapter–v`命令可显示HBA卡信息、例如适配器支持的速度和协商的速度。这似乎只是一个报告问题描述。要确定实际速度、请使用`fcstat fcsx`命令。</block>
+  <block id="f83b431a86f1d264a4fc51c9a667a1ee" category="paragraph"><block ref="2f247b6bc715dd3b3f556a7c1dea26c9" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。您可能需要使用的一些关键字组合和错误类型包括：</block>
+  <block id="31dade612c24301b89dad4a9747ed73e" category="list-text">FCP常规：显示与特定主机无关的FC和HBA错误。</block>
+  <block id="09244b95824d6e702b6eaab2034bdeec" category="list-text">FCP—AIX</block>
+  <block id="bba7946c172f683f15783fc909c9d5cf" category="paragraph">有关SAN Host Utilities的文档、请参见 <block ref="257925f1258b094e61a79b35ac8d3a5c" category="inline-link-macro-rx"></block> 文档。ONTAP SAN主机配置文档是累积的、涵盖所有当前的SAN主机版本。各个版本之间的任何功能差异都会在上下文中注明。</block>
+  <block id="50f66ded0854572ca8ed0f243a0ec38c" category="list-text">。 <block ref="206633049dac20bcc789824bc56ff330" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="e01ab2a4280a36b99ef1be4dac2123ef" category="inline-link-macro">《ONTAP SAN管理指南》</block>
+  <block id="ec263c216b2591d09b1b18cac1d6d689" category="list-text">。 <block ref="7aab157b9ae6c78afbd7e0b3cade79f0" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="012e2372f667cb2ee5fbb880bb6b907f" category="list-text">。 <block ref="70e6266524a3fa8cf76b1611cdf89cf0" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
+  <block id="1c2375a9f8b4b3c327caa1bfc9cb07c2" category="list-text"><block ref="1c2375a9f8b4b3c327caa1bfc9cb07c2" category="inline-link-macro-rx"></block></block>
+  <block id="4d0377323e0534441af71e05c931ef5c" category="list-text"><block ref="6ec228dfe84ccdb5f038627d2fe43701" category="inline-link-macro-rx"></block> (以前称为《系统配置指南》)</block>
+  <block id="b90eb3e688d069ada30157d4030b66f5" category="inline-link-macro">支持的光纤通道SAN拓扑</block>
+  <block id="a1976a5397f63f5caa13a0e86733d543" category="list-text"><block ref="a1976a5397f63f5caa13a0e86733d543" category="inline-link-macro-rx"></block></block>
+  <block id="c0965c2d259d63a3e2cbab60c837eaaa" category="inline-link-macro">为主机配置Host Utilities</block>
+  <block id="903a5a2a39aaeff84744ed68f14407d4" category="list-text"><block ref="903a5a2a39aaeff84744ed68f14407d4" category="inline-link-macro-rx"></block></block>
+  <block id="2ee1fba4400a50245e66ef649b54d588" category="sidebar">安装AIX HU 6.1</block>
 </blocks>
