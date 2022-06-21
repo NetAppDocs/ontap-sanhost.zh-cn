@@ -2411,4 +2411,10 @@
   <block id="c0965c2d259d63a3e2cbab60c837eaaa" category="inline-link-macro">为主机配置Host Utilities</block>
   <block id="903a5a2a39aaeff84744ed68f14407d4" category="list-text"><block ref="903a5a2a39aaeff84744ed68f14407d4" category="inline-link-macro-rx"></block></block>
   <block id="2ee1fba4400a50245e66ef649b54d588" category="sidebar">安装AIX HU 6.1</block>
+  <block id="b767aaa513fc8b09074940ccea06b212" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.6</block>
+  <block id="0202939493cea9d89d8217a646a65b54" category="doc">将Red Hat Enterprise Linux 8.6与NetApp ONTAP 结合使用</block>
+  <block id="be200813e91d3b0e3285391fd2e20825" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.6、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。RHEL 8.6使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
+  <block id="98d83a607473e5d6dab1096f6758273a" category="paragraph">RHEL 8.6操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
+  <block id="18b8e1deb73eabf9425b04753d2b006d" category="paragraph">RHEL 8.6没有已知问题。</block>
+  <block id="9b402891c0d38b9c654dcfa36df9d722" category="sidebar">8.6.</block>
 </blocks>
