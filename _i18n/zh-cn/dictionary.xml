@@ -1566,7 +1566,6 @@
   <block id="0abc977b99b5f67c94ba5221df34ff03" category="admonition">要配置 Oracle Linux 7.8 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="f258b7d81a3180e673755835c6a903ac" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.8 。</block>
   <block id="33fb3916b5bbccadc7502b97d2b47e0a" category="summary">介绍如何将 Citrix XenServer 7.x 与 ONTAP 结合使用</block>
   <block id="9873f1b83211d16cf532c7bbb3c830b9" category="doc">将 Citrix XenServer 与 NetApp ONTAP 结合使用</block>
-  <block id="c2c2558eb447d94ed557cacb48863870" category="paragraph">本文档提供了有关使用 FC ， FCoE 和 iSCSI 协议的 Citrix XenServer 7 系列操作系统版本的 ONTAP SAN 主机配置设置的指导。</block>
   <block id="a51e3210f96458fa393e6f4bf88caabc" category="paragraph">Citrix XenServer 中的多路径支持基于设备映射程序多路径组件。不会自动为呈现给 XenServer 的所有 LUN 创建设备映射器节点，并且只有在存储管理层（ API ）正在使用 LUN 时才会配置设备映射器节点。Citrix XenServer Storage Manager API 插件可自动激活和停用多路径节点。</block>
   <block id="614673c0b1eeb91e8ffc86cde6faa93b" category="paragraph">由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix XenServer 的标准供应商文档。</block>
   <block id="9fc86c956b59ea355d470ac30580447a" category="paragraph">Citrix XenServer 7.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix XenServer 7.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
@@ -2417,4 +2416,7 @@
   <block id="98d83a607473e5d6dab1096f6758273a" category="paragraph">RHEL 8.6操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="18b8e1deb73eabf9425b04753d2b006d" category="paragraph">RHEL 8.6没有已知问题。</block>
   <block id="9b402891c0d38b9c654dcfa36df9d722" category="sidebar">8.6.</block>
+  <block id="cebcd1a5ff2049be4533aaf6b185029d" category="summary">《AIX Host Utilities 6.1发行说明》</block>
+  <block id="b46a43d1dd4c2f14b94228f8a8b1e193" category="paragraph">本文档提供了有关使用FC、FCoE和iSCSI协议的Citrix XenServer 7系列操作系统版本的ONTAP SAN主机配置设置的指导。</block>
+  <block id="c03432d938277a67cb7c8ce5d783b2ca" category="paragraph">以下示例显示了具有所有四个主动/优化路径的ONTAP LUN的正确输出：</block>
 </blocks>

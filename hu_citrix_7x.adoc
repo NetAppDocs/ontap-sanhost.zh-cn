@@ -22,7 +22,7 @@ summary: 介绍如何将 Citrix XenServer 7.x 与 ONTAP 结合使用
 
 == 简介
 
-本文档提供了有关使用 FC ， FCoE 和 iSCSI 协议的 Citrix XenServer 7 系列操作系统版本的 ONTAP SAN 主机配置设置的指导。
+本文档提供了有关使用FC、FCoE和iSCSI协议的Citrix XenServer 7系列操作系统版本的ONTAP SAN主机配置设置的指导。
 
 
 
@@ -70,11 +70,35 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
 | |- 12:0:5:0  sdn   8:208   active ready running
 | |- 2:0:6:0   sdg   8:96    active ready running
 | `- 12:0:0:0  sdi   8:128   active ready running
-`-+-`policy='service-time 0' prio=10 status=enabled
+|-+- policy='service-time 0' prio=10 status=enabled
   |- 2:0:0:0   sda   8:0     active ready running
   |- 2:0:1:0   sdb   8:16    active ready running
   |- 12:0:3:0  sd1   8:176   active ready running
   `-12:0:6:0   sdo   8:224   active ready running
+[root@sanhost ~]#
+----
+
+NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。
+
+
+
+=== 全 SAN 阵列配置
+
+在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
+
+以下示例显示了具有所有四个主动/优化路径的ONTAP LUN的正确输出：
+
+[listing]
+----
+# mpathutil status
+show topology
+3600a098038303458772450714535317a dm-0 NETAPP  , LUN C-Mode
+size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 2:0:2:0   sdc   8:32    active ready running
+| |- 12:0:5:0  sdn   8:208   active ready running
+| |- 2:0:6:0   sdg   8:96    active ready running
+| `- 12:0:0:0  sdi   8:128   active ready running
 [root@sanhost ~]#
 ----
 
