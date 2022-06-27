@@ -17,6 +17,8 @@ sidebar:
       entries:
       - title: 安装AIX HU 6.1
         url: "/hu_aix_61.html"
+      - title: 发行说明
+        url: "/hu_aix_61_rn.html"
     - title: HPUX Host Utilities
       url: "/hu_hpux_60.html"
     - title: Linux Unified Host Utilities
