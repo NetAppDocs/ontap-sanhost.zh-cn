@@ -2426,4 +2426,9 @@
   <block id="805a476dee7a3e2c96d744778fabadf2" category="admonition">要配置Oracle Linux 8.6 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="db48836fc998d5e9210c21f83870f464" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.6。</block>
   <block id="eb39e2dacde05fafa987d04a67eb15ff" category="paragraph">Oracle Linux 8.6没有已知问题。</block>
   <block id="5ebe49302359fb6e4d762fdceb288864" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="10ee08d1b3d909bc389f3b317276174b" category="inline-link-macro-rx"></block> 一节。</block>
+  <block id="c0555368ec9919ce9b1c9712c00dbb76" category="section-title">SM-BC支持AIX</block>
+  <block id="a87c560166b76536072b61a847b883d2" category="paragraph">从ONTAP 9.11.1开始、SM-BC支持AIX。在AIX配置中、主集群是"活动"集群。</block>
+  <block id="244c37afdc307098d90d497c08f88069" category="paragraph">在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。</block>
+  <block id="ba865279c8bb1f9a639935e3cb2406b0" category="inline-link-macro">如何为SnapMirror业务连续性(SM-BC)配置AIX主机</block>
+  <block id="ce41c78a17a5925101abf561eb152ad3" category="paragraph">要配置适用于SM-BC的AIX、请参阅知识库文章 <block ref="bfd553e439e8f0adcfe76e0cf010b4a4" category="inline-link-macro-rx"></block>。</block>
 </blocks>
