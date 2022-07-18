@@ -258,11 +258,13 @@
           <div id="react-search" 
           data-search-html="/zh-cn/ontap-sanhost/search.html"
           data-type="widget" 
-          data-placeholder="搜索文档" 
-          data-no-results-found="未找到与 {query} 匹配的结果。" 
-          data-did-you-mean="搜索 {suggestion}。" 
-          data-no-results-found-did-you-mean="未找到与 {query} 匹配的结果。您是否要搜索 {suggestion}?" 
-          data-results-found="找到 {hitCount} 个结果"  
+          data-placeholder="搜索文档"
+          data-no-results-found="未找到与 {query} 匹配的结果。"
+          data-did-you-mean="搜索 {suggestion}。"
+          data-no-results-found-did-you-mean="未找到与 {query} 匹配的结果。您是否要搜索 {suggestion}?"
+          data-results-found="找到 {hitCount} 个结果"
+          data-error-message="We're sorry, an issue occurred when fetching your results. Please try again."
+          data-error-reset="Reset Search"
           data-sk-es-pf-indexes=""
           data-flavor=""></div>
           <button class="n-property-bar__search-toggle-button" type="button">
@@ -1763,7 +1765,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-05-03 10:27:40 +0000">05/03/2022</time>
+    <time datetime="2022-07-18 13:31:21 +0000">07/18/2022</time>
     
   
 
@@ -1779,6 +1781,7 @@
 <li><a href="#多路径">多路径</a></li>
 <li><a href="#建议设置">建议设置</a></li>
 <li><a href="#metrocluster-的建议设置">MetroCluster 的建议设置</a></li>
+<li><a href="#sm-bc支持aix">SM-BC支持AIX</a></li>
 <li><a href="#已知问题和限制">已知问题和限制</a></li>
 </ul>
 </div>
@@ -2074,6 +2077,20 @@ up     primary  path3  fcs1    fc_aix_4     1</pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 <a href="https://kb.netapp.com/app/answers/answer_view/a_id/1001318" target="_blank" rel="noopener">"NetApp KB1001318"</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sm-bc支持aix">SM-BC支持AIX</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>从ONTAP 9.11.1开始、SM-BC支持AIX。在AIX配置中、主集群是"活动"集群。</p>
+</div>
+<div class="paragraph">
+<p>在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。</p>
+</div>
+<div class="paragraph">
+<p>要配置适用于SM-BC的AIX、请参阅知识库文章 <a href="https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)" target="_blank" rel="noopener">"如何为SnapMirror业务连续性(SM-BC)配置AIX主机"</a>。</p>
 </div>
 </div>
 </div>
