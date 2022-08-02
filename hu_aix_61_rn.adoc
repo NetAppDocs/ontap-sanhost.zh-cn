@@ -36,7 +36,7 @@ summary: 《AIX Host Utilities 6.1发行说明》
 有关PowerVM功能的详细信息、请参见IBM PowerVM实时分区移动红皮书。
 
 ====
-Host Utilities软件打包为一个压缩文件。您可以从NetApp支持站点下载经过压缩的文件和文档。ONTAP SAN主机配置提供了有关安装和设置主机实用程序以使用您的环境和协议的说明。
+Host Utilities软件打包为一个压缩文件。您可以从下载压缩文件和文档 link:link:https://mysupport.netapp.com/site/["NetApp 支持站点"^]。ONTAP SAN主机配置提供了有关安装和设置主机实用程序以使用您的环境和协议的说明。
 
 
 NOTE: 您必须为集群模式Data ONTAP 部署中的所有FC和FCoE启动程序启用动态跟踪。
@@ -57,7 +57,7 @@ NOTE: 您必须为集群模式Data ONTAP 部署中的所有FC和FCoE启动程序
 | BugID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/872113["872113"] | 在发生原因 某些版本的AIX主机操作系统上、`sanlun lun show–p`命令可能会出现内存故障 | 运行`sanlun lun show -p`命令时报告了AIX核心转储的间歇实例。Sanlun的`lun show -p`选项可为主机上发现的所有LUN提供多路径信息。它会对这些信息进行排列、以显示哪个SCSI设备来自哪个LUN、路径状态(主设备或二级设备)以及其他详细信息。但是、在某些运行`sanlun lun show -p`命令的AIX主机发生原因 上、可能会出现内存故障。只有在使用`-p`选项运行sanlun命令时、才会出现此问题描述。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/872113["872113"^] | 在发生原因 某些版本的AIX主机操作系统上、`sanlun lun show–p`命令可能会出现内存故障 | 运行`sanlun lun show -p`命令时报告了AIX核心转储的间歇实例。Sanlun的`lun show -p`选项可为主机上发现的所有LUN提供多路径信息。它会对这些信息进行排列、以显示哪个SCSI设备来自哪个LUN、路径状态(主设备或二级设备)以及其他详细信息。但是、在某些运行`sanlun lun show -p`命令的AIX主机发生原因 上、可能会出现内存故障。只有在使用`-p`选项运行sanlun命令时、才会出现此问题描述。 
 |===
 
 
@@ -70,7 +70,7 @@ NOTE: 您必须为集群模式Data ONTAP 部署中的所有FC和FCoE启动程序
 | 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1069147["1069147"] | AIX HU Sanlun报告的HBA速度不正确 | 运行`sanlun fcp show adapter–v`命令时、报告sanlun显示不正确的HBA速度的实例。`sanlun fcp show adapter–v`命令可显示HBA卡信息、例如适配器支持的速度和协商的速度。这似乎只是一个报告问题描述。要确定实际速度、请使用`fcstat fcsx`命令。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1069147["1069147"^] | AIX HU Sanlun报告的HBA速度不正确 | 运行`sanlun fcp show adapter–v`命令时、报告sanlun显示不正确的HBA速度的实例。`sanlun fcp show adapter–v`命令可显示HBA卡信息、例如适配器支持的速度和协商的速度。这似乎只是一个报告问题描述。要确定实际速度、请使用`fcstat fcsx`命令。 
 |===
 link:https://mysupport.netapp.com/site/["NetApp Bug Online"] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。您可能需要使用的一些关键字组合和错误类型包括：
 
@@ -92,11 +92,11 @@ link:https://mysupport.netapp.com/site/["NetApp Bug Online"] 提供有关大多�
 
 *配置和管理ONTAP 存储系统*
 
-* 。 link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["《ONTAP 软件设置指南》"] 适用于您的ONTAP 版本
-* 。 link:https://docs.netapp.com/us-en/ontap/san-management/index.html["《ONTAP SAN管理指南》"] 适用于您的ONTAP 版本
-* 。 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["《 ONTAP 发行说明》"] 适用于您的ONTAP 版本
-* link:https://mysupport.netapp.com/site/["NetApp 互操作性表"]
-* link:https://hwu.netapp.com/["Hardware Universe"] (以前称为《系统配置指南》)
-* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["支持的光纤通道SAN拓扑"]
-* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["为主机配置Host Utilities"]
+* 。 link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["《ONTAP 软件设置指南》"^] 适用于您的ONTAP 版本
+* 。 link:https://docs.netapp.com/us-en/ontap/san-management/index.html["《ONTAP SAN管理指南》"^] 适用于您的ONTAP 版本
+* 。 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["《 ONTAP 发行说明》"^] 适用于您的ONTAP 版本
+* link:https://imt.netapp.com/matrix/#welcome["NetApp 互操作性表"^]
+* link:https://hwu.netapp.com/["Hardware Universe"^] (以前称为《系统配置指南》)
+* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["支持的光纤通道SAN拓扑"^]
+* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["为主机配置Host Utilities"^]
 

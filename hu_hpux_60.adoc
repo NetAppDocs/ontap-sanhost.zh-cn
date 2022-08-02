@@ -4,7 +4,7 @@ permalink: hu_hpux_60.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用 
 ---
-= HPUX Host Utilities 6.0
+= HP-UX Host Utilities 6.0
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -28,7 +28,7 @@ summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用
 
 == SAN 工具包
 
-HPUX Host Utilities 是一款 NetApp 主机软件，可在 HPUX 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
+HP-UX Host Utilities是一款NetApp主机软件、可在HP-UX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
 
@@ -50,9 +50,9 @@ NOTE: 此工具包在 Host Utilities 的所有配置和协议中通用。因此�
 
 
 
-== 安装 HPUX Host Utilities
+== 安装HP-UX Host Utilities
 
-可从上获取 NetApp HPUX Host Utilities 软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 在压缩文件中。
+上提供了NetApp HP-UX Host Utilities软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 在压缩文件中。
 
 您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^]。下载文件后，必须在安装之前对其进行解压缩。
 

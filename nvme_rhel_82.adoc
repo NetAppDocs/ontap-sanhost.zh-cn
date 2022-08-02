@@ -106,7 +106,7 @@ Vserver      Subsystem        Host           NQN
 . 重新启动主机。
 . 更新 `enable_Foreign` Setting _ （ optional ） _ 。
 +
-如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您应在 dm-multipath 中将 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。
+如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。
 
 +
 [listing]

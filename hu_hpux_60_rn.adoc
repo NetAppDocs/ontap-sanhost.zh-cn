@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: hu_hpux_60_rn.html 
+keywords: host utilities, hpux, 6.0, netapp, ontap, release, notes 
+summary: 《HPUX Host Utilities 6.0发行说明》 
+---
+= 《HP-UX Host Utilities 6.0发行说明》
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+本发行说明文档提供了有关HP-UX Host Utilities 6.0版本的最新信息、其中包括有关已知问题、限制以及配置和管理ONTAP 存储系统的更新。当有关使用HP-UX Host Utilities的新信息可用时、发行说明文档将进行更新。
+
+
+
+== 关于HP-UX Host Utilities 6.0版本
+
+HP-UX Host Utilities支持多个HP-UX环境和多个协议。HP-UX Host Utilities支持以下环境：
+
+* 原生 MPIO
+* Veritas动态多路径(DMP)
+
+
+
+NOTE: 为了立即明确所使用的环境、本文档有时会为Veritas DMP环境指定"DMP"、为HP-UX原生 环境指定"MPIO"。在某些情况下、您使用的命令可能会因所使用的驱动程序而异。在这些情况下、系统会同时指定环境和驱动程序类型。
+
+
+
+== HP-UX Host Utilities 6.0增强功能
+
+随着新信息的提供、发行说明会在不同产品版本之间进行更新。HP-UX Host Utilities 6.0仍支持以下版本：
+
+* HP-UX 11iv2.
+* HP-UX 11iv3.
+
+
+
+
+== 已知问题和限制
+
+HP-UX 6.0版本没有已知问题。
+
+
+
+== 关于SAN主机配置文档
+
+有关SAN Host Utilities的文档、请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["ONTAP SAN主机配置文档。"] ONTAP SAN主机配置文档是累积的、其中涵盖了所有当前的SAN主机版本。各个版本之间的任何功能差异都会在上下文中注明。
+
+
+
+== 从何处查找产品文档和其他信息
+
+您可以访问所有NetApp产品的文档、并在NetApp公司站点的产品文档页面上查找其他产品信息资源、例如技术报告和白皮书。
+
+*配置和管理ONTAP 存储系统*
+
+* 。 link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["适用于您的ONTAP 版本的ONTAP 软件设置指南"^]
+* 。 link:https://docs.netapp.com/us-en/ontap/san-management/index.html["适用于您的ONTAP 版本的ONTAP SAN管理指南"^]
+* 。 link:https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["适用于您的ONTAP 版本的ONTAP 发行说明"^]
+* link:https://imt.netapp.com/matrix/#welcome["NetApp 互操作性表"^]
+* link:https://hwu.netapp.com/["Hardware Universe"^] (以前称为《系统配置指南》)
+* link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["支持的光纤通道SAN拓扑"]
+* link:https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61343["为主机配置Host Utilities"^]
+
