@@ -528,10 +528,16 @@ Cmpl 00000000000000a8 Outstanding 0000000000000001
 
 
 
-| `在` nvme discover `、`nvme connect`或`nvme connect-all``期间、没有要提取的发现日志条目 | 如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统、或者在相应子系统中添加了不正确的hostnqn字符串、则通常会显示此错误消息。 | 确保已将确切的`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中(通过`vserver nvme子系统主机show`进行验证)。 
+| `在` nvme discover `、`nvme connect`或`nvme connect-all``期间、没有要提取的发现日志条目  a| 
+如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统、或者在相应子系统中添加了不正确的`hostnqn`字符串、则通常会显示此错误消息。
+ a| 
+确保已将确切的`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中(通过`vserver nvme子系统主机show`进行验证)。
 
 
-| `无法写入/dev/nve-Fabric：操作已在进行中`在`NVMe发现`、`NVMe连接`或`NVMe连接全部`期间 | 如果控制器关联或指定操作已创建或正在创建、则会显示此错误消息。在上述自动连接脚本中可能会发生这种情况。 | 无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`以验证是否已在主机上创建并显示命名空间设备。 
+
+| `无法写入/dev/nve-Fabric：操作已在进行中`在`NVMe发现`、`NVMe连接`或`NVMe连接全部`期间 | 如果控制器关联或指定操作已创建或正在创建、则会显示此错误消息。在上述自动连接脚本中可能会发生这种情况。  a| 
+无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`以验证是否已在主机上创建并显示命名空间设备。
+
 |===
 
 

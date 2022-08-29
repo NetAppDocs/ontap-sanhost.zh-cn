@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_rhel_86.html 
+permalink: nvme_rhel_85.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 如何使用ONTAP 为RHEL 8.6配置NVMe-oF主机 
+summary: 如何使用ONTAP 为RHEL 8.5配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP 的RHEL 8.6的NVMe-oF主机配置
+= 适用于采用ONTAP 的RHEL 8.5的NVMe-oF主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -23,21 +23,21 @@ summary: 如何使用ONTAP 为RHEL 8.6配置NVMe-oF主机
 
 == 可支持性
 
-采用ANA (非对称命名空间访问)的RHEL 8.6支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在RHEL 8.6和ONTAP 上使用ANA作为目标的内核NVMe多路径中启用NVMe-oF的详细信息。
+采用ANA (非对称命名空间访问)的RHEL 8.5支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在RHEL 8.5和ONTAP 上使用ANA作为目标的内核NVMe多路径中启用NVMe-oF的详细信息。
 
 
 
 == 功能
 
-* 除了NVMe/FC之外、RHEL 8.6还支持NVMe/TCP (作为技术预览功能)。原生 NVMe-CLI软件包中的NetApp插件能够显示NVMe/FC和NVMe/TCP命名空间的ONTAP 详细信息。
+* 除了NVMe/FC之外、RHEL 8.5还支持NVMe/TCP (作为技术预览功能)。原生 NVMe-CLI软件包中的NetApp插件可以显示NVMe/FC和NVMe/TCP命名空间的ONTAP 详细信息。
 
 
 
 
 == 已知限制
 
-* 对于RHEL 8.6、默认情况下、内核NVMe多路径保持禁用状态。因此，您需要手动启用它。
-* 由于出现未解决的问题、RHEL 8.6上的NVMe/TCP仍是一项技术预览功能。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.6_release_notes/index#technology-preview_file-systems-and-storage["RHEL 8.6发行说明"^] 了解详细信息。
+* 对于RHEL 8.5、默认情况下、内核NVMe多路径保持禁用状态。因此，您需要手动启用它。
+* 由于出现未解决的问题、RHEL 8.5上的NVMe/TCP仍是一项技术预览功能。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.5_release_notes/index#technology-preview_file-systems-and-storage["RHEL 8.5发行说明"^] 了解详细信息。
 
 
 
@@ -50,8 +50,7 @@ summary: 如何使用ONTAP 为RHEL 8.6配置NVMe-oF主机
 
 == 启用内核 NVMe 多路径
 
-. 在服务器上安装RHEL 8.6。安装完成后、验证您是否正在运行指定的RHEL 8.6内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
-. 安装完成后、验证您是否正在运行指定的RHEL 8.6内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 在服务器上安装RHEL 8.5 GA。安装完成后、验证您是否正在运行指定的RHEL 8.5 GA内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
 +
 示例
 
@@ -59,7 +58,7 @@ summary: 如何使用ONTAP 为RHEL 8.6配置NVMe-oF主机
 [listing]
 ----
 # uname -r
-4.18.0-372.9.1.el8.x86_64
+4.18.0-348.el8.x86_64
 ----
 . 安装 `NVMe-CLI` 软件包：
 +
@@ -69,13 +68,13 @@ summary: 如何使用ONTAP 为RHEL 8.6配置NVMe-oF主机
 [listing]
 ----
 # rpm -qa|grep nvme-cli
-nvme-cli-1.16-3.el8.x86_64
+nvme-cli-1.14-3.el8.x86_64
 ----
 . 启用内核 NVMe 多路径。
 +
 [listing]
 ----
-# grubby --args=nvme_core.multipath=Y --update-kernel /boot/vmlinuz-4.18.0-372.9.1.el8.x86_64
+# grubby --args=nvme_core.multipath=Y --update-kernel /boot/vmlinuz-4.18.0-348.el8.x86_64
 ----
 . 在主机上，检查 ` /etc/nve/hostnqn` 处的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。示例
 +
@@ -138,7 +137,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 12.8.351.47, sli-4:2:c
 12.8.351.47, sli-4:2:c
 # cat /sys/module/lpfc/version
-0:14.0.0.4
+0:12.8.0.10
 ----
 . 验证`lpfc_enable_FC4_type`是否设置为3
 +
@@ -154,10 +153,13 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 # cat /sys/class/fc_host/host*/port_name
 0x100000109b1c1204
 0x100000109b1c1205
+
 # cat /sys/class/fc_host/host*/port_state
 Online
 Online
+
 # cat /sys/class/scsi_host/host*/nvme_info
+
 NVME Initiator Enabled
 XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
 NVME LPORT lpfc0 WWPN x100000109b1c1204 WWNN x200000109b1c1204 DID x011d00 ONLINE
@@ -216,15 +218,15 @@ options lpfc lpfc_sg_seg_cnt=256
 
 === Marvell/QLogic
 
-RHEL 8.6内核中包含的原生 收件箱`qla2xxx`驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
+RHEL 8.5 GA内核中包含的原生 收件箱`qla2xxx`驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
 
 . 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----
 # cat /sys/class/fc_host/host*/symbolic_name
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
+QLE2742 FW:v9.06.02 DVR:v10.02.00.106-k
+QLE2742 FW:v9.06.02 DVR:v10.02.00.106-k
 ----
 . 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：
 +
@@ -245,7 +247,7 @@ QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
 * * 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。
 
 
-要轻松地承受ONTAP 故障转移事件(例如SFO)、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。详细信息如下：
+要轻松地承受 ONTAP 故障转移事件（例如 SFO ），建议通过调整 `Ctrl_los_tm` timer 来设置较长的重试时间，例如 30 分钟。详细信息如下：
 
 . 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
 +
@@ -294,7 +296,7 @@ sectype: none
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
 ----
-. 对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在连接期间使用较长的 `Ctrl_los_TMOT` 时间段（例如 30 分钟，可通过 ` -l 1800` 进行设置），以便在发生路径丢失时重试较长时间。例如：
+. 对节点上所有受支持的NVMe/TCP启动程序-target LIF运行`nvme connect-all`命令。请确保在连接期间使用较长的`Ctrl_los_TMOT`时间段(例如30分钟、可通过`-l 1800`进行设置)、以便在路径丢失时重试较长时间。例如：
 +
 [listing]
 ----
@@ -316,7 +318,7 @@ sectype: none
 # cat /sys/module/nvme_core/parameters/multipath
 Y
 ----
-. 验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、`model` set to `NetApp ONTAP Controller` and load balancing `OPolicy` set to `round-robin`)是否正确反映在主机上：
+. 验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如， `model` set to `NetApp ONTAP Controller` and `load balancing OPolicy` set to `round-robin` ）是否正确反映在主机上：
 +
 [listing]
 ----
@@ -335,7 +337,7 @@ round-robin
 # nvme list
 Node           SN                    Model                   Namespace
 ------------   --------------------- ---------------------------------
-/dev/nvme0n1   814vWBNRwf9HAAAAAAAB   NetApp ONTAP Controller   1
+/dev/nvme0n1    814vWBNRwf9HAAAAAAAB  NetApp ONTAP Controller   1
 
 Usage                Format         FW Rev
 -------------------  -----------    --------
@@ -345,8 +347,8 @@ Usage                Format         FW Rev
 +
 [listing, subs="+quotes"]
 ----
-# nvme list-subsys /dev/nvme1n1
-nvme-subsys1 - nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:subsystem.nvme_141_1
+# nvme list-subsys /dev/nvme0n1
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e00a098df41bd:subsystem.nvme_141_1
 \
 +- nvme0 fc traddr=nn-0x203700a098dfdd91:pn-0x203800a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 *live inaccessible*
 +- nvme1 fc traddr=nn-0x203700a098dfdd91:pn-0x203900a098dfdd91 host_traddr=nn-0x200000109b1c1204:pn-0x100000109b1c1204 *live inaccessible*
@@ -360,7 +362,7 @@ nvme-subsys1 - nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.5f5f2c4aa73b11e9967e
 # nvme netapp ontapdevices -o column
 Device       Vserver          Namespace Path
 ---------    -------          --------------------------------------------------
-/dev/nvme0n1 vs_fcnvme_141    /vol/fcnvme_141_vol_1_1_0/fcnvme_141_ns
+/dev/nvme0n1 vs_fcnvme_141  vol/fcnvme_141_vol_1_1_0/fcnvme_141_ns
 
 NSID  UUID                                   Size
 ----  ------------------------------         ------

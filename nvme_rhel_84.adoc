@@ -143,7 +143,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 # cat /sys/module/lpfc/version
 0:12.8.0.5
 ----
-. 验证 lpfc_enable_FC4_type 是否设置为 3 。
+. 验证`lpfc_enable_FC4_type`是否设置为3
 +
 [listing]
 ----
@@ -315,7 +315,7 @@ sectype: none
 # cat /sys/module/nvme_core/parameters/multipath
 Y
 ----
-. 验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如， `model` set to `NetApp ONTAP Controller` and `load balancing OPolicy` set to `round-robin` ）是否正确反映在主机上：
+. 验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、`model` set to `NetApp ONTAP Controller` and load balancing `OPolicy` set to `round-robin`)是否正确反映在主机上：
 +
 [listing]
 ----
@@ -539,17 +539,25 @@ NVME RPORT WWPN x200900a098c80f09 WWNN x200800a098c80f09 DID x010301 TARGET DISC
 NVME Statistics
 LS: Xmt 0000000000000006 Cmpl 0000000000000006
 FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
-Cmpl 00000000000000a8 Outstanding 0000000000000001`
+Cmpl 00000000000000a8 Outstanding 0000000000000001
 ----
 * 如果目标 LIF 未在 nve_info 输出中显示为上述内容，请检查 ` /var/log/messages` 和 `dMesg` 输出中是否存在任何可疑的 NVMe/FC 故障，并相应地进行报告或修复。
 
 
 
 
-| `没有要提取的发现日志条目` | 通常，如果未将 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统，或者在相应子系统中添加了不正确的 hostnqn 字符串，则会出现此情况。 | 确保已将确切的 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统中（通过 `vserver nvme subsystem host show` 命令进行验证）。 
+| `没有要提取的发现日志条目`  a| 
+通常、如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中、或者在相应子系统中添加了不正确的`hostnqn`字符串、则会显示此信息。
+ a| 
+确保已将确切的 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统中（通过 `vserver nvme subsystem host show` 命令进行验证）。
 
 
-| `无法写入 /dev/nve-Fabric ：操作已在进行中` | 查看控制器关联或指定操作是否已创建或正在创建。在上述自动连接脚本中可能会发生这种情况。 | 无对于 NVMe 发现，请尝试在一段时间后运行此命令。对于 NVMe connect and connect-all ，请运行 `nvme list` 命令以验证是否已在主机上创建并显示命名空间设备。 
+
+| `无法写入 /dev/nve-Fabric ：操作已在进行中`  a| 
+查看控制器关联或指定操作是否已创建或正在创建。在上述自动连接脚本中可能会发生这种情况。
+ a| 
+无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。
+
 |===
 
 
