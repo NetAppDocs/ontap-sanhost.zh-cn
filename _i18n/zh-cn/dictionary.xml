@@ -2561,4 +2561,11 @@
   <block id="431b68e6f738b5c8bf76d7972d17685f" category="paragraph">通常、如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中、或者在相应子系统中添加了不正确的`hostnqn`字符串、则会显示此信息。</block>
   <block id="d9062f55beecc22ab1e0baaa195b1f68" category="paragraph">无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。</block>
   <block id="9b2d197e1555229882f18589d7c32cce" category="list-text">验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、`model` set to `NetApp ONTAP Controller` and load balancing `OPolicy` set to `round-robin`)是否正确反映在主机上：</block>
+  <block id="6cbc9fed5483c62cf8d3ec78d1467ec4" category="list-text">从7.0U3c及更高版本开始、ESXi虚拟机管理程序支持NVMe/TCP功能。</block>
+  <block id="cc2bd6356672cd21ca706ee5860d746e" category="list-text">从ONTAP 9.10.1及更高版本开始、ONTAP 支持NVMe/TCP功能。</block>
+  <block id="fc42d5b62a406fecb7a634ca014f42c2" category="paragraph">从7.0U3c开始、默认情况下会加载所需的NVMe/TCP模块。有关配置网络和NVMe/TCP适配器的信息、请参见VMware vSphere文档。</block>
+  <block id="209ae9abdc2efd05e90e3a97a8913a9b" category="section-title">验证NVMe/TCP</block>
+  <block id="e4dbb8bc2f2492f010d3f33dd68f00c8" category="list-text">验证NVMe/TCP适配器的状态。</block>
+  <block id="d4babb87959d757516a4f480642224cf" category="list-text">要列出NVMe/TCP连接、请使用以下命令：</block>
+  <block id="75d2257ae841105f67aa7e6940b3fccb" category="list-text">要列出NVMe命名空间的路径数、请使用以下命令：</block>
 </blocks>
