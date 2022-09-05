@@ -2568,4 +2568,14 @@
   <block id="e4dbb8bc2f2492f010d3f33dd68f00c8" category="list-text">验证NVMe/TCP适配器的状态。</block>
   <block id="d4babb87959d757516a4f480642224cf" category="list-text">要列出NVMe/TCP连接、请使用以下命令：</block>
   <block id="75d2257ae841105f67aa7e6940b3fccb" category="list-text">要列出NVMe命名空间的路径数、请使用以下命令：</block>
+  <block id="d1672d22493ff360a1f07bc1cfac7524" category="doc">将SUSE Linux Enterprise Server 15 SP4与NetApp ONTAP 结合使用</block>
+  <block id="aaf285a33d84d021ddb3cf7d93395617" category="paragraph">对于SUSE Linux Enterprise Server 15 SP4、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP4是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
+  <block id="3dfda629d29a9eff997fc21c726b36da" category="paragraph">对SUSE Linux Enterprise Server 15 SP4操作系统进行了编译、以识别ONTAP LUN并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
+  <block id="bdb5443c5dd9643367f9496b5fb35d08" category="paragraph">要启动多路径守护进程、必须存在`multipath.conf`文件、但您可以使用以下命令创建一个空的零字节文件：`touch /etc/multipath.conf`</block>
+  <block id="a96d8f77801154cf5d51080e06fa3215" category="paragraph">将`&lt;DevID&gt;`替换为要排除的设备的`WWID`字符串。使用以下命令确定`WWID`：</block>
+  <block id="9d29c9f01ddee621ba147e8ccc4bc7b0" category="list-text">运行以下命令以确定`WWID`：</block>
+  <block id="e97b2c87e2a473e6975fd85e7af8bc02" category="list-text">将此`WWID`添加到`/etc/multipath.conf`中的黑名单stanza中：</block>
+  <block id="588664bdfe3aca23316ad7f26a08e2a5" category="paragraph">下表显示了ONTAP LUN的关键多路径参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
+  <block id="e1f518829ea0b48c92b1926c70a84380" category="paragraph">对于SUSE Linux Enterprise Server 15 SP4、没有已知问题。</block>
+  <block id="cf79be42f6c9a2f2225f202bfec080c2" category="sidebar">15 SP4</block>
 </blocks>
