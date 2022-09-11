@@ -1,0 +1,602 @@
+---
+sidebar: sidebar 
+permalink: nvme_sles15_sp4.html 
+keywords: nvme, linux, suse, sles, 15, sp4, server, enterprise 
+summary: 介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVMe/FC 
+---
+= 适用于采用ONTAP 的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:source-highlighter: highlighter.js
+:toc-position: content
+
+
+
+
+== 可支持性
+
+采用ANA (非对称命名空间访问)的SUSE Linux Enterprise Server 15 SP4 (SLES15 SP4)支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处详细介绍了如何在SLES15 SP4和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
+
+
+
+== 功能
+
+* SLES15 SP4支持NVMe/FC和其他传输。
+* 不支持`sanlun` nve-oF。因此、在SLES15 SP4上、不支持对NVMe-oF使用任何Lu支持。您可以改用原生 `NVMe-CLI`中包含的NetApp插件。此操作应适用于所有 NVMe-oF 传输。
+* NVMe 和 SCSI 流量均可在同一主机上运行。实际上、这应该是通常部署的主机配置。因此、对于SCSI、您可以像往常一样为SCSI LUN配置`dm-multipath`、从而生成mpath设备、而NVMe多路径则可用于在主机上配置NVMe-of多路径设备。
+
+
+
+
+== 已知限制
+
+没有已知限制。
+
+
+
+== 配置要求
+
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
+
+
+
+== 启用内核 NVMe 多路径
+
+默认情况下、内核NVMe多路径已在SLES15 SP4等SLES主机上启用。因此，此处不需要其他设置。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
+
+
+
+== NVMe-oF 启动程序包
+
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
+
+* 确认SLES15 SP4 MU主机上安装了所需的内核和`NVMe-CLI`维护更新(维护更新)(MU)软件包。
++
+示例
+
++
+[listing]
+----
+# uname -r
+5.14.21-150400.24.11-default
+----
++
+[listing]
+----
+# rpm -qa|grep nvme-cli
+nvme-cli-2.0-150400.1.6.x86_64
+----
++
+上述 NVMe-CLI MU 软件包现在包括以下内容：
+
++
+** * NVMe/FC 自动连接脚本 * —在还原命名空间的底层路径以及主机重新启动期间， NVMe/FC 自动（重新）连接所需的脚本：
++
+[listing]
+----
+# rpm -ql nvme-cli-1.13-3.3.1.x86_64
+     /etc/nvme
+     /etc/nvme/discovery.conf
+     /etc/nvme/hostid
+     /etc/nvme/hostnqn
+     /usr/lib/systemd/system/nvmefc-boot-connections.service
+     /usr/lib/systemd/system/nvmf-autoconnect.service
+     /usr/lib/systemd/system/nvmf-connect.target
+...
+----
+** * NVMe udev rule* - 用于确保适用场景多路径循环负载平衡器默认 ONTAP 所有 ONTAP 命名空间的新 udev 规则：
++
+[listing]
+----
+# rpm -ql nvme-cli-1.13-3.3.1.x86_64
+/etc/nvme
+/etc/nvme/discovery.conf
+/etc/nvme/hostid
+/etc/nvme/hostnqn
+/usr/lib/systemd/system/nvmefc-boot-connections.service
+/usr/lib/systemd/system/nvmf-autoconnect.service
+/usr/lib/systemd/system/nvmf-connect.target
+/usr/lib/systemd/system/nvmf-connect@.service
+/usr/lib/udev/rules.d/70-nvmf-autoconnect.rules
+/usr/lib/udev/rules.d/71-nvmf-iopolicy-netapp.rules
+...
+# cat /usr/lib/udev/rules.d/71-nvmf-iopolicy-netapp.rules
+# Enable round-robin for NetApp ONTAP and NetApp E-Series
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{model}=="NetApp E-Series", ATTR{iopolicy}="round-robin"
+----
+** * 适用于 ONTAP 设备的 NetApp 插件 * —现有的 NetApp 插件现已进行修改，以处理 ONTAP 命名空间。
+
+
+* 检查主机上`/etc/nve/hostnqn`处的`hostnqn`字符串、并确保其与ONTAP 阵列上相应子系统的`hostnqn`字符串正确匹配。例如：
++
+[listing]
+----
+# cat /etc/nvme/hostnqn
+nqn.2014-08.org.nvmexpress:uuid:60c23e12-15f4-11e5-a5ca-98be942448b2
+::> vserver nvme subsystem host show -vserver vs_fcnvme_145
+Vserver     Subsystem      Host NQN
+-------     ---------      ----------------------------------
+vs_nvme_145 nvme_145_1 nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
+            nvme_145_2 nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
+            nvme_145_3 nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
+            nvme_145_4 nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
+            nvme_145_5 nqn.2014-08.org.nvmexpress:uuid:c7b07b16-a22e-41a6-a1fd-cf8262c8713f
+5 entries were displayed.
+----
+
+
+根据主机上使用的FC适配器、继续执行以下步骤。
+
+
+
+== 配置 NVMe/FC
+
+
+
+=== Broadcom/Emulex
+
+.步骤
+. 验证您是否具有建议的适配器和固件版本。例如：
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/modelname
+LPe32002-M2
+LPe32002-M2
+# cat /sys/class/scsi_host/host*/modeldesc
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
+# cat /sys/class/scsi_host/host*/fwrev
+14.0.505.11, sli-4:2:c
+14.0.505.11, sli-4:2:c
+----
++
+较新的lpfc驱动程序(收件箱和发件箱)已将`lpfc_enable_FC4_type` default设置为3、因此、您不再需要在`/etc/modprobe.d/lpfc.conf`中明确设置此设置、并重新创建`initrd`。默认情况下，已启用 `lpfc NVMe` 支持：
+
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+3
+----
++
+现有的原生收件箱 lpfc 驱动程序已经是最新版本，并且与 NVMe/FC 兼容。因此、您无需安装lpfc即装即用(OOB)驱动程序。
+
++
+[listing]
+----
+# cat /sys/module/lpfc/version
+        0:14.2.0.4
+----
+. 验证启动程序端口是否已启动且正在运行。
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/port_name
+0x100000109b579d5e
+0x100000109b579d5f
+# cat /sys/class/fc_host/host*/port_state
+Online
+Online
+----
+. 确认 NVMe/FC 启动程序端口已启用，并且您能够看到目标端口，并且所有端口均已启动且正在运行。在此示例中、仅启用了一个启动程序端口、并与两个目标LIF进行连接、如输出所示：
++
+[listing]
+----
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x10000090fac7fe48 WWNN x20000090fac7fe48 DID x022700 ONLINE
+NVME RPORT       WWPN x209dd039ea16c28f WWNN x209cd039ea16c28f DID x020f0e TARGET DISCSRVC ONLINE
+
+NVME Statistics
+LS: Xmt 00000003e2 Cmpl 00000003e2 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 00000000000f36cd Issue 00000000000f36ce OutIO 0000000000000001
+        abort 00000000 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 000000bc Err 000001d8
+
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x10000090fac7fe49 WWNN x20000090fac7fe49 DID x022d00 ONLINE
+NVME RPORT       WWPN x20a0d039ea16c28f WWNN x209cd039ea16c28f DID x02010f TARGET DISCSRVC ONLINE
+NVME RPORT       WWPN x209ed039ea16c28f WWNN x209cd039ea16c28f DID x020d0f TARGET DISCSRVC ONLINE
+
+NVME Statistics
+LS: Xmt 000000056a Cmpl 000000056a Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000000010af3e Issue 000000000010af40 OutIO 0000000000000002
+        abort 00000000 noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00000102 Err 0000028e
+3
+----
+. 重新启动主机。
+
+
+
+
+=== 启用 1 MB I/O 大小（可选）
+
+ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是，对于 Broadcom NVMe/FC 主机 1 MB 大小的问题描述 I/O 请求， lpfc 参数 `lpfc_sg_seg_cnt` 也应从默认值 64 增加到 256 。请按照以下说明执行此操作：
+
+.步骤
+. 在相应的 `modprobe lpfc.conf` 文件中附加值 256 ：
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行dracut -f命令、然后重新启动主机。
+. 重新启动后，通过检查相应的 sysfs 值来验证是否已应用上述设置：
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+现在， Broadcom NVMe/FC 主机应该能够在 ONTAP 命名空间设备上最多发送 1 MB 的 I/O 请求。
+
+
+
+=== Marvell/QLogic
+
+较新的SLES15 SP4 MU内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
+
+.步骤
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本，例如：
++
+[listing]
+----
+# cat /sys/class/fc_host/host*/symbolic_name
+QLE2742 FW:v9.08.02 DVR:v10.02.07.800-k
+QLE2742 FW:v9.08.02 DVR:v10.02.07.800-k
+----
+. 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够用作 NVMe/FC 启动程序：
++
+[listing]
+----
+# cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+1
+----
+
+
+
+
+== 配置 NVMe/TCP
+
+与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
+
+* 路径恢复后无自动重新连接NVMe/TCP无法自动重新连接到路径关闭后10分钟的默认`Ctrl-los-tm`计时器之后恢复的路径。
+* 主机启动期间无自动连接NVMe/TCP也无法在主机启动期间自动连接。
+
+
+要轻松地承受存储故障转移(Storage Failover、SFO)等ONTAP 故障转移事件、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。详细信息如下：
+
+.步骤
+. 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
++
+[listing]
+----
+# nvme discover -t tcp -w 192.168.1.8 -a 192.168.1.51
+Discovery Log Number of Records 10, Generation counter 119
+=====Discovery Log Entry 0======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 0
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_1
+traddr: 192.168.2.56
+sectype: none
+=====Discovery Log Entry 1======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 1
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_1
+traddr: 192.168.1.51
+sectype: none
+=====Discovery Log Entry 2======
+trtype: tcp
+adrfam: ipv4
+subtype: nvme subsystem
+treq: not specified
+portid: 0
+trsvcid: 4420
+subnqn: nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:subsystem.nvme_118_tcp_2
+traddr: 192.168.2.56
+sectype: none
+...
+----
+. 验证其他 NVMe/TCP 启动程序 - 目标 LIF 组合是否能够成功提取发现日志页面数据。例如：
++
+[listing]
+----
+# nvme discover -t tcp -w 192.168.1.8 -a 192.168.1.52
+# nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
+# nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
+----
+. 对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在`connect-all`期间使用较长的`Ctrl_los_TMOT`时间段(例如30分钟、可通过-l 1800进行设置)、以便在发生路径丢失时重试较长时间。例如：
++
+[listing]
+----
+# nvme connect-all -t tcp -w 192.168.1.8 -a 192.168.1.51 -l 1800
+# nvme connect-all -t tcp -w 192.168.1.8 -a 192.168.1.52 -l 1800
+# nvme connect-all -t tcp -w 192.168.2.9 -a 192.168.2.56 -l 1800
+# nvme connect-all -t tcp -w 192.168.2.9 -a 192.168.2.57 -l 1800
+----
+
+
+
+
+== 验证 NVMe-oF
+
+.步骤
+. 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：
++
+[listing]
+----
+# cat /sys/module/nvme_core/parameters/multipath
+Y
+----
+. 验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、将型号设置为NetApp ONTAP 控制器并将负载平衡程序设置为轮循)是否正确反映在主机上：
++
+[listing]
+----
+# cat /sys/class/nvme-subsystem/nvme-subsys*/model
+NetApp ONTAP Controller
+
+# cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+round-robin
+----
+. 验证 ONTAP 命名空间是否正确反映在主机上。例如：
++
+[listing]
+----
+# nvme list
+Node           SN                    Model                   Namespace
+------------   --------------------- ---------------------------------
+/dev/nvme0n1   81CZ5BQuUNfGAAAAAAAB  NetApp ONTAP Controller   1
+
+Usage                Format         FW Rev
+-------------------  -----------    --------
+85.90 GB / 85.90 GB  4 KiB + 0 B    FFFFFFFF
+----
++
+示例(A)：
+
++
+[listing]
+----
+# nvme list
+Node           SN                    Model                   Namespace
+------------   --------------------- ---------------------------------
+/dev/nvme0n1   81CYrBQuTHQFAAAAAAAC  NetApp ONTAP Controller   1
+
+Usage                Format         FW Rev
+-------------------  -----------    --------
+85.90 GB / 85.90 GB  4 KiB + 0 B    FFFFFFFF
+----
+. 验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。例如：
++
+[listing]
+----
+# nvme list-subsys /dev/nvme1n1
+nvme-subsys1 - NQN=nqn.1992-08.com.netapp:sn.04ba0732530911ea8e8300a098dfdd91:subsystem.nvme_145_1
+\
++- nvme2 fc traddr=nn-0x208100a098dfdd91:pn-0x208200a098dfdd91 host_traddr=nn-0x200000109b579d5f:pn-0x100000109b579d5f live non-optimized
++- nvme3 fc traddr=nn-0x208100a098dfdd91:pn-0x208500a098dfdd91 host_traddr=nn-0x200000109b579d5e:pn-0x100000109b579d5e live non-optimized
++- nvme4 fc traddr=nn-0x208100a098dfdd91:pn-0x208400a098dfdd91 host_traddr=nn-0x200000109b579d5e:pn-0x100000109b579d5e live optimized
++- nvme6 fc traddr=nn-0x208100a098dfdd91:pn-0x208300a098dfdd91 host_traddr=nn-0x200000109b579d5f:pn-0x100000109b579d5f live optimized
+----
++
+示例(A)：
+
++
+[listing]
+----
+#nvme list-subsys /dev/nvme0n1
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.37ba7d9cbfba11eba35dd039ea165514:subsystem.nvme_114_tcp_1
+\
++- nvme0 tcp traddr=192.168.2.36 trsvcid=4420 host_traddr=192.168.1.4 live optimized
++- nvme1 tcp traddr=192.168.1.31 trsvcid=4420 host_traddr=192.168.1.4 live optimized
++- nvme10 tcp traddr=192.168.2.37 trsvcid=4420 host_traddr=192.168.1.4 live non-optimized
++- nvme11 tcp traddr=192.168.1.32 trsvcid=4420 host_traddr=192.168.1.4 live non-optimized
++- nvme20 tcp traddr=192.168.2.36 trsvcid=4420 host_traddr=192.168.2.5 live optimized
++- nvme21 tcp traddr=192.168.1.31 trsvcid=4420 host_traddr=192.168.2.5 live optimized
++- nvme30 tcp traddr=192.168.2.37 trsvcid=4420 host_traddr=192.168.2.5 live non-optimized
++- nvme31 tcp traddr=192.168.1.32 trsvcid=4420 host_traddr=192.168.2.5 live non-optimized
+----
+. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如：
++
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device       Vserver          Namespace Path
+---------    -------          --------------------------------------------------
+/dev/nvme1n1 vserver_fcnvme_145 /vol/fcnvme_145_vol_1_0_0/fcnvme_145_ns
+
+NSID  UUID                                   Size
+----  ------------------------------         ------
+1      23766b68-e261-444e-b378-2e84dbe0e5e1  85.90GB
+
+
+# nvme netapp ontapdevices -o json
+{
+"ONTAPdevices" : [
+     {
+       "Device" : "/dev/nvme1n1",
+       "Vserver" : "vserver_fcnvme_145",
+       "Namespace_Path" : "/vol/fcnvme_145_vol_1_0_0/fcnvme_145_ns",
+       "NSID" : 1,
+       "UUID" : "23766b68-e261-444e-b378-2e84dbe0e5e1",
+       "Size" : "85.90GB",
+       "LBA_Data_Size" : 4096,
+       "Namespace_Size" : 20971520
+     }
+  ]
+}
+----
++
+示例(A)：
+
++
+[listing]
+----
+# nvme netapp ontapdevices -o column
+Device       Vserver          Namespace Path
+---------    -------          --------------------------------------------------
+/dev/nvme0n1 vs_tcp_114       /vol/tcpnvme_114_1_0_1/tcpnvme_114_ns
+
+NSID  UUID                                   Size
+----  ------------------------------         ------
+1      a6aee036-e12f-4b07-8e79-4d38a9165686  85.90GB
+----
+
+
+[listing]
+----
+# nvme netapp ontapdevices -o json
+{
+     "ONTAPdevices" : [
+     {
+          "Device" : "/dev/nvme0n1",
+           "Vserver" : "vs_tcp_114",
+          "Namespace_Path" : "/vol/tcpnvme_114_1_0_1/tcpnvme_114_ns",
+          "NSID" : 1,
+          "UUID" : "a6aee036-e12f-4b07-8e79-4d38a9165686",
+          "Size" : "85.90GB",
+          "LBA_Data_Size" : 4096,
+          "Namespace_Size" : 20971520
+       }
+  ]
+
+}
+----
+
+
+== 故障排除
+
+
+
+=== lpfc 详细日志记录
+
+. 您可以将 lpfc_log_verbose 驱动程序设置为以下任意值以记录 NVMe/FC 事件。
++
+[listing]
+----
+#define LOG_NVME 0x00100000 /* NVME general events. */
+#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
+#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
+#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
+----
+. 设置上述任一值后，运行 `dracut-f` 并重新启动主机。
+. 重新启动后，验证设置。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_log_verbose=0xf00083
+
+# cat /sys/module/lpfc/parameters/lpfc_log_verbose
+15728771
+----
+
+
+
+
+=== qla2xxx 详细日志记录
+
+NVMe/FC 没有与 lpfc 驱动程序类似的特定 qla2xxx 日志记录。因此，您可以使用以下步骤设置常规 qla2xxx 日志记录级别：
+
+. 将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。
+. 运行 `dracut -f` 命令重新创建 `initramfs` ，然后重新启动主机。
+. 重新启动后，验证是否已按如下所示应用详细日志记录：
++
+[listing]
+----
+# cat /etc/modprobe.d/qla2xxx.conf
+options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
+# cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
+507510784
+----
+
+
+
+
+=== 常见 NVMe-CLI 错误和解决方法
+
+下表显示了在 NVMe 发现， NVMe 连接或 NVMe 连接所有操作期间 `NVMe-CLI` 显示的错误以及解决方法：
+
+[cols="20, 20, 50"]
+|===
+| `NVMe-CLI` 显示的错误 | 可能的发生原因 | 临时解决策 
+
+
+| `无法写入 /dev/nve-Fabric ：参数` 无效 | 语法不正确 | 确保 NVMe 命令使用的语法正确。 
+
+
+| `无法写入 /dev/nve-Fabric ：没有此类文件或目录` | 多个问题可能会触发此问题。将错误的参数传递给 NVMe 命令是常见原因之一。  a| 
+* 确保已将正确的参数（例如正确的 WWNN 字符串， WWPN 字符串等）传递给命令。
+* 如果参数正确，但您仍看到此错误，请检查 ` /sys/class/scsi_host/host*/nve_info` 输出是否正确， NVMe 启动程序是否显示为 `Enabled` ， NVMe/FC 目标 LIF 是否正确显示在此处的远程端口部分下。示例
++
+[listing]
+----
+
+# cat /sys/class/scsi_host/host*/nvme_info
+NVME Initiator Enabled
+NVME LPORT lpfc0 WWPN x10000090fae0ec9d WWNN x20000090fae0ec9d DID x012000 ONLINE
+NVME RPORT WWPN x200b00a098c80f09 WWNN x200a00a098c80f09 DID x010601 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000000000006 Cmpl 0000000000000006
+FCP: Rd 0000000000000071 Wr 0000000000000005 IO 0000000000000031
+Cmpl 00000000000000a6 Outstanding 0000000000000001
+NVME Initiator Enabled
+NVME LPORT lpfc1 WWPN x10000090fae0ec9e WWNN x20000090fae0ec9e DID x012400 ONLINE
+NVME RPORT WWPN x200900a098c80f09 WWNN x200800a098c80f09 DID x010301 TARGET DISCSRVC ONLINE
+NVME Statistics
+LS: Xmt 0000000000000006 Cmpl 0000000000000006
+FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
+Cmpl 00000000000000a8 Outstanding 0000000000000001`
+----
+* 如果目标LIF未在`NVMe_info`输出中显示为上述内容、请检查`/var/log/messages`和`dMesg`输出中是否存在任何可疑的NVMe/FC故障、并相应地进行报告或修复。
+
+
+
+
+| `没有要提取的发现日志条目` | 通常，如果未将 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统，或者在相应子系统中添加了不正确的 hostnqn 字符串，则会出现此情况。 | 确保已将确切的 ` /etc/nve/hostnqn` 字符串添加到 NetApp 阵列上的相应子系统中（通过 `vserver nvme subsystem host show` 命令进行验证）。 
+
+
+| `无法写入 /dev/nve-Fabric ：操作已在进行中` | 查看控制器关联或指定操作是否已创建或正在创建。在上述自动连接脚本中可能会发生这种情况。 | 无对于 NVMe 发现，请尝试在一段时间后运行此命令。对于 NVMe connect and connect-all ，请运行 `nvme list` 命令以验证是否已在主机上创建并显示命名空间设备。 
+|===
+
+
+=== 何时联系技术支持
+
+如果您仍面临问题，请收集以下文件和命令输出，并联系技术支持以进行进一步的分类：
+
+[listing]
+----
+cat /sys/class/scsi_host/host*/nvme_info
+/var/log/messages
+dmesg
+nvme discover output as in:
+nvme discover --transport=fc --traddr=nn-0x200a00a098c80f09:pn-0x200b00a098c80f09 --host-traddr=nn-0x20000090fae0ec9d:pn-0x10000090fae0ec9d
+nvme list
+nvme list-subsys /dev/nvmeXnY
+----
