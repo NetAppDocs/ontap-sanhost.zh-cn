@@ -2671,4 +2671,43 @@
   <block id="b3b940fc372d8951896f13c236f63d70" category="sidebar">RHEL/6-FCP</block>
   <block id="c11de2cda31d67ed47c0182334a7ac91" category="sidebar">sle-15-fcp</block>
   <block id="2f7ca50ec80cb8bec6ae8dd04c29748c" category="sidebar">Windows-FCP</block>
+  <block id="752a324c176d2c493675458b92ddd613" category="summary">使用ONTAP 为Oracle Linux 8.6设置VME/FC主机配置、包括示例</block>
+  <block id="0dea8ccda08dc1647ed0a458849e5cda" category="doc">适用于采用ONTAP 的Oracle Linux 8.6的NVMe/FC主机配置</block>
+  <block id="56c808f331e6b3c9820175d57306e0f3" category="paragraph">适用于Oracle Linux 8.6的ONTAP 9.6或更高版本支持NVMe/FC。Oracle Linux 8.6主机可以通过相同的光纤通道(FC)启动程序适配器端口运行NVMe/FC和FCP流量。请参见 <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 。</block>
+  <block id="b6aacf330be58e59ae9c6e632264ada4" category="list-text">默认情况下、Oracle Linux 8.6为NVMe命名空间启用了内核NVMe多路径。</block>
+  <block id="632a014dfdbbcfe7be2f4a3299f8179f" category="list-text">在Oracle Linux 8.6中、原生 `NVMe-CLI`软件包中包含`nve-fc auto-connect`脚本。因此、您可能会依赖这些原生 自动连接脚本本身、而不必安装外部供应商提供的出箱自动连接脚本。</block>
+  <block id="c8313026557b779f395283c2ea9714a2" category="list-text">在Oracle Linux 8.6中、已在`NVMe-CLI`软件包中提供原生 `udev`规则、该软件包可为NVMe多路径启用轮循负载平衡。因此、您无需再手动创建此规则(如Oracle Linux 8.1中所做的那样)。</block>
+  <block id="8e8806fe2838afa9bf15e3dbbfece6ac" category="list-text">在Oracle Linux 8.6中、NVMe和SCSI流量均可在同一台共存的主机上运行。实际上、这应该是通常部署的主机配置。因此、对于SCSI、您可以像往常一样为SCSI LUN配置`dm-multipath`、从而生成mpath设备、而NVMe多路径则可用于在主机上配置NVMe-of多路径设备(即、`/dev/nvmeXnY`)。</block>
+  <block id="8ca36637dafccfba226982d60fc919af" category="list-text">在Oracle Linux 8.6中、原生 `NVMe-CLI`中的NetApp插件也能够显示ONTAP 命名空间的ONTAP 详细信息。</block>
+  <block id="32ad96e08f0745dafe749450924fe262" category="list-text">NVMe/TCP是一种技术预览功能、因此支持不会发布在互操作性表工具上。</block>
+  <block id="263a466cd0e85665ea1116eaa30f6d8f" category="list-text">要轻松应对ONTAP 故障转移事件、例如NVMe/TCP的存储故障转移(Storage Failover、SFO)、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。请参见以下详细信息。</block>
+  <block id="852276567efe7b56afec8ce96d0b81be" category="section-title">在Oracle Linux 8.6中启用NVMe/FC</block>
+  <block id="1e37ab7e798e668edd8a9933d40ebce8" category="list-text">在服务器上安装Oracle Linux 8.6 GA。安装完成后、验证您是否正在运行指定的Oracle Linux 8.6 GA内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
+  <block id="b3c9256bf72a3e95e62e3b27fb7a272c" category="list-text">在Oracle Linux 8.6主机上、检查`/etc/nve/hostnqn`处的`hostnqn`字符串、并验证它是否与ONTAP 阵列上对应子系统的`hostnqn`字符串匹配。</block>
+  <block id="c3f945c387081e13e35b50e7a9596c45" category="admonition">如果`hostnqn`字符串不匹配、则应使用`vserver modify`命令更新相应ONTAP 阵列子系统上的hostnqn字符串、以与主机上`/etc/nve/hostnqn`中的`hostnqn`字符串匹配。</block>
+  <block id="80c56c3864b926fe136ad892a00d18ae" category="paragraph">如果您要在同一台Oracle Linux 8.6共存的主机上同时运行NVMe和SCSI流量、建议分别对ONTAP 命名空间使用内核NVMe多路径和对ONTAP LUN使用`dm-multipath`。这也意味着ONTAP 命名空间应列入`dm-multipath`中、以防止`dm-multipath`声明这些命名空间设备。为此、可以将`enable_Foreign`设置添加到`/etc/multipath.conf`中：</block>
+  <block id="26723dffa61ae0f61d6a8cd44850bd2c" category="list-text">运行`systemctl restart multipathd`命令以使新设置生效、从而重新启动multipathd守护进程。</block>
+  <block id="04e72c0ba3af5aaae0fee06a8ca8d6ef" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 。</block>
+  <block id="cbfc68d368a87a077c1eef36f75da871" category="list-text">验证您是否正在使用建议的Broadcom `lpfc`固件和收件箱驱动程序。有关支持的适配器驱动程序和固件版本的最新列表、请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 。</block>
+  <block id="e42d2937239f99af3555e447c690bae4" category="section-title">启用1 MB I/O大小</block>
+  <block id="b28285499ae17175e806b94fc3cb4e9e" category="list-text">运行dracut -f命令、然后重新启动主机。</block>
+  <block id="4e607aa60f743cf23d102c38d262e0ce" category="section-title">为NVMe/FC配置Marvell/QLogic FC适配器</block>
+  <block id="8dfeb89cb3c09b7e1a84c8cb64942605" category="list-text">RHEL 8.6 GA内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="d089a5874400b4d27c5c75a27689a763" category="paragraph">要轻松地承受ONTAP 故障转移事件(例如SFO)、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。请参见以下详细信息。</block>
+  <block id="fa018ab34241962fb97609ee124f1513" category="list-text">同样、验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据。例如：</block>
+  <block id="1549872eccb230def9ed61fd6e643da1" category="list-text">现在、对节点上所有受支持的NVMe/TCP启动程序-目标LIF运行`nvme connect-all`命令。请确保在`connect-all`期间使用较长的`Ctrl_los_TMOT`时间段(例如、30分钟、可通过`-l 1800`设置)、以便在发生路径丢失时重试较长时间。例如：</block>
+  <block id="fcd0d6c9e19d4cbc025e05cfc23cdaf2" category="list-text">在Oracle Linux 8.6主机上验证以下NVMe/FC设置：</block>
+  <block id="1c90df85f9ac017905701f01a5b3788b" category="list-text">验证是否已在主机上创建并正确发现命名空间：</block>
+  <block id="2ff06b30bf2e564bdee443c4b385552e" category="paragraph">在对任何NVMe/FC故障开始任何故障排除之前、请始终确保运行的配置符合IMT 规范、然后继续执行以下步骤以调试任何主机端问题。</block>
+  <block id="7be9aa10f19f6b39286cbd2769f88cd5" category="section-title">lpfc详细日志记录</block>
+  <block id="433e600c7cc5c16a4c4ef2eafbfbeba1" category="paragraph">因此、您可以将`lpfc_log_verbose`驱动程序设置(附加到位于`/etc/modprobe.d/lpfc.conf`的lpfc行中)设置为上述任意值、以便从lpfc驱动程序的角度记录NVMe/FC事件。然后运行"dracut -f "重新创建initiramfs、然后重新启动主机。重新启动后、请使用上述`log_nve_disc` bitmask作为示例检查以下内容、以验证是否已应用详细日志记录：</block>
+  <block id="9c2f86beda575f2401b682f52ff52734" category="paragraph">下表显示了`NVMe-CLI`在`NVMe发现`、`NVMe连接`或`NVMe连接全部`操作期间显示的错误以及解决方法：</block>
+  <block id="03e777a5d13f745b3711328f199b68eb" category="cell">语法不正确。</block>
+  <block id="613c0357c7acc38fb1ef11262cea3be4" category="cell">多个问题可能会触发此问题。其中一些常见情形包括：您向上述NVMe命令传递了错误的参数。</block>
+  <block id="675759a03d5b6eaf83372c004fb00e5f" category="list-text">确保已为上述命令传递正确的参数本身(例如正确的WWNN字符串、WWPN字符串)。</block>
+  <block id="1ae0589eecd3f3226905a705c23041c9" category="list-text">如果参数正确、但仍显示此错误、请检查`/sys/class/scsi_host/host*/nve_info`输出是否正确、并在此处的远程端口部分下将NVMe启动程序显示为`Enabled`、同时适当显示NVMe/FC目标LIF。例如：</block>
+  <block id="9a852133465a9739a4e76a8c4c1b0003" category="list-text">如果目标LIF未在`NVMe_info`输出中显示为上述内容、请检查`/var/log/messages`和`dMesg`输出中是否存在任何可疑的NVMe/FC故障、并相应地报告/修复。</block>
+  <block id="36cef896471a12b0f41c40926a1d02dc" category="cell">如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统、则通常会显示此错误消息。或者、在相应子系统中添加的hostnqn字符串不正确。</block>
+  <block id="db0bd7baf16dc60d55f11a9b309bc749" category="cell">无对于`NVMe discover`、请尝试在一段时间后运行此命令。可能对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。</block>
+  <block id="9e9ad12d8f7b421ec7b07bcffb518755" category="paragraph">如果您仍面临问题、请收集以下文件和命令输出、并联系技术支持以进行进一步的分类：</block>
 </blocks>
