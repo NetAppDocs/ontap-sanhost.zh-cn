@@ -1087,14 +1087,7 @@
   <block id="2a1ab1135667d6dc77c69e8562aa36e0" category="paragraph">对于 CentOS 6.7 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.7 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="eb694d82bb8432a9005a1a1f219b1fa0" category="paragraph">系统会对 CentOS 6.7 操作系统进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="9d2a87ba78cec8237c139f77ffb44261" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="fd679b4991af24edfd6d66f5cbc5db76" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.7 。</block>
-  <block id="4a9d6f77a85370fcefc81c6198d55611" category="summary">SAN 主机文档</block>
   <block id="79e721357e358d77c4700c25c863fc37" category="doc">ONTAP SAN 主机配置</block>
-  <block id="e86a7e3bea38d2583e3a667f01b9c8c1" category="paragraph">此内容针对分发提供了有关如何为 NVMe ， iSCSI 和 FC 协议配置 ONTAP SAN 主机的指导。</block>
-  <block id="ff45216534e3f7d14efcedbac9ce3e18" category="paragraph">为了获得最佳性能并确保故障转移成功，请务必使用 ONTAP 存储正确配置 SAN 主机。这些文档介绍了如何快速设置最佳实践配置。</block>
-  <block id="47e46257d0b1fbf2e6359578f279e2e1" category="paragraph">对于 iSCSI 和 FC ，本文档将取代传统的 Linux Unified Host Utilities 指南。每个文档都特定于 Linux 的一个分发版和版本，因此您只能查看确切版本的信息。如果您的 Linux 版本尚未列出，请尽快查看。</block>
-  <block id="ab066b3292d8ab61ef3b5c77169cdd19" category="section-title">更多信息</block>
-  <block id="77e0defdbacbcd12c42e7a582cf75709" category="paragraph">您可以在以下文档中找到基于 SAN 的追加信息配置：</block>
-  <block id="891d3d61b8fac48b3a3480b3a2f6d3c9" category="inline-link-macro">《全 SAN 阵列软件配置指南》</block>
   <block id="a76193f5d9397d9c49ca283a20ccf649" category="inline-link-macro">《 SAN 管理指南》</block>
   <block id="8cb9ee34636093f5ba25008ebc7b7287" category="inline-link-macro">《 SAN 配置指南》</block>
   <block id="f75fbeea110530ab4a9306fd42a5e085" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 6.8</block>
@@ -1797,10 +1790,6 @@
   <block id="2abffb2205f281bc82ee25fbb0545967" category="paragraph">对于 CentOS 8.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 8.0 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="789946f446a9091348366818339bb5af" category="paragraph">CentOS 8.0 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件</block>
   <block id="16c8f9caff89a168a424e7f5ade0f822" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="13be8945161aaeca52d4e4a694080916" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.0 。</block>
-  <block id="8cf04a9734132302f96da8e113e80ce5" category="sidebar">主页</block>
-  <block id="7b77ca74daebfde9d9723cc5ef879cf8" category="sidebar">SAN Host Utilities</block>
-  <block id="a4d5754af636a6318ee2ffcd80c52e27" category="sidebar">Linux Unified Host Utilities</block>
-  <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
   <block id="1aa66ef3a8e34a7a538960a80d2e1e31" category="sidebar">ESXi</block>
   <block id="01deebfa87b938c89ecb3dcb4effcbe2" category="sidebar">7.0</block>
   <block id="fdcd362ac5f5f9817e70642dd2a48bfd" category="sidebar">Oracle Linux</block>
@@ -1816,7 +1805,6 @@
   <block id="ea6b2efbdd4255a9f1b3bbc6399b58f4" category="sidebar">2019 年</block>
   <block id="95192c98732387165bf8e396c0f2dad2" category="sidebar">2016 年</block>
   <block id="f997434446ca6b2fcbb19d33852187d3" category="sidebar">2012 R2</block>
-  <block id="16b27b38be3c36e579e929b4c20b9fbd" category="sidebar">FCP 和 iSCSI 主机配置</block>
   <block id="9be5573ac1f42b7e45f53ea9bcbacde3" category="sidebar">AIX 和 PowerVM/VIOS</block>
   <block id="f418ab5fac16133ff4e30e12dffff5f7" category="sidebar">7.2/3.1</block>
   <block id="7cd31cf6820896d838535a73cafb15ca" category="sidebar">7.1</block>
@@ -1980,7 +1968,6 @@
   <block id="a0eb26e72e628156638ad8b9cea45ac5" category="list-text">通过检查以下各项验证是否确实已启用内核 NVMe 多路径：</block>
   <block id="80748b874d55c5038d34ce16a870e640" category="section-title">qla2xxx 详细日志记录</block>
   <block id="38a517c65e7a4cfa6d1b781c6a6e35f4" category="cell">确保 NVMe 命令使用的语法正确。</block>
-  <block id="c93b085fcb8e1f8bc98e8da71741e760" category="sidebar">NVMe-oF 主机配置</block>
   <block id="be3d2421a8f8e1a506cd8ec6140627fb" category="paragraph">`tar -xvf ntap_aix_host_utilities_6.1.tar.tgz`</block>
   <block id="6a60f15d3addedaaeee9fbd5c320d06d" category="paragraph">解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit</block>
   <block id="4a74fae0987c7a6283e4b1f5c07e2bf2" category="paragraph">`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`</block>
@@ -2021,7 +2008,6 @@
   <block id="dfa4360b9ef5c59ee3bab4c95d016689" category="admonition">要配置 Oracle Linux 8.3 Red Hat Enterprise Kernel （ RHCK ），请使用 <block ref="4e79a9939610f9dc89e0e26786a809f0" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.3 。</block>
   <block id="dbe552aa6706cdda69944fc1f527ec35" category="paragraph">Oracle Linux 8.3 没有已知问题。</block>
   <block id="273955f9a81b6001ec0fed11c89c61c3" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="3c7f0100e93cbb394731ee7d8982c161" category="inline-link-macro-rx"></block> 一节。</block>
-  <block id="069c43556e66148f1f1eeabd7e9e7872" category="sidebar">AIX Host Utilities</block>
   <block id="095f17ad6c7f706c5fa881fa28d2b0e2" category="sidebar">XenServer 7.</block>
   <block id="7818dfcab7a1c05d51aa00ac15f3beac" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。` /kernel/drv/fp.conf` 中的默认设置更改为 mpxio-disable="no" 。</block>
   <block id="1014a6a04423d551549d409e08fbcc51" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
@@ -2173,7 +2159,6 @@
   <block id="7f281a8c95a2d1ea3fef7e5b156beee5" category="section-title">在 SLES15 SP2 上启用 NVMe/FC</block>
   <block id="f7a582d94c3c08d29da52684240c7e5e" category="section-title">启用 1 MB I/O 大小（可选）</block>
   <block id="7988dd645d080901aa85637adea3c152" category="sidebar">NVMeoF ESXi</block>
-  <block id="e0f04c85d16be7d67287c02eeb4c1ca8" category="sidebar">NVMeF RHEL</block>
   <block id="6450317152c5c108daebac9e8e1a387c" category="sidebar">SLES</block>
   <block id="2f9c81bcc0340cf8ca367c73fc2605c3" category="sidebar">NVMeoF SLES</block>
   <block id="f77a693c238b55e124aad6c742f7abd9" category="sidebar">SLES 15</block>
@@ -2201,7 +2186,6 @@
   <block id="34fed3385bd742bd2b178de283f371b7" category="cell">`vendor`</block>
   <block id="3226f4c6b2d594c2a4e8db91fcc55341" category="section-title">配置 Broadcom/Emulex</block>
   <block id="63d2eef6ffb1f9f0f6a378b0692f6dd3" category="section-title">配置 Marvell/QLogic</block>
-  <block id="b1db54564fe54a4c74a975b18a791532" category="sidebar">7.x</block>
   <block id="61092b92c56a8527051cc09db7ffcf96" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.5</block>
   <block id="741d2402053ca439d535ee1e7db603b7" category="doc">将 Red Hat Enterprise Linux 8.5 与 NetApp ONTAP 结合使用</block>
   <block id="10a8491b4d5d18409c61a4a90c61750b" category="section-title">安装 Linux Unified Host Utilities</block>
@@ -2222,9 +2206,6 @@
   <block id="999cc5e84fec57fdd157e6fdacc5c96a" category="paragraph">`dept_path` 提供存储库文件的路径和名称。</block>
   <block id="e661cef1335457aaa4b6047327cfb656" category="paragraph">`swinstall` 命令可运行一个安装脚本，用于验证 HP-UX 设置的状态。如果您的系统满足要求，此脚本会将 `sanlun` 实用程序和诊断脚本安装在 ` /opt/netapp/santools/bin` 目录中。</block>
   <block id="96e0cae7407a65fe53018dd9c13dbbe7" category="section-title">配置 FC HBA 和交换机</block>
-  <block id="4305e9936b83d45d04d4e15cb3f002d2" category="paragraph"><block ref="e5534403168e57c1e34879bb31a5b6d6" category="inline-link-macro-rx"></block>
-<block ref="414cc440da9b8860f85936c8ca7199d3" category="inline-link-macro-rx"></block>
-<block ref="c70054656a6156c5d554f172fbb27a7a" category="inline-link-macro-rx"></block></block>
   <block id="13875804930272cb7e31a51605d09c65" category="doc">Solaris Host Utilities 6.2</block>
   <block id="408c1c436b88f56a9e4cf815ca520ffc" category="list-text">为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。</block>
   <block id="8f3b9d0cc42d20c0623a5f0990c4181e" category="paragraph">Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
@@ -2250,7 +2231,6 @@
   <block id="cdfd79e32ab8a821a843e89d91bdcd8d" category="list-text">MPxIO</block>
   <block id="8ae046464e598978903e62c0c706373c" category="list-text">Veritas DMP</block>
   <block id="a335fa6e5bef06439b229f8adabc7dfe" category="section-title">列出从给定 SVM/ 映射到主机的所有 LUN 列出映射到主机的给定 LUN 的所有属性</block>
-  <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
   <block id="072bbeb072deda2033d37a6e9af67b96" category="summary">介绍如何在ONTAP 中使用Oracle Linux 8.5</block>
   <block id="bebf74152cdc0b8f2233ff49a9112052" category="doc">将Oracle Linux 8.5与NetApp ONTAP 结合使用</block>
   <block id="5afff738a58f6889eebdd3efb2f2c405" category="paragraph">对于Oracle Linux (OL) 8.5、/etc/multipath.conf文件必须存在、但您不需要对该文件进行特定更改。OL 8.5是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
@@ -2522,7 +2502,6 @@
   <block id="13d4f4be1ab239d2cd36fb812fad5fc1" category="inline-link-macro">适用于您的ONTAP 版本的ONTAP 发行说明</block>
   <block id="d7b5ae94e622a21572fe07c48e20da09" category="list-text">。 <block ref="2ba744c2429cbcfc53bdb0428522a053" category="inline-link-macro-rx"></block></block>
   <block id="60cb9c3f22cf2b74a314e1d7baf48bef" category="paragraph">CentOS 8.4没有已知问题。</block>
-  <block id="2cac689df6b99782e23a143c9bfa2346" category="sidebar">HP-UX Host Utilities</block>
   <block id="032f858f49a253e7a44870c242d0aa5b" category="sidebar">安装HP-UX HU 6.0</block>
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">发行说明</block>
   <block id="a7a862c0d782706aace5e07821f4f4c9" category="sidebar">安装Solaris HU 6.2</block>
@@ -2710,4 +2689,40 @@
   <block id="36cef896471a12b0f41c40926a1d02dc" category="cell">如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统、则通常会显示此错误消息。或者、在相应子系统中添加的hostnqn字符串不正确。</block>
   <block id="db0bd7baf16dc60d55f11a9b309bc749" category="cell">无对于`NVMe discover`、请尝试在一段时间后运行此命令。可能对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。</block>
   <block id="9e9ad12d8f7b421ec7b07bcffb518755" category="paragraph">如果您仍面临问题、请收集以下文件和命令输出、并联系技术支持以进行进一步的分类：</block>
+  <block id="c345c92c1db74865c1b5cb8dad478651" category="summary">此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。</block>
+  <block id="d1c811acf82829db30f1d8b3e6c940d6" category="doc">SAN主机和云客户端</block>
+  <block id="708c2a641aba7d3caf588312e9a41596" category="summary">此内容针对分发提供了有关如何配置连接到Cloud Volumes ONTAP 的云客户端以及连接到内部ONTAP 存储的Amazon FSX for ONTAP 和SAN主机的指南。</block>
+  <block id="be2f9317bef1b02401365be22d60a02b" category="doc">SAN主机配置概述</block>
+  <block id="08d0a34cb57428b1414232e7c1592ef5" category="paragraph">此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。</block>
+  <block id="ab5c1cc33879491a00632f6478216936" category="paragraph">您的SAN主机和ONTAP 存储可以位于内部、云中、也可以同时位于这两者。</block>
+  <block id="d99091ccf334938dd920fe960b4e1341" category="admonition">在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。</block>
+  <block id="117bdbda976fe8b3212bc3b6327a0a1b" category="inline-link-macro">Cloud Volumes ONTAP</block>
+  <block id="18cf072964a583150dd247485ba75b92" category="inline-link-macro">适用于 ONTAP 的 Amazon FSX</block>
+  <block id="aad6098c26fd28acf5ce95db0964f759" category="paragraph">例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 <block ref="5671724540e4dc98b668b1507167bffb" category="inline-link-macro-rx"></block> 或 <block ref="e817674c4b959088a38fc0d01ba3d16d" category="inline-link-macro-rx"></block> 连接到内部SAN主机或连接到SAN云客户端。</block>
+  <block id="bd4300690dfdbe14b72c16ede45c8a40" category="paragraph">正确配置对于实现最佳性能和成功故障转移至关重要。</block>
+  <block id="5206f5e3d376aae380267b11c8d7e8a0" category="sidebar">此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。SAN客户端和ONTAP 存储可以驻留在内部或云中。</block>
+  <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">入门</block>
+  <block id="5547603ff69e3da92f703bcf50ce3f6b" category="sidebar">AIX主机实用程序发行说明</block>
+  <block id="07f600a27795dcb67160c1a6254ac955" category="sidebar">HP-UX Host Utilities发行说明</block>
+  <block id="e5df731937a491dd8cd0cc7b6ebee041" category="sidebar">Linux主机实用程序发行说明</block>
+  <block id="6ef0df02f01fe0ace4a41985abbcac96" category="sidebar">Solaris主机实用程序发行说明</block>
+  <block id="bb27f844f9da131bbc413a981aac48b0" category="sidebar">FCP和iSCSI主机配置</block>
+  <block id="5518a21314616fae9f003bf96e584f7f" category="sidebar">Red Hat Enterprise Linux 9.0</block>
+  <block id="28cf759ac2f6eab35d6588e5a7c44eac" category="sidebar">SUSE Linux Enterprise Server 15 SP4</block>
+  <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="sidebar">Windows Server 2022</block>
+  <block id="926f2d20f93d6be035bae2a94b2a5fc4" category="sidebar">IBM AIX 7.2和PowerVM (VIOS 3.1)</block>
+  <block id="48d339e5fe7e520b196955902fda50d4" category="sidebar">Oracle Solaris 11.4.</block>
+  <block id="524d2ef3f81ea92b8da31f7bfb61fdfa" category="sidebar">NVMe-oF主机配置</block>
+  <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">更多资源</block>
+  <block id="8f631f7b4d000947dcf86232c51cf147" category="sidebar">全SAN阵列软件配置</block>
+  <block id="587c9aa3c6003c9a9fa1fc9c2ceb2eaa" category="sidebar">SAN 管理</block>
+  <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
+  <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">概述</block>
+  <block id="bd2327e60e0cfdc7632cb188bd1c7293" category="sidebar">SAN主机实用程序</block>
+  <block id="db3a7c082080fd11b89a35d4b36694db" category="sidebar">AIX主机实用程序</block>
+  <block id="6644e7ab2de97becedaef22c5a1099e9" category="sidebar">HP-UX主机实用程序</block>
+  <block id="237e46c87c95b6d72dceaf420c603d90" category="sidebar">Linux统一主机实用程序</block>
+  <block id="c134d5805f93afa1db7c6399465d2bd8" category="sidebar">Solaris主机实用程序</block>
+  <block id="bcc66daaa6f6f7ca19890b95ffa6b4c0" category="sidebar">Windows统一主机实用程序</block>
+  <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
 </blocks>

@@ -1,0 +1,30 @@
+---
+sidebar: sidebar 
+permalink: overview.html 
+keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracle, linux, windows, enterprise, fc, fcp, isci, aix, powervm, vios, centos, citrix, hp-ux, solaris, veritas, cvo, cloud, volume, ontap, clients, configuration, FSx, instance, netapp 
+summary: 此内容针对分发提供了有关如何配置连接到Cloud Volumes ONTAP 的云客户端以及连接到内部ONTAP 存储的Amazon FSX for ONTAP 和SAN主机的指南。 
+---
+= SAN主机配置概述
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。
+
+您的SAN主机和ONTAP 存储可以位于内部、云中、也可以同时位于这两者。
+
+
+NOTE: 在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。
+
+例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 或 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^] 连接到内部SAN主机或连接到SAN云客户端。
+
+正确配置对于实现最佳性能和成功故障转移至关重要。
