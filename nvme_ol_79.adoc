@@ -25,6 +25,9 @@ summary: 使用 ONTAP 为 Oracle Linux 7.9 设置 VME/FC 主机配置，包括�
 适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 
 
+NOTE: 您可以使用此内容中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+
+
 
 == 已知限制
 
@@ -246,4 +249,7 @@ options lpfc lpfc_sg_seg_cnt=256
 # cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 256
 ----
++
+XXX
+
 

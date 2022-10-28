@@ -25,6 +25,9 @@ summary: 使用ONTAP 为Oracle Linux 8.6设置VME/FC主机配置、包括示例
 适用于Oracle Linux 8.6的ONTAP 9.6或更高版本支持NVMe/FC。Oracle Linux 8.6主机可以通过相同的光纤通道(FC)启动程序适配器端口运行NVMe/FC和FCP流量。请参见 link:https://hwu.netapp.com/["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 。
 
 
+NOTE: 您可以使用此内容中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+
+
 
 == 功能
 
