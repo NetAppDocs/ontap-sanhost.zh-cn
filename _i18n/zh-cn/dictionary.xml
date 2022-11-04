@@ -309,7 +309,6 @@
   <block id="56dd1899b4280d897ff6670fb0968e02" category="admonition">许多修补程序都需要重新启动 Windows 主机，但您可以选择等待重新启动主机，直到安装或升级 Host Utilities 为止。</block>
   <block id="36b258cf83367d27741cf0be3d246eca" category="section-title">安装 Windows Unified Host Utilities</block>
   <block id="ba490f365e20da97a23546cfe0da8569" category="inline-link-macro">WUHU 7.1 文档</block>
-  <block id="47e355e7eaad5d4a7f631164efee9da4" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 <block ref="8ecfeb68c5bc6c6d13bf3c3939739f31" category="inline-link-macro-rx"></block>。</block>
   <block id="d25621141f24193488d8ea2276c47e01" category="paragraph">如果 Windows 主机具有多条存储系统路径，则必须安装 MPIO 软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。</block>
   <block id="a0e497cbff11ff2d61625663418c3fc8" category="paragraph">在 Windows 系统上，任何 MPIO 解决方案的两个主要组件是 DSM 和 Windows MPIO 。在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO 。</block>
   <block id="60bdc643bd0e4fed0f4a29dbcd77bc2b" category="admonition">选择 MPIO 支持后， Windows Unified Host Utilities 将启用 Windows Server 2012 R2 的随附 MPIO 功能。</block>
@@ -859,7 +858,6 @@
   <block id="814e9f528f5fa391cd6774e57a5c651c" category="list-text">NVMEMode = 0</block>
   <block id="12975cfd6b02fcd31121a100cbbb128c" category="list-text">限制传输大小 =1</block>
   <block id="95feeb984f6b07e38a54290d155380fb" category="paragraph">在 Windows 环境中使用适用于 FC/NVMe 的 Broadcom 适配器时，每个主机总线适配器（ HBA ）端口都会关联一个 ` +hostnqn+` 。` +hostnqn+` 的格式如下。</block>
-  <block id="410fc92241ee85585a89a22f4f38a389" category="list-text">安装 Windows Host Utility Kit 7.1 以设置 FC 和 NVMe 通用的驱动程序参数。</block>
   <block id="cc6f38a02ffcad6a7b76b5c9c2a8a868" category="list-text">打开 MPIO 属性。</block>
   <block id="8eff5eebf9f16bb0e2893ae3c5998da1" category="list-text">从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。</block>
   <block id="1fc4b6b7368b8cca78fdc9a59572d5bb" category="paragraph">MPIO 可以识别 NVMe 设备，这些设备可在磁盘管理下查看。</block>
@@ -1200,10 +1198,8 @@
   <block id="271e95bb5110c34300c9e4e30ad2991d" category="cell">`sA_version.exe`</block>
   <block id="ab595e8644eb54589f5d769321b11cc4" category="cell">显示 Host Utilities 和光纤通道 HBA 的版本。</block>
   <block id="86d6299bc9dab5266c5f61d0a0769264" category="section-title">Host Utilities 支持的配置</block>
-  <block id="298aa3c26f019d0f6b504317238a932c" category="paragraph">Host Utilities 支持不同的 Windows 主机配置，协议和多路径选项。有关详细信息，请参见<block ref="b7322bec4509d45107de6de43ca1f517" category="inline-link-rx"></block>。</block>
   <block id="700f2514d3d4cc2ed02cb06d8b922b2d" category="paragraph">在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。</block>
   <block id="84d4097a38ff264dfaf97e1cec24b529" category="list-text">在中检查支持的配置<block ref="49d81d143d5c8b402603532056154481" category="inline-link-rx"></block>。</block>
-  <block id="bd723d0221300797678f431604539bd8" category="list-text">在 SAN 主机文档中检查相应主机所需的修补程序。</block>
   <block id="29cd26a0b6469ed25fabeac1805eb8a6" category="list-text">添加 iSCSI 或 FCP 许可证并启动目标服务。</block>
   <block id="185e819968cd77ce618663a3c7abd72d" category="paragraph">在使用 SANtricity 存储管理器的 E 系列存储系统上，光纤通道和 iSCSI 协议不需要许可证。</block>
   <block id="dafd8a261adaf4e33c8e8c74baa71755" category="list-text">验证布线</block>
@@ -2723,8 +2719,51 @@
   <block id="6644e7ab2de97becedaef22c5a1099e9" category="sidebar">HP-UX主机实用程序</block>
   <block id="237e46c87c95b6d72dceaf420c603d90" category="sidebar">Linux统一主机实用程序</block>
   <block id="c134d5805f93afa1db7c6399465d2bd8" category="sidebar">Solaris主机实用程序</block>
-  <block id="bcc66daaa6f6f7ca19890b95ffa6b4c0" category="sidebar">Windows统一主机实用程序</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
   <block id="8200a3db147155676a7739eb43b685c9" category="admonition">您可以使用此内容中提供的配置设置来配置连接到的云客户端 <block ref="5671724540e4dc98b668b1507167bffb" category="inline-link-macro-rx"></block> 和 <block ref="e817674c4b959088a38fc0d01ba3d16d" category="inline-link-macro-rx"></block>。</block>
   <block id="f561aaf6ef0bf14d4208bb46a4ccb3ad" category="paragraph">XXX</block>
+  <block id="47e2092f9d666fc24b67c7da02de84c7" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 <block ref="f7fe1c204ed60a7e9dd594c09fd7b1a5" category="inline-link-macro-rx"></block>。</block>
+  <block id="38022ef96e4c7edb41b89fa3a008c3f6" category="inline-link-macro">Windows Host Utility Kit 7.1</block>
+  <block id="47806b50157f4c2450dab9085e65bf42" category="list-text">安装 <block ref="3da09c0cdee3c0d99e3c71a79e706ce0" category="inline-link-macro-rx"></block> 设置FC和NVMe通用的驱动程序参数。</block>
+  <block id="a94e97667092f5ff8b67813ccebdb0ca" category="paragraph">Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见<block ref="b7322bec4509d45107de6de43ca1f517" category="inline-link-rx"></block>。</block>
+  <block id="0165fb41a35ddb937948f77394256403" category="inline-link-macro">SAN主机Windows文档</block>
+  <block id="6edf97e112927c25a9a1571ba78c02f9" category="list-text">检查上相应主机所需的修补程序 <block ref="d639dff184f4bf79d87dbc978d26f542" category="inline-link-macro-rx"></block>。</block>
+  <block id="125c89a36748abb41fb38e89f5009ec9" category="inline-link-macro">将Windows Server 2022与ONTAP 结合使用</block>
+  <block id="eff83cf87307f9f0c4cf876914031ade" category="inline-link-macro">安装Windows修补程序</block>
+  <block id="74c96d3ba2305a0f126dc2494f4cd977" category="admonition"><block ref="c6686e038b760393cddd662d474b7627" category="inline-link-macro-rx"></block> 提供有关的说明 <block ref="9dcc96c7a1b888cfbb8ae39c864be341" category="inline-link-macro-rx"></block> 对于Windows Server 2022。请参见"主机配置"类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。</block>
+  <block id="f8a9c652b77d95b070fee4e944c23c55" category="summary">《Windows Unified Host Utilities 7.1发行说明》</block>
+  <block id="8a9391447d14b7fa38cc33b8b42a5eee" category="doc">《Windows Unified Host Utilities 7.1发行说明》</block>
+  <block id="84f4f58e26d14120cd13928993415ef8" category="paragraph">本发行说明文档包含Windows Unified Host Utilities 7.1版的最新信息、包括有关新功能、增强功能和已知问题的更新。当有关使用Windows Host Utilities的新信息可用时、本文档将进行更新。</block>
+  <block id="792c65ea8e28d4d1ad3178bd5ed7a65b" category="section-title">关于Windows Unified Host Utilities 7.1版</block>
+  <block id="34eb6bacd27b9f225e7ca9de29f4668b" category="paragraph">通过Windows Unified Host Utilities、您可以将Windows主机计算机连接到NetApp存储系统。Windows Unified Host Utilities包含一个安装程序、用于设置所需的Windows注册表和HBA值。</block>
+  <block id="13e6b822d7fe9f7e9f0efeca225b29a0" category="paragraph">Windows Unified Host Utilities 7.1仍支持以下版本的Windows：</block>
+  <block id="8e81245b7f02b8484320ddb3e4b13c18" category="list-text">Windows 2012</block>
+  <block id="1347f9ce905795bee095e16712f81913" category="list-text">Windows 2012R2</block>
+  <block id="4083fee85864d55c66d5e0b21a7928b3" category="list-text">Windows 2016</block>
+  <block id="0a412bceaa4a8d671231ab04d2e0296e" category="list-text">Windows 2019</block>
+  <block id="3ffd22c07b48a1c76b76f941ad1cad96" category="list-text">Windows 2022</block>
+  <block id="f30ac79774ac72cad690c3f814efd2fa" category="admonition">NetApp对Host Utilities软件两个版本之间的其他组件进行了资格认定。有关系统要求的最新信息、请参见 <block ref="454ffc53fb26d285d765b8fbe8c25a5d" category="inline-link-macro-rx"></block>。</block>
+  <block id="feb11f8755baed6ff89937754d9fdb5e" category="section-title">此Host Utilities版本中的功能</block>
+  <block id="ff71b00ca4f59efb041754af8a3c5633" category="paragraph">Windows Unified Host Utilities 7.1支持E系列存储系统、支持ONTAP 9及更高版本、并增强了iSCSI超时功能、可加快故障转移速度。</block>
+  <block id="2f7c358042ffb7d37991aff648b1cb3d" category="section-title">重要注意事项</block>
+  <block id="aacc0d256c74ef3a06a601980b807a0e" category="paragraph">在部署最新版本的Windows Host Utilities之前、您必须阅读可用信息、以帮助您确定并解决可能影响系统运行的问题。</block>
+  <block id="7cd36e8f4d329b5cfafec87711c36cbd" category="paragraph">有关单个错误的详细信息以及探索其他与错误相关的工具、请参见 <block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block>。</block>
+  <block id="14604b92d34df545c8df1df02158a241" category="section-title">安装所需的修补程序</block>
+  <block id="9271b83ea2248c31dc793920e78f3085" category="paragraph">要确保成功安装或升级Windows Unified Host Utilities、您必须安装特定的Windows修补程序。某些修补程序是Windows更新的一个组件。</block>
+  <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Windows Host Utilities文档</block>
+  <block id="231e5ff41539516674c45e33de03b0be" category="paragraph">请参见 <block ref="f5596c1e3b207c40ba7cdd523469fc51" category="inline-link-macro-rx"></block> 以满足您的特定配置修补程序要求。</block>
+  <block id="95dc0391ce7b396d7dd5622284e8fc3e" category="section-title">已知问题</block>
+  <block id="fa8a4c6fcae2ff0a42db985d96655a59" category="paragraph">此版本已确定一些意外的、可能不受欢迎的行为、以及在某些情况下避免这些行为的解决方法。</block>
+  <block id="56659c18435d50a38e076a58b32163a4" category="cell">运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本</block>
+  <block id="ea42119311b1ebffaae8c2a3d60d8cfd" category="cell">您不再需要运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 用于更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时的脚本、因为正在使用默认超时设置。。<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 先前版本的Host Utilities中包含的脚本不再包含在Windows Unified Host Utilities中。Windows Unified Host Utilities 7.1使用默认磁盘超时设置。</block>
+  <block id="e91b41f5f9d74fcfaa3733fe1534d7c8" category="cell">使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接</block>
+  <block id="03a5ef9a07e32294246c302f24714cba" category="cell">在多路径I/O (MPIO)配置或同时具有IPv4和IPv6端点的多个会话连接(MCS)配置中、某些iSCSI会话可能无法在重新启动Windows主机后重新连接。</block>
+  <block id="7781892f22565c078543a9afe054eafe" category="cell">要确保所有iSCSI路径在重新启动后均返回、请使用所有IPv4端点或所有IPv6。请勿混合使用IPv4和IPv6。</block>
+  <block id="9ffe40d778f0a3ffe9e1f6de2a49fb40" category="cell">iSCSI软件启动不支持MCS</block>
+  <block id="63f871187249b3071dc36a54982c1e17" category="cell">如果将iSCSI软件启动与每个会话的iSCSI多个连接(MCS)结合使用、则无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、从而导致主机崩溃。</block>
+  <block id="a77cd68a790d44f2359fe8a4dd45b1dc" category="cell">对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。</block>
+  <block id="05aa4f4bc5b51efef2c52f4fb2ddc55f" category="paragraph"><block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。</block>
+  <block id="a64644439f45078aa7c8e54709b6fb99" category="paragraph">请参见 <block ref="098b68c05e072d65de8b63c55177a5c6" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
+  <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
+  <block id="7b4c9d36bd8121e0d136897711d66090" category="sidebar">安装Wuhu 7.1</block>
 </blocks>

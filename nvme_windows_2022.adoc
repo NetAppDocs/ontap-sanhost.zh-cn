@@ -68,7 +68,7 @@ nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
 
 === 在 Windows 主机上为 NVMe 设备启用 MPIO
 
-. 安装 Windows Host Utility Kit 7.1 以设置 FC 和 NVMe 通用的驱动程序参数。
+. 安装 link:link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["Windows Host Utility Kit 7.1"] 设置FC和NVMe通用的驱动程序参数。
 . 打开 MPIO 属性。
 . 从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。
 +

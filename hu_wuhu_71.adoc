@@ -50,7 +50,7 @@ Windows 主机计算机上安装了以下程序和文件。默认目录为 `C �
 
 == Host Utilities 支持的配置
 
-Host Utilities 支持不同的 Windows 主机配置，协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
 
 
@@ -60,7 +60,11 @@ Host Utilities 支持不同的 Windows 主机配置，协议和多路径选项�
 
 .步骤
 . 在中检查支持的配置 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
-. 在 SAN 主机文档中检查相应主机所需的修补程序。
+. 检查上相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
++
+
+NOTE: link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将Windows Server 2022与ONTAP 结合使用"] 提供有关的说明 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["安装Windows修补程序"] 对于Windows Server 2022。请参见"主机配置"类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。
+
 . 添加 iSCSI 或 FCP 许可证并启动目标服务。
 +
 在使用 SANtricity 存储管理器的 E 系列存储系统上，光纤通道和 iSCSI 协议不需要许可证。

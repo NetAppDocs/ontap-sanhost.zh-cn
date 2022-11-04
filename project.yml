@@ -39,8 +39,12 @@ sidebar:
         url: "/hu_solaris_62.html"
       - title: 发行说明
         url: "/hu_solaris_62_rn.html"
-    - title: Windows统一主机实用程序
-      url: "/hu_wuhu_71.html"
+    - title: Windows Unified Host Utilities
+      entries:
+      - title: 安装Wuhu 7.1
+        url: "/hu_wuhu_71.html"
+      - title: 发行说明
+        url: "/hu_wuhu_71_rn.html"
   - title: NVMe-oF主机配置
     entries:
     - title: ESXi
