@@ -18,10 +18,6 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 :toc-position: content
 
 
-
-
-== 前提条件
-
 .您需要什么？ #8217 ；将需要什么
 * 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
 +

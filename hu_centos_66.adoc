@@ -82,6 +82,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 对于 CentOS 6.6 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.6 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：
 
+.步骤
 . 创建 initrd-image 的备份。
 . 将以下参数值附加到内核中，以使 ALUA 和非 ALUA 正常工作： `rdloaddriver=SCSI_DH_ALUA`
 +

@@ -426,7 +426,7 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 * 如果重新启动后 iSCSI LUN 不可用，则必须验证目标是否在 Microsoft iSCSI 启动程序 GUI 的持久目标选项卡上列为持久目标。
 * 如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。
 * 对于运行 ONTAP 的存储控制器的光纤通道路径，您必须验证 FC 交换机是否使用目标 LIF 的 WWPN 进行分区，而不是使用节点上物理端口的 WWPN 进行分区。
-* 您必须查看 https://library.netapp.com/ecm/ecm_download_file/ECMLP2789205["Windows Host Utilities 发行说明"^] 检查已知问题。发行说明包括一个已知问题和限制列表。
+* 您必须查看 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities 发行说明"] 检查已知问题。发行说明包括一个已知问题和限制列表。
 * 您必须查看中的故障排除信息 https://docs.netapp.com/ontap-9/index.jsp["《 SAN 管理指南》"^] 适用于您的 ONTAP 版本。
 * 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/["Bug Online"^] 最近发现的问题。
 * 在高级搜索下的错误类型字段中，您应选择 iSCSI - Windows ，然后单击转到。您应重复搜索错误类型 FCP -Windows 。

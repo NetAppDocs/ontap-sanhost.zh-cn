@@ -84,7 +84,7 @@ SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX 主机的启动设�
 
 多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。Host Utilities 的 AIX 环境使用 AIX 原生多路径解决方案， MPIO 。
 
-对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM 是存储供应商提供的用于处理路径管理的代码。在 Host Utilities 安装过程中会安装并启用此功能。
+对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM是存储供应商提供的代码、用于处理路径管理。在 Host Utilities 安装过程中会安装并启用此功能。
 
 
 
@@ -205,7 +205,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == MetroCluster 的建议设置
 
-默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 link:https://kb.netapp.com/app/answers/answer_view/a_id/1001318["NetApp KB1001318"^]
+默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 link:https://kb.netapp.com/app/answers/answer_view/a_id/1001318["NetApp KB1001318"^]
 
 
 

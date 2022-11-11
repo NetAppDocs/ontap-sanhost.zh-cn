@@ -97,6 +97,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 
 === 配置 Marvell/QLogic
 
+.步骤
 . 请参见，检查所需驱动程序 / 固件是否支持配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 . 设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 +
@@ -269,7 +270,7 @@ tcp.vmnic3:34:80:Od:30:ca:el-tcp.unknown-uuid.400bf333abf74ab8b96dc18ffadc3f99
 
 == 已知问题描述
 
-* 从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为 https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654[] 了解详细信息。
+* 从ONTAP 9.9.1 P3及更高版本开始、可提供ESXi 7.0 U3 (及更高版本) NVMe/FC支持、因为从ONTAP 9.9.1 P3开始、可提供关键NVMe中止修复(由ESXi 7.0 U3及更高版本发布)。请参见相应的 burt 公有报告，网址为 https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654[] 了解详细信息。
 
 
 

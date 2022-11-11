@@ -243,6 +243,7 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O
 
+.步骤
 . 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
 +
 [listing]

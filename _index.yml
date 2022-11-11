@@ -12,6 +12,8 @@ indexpage:
       url: "/hu_luhu_71_rn.html"
     - title: Solaris主机实用程序发行说明
       url: "/hu_solaris_62_rn.html"
+    - title: Windows Host Utilities发行说明
+      url: "/hu_wuhu_71_rn.html"
   - title: FCP和iSCSI主机配置
     links:
     - title: VMware vSphere 7

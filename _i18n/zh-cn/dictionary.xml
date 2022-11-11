@@ -28,7 +28,6 @@
   <block id="8bec1661077d28352868870f186e4392" category="list-text">将以下参数值附加到内核中，以使 ALUA 和非 ALUA 正常工作： `rdloaddriver=SCSI_DH_ALUA`</block>
   <block id="4c489d4721694c4117162307ded4345c" category="list-text">使用 `mkinitrd` 命令重新创建 initrd-image 。Oracle 6x 及更高版本使用以下命令之一： `mkinitrd -f /boot/ initrd-"uname -r".img uname -r` 或命令： `dracut -f`</block>
   <block id="8418b94a2a307b3e96b6474bc55e08b7" category="list-text">重新启动主机。</block>
-  <block id="fdb062d5e36f31296f4e16a54ea52c2e" category="list-text">验证 `cat /proc/cmdline` 命令的输出，以确保设置完成。您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="0aa6d9cb7674d34a808be2224e074189" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：</block>
   <block id="aa89a86e36a09e87ac1e23a259c8d26c" category="admonition">请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 个。在存储故障期间， 8 个以上的路径可能会出现发生原因路径问题。</block>
   <block id="21a58bdeaf70327c6f6f5fd597b24fa3" category="section-title">建议设置</block>
@@ -38,7 +37,6 @@
   <block id="3bd7fde20a9abc176890c7422cf0f77f" category="admonition">将 &lt;DevID&gt; 替换为要排除的设备的 WWID 字符串。使用以下命令确定 WWID ：</block>
   <block id="58449f79b301eee405bcc04689e38467" category="paragraph">在此示例中， sda 是我们需要将其列入黑名单的本地 SCSI 磁盘。</block>
   <block id="4d70a817ac85626aff88bbc73d0a2deb" category="list-text">运行以下命令以确定 WWID ：</block>
-  <block id="8d39ccb2975dcb64ce078ed12e229a84" category="list-text">将此 WWID 添加到 /etc/multipath.conf 中的黑名单 stanza 中：</block>
   <block id="21613f1f81985ce9edca2dc6272a765e" category="paragraph">您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
   <block id="83f499a540b1323009c200d6f8cc9396" category="cell">参数</block>
   <block id="51ac4bf63a0c6a9cefa7ba69b4154ef1" category="cell">正在设置 ...</block>
@@ -445,7 +443,6 @@
   <block id="a8dc135d317a36a2ccd92726f9e0e598" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="33a1f2b8cd02575a35b77c10ba65d8f8" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="31db1dbc8875fe1d1fb0c598273975d6" category="paragraph">对于 Oracle Linux 7.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="40c5d9e1e896025a107a6c97b22c1167" category="list-text">使用 `dracut -f` 命令重新创建 initrd-image 。</block>
-  <block id="f01b02d5e89762686d3f51d4b0f7f138" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="ed1146f14c5bbbbb36046ba06da1cd88" category="paragraph">Oracle Linux 7.0 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="a071ebe8686e61a0aa4fe307a3225ad9" category="cell">" 服务时间 0"</block>
   <block id="833392375a19e092bb249773aab90ae7" category="admonition">要配置 Oracle Linux 7.0 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="95c92cba905c8a4ca7d7698440b6011a" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.0 。</block>
@@ -499,7 +496,6 @@
   <block id="073055d89f87f920dc7706848774e7b2" category="paragraph">Oracle Linux 7.1 支持 Unbreakable Enterprise Kernel （ Uek ） R3 和 Uek r4 。默认情况下，操作系统使用 Uek R3 内核启动。</block>
   <block id="66cd34e86ff7d645147b1d5d5a6c9f10" category="paragraph">对于 Oracle Linux 7.1 Uek R3 ，创建一个空 multipath.conf 文件。默认情况下， Oracle Linux 7.1 Uek 的设置会自动更新 ALUA 和不更新 ALUA 。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="f4d88f38762443125e864f0e0bf3dc56" category="list-text">使用 `dracut -f` 命令重新创建 initrd-image 。</block>
-  <block id="020cab387f9cfdce82fc2e3751625f87" category="paragraph">对于 Oracle Linux 7.1 Uek r4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.1 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="6ff43f8d58cf03692931460affd888be" category="paragraph">Oracle Linux 7.1 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="de50d87828d6c062d5ee3ed42e95ae42" category="admonition">要配置 Oracle Linux 7.1 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="ac06888ec4e3e5a4526108ac1f8520b7" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.1 。</block>
   <block id="d92da7c3e5e1c0b3a496a0771d576f96" category="paragraph">Oracle Linux 7.1 没有已知问题。</block>
@@ -513,7 +509,6 @@
   <block id="a12eee609318f789b110fe7492bac976" category="list-text">QLogic HBA — QConvergeConsole CLI</block>
   <block id="59b271fe18b45209cf86bc956dfb5f7e" category="list-text">Emulex HBA — OneCommand Manager 核心应用程序 CLI</block>
   <block id="5ab8738b15e4372e4fe9670449a5b820" category="list-text">Brocade HBA — Brocade Command Utility CLI</block>
-  <block id="ac6b9eb61f566a414937fce88a660057" category="paragraph">应在主机操作系统上安装可用于每个 Linux 分发版的 RPM 软件包 "libhbaapi" 和 "libhbalinux-" 。</block>
   <block id="ffdedbe1187a1ddb0d5c60a0ac382630" category="paragraph">Linux Unified Host Utilities 是一款 NetApp 主机软件，可在 Linux 主机上提供命令行工具包。</block>
   <block id="00c00a19ea488ceb63e99f408a6b6118" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
   <block id="7f239a97a66cea4e3bb767698099b430" category="admonition">Citrix XenServer ， Oracle VM 和 Red Hat Enterprise Virtualization Hypervisor 不支持 SAN 工具包。</block>
@@ -622,7 +617,6 @@
   <block id="a40ecef4a09b118c1f7f8b069486d849" category="list-text">解压缩文件并提取 SAN 工具包软件包。</block>
   <block id="f79c6b17105bfd3884500ded694cb1f2" category="paragraph">SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX/PowerVM 主机的启动设备的过程。您可以将 SAN 启动 LUN 设置为在运行采用 FC 或 FCoE 协议的 AIX Host Utilities 的 AIX MPIO 环境中运行。在 AIX MPIO 环境中，用于创建 SAN 启动 LUN 并在其上安装新操作系统映像的方法可能会有所不同，具体取决于您使用的协议。</block>
   <block id="4b1288921d45a28c64d922c51edfb95d" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。Host Utilities 的 AIX 和 PowerVM 环境使用 AIX 的原生 Multipathing 解决方案（ MPIO ）。</block>
-  <block id="1697f4d36614d1ab7c528058860fd4fd" category="paragraph">以下是 NetApp ONTAP LUN 的一些建议参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。</block>
   <block id="0e413d300c65d6eeae3946b5cd377d21" category="cell">对于 AIX 3072 ，对于 VIOS 为 1024</block>
   <block id="c4dd079617b8872443b613d8a94e3cbc" category="cell">合作伙伴 ID</block>
   <block id="de6158aaf59eefd0e967674f80bf69a0" category="cell">1307653</block>
@@ -1756,7 +1750,6 @@
   <block id="dfdecabe17f4f61a0c5b353fdc3dfeef" category="paragraph">Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
   <block id="4d9e4d5a080304464911deeebee0a0b3" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
   <block id="258e01d6ca463cd89e79be409a5b9398" category="paragraph">在此示例中，对于 Citrix 虚拟机管理程序 8.x ， `sda` 是列入黑名单所需的本地 SCSI 磁盘。</block>
-  <block id="90b4f63b7d8602eb40cd95b55d20f105" category="paragraph">请使用 ` $multipathd show config` 命令参考多路径参数运行时配置。您应始终检查正在运行的配置中是否存在可能会覆盖默认设置的旧设置，尤其是在默认设置部分。</block>
   <block id="891983ab249dd51fa02a51e1da92fd57" category="admonition">对于支持的配置， Citrix 虚拟机管理程序建议对所有基于 Linux 和 Windows 的子虚拟机使用 Citrix VM 工具。</block>
   <block id="39f11cb747dafe51ae2cd54386744d96" category="cell">Citrix Tracker ID</block>
   <block id="37a4830e2093543aff3053de0d030043" category="inline-link-macro">1242343</block>
@@ -2035,7 +2028,6 @@
   <block id="a4e09728b21e07eb8de92849a3239079" category="admonition">在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须将命名空间块大小设置为 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。</block>
   <block id="b19cff5a6d037faf5ffa796506cf839f" category="inline-link-macro">ONTAP 9 命令手册页</block>
   <block id="e83464ce8bd634efb1f099c956ec64a8" category="section-title">已知问题描述</block>
-  <block id="7c6b30ab95aa6f3eeb2a6b9cbaf31f6c" category="list-text">从 ONTAP 9.9.1 P3 开始，可提供 ESXi 7.0 U3 （及更高版本） NVMe/FC 支持。这是由于仅在 ONTAP 9.9.1 P3 起提供的关键 NVMe 中止（由 ESXi 7.0 U3 及更高版本发出）修复程序。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
   <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="0a7c052037789d22811592a15b7a2e17" category="inline-link-macro">NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x</block>
   <block id="ff09581cb2c13d8ad132e71c1320dc7e" category="cell"><block ref="108e2d22c5beb633cb3cfe03baa4f66f" category="inline-link-macro-rx"></block></block>
@@ -2074,7 +2066,6 @@
   <block id="3809aec0d76653aef580fe5a05c2ceea" category="paragraph"><block ref="b1540a3ec25c7d8277b499a1cc1d920b" category="inline-link-rx"></block>
 <block ref="37fb4b1646680720393f2c3367174dbe" category="inline-link-rx"></block>
 <block ref="787134229d52d08fef0caa9611cbbc06" category="inline-link-rx"></block></block>
-  <block id="78ba88bcc67458c1a5065ee8f68514e8" category="paragraph">默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 <block ref="682b92f396ad2229bd62e99c5a518610" category="inline-link-macro-rx"></block></block>
   <block id="63de1f29f867ea5090af94f0fe852e73" category="paragraph">对于 RHEL 8.2 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="fe11a5d007b30b19387669fa13d0bc9d" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
   <block id="62ec2bcab7e05f6212dbc5211b403a26" category="list-text">在服务器上安装 RHEL 8.4 GA 。安装完成后，验证您是否正在运行指定的 RHEL 8.4 GA 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
@@ -2126,7 +2117,6 @@
   <block id="71a1238a2a3eb2842a1147f88470407a" category="section-title">修复和删除 Windows Host Utilities</block>
   <block id="7ec91814b4b8031452953e60444fdac1" category="section-title">以交互方式修复或删除 Windows Host Utilities</block>
   <block id="e4ab25c62c74b247f110cc0ddf4a7128" category="section-title">从命令行修复或删除 Windows Host Utilities</block>
-  <block id="9781d69195e9bb9dad9ea221e352929d" category="list-text">您必须查看<block ref="c98f6369245de310035299ae832b1997" category="inline-link-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
   <block id="46795771824c20823fe2d0312b584a17" category="section-title">了解 Host Utilities 对 FC HBA 驱动程序设置所做的更改</block>
   <block id="afe3961340d8bd7d749848a97e031049" category="section-title">验证 FC 系统上的 Emulex HBA 驱动程序设置</block>
   <block id="884960c052ad072d600fae7dc861c0c6" category="section-title">验证 FC 系统上的 QLogic HBA 驱动程序设置</block>
@@ -2161,7 +2151,6 @@
   <block id="9a5aadcd2f712e90b04bd1524cdd6dc4" category="sidebar">SLES 12</block>
   <block id="d87433b06a0f03952a4dc973f5315687" category="paragraph">对于 Citrix 虚拟机管理程序（ CH ） 8.x ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CH 8.x 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。您可以使用 ` /sbin/mpathutil` status 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 角色的 LUN 的示例多路径输出。</block>
   <block id="d6001c34c29bb04684b5c07f3b8c9209" category="section-title">全 SAN 阵列（ ASA ）配置</block>
-  <block id="c17362e9d01452047d060a128e8e3634" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径，这意味着它们由控制器提供服务，并通过所有活动路径发送 I/O 。</block>
   <block id="15e8bfaa3c1b932b597dedce3820fa11" category="paragraph">以下示例显示了具有四个主动 / 优化路径的 ONTAP LUN 的正确输出：</block>
   <block id="093280d0b1b888a2d2861cdc763f5f54" category="cell">`detect_prio`</block>
   <block id="d4f9e6cd04344d6033229cebcf82d8e6" category="cell">`dev_los_TMOs`</block>
@@ -2196,7 +2185,6 @@
   <block id="dd0ef0f389a16b505e475797a7b752ac" category="list-text">从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 连接到 HP-UX 主机。</block>
   <block id="5eaf61000f0f261f2e4793f7e336889a" category="list-text">输入以下命令解压缩 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` 文件：</block>
   <block id="93b6e09e96afb8006209af84f438ca2b" category="paragraph">` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
-  <block id="d10caeaed75e8947d0e8840674994b68" category="paragraph">系统会将提取的软件置于您将存储库文件解压缩到的目录中。</block>
   <block id="2a346f59c525e5728cec25bf9a377f2f" category="list-text">输入以下命令以安装软件：</block>
   <block id="2d903390e509c4d2f6da1a4d0787b5b6" category="paragraph">` # swinstall -s /storage_path`</block>
   <block id="999cc5e84fec57fdd157e6fdacc5c96a" category="paragraph">`dept_path` 提供存储库文件的路径和名称。</block>
@@ -2217,7 +2205,6 @@
   <block id="8b2e8dcabd2803cfffe6d347e740d632" category="list-text">x86/x64 CPU ： `NetApp_Solaris_host_utilities_6_2_amd.tar.gz`</block>
   <block id="4b9b8c4fa4d1eb96283d16c11c709e8e" category="list-text">使用 gunzip 命令解压缩文件</block>
   <block id="1f2423b6dd7c87600c006dd4fe70055e" category="paragraph">` # gunzip netapp_solaris host_utilities_6_2_sparc.tar.gz`</block>
-  <block id="72f9fed930907b19e060560561469054" category="list-text">解压缩文件。您可以使用 `tar xvf` 命令执行此操作。</block>
   <block id="d35a857c138589666873eef37b70bd9c" category="paragraph">` # tar xvf netapp_solaris host_utilities_6_2_sparc.tar`</block>
   <block id="963069b30b9e059f13bf53eb0a7cfbfe" category="list-text">将从 tar 文件提取的软件包添加到主机。您可以使用 `pkgadd` 命令执行此操作。</block>
   <block id="0c91635f19857d5fe1642e137ecfe86f" category="paragraph">这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。以下示例使用 `pkgadd` 命令安装 Solaris 安装包：</block>
@@ -2335,7 +2322,6 @@
   <block id="4a77bd6ca1098e847cb75095287cdf8d" category="paragraph">CentOS 7.3没有已知问题。</block>
   <block id="ebc6dd08dd10ab545441a995fcd41e3f" category="paragraph">CentOS 7.1没有已知问题。</block>
   <block id="4391e4a69364ebb845d6562846716af4" category="doc">《AIX Host Utilities 6.1发行说明》</block>
-  <block id="81bca837c40611da67f18f391bb32923" category="paragraph">本发行说明文档包含有关AIX Host Utilities 6.1版的最新信息、包括有关已知问题、限制以及配置和管理ONTAP 存储系统的更新。</block>
   <block id="ebdfd2288177a34c60438efc134f52c4" category="paragraph">当有关使用AIX Host Utilities的新信息可用时、发行说明文档将进行更新。</block>
   <block id="cfbc0c9386472f86132990683d16796f" category="section-title">关于AIX Host Utilities 6.1版</block>
   <block id="f418c08cd071f42a28a07d007dd30c34" category="paragraph">您可以使用AIX Host Utilities将AIX主机连接到NetApp存储。AIX Host Utilities支持多种环境以及FC、FCoE和iSCSI协议。支持的环境包括AIX MPIO (原生 OS)和PowerVM。</block>
@@ -2451,7 +2437,6 @@
   <block id="478829f91ffe1d5a9fcb7ae0a4fa2eda" category="cell">HP-UX LVM创建会发送块大小超过1 MB的I/O</block>
   <block id="24cc4783034cf857703516141d8cc8ad" category="summary">《Solaris Host Utilities 6.2发行说明》</block>
   <block id="07cb401e35e41c1ea4ba568ba75b0261" category="doc">《Solaris Host Utilities 6.2发行说明》</block>
-  <block id="6680e6f1f2da4905e1106056bcccc97b" category="paragraph">本发行说明文档包含有关Solaris Host Utilities 6.2的最新信息、包括有关已知问题和限制的更新以及配置和管理ONTAP 存储系统。</block>
   <block id="a8d190b8be84e8cfdb8b2df1b04cb957" category="paragraph">当有关使用Solaris Host Utilities的新信息可用时、将更新发行说明文档。</block>
   <block id="83abaefac7375849eeb586ba637a2d22" category="section-title">关于Solaris Host Utilities 6.2版本</block>
   <block id="d64c00d8393bc6d797e2fd2eb038c7f6" category="paragraph">Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。</block>
@@ -2472,7 +2457,6 @@
   <block id="2aa7ada2848fa0738fbfac1114907aa4" category="list-text"><block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> (以前称为《系统配置指南》)</block>
   <block id="15b39b3049d63d1b09b2b4d4ddc115a4" category="list-text"><block ref="15b39b3049d63d1b09b2b4d4ddc115a4" category="inline-link-macro-rx"></block></block>
   <block id="c52f3cfca61100f76a974648c1c9a180" category="list-text"><block ref="c52f3cfca61100f76a974648c1c9a180" category="inline-link-macro-rx"></block></block>
-  <block id="0a9958781afdc779222e135d13dce352" category="paragraph">Host Utilities软件打包为一个压缩文件。您可以从下载压缩文件和文档 <block ref="c51b16e40c82542166bd05959a366a37" category="inline-link-macro-rx"></block>。ONTAP SAN主机配置提供了有关安装和设置主机实用程序以使用您的环境和协议的说明。</block>
   <block id="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="cell"><block ref="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="inline-link-macro-rx"></block></block>
   <block id="ba57f19b6b69755c2919b58188582a77" category="cell"><block ref="ba57f19b6b69755c2919b58188582a77" category="inline-link-macro-rx"></block></block>
   <block id="e8db03fc399918672bed8132e0d8ea35" category="list-text">。 <block ref="0f33c30ae119203ebbfd38575ad3015e" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
@@ -2689,12 +2673,9 @@
   <block id="d1c811acf82829db30f1d8b3e6c940d6" category="doc">SAN主机和云客户端</block>
   <block id="708c2a641aba7d3caf588312e9a41596" category="summary">此内容针对分发提供了有关如何配置连接到Cloud Volumes ONTAP 的云客户端以及连接到内部ONTAP 存储的Amazon FSX for ONTAP 和SAN主机的指南。</block>
   <block id="be2f9317bef1b02401365be22d60a02b" category="doc">SAN主机配置概述</block>
-  <block id="08d0a34cb57428b1414232e7c1592ef5" category="paragraph">此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。</block>
   <block id="ab5c1cc33879491a00632f6478216936" category="paragraph">您的SAN主机和ONTAP 存储可以位于内部、云中、也可以同时位于这两者。</block>
-  <block id="d99091ccf334938dd920fe960b4e1341" category="admonition">在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。</block>
   <block id="117bdbda976fe8b3212bc3b6327a0a1b" category="inline-link-macro">Cloud Volumes ONTAP</block>
   <block id="18cf072964a583150dd247485ba75b92" category="inline-link-macro">适用于 ONTAP 的 Amazon FSX</block>
-  <block id="aad6098c26fd28acf5ce95db0964f759" category="paragraph">例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 <block ref="5671724540e4dc98b668b1507167bffb" category="inline-link-macro-rx"></block> 或 <block ref="e817674c4b959088a38fc0d01ba3d16d" category="inline-link-macro-rx"></block> 连接到内部SAN主机或连接到SAN云客户端。</block>
   <block id="bd4300690dfdbe14b72c16ede45c8a40" category="paragraph">正确配置对于实现最佳性能和成功故障转移至关重要。</block>
   <block id="5206f5e3d376aae380267b11c8d7e8a0" category="sidebar">此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。SAN客户端和ONTAP 存储可以驻留在内部或云中。</block>
   <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">入门</block>
@@ -2766,4 +2747,23 @@
   <block id="a64644439f45078aa7c8e54709b6fb99" category="paragraph">请参见 <block ref="098b68c05e072d65de8b63c55177a5c6" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
   <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
   <block id="7b4c9d36bd8121e0d136897711d66090" category="sidebar">安装Wuhu 7.1</block>
+  <block id="1f87ccc57172166c30629890b2884f0e" category="paragraph">您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
+  <block id="1bad318175e7aa1eb67e6db2256bb9b1" category="paragraph">系统会将提取的软件放置在解压缩存储库文件的目录中。</block>
+  <block id="5bd6f64a8cbf5643612affb8bd552a8d" category="paragraph">本发行说明文档包含有关AIX Host Utilities 6.1版的最新信息、包括有关已知问题、限制、配置和管理ONTAP 存储系统的更新。</block>
+  <block id="39b3dd6edf4819881415b4ccbfcf4d58" category="paragraph">对于 Oracle Linux 7.1 Uek r4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.1 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
+  <block id="b2cff30246d08cdfde41ba01866ee693" category="list-text">从ONTAP 9.9.1 P3及更高版本开始、可提供ESXi 7.0 U3 (及更高版本) NVMe/FC支持、因为从ONTAP 9.9.1 P3开始、可提供关键NVMe中止修复(由ESXi 7.0 U3及更高版本发布)。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
+  <block id="36889db7961eacd91f01477a29a2c5ea" category="list-text">验证的输出<block ref="76b66d5f379b691153dc22425201f6ae" prefix=" " category="inline-code"></block> 命令以确保设置完成。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
+  <block id="8798c6858a1c8968b7b9cad1ace9d91a" category="list-text">将此WWID添加到/etc/multipath.conf中的"blacklist" stanza中：</block>
+  <block id="3ad269cd9c25c5c028bf155f768f0618" category="paragraph">默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 <block ref="682b92f396ad2229bd62e99c5a518610" category="inline-link-macro-rx"></block></block>
+  <block id="eae76491b6011f6e80494775aea500b6" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动/优化路径、这意味着它们由控制器提供服务、并通过所有活动路径发送I/O。</block>
+  <block id="3012ce3908219f8e726469f86858ac26" category="paragraph">对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM是存储供应商提供的代码、用于处理路径管理。在 Host Utilities 安装过程中会安装并启用此功能。</block>
+  <block id="f5188f0db18a0455b279280c37baccd9" category="list-text">解压缩文件。您可以使用<block ref="310cb972d0a51b72a4a64dd98fcc2fb1" prefix=" " category="inline-code"></block> 命令执行此操作。</block>
+  <block id="5c3a15590c180da4d9be3de55cf1bab9" category="list-text">您必须查看 <block ref="a681b254fb67a8552286997361f8b0b5" category="inline-link-macro-rx"></block> 检查已知问题。发行说明包括一个已知问题和限制列表。</block>
+  <block id="488ee7d410bfc05042cf79417f62b731" category="paragraph">此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。</block>
+  <block id="bb80358d422ec918cde74cab08e90d5c" category="admonition">在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。</block>
+  <block id="7dac0335f353ff4aea15e7349355818e" category="paragraph">例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 <block ref="5671724540e4dc98b668b1507167bffb" category="inline-link-macro-rx"></block> 或 <block ref="e817674c4b959088a38fc0d01ba3d16d" category="inline-link-macro-rx"></block> 连接到内部SAN主机或连接到SAN云客户端。</block>
+  <block id="6889073c7d1502d89a41a22f7b933a57" category="paragraph">本发行说明文档包含有关Solaris Host Utilities 6.2的最新信息、包括有关已知问题、限制、配置和管理ONTAP 存储系统的更新。</block>
+  <block id="94ed2eb93c1ea841359ebf631638ec66" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
+  <block id="a667026321ffb956d941d648c0ad659f" category="paragraph">应在主机操作系统上安装可用于每个Linux分发版的RPM软件包"libhbaapi"和"libhbalinu"。</block>
+  <block id="2e2f435df31672c9332b32b2b69afe2a" category="sidebar">Windows Host Utilities发行说明</block>
 </blocks>

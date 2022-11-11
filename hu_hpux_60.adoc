@@ -64,7 +64,7 @@ NOTE: 此工具包在 Host Utilities 的所有配置和协议中通用。因此�
 ` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`
 
 +
-系统会将提取的软件置于您将存储库文件解压缩到的目录中。
+系统会将提取的软件放置在解压缩存储库文件的目录中。
 
 . 输入以下命令以安装软件：
 +

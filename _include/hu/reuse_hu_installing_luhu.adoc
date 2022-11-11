@@ -6,6 +6,7 @@
 
 强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
+.步骤
 . 如果当前已安装 Linux Unified Host Utilities 版本，请使用以下命令将其删除：
 +
 `rpm -e NetApp_Linux_unified_host_utilities_7-1`

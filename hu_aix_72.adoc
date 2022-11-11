@@ -153,7 +153,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == 建议设置
 
-以下是 NetApp ONTAP LUN 的一些建议参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。
+以下是为 NetApp ONTAP LUN 建议的一些参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。
 
 [cols="4*"]
 |===
@@ -208,7 +208,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == MetroCluster 的建议设置
 
-默认情况下，如果 LUN 的路径不可用，则 AIX 操作系统会强制执行较短的 I/O 超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息以及对默认设置的建议更改，请参见 link:https://kb.netapp.com/app/answers/answer_view/a_id/1001318["NetApp KB1001318"^]
+默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 link:https://kb.netapp.com/app/answers/answer_view/a_id/1001318["NetApp KB1001318"^]
 
 
 
