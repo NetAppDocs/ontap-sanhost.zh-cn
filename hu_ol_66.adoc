@@ -137,7 +137,7 @@ blacklist {
         devnode "^cciss.*"
 }
 ....
-在此示例中， sda 是我们需要将其列入黑名单的本地 SCSI 磁盘。
+在此示例中、sda是需要添加到黑名单中的本地SCSI磁盘。
 
 . 运行以下命令以确定 WWID ：
 +

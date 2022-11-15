@@ -35,7 +35,6 @@
   <block id="eed881bb2a34d1ee7f7f847943028439" category="paragraph">要启动多路径守护进程，必须存在 multipath.conf 文件，但您可以使用以下命令创建一个空的零字节文件： `touch /etc/multipath.conf` 首次创建此文件时，可能需要启用并启动多路径服务。</block>
   <block id="3e62478acd97c41a7fea67ffea8ef9a1" category="paragraph">无需直接向 multipath.conf 添加任何内容，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
   <block id="3bd7fde20a9abc176890c7422cf0f77f" category="admonition">将 &lt;DevID&gt; 替换为要排除的设备的 WWID 字符串。使用以下命令确定 WWID ：</block>
-  <block id="58449f79b301eee405bcc04689e38467" category="paragraph">在此示例中， sda 是我们需要将其列入黑名单的本地 SCSI 磁盘。</block>
   <block id="4d70a817ac85626aff88bbc73d0a2deb" category="list-text">运行以下命令以确定 WWID ：</block>
   <block id="21613f1f81985ce9edca2dc6272a765e" category="paragraph">您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
   <block id="83f499a540b1323009c200d6f8cc9396" category="cell">参数</block>
@@ -413,7 +412,6 @@
   <block id="6e7eef95f0e9ee9b717340ce72d65e5b" category="paragraph">不需要直接向 `multipath.conf` 文件添加任何内容，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。</block>
   <block id="36da0e0b56843a1256e96e81029390fa" category="paragraph">您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。</block>
   <block id="32fdadaf90804487f6b463983fc1c553" category="paragraph">将 ` &lt;DevID&gt;` 替换为要排除的设备的 WWID 字符串。使用以下命令确定 WWID ：</block>
-  <block id="090f01b46aada524696024ccba0a31de" category="paragraph">在此示例中， `sda` 是需要列入黑名单的本地 SCSI 磁盘。</block>
   <block id="ff73d7e0f0c6051bbd80575105bb1cb1" category="list-text">将此 WWID 添加到 ` /etc/multipath.conf` 中的黑名单 stanza 中：</block>
   <block id="e652073cb2a43641b24496c09164f62a" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
   <block id="5fa917b25abcb73abe17905f90a2c698" category="section-title">KVM 设置</block>
@@ -1550,7 +1548,6 @@
   <block id="410267f88a5f79f5d40838a8e7a35e62" category="paragraph">从 * XenCenter 管理门户 * 启用主机多路径服务，并验证多路径服务是否已启用且正在运行。</block>
   <block id="cd96c3aa1c1e2627c438d2fe6fda056c" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。</block>
   <block id="b00ab7c17a141468a5921157cdf11ec3" category="admonition">将 * &lt;DevID&gt;* 替换为要排除的设备的 WWID 字符串。</block>
-  <block id="71b9d2719d4bd590da83c5da238b05fc" category="paragraph">在本示例中，对于 Citrix XenServer 7.x ， `sda` 是黑名单中所需的本地 SCSI 磁盘。</block>
   <block id="ec8b35f300ba884a5dff762db20c0a35" category="paragraph">使用 ` $multipathd show config` 命令查看多路径参数运行时配置。您应始终检查正在运行的配置中是否存在可能会覆盖默认设置的旧设置，尤其是在默认设置部分。</block>
   <block id="aea5fd959632948a3225c2ddd5323d43" category="paragraph">下表显示了 ONTAP LUN 的关键 * 多路径 * 参数以及所需值。如果某个主机已连接到其他供应商的 LUN ，并且这些参数中的任何一个被覆盖，则需要在专门适用于 ONTAP LUN 的 * multipath.conf* 中使用稍后的 stantzas 进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才能覆盖以下默认值，并且只有在完全了解其影响时才会覆盖这些默认值。</block>
   <block id="9d5bc46c4aa8d12cf17b1243dea3cdb8" category="paragraph">以下示例说明了如何更正被覆盖的默认值。在这种情况下， * 多路径 .conf * 文件定义了与 ONTAP LUN 不兼容的 * 路径检查程序 * 和 * 检测 _prio* 值。如果由于连接到主机的其他 SAN 阵列而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
@@ -1749,7 +1746,6 @@
   <block id="b4fb72e88112026a3055df686f0141d6" category="paragraph">本文档提供了有关使用 FC ， FCoE 和 iSCSI 协议的 Citrix 虚拟机管理程序 8 系列操作系统版本的 ONTAP SAN 主机配置设置的指导。</block>
   <block id="dfdecabe17f4f61a0c5b353fdc3dfeef" category="paragraph">Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
   <block id="4d9e4d5a080304464911deeebee0a0b3" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
-  <block id="258e01d6ca463cd89e79be409a5b9398" category="paragraph">在此示例中，对于 Citrix 虚拟机管理程序 8.x ， `sda` 是列入黑名单所需的本地 SCSI 磁盘。</block>
   <block id="891983ab249dd51fa02a51e1da92fd57" category="admonition">对于支持的配置， Citrix 虚拟机管理程序建议对所有基于 Linux 和 Windows 的子虚拟机使用 Citrix VM 工具。</block>
   <block id="39f11cb747dafe51ae2cd54386744d96" category="cell">Citrix Tracker ID</block>
   <block id="37a4830e2093543aff3053de0d030043" category="inline-link-macro">1242343</block>
@@ -2130,10 +2126,8 @@
   <block id="02ec5a6431274b50044361aad326cbdc" category="paragraph">与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：</block>
   <block id="524fa08703d908aeca5cccda70508020" category="list-text">* 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。</block>
   <block id="5ac8d4417219a758cb216b44e499a52a" category="list-text">* 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。</block>
-  <block id="237af845a336c688dd92384a771f5c92" category="paragraph">要轻松地承受 ONTAP 故障转移事件（例如 SFO ），建议通过调整 `Ctrl_los_tm` timer 来设置较长的重试时间，例如 30 分钟。详细信息如下：</block>
   <block id="9f291dc2ffc26a15b15d66dfbe7c03c7" category="list-text">验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：</block>
   <block id="cdad7a1e7e4e6d6a5603c6ee5b84a18b" category="list-text">验证其他 NVMe/TCP 启动程序 - 目标 LIF 组合是否能够成功提取发现日志页面数据。例如：</block>
-  <block id="c3f202b40a54d75b57fbe1fedd71b1e7" category="list-text">对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在连接期间使用较长的 `Ctrl_los_TMOT` 时间段（例如 30 分钟，可通过 ` -l 1800` 进行设置），以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="55ab77cd94d55aaa364453f7cf104285" category="section-title">验证 NVMe-oF</block>
   <block id="d59a70bb68888f817286630067489719" category="list-text">验证相应 ONTAP 命名空间的适当 NVMe-oF 设置（例如， `model` set to `NetApp ONTAP Controller` and `load balancing OPolicy` set to `round-robin` ）是否正确反映在主机上：</block>
   <block id="6d678a1cb8ddbf76f2e82d8950f207e7" category="list-text">验证 ONTAP 命名空间是否正确反映在主机上。例如：</block>
@@ -2383,7 +2377,6 @@
   <block id="e646e16bee8b32e6ea29e30d01970a6c" category="section-title">限制</block>
   <block id="8dc2bb86558c5fa9a6925f0d8bd82e21" category="list-text">与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这反映为Linux主机的两个主要限制：</block>
   <block id="b7c3db78c3a82d963056f99e4aa58d39" category="list-text">路径恢复后不会自动重新连接—NVMe/TCP无法自动重新连接到路径关闭后10分钟内恢复的路径、该路径超出默认值`Ctrl-los-tm`。</block>
-  <block id="fa4425742c4d1fb5d8e39e4339d06d6e" category="list-text">主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。要轻松地承受ONTAP 故障转移事件、例如NVMe/TCP的SFO、建议通过调整`Ctrl_los_tm`计时器来设置更长的重试时间、例如30分钟。</block>
   <block id="140268ba3849abd78f34f907f067407f" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的确切详细信息。</block>
   <block id="061e98174e60e8e432e858a83311d44d" category="list-text">在服务器上安装RHEL 9.0。安装完成后、验证您是否正在运行指定的RHEL 9.0内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="aa752093cf87ece20a99a98640048b70" category="list-text">安装完成后、验证您是否正在运行指定的RHEL 9.0内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
@@ -2398,7 +2391,6 @@
   <block id="7f905df84e3f641e977ad2d5240dee4b" category="list-text">主机启动后、验证`lpfc_sg_seg_cnt`是否设置为`256`。</block>
   <block id="73a7814e5695a25d9824e6de50fe0979" category="paragraph">RHEL 9.0内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这对于ONTAP 支持至关重要。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="b3cc0f8131b6dd17671baba8c63d88b6" category="paragraph">与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这反映为Linux NVMe/TCP主机上的两个主要限制：</block>
-  <block id="828f6c28a4d526b6783eecef0ac05b8a" category="list-text">主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。要轻松地承受 ONTAP 故障转移事件（例如 SFO ），建议通过调整 `Ctrl_los_tm` timer 来设置较长的重试时间，例如 30 分钟。详细信息如下：</block>
   <block id="055436915aa042f3fdf8045e013acbb5" category="list-text">验证启动程序端口是否能够通过支持的NVMe/TCP LIF提取发现日志页面数据：</block>
   <block id="351f4726c12d45250df101c8bd9578d6" category="list-text">同样、验证另一个NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据。例如：</block>
   <block id="7ce841894f1ef8447498c5c8f5b1f19a" category="section-title">验证NVMf</block>
@@ -2498,9 +2490,7 @@
   <block id="67a7c2662b17653a8ac76448e703f0b7" category="list-text">安装完成后、验证您是否正在运行指定的RHEL 8.6内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="71dcdd59971df1a5bb4dfbb60ffe2bad" category="list-text">确认启动程序端口已启动且正在运行、并且您可以看到目标LIF。</block>
   <block id="95e3f3faa5bf8e48441621d165c05044" category="paragraph">RHEL 8.6内核中包含的原生 收件箱`qla2xxx`驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。</block>
-  <block id="b964263fad43476391626a8c5994d66f" category="paragraph">要轻松地承受ONTAP 故障转移事件(例如SFO)、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。详细信息如下：</block>
   <block id="346a874868cfe5950cc070d607e10dda" category="list-text">验证其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据。例如：</block>
-  <block id="7e4e5f748eea832eccfa25b6f84c9beb" category="list-text">对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在连接期间使用较长的 `Ctrl_los_TMOT` 时间段（例如 30 分钟，可通过 ` -l 1800` 进行设置），以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="3bb5487a25f2c91e7d62566cb6026b68" category="list-text">验证 ONTAP 命名空间是否正确反映在主机上。例如：</block>
   <block id="f2af591771f10d63662bd947024ee100" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的 ANA 状态。例如：</block>
   <block id="c13733aade7c22e1d6c0fb7be8a8c754" category="list-text">验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如：</block>
@@ -2515,7 +2505,6 @@
   <block id="9c7d4fd2f8e0f3f2d80343ad47595e46" category="list-text">在服务器上安装RHEL 8.5 GA。安装完成后、验证您是否正在运行指定的RHEL 8.5 GA内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="3010e81137392b43d689728401eb1ea9" category="list-text">验证`lpfc_enable_FC4_type`是否设置为3</block>
   <block id="d5236e74852c6cce228c1229faf5ea4f" category="paragraph">RHEL 8.5 GA内核中包含的原生 收件箱`qla2xxx`驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。</block>
-  <block id="e23d82164b7ed25abb97130635815a09" category="list-text">对节点上所有受支持的NVMe/TCP启动程序-target LIF运行`nvme connect-all`命令。请确保在连接期间使用较长的`Ctrl_los_TMOT`时间段(例如30分钟、可通过`-l 1800`进行设置)、以便在路径丢失时重试较长时间。例如：</block>
   <block id="431b68e6f738b5c8bf76d7972d17685f" category="paragraph">通常、如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中、或者在相应子系统中添加了不正确的`hostnqn`字符串、则会显示此信息。</block>
   <block id="d9062f55beecc22ab1e0baaa195b1f68" category="paragraph">无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。</block>
   <block id="9b2d197e1555229882f18589d7c32cce" category="list-text">验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、`model` set to `NetApp ONTAP Controller` and load balancing `OPolicy` set to `round-robin`)是否正确反映在主机上：</block>
@@ -2554,8 +2543,6 @@
   <block id="61efa8d63e1b266809e1e79422fed58f" category="paragraph">较新的SLES15 SP4 MU内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。</block>
   <block id="859c1dcdb0decd8fe22f184abe2b92f7" category="list-text">路径恢复后无自动重新连接NVMe/TCP无法自动重新连接到路径关闭后10分钟的默认`Ctrl-los-tm`计时器之后恢复的路径。</block>
   <block id="1077e8ad3542ff8af32bed26b6b21ee8" category="list-text">主机启动期间无自动连接NVMe/TCP也无法在主机启动期间自动连接。</block>
-  <block id="bf67db93bdc191f54bf3b60580bdafe9" category="paragraph">要轻松地承受存储故障转移(Storage Failover、SFO)等ONTAP 故障转移事件、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。详细信息如下：</block>
-  <block id="bf093b1c5c4b0f979c7987042c56c3d8" category="list-text">对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在`connect-all`期间使用较长的`Ctrl_los_TMOT`时间段(例如30分钟、可通过-l 1800进行设置)、以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="b2edbac4a48e893081ffbe4cda9a7dec" category="list-text">验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、将型号设置为NetApp ONTAP 控制器并将负载平衡程序设置为轮循)是否正确反映在主机上：</block>
   <block id="0882578f9915da36a8ab5c612728ad30" category="paragraph">示例(A)：</block>
   <block id="07cf625ee23005956a460fdd83c0142d" category="list-text">如果目标LIF未在`NVMe_info`输出中显示为上述内容、请检查`/var/log/messages`和`dMesg`输出中是否存在任何可疑的NVMe/FC故障、并相应地进行报告或修复。</block>
@@ -2766,4 +2753,16 @@
   <block id="94ed2eb93c1ea841359ebf631638ec66" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="a667026321ffb956d941d648c0ad659f" category="paragraph">应在主机操作系统上安装可用于每个Linux分发版的RPM软件包"libhbaapi"和"libhbalinu"。</block>
   <block id="2e2f435df31672c9332b32b2b69afe2a" category="sidebar">Windows Host Utilities发行说明</block>
+  <block id="3972a4868b0682bd7aa086e3f90df6a5" category="paragraph">在此示例中、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
+  <block id="83b4ba657748695cb0894283702e0f3e" category="list-text">主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。</block>
+  <block id="f0f82e2793c63d13158f3daced159083" category="list-text">主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
+  <block id="b23eda8b5a2eb7f788559c0df550f0fa" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
+  <block id="30058c2cccf9fdeeb47f9d3fbf9108bf" category="paragraph">在此示例中、sda是需要添加到黑名单中的本地SCSI磁盘。</block>
+  <block id="ed53d9bb40cf906cb73ab578cb3adb1d" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
+  <block id="9ac1e2761e536d1b08b677a24976cad9" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 在期间、计时器重试时间(例如30分钟、可通过-l 1800设置)<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block> 以便在路径丢失时重试较长时间。例如：</block>
+  <block id="1272c37c0c38bd618d6d76d763f54041" category="paragraph">在本示例中、对于Citrix虚拟机管理程序8.x、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
+  <block id="1de6caecfe16b961f2f1c858579203f0" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
+  <block id="557c4124a10a18982aa7103d5c4f8b02" category="paragraph">在本示例中、对于Citrix XenServer 7.x、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
+  <block id="ad6d243201e40d0f0153f9cf8a6eca49" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
+  <block id="96e313a007231cc32cb878d3d92047fb" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
 </blocks>

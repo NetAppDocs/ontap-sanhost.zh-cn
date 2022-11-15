@@ -127,7 +127,7 @@ blacklist {
 
 NOTE: 将 * <DevID>* 替换为要排除的设备的 WWID 字符串。
 
-在此示例中，对于 Citrix 虚拟机管理程序 8.x ， `sda` 是列入黑名单所需的本地 SCSI 磁盘。
+在本示例中、对于Citrix虚拟机管理程序8.x、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
 
 . 运行以下命令以确定 WWID ：
 +

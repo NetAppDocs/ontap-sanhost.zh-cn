@@ -285,7 +285,7 @@ QLE2742 FW:v9.08.02 DVR:v10.02.07.800-k
 * 主机启动期间无自动连接NVMe/TCP也无法在主机启动期间自动连接。
 
 
-要轻松地承受存储故障转移(Storage Failover、SFO)等ONTAP 故障转移事件、建议通过调整`Ctrl_los_tm`计时器来设置较长的重试时间、例如30分钟。详细信息如下：
+您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
@@ -334,7 +334,7 @@ sectype: none
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.56
 # nvme discover -t tcp -w 192.168.2.9 -a 192.168.2.57
 ----
-. 对节点上所有受支持的 NVMe/TCP 启动程序 -target LIF 运行 `nvme connect-all` 命令。请确保在`connect-all`期间使用较长的`Ctrl_los_TMOT`时间段(例如30分钟、可通过-l 1800进行设置)、以便在发生路径丢失时重试较长时间。例如：
+. 运行 `nvme connect-all` 命令。确保设置较长的 `ctrl_loss_tmo` 在期间、计时器重试时间(例如30分钟、可通过-l 1800设置) `connect-all` 以便在路径丢失时重试较长时间。例如：
 +
 [listing]
 ----
