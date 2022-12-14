@@ -108,6 +108,7 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 当您进入 `OEM_setup_env` 模式时，命令行提示符将从美元符号变为井号，您将保持在 `OEM_setup_env` 模式，直到输入 exit 等命令将其暂停为止。
 
 +
+.示例
 `` # vioserver$ OEM_setup_env`
 
 . 如果您的配置支持 ALUA ，则可以使用它来设置路径优先级。验证是否已启用 ALUA ：
@@ -156,6 +157,7 @@ vioserver#
 ` # sanlun lun show -p`
 
 +
+.示例
 此示例显示了直连配置的 `sanlun lun show -p` 命令的典型输出。它还包括 `sanlun lun show -d hdisk9 -v` 命令，用于显示有关 hdisk9 的信息。此命令的输出已被截断。
 
 +

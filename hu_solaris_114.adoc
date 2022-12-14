@@ -74,6 +74,7 @@ host_config 命令执行以下操作：
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
+.示例
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
 
 [listing]
@@ -90,6 +91,7 @@ data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475
 
 == SAN 启动
 
+.您需要的内容
 如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。
@@ -108,6 +110,7 @@ SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动
 
 对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
 
+.示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
 
 在 OS 原生 `mpathadm show lu <lun>` 命令中，每个 LUN 的 * 访问状态 * 部分会显示路径优先级。
@@ -118,6 +121,7 @@ SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动
 
 在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
 
+.示例
 以下示例显示了 ONTAP LUN 的正确输出：
 
 对于 ASA 和非 ASA 配置， `sanlun` 命令的输出是相同的。

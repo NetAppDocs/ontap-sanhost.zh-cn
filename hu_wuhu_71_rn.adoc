@@ -93,6 +93,7 @@ link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^]
 
 您可以访问所有NetApp产品的文档、并在NetApp公司站点的产品文档页面上查找其他产品信息资源、例如技术报告和白皮书。
 
+.相关信息
 *配置和管理ONTAP 存储系统*
 
 * 。 link:https://docs.netapp.com/us-en/ontap/setup-upgrade/index.html["《ONTAP 软件设置指南》"^] 适用于您的ONTAP 版本

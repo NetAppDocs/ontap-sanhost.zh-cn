@@ -26,6 +26,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.3
 
 强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
+.您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
 .步骤
@@ -45,6 +46,7 @@ NOTE: 您可以使用此内容中提供的配置设置来配置连接到的云�
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
+.示例
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
 
 [listing]
@@ -62,6 +64,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
+.您需要的内容
 如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
@@ -91,6 +94,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
 
+.示例
 以下示例显示了 ONTAP LUN 的正确输出：
 
 [listing]
@@ -113,6 +117,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
 
+.示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
 
 [listing]
@@ -159,6 +164,7 @@ blacklist {
         devnode "^cciss.*"
 }
 ....
+.示例
 在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
 
 .步骤
@@ -242,6 +248,7 @@ blacklist {
 
 | 供应商 | NetApp 
 |===
+.示例
 以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]

@@ -25,6 +25,7 @@ blacklist {
         devnode "^cciss.*"
 }
 ....
+.示例
 在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
 
 .步骤

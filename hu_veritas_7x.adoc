@@ -32,6 +32,7 @@ summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置
 
 强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
+.您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
 .步骤
@@ -48,6 +49,7 @@ summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
+.示例
 在下图中， `sanlun show` 命令将返回 LUN 信息。
 
 [listing]
@@ -74,6 +76,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192
 
 == SAN 启动
 
+.您需要的内容
 如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 请参见 Veritas 支持门户（产品表，平台查找， HCL 表）以验证 SAN 启动配置可支持性和已知注意事项。
@@ -97,6 +100,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192
 
 您必须验证您的配置是否满足系统要求。有关详细信息、请参见NetApp互操作性表工具和Veritas HCL表。
 
+.示例
 在此示例中，使用 `vxdmpadm` 命令验证 VxDMP 多路径是否已连接 ONTAP 目标阵列。
 
 [listing]
@@ -112,6 +116,7 @@ sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
 ----
 使用 Veritas 动态多路径（ VxDMP ）时，您必须执行配置任务，将 NetApp LUN 声明为 Veritas 多路径设备。您必须安装 Veritas 为 NetApp 存储系统提供的阵列支持库（ Array Support Library ， Asl ）和阵列策略模块（ Array Policy Module ， apm ）软件包。虽然 Veritas Software Installation 会随产品一起加载默认的 ASl apm 软件包，但建议使用 Veritas 支持门户上列出的最新受支持的软件包。
 
+.示例
 以下示例显示了 Veritas 支持库（ Asl ）和阵列策略模块（ Array Policy Module ， apm ）配置。
 
 [listing]
@@ -137,6 +142,7 @@ ARRAY_TYPE  ALUA, A/A
 
 在所有 SAN 阵列（ ASA ）配置中，指向给定逻辑单元（ LUN ）的所有路径均处于活动状态并已进行优化。这意味着可以同时通过所有路径提供 I/O ，从而提高性能。
 
+.示例
 以下示例显示了 ONTAP LUN 的正确输出：
 
 [listing]
@@ -158,6 +164,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过 4 
 
 对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
 
+.示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
 
 [listing]
@@ -202,6 +209,7 @@ NetApp 建议使用以下 Veritas VxDMP 可调参数，以便在存储故障转�
 
 可以使用 ` #vxdmpadm gettune` 动态验证这些可调参数的值。
 
+.示例
 以下示例显示了 SAN 主机上的有效 VxDMP 可调参数。
 
 [listing]

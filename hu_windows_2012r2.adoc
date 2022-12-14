@@ -94,6 +94,7 @@ NOTE: 选择 MPIO 支持后， Windows Unified Host Utilities 将启用 Windows 
 
 NOTE: 只有在没有优化路径可用时，才会使用非优化路径。
 
+.示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
 
 image::nonasa.png[非 ASA]

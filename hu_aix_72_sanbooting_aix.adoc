@@ -131,6 +131,7 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 ` # sanlun lun show`
 
 +
+.示例
 此示例显示了 MPIO 多路径环境中 `sanlun lun show` 命令的典型输出。
 
 +
