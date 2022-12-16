@@ -23,10 +23,10 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 
 == 可支持性
 
-采用ANA (非对称命名空间访问)的RHEL 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在RHEL 8.7和ONTAP 上使用ANA作为目标的内核NVMe多路径中启用NVMe-oF的详细信息。
+采用ANA (非对称命名空间访问)的RHEL 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。本主题详细介绍了如何在RHEL 8.7和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用本主题中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
 
 
@@ -53,7 +53,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 == 启用内核 NVMe 多路径
 
 .步骤
-. 在服务器上安装RHEL 8.7。安装完成后、验证您是否正在运行指定的RHEL 8.7内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 在服务器上安装RHEL 8.7。
 . 安装完成后、验证您是否正在运行指定的RHEL 8.7内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
 +
 示例
@@ -194,7 +194,7 @@ FCP CMPL: xb 0000006b Err 00017f99
 
 
 
-==== 启用 1 MB I/O 大小（可选）
+==== 启用1 MB I/O大小(可选)
 
 ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是，对于 Broadcom NVMe/FC 主机 1 MB 大小的问题描述 I/O 请求， lpfc 参数 `lpfc_sg_seg_cnt` 也应从默认值 64 增加到 256 。请按照以下说明执行此操作：
 
@@ -215,7 +215,7 @@ options lpfc lpfc_sg_seg_cnt=256
 256
 ----
 +
-现在， Broadcom FC-NVMe 主机应该能够在 ONTAP 命名空间设备上发送最多 1 MB 的 I/O 请求。
+现在、Broadcom FC-NVMe主机应该能够在ONTAP 命名空间设备上发送高达1 MB的I/O请求。
 
 
 
@@ -233,7 +233,7 @@ options lpfc lpfc_sg_seg_cnt=256
 QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 ----
-. 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：
+. 验证 `ql2xnvmeenable` 已设置、这将使Marvell适配器能够使用以下命令作为NVMe/FC启动程序运行：
 +
 [listing]
 ----
@@ -469,7 +469,7 @@ NSID  UUID                                   Size
 
 
 
-=== lpfc 详细日志记录
+=== lpfc详细日志记录
 
 .步骤
 . 您可以将 `lpfc_log_verbose` 驱动程序设置为以下任意值以记录 NVMe/FC 事件：
@@ -499,7 +499,7 @@ options lpfc lpfc_log_verbose=0xf00083
 
 
 
-=== qla2xxx 详细日志记录
+=== qla2xxx详细日志记录
 
 NVMe/FC 没有与 lpfc 驱动程序类似的特定 qla2xxx 日志记录。因此，您可以使用以下步骤设置常规 qla2xxx 日志记录级别：
 
@@ -530,7 +530,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 |===
 
 
-=== 常见 NVMe-CLI 错误和解决方法
+=== 常见NVMe-CLI错误和解决方法
 
 下表显示了在 NVMe 发现， NVMe 连接或 NVMe 连接所有操作期间 `NVMe-CLI` 显示的错误以及解决方法：
 

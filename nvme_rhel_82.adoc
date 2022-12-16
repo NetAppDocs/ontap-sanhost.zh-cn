@@ -25,7 +25,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机
 对于 RHEL 8.2 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用本主题中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
 
 
