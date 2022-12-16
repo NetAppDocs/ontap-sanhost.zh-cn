@@ -38,7 +38,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.2
 
 
 
-NOTE: 您可以使用此内容中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
 
 
@@ -121,7 +121,7 @@ RHEL 8.2 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所
 # systemctl enable multipathd
 # systemctl start multipathd
 ----
-不需要直接向 `multipath.conf` 文件添加任何内容，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。
+无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
 
 您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。
 
@@ -157,9 +157,9 @@ blacklist {
 ....
 
 
-您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。
+您应始终检查 `/etc/multipath.conf` 文件中的原有设置、尤其是默认设置部分中的设置、这些设置可能会覆盖默认设置。
 
-下表显示了 ONTAP LUN 的严重 `multipathd` 参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
+下表显示了严重 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
 
 [cols="2*"]
 |===
