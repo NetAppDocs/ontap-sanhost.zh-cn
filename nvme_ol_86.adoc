@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: nvme_ol_86.html 
+keywords:  
+summary:  
+---
+= 适用于采用ONTAP 的Oracle Linux 8.6的NVMe/FC主机配置
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+如果Oracle对NVMe/FC的支持完全符合此主机操作系统版本的要求、则会发布Oracle 8.6的NVMe/FC主机配置详细信息。

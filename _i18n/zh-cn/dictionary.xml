@@ -2718,4 +2718,8 @@
   <block id="d3ac6c9b9f08add73cc79ed8987c7638" category="paragraph">请确保准确<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串将添加到NetApp阵列上的相应子系统中(通过进行验证<block ref="0e04d4bf4054a77eef58ff3d9b9e59ae" prefix=" " category="inline-code"></block> 命令)。</block>
   <block id="0fffdf54ff26eafef72a1df48bb79f76" category="paragraph">RHEL 8.7操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="e2a722d31e0e80f2dd094823eb24d448" category="cell"><block ref="f92718f463480c9c4b4291e7fd4ef19e" prefix="" category="inline-code"></block> timeout参数表示FC传输为防止远程端口丢失而应隔离的默认秒数。如果超过此值、则会从主机中删除SCSI目标。此参数值应为正整数值。但是、在RHEL 8.7中、<block ref="58fa55ed07383d23de64a931619c03fe" prefix=" " category="inline-code"></block> 文件系统将为返回负值(-1)<block ref="f92718f463480c9c4b4291e7fd4ef19e" prefix=" " category="inline-code"></block> SCSI设备的超时参数。下面是用于验证的命令行示例<block ref="f92718f463480c9c4b4291e7fd4ef19e" prefix=" " category="inline-code"></block> 运行正常的主机上的参数：<block ref="227979672a108771b68f10c269922312" prefix=" " category="inline-code"></block>。在RHEL 8.7中、此问题描述 没有临时解决策。</block>
+  <block id="0dea8ccda08dc1647ed0a458849e5cda" category="doc">适用于采用ONTAP 的Oracle Linux 8.6的NVMe/FC主机配置</block>
+  <block id="6b9300bd0ee78fc87c33ec2c07cd7201" category="paragraph">如果Oracle对NVMe/FC的支持完全符合此主机操作系统版本的要求、则会发布Oracle 8.6的NVMe/FC主机配置详细信息。</block>
+  <block id="309cf24349edc5122d2f31c53280bf27" category="doc">适用于采用ONTAP 的Oracle Linux 8.5的NVMe/FC主机配置</block>
+  <block id="0d0f40ef84bd491b0391f725ee2511e1" category="paragraph">如果Oracle对NVMe/FC的支持完全符合此主机操作系统版本的要求、则会发布Oracle 8.5的NVMe/FC主机配置详细信息。</block>
 </blocks>
