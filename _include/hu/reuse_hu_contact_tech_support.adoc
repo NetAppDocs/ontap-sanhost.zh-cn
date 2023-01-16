@@ -1,0 +1,16 @@
+= 
+:allow-uri-read: 
+
+
+如果您仍面临问题、请收集以下文件和命令输出、并联系技术支持以进行进一步的分类：
+
+[listing]
+----
+cat /sys/class/scsi_host/host*/nvme_info
+/var/log/messages
+dmesg
+nvme discover output as in:
+nvme discover --transport=fc --traddr=nn-0x200a00a098c80f09:pn-0x200b00a098c80f09 --host-traddr=nn-0x20000090fae0ec9d:pn-0x10000090fae0ec9d
+nvme list
+nvme list-subsys /dev/nvmeXnY
+----

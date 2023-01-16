@@ -26,7 +26,7 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 采用ANA (非对称命名空间访问)的RHEL 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。本主题详细介绍了如何在RHEL 8.7和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
 
 
-NOTE: 您可以使用本主题中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
 
 
@@ -526,7 +526,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1479047 | RHEL 8.x NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以通过提供来创建永久性发现控制器(POC) `-p` 选项 `nvme discover` 命令：对于指定的启动程序-目标组合、每次调用时都需要创建一个PDC `nvme discover` 命令：但是、从ONTAP 9.10.1开始、Red Hat Enterprise Linux (RHEL) 8.x NVMe-oF主机最终会在每次调用时创建重复的PD `nvme discover` 命令 `-p` 选项这会导致主机和目标上的资源浪费。 | 2087000 
+| 1479047 | RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 | 2087000 
 |===
 
 

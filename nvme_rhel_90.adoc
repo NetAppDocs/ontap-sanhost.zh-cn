@@ -26,7 +26,7 @@ summary: 如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机
 RHEL 9.0支持NVMe-oF (包括NVMe/FC和NVMe/TCP)、并且ONTAP 阵列上运行正常的存储故障转移(Storage Failovers、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVM-oF环境中的ALUA等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在RHEL 9.0和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
 
 
-NOTE: 您可以使用本主题中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
 
 
@@ -34,18 +34,6 @@ NOTE: 您可以使用本主题中提供的配置设置来配置连接到的云�
 
 * 从RHEL 9.0开始、NVMe/TCP不再是技术预览功能(与RHEL 8不同)、而是完全受支持的企业功能本身。
 * 从RHEL 9.0开始、默认情况下会为NVMe命名空间启用内核NVMe多路径、而无需显式设置(与RHEL 8不同)。
-
-
-
-
-== 限制
-
-* 与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这反映为Linux主机的两个主要限制：
-+
-** 路径恢复后不会自动重新连接—NVMe/TCP无法自动重新连接到路径关闭后10分钟内恢复的路径、该路径超出默认值`Ctrl-los-tm`。
-** 主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。
-
-
 
 
 
@@ -232,11 +220,13 @@ QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
 
 == 配置 NVMe/TCP
 
-与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这反映为Linux NVMe/TCP主机上的两个主要限制：
+与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
 
-* 路径恢复后不会自动重新连接—NVMe/TCP无法自动重新连接到路径关闭后10分钟内恢复的路径、该路径超出默认值`Ctrl-los-tm`。
-* 主机启动期间无自动连接—NVMe/TCP也无法在主机启动期间自动连接。您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：
+* * 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。
+* * 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。
 
+
+您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：
 
 .步骤
 . 验证启动程序端口是否能够通过支持的NVMe/TCP LIF提取发现日志页面数据：
@@ -302,6 +292,7 @@ sectype: none
 
 == 验证NVMf
 
+.步骤
 . 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：
 +
 [listing]
@@ -491,6 +482,17 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 # cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
 507510784
 ----
+
+
+== 已知问题
+
+[cols="10,30,30,10"]
+|===
+| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+
+
+| 1479047 | RHEL 9.0 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您运行的是ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 9.0并使用NVMe-oF主机、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 | 2087000 
+|===
 
 
 === 常见NVMe-CLI错误和解决方法
