@@ -610,7 +610,6 @@
   <block id="4d4d33d5567c483eb5e65c4545674190" category="cell"><block ref="4d4d33d5567c483eb5e65c4545674190" category="inline-link-macro-rx"></block></block>
   <block id="1669e5f0b1148e1054b39b7a819b7fdb" category="summary">介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用</block>
   <block id="5526e4fbaeff80cd5d23977ccd71e110" category="doc">将 IBM AIX 7.2 和 / 或 PowerVM （ VIOS 3.1 ）与 NetApp ONTAP 结合使用</block>
-  <block id="326165d98b3f356087f845a446619afc" category="section-title">安装 AIX/VIOS 主机实用程序</block>
   <block id="be02c5fbd2d78a32d06d7da8385cae85" category="list-text">在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 `oem_setup_env` 命令以成为 root 。</block>
   <block id="a40ecef4a09b118c1f7f8b069486d849" category="list-text">解压缩文件并提取 SAN 工具包软件包。</block>
   <block id="f79c6b17105bfd3884500ded694cb1f2" category="paragraph">SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX/PowerVM 主机的启动设备的过程。您可以将 SAN 启动 LUN 设置为在运行采用 FC 或 FCoE 协议的 AIX Host Utilities 的 AIX MPIO 环境中运行。在 AIX MPIO 环境中，用于创建 SAN 启动 LUN 并在其上安装新操作系统映像的方法可能会有所不同，具体取决于您使用的协议。</block>
@@ -1957,7 +1956,6 @@
   <block id="6a60f15d3addedaaeee9fbd5c320d06d" category="paragraph">解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit</block>
   <block id="4a74fae0987c7a6283e4b1f5c07e2bf2" category="paragraph">`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`</block>
   <block id="40cb79ed451a05fc3cb913a91c474fdc" category="list-text">安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`</block>
-  <block id="8bd93b2eff143ccd3ead742068cf4430" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后，必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。</block>
   <block id="1306166f349020a2e91d6b8afe8455fb" category="paragraph">NetApp AIX Host Utilities 6.1 是最新版本。此版本可解决先前版本中报告的内存泄漏问题描述。有关追加信息，请参见发行说明部分。</block>
   <block id="94761002a24bd6eeff8ffd9c476b4f1b" category="paragraph">`tar -xvf ntap_aix_host_utilities_6.1.tar.gz`</block>
   <block id="354315ccea353183f3cbbd3c90fe0c38" category="cell">1416221.</block>
@@ -2007,7 +2005,6 @@
   <block id="8b30a2a046838a554ec8551f6130f395" category="cell">在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
   <block id="38a445b35a68bb2b838316376b083c19" category="doc">适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置</block>
-  <block id="0f97c82c57e5402681bd180ec7889f9a" category="paragraph">ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。</block>
   <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。</block>
   <block id="087c6f6069a3f1c08cb62e3d53029f80" category="list-text">对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。</block>
   <block id="f19c49e2c5af4fdef9d76da8243928b8" category="paragraph">不支持以下配置：</block>
@@ -2501,8 +2498,6 @@
   <block id="431b68e6f738b5c8bf76d7972d17685f" category="paragraph">通常、如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中、或者在相应子系统中添加了不正确的`hostnqn`字符串、则会显示此信息。</block>
   <block id="d9062f55beecc22ab1e0baaa195b1f68" category="paragraph">无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。</block>
   <block id="9b2d197e1555229882f18589d7c32cce" category="list-text">验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、`model` set to `NetApp ONTAP Controller` and load balancing `OPolicy` set to `round-robin`)是否正确反映在主机上：</block>
-  <block id="6cbc9fed5483c62cf8d3ec78d1467ec4" category="list-text">从7.0U3c及更高版本开始、ESXi虚拟机管理程序支持NVMe/TCP功能。</block>
-  <block id="cc2bd6356672cd21ca706ee5860d746e" category="list-text">从ONTAP 9.10.1及更高版本开始、ONTAP 支持NVMe/TCP功能。</block>
   <block id="fc42d5b62a406fecb7a634ca014f42c2" category="paragraph">从7.0U3c开始、默认情况下会加载所需的NVMe/TCP模块。有关配置网络和NVMe/TCP适配器的信息、请参见VMware vSphere文档。</block>
   <block id="209ae9abdc2efd05e90e3a97a8913a9b" category="section-title">验证NVMe/TCP</block>
   <block id="e4dbb8bc2f2492f010d3f33dd68f00c8" category="list-text">验证NVMe/TCP适配器的状态。</block>
@@ -2754,4 +2749,13 @@
   <block id="de92f8bcc4d493d57927d45de496dfcd" category="cell">RHEL 8.6 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="67eaffbea4f4f435b98dfd9d82b810fe" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.6、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
   <block id="796d3a90e43ce105cbf37298c5065f7e" category="sidebar">9.1</block>
+  <block id="19c0ae184ff29a5cb77c04c8bea684af" category="list-text">从ONTAP 9.7开始、VMware vSphere版本增加了对基于光纤通道的NVMe (NVMe/FC)的支持。</block>
+  <block id="3a34596144aee2d13108623781ca1789" category="list-text">从7.0U3c开始、ESXi虚拟机管理程序支持NVMe/TCP功能。</block>
+  <block id="98f0b197b8132a81e5d6da89bc6ded25" category="list-text">从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP功能。</block>
+  <block id="8f782d5cde04c444d313ce732c4c1552" category="section-title">安装AIX/VIOS主机实用程序</block>
+  <block id="98ffdd0945470204439692dc82dc8d98" category="paragraph">在将AIX MPIO与NetApp ONTAP 存储结合使用时、必须安装AIX主机实用程序套件。</block>
+  <block id="9aab5807a16ac54dff9ec8e124181169" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。</block>
+  <block id="191896e66abb860542afaf3bc97289fc" category="section-title">SAN工具包</block>
+  <block id="01281e2990c631b64037834e8b22bd4c" category="cell">rw_timeout (磁盘)</block>
+  <block id="a97f41c78bd6ac237cc0a78dbc8e3557" category="section-title">MetroCluster 的建议设置</block>
 </blocks>

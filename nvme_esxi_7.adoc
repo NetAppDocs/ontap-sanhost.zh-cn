@@ -22,9 +22,9 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 == 可支持性
 
-* ONTAP 9.7 或更高版本支持基于光纤通道的 NVMe （ NVMe/FC ）。
-* 从7.0U3c及更高版本开始、ESXi虚拟机管理程序支持NVMe/TCP功能。
-* 从ONTAP 9.10.1及更高版本开始、ONTAP 支持NVMe/TCP功能。
+* 从ONTAP 9.7开始、VMware vSphere版本增加了对基于光纤通道的NVMe (NVMe/FC)的支持。
+* 从7.0U3c开始、ESXi虚拟机管理程序支持NVMe/TCP功能。
+* 从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP功能。
 
 
 
