@@ -248,7 +248,6 @@
   <block id="d58a6348af94cbfcbf65485358c4a07d" category="list-text">验证 ANA 路径的状态。</block>
   <block id="61713dcee5b85916fbe59e04b45b37d0" category="list-text">验证适用于 ONTAP 设备的 NetApp 插件。</block>
   <block id="4d1a5dc427910a8f8e64f05cd745f04b" category="section-title">为 Broadcom NVMe/FC 启用 1 MB I/O 大小</block>
-  <block id="bad43103531df08ecaca22cdac67f137" category="paragraph">必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O</block>
   <block id="b2c535b12eae5c28a532e07cea962627" category="list-text">将 `lpfc_sg_seg_cnt` 参数设置为 256 。</block>
   <block id="d73152e7a2f3eb9fac20bc98a1ee9686" category="list-text">运行 `dracut -f` 命令，然后重新启动主机。</block>
   <block id="681e25842821aed88b9536b9cde94730" category="list-text">验证 `lpfc_sg_seg_cnt` 是否为 256 。</block>
@@ -279,9 +278,6 @@
   <block id="6218e0ecfb5322fccd6e215e3e9134d7" category="list-text">主机启动后，验证 lpfc_sg_seg_cnt 是否设置为 256 。</block>
   <block id="eba3a332cb321562f0fc9dfcc5b1c84c" category="list-text">验证您是否正在使用建议的 Broadcom lpfc 固件以及收件箱驱动程序。</block>
   <block id="abdf9c787f0ce3f5d12b402c6e131791" category="section-title">lpfc 详细日志记录</block>
-  <block id="3ff6ab719d63a53e948c2878cd3cb0fe" category="list-text">您可以将 lpfc_log_verbose 驱动程序设置为以下任意值以记录 NVMe/FC 事件。</block>
-  <block id="59180a385bbc70f0147d8dcc2e40392c" category="list-text">设置上述任一值后，运行 `dracut-f` 并重新启动主机。</block>
-  <block id="43a1ae88ecbcd358290c6d654acd3f5b" category="list-text">重新启动后，验证设置。</block>
   <block id="5fc5720a1a04d98fd8788b6a94e31e4e" category="summary">使用 ONTAP 为 Oracle Linux 7.8 设置 VME/FC 主机配置，包括示例</block>
   <block id="62eef3d72485420aaef57ae6f4135044" category="doc">适用于采用 ONTAP 的 Oracle Linux 7.8 的 NVMe/FC 主机配置</block>
   <block id="cddebb777dcce0d200e1342fa6f70131" category="list-text">默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 7.8 上启用 NVMe/FC 的章节提供了相关步骤。</block>
@@ -2758,4 +2754,18 @@
   <block id="191896e66abb860542afaf3bc97289fc" category="section-title">SAN工具包</block>
   <block id="01281e2990c631b64037834e8b22bd4c" category="cell">rw_timeout (磁盘)</block>
   <block id="a97f41c78bd6ac237cc0a78dbc8e3557" category="section-title">MetroCluster 的建议设置</block>
+  <block id="ff1a4459902829746c9feae2fe88b4a7" category="paragraph">。<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block> 要使主机达到问题描述 1 MB大小I/O、必须将参数设置为256</block>
+  <block id="53a86d5c1b5a726e2014e8e7789d3e96" category="list-text">设置<block ref="6a6d27f670629373aedb61a672b398f8" prefix=" " category="inline-code"></block> 将驱动程序设置为以下任意值以记录NVMe/FC事件。</block>
+  <block id="ac680a7503424f513ba95ee46f269bd8" category="list-text">设置值后、运行<block ref="212b9aebab74c7199bb59cfbc6fb92f9" prefix=" " category="inline-code"></block> 命令并重新启动主机。</block>
+  <block id="814cc8b053fd0d3c9d35f87411477d5f" category="list-text">验证设置。</block>
+  <block id="9c2f86beda575f2401b682f52ff52734" category="paragraph">显示的错误<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 期间<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>，<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>或<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 下表显示了操作和解决方法：</block>
+  <block id="f9ffceb0310fe0428aa1a0ea1847693f" category="cell">验证是否对使用了正确的语法<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>，<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>，和<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令</block>
+  <block id="399c48f51a24097568f4d7f84e8946fb" category="cell">可能会出现多个问题、例如、为NVMe命令提供错误的参数是常见原因之一。</block>
+  <block id="79083cbc1a1d7e0e24669a1f41c3b968" category="list-text">确认已将正确的参数(例如、正确的WWNN字符串、WWPN字符串等)传递给命令。</block>
+  <block id="ff92d70f29c0c6b352a2a9817436b2c4" category="list-text">如果参数正确、但您仍看到此错误、请检查是否存在<block ref="3716e18360493a14deb6b4391cc3652f" prefix=" " category="inline-code"></block> 命令输出正确、NVMe启动程序显示为<block ref="00d23a76e43b46dae9ec7aa9dcbebb32" prefix=" " category="inline-code"></block>和NVMe/FC目标LIF会正确显示在远程端口部分下。示例</block>
+  <block id="0b95c202146fcc6556b5e4cc0c2b26dd" category="list-text">目标LIF在中未显示如上<block ref="86265333b9052ec5fde056eeddb3a5ef" prefix=" " category="inline-code"></block> 命令输出、请检查<block ref="452905a167cf4509fd08acb964fdb20c" prefix=" " category="inline-code"></block> 和<block ref="6b8cf905772edc32b7a7d638713c0075" prefix=" " category="inline-code"></block> 命令输出、用于报告任何可疑的NVMe/FC故障、并相应地进行报告或修复。</block>
+  <block id="5f07f9d3d72a7357334dba748c6baebc" category="paragraph">通常会在出现时观察到<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串未添加到NetApp阵列上的相应子系统或不正确<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串已添加到相应的子系统中。</block>
+  <block id="c25aa2a919e3a63ca18f5d2ba0d93494" category="paragraph">验证是否准确<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串已添加到NetApp阵列上的相应子系统中(使用进行验证<block ref="0e04d4bf4054a77eef58ff3d9b9e59ae" prefix=" " category="inline-code"></block> 命令)。</block>
+  <block id="d517a34201e69d7cbd98e82863cbb016" category="paragraph">在控制器关联或指定操作已创建或正在创建时观察到。在上述自动连接脚本中可能会发生这种情况。</block>
+  <block id="ed88a4dfde1eda848d0cd0880569e29d" category="paragraph">无尝试运行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令。适用于<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block> 和<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>、运行<block ref="b0f1705bbfcfb10368af21a019072318" prefix=" " category="inline-code"></block> 命令以验证是否已创建命名空间设备并将其显示在主机上。</block>
 </blocks>

@@ -371,7 +371,7 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 == lpfc 详细日志记录
 
-. 您可以将 lpfc_log_verbose 驱动程序设置为以下任意值以记录 NVMe/FC 事件。
+. 设置 `lpfc_log_verbose` 将驱动程序设置为以下任意值以记录NVMe/FC事件。
 +
 [listing]
 ----
@@ -380,8 +380,8 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 #define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
 #define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
 ----
-. 设置上述任一值后，运行 `dracut-f` 并重新启动主机。
-. 重新启动后，验证设置。
+. 设置值后、运行 `dracut-f` 命令并重新启动主机。
+. 验证设置。
 +
 [listing]
 ----

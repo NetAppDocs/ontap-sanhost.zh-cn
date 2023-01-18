@@ -236,7 +236,7 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 == 为 Broadcom NVMe/FC 启用 1 MB I/O 大小
 
-必须将 lpfc_sg_seg_cnt 参数设置为 256 ，主机才能使用问题描述 1 MB 大小的 I/O
+。 `lpfc_sg_seg_cnt` 要使主机达到问题描述 1 MB大小I/O、必须将参数设置为256
 
 .步骤
 . 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
