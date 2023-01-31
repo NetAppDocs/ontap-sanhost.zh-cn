@@ -149,7 +149,6 @@
   <block id="d73e6214e3336f5200c990aa71164cec" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。</block>
   <block id="5526d07285513042d4092f2ededbb3d5" category="list-text">在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。</block>
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">NetApp 互操作性表</block>
-  <block id="5a691625528023b117e33add8f4779da" category="section-title">建议的虚拟化设置</block>
   <block id="a63c36dd82631ec1965478d89094624d" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
   <block id="d814467c80971fad7dc38d7544ce98d0" category="paragraph">要验证修补程序，请执行以下操作：</block>
   <block id="9f6b080eca87f7396d496ea0c81b7e3e" category="list-text">创建 zpool 。</block>
@@ -1990,11 +1989,7 @@
   <block id="7818dfcab7a1c05d51aa00ac15f3beac" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。` /kernel/drv/fp.conf` 中的默认设置更改为 mpxio-disable="no" 。</block>
   <block id="1014a6a04423d551549d409e08fbcc51" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
   <block id="26aa8c05766be362fe2c469284c66a45" category="paragraph">如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 `vDC.conf` 的内容。</block>
-  <block id="83b783cc8aa7959a24d34b681bbc1fd2" category="section-title">SnapMirror 业务连续性的建议设置</block>
-  <block id="0f82632d4a7c23010dbe44e368821348" category="paragraph">为了确保在 SnapMirror 业务连续性（ SM-BC ）环境中发生计划外站点故障转移切换时 Solaris 客户端应用程序不会造成中断，需要在 Solaris 11.4 主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` ，以防止执行检测到冲突的代码路径。</block>
   <block id="025006946b1c53786cbb29eef3d30229" category="paragraph">按照说明配置 override 参数：</block>
-  <block id="04b92c9c817cdf34e3eacbf5cd765484" category="list-text">为连接到主机的 NetApp 存储类型创建配置文件 ` /etc/driver/drv/scsi_vhci.conf` ，并输入类似于以下内容的条目：</block>
-  <block id="b6fdbb065aa5e5c1bf0f5af8ad73ca53" category="list-text">使用 `devprop` 和 `mdb` 命令验证是否已成功应用覆盖：</block>
   <block id="570f5761e2e0bfb396196b06d19e21b0" category="paragraph">`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl</block>
   <block id="5492ce934067a932652b5c7aa5dd991b" category="inline-link">Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置</block>
   <block id="7fed5db563dfce62e3512e9c6fe716c1" category="cell">"Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 "</block>
@@ -2029,7 +2024,6 @@
   <block id="bb07e47b42aa48376a913354e1a94c0f" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp <block ref="9c0611c5ceabd8da2106dbd75573cd48" category="inline-link-macro-rx"></block>。</block>
   <block id="692dca145cf34dacba629a9ddf6d4c42" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
   <block id="73710dbb0bb38e18d8eb3c739564246e" category="list-text">仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block>。</block>
-  <block id="2a8cf5b2d9486c637aaa9e7f5fb2bbf3" category="admonition">应用 `scsI-vhcI-failover-override` 后， `conf` 将添加到 `svl_fPS_name` 中。有关追加信息以及对默认设置的建议更改，请参阅 NetApp 知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
   <block id="f58813ca14ecba2def986836fee74fc0" category="paragraph">适用于 Oracle Linux 8.1 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.1 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="0a9d709578599cebfffb10775d3641a7" category="list-text">安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="3a70a917bfcb66912a844601f3334965" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
@@ -2083,7 +2077,6 @@
   <block id="53e0316343afe978271ccd43b743d05a" category="paragraph">在 ONTAP 9.6 及更高版本上， SLES15 SP2 支持 NVMe/FC 。SLES15 SP2 主机可以通过相同的光纤通道启动程序适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。</block>
   <block id="443e8164d670e55b2388725ef1a0bda5" category="paragraph">默认情况下， SLES15 SP3 等 SLES 主机上已启用内核 NVMe 多路径。因此，此处不需要其他设置。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
   <block id="6332394e52d860951e446b20a9580794" category="section-title">安装 Linux Unified Host Utilities</block>
-  <block id="2bde94f95676c1c2bd32242e8415c1f8" category="admonition">从 ONTAP 9.1.1 开始， Solaris 11.4 主机支持 SM-BC 设置配置。</block>
   <block id="b2868986ab4f89d873eb88548fa648bb" category="cell">Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。</block>
   <block id="dd31b82b57542d64583398514e1838f4" category="section-title">启用 NVMe/FC</block>
   <block id="6d2964de8c046289cdcfaebf91369e08" category="section-title">为 NVMe/FC 配置 Broadcom FC 适配器</block>
@@ -2768,4 +2761,15 @@
   <block id="c25aa2a919e3a63ca18f5d2ba0d93494" category="paragraph">验证是否准确<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串已添加到NetApp阵列上的相应子系统中(使用进行验证<block ref="0e04d4bf4054a77eef58ff3d9b9e59ae" prefix=" " category="inline-code"></block> 命令)。</block>
   <block id="d517a34201e69d7cbd98e82863cbb016" category="paragraph">在控制器关联或指定操作已创建或正在创建时观察到。在上述自动连接脚本中可能会发生这种情况。</block>
   <block id="ed88a4dfde1eda848d0cd0880569e29d" category="paragraph">无尝试运行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令。适用于<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block> 和<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>、运行<block ref="b0f1705bbfcfb10368af21a019072318" prefix=" " category="inline-code"></block> 命令以验证是否已创建命名空间设备并将其显示在主机上。</block>
+  <block id="46a8331e5e839c47acb3298049532616" category="section-title">Oracle Solaris虚拟化</block>
+  <block id="1b047686d1675f4b3beb6b06153998c1" category="section-title">建议的虚拟化设置</block>
+  <block id="23013fc45b1e28aeba8b4521f80156eb" category="section-title">SnapMirror业务连续性的建议设置</block>
+  <block id="32553d76838b87cefddf124e0799eafb" category="paragraph">为了确保在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时Solaris客户端应用程序不会造成中断、需要在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块–<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
+  <block id="0dfb4cdaba75a3cede493d07bb6a34a7" category="admonition">从ONTAP 9.1.1开始、Solaris 11.3主机支持SM-BC设置配置。</block>
+  <block id="7682043e346a0976ad107c7cb3989145" category="list-text">创建配置文件<block ref="2c50293ac08c6ad6b30ce2ba7a8fcd9c" prefix=" " category="inline-code"></block> 对于连接到主机的NetApp存储类型、此条目类似于以下内容：</block>
+  <block id="05e4ba462549c2424bbff74659b276f2" category="list-text">使用<block ref="01fe732856e5259c0c505f9054c784ba" prefix=" " category="inline-code"></block> 和<block ref="801693b1d56b19d77272b3c6db46a751" prefix=" " category="inline-code"></block> 用于验证是否已成功应用覆盖参数的命令：</block>
+  <block id="7f7d67d4a4b1712dc7bf97b923fea01b" category="admonition"><block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix="" category="inline-code"></block> 将添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block> 时间<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
+  <block id="ca9ed2ccbdcc305e9773420d7547b568" category="paragraph">为了确保在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时Solaris客户端应用程序不会造成中断、需要在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块–<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
+  <block id="976902513d73f70373bf832d81070379" category="admonition">从ONTAP 9.1.1开始、Solaris 11.4主机支持SM-BC设置配置。</block>
+  <block id="fbd29cc67321a256f7cc8237fc832a9b" category="list-text">使用 ...<block ref="01fe732856e5259c0c505f9054c784ba" prefix=" " category="inline-code"></block> 和<block ref="801693b1d56b19d77272b3c6db46a751" prefix=" " category="inline-code"></block> 用于验证是否已成功应用覆盖参数的命令：</block>
 </blocks>

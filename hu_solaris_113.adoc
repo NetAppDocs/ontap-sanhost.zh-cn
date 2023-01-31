@@ -70,7 +70,7 @@ summary: 介绍如何安装 Solaris 主机实用程序
 
 
 
-== SAN 工具包
+== SAN工具包
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
@@ -182,7 +182,7 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 
 
-== Oracle Solaris 虚拟化
+== Oracle Solaris虚拟化
 
 * Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。
 * 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
@@ -210,6 +210,40 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 
 NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提供了修补程序。如果需要帮助确定最佳内核修补程序，请联系 Oracle 。
+
+
+
+== SnapMirror业务连续性的建议设置
+
+为了确保在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时Solaris客户端应用程序不会造成中断、需要在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块– `f_tpgs` 以防止执行检测到冲突的代码路径。
+
+
+NOTE: 从ONTAP 9.1.1开始、Solaris 11.3主机支持SM-BC设置配置。
+
+按照说明配置 override 参数：
+
+.步骤
+. 创建配置文件 `/etc/driver/drv/scsi_vhci.conf` 对于连接到主机的NetApp存储类型、此条目类似于以下内容：
++
+[listing]
+----
+scsi-vhci-failover-override =
+"NETAPP  LUN","f_tpgs"
+----
+. 使用 `devprop` 和 `mdb` 用于验证是否已成功应用覆盖参数的命令：
++
+`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl
+
++
+[listing]
+----
+svl_lun_wwn = 0xa002a1c8960 "600a098038313477543f524539787938"
+svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
+----
+
+
+
+NOTE: `conf` 将添加到 `svl_fops_name` 时间 `scsi-vhci-failover-override` 已应用。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
 
 
 
