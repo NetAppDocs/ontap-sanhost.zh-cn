@@ -178,7 +178,7 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 === MetroCluster 的建议设置
 
-默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp https://kb.netapp.com/app/answers/answer_view/a_id/1001373/loc/en_US["KB1001373"^]。
+默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制 `fcp_offline_delay` 参数。的默认值 `fcp_offline_delay` 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值为 `fcp_offline_delay` 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关追加信息 以及对默认设置的建议更改、请参见NetApp https://kb.netapp.com/app/answers/answer_view/a_id/1001373/loc/en_US["KB1001373"^]。
 
 
 
@@ -215,7 +215,7 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 
 == SnapMirror业务连续性的建议设置
 
-为了确保在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时Solaris客户端应用程序不会造成中断、需要在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块– `f_tpgs` 以防止执行检测到冲突的代码路径。
+要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` 以防止执行检测到冲突的代码路径。
 
 
 NOTE: 从ONTAP 9.1.1开始、Solaris 11.3主机支持SM-BC设置配置。
@@ -243,7 +243,7 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: `conf` 将添加到 `svl_fops_name` 时间 `scsi-vhci-failover-override` 已应用。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
+NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name`。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
 
 
 

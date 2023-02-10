@@ -215,7 +215,7 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 
 == SnapMirror业务连续性的建议设置
 
-为了确保在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时Solaris客户端应用程序不会造成中断、需要在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块– `f_tpgs` 以防止执行检测到冲突的代码路径。
+要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` 以防止执行检测到冲突的代码路径。
 
 
 NOTE: 从ONTAP 9.1.1开始、Solaris 11.4主机支持SM-BC设置配置。
@@ -229,7 +229,7 @@ NOTE: 从ONTAP 9.1.1开始、Solaris 11.4主机支持SM-BC设置配置。
 scsi-vhci-failover-override =
 "NETAPP  LUN","f_tpgs"
 ----
-. 使用 ... `devprop` 和 `mdb` 用于验证是否已成功应用覆盖参数的命令：
+. 使用 `devprop` 和 `mdb` 用于验证是否已成功应用覆盖参数的命令：
 +
 `root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl
 
@@ -242,7 +242,7 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: `conf` 将添加到 `svl_fops_name` 时间 `scsi-vhci-failover-override` 已应用。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
+NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name` 。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
 
 
 

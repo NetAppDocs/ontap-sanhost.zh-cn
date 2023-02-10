@@ -463,34 +463,42 @@ NSID  UUID                                   Size
 
 
 
+== 已知问题
+
+[cols="10,30,30,10"]
+|===
+| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+
+
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"] | RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 | 2087000 
+|===
+
+
 == 故障排除
 
-在对任何NVMe/FC故障开始任何故障排除之前、请确保您运行的配置符合IMT 规范、然后继续执行以下步骤以调试任何主机端问题。
+在对任何NVMe/FC故障开始任何故障排除之前、请确保运行的配置符合互操作性表工具(IMT)规范、然后继续执行以下步骤以调试任何主机端问题。
 
 
 
 === lpfc详细日志记录
 
 .步骤
-. 您可以将 `lpfc_log_verbose` 驱动程序设置为以下任意值以记录 NVMe/FC 事件：
+. 设置 `lpfc_log_verbose` 将驱动程序设置为以下任意值以记录NVMe/FC事件。
 +
 [listing]
 ----
-
 #define LOG_NVME 0x00100000 /* NVME general events. */
 #define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
 #define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
 #define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
-
 ----
-. 设置上述任一值后，运行 `dracut-f` 命令重新创建 `initramfs` 并重新启动主机。
-. 重新启动后，验证设置。
+. 设置值后、运行 `dracut-f` 命令并重新启动主机。
+. 验证设置。
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_log_verbose=0xf00083
-
 
 # cat /sys/module/lpfc/parameters/lpfc_log_verbose
 15728771
@@ -501,7 +509,7 @@ options lpfc lpfc_log_verbose=0xf00083
 
 === qla2xxx详细日志记录
 
-NVMe/FC 没有与 lpfc 驱动程序类似的特定 qla2xxx 日志记录。因此，您可以使用以下步骤设置常规 qla2xxx 日志记录级别：
+NVMe/FC没有与类似的特定qla2xxx日志记录 `lpfc` 驱动程序。因此、您可以使用以下步骤设置常规qla2xxx日志记录级别：
 
 .步骤
 . 将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。
@@ -519,32 +527,21 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 
 
 
-== 已知问题和限制
-
-[cols="10,30,30,10"]
-|===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
-
-
-| 1479047 | RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 | 2087000 
-|===
-
-
 === 常见NVMe-CLI错误和解决方法
 
-下表显示了在 NVMe 发现， NVMe 连接或 NVMe 连接所有操作期间 `NVMe-CLI` 显示的错误以及解决方法：
+显示的错误 `nvme-cli` 期间 `nvme discover`， `nvme connect`或 `nvme connect-all` 下表显示了操作和解决方法：
 
 [cols="20, 20, 50"]
 |===
 | `NVMe-CLI` 显示的错误 | 可能的发生原因 | 临时解决策 
 
 
-| `无法写入 /dev/nve-Fabric ：参数` 无效 | 语法不正确 | 确保对上述NVMe命令使用正确的语法。 
+| `无法写入 /dev/nve-Fabric ：参数` 无效 | 语法不正确 | 验证是否对使用了正确的语法 `nvme discover`， `nvme connect`，和 `nvme connect-all` 命令 
 
 
-| `无法写入 /dev/nve-Fabric ：没有此类文件或目录` | 多个问题可能会触发此问题。为NVMe命令提供错误的参数是常见原因之一。  a| 
-* 确保已将正确的参数(例如正确的WWNN字符串、WWPN字符串等)传递给命令。
-* 如果参数正确，但您仍看到此错误，请检查 ` /sys/class/scsi_host/host*/nve_info` 输出是否正确， NVMe 启动程序是否显示为 `Enabled` ， NVMe/FC 目标 LIF 是否正确显示在此处的远程端口部分下。示例
+| `无法写入 /dev/nve-Fabric ：没有此类文件或目录` | 可能会出现多个问题、例如、为NVMe命令提供错误的参数是常见原因之一。  a| 
+* 确认已将正确的参数(例如、正确的WWNN字符串、WWPN字符串等)传递给命令。
+* 如果参数正确、但您仍看到此错误、请检查是否存在 `/sys/class/scsi_host/host*/nvme_info` 命令输出正确、NVMe启动程序显示为 `Enabled`和NVMe/FC目标LIF会正确显示在远程端口部分下。示例
 +
 [listing]
 ----
@@ -565,29 +562,29 @@ LS: Xmt 0000000000000006 Cmpl 0000000000000006
 FCP: Rd 0000000000000073 Wr 0000000000000005 IO 0000000000000031
 Cmpl 00000000000000a8 Outstanding 0000000000000001
 ----
-* 如果目标 LIF 未在 nve_info 输出中显示为上述内容，请检查 ` /var/log/messages` 和 `dMesg` 输出中是否存在任何可疑的 NVMe/FC 故障，并相应地进行报告或修复。
+* 目标LIF在中未显示如上 `nvme_info` 命令输出、请检查 `/var/log/messages` 和 `dmesg` 命令输出、用于报告任何可疑的NVMe/FC故障、并相应地进行报告或修复。
 
 
 
 
 | `没有要提取的发现日志条目`  a| 
-通常、如果未将`/etc/nve/hostnqn`字符串添加到NetApp阵列上的相应子系统中、或者在相应子系统中添加了不正确的`hostnqn`字符串、则会显示此信息。
+通常会在出现时观察到 `/etc/nvme/hostnqn` 字符串未添加到NetApp阵列上的相应子系统或不正确 `hostnqn` 字符串已添加到相应的子系统中。
  a| 
-请确保准确 `/etc/nvme/hostnqn` 字符串将添加到NetApp阵列上的相应子系统中(通过进行验证 `vserver nvme subsystem host show` 命令)。
+验证是否准确 `/etc/nvme/hostnqn` 字符串已添加到NetApp阵列上的相应子系统中(使用进行验证 `vserver nvme subsystem host show` 命令)。
 
 
 
 | `无法写入 /dev/nve-Fabric ：操作已在进行中`  a| 
-如果控制器关联或指定操作已创建或正在创建、请注意。在上述自动连接脚本中可能会发生这种情况。
+在控制器关联或指定操作已创建或正在创建时观察到。在上述自动连接脚本中可能会发生这种情况。
  a| 
-无对于`NVMe discover`、请尝试在一段时间后运行此命令。对于`nvme connect`和`connect-all`、运行`nvme list`命令以验证是否已在主机上创建并显示命名空间设备。
+无尝试运行 `nvme discover` 命令。适用于 `nvme connect` 和 `connect-all`、运行 `nvme list` 命令以验证是否已创建命名空间设备并将其显示在主机上。
 
 |===
 
 
 === 何时联系技术支持
 
-如果您仍面临问题，请收集以下文件和命令输出，并联系技术支持以进行进一步的分类：
+如果您仍面临问题、请收集以下文件和命令输出、并联系技术支持以进行进一步的分类：
 
 [listing]
 ----
