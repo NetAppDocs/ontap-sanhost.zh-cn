@@ -50,6 +50,11 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 [listing]
 ----
 # sanlun lun show all
+----
+示例输出：
+
+[listing]
+----
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
 -------------------------------------------------------------------------

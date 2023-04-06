@@ -54,6 +54,11 @@ Linux Unified Host Utilities 是一款 NetApp 主机软件，可在 Linux 主机
 [listing]
 ----
 # sanlun lun show all
+----
+示例输出：
+
+[listing]
+----
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
 -------------------------------------------------------------------------

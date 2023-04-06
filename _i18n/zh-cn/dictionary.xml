@@ -2756,9 +2756,6 @@
   <block id="e42d2937239f99af3555e447c690bae4" category="section-title">启用1 MB I/O大小</block>
   <block id="4e607aa60f743cf23d102c38d262e0ce" category="section-title">为NVMe/FC配置Marvell/QLogic FC适配器</block>
   <block id="dcf9c1daaefaae22f7202d217cd05be1" category="list-text">请验证<block ref="a8961a0cb8d5dfd91556db806f0f2cfc" prefix=" " category="inline-code"></block> 设置此项可使Marvell适配器用作NVMe/FC启动程序：</block>
-  <block id="e98cbaaa1dad7fa881f7b9e5dc526195" category="list-text">*恢复路径后不会自动重新连接*- NVMe/TCP无法自动重新连接到已恢复的默认路径<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block> 路径关闭后10分钟的计时器。</block>
-  <block id="d2022b31505ee91b7e27d079c2942aec" category="list-text">*主机启动期间无自动连接*- NVMe/TCP无法在主机启动期间自动连接。</block>
-  <block id="a4ab86f49ce98a35d17bd2f072f94439" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加的值来增加重试期限<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 使用以下操作步骤 的计时器：</block>
   <block id="497514b0e075b1b4f0a02b0a0bdc49c3" category="list-text">验证启动程序端口是否能够通过支持的NVMe/TCP LIF提取发现日志页面数据。</block>
   <block id="cc1376f3d88929c0b6332513de3fdbc9" category="list-text">同样、验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据。示例、</block>
   <block id="7f6f90fe10241433c68e7ce29b87dbde" category="list-text">现在运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。请确保您经过的时间更长<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 句点(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block> 以便在路径丢失时重试较长时间。例如：</block>
@@ -2881,4 +2878,44 @@
   <block id="acad552cc1f69d130b13381f823afd65" category="list-text"><block ref="acad552cc1f69d130b13381f823afd65" category="inline-link-macro-rx"></block></block>
   <block id="c44700394b9a4063439bc92ea42d5e41" category="inline-link-macro">Windows注意事项</block>
   <block id="9d9a9c7064b8193ac433a5365fe1afdb" category="list-text"><block ref="9d9a9c7064b8193ac433a5365fe1afdb" category="inline-link-macro-rx"></block></block>
+  <block id="8637d6c1f3e0436f7f2ec935b829bd22" category="paragraph">示例输出：</block>
+  <block id="4c4c3dde0aa2241b7309f48a51b17be1" category="paragraph">NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。</block>
+  <block id="e5bb15bb11bc9d2f4a5298c657566227" category="summary">介绍如何在ONTAP 中使用Oracle Linux 9.0</block>
+  <block id="4218cca0e66f5dacb43716e0a9523276" category="doc">将Oracle Linux 9.0与NetApp ONTAP 结合使用</block>
+  <block id="70c435210209e4fcc06e3525a39366c4" category="paragraph">安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供sanlun实用程序、可帮助您管理LUN和HBA。sanlun命令可返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
+  <block id="768382c1e455944bfcfdcebd2c7be7af" category="paragraph">在以下示例中、sanlun lun show命令返回LUN信息。</block>
+  <block id="ae8e81252a704349cea5f061e9fb652e" category="paragraph">对于Oracle Linux (OL) 9.0<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。对OL 9.0进行了编译、其中包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="5e51169d33c14ff0aaa1bdcad247d216" category="paragraph">以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。</block>
+  <block id="2722dd408e2c6dddce120893d4c5c0a7" category="paragraph">Oracle Linux 9.0操作系统经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
+  <block id="834ccc84967581d1336062ada79c9a0e" category="admonition">要配置Oracle Linux 9.0 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="db48836fc998d5e9210c21f83870f464" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 9.0。</block>
+  <block id="2de4eb9b3af281c4790a039cf2f92eb7" category="section-title">KVM设置</block>
+  <block id="fdf71d22ca12e1b94c3cffe88a22f330" category="paragraph">Oracle Linux 9.0没有已知问题。</block>
+  <block id="e5d062225c58cec8d22b3128331f0488" category="paragraph">ASM镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。有关详细信息、请参见ONTAP 上的Oracle数据库。</block>
+  <block id="678b361384466d6bf28f930dd514a9a8" category="doc">适用于采用ONTAP 的Oracle Linux 9.0的NVMe/FC主机配置</block>
+  <block id="5cb5911912e86cb36a8fd5e61044fcf9" category="paragraph">采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 9.0支持基于网络结构的NVMe (NVMe-oF)、包括NVMe/FC和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="2cbaf680f82c54fd6fb7778f0101ab88" category="paragraph">有关支持的配置的其他详细信息、请参见 <block ref="aaa18d9ccb38f09094f0c241a8585efd" category="inline-link-macro-rx"></block>。</block>
+  <block id="55fb7862f01474277c3620f9debfb3d5" category="list-text">默认情况下、Oracle Linux 9.0为NVMe命名空间启用了内核NVMe多路径、因此无需显式设置。</block>
+  <block id="b064015a3282fc489c69be4a7699cc91" category="section-title">验证软件版本</block>
+  <block id="b76db361f4ec79f85164719f414b064f" category="paragraph">您可以使用以下操作步骤 验证支持的最低OL 9.0软件版本。</block>
+  <block id="ed14e1c5f9c2e5c334a5bff4288d87ce" category="list-text">在服务器上安装Oracle Linux 9.0 GA。安装完成后、验证您是否正在运行指定的Oracle Linux 9.0 GA内核。</block>
+  <block id="52b5830420efb96c3a91beb52bac3b23" category="paragraph">*示例输出：*</block>
+  <block id="2dae71c1d86116eab552b9b056780e26" category="list-text">在Oracle Linux 9.0主机上、检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串位于<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="256141e56255da4626b3cd641b2f785a" category="list-text">验证是否已<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串与匹配<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> ONTAP 阵列上对应子系统的字符串：</block>
+  <block id="79894377ddb5e7ce912ed785003b69fe" category="admonition">如果<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串不匹配、您应使用<block ref="f7aa1d6bd51ada390168cd39c4c09b91" prefix=" " category="inline-code"></block> 用于更新的命令<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 要匹配的相应ONTAP 阵列子系统上的字符串<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串自<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 在主机上。</block>
+  <block id="d56e4e530b3041c524f4212efc9efc17" category="paragraph">您可以为Broadcom/Emulex适配器或Marvell/qlogic适配器配置NVMe/FC。</block>
+  <block id="2f749c740a41c151c1485b84206264ca" category="list-text">验证您使用的是支持的适配器型号。</block>
+  <block id="fd3cbdb4a32644d25b951ee0b3bc5aae" category="open-title">适用于NVMe/FC的Marvell/QLogic FC适配器</block>
+  <block id="632cccb989f7ba938ccedab64dafd738" category="list-text">验证您是否正在运行受支持的适配器驱动程序和固件版本。OL 9.0 GA内核中包含的本机收件箱qla2xxx驱动程序具有对ONTAP 支持至关重要的最新上游修复程序：</block>
+  <block id="61048cc84224cb0a87e2b824e5e313ea" category="list-text">验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据。</block>
+  <block id="ce6047856868bd861d72aba06f0054ce" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令、并将控制器丢失超时期限至少设置为30分钟或1800秒：</block>
+  <block id="707080871f35808fd049a250385d4f06" category="list-text">验证Oracle Linux 9.0主机上的以下NVMe/FC设置：</block>
+  <block id="0121ea908d2a2cb95436d77156b96a8c" category="cell">Oracle Linux 9.0 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="91ef9105de2091600f7c347406622a2e" category="cell">在Oracle Linux 9.0基于网络结构的NVMe (NVMe-oF)主机上、您可以使用<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 用于创建永久性发现控制器(POC)的命令。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果在运行ONTAP 9.10.1和Oracle Linux 9.0的NVMe-oF主机上运行、则每次都会创建一个重复的PDC<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 已执行。这会导致不必要地使用主机和目标上的资源。</block>
+  <block id="f50972c35190e5df79b7272d295f432e" category="paragraph">在对任何NVMe/FC故障进行故障排除之前、请验证您运行的配置是否符合IMT 规格、然后继续执行以下步骤以调试任何主机端问题。</block>
+  <block id="25f321fe018cf20163dc0c70e2eea888" category="section-title">启用详细日志记录</block>
+  <block id="39015274ce6bc3d4a2365f4b9d55591e" category="paragraph">如果您的配置包含问题描述 、则详细日志记录可以提供对故障排除至关重要的宝贵信息。</block>
+  <block id="65427f0cfd42249488837342e79863a2" category="paragraph">用于为Qlogic (qla2xxx)设置详细日志记录的操作步骤 与用于设置lpfc详细日志记录的操作步骤 不同。</block>
+  <block id="2401f6c892699dd24f7fa72c9a39b053" category="open-title">lpfc</block>
+  <block id="db9afb1f05f1d6930c84839b76060ccc" category="open-title">qla2xxx</block>
+  <block id="7ad56430e8db8d37194a3ee41cf45911" category="sidebar">其他部分9.</block>
 </blocks>
