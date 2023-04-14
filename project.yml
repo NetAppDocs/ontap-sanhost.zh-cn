@@ -41,6 +41,8 @@ sidebar:
         url: "/hu_solaris_62_rn.html"
     - title: Windows Unified Host Utilities
       entries:
+      - title: 安装Wuhu 7.2
+        url: "/hu_wuhu_72.html"
       - title: 安装Wuhu 7.1
         url: "/hu_wuhu_71.html"
       - title: 发行说明

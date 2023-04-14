@@ -1,0 +1,531 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_72.html 
+keywords: wuhu, 7.2, host utilities, SAN, windows, unified 
+summary: Windows统一主机实用程序包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理NetApp ONTAP 和E系列平台的存储系统行为。 
+---
+= Windows Unified Host Utilities 7.2
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+
+
+== 关于Windows Host Utilities
+
+Windows统一主机实用程序包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理NetApp ONTAP 和E系列平台的存储系统行为。
+
+安装Host Utilities软件时、安装程序会设置所需的Windows注册表和HBA参数。
+
+Windows 主机计算机上安装了以下程序和文件。默认目录为 `C ： \Program Files\NetApp\Windows Host Utilities` 。
+
+|===
+| 计划 | 目的 
+
+
+| `` m é exhba.reg | 故障排除程序；只有在技术支持人员要求时，才运行此程序。 
+
+
+| ` \NetAppQCL1\fcconfig.exe` | 由安装程序用于设置HBA参数。 
+
+
+| ` \NetAppQCL1\fcconfig.ini` | 由安装程序用于设置HBA参数。 
+
+
+| ` \NetAppQCLI\* 。 *` | 由安装程序用于设置QLogic FC HBA参数。 
+
+
+| `sA_version.exe` | 显示主机实用程序和FC HBA的版本。 
+|===
+
+
+== Host Utilities支持的配置
+
+主机实用程序支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+
+
+
+== 验证主机和存储系统配置
+
+在安装Host Utilities之前、您必须验证Host Utilities版本是否支持主机和存储系统配置、以便正确安装软件。
+
+.步骤
+. 在中检查支持的配置 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
+. 在中检查相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
++
+
+NOTE: link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将Windows Server 2022与ONTAP 结合使用"] 提供有关的说明 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["安装Windows修补程序"] 对于Windows Server 2022。请参见主机配置类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。
+
+. 添加iSCSI、FCP或NVMe-oF许可证并启动目标服务。
++
+在使用SANtricity 存储管理器的E系列存储系统上、FC和iSCSI协议不需要许可证。
+
+. 验证布线。
++
+请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^] 适用于您的ONTAP 版本或 https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
+
+
+
+
+
+== 配置 FC HBA 和交换机
+
+安装并配置一个或多个受支持的FC主机总线适配器(HBA)、以便与存储系统建立FC连接。
+
+Windows Host Utilities安装程序可设置所需的FC HBA设置。
+
+
+CAUTION: 请勿手动更改HBA设置。
+
+.步骤
+. 按照HBA供应商提供的说明安装一个或多个受支持的FC HBA。
+. 获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。
+. 将HBA连接到FC交换机或直接连接到存储系统。
+. 根据FC交换机文档在FC交换机上创建分区。
+. 对于ONTAP 、请按WWPN对交换机进行分区。请务必使用逻辑接口(LIF)的WWPN、而不是存储控制器上物理端口的WWPN。有关详细信息，请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^]。
+
+
+
+
+== 安装主机实用程序
+
+安装程序将安装Host Utilities软件包并设置Windows注册表和HBA设置。
+
+您必须指定在安装 Windows Unified Host Utilities 软件包时是否包括多路径支持。安装程序将提示您输入以下选项。您也可以从 Windows 命令提示符处运行静默（无人参与）安装。
+
+.多路径支持
+* 选择 `MPIO` 从Windows主机或虚拟机到存储系统的路径不止一个。
+* 选择 `no MPIO` 仅当您使用存储系统的单个路径时。
+
+
+MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系统不支持多路径 I/O 。对于 Hyper-V 子系统，如果选择多路径支持，则原始（直通）磁盘不会显示在子操作系统中。您可以使用原始磁盘，也可以使用 MPIO ，但不能在子操作系统中同时使用这两者。
+
+[role="tabbed-block"]
+====
+.以交互方式安装主机实用程序
+--
+要以交互方式安装Host Utilities软件包、您必须运行Host Utilities安装程序并按照提示进行操作。
+
+.步骤
+. 从下载可执行文件 https://mysupport.netapp.com/site/["NetApp 支持站点"^]。
+. 更改为下载可执行文件的目录。
+. 运行 `netapp_windows_host_utilities_7.2_x64` 归档并按照屏幕上的说明进行操作。
+. 出现提示时重新启动 Windows 主机。
+
+
+--
+.从命令行安装主机实用程序
+--
+您可以通过在Windows命令提示符处输入相应的命令来执行主机实用程序的静默(无人参与)安装。Host Utilities安装包必须位于Windows主机可访问的路径中。
+
+按照以交互方式安装主机实用程序的说明获取安装包。安装完成后，系统将自动重新启动。
+
+.步骤
+. 在Windows命令提示符处输入以下命令：
++
+`msiexec /i installer.msi /quiet multipath= ｛ 0` 1 ｝ [INSTALLDIR=inst_path]
+
++
+** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
+** 多路径用于指定是否安装 MPIO 支持。允许的值为"0"表示否、"1"表示是。
+** `inst_path` 是安装Host Utilities文件的路径。默认路径为 `C:\Program Files\NetApp\Windows Host Utilities\`。
+
+
+
+
+
+NOTE: 要查看用于日志记录和其他功能的标准Microsoft安装程序(MSI)选项、请输入 `msiexec /help` 在Windows命令提示符处。例如、 `msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1` 命令可显示日志记录信息。
+
+--
+====
+
+
+== 升级主机实用程序
+
+新的Host Utilities安装包必须位于Windows主机可访问的路径中。按照说明以交互方式安装主机实用程序、以升级安装包。
+
+[role="tabbed-block"]
+====
+.以交互方式升级主机实用程序
+--
+要以交互方式升级Host Utilities软件包、您必须运行Host Utilities安装程序并按照提示进行操作。
+
+.步骤
+. 更改为下载可执行文件的目录。
+. 运行可执行文件并按照屏幕上的说明进行操作。
+. 出现提示时重新启动 Windows 主机。
+. 重新启动完成后、请检查主机实用程序版本：
++
+.. 打开 * 控制面板 * 。
+.. 转至 * 程序和功能 * 并检查主机实用程序版本。
+
+
+
+
+--
+.从命令行升级主机实用程序
+--
+您可以在Windows命令提示符处输入相应的命令、对新的主机实用程序执行静默(无人值守)升级。
+
+新的Host Utilities安装包必须位于Windows主机可访问的路径中。按照以交互方式安装主机实用程序的说明升级安装包。
+
+.步骤
+. 在Windows命令提示符处输入以下命令：
++
+`msiexec /i installer.msi /quiet multipath= ｛ 0` 1 ｝ [INSTALLDIR=inst_path]
+
++
+** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
+** 多路径用于指定是否安装 MPIO 支持。允许的值为"0"表示否、"1"表示是。
+** `inst_path` 是安装Host Utilities文件的路径。默认路径为 `C:\Program Files\NetApp\Windows Host Utilities\`。
+
+
+
+
+
+NOTE: 要查看用于日志记录和其他功能的标准Microsoft安装程序(MSI)选项、请输入 `msiexec /help` 在Windows命令提示符处。例如、 `msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1` 命令可显示日志记录信息。
+
+安装完成后，系统将自动重新启动。
+
+--
+====
+
+
+== 修复并删除Windows Host Utilities
+
+您可以使用Host Utilities安装程序的*修复*选项来更新HBA和Windows注册表设置。您可以通过交互方式或从Windows命令行中完全删除主机实用程序。
+
+[role="tabbed-block"]
+====
+.以交互方式修复或删除 Windows Host Utilities
+--
+"*修复*"选项将使用所需设置更新Windows注册表和FC HBA。您也可以完全删除主机实用程序。
+
+.步骤
+. 打开Windows *程序和功能*(Windows Server 2012 R2、Windows Server 2016、Windows Server 2019和Windows 2022)。
+. 选择 * NetApp Windows Unified Host Utilities* 。
+. 选择*更改*。
+. 根据需要选择*修复*或*删除*。
+. 按照屏幕上的说明进行操作。
+
+
+--
+.从命令行修复或删除 Windows Host Utilities
+--
+"*修复*"选项将使用所需设置更新Windows注册表和FC HBA。您也可以从Windows命令行中完全删除主机实用程序。
+
+.步骤
+. 在 Windows 命令行上输入以下命令以修复 Windows Host Utilities ：
++
+`msiexec /f installer.msi [/quiet]`
+
++
+** ` /f` 修复安装。
+** `installer.msi` 是系统上 Windows Host Utilities 安装程序的名称。
+** ` /quiet` 禁止所有反馈并自动重新启动系统，而不会在命令完成时提示。
+
+
+
+
+--
+====
+
+
+== Host Utilities使用的设置概述
+
+主机实用程序需要使用某些注册表和参数设置来验证Windows主机是否正确处理存储系统行为。
+
+Windows Host Utilities会设置一些参数、这些参数会影响Windows主机对数据延迟或丢失的响应方式。已选择特定值以验证Windows主机是否正确处理诸如将存储系统中的一个控制器故障转移到其配对控制器等事件。
+
+并非所有值都适用于DSM for SANtricity 存储管理器；但是、由主机实用程序设置的值与DSM for SANtricity 存储管理器设置的值之间的任何重叠都不会导致冲突。
+
+FC、NVMe/FC和iSCSI HBA还具有一些参数、您必须设置这些参数以确保最佳性能并成功处理存储系统事件。
+
+随Windows Unified Host Utilities提供的安装程序会将Windows、FC和NVMe/FC HBA参数设置为支持的值。
+
+您必须手动设置iSCSI HBA参数。
+
+安装程序会根据您在运行安装程序时是否指定多路径I/O (MPIO)支持来设置不同的值。
+
+除非技术支持指示您更改这些值，否则不应更改这些值。
+
+
+
+== Windows Unified Host Utilities 设置的注册表值
+
+Windows Unified Host Utilities安装程序会根据您在安装期间所做的选择自动设置注册表值。您应了解这些注册表值和操作系统版本。
+
+以下值由 Windows Unified Host Utilities 安装程序设置。除非另有说明、否则所有值均为十进制值。
+
+
+NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
+
+[cols="20,20,30"]
+|===
+| 注册表项 | 价值 | 设置时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters \DsmMaximumRetryTimeDuringStateTransition | 120 | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016和Windows 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet \Services\msdsm\Parameters \DsmMaximumStateTransitionTime | 120 | 如果指定了MPIO支持、并且您的服务器是Windows Server 2012 R2、Windows Server 2016、Windows 2019或Windows Server 2022 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"NVMe NetApp ONTAO" | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \IPSecConfigTimeout | 60 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instation_ID \Parameters \LinkDownTime | 10 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \ClusDisk \Parameters\ManagementDisksOnSystemBuses | 1. | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 120 | 未选择 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 30 个 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"、"NVMe NetApp ONTAOCON" | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathRecoveryInterval | 30 个 | 当您的服务器是Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathVerifyEnabled | 1. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\PathVerifyEnabled | 1. | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\PathVerifyEnabled | 0 | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \MPIO\Parameters\PDORemovePeriod | 130 | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\PDORemovePeriod | 130 | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\PDORemovePeriod | 130 | 指定 MPIO 支持时，除非检测到 Data ONTAP DSM 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\RetransCount | 6. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetransyCount | 6. | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\RetransyInterval | 1. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetransyInterval | 1. | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\RetransyInterval | 1. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \disk\TimeOutValue | 120 | 未选择 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. | 指定了MPIO支持且您的服务器为Windows Server 2012 R2、Windows Server 2016、Windows Server 2019或Windows Server 2022时 
+|===
+.相关信息
+有关注册表参数的详细信息、请参见Microsoft文档。
+
+
+
+== NVMe参数
+
+安装Wuhu 7.2时、将更新以下NVMe Emulex驱动程序参数：
+
+* EnableNVMe = 1
+* NVMEMode = 0
+* 限制传输大小 =1
+
+
+
+
+== Windows Host Utilities 设置的 FC HBA 值
+
+在使用FC的系统上、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。
+
+对于Emulex FC HBA、安装程序会设置以下参数：
+
+[role="tabbed-block"]
+====
+.选择MPIO时
+--
+|===
+| 属性类型 | 属性值 
+
+
+| LinkTimeOut | 1. 
+
+
+| 节点超时 | 10 
+|===
+--
+.未选择MPIO时
+--
+|===
+| 属性类型 | 属性值 
+
+
+| LinkTimeOut | 30 个 
+
+
+| 节点超时 | 120 
+|===
+--
+====
+对于QLogic FC HBA、安装程序会设置以下参数：
+
+[role="tabbed-block"]
+====
+.选择MPIO时
+--
+|===
+| 属性类型 | 属性值 
+
+
+| LinkDownTimeOut | 1. 
+
+
+| PortDownRetransCount | 10 
+|===
+--
+.未选择MPIO时
+--
+|===
+| 属性类型 | 属性值 
+
+
+| LinkDownTimeOut | 30 个 
+
+
+| PortDownRetransCount | 120 
+|===
+--
+====
+
+NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例如、在QLogic QConvergeConsole程序中、参数显示为 `Link Down Timeout`。host实用程序 `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `MpioLinkDownTimeOut`、具体取决于是否指定MPIO。但是，所有这些名称都引用相同的 HBA 参数。
+
+.相关信息
+有关超时参数的详细信息、请参见Emulex或QLogic站点。
+
+
+
+== 故障排除
+
+您可以使用Windows Host Utilities的常规故障排除技术。请务必查看最新的发行说明以了解已知问题和解决方案。
+
+
+
+=== 可从不同方面确定可能的互操作性问题
+
+* 要确定潜在的互操作性问题、您必须确认主机实用程序支持主机操作系统软件、主机硬件、ONTAP 软件和存储系统硬件的组合。
+* 您必须检查 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
+* 您必须验证 iSCSI 配置是否正确。
+* 如果重新启动后iSCSI LUN不可用、则必须验证目标是否在Microsoft iSCSI启动程序GUI的*持久目标*选项卡上列为持久目标。
+* 如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。
+* 对于运行ONTAP 的存储控制器的FC路径、您必须验证FC交换机是否已使用目标LIF的WWPN进行分区、而不是使用节点上物理端口的WWPN进行分区。
+* 您必须查看 link:hu_wuhu_71_rn.html["发行说明"] 让Windows Host Utilities检查已知问题。发行说明包括一个已知问题和限制列表。
+* 您必须查看适用于您的ONTAP 版本的SAN管理指南中的故障排除信息。
+* 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 最近发现的问题。
++
+** 在高级搜索下的错误类型字段中、应选择* iSCSI - Windows*、然后选择*执行*。您应重复搜索错误类型* fcp -windows*。
+
+
+* 您必须收集有关系统的信息。
+* 记录主机或存储系统控制台上显示的所有错误消息。
+* 收集主机和存储系统日志文件。
+* 记录问题的症状以及在问题出现之前对主机或存储系统所做的任何更改。
+* 如果无法解决此问题、请联系NetApp技术支持以获得帮助。
+
+
+
+
+=== 了解主机实用程序对FC HBA驱动程序设置所做的更改
+
+在FC系统上安装所需的Emulex或QLogic HBA驱动程序期间、系统会检查多个参数、在某些情况下会进行修改。
+
+主机实用程序会为以下参数设置值：
+
+* LinkTimeOut—定义物理链路关闭后主机端口在恢复I/O操作之前等待的时间长度(以秒为单位)。
+* NodeTimeOut—定义主机端口识别到目标设备连接已关闭之前的时间长度(以秒为单位)。
+
+
+在对HBA问题进行故障排除时、请验证这些设置是否具有正确的值。正确的值取决于两个因素：
+
+* HBA 供应商
+* 是否正在使用MPIO
+
+
+您可以通过运行Windows Host Utilities安装程序的*修复*选项来更正HBA设置。
+
+[role="tabbed-block"]
+====
+.验证 FC 系统上的 Emulex HBA 驱动程序设置
+--
+如果您使用的是FC系统、则必须验证Emulex HBA驱动程序设置。HBA 上的每个端口都必须具有这些设置。
+
+.步骤
+. 打开 OnCommand 管理器。
+. 从列表中选择相应的HBA、然后选择*驱动程序参数*选项卡。
++
+此时将显示驱动程序参数。
+
+. 如果您使用的是MPIO软件、请验证您是否具有以下驱动程序设置：
++
+** LinkTimeOut — 1.
+** 节点超时 - 10
+
+
+. 如果您不使用MPIO软件、请验证您是否具有以下驱动程序设置：
++
+** LinkTimeOut — 30
+** 节点超时 - 120
+
+
+
+
+--
+.验证 FC 系统上的 QLogic HBA 驱动程序设置
+--
+在FC系统上、您必须验证QLogic HBA驱动程序设置。HBA 上的每个端口都必须具有这些设置。
+
+.步骤
+. 打开QConvergeConsole、然后选择工具栏上的*连接*。
++
+此时将显示*连接到主机*对话框。
+
+. 从列表中选择相应的主机、然后选择*连接*。
++
+此时、FC HBA窗格中将显示HBA列表。
+
+. 从列表中选择相应的HBA端口、然后选择*设置*选项卡。
+. 从 * 选择设置 * 部分中选择 * 高级 HBA 端口设置 * 。
+. 如果您使用的是MPIO软件、请验证您是否具有以下驱动程序设置：
++
+** 链路关闭超时（ linkdwnto ）— 1.
+** 端口关闭重试计数（ portdwnrc ）— 10
+
+
+. 如果您不使用MPIO软件、请验证您是否具有以下驱动程序设置：
++
+** 链路关闭超时（ linkdwnto ）— 30
+** 端口关闭重试计数（ portdwnrc ）— 120
+
+
+
+
+--
+====

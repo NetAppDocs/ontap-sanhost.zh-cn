@@ -19,7 +19,7 @@ summary:
 
 
 [role="lead"]
-采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 9.0支持基于网络结构的NVMe (NVMe-oF)、包括NVMe/FC和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。
+采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux (OL) 9.0支持基于网络结构的NVMe (NVMe-oF)、包括NVMe/FC和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。
 
 有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
@@ -43,7 +43,7 @@ summary:
 您可以使用以下操作步骤 验证支持的最低OL 9.0软件版本。
 
 .步骤
-. 在服务器上安装Oracle Linux 9.0 GA。安装完成后、验证您是否正在运行指定的Oracle Linux 9.0 GA内核。
+. 在服务器上安装OL 9.0 GA。安装完成后、验证您是否正在运行指定的OL 9.0 GA内核。
 +
 [listing]
 ----
@@ -353,7 +353,7 @@ options lpfc lpfc_sg_seg_cnt=256
 == 验证 NVMe-oF
 
 .步骤
-. 验证Oracle Linux 9.0主机上的以下NVMe/FC设置：
+. 验证OL 9.0主机上的以下NVMe/FC设置：
 +
 [listing]
 ----
@@ -497,7 +497,7 @@ NSID       UUID                                   Size
 
 === 启用详细日志记录
 
-如果您的配置包含问题描述 、则详细日志记录可以提供对故障排除至关重要的宝贵信息。
+如果您的配置包含问题描述 、则详细日志记录可提供故障排除所需的基本信息。
 
 .步骤
 用于为Qlogic (qla2xxx)设置详细日志记录的操作步骤 与用于设置lpfc详细日志记录的操作步骤 不同。
