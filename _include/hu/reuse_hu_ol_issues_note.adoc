@@ -3,4 +3,4 @@
 
 
 
-NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见相应中的已知问题一节 https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=63146["Red Hat Enterprise Linux 版本"^] 文档。
+NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见相应中的已知问题一节 https://["Red Hat Enterprise Linux 版本"^] 文档。

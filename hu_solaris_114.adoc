@@ -22,14 +22,14 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 == 安装 Solaris Host Utilities
 
-您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后，必须对其进行解压缩，以获取安装 Host Utilities 所需的软件包。
+您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]。获得该文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的软件包。
 
 .步骤
 . 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 到主机上的目录。
 . 转到包含下载内容的目录。
 . 解压缩文件。
 +
-以下示例将对 SPARC 系统的文件进行解压缩。对于 x86-64 平台，请使用 x86/x64 软件包。
+以下示例将解压缩 SPARC 系统的文件。对于x86－64平台，请使用 `x86/x64` 软件包。
 
 +
 `gunzip netapp_solaris host_utilities_6_2N20170913_0304_sparc.tar.gz`
@@ -43,22 +43,22 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 `pkgadd -d NTAPSANTool.pkg`
 
 +
-软件包将添加到 /opt/NTAP/SANToolkit/bin 目录。
+这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。
 
 +
-要完成安装，您必须使用 `host_config` 命令为您的环境（此处为 MPxIO ）配置主机参数。
+要完成安装、您必须使用为您的环境(此处为MPxIO)配置主机参数 `host_config` 命令：
 
 +
-host_config 命令的格式如下：
+`host_config` 命令的格式如下：
 
 +
 ` /opt/NTAP/SANToolkit/bin/host_config <-setup> <-protocol fcp_iscsi_mixed> <-multipath mpxio_dmp> non> （ -noalua ） [-mcc 60_90_120]`
 
 +
-host_config 命令执行以下操作：
+`host_config` 命令执行以下操作：
 
 +
-** 对 x86 和 SPARC 系统的光纤通道和 SCSI 驱动程序进行设置更改
+** 更改x86和SPARC系统的光纤通道和SCSI驱动程序的设置
 ** 为两种 MPxIO 配置提供 SCSI 超时设置
 ** 设置 VID/PID 信息
 ** 启用或禁用 ALUA
@@ -96,7 +96,7 @@ data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475
 
 SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。
 
-您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 link:https://library.netapp.com/ecmdocs/ECMLP2748974/html/frameset.html["《 Solaris Host Utilities 安装和设置指南》"^] 有关在 Solaris MPIO 环境中启动 SAN LUN 的详细信息。
+您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 https://["安装Solaris Host Utilities"^] 有关在Solaris MPIO环境中SAN启动LUN的详细信息。
 
 
 
@@ -141,7 +141,7 @@ SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动
               Multipath Policy: Native
 ----
 
-NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列（ ASA ）配置。
+NOTE: 从适用于Solaris主机的ONTAP 9.8开始、支持所有SAN阵列(ASA)配置。
 
 
 
@@ -178,13 +178,13 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 === MetroCluster 的建议设置
 
-默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由 `fcp_offline_delay` 参数控制。`fcp_offline_delay` 的默认值适用于标准 ONTAP 集群。但是，在 MetroCluster 配置中，必须将 `fcp_offline_delay` 的值增加到 * 120 秒 * ，以确保 I/O 在包括计划外故障转移在内的操作期间不会过早超时。有关其他信息以及对默认设置的建议更改，请参见 NetApp link:https://kb.netapp.com/app/answers/answer_view/a_id/1001373/loc/en_US["KB1001373"^]。
+默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制 `fcp_offline_delay` 参数。的默认值 `fcp_offline_delay` 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值 `fcp_offline_delay` 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见NetApp知识库文章 https://["MetroCluster 配置中的 Solaris 主机支持注意事项"^]。
 
 
 
 == Oracle Solaris 虚拟化
 
-* Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。
+* Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。这些技术通常已更名为"Oracle虚拟机"、尽管它们基于不同的架构。
 * 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
 * NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
 * 仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^]。
@@ -194,10 +194,11 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 === 建议的虚拟化设置
 
-如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述，必须针对 Oracle 错误 15824910 修补 LDOM 操作系统，并创建一个 `vDC.conf` 文件，将虚拟磁盘的块大小设置为 4096 。有关详细信息，请参见 Oracle 文档 2157669.1 。
+如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述 、必须修补LDOM操作系统以修复_Oracle错误15824910_和 `vdc.conf` 必须创建将虚拟磁盘的块大小设置为4096的文件。有关详细信息，请参见 Oracle 文档 2157669.1 。
 
 要验证修补程序，请执行以下操作：
 
+.步骤
 . 创建 zpool 。
 . 对 zpool 运行 `zdb -C` 并验证 * 磁盘移 * 的值是否为 12 。
 +
@@ -242,7 +243,7 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name` 。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
+NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name` 。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
 
 
 
@@ -253,13 +254,13 @@ NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl
 | NetApp 错误 ID | 标题 | Description | Oracle ID 
 
 
-| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | Solaris 11.4 和 HUK 建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。将 `ssd.conf` 中的配置移动到 `s ds.conf` ，如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。 | （文档 ID 2595926.1 ） 
+| 1362435 | Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改 | 请遵循Solaris 11.4和HUK的建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。移动中的配置 `ssd.conf` to `sd.conf` 如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。 | （文档 ID 2595926.1 ） 
 
 
 | 1366780 | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 
 
 
-| 1368957 | "Solaris 11.x `cfgadm -c configure` 使用端到端 Emulex 配置导致 I/O 错误 " | 在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复 | 不适用 
+| 1368957 | Solaris 11.x `cfgadm -c configure` 导致端到端Emulex配置出现I/O错误 | 在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复 | 不适用 
 
 
 | 1345622 | 使用 OS 原生命令在使用 AA/pports 的 Solaris 主机上报告路径异常 | 使用 ASA 的 Solaris 11.4 出现间歇性路径报告问题 | 不适用 

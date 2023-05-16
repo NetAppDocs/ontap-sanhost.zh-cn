@@ -69,7 +69,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=74908;74907;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。

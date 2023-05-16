@@ -50,7 +50,7 @@ Windows 主机计算机上安装了以下程序和文件。默认目录为 `C �
 
 == Host Utilities 支持的配置
 
-Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://["NetApp 互操作性表工具"^]。
 
 
 
@@ -59,7 +59,7 @@ Host Utilities支持不同的Windows主机配置、协议和多路径选项。�
 在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。
 
 .步骤
-. 在中检查支持的配置 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
+. 在中检查支持的配置 http://["NetApp 互操作性表工具"^]。
 . 检查上相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
 +
 
@@ -71,7 +71,7 @@ NOTE: link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将
 
 . 验证布线
 +
-请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^] 适用于您的 ONTAP 或版本 https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
+请参见 https://["《 SAN 配置指南》"^] 适用于您的 ONTAP 或版本 https://["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
 
 
 
@@ -91,7 +91,7 @@ NOTE: 请勿手动更改 HBA 设置。
 . 获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。
 . 将 HBA 连接到光纤通道交换机或直接连接到存储系统。
 . 根据您的光纤通道交换机文档在光纤通道交换机上创建分区。
-. 对于 ONTAP ，请按 WWPN 对交换机进行分区。请务必使用 LIF 的 WWPN ，而不是存储控制器上物理端口的 WWPN 。有关详细信息，请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^]。
+. 对于 ONTAP ，请按 WWPN 对交换机进行分区。请务必使用 LIF 的 WWPN ，而不是存储控制器上物理端口的 WWPN 。有关详细信息，请参见 https://["《 SAN 配置指南》"^]。
 
 
 
@@ -116,7 +116,7 @@ NOTE: 请勿手动更改 HBA 设置。
 要以交互方式安装 Host Utilities 软件包，您必须运行 Host Utilities 安装程序并按照提示进行操作。
 
 .步骤
-. 从下载可执行文件 https://mysupport.netapp.com/site/["NetApp 支持站点"^]。
+. 从下载可执行文件 https://["NetApp 支持站点"^]。
 . 更改为下载可执行文件的目录。
 . 运行 `NetApp_windows_host_utilities_7.1_x64` 文件，然后按照屏幕上的说明进行操作。
 . 出现提示时重新启动 Windows 主机。
@@ -359,7 +359,7 @@ Windows Unified Host Utilities 安装程序会根据您在安装期间所做的�
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. | 当您的服务器仅为 Windows Server 2008 ， Windows Server 2008 R2 ， Windows Server 2012 ， Windows Server 2012 R2 或 Windows Server 2016 时 
 |===
 .相关信息
-请参见 https://docs.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users["Microsoft 文档"^] 有关注册表参数的详细信息。
+请参见 https://["Microsoft 文档"^] 有关注册表参数的详细信息。
 
 
 
@@ -413,7 +413,7 @@ Windows Unified Host Utilities 安装程序会根据您在安装期间所做的�
 NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例如，在 QLogic QConvergeConsole 程序中，参数显示为 `Link down Timeout` 。Host Utilities `fcconfig.ini` 文件会将此参数显示为 `LinkDownTimeOut` 或 `MPioLinkDownTimeOut` ，具体取决于是否指定了 MPIO 。但是，所有这些名称都引用相同的 HBA 参数。
 
 .相关信息
-请参见 https://www.broadcom.com/support/download-search["Emulex"^] 或 https://driverdownloads.qlogic.com/QLogicDriverDownloads_UI/Netapp_search.aspx["QLogic"^] 站点以了解有关超时参数的更多信息。
+请参见 https://["Emulex"^] 或 https://["QLogic"^] 站点以了解有关超时参数的更多信息。
 
 
 
@@ -429,8 +429,8 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 * 如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。
 * 对于运行 ONTAP 的存储控制器的光纤通道路径，您必须验证 FC 交换机是否使用目标 LIF 的 WWPN 进行分区，而不是使用节点上物理端口的 WWPN 进行分区。
 * 您必须查看 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities 发行说明"] 检查已知问题。发行说明包括一个已知问题和限制列表。
-* 您必须查看中的故障排除信息 https://docs.netapp.com/ontap-9/index.jsp["《 SAN 管理指南》"^] 适用于您的 ONTAP 版本。
-* 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/["Bug Online"^] 最近发现的问题。
+* 您必须查看中的故障排除信息 https://["《 SAN 管理指南》"^] 适用于您的 ONTAP 版本。
+* 您必须进行搜索 https://["Bug Online"^] 最近发现的问题。
 * 在高级搜索下的错误类型字段中，您应选择 iSCSI - Windows ，然后单击转到。您应重复搜索错误类型 FCP -Windows 。
 * 您必须收集有关系统的信息。
 * 记录主机或存储系统控制台上显示的所有错误消息。
@@ -440,9 +440,9 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 
 
 .相关信息
-http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]
-https://mysupport.netapp.com/portal/documentation["NetApp 文档"^]
-https://mysupport.netapp.com/NOW/cgi-bin/bol["NetApp Bug Online"^]
+http://["NetApp 互操作性表工具"^]
+https://["NetApp 文档"^]
+https://["NetApp Bug Online"^]
 
 
 

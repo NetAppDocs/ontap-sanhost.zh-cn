@@ -160,4 +160,4 @@ link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"] 
 * 适用于您的SANtricity 版本的《SANtricity 存储管理器发行说明》。
 
 
-转至 link:https://docs.netapp.com/us-en/e-series/getting-started/index.html["E 系列文档"] 查找SANtricity 相关文档。
+请参见 link:https://docs.netapp.com/us-en/e-series/index.html["E 系列文档"] 查找SANtricity 相关文档。

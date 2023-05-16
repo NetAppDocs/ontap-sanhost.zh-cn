@@ -40,7 +40,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 == 已知限制
 
 * 对于RHEL 8.5、默认情况下、内核NVMe多路径保持禁用状态。因此，您需要手动启用它。
-* 由于出现未解决的问题、RHEL 8.5上的NVMe/TCP仍是一项技术预览功能。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.5_release_notes/index#technology-preview_file-systems-and-storage["RHEL 8.5发行说明"^] 了解详细信息。
+* 由于出现未解决的问题、RHEL 8.5上的NVMe/TCP仍是一项技术预览功能。请参见 https://["RHEL 8.5发行说明"^] 了解详细信息。
 
 
 

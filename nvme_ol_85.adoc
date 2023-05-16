@@ -407,7 +407,7 @@ NSID    UUID                                   Size
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1517321 | Oracle Linux 8.5 NVMe-oF主机会创建重复的永久性发现控制器 | 在Oracle Linux 8.5基于网络结构的NVMe (NVMe-oF)主机上、您可以使用 `nvme discover -p` 用于创建永久性发现控制器(POC)的命令。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果在运行ONTAP 9.10.1和Oracle Linux 8.5的NVMe-oF主机上运行、则每次都会创建一个重复的PDC `nvme discover -p` 已执行。这会导致不必要地使用主机和目标上的资源。 | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Oracle Linux 8.5 NVMe-oF主机会创建重复的永久性发现控制器 | 在Oracle Linux 8.5基于网络结构的NVMe (NVMe-oF)主机上、您可以使用 `nvme discover -p` 用于创建永久性发现控制器(POC)的命令。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果在运行ONTAP 9.10.1和Oracle Linux 8.5的NVMe-oF主机上运行、则每次都会创建一个重复的PDC `nvme discover -p` 已执行。这会导致不必要地使用主机和目标上的资源。 | https://["18118"^] 
 |===
 
 
