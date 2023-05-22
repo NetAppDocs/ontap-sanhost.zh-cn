@@ -271,9 +271,13 @@ tcp.vmnic3:34:80:Od:30:ca:el-tcp.unknown-uuid.400bf333abf74ab8b96dc18ffadc3f99
 
 == 已知问题描述
 
-* 从ONTAP 9.9.1 P3及更高版本开始、可提供ESXi 7.0 U3 (及更高版本) NVMe/FC支持、因为从ONTAP 9.9.1 P3开始、可提供关键NVMe中止修复(由ESXi 7.0 U3及更高版本发布)。请参见相应的 burt 公有报告，网址为 https://[] 了解详细信息。
+[cols="10,30,30"]
+|===
+| NetApp 错误 ID | 标题 | 临时解决策 
 
 
+| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654,"^] | 在ONTAP 9.9.1中使用NVMe/FC协议时、ONTAP 节点不运行 | 检查并更正主机网络结构中的任何网络问题。如果这不起作用、请升级到可修复此问题描述 的修补程序。 
+|===
 
 
 == 相关链接

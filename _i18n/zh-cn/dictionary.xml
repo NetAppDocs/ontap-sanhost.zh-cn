@@ -2565,7 +2565,6 @@
   <block id="1bad318175e7aa1eb67e6db2256bb9b1" category="paragraph">系统会将提取的软件放置在解压缩存储库文件的目录中。</block>
   <block id="5bd6f64a8cbf5643612affb8bd552a8d" category="paragraph">本发行说明文档包含有关AIX Host Utilities 6.1版的最新信息、包括有关已知问题、限制、配置和管理ONTAP 存储系统的更新。</block>
   <block id="39b3dd6edf4819881415b4ccbfcf4d58" category="paragraph">对于 Oracle Linux 7.1 Uek r4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.1 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
-  <block id="b2cff30246d08cdfde41ba01866ee693" category="list-text">从ONTAP 9.9.1 P3及更高版本开始、可提供ESXi 7.0 U3 (及更高版本) NVMe/FC支持、因为从ONTAP 9.9.1 P3开始、可提供关键NVMe中止修复(由ESXi 7.0 U3及更高版本发布)。请参见相应的 burt 公有报告，网址为<block ref="e74f384cf37401802acc612082793163" category="inline-link-rx"></block> 了解详细信息。</block>
   <block id="36889db7961eacd91f01477a29a2c5ea" category="list-text">验证的输出<block ref="76b66d5f379b691153dc22425201f6ae" prefix=" " category="inline-code"></block> 命令以确保设置完成。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="8798c6858a1c8968b7b9cad1ace9d91a" category="list-text">将此WWID添加到/etc/multipath.conf中的"blacklist" stanza中：</block>
   <block id="3ad269cd9c25c5c028bf155f768f0618" category="paragraph">默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 <block ref="682b92f396ad2229bd62e99c5a518610" category="inline-link-macro-rx"></block></block>
@@ -3029,29 +3028,90 @@
   <block id="d6f0420e884ba06233920f24aeacd0b4" category="sidebar">安装Wuhu 7.2</block>
   <block id="c89f54db5376bd3f5d9ade2c6d3362fd" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block>。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的软件包。</block>
   <block id="acabba98705eb29393554dc66f1ee4e2" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于 x86-64 平台，请使用 x86/x64 软件包。</block>
-  <block id="7b80b257325a5b162e64740743f1f56b" category="paragraph">要完成安装、您必须使用为您的环境(此处为MPxIO)配置主机参数<block ref="3062dc928daa4d85f6e34b6dea110a00" prefix=" " category="inline-code"></block> 命令：</block>
-  <block id="2e6c1117a40c601f7b1e729219ae60d4" category="list-text">更改x86和SPARC系统的光纤通道和SCSI驱动程序的设置</block>
   <block id="c4cad7deef0c16d999553f9114b69a38" category="inline-link">安装Solaris Host Utilities</block>
   <block id="f3fa3c55f6e1d616adca4cc7545092f0" category="paragraph">您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见<block ref="b122ff225ade2e6fc15e0025cf78e2d2" category="inline-link-rx"></block> 有关在Solaris MPIO环境中SAN启动LUN的详细信息。</block>
   <block id="daa135326b602a4d4c5bd7b55808870a" category="inline-link">MetroCluster 配置中的 Solaris 主机支持注意事项</block>
-  <block id="c0fb739872dac94bedef68b1bae6c33c" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值为<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关追加信息 以及建议的默认设置更改、请参见NetApp知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
   <block id="8f4e34dd626d27db6da17b83e4d7f329" category="cell">Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误</block>
-  <block id="67618ee20fc9c9dc6bacf85ab256b07c" category="cell">正在运行<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 在Emulex上、端到端配置会导致I/O错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
   <block id="05a2e5d38b7302b051a92c093ea62da1" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block>。获得该文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的软件包。</block>
   <block id="a387e31363493fb3c0fbdcc0d7458c52" category="list-text">解压缩文件。</block>
   <block id="8fe0dc9943c3dbce8070a7613545cb91" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于x86－64平台，请使用<block ref="2dea9af09f7e80915b8298deb9ca9b8a" prefix=" " category="inline-code"></block> 软件包。</block>
   <block id="db3593f61ef4c56ea67fd06ebc7a6825" category="admonition">从适用于Solaris主机的ONTAP 9.8开始、支持所有SAN阵列(ASA)配置。</block>
   <block id="f8af07f878832a82df53431926e7c3f6" category="paragraph">以下是为采用 NetApp ONTAP LUN 的 Solaris 11.4 SPARC 和 x86_64 建议的一些参数设置。这些参数值由 Host Utilities 设置。有关 Solaris 11.4 系统的其他设置，请参见 Oracle 文档 ID ： 2595926.1</block>
-  <block id="df005c493acb8e00e9543058c5ac6269" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见NetApp知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
-  <block id="64799ab49723d2dcfaeadf0cc963a0af" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。这些技术通常已更名为"Oracle虚拟机"、尽管它们基于不同的架构。</block>
   <block id="3cdb50c8bf082811e79154b6cdabdb1f" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述 、必须修补LDOM操作系统以修复_Oracle错误15824910_和<block ref="3328fba80b08b36663ffae0684f6c578" prefix=" " category="inline-code"></block> 必须创建将虚拟磁盘的块大小设置为4096的文件。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
   <block id="c39a85f8ec6b0a29f08919e66d066295" category="cell">请遵循Solaris 11.4和HUK的建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。移动中的配置<block ref="d5ef7f69fa74e42b54d8244ee447ab2b" prefix=" " category="inline-code"></block> to<block ref="88cafedaeae385b0e8278ab1804829cd" prefix=" " category="inline-code"></block> 如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。</block>
   <block id="cb5a5fbf7b377c4121e5a7dee7e950e5" category="cell">Solaris 11.x<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 导致端到端Emulex配置出现I/O错误</block>
   <block id="a15ed55b009e93df31791bff39016875" category="paragraph">请参见 <block ref="a39850964251401babb6e797f9dd15c1" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
-  <block id="2f250814a775a0365f902dbe562032c6" category="paragraph">请参见 <block ref="7f9ee14ffba4539bbbffe56322464e8d" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
-  <block id="ad29963bc78eccf5ea7c4b874af41073" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block> 和 <block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
   <block id="f6bd0d7447ff66cc6b859603a88fbde9" category="section-title">相关链接</block>
   <block id="ec1f030f0caddb932644a46761f74630" category="list-text"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block></block>
   <block id="e0ace13bee28a678ec04ad1b076b4b00" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有igrou设置、因此无需在VVOLs环境中创建或管理iGroup。</block>
   <block id="a2093eec2c1b326b4a76efce454cc95a" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及<block ref="fc9815e7b1405959c49ad47e9a23e3a5" category="inline-link-rx"></block> 和 <block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
+  <block id="8b09e18eadcf22c450f1d7d911321716" category="paragraph">要完成安装、您必须使用为您的环境(此处为MPxIO)配置主机参数<block ref="3062dc928daa4d85f6e34b6dea110a00" prefix=" " category="inline-code"></block> 命令：</block>
+  <block id="a59067c75792ec364887962f5388c9af" category="list-text">更改x86和SPARC系统的光纤通道和SCSI驱动程序设置</block>
+  <block id="168fdc611543547ce1e8f26fcfc2b182" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值为<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关追加信息 和建议的默认设置更改、请参见知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
+  <block id="4ace21de4701510a7868bf0b96619e05" category="cell">正在运行<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中修复</block>
+  <block id="2d15eeef1c034eb367e3e2bdf54c1d44" category="paragraph">您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见<block ref="d20544b1cb103be423151e95ebf1c3ce" category="inline-link-rx"></block> 有关在Solaris MPIO环境中SAN启动LUN的详细信息。</block>
+  <block id="46f0926a49e1e94eb293a199875f98b9" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
+  <block id="ff91b353cdd0cfbd758a014f3a8eb777" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于不同的架构、但它们通常已更名为"Oracle虚拟机"。</block>
+  <block id="7ff276d19a76a720d17e3dcf4d050ee3" category="summary">您可以在运行ESXi 8.x和ONTAP 的启动程序主机上将基于网络结构的NVMe (NVMe-oF)配置为目标。</block>
+  <block id="c719ab5e5b2a188adebd62c0829a9f96" category="doc">适用于采用ONTAP 的ESXi 8.x的NVMe-oF主机配置</block>
+  <block id="53b4135529508b3c01c35cf73dca64d0" category="list-text">从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP协议。</block>
+  <block id="7237142305a120be2bd65985f2ef736c" category="list-text">从ONTAP 9.9.1 P3开始、ESXi 8及更高版本支持NVMe/FC协议。</block>
+  <block id="7c1c1c55c2c606a3cf3259643b78a017" category="list-text">ESXi启动程序主机可以通过相同的适配器端口同时运行NVMe/FC和FCP流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。请参见 <block ref="aaa18d9ccb38f09094f0c241a8585efd" category="inline-link-macro-rx"></block> 有关支持的最新配置和版本列表。</block>
+  <block id="d202ecba0de538b2ab3f4e53f0191f53" category="list-text">对于ESXi 8.0及更高版本、HPP (高性能插件)是NVMe设备的默认插件。</block>
+  <block id="b1d7de4d8d51704fba7a0c0f12c2c299" category="list-text">不支持RDM映射。</block>
+  <block id="cb56b881b7fbeb83a5d042635cd3d79d" category="paragraph">默认情况下、在vSphere版本中、NVMe/FC处于启用状态。</block>
+  <block id="6d7a35d7f614ee089a2ca03495dddec5" category="paragraph-title">验证主机NQN</block>
+  <block id="37ff421f2417d73d59b2924fd899cd8c" category="paragraph">您必须检查ESXi主机NQN字符串、并验证它是否与ONTAP 阵列上对应子系统的主机NQN字符串匹配。</block>
+  <block id="4a5758dd5956965d547b1cb45d67a575" category="paragraph">如果主机NQN字符串不匹配、则应使用<block ref="037f8d599d4c7dd20cf7edd2a56379ce" prefix=" " category="inline-code"></block> 命令以更新相应ONTAP NVMe子系统上的正确主机NQN字符串。</block>
+  <block id="c0258b0d4807f8c5d210d24a07f7b5a5" category="section-title">配置Broadcom/Emulex和Marvell/Qlogic</block>
+  <block id="03e2c707931af39e8a945724180de793" category="paragraph">。<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block> 驱动程序和<block ref="d38f1c79c480647ae5bdf4c854fbdce3" prefix=" " category="inline-code"></block> 默认情况下、vSphere 8.x中的驱动程序已启用NVMe/FC功能。</block>
+  <block id="1b806581ee4833315ec4773f5d725880" category="paragraph">请参见 <block ref="aaa18d9ccb38f09094f0c241a8585efd" category="inline-link-macro-rx"></block> 检查驱动程序或固件是否支持此配置。</block>
+  <block id="ab59463ceab4b1c6a30ae9eae073bf3b" category="paragraph">您可以使用以下操作步骤 来验证NVMe/FC。</block>
+  <block id="90c9ebe9c42a74ad4d9455aebe8b9c93" category="list-text">验证NVMe/FC适配器是否列在ESXi主机上：</block>
+  <block id="428a9b553fcdd96c492bbc12bc36a9a1" category="list-text">验证是否已正确创建NVMe/FC命名空间：</block>
+  <block id="406799333bffbd7142130088a97c74bc" category="paragraph">在ONTAP 9.7中、NVMe/FC命名空间的默认块大小为4k。此默认大小与 ESXi 不兼容。因此、在为ESXi创建命名空间时、必须将命名空间块大小设置为* 512 B*。您可以使用执行此操作<block ref="61d81914cbbf064ce9a19bff51785b24" prefix=" " category="inline-code"></block> 命令：</block>
+  <block id="1eccb728ae533945090a979925c23add" category="paragraph">示例、</block>
+  <block id="5b3298e4daae06c1fc8dfab698385946" category="paragraph">请参见 <block ref="8e58017a2197e770fd8e78aaf7da6a84" category="inline-link-macro-rx"></block> 了解更多详细信息。</block>
+  <block id="cd685cf69530f787c9eda72ce3139eb1" category="paragraph">在ESXi 8.x中、默认情况下会加载所需的NVMe/TCP模块。要配置网络和NVMe/TCP适配器、请参见VMware vSphere文档。</block>
+  <block id="dbca68d1e16b8b8773e9fa923060d1c0" category="paragraph">您可以使用以下操作步骤 来验证NVMe/TCP。</block>
+  <block id="6ae74f9d53438972eb1f1e5ec90f7f1b" category="list-text">验证NVMe/TCP适配器的状态：</block>
+  <block id="c19fe6dee7f7a3724a5f9dcec2948091" category="list-text">检索NVMe/TCP连接列表：</block>
+  <block id="7b2ec28c3dfb12efddfebc7d80f05316" category="list-text">检索NVMe命名空间的路径数列表：</block>
+  <block id="c3bd18851ce712c62533ac8c331b71d8" category="inline-link-macro">1420654,</block>
+  <block id="7fa79b2d844dd78eb5ebb9aa901e8f14" category="cell"><block ref="7fa79b2d844dd78eb5ebb9aa901e8f14" category="inline-link-macro-rx"></block></block>
+  <block id="6c5ab2230ea5f786135c35ed670ce6d6" category="cell">在ONTAP 9.9.1中使用NVMe/FC协议时、ONTAP 节点不运行</block>
+  <block id="85dcf040cfea5e44024dcdee365ef36f" category="cell">ONTAP 9.9.1支持NVMe"中止"命令。当ONTAP 收到"中止"命令以中止正在等待其配对命令的NVMe融合命令时、会发生ONTAP 节点中断。只有使用NVMe融合命令(例如ESX)和光纤通道(FC)传输的主机才会发现问题描述。</block>
+  <block id="fe73a89d7c677ea4abb2a996360023fa" category="cell">1543660</block>
+  <block id="5a3b86e99232b3604afe4db20db45884" category="cell">如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误</block>
+  <block id="9c72461f3069d27216e1faab60848be8" category="paragraph">运行vSphere 8.x及更高版本并使用虚拟NVMe (vNVME)适配器的Linux VM会遇到I/O错误、因为默认情况下、vNVMe重试操作处于禁用状态。为了避免在所有路径关闭(All Paths Down、APD)或I/O负载繁重期间对运行旧内核的Linux VM造成中断、VMware引入了可调"VSCSIDisableNvmeRetry"以禁用vNVMe重试操作。</block>
+  <block id="03d0e633810a3de10e61ce29a7d4abb0" category="cell">检查并更正主机网络结构中的任何网络问题。如果这不起作用、请升级到可修复此问题描述 的修补程序。</block>
+  <block id="d9dd0dcd952b59a8a387ef9beb4c00f2" category="paragraph">请参见 <block ref="655b517a7a97afe4ca5d1c4eeafd2bfe" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
+  <block id="dad160104969c39365dd2cd4c98dd300" category="inline-link-macro">TR-4400</block>
+  <block id="a36f49fe4436012bee1d9977a9ab9b95" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block> 和 <block ref="bcecf0e9ae9f2444b66065a431138ac6" category="inline-link-macro-rx"></block>。</block>
+  <block id="ec28bcc44a923317b69c457e0afb81a2" category="summary">您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配置ONTAP SAN主机设置。</block>
+  <block id="4666c702a235d23b17ec55d988d16d3e" category="doc">将VMware vSphere 8.x与NetApp ONTAP 结合使用</block>
+  <block id="826ec041a0aff526181c163b6a4e0c3d" category="section-title">虚拟机管理程序SAN启动</block>
+  <block id="a2f3bc96cbc046a0257c4be3c7ced6d9" category="paragraph">ESXi提供了一个称为本机多路径插件(NMP)的可扩展多路径模块、用于管理子插件、存储阵列类型插件(Storage Array Type Plugin、SATP)和路径选择插件(Path Selection Plugins、PSP)。默认情况下、这些SATS规则在ESXi中可用。</block>
+  <block id="5aec6957b0d2d12d3804dd3a930de977" category="paragraph">对于NetApp ONTAP 存储、<block ref="d4f7bd3bf4872a2f8cd0cbe400fb23d0" prefix=" " category="inline-code"></block> 默认情况下、插件与一起使用<block ref="4646bb781f9a95f64c182af129e43c7c" prefix=" " category="inline-code"></block> 作为路径选择策略(PSP)。您可以使用以下命令进行确认：</block>
+  <block id="f97e2682b008f063e93b88b3fd21dec5" category="paragraph">虚拟卷(Vvol)是一种VMware对象类型、对应于虚拟机(Virtual Machine、VM)磁盘、其快照和快速克隆。</block>
+  <block id="4d473bf9776286f2c0e6c4560b881e47" category="paragraph">适用于 VMware vSphere 的 ONTAP 工具包括适用于 ONTAP 的 VASA Provider ，它为 VMware vCenter 提供了一个集成点，可用于利用基于 VVol 的存储。部署ONTAP 工具开放虚拟化设备(OVA)时、它会自动注册到vCenter Server并启用VASA Provider。</block>
+  <block id="c07b705fb9620f086ea38c4b77ac01b8" category="paragraph">在使用 vCenter 用户界面创建 VVOL 数据存储库时，它会指导您创建 FlexVol 作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问卷数据存储库中的卷。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE 是一个管理逻辑单元（ ALU ）。VVOL 是辅助逻辑单元（ SLU ）。</block>
+  <block id="cbb6add88005b9e195154a0f8f85eeaf" category="list-text">消除任何单点故障。在使用多个虚拟交换机时使用NIC绑定的不同网络子网上使用多个VMkernel网络接口、或者使用连接到多个物理交换机的多个物理NIC来提供HA并提高吞吐量。</block>
+  <block id="46ec41b6e978af4bf2bcdae563d90ea4" category="list-text">根据需要配置分区和/或VLAN以实现主机连接。</block>
+  <block id="3fc902961119186032f704ba3435c6b2" category="list-text">验证所有必需的启动程序是否均已登录到所需SVM上的目标SVM。</block>
+  <block id="db234a15624d05512170fa7a780b7283" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有iGroup设置、因此无需在vvol环境中创建或管理iGroup。</block>
+  <block id="6961083e089f23fe2e08fee4e11ce67d" category="paragraph">有关配置和管理vvol的详细信息、请参阅适用于VMware vSphere的ONTAP 工具文档、 <block ref="52e81e11040c41825151f9c7710055f2" category="inline-link-macro-rx"></block>，和 <block ref="bcecf0e9ae9f2444b66065a431138ac6" category="inline-link-macro-rx"></block>。</block>
+  <block id="85c20d8ed50da2b685dee6048290bc6b" category="section-title">ATS锁定</block>
+  <block id="2a25d8db6ac1adf1bf990599279ec725" category="admonition">-enable<block ref="e855ec75b8d039b41e36e5b06323d66b" prefix=" " category="inline-code"></block> 为映射到VMware vSphere for的所有LUN设置<block ref="c92fdf55401abf777b4eb053ea6c606b" prefix=" " category="inline-code"></block> 工作。有关详细信息、请参见ONTAP 文档。</block>
+  <block id="fc762f7b8978e7422da00476297460a4" category="paragraph">您可以使用建议的子操作系统调整手动配置虚拟机。调整更新后，必须重新启动子系统，更新才能生效。</block>
+  <block id="50d0455997a85b31fbe42e78c301b264" category="section-title">验证vSphere可调功能</block>
+  <block id="444ed403aaf81677cb3dd3c37eac7299" category="paragraph">您可以使用以下命令验证<block ref="26b00496bdf993ad7862062ddcf5fed5" prefix=" " category="inline-code"></block> 设置。</block>
+  <block id="b8a4c508b30d28aacdd6831c95eac830" category="paragraph"><block ref="8be06aa7887782bd4e41da5c199983f2" prefix="" category="inline-code"></block></block>
+  <block id="5969785f7e2cf46109d13be9407a2c26" category="section-title">验证磁盘IOPS设置</block>
+  <block id="2bbdad1b88dae05e21d90f30c22f2fa5" category="paragraph">您可以使用以下命令验证IOPS设置。</block>
+  <block id="e5df657fd388d8f39a43697287ad4be4" category="paragraph"><block ref="c473f85e097dac32fab2ca7cf250ea1c" prefix="" category="inline-code"></block></block>
+  <block id="34c0ffbf32ee377ba7a81a38a98102b3" category="section-title">验证QFullSampleSize</block>
+  <block id="6900c94ed3bcf3920ffd579cf50e5209" category="paragraph">您可以使用以下命令验证QFullSampleSize。</block>
+  <block id="7cdbf4845592ad7b5cdb4ccc2c4e2638" category="paragraph"><block ref="d6c304a8136df005fd734e2f1889954c" prefix="" category="inline-code"></block></block>
+  <block id="8d0e68de728c46da62cafb173eb4dabc" category="sidebar">VMware vSphere 8</block>
 </blocks>

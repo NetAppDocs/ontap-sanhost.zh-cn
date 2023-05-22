@@ -58,7 +58,7 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 `host_config` 命令执行以下操作：
 
 +
-** 更改x86和SPARC系统的光纤通道和SCSI驱动程序的设置
+** 更改x86和SPARC系统的光纤通道和SCSI驱动程序设置
 ** 为两种 MPxIO 配置提供 SCSI 超时设置
 ** 设置 VID/PID 信息
 ** 启用或禁用 ALUA
@@ -96,7 +96,7 @@ data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475
 
 SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。
 
-您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 https://["安装Solaris Host Utilities"^] 有关在Solaris MPIO环境中SAN启动LUN的详细信息。
+您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 https://["安装Solaris Host Utilities"] 有关在Solaris MPIO环境中SAN启动LUN的详细信息。
 
 
 
@@ -178,13 +178,13 @@ NOTE: 从适用于Solaris主机的ONTAP 9.8开始、支持所有SAN阵列(ASA)�
 
 === MetroCluster 的建议设置
 
-默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制 `fcp_offline_delay` 参数。的默认值 `fcp_offline_delay` 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值 `fcp_offline_delay` 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见NetApp知识库文章 https://["MetroCluster 配置中的 Solaris 主机支持注意事项"^]。
+默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制 `fcp_offline_delay` 参数。的默认值 `fcp_offline_delay` 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值 `fcp_offline_delay` 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见知识库文章 https://["MetroCluster 配置中的 Solaris 主机支持注意事项"^]。
 
 
 
 == Oracle Solaris 虚拟化
 
-* Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。这些技术通常已更名为"Oracle虚拟机"、尽管它们基于不同的架构。
+* Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于不同的架构、但它们通常已更名为"Oracle虚拟机"。
 * 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
 * NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
 * 仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^]。
