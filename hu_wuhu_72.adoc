@@ -45,7 +45,7 @@ Windows 主机计算机上安装了以下程序和文件。默认目录为 `C �
 
 == Host Utilities支持的配置
 
-主机实用程序支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://["NetApp 互操作性表工具"^]。
+主机实用程序支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
 
 
@@ -54,7 +54,7 @@ Windows 主机计算机上安装了以下程序和文件。默认目录为 `C �
 在安装Host Utilities之前、您必须验证Host Utilities版本是否支持主机和存储系统配置、以便正确安装软件。
 
 .步骤
-. 在中检查支持的配置 http://["NetApp 互操作性表工具"^]。
+. 在中检查支持的配置 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
 . 在中检查相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
 +
 
@@ -66,7 +66,7 @@ NOTE: link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将
 
 . 验证布线。
 +
-请参见 https://["《 SAN 配置指南》"^] 适用于您的ONTAP 版本或 https://["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
+请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^] 适用于您的ONTAP 版本或 https://mysupport.netapp.com/ecm/ecm_get_file/ECMLP2773533["《 E 系列硬件布线指南》"^] 有关布线和配置的详细信息。
 
 
 
@@ -86,7 +86,7 @@ CAUTION: 请勿手动更改HBA设置。
 . 获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。
 . 将HBA连接到FC交换机或直接连接到存储系统。
 . 根据FC交换机文档在FC交换机上创建分区。
-. 对于ONTAP 、请按WWPN对交换机进行分区。请务必使用逻辑接口(LIF)的WWPN、而不是存储控制器上物理端口的WWPN。有关详细信息，请参见 https://["《 SAN 配置指南》"^]。
+. 对于ONTAP 、请按WWPN对交换机进行分区。请务必使用逻辑接口(LIF)的WWPN、而不是存储控制器上物理端口的WWPN。有关详细信息，请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanconf/home.html?cp=14_7["《 SAN 配置指南》"^]。
 
 
 
@@ -111,7 +111,7 @@ MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系
 要以交互方式安装Host Utilities软件包、您必须运行Host Utilities安装程序并按照提示进行操作。
 
 .步骤
-. 从下载可执行文件 https://["NetApp 支持站点"^]。
+. 从下载可执行文件 https://mysupport.netapp.com/site/["NetApp 支持站点"^]。
 . 更改为下载可执行文件的目录。
 . 运行 `netapp_windows_host_utilities_7.2_x64` 归档并按照屏幕上的说明进行操作。
 . 出现提示时重新启动 Windows 主机。
@@ -432,14 +432,14 @@ NOTE: 根据程序的不同，这些参数的名称可能会略有不同。例�
 === 可从不同方面确定可能的互操作性问题
 
 * 要确定潜在的互操作性问题、您必须确认主机实用程序支持主机操作系统软件、主机硬件、ONTAP 软件和存储系统硬件的组合。
-* 您必须检查 http://["NetApp 互操作性表工具"^]。
+* 您必须检查 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
 * 您必须验证 iSCSI 配置是否正确。
 * 如果重新启动后iSCSI LUN不可用、则必须验证目标是否在Microsoft iSCSI启动程序GUI的*持久目标*选项卡上列为持久目标。
 * 如果使用 LUN 的应用程序在启动时显示错误，则必须验证是否已将这些应用程序配置为依赖于 iSCSI 服务。
 * 对于运行ONTAP 的存储控制器的FC路径、您必须验证FC交换机是否已使用目标LIF的WWPN进行分区、而不是使用节点上物理端口的WWPN进行分区。
 * 您必须查看 link:hu_wuhu_71_rn.html["发行说明"] 让Windows Host Utilities检查已知问题。发行说明包括一个已知问题和限制列表。
 * 您必须查看适用于您的ONTAP 版本的SAN管理指南中的故障排除信息。
-* 您必须进行搜索 https://["NetApp Bug Online"^] 最近发现的问题。
+* 您必须进行搜索 https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 最近发现的问题。
 +
 ** 在高级搜索下的错误类型字段中、应选择* iSCSI - Windows*、然后选择*执行*。您应重复搜索错误类型* fcp -windows*。
 

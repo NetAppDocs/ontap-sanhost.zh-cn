@@ -26,7 +26,7 @@ summary: 您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配
 == 虚拟机管理程序SAN启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -233,7 +233,7 @@ NOTE: 要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具
 
 NetApp 不建议此时更改任何 VVOL 设置的默认值。
 
-请参见 https://["NetApp 互操作性表工具"^] 适用于特定版本的 ONTAP 工具或适用于特定版本的 vSphere 和 ONTAP 的原有 VASA Provider 。
+请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 适用于特定版本的 ONTAP 工具或适用于特定版本的 vSphere 和 ONTAP 的原有 VASA Provider 。
 
 有关配置和管理vvol的详细信息、请参阅适用于VMware vSphere的ONTAP 工具文档、 link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^]，和 link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400"^]。
 

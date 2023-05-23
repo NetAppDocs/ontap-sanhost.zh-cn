@@ -36,7 +36,7 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://["NetApp 支持站点"^] 主机。
+. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 主机。
 . 使用以下命令安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -77,7 +77,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 请参见 Veritas 支持门户（产品表，平台查找， HCL 表）以验证 SAN 启动配置可支持性和已知注意事项。
 
@@ -98,7 +98,7 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192
 
 == 多路径
 
-您必须验证您的配置是否满足系统要求。有关详细信息，请参见 https://["NetApp 互操作性表工具"^] 和 Veritas HCL 表。
+您必须验证您的配置是否满足系统要求。有关详细信息，请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 和 Veritas HCL 表。
 
 .示例
 在此示例中，使用 `vxdmpadm` 命令验证 VxDMP 多路径是否已连接 ONTAP 目标阵列。
