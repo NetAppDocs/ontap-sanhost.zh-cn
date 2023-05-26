@@ -3114,4 +3114,81 @@
   <block id="6900c94ed3bcf3920ffd579cf50e5209" category="paragraph">您可以使用以下命令验证QFullSampleSize。</block>
   <block id="7cdbf4845592ad7b5cdb4ccc2c4e2638" category="paragraph"><block ref="d6c304a8136df005fd734e2f1889954c" prefix="" category="inline-code"></block></block>
   <block id="8d0e68de728c46da62cafb173eb4dabc" category="sidebar">VMware vSphere 8</block>
+  <block id="2e920bc4fea58a11c2cd8f0900ced25a" category="summary">如何使用ONTAP为AIX配置NVMe/FC主机</block>
+  <block id="ef44b1520fc219818110cbb848b83d4c" category="doc">适用于采用ONTAP的AIX的NVMe/FC主机配置</block>
+  <block id="8ab281bb60ad999625aaf3de3c38fb65" category="paragraph">您可以在使用ONTAP存储作为目标的IBM AIX和VIOS/PowerVM主机上启用NVMe/FC。有关支持的配置的其他详细信息、请参见 <block ref="aaa18d9ccb38f09094f0c241a8585efd" category="inline-link-macro-rx"></block>。</block>
+  <block id="3f30b3d0388d2e37b9eab09266e88352" category="paragraph">以下支持适用于使用ONTAP的AIX主机的NVMe/FC主机配置：</block>
+  <block id="0ea2a32c53bc6cd3ea3534dccecb8603" category="list-text">从ONTAP 9.13.1开始、为IBM AIX 7.2 TL5 SP6、AIX 7.3 TL1 SP2和VIOS 3.1.4.21版本增加了基于光纤通道的NVMe (NVMe/FC)支持、并为物理堆栈和虚拟堆栈提供SAN启动支持。有关设置SAN启动支持的详细信息、请参见IBM文档。</block>
+  <block id="870666297c802760e0f740c23ba0f86a" category="list-text">只有POWER9和Power10 IBM服务器才支持NVMe/FC。</block>
+  <block id="2cbe79c2517f134493f44b09d5cbb74f" category="list-text">NVMe设备不需要单独的PCM (路径控制模块)、例如HUK for AIX SCSI MPIO支持。</block>
+  <block id="4eb7ab60a4431529679ce25f0492c7af" category="list-text">VIOS 3.1.4.21引入了NetApp虚拟化支持(VIOS/PowerVM)。这在使用Power10 IBM服务器的NPIV (N_portID虚拟化)存储虚拟化模式中仅受支持。</block>
+  <block id="3f11c6032647a5818c534829ca2b2ee0" category="list-text">确认您已安装32 Gb FC Emulex适配器(EN1A、EN1B、EN1L)或64 Gb FC适配器(EN1n、EN1P)、且适配器固件为12.4.257.半 及更高版本。</block>
+  <block id="8bd787dd7b428233f651ee1c46e21ee9" category="list-text">如果您使用的是MetroCluster配置、NetApp建议更改AIX NVMe/FC默认APD (所有路径均关闭)时间以支持MetroCluster计划外切换事件、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅公共报告1553249。</block>
+  <block id="0e7e32cf18062ea2f0711c507e314b8a" category="list-text">默认情况下、AIX主机操作系统的ANATT值为30秒。IBM提供了一个临时修复(IFIX)、将ANATT值上限设置为60秒；您需要从IBM网站安装IFIX、以确保所有ONTAP工作流均无中断。</block>
+  <block id="feea0cbb465b6caacbe6b2e93f04da1d" category="admonition">要获得NVMe/FC AIX支持、您需要在AIX OS的GA版本上安装IFIX。VIOS/PowerVM操作系统不需要执行此操作。</block>
+  <block id="c07e427521a4c5ceb9704138566e124e" category="paragraph">IFIX的详细信息如下：</block>
+  <block id="e1fa9920a353e14604b971646734d9ad" category="list-text">对于AIX版本72-TL5-SP6-2320、安装<block ref="f896e07534b8a3b773955f68065d246e" prefix=" " category="inline-code"></block> 软件包。</block>
+  <block id="532cbcbb7aad95ce1f00e4e3fb4b03f6" category="list-text">对于AIX Level 73-TL1-SP2-2320、安装<block ref="9b3ffcc15ca4d75da623901d3832fc42" prefix=" " category="inline-code"></block> 软件包。</block>
+  <block id="f17bfdf5999401bcdd6897f6d5dd675b" category="inline-link-macro">管理AIX上的临时修复程序</block>
+  <block id="bcdcf815cb913fe205982051fea55f20" category="paragraph">有关管理ifixes的详细信息、请参见 <block ref="d0c56d52e1733062faaa4c2667974f7c" category="inline-link-macro-rx"></block>。</block>
+  <block id="fe969132e8cace79306a9789cbb1baf4" category="admonition">您需要在以前没有与相关的已安装ifixes的AIX版本上安装ifixes<block ref="ed3d677bd9df1c532cefdc326b4fb80e" prefix=" " category="inline-code"></block> 在系统上。如果存在这些ifixes、它们将与新安装冲突。</block>
+  <block id="940130be22cd59a60c9c2a5671450753" category="paragraph">下表显示了在非虚拟化模式下分配给AIX LPAR (AIX逻辑分区)或物理/本机堆栈的HBA：</block>
+  <block id="0437eec9c1ba5909642a99ee90c5a546" category="cell">主机操作系统</block>
+  <block id="11b3050b36fe4bf65551c9379e74cac7" category="cell">Power Arch</block>
+  <block id="807dd41b75918d70b41f7722ef76ddcb" category="cell">电源固件版本</block>
+  <block id="650be61892bf690026089544abbd9d26" category="cell">模式</block>
+  <block id="8413c683b4b27cc3f4dbd4c90329d8ba" category="cell">注释</block>
+  <block id="7b9eb3515c255f26f173af0f1d02ca10" category="cell">AIX 7.2 TL5 SP6</block>
+  <block id="89832886f2c91d14b5ea95e8c8b2efc3" category="cell">POWER9</block>
+  <block id="fdcfefc0dd4d47b4775e7a895353b298" category="cell">FW 950或更高版本</block>
+  <block id="da032935d38f58f2a80e85824e285a21" category="cell">物理堆栈</block>
+  <block id="948c847302bfad6875962089bd70b8eb" category="cell">通过TS012877410提供IFIX。</block>
+  <block id="ef68d757b6bda6ddbe9888cee04ed83e" category="cell">Power10</block>
+  <block id="491f480bd25135b61af1898f4382d024" category="cell">FW 1010或更高版本</block>
+  <block id="e7cda58d3cb375f2860722871215ea51" category="cell">支持SAN启动。通过TS012877410提供IFIX。</block>
+  <block id="307b80695029d3fb204f358d595aa521" category="cell">AIX 7.3 TL1 SP2</block>
+  <block id="bfbb073807eefa21522d9a2da6f6143e" category="cell">物理和虚拟堆栈</block>
+  <block id="2169ce752df21260967f4168dcd448df" category="paragraph">下表显示了在虚拟化模式下分配给VIOS且支持NPIV的HBA：</block>
+  <block id="c31bfee70971bfd9d23d0e828b31f576" category="cell">VIOS/PowerVM 3.1.4.21</block>
+  <block id="8ed3cb67c40a76fb7e1d9cf52f588283" category="cell">虚拟堆栈</block>
+  <block id="ffe61e892c57af1c7ba6edcf6cd43164" category="cell">从适用于VIOCc的AIX 7.3 TL1 SP2开始提供支持</block>
+  <block id="7497bca195bb082ae940f34297194a2d" category="paragraph">适用于采用ONTAP的AIX的NVMe/FC主机配置具有以下已知限制：</block>
+  <block id="e210d5a356038b64a9864c04f6066b20" category="list-text">AIX主机上的QLogic/Marvel 32G FC HBA不支持NVMe/FC。</block>
+  <block id="0addf2aa980ae0c0697b70236083a535" category="list-text">使用POWER9 IBM服务器的NVMe/FC设备不支持SAN启动。</block>
+  <block id="108d929e2d13a7291d4c2a75f9607cb3" category="paragraph">默认情况下，安装AIX OS时会提供用于NVMe多路径的IBM MPIO (多路径I/O)。</block>
+  <block id="55bd8b08aa29008e531a080aa61ecdb8" category="paragraph">您可以使用验证是否已为AIX主机启用NVMe多路径<block ref="d4911144bc4ed6672c49d5124ec36d0d" prefix=" " category="inline-code"></block> 命令：</block>
+  <block id="6ca857f7a44a21cfffda914cf9549710" category="paragraph">*示例输出*</block>
+  <block id="befb82eb50a6a0cc76543fdb7fa81b05" category="paragraph">您可以使用以下操作步骤为Broadcom/Emulex适配器配置NVMe/FC。</block>
+  <block id="869544161f77927dc1a5671f65d62425" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="aaa18d9ccb38f09094f0c241a8585efd" category="inline-link-macro-rx"></block>。</block>
+  <block id="ce2df3d84c39fdb894251f18b0f706c8" category="list-text">默认情况下、在物理FC中启用了NVMe/FC协议支持；但是、在虚拟I/O服务器(VIOS)上的虚拟光纤通道(VFC)中禁用了NVMe/FC协议支持。检索已禁用NVMe/FC支持的适配器的列表：</block>
+  <block id="955736fca778773f397bfff3fb13554e" category="list-text">通过运行在适配器上启用对NVMe/FC协议的支持<block ref="298944b0d52065fb6d4009e722898415" prefix=" " category="inline-code"></block> VIOS上的命令：</block>
+  <block id="6cd5c80cb797f1e2d35f1d580ffe6d20" category="list-text">验证是否已在适配器上启用支持：</block>
+  <block id="8efc24b1df9bc9f173cfba2079a3ac11" category="list-text">为所有当前适配器或选定适配器启用NVMe/FC协议：</block>
+  <block id="84b3e0604b5f47c082acaf2ab109e481" category="list-text">为所有适配器启用NVMe/FC协议：</block>
+  <block id="af34ce57ad4def33e18653786afd224e" category="list-text">更改<block ref="f554e1472be57a017a09b8e72df7e0b2" prefix=" " category="inline-code"></block> 的属性值<block ref="6366faad0ce9db50ad4ec0b944e6804f" prefix=" " category="inline-code"></block> 伪设备<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block>。</block>
+  <block id="1e51be8d7b5e359a2e676b1786aa6f7c" category="list-text">设置<block ref="29869abeb6a28a2a0c3dcbf38108e625" prefix=" " category="inline-code"></block> 属性值为<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block> 适用于所有VFC主机设备。</block>
+  <block id="6ea83948bb41db592f1dd144bab617d5" category="list-text">通过更改为选定适配器启用NVMe/FC协议<block ref="29869abeb6a28a2a0c3dcbf38108e625" prefix=" " category="inline-code"></block> VFC主机设备属性的值<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block>。</block>
+  <block id="2b7b658346d3fa52c5363c17cfe2b64f" category="list-text">请验证<block ref="fb697c2845ab4f6877db5fb0f162a140" prefix=" " category="inline-code"></block> 已在服务器上创建：</block>
+  <block id="9ca965cb8c1f3cc98538fd9fe17ee462" category="paragraph">*示例输出*</block>
+  <block id="6205e6a8adf00a039a76f80fba751d5d" category="list-text">记录服务器中的主机NQN：</block>
+  <block id="5609ae4308e7e13b571a4609a80ca28c" category="list-text">查看分区UUID：</block>
+  <block id="46fb92f9d8bcac6d074199517bcfd9da" category="list-text">检查主机NQN并验证它是否与ONTAP阵列上对应子系统的主机NQN字符串匹配：</block>
+  <block id="da208fb575db2ac57ff1319036af2a6f" category="list-text">验证启动程序端口是否已启动且正在运行、并且您可以看到目标生命周期。</block>
+  <block id="413d1a842341ac8491856d35085746ac" category="paragraph">您需要验证ONTAP名称卷是否正确反映在主机上。为此、请运行以下命令：</block>
+  <block id="c4815a9e7bab07d952f3a16f2d250f1f" category="paragraph">您可以检查多路径状态：</block>
+  <block id="b1460fc99f40abf0e4777c0ef83f9340" category="paragraph">适用于采用ONTAP的AIX的NVMe/FC主机配置存在以下已知问题：</block>
+  <block id="31c5b0de25b168798dceb058bef8a7f6" category="cell">BURT ID (BURT ID)</block>
+  <block id="42dcdffc46f5810bfaac54d46fbf50ef" category="cell">1553249.</block>
+  <block id="650a7c31a67a66d1f1f10b3eccb13db4" category="cell">要修改的AIX NVMe/FC默认APD时间、以支持MCC计划外切换事件</block>
+  <block id="9f84e76956bfe4d716d3866a854ef57e" category="cell">默认情况下、AIX操作系统会对NVMe/FC使用全路径关闭(APD)超时值20秒。  但是、ONTAP MetroCluster自动计划外切换(Automatic Undurrated SwitchOver、AUSO)和Tieb破碎 机启动的切换工作流所需时间可能比APD超时窗口要长一些、从而导致I/O错误。</block>
+  <block id="5f6372d1d8f487ae80b5feed7e441420" category="cell">1546017</block>
+  <block id="24f2a7ff1a2835519ea571d3e22b1a36" category="cell">AIX NVMe/FC将ANATT上限设置为60秒、而不是ONTAP公布的120秒</block>
+  <block id="16c567932b89582ab5042df30072ca4e" category="cell">ONTAP在控制器标识中显示ANA (非对称命名空间访问)过渡超时为120秒。目前、借助IFIX、AIX会从控制器标识读取ANA过渡超时、但如果超过此限制、则会将其有效地固定到60秒。</block>
+  <block id="9539a7ea940559ecdced176b2592b5d3" category="cell">1541386</block>
+  <block id="7dcc9f5201e7653745b04540dfb62afa" category="cell">在AATT到期后、AIX NVMe/FC会命中EIO</block>
+  <block id="005bc828fe1c9102500705a406202e5c" category="cell">对于任何存储故障转移(Storage Failover、SFO)事件、如果ANA (非对称命名空间访问)过渡超过给定路径上的ANA过渡超时上限、则AIX NVMe/FC主机将失败、并显示I/O错误、尽管命名空间具有备用的运行状况良好的路径。</block>
+  <block id="51febd786dec93062cef9cfc8123006f" category="cell">1541380</block>
+  <block id="875f8b6e43bcfbc9770e44865a0aed5c" category="cell">AIX NVMe/FC等待半/全AATT过期、然后在ANA AEN之后恢复I/O</block>
+  <block id="656b00a7eb6f6aa3f9eb9c87cb124f32" category="cell">IBM AIX NVMe/FC不支持ONTAP发布的某些异步通知(Aschron也 会通知、AEN)。这种次优ANA处理方式会导致SFB操作期间性能欠佳。</block>
+  <block id="7e6bb0931a72759d39514aa924b420bc" category="sidebar">AIX</block>
 </blocks>
