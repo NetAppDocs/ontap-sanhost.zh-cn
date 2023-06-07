@@ -15,7 +15,7 @@
 
 您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。
 
-将 ` <DevID>` 替换为要排除的设备的 WWID 字符串。使用以下命令确定 WWID ：
+更换 `<DevId>` 使用要排除的设备的WWID字符串：
 
 ....
 blacklist {

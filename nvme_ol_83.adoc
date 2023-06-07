@@ -197,7 +197,7 @@ FCP CMPL: xb 00000c89 Err 0000cd87
 
 === 启用1 MB I/O大小
 
-。 `lpfc_sg_seg_cnt` 要使主机达到问题描述 1 MB大小I/O、必须将参数设置为256
+ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加 `lpfc` 的值 `lpfc_sg_seg_cnt` 参数从默认值64更改为256。
 
 .步骤
 . 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
@@ -216,6 +216,9 @@ options lpfc lpfc_sg_seg_cnt=256
 256
 ----
 
+
+
+NOTE: 这不适用于逻辑NVMe/FC主机。
 
 
 
