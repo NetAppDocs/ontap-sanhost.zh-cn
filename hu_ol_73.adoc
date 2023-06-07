@@ -115,54 +115,62 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-Oracle Linux 7.3 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。要启动多路径守护进程，必须存在 `multipath.conf` 文件，但您可以使用命令 `touch /etc/multipath.conf` 创建一个空的零字节文件
+经过编译的Oracle Linux 7.3操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
+。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
-首次创建此文件时，您可能需要启用并启动多路径服务。
+`touch /etc/multipath.conf`
+
+首次创建此文件时、可能需要启用并启动多路径服务：
 
 [listing]
 ----
 # systemctl enable multipathd
 # systemctl start multipathd
 ----
-无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
-
-您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。
-
-更换 `<DevId>` 使用要排除的设备的WWID字符串：
-
-....
+* 无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
+* 要排除不需要的设备、请将以下语法添加到中 `multipath.conf` 文件。
++
+[listing]
+----
 blacklist {
         wwid <DevId>
         devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
         devnode "^hd[a-z]"
         devnode "^cciss.*"
 }
-....
+----
++
+更换 `<DevId>` 使用 `WWID` 要排除的设备的字符串。
+
+
+
 .示例
 在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
 
 .步骤
 . 运行以下命令以确定 WWID ：
 +
-....
+[listing]
+----
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
-....
-. 将此 WWID 添加到 ` /etc/multipath.conf` 中的黑名单 stanza 中：
+----
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
-....
+[listing]
+----
 blacklist {
      wwid   360030057024d0730239134810c0cb833
      devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
      devnode "^hd[a-z]"
      devnode "^cciss.*"
 }
-....
+----
 
 
-您应始终检查 `/etc/multipath.conf` 文件中的原有设置、尤其是默认设置部分中的设置、这些设置可能会覆盖默认设置。
+您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了严重 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
+下表显示了关键 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_centos_78.html 
-keywords: host utilities, centos, linux, 7.8, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 CentOS 7.8 
+permalink: hu_rhel_92.html 
+keywords: host utilities, red hat, rhel, linux, 9.2, netapp, ontap, rhel 
+summary: 介绍如何将Red Hat Enterprise Linux 9.2与ONTAP结合使用 
 ---
-= 将 CentOS 7.8 与 NetApp ONTAP 结合使用
+= 将Red Hat Enterprise Linux 9.2与NetApp ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -22,26 +22,24 @@ summary: 介绍如何在 ONTAP 中使用 CentOS 7.8
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
 
-强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
-如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
+如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
 
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 站点到主机。
-. 使用以下命令安装软件包：
+.步骤
+. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 主机。
+. 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
 
 
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
-
-
-== SAN 工具包
+== SAN工具套件
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
@@ -69,7 +67,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -89,7 +87,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 == 多路径
 
-对于 CentOS 7.8 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于Red Hat Enterprise Linux (RHEL) 9.2、 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.2会编译为识别和正确管理ONTAP LUN所需的所有设置。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -108,10 +106,11 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
 size=80G  features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
+  |- 11:0:7:1    sdfi  130:64   active ready running
+  |- 11:0:9:1    sdiy  8:288    active ready running
+  |- 11:0:10:1   sdml  69:464   active ready running
+  |- 11:0:11:1   sdpt  131:304  active ready running
+
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
@@ -136,6 +135,7 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
 `-+- policy='service-time 0' prio=10 status=enabled
 |- 11:0:0:0 sdb 8:i6 active ready running
 |- 12:0:0:0 sdz 65:144 active ready running
+
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
@@ -144,7 +144,8 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-对CentOS 7.8操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
+经过编译的RHEL 9.2操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
+
 。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
 `touch /etc/multipath.conf`
@@ -218,7 +219,7 @@ blacklist {
 | fast_io_fail_sMO | 5. 
 
 
-| features | "3 queue_if_no_path pG_init_retries 50" 
+| features | "2 pG_INIT_retries 50" 
 
 
 | flush_on_last_del | 是的。 
@@ -260,21 +261,21 @@ blacklist {
 | 供应商 | NetApp 
 |===
 .示例
-以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
+以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示 `multipath.conf` 文件定义的值 `path_checker` 和 `no_path_retry` 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。
 
 [listing]
 ----
 defaults {
    path_checker      readsector0
-   no_path_retry      fail
+   no_path_retry     fail
 }
 
 devices {
    device {
       vendor         "NETAPP  "
       product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
+      no_path_retry    queue
+      path_checker     tur
    }
 }
 ----
@@ -286,14 +287,19 @@ devices {
 
 
 
-== 已知问题和限制
+== 已知问题
 
-[cols="4*"]
+使用ONTAP版本的RHEL 9.2的NVMe-oF主机配置存在以下已知问题：
+
+[cols="20, 20, 50,20"]
 |===
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 | 不适用 
+| 1508554 | 要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项 | 在RHEL 9.2中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持HBA发现的库软件包依赖关系。 | 不适用 
+
+
+| 1537359 | 使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断 | 在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况 `kdump` 配置、则会生成 `vmcore` 文件 `/var/crash/` 目录。正在使用对问题描述进行分类 `lpfc` 驱动程序、但无法一致地复制。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=2173947["2173947"^] 
 |===
 
 

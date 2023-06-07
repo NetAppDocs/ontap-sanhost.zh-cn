@@ -127,10 +127,11 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 Oracle Linux 6.6 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。
 
-* 。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
-`touch /etc/multipath.conf`。
-* 首次创建此文件时，您可能需要启用并启动多路径服务。
+。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
+`touch /etc/multipath.conf`。
+
+首次创建此文件时，您可能需要启用并启动多路径服务。
 
 [listing]
 ----
@@ -138,21 +139,27 @@ Oracle Linux 6.6 操作系统经过编译，可识别 ONTAP LUN 并自动正确�
 # /etc/init.d/multipathd start
 ----
 * 无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望多路径管理、或者您的现有设置覆盖默认值。
-* 您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。
-* 将<DevId>替换为要排除的设备的WWID字符串：
-
-
-....
+* 您可以将以下语法添加到中 `multipath.conf` 用于排除不需要的设备的文件：
++
+** 将<DevId>替换为要排除的设备的WWID字符串：
++
+[listing]
+----
 blacklist {
         wwid <DevId>
         devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
         devnode "^hd[a-z]"
         devnode "^cciss.*"
 }
-....
+----
+
+
+
+
 .示例
 在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
 
+.步骤
 . 运行以下命令以确定 WWID ：
 +
 [listing]
@@ -160,21 +167,22 @@ blacklist {
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. 将此WWID添加到/etc/multipath.conf中的"blacklist" stanza中：
+. 将此WWID添加到中的"黑名单"部分 `/etc/multipath.conf`：
 +
-....
+[listing]
+----
 blacklist {
      wwid   360030057024d0730239134810c0cb833
      devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
      devnode "^hd[a-z]"
      devnode "^cciss.*"
 }
-....
+----
 
 
 您应始终检查 `/etc/multipath.conf` 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了严重 `multipathd` ONTAP LUN的参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须稍后在中的zas中对其进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
+下表显示了关键 `multipathd` ONTAP LUN的参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须稍后在中的zas中对其进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
