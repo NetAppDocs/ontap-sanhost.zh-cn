@@ -3303,7 +3303,6 @@ XXX</block>
 。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="43784ec2c1aaa42346ed96f22c8410b6" category="sidebar">9.2.</block>
   <block id="30c9201611d0a0e2f87585a1866fa4bd" category="doc">适用于采用ONTAP的Oracle Linux 9.1的NVMe-oF主机配置</block>
-  <block id="4f50054d9d230419cddd33dc0dfec902" category="paragraph">采用非对称命名空间访问(AANA)的Oracle Linux (OL) 9.1支持基于网络结构的NVMe (NVMe-oF)、包括NVMe/FC和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
   <block id="de83b7a38e0f01ada520a571da1c0ae7" category="paragraph">以下支持适用于采用ONTAP的OL 9.1的NVMe-oF主机配置：</block>
   <block id="3178ea29b080ab675001ea00192c87ef" category="list-text">默认情况下、Oracle Linux 9.1已为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。</block>
   <block id="6108d173e82e63fbc1c54d48885f9779" category="paragraph">您可以使用以下操作步骤验证支持的最低OL 9.1软件版本。</block>
@@ -3313,7 +3312,6 @@ XXX</block>
   <block id="9cdf71978b23a4023a75f102c03f30d0" category="list-text">验证您使用的适配器型号是否受支持：</block>
   <block id="b7d859687cee13a86312666f61100178" category="list-text">OL 9.1 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="30a04882c68a73c9cf9bda1fde81eb99" category="list-text">在OL 9.1主机上验证以下NVMe/FC设置：</block>
-  <block id="2fa1372c51233d5657736d3be228889f" category="paragraph">使用ONTAP版本的OL 9.1的NVMe-oF主机配置存在以下已知问题：</block>
   <block id="bed8afd121bcc77f7679ad8aa66edc6e" category="cell">1536937</block>
   <block id="277f83d9faff75a0f8017279fcf07969" category="cell"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block> 命令会为子系统打印重复的NVMe控制器</block>
   <block id="8e34704e7af729eb74fd3ebaac0a9342" category="cell">。<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令应返回与给定子系统关联的NVMe控制器的唯一列表。在Oracle Linux 9.1中、<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令将返回属于给定子系统的所有命名空间的NVMe控制器以及相应的非对称命名空间访问(AANA)状态。但是、如果列出给定命名空间的子系统命令语法、则显示路径状态的唯一NVMe控制器条目会很有用、因为ANA状态是每个命名空间的属性。</block>
@@ -3321,17 +3319,47 @@ XXX</block>
   <block id="1c68cdd2e6afb2c09809c25810c520aa" category="cell"><block ref="1c68cdd2e6afb2c09809c25810c520aa" category="inline-link-macro-rx"></block></block>
   <block id="5cf8c44d0d04885f386e9f0d05461ec2" category="cell">1539101</block>
   <block id="91a845901382406af3acfb27b99025ea" category="cell">Oracle Linux 9.1 NVMe-oF主机无法创建永久性发现控制器</block>
-  <block id="465d3ac157f9559a71ac205312d4cf83" category="cell">在Oracle Linux 9.1基于网络结构的NVMe (NVMe-oF)主机上、您可以使用<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 用于创建永久性发现控制器(POC)的命令。使用此命令时、应为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Oracle Linux 9.1、则在中创建PDC将失败<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 已执行命令。</block>
   <block id="86d73f9a9eafbf2a1bc89961929ab3e0" category="inline-link-macro">18196</block>
   <block id="84ccd25799ec2ea76f7f5faab8db9837" category="cell"><block ref="84ccd25799ec2ea76f7f5faab8db9837" category="inline-link-macro-rx"></block></block>
   <block id="533f5c2e4bcf35d9cefe9c97046f7654" category="summary">介绍如何将Oracle Linux 9.1与ONTAP结合使用</block>
   <block id="83b6364b5fed0880c85b1a8caf70b15f" category="doc">将Oracle Linux 9.1与NetApp ONTAP结合使用</block>
-  <block id="d1e17b610d12e40ce0477f24b702c3d2" category="paragraph">对于OL 9.1、请使用<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。OL 9.1包含识别和正确管理ONTAP LUN所需的所有设置。</block>
-  <block id="2d3eb2d12b839784838915ca9789047f" category="paragraph">经过编译的Oracle Linux 9.1操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="4c27689c3548176781daa0cf49fc86d5" category="paragraph">以下示例说明了如何更正覆盖的默认值。在这种情况下、将显示<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件定义的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 与ONTAP LUN不兼容的LUN。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
   <block id="c6951501d0b58604dc509284a2398484" category="admonition">要配置Oracle Linux 9.1 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 9.1。</block>
   <block id="1c50fcd4efa065aedf6e2667df8523f3" category="paragraph">具有NetApp ONTAP版本的Oracle Linux 9.1存在以下已知问题：</block>
   <block id="da80aa62fc6cf6b66539a5a3933874a8" category="cell"><block ref="da80aa62fc6cf6b66539a5a3933874a8" category="inline-link-rx"></block></block>
-  <block id="00afbfe7fe5cea7d2316cbbc96e387c4" category="cell">带有Emulex HBA的SAN LUN实用程序需要库软件包中的符号链接</block>
   <block id="20e1c7fed64a39ad5334f26be4f4d8c7" category="paragraph">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)发现所需的库依赖关系：</block>
+  <block id="945ae6ecd5de8145a44bcea8e9d26556" category="summary">介绍如何将Red Hat Enterprise Linux 8.8与ONTAP结合使用</block>
+  <block id="0c3cf35e9d17d9797fe9f979cd114434" category="doc">将Red Hat Enterprise Linux 8.8与NetApp ONTAP结合使用</block>
+  <block id="03b42a28986c6f868e2df3814cdcbb0d" category="paragraph">安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
+  <block id="a2bd0f8150b6236d72e1f415a678cf78" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.8、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.8会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="5dcf53fffd6ff60a6d2323ae00a871f3" category="paragraph">对RHEL 8.8操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="b8aa99c2e58dbe6b9f5fbd80d2ef3c41" category="summary">如何使用ONTAP为RHEL 8.8配置NVMe-oF主机</block>
+  <block id="2f2ef2920873b538ad7f28e5d18221a0" category="doc">适用于采用ONTAP的RHEL 8.8的NVMe-oF主机配置</block>
+  <block id="627fc5ce0d88e0997ea80bdeecc63bc3" category="paragraph">采用非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 8.8支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="ab15b05ddb0c07381067dd0a70972dfd" category="paragraph">对于采用ONTAP的RHEL 8.8、NVMe-oF主机配置支持以下功能：</block>
+  <block id="ba770fdddd491fed0ed0aa2d9bce30bc" category="list-text">默认情况下、对于RHEL 8.8 NVMe-oF主机、内核NVMe多路径处于禁用状态。因此，您需要手动启用它。</block>
+  <block id="c55d87b5714812a0110cd0c2b93d2102" category="list-text">在RHEL 8.8主机上、由于存在未决问题、NVMe/TCP是一项技术预览功能。</block>
+  <block id="b533797bfe32a06fb40a831b72c0e6fc" category="section-title">启用内核多路径</block>
+  <block id="682268ee3623608f6aaa4d97948590b9" category="paragraph">您可以使用以下操作步骤启用内核多路径。</block>
+  <block id="79f5508560fcdeeb0f8f5e35cfeeb028" category="list-text">在主机服务器上安装RHEL 8.8。</block>
+  <block id="3f941eb23733b5fc256825fb8360af1e" category="list-text">安装完成后、验证是否正在运行指定的RHEL 8.8内核。</block>
+  <block id="0b2a1cf2bd4cdd2ea23a2f0ea592a4d6" category="list-text">安装NVMe-CLI软件包：</block>
+  <block id="22ac38109d566f08520d1c578277fad1" category="list-text">在内核NVMe多路径中启用：</block>
+  <block id="1c30079002b0176bf0beeaed68880244" category="list-text">在主机上、检查中的主机NQN字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="94ba0506900b15b89968be3bc20d71af" category="admonition">如果主机NQN字符串不匹配、则可以使用<block ref="f7aa1d6bd51ada390168cd39c4c09b91" prefix=" " category="inline-code"></block> 命令以更新相应ONTAP NVMe子系统上的主机NQN字符串、使其与主机NQN字符串匹配<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 在主机上。</block>
+  <block id="e6e7ba3eb589d8ecc8281c644469c6e5" category="paragraph">如果要在同一主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。可以通过添加来完成此操作<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
+  <block id="a1574e96784ad2bd52bae70c14a998a2" category="list-text">RHEL 8.8 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="5aae5284420b8ceb0aa0f5d959c566bc" category="list-text">验证其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：</block>
+  <block id="9bdba773d50bb88232e3e64ea6e985b9" category="list-text">验证是否使用了适当的NVMe-oF设置(例如、<block ref="20f35e630daf44dbfa4c3f68f5399d8c" prefix=" " category="inline-code"></block> 设置为<block ref="756ad8952bac6a54235a8fd3a5378672" prefix=" " category="inline-code"></block> 和负载平衡<block ref="9dcdd7789010499b5bf49690aa44b8e9" prefix=" " category="inline-code"></block> 设置为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>)的相应ONTAP名称区正确反映在主机上：</block>
+  <block id="d7442f3fc53686df869915abb03259d5" category="paragraph">使用ONTAP版本的RHEL 8.8的NVMe-oF主机配置存在以下已知问题：</block>
+  <block id="03ae8eb9222d50f723280c24049da8ff" category="cell">RHEL 8.8 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="1e33904ede6309a554b35640a5cef193" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.8、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
+  <block id="317bd3f8323d3750053ef303ee6f5813" category="paragraph">采用非对称命名空间访问(AANA)的Oracle Linux (OL) 9.1支持基于网络结构的NVMe (NVMe-oF)、其中包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="403f78a784ce2b6ea83a425d2530e736" category="paragraph">使用ONTAP版本的OL 9.1的NVMe-oF主机配置存在以下已知问题：</block>
+  <block id="c43b3026b84082f6f8a8e5dbf4fc8359" category="cell">在Oracle Linux 9.1 NVMe-oF主机上、您可以使用<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 用于创建永久性发现控制器(POC)的命令。使用此命令时、应为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Oracle Linux 9.1、则在中创建PDC将失败<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 已执行命令。</block>
+  <block id="5ba9d31ec6b8af7200bbbb91b8d169f3" category="paragraph">对于OL 9.1、请使用<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。OL 9.1包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="a757398c74551ef32047b5af3026cb65" category="paragraph">以下各节提供了映射到ASA和非ASA配置的LUN的示例多路径输出。</block>
+  <block id="2d69d1a04ab1fce41548a0d0d311bd3d" category="paragraph">经过编译的Oracle Linux 9.1操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="5df3ff7cb7b785e8c8bebccf076a731e" category="paragraph">以下示例说明了如何更正覆盖的默认值。在这种情况下、将显示<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件定义的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。</block>
+  <block id="675cd8e52ba395fba110b2ae7c90675b" category="cell">带有Emulex HBA的SAN LUN实用程序需要库软件包中的符号链接</block>
+  <block id="76da8e16b4b35b8424eb298d2b37d666" category="sidebar">8.8.</block>
 </blocks>
