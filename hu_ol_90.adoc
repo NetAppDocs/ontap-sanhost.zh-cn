@@ -290,8 +290,23 @@ NOTE: 要配置Oracle Linux 9.0 RedHat Enterprise Kernel (RHCK)、请使用 link
 
 == 已知问题
 
-Oracle Linux 9.0没有已知问题。
+Oracle Linux 9.0 with NetApp ONTAP发行版存在以下已知问题：
 
+[cols="10,30,30,10"]
+|===
+| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+
+
+| https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1508554["1508554"^] | 带有Emulex HBA的SAN LUN实用程序需要库软件包中的符号链接  a| 
+在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)发现所需的库依赖关系：
+
+[listing]
+----
+[root@hostname ~]# sanlun fcp show adapter -v
+Unable to locate /usr/lib64/libHBAAPI.so library
+Make sure the package installing the library is installed & loaded
+----| 不适用 
+|===
 
 
 == 发行说明
