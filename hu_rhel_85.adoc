@@ -4,7 +4,7 @@ permalink: hu_rhel_85.html
 keywords: host utilities, red hat, rhel, linux, 8.5, netapp, ontap 
 summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.5 
 ---
-= 将 Red Hat Enterprise Linux 8.5 与 NetApp ONTAP 结合使用
+= 将Red Hat Enterprise Linux 8.5与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -291,13 +291,3 @@ devices {
 == 已知问题和限制
 
 RHEL 8.5没有已知问题。
-
-
-
-== 发行说明
-
-
-
-=== ASM 镜像
-
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。

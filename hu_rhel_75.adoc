@@ -4,7 +4,7 @@ permalink: hu_rhel_75.html
 keywords: host utilities, red hat, rhel, linux, 7.5, netapp, ontap 
 summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.5 
 ---
-= 将 Red Hat Enterprise Linux 7.5 与 NetApp ONTAP 结合使用
+= 将Red Hat Enterprise Linux 7.5与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -24,7 +24,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.5
 
 上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
-强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
@@ -308,12 +308,3 @@ devices {
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1146898["1146898"^] | 在存储故障转移操作期间，使用 Emulex HBA 的 RHEL 7.5 会发生内核中断 | 在使用 Emulex LPe32002 M2 32 Gb FC 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 7.5 系统上执行存储故障转移操作期间，内核发生中断。内核中断会导致操作系统重新启动，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成 vmcore 文件。您可以使用 vmcore 文件确定故障的发生原因。在以下示例中，您可以在 "lpfc_HBA_clean-txcmplq+368" 模块中看到中断。此中断会记录在包含以下字符串的 vmcore 文件中： " [Exception RIP ： lpfc_HBA_clean-txcmplq+368]" 内核中断后，重新启动主机操作系统以恢复操作系统。根据需要重新启动应用程序。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1554777["1554777"^] 
 |===
-
-
-== 发行说明
-
-
-
-=== ASM 镜像
-
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。

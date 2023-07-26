@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: hu_nvme_index.html 
+keywords:  
+summary:  
+---
+= 概述
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+您可以为某些SAN主机配置基于网络结构的NVMe (NVMe-oF)协议、其中包括基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)、并以ONTAP为目标。根据主机操作系统和ONTAP版本、您可以在主机上配置和/或验证NVMe/FC或NVMe/TCP协议。

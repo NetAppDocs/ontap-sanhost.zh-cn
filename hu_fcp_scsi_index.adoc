@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: hu_fcp_scsi_index.html 
+keywords:  
+summary:  
+---
+= 概述
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+您可以将某些SAN主机配置为使用ONTAP作为目标的FCP或iSCSI。首先安装相关的操作系统主机实用程序软件包(包括SAN工具包)、然后验证NetApp ONTAP LUN的多路径设置。

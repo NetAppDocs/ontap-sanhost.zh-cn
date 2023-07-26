@@ -4,40 +4,26 @@ indexpage:
   tiles:
   - title: 入门
     links:
-    - title: AIX主机实用程序发行说明
+    - title: 产品概述
+      url: "/overview.html"
+    - title: "《AIX Host Utilities发行说明》"
       url: "/hu_aix_61_rn.html"
     - title: HP-UX Host Utilities发行说明
       url: "/hu_hpux_60_rn.html"
-    - title: Linux主机实用程序发行说明
+    - title: "《Linux Host Utilities发行说明》"
       url: "/hu_luhu_71_rn.html"
-    - title: Solaris主机实用程序发行说明
+    - title: "《Solaris Host Utilities发行说明》"
       url: "/hu_solaris_62_rn.html"
     - title: Windows Host Utilities发行说明
       url: "/hu_wuhu_71_rn.html"
-  - title: FCP和iSCSI主机配置
+  - title: 安装和配置SAN主机
     links:
-    - title: VMware vSphere 7
-      url: "/hu_vsphere_7.html"
-    - title: Red Hat Enterprise Linux 9.0
-      url: "/hu_rhel_90.html"
-    - title: SUSE Linux Enterprise Server 15 SP4
-      url: "/hu_sles_15SP4.html"
-    - title: Windows Server 2022
-      url: "/hu_windows_2022.html"
-    - title: IBM AIX 7.2和PowerVM (VIOS 3.1)
-      url: "/hu_aix_72.html"
-    - title: Oracle Solaris 11.4.
-      url: "/hu_solaris_114.html"
-  - title: NVMe-oF主机配置
-    links:
-    - title: VMware vSphere 7
-      url: "/nvme_esxi_7.html"
-    - title: Red Hat Enterprise Linux 9.0
-      url: "/nvme_rhel_90.html"
-    - title: SUSE Linux Enterprise Server 15 SP4
-      url: "/nvme_sles15_sp4.html"
-    - title: Windows Server 2022
-      url: "/nvme_windows_2022.html"
+    - title: 安装SAN Host Utilities
+      url: "/hu_sanhost_index.html"
+    - title: 使用FCP和iSCSI配置主机
+      url: "/hu_fcp_scsi_index.html"
+    - title: 使用NVMe-oF配置主机
+      url: "/hu_nvme_index.html"
   - title: 更多资源
     links:
     - title: Cloud Volumes ONTAP

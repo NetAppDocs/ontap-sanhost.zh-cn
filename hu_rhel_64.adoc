@@ -4,7 +4,7 @@ permalink: hu_rhel_64.html
 keywords: host utilities, red hat, rhel, linux, 6.4, netapp, ontap 
 summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.4 
 ---
-= 将 Red Hat Enterprise Linux 6.4 与 NetApp ONTAP 结合使用
+= 将Red Hat Enterprise Linux 6.4与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -24,7 +24,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.4
 
 上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
-强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
@@ -308,12 +308,3 @@ devices {
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=673009["673009"^] | 在 LV 上创建 ext4 文件系统，并在 15 个或更多启用了丢弃且精简配置的多路径设备上进行条带化，这会触发 "request botched" 内核错误 | 当用户尝试在启用了丢弃的精简配置多路径设备上创建 ext4 文件系统时，出现 " 请求 blotched" 内核错误。因此，创建 ext4 文件系统可能需要较长时间才能完成，偶尔会发生中断。只有在运行 Red Hat Enterprise Linux 6.x 和 Data ONTAP 8.1.3 及更高版本且以 7- 模式运行的系统上，用户尝试在 LV 上创建 ext4 文件系统时，才会发生此问题描述。之所以出现问题描述，是因为内核错误地尝试合并丢弃请求，而 Red Hat Enterprise Linux 6.x 目前不支持这种做法。发生此问题描述时，系统会将以下消息的多个实例写入系统日志（ /var/log/messages ）： kernel ： blk ： request botched 。因此，文件系统创建所需时间可能比预期要长。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=907844["907844"^] 
 |===
-
-
-== 发行说明
-
-
-
-=== ASM 镜像
-
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。

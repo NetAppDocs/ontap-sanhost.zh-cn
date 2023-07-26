@@ -18,12 +18,6 @@ summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用
 :toc-position: content
 
 
-.您需要的内容
-* 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
-
-
-您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
-
 
 
 == SAN 工具包

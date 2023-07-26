@@ -4,7 +4,7 @@ permalink: hu_veritas_7x.html
 keywords: host utilities, veritas, infoscale, 7, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
 summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置设置的指导 
 ---
-= 将适用于 Linux 的 Veritas Infoscale 7 与 NetApp ONTAP 结合使用
+= 将Veritas Infoscale 7 for Linux与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1

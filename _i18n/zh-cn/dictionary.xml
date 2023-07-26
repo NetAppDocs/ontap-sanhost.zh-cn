@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
   <block id="de0fb073bc25cf2e534d5a146ab9165f" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 6.9</block>
-  <block id="80ecd8f7492c0454171f153f5c729eec" category="doc">将 Oracle Linux 6.9 与 NetApp ONTAP 结合使用</block>
-  <block id="fab62fb29cd63ccad318675378384238" category="section-title">安装 Linux Unified Host Utilities</block>
   <block id="9d2169c1c2855b78a7aeaa4f42d27dc7" category="inline-link-macro">NetApp 支持站点</block>
   <block id="9ed4a475dd3705157a9fed8811f63ce2" category="inline-link-macro">NetApp 互操作性表工具</block>
   <block id="0fed9cf9730bf6732d4b5c033406917c" category="paragraph">上提供了 NetApp Linux Unified Host Utilities 软件包 <block ref="6669d666f8f453569510bbfca28c3a1e" category="inline-link-macro-rx"></block> 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 <block ref="963ce614f4afebd07b4317928a39d286" category="inline-link-macro-rx"></block> 验证所需的配置。</block>
-  <block id="d75d4e47d24a30ba359e485926c2930c" category="paragraph">强烈建议安装 Linux Unified Host Utilities ，但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。</block>
   <block id="00fc1bf20dbc4f3e92a58dc60bc9ed11" category="paragraph">如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。</block>
   <block id="53fb5541a1076b0275ddc8379f39602d" category="list-text">从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 <block ref="6669d666f8f453569510bbfca28c3a1e" category="inline-link-macro-rx"></block> 站点到主机。</block>
   <block id="8c00d982a2880d4d1d69e922c0dcea7c" category="list-text">使用以下命令安装软件包：</block>
@@ -87,7 +84,6 @@
   <block id="f25da2d4ec4aacff4750d97e83acec21" category="section-title">ASM 镜像</block>
   <block id="446548f2b1301893641e29657fc7fe53" category="inline-link-macro">基于 ONTAP 的 Oracle 数据库</block>
   <block id="7466d31b9a4018d8f402bd6f92090e59" category="summary">介绍如何安装 Solaris 主机实用程序</block>
-  <block id="e1084bfbacc7e9ee1de94f35fce4fca3" category="doc">将 Solaris 11.3 与 NetApp ONTAP 结合使用</block>
   <block id="16dcd3f6f3bbebb1de9769e4045dbb3f" category="section-title">安装 Solaris Host Utilities</block>
   <block id="c454d997c91275b70f2f0433fad3fe36" category="list-text">转到包含下载内容的目录。</block>
   <block id="88a1748445927988a69d31c53331a565" category="list-text">提取文件。</block>
@@ -151,8 +147,6 @@
   <block id="a45d90a5f7a08888afb625a60a87c1fe" category="cell">1368957</block>
   <block id="d4cd0dabcf4caa22ad92fab40844c786" category="cell">不适用</block>
   <block id="0960de670071121018c377f3ca40c5e7" category="summary">介绍如何将 IBM AIX 7.1 与 ONTAP 结合使用</block>
-  <block id="241d5f190b08a8c6040501ba121d06b4" category="doc">将 IBM AIX 7.1 与 NetApp ONTAP 结合使用</block>
-  <block id="1e2586276f930618fab0e81207301a0c" category="section-title">安装 AIX Host Utilities</block>
   <block id="7c7e86701edb3aaa86c9a8f043c6e949" category="paragraph">在将 AIX MPIO 与 NetApp ONTAP 存储结合使用时，必须安装 AIX 主机实用程序套件。</block>
   <block id="9fd30469c1e3a7c262c116e88d7e9274" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的两个软件包。</block>
   <block id="83ea987146445e3a3ff4069f8c0095ac" category="list-text">登录到主机。</block>
@@ -164,7 +158,6 @@
   <block id="3687a533941379b59a8738b1c2ed0311" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。Host Utilities 的 AIX 环境使用 AIX 原生多路径解决方案， MPIO 。</block>
   <block id="7924ef77d0345ab3b49395dc2db2cfd8" category="paragraph">对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM 是存储供应商提供的用于处理路径管理的代码。在 Host Utilities 安装过程中会安装并启用此功能。</block>
   <block id="2b72917ba6f1cc277017f5a9601aa2ef" category="admonition">从适用于 AIX 主机的 ONTAP 9.8 开始，支持所有 SAN 阵列（ ASA ）配置。</block>
-  <block id="5a14ed309081290d9e2d925584ae805b" category="paragraph">以下是为 NetApp ONTAP LUN 建议的一些参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。</block>
   <block id="0ba29c6a1afacf586b03a26162c72274" category="cell">environment</block>
   <block id="e282cd884ba9b656c4bc8b82b5d8be14" category="cell">AIX 的价值</block>
   <block id="3b0649c72650c313a357338dcdfb64ec" category="cell">注意</block>
@@ -341,7 +334,6 @@
   <block id="c5fac7adc428bbd803e2710cafe09003" category="admonition">Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 <block ref="53418a54750628f8c611b4cd8982473c" category="inline-link-macro-rx"></block>。</block>
   <block id="a986b4819866ccf2fd420f54ba13180b" category="paragraph">Windows Server 2012 R2 没有已知问题。</block>
   <block id="cdf5d86cb1edacde3eb5e2a5ecdde6c3" category="summary">介绍如何将 Oracle Linux 6.7 与 ONTAP 结合使用</block>
-  <block id="813ff0ec64503bac99ad0f3eb909ddff" category="doc">将 Oracle Linux 6.7 与 NetApp ONTAP 结合使用</block>
   <block id="7a10fec24c048df32aa9daca418df81a" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="b5abfd2250ee315cd6ad25de3df45edd" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="7c7b1ac412755c409b674d6d1d5261c8" category="paragraph">对于 Oracle Linux 6.7 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.7 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="30551084db41b5a626c643ea028e9abc" category="paragraph">Oracle Linux 6.7 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
@@ -349,7 +341,6 @@
   <block id="038243cdb50150566123ac124dda8a72" category="paragraph">Oracle 6.7 没有已知问题。</block>
   <block id="ffc40f78b93020104da2125464f60645" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="fd679b4991af24edfd6d66f5cbc5db76" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.7 。</block>
   <block id="894e4bdfe9d6da54721793a917a39e41" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 6.4</block>
-  <block id="09393803a5018bd913eeebc4ff241b9d" category="doc">将 Oracle Linux 6.4 与 NetApp ONTAP 结合使用</block>
   <block id="fc705c5393a2e9aef173ed40205014bb" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="77ab0bbf377853176c70e55d32dcb81a" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="acc24e9cf246ca31a5b0a8efe708e78a" category="paragraph">对于 Oracle Linux 6.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.4 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="07cbee168940977c800471bc6700728e" category="paragraph">Oracle Linux 6.4 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
@@ -380,7 +371,6 @@
   <block id="01dab0d6fe6067acdd00c767b503f115" category="cell"><block ref="01dab0d6fe6067acdd00c767b503f115" category="inline-link-macro-rx"></block></block>
   <block id="7b9fb98af3d3330107d455e90e676611" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="f736929b1834226891236b2c0b0b218e" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.4 。</block>
   <block id="903b07b1963af0c45e65b6d887a9b059" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.9</block>
-  <block id="318b80625145e5ced9a69b2b70948bc0" category="doc">将 Red Hat Enterprise Linux 6.9 与 NetApp ONTAP 结合使用</block>
   <block id="30882960e4e91384155a1bff6c886630" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="70efe35e64cc9ba99c6f021b1f4d02ec" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="b2da1ca8334b29f1d40436a25662d8d6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.9 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.9 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="72421574ca16f2cc8486132314d384b7" category="list-text">使用 `mkinitrd` 命令重新创建 initrd-image 。RHEL 6x 及更高版本使用以下命令之一： `mkinitrd -f /boot/ initrd-"uname -r".img uname -r` 或命令： `dracut -f`</block>
@@ -407,7 +397,6 @@
   <block id="b720a262f078ee7e33e54643f48df1b0" category="inline-link-macro">1438711</block>
   <block id="bd70b4627500ea5c8939b9ea0e8ba9df" category="cell"><block ref="bd70b4627500ea5c8939b9ea0e8ba9df" category="inline-link-macro-rx"></block></block>
   <block id="99d5775ff67d3ebcdc6e872f0bb0e7bd" category="summary">介绍如何将 Oracle Linux 6.10 与 ONTAP 结合使用</block>
-  <block id="388bfd7f21d0d1033ae06f4b6a500eef" category="doc">将 Oracle Linux 6.10 与 NetApp ONTAP 结合使用</block>
   <block id="31df1b3be5d57ead2772d8f24d7f3661" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="0c6007e6b6b7d891a61a3130a6b08c13" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3b3051e9028e74cd5ada27ca8f32e352" category="paragraph">对于 Oracle Linux 6.10 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.10 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="00d1a8ad09df702e5b164c26cbd1bc1a" category="paragraph">Oracle Linux 6.10 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
@@ -415,7 +404,6 @@
   <block id="95a2a60b3c81348f445296ddb1b67056" category="paragraph">Oracle 6.10 没有已知问题。</block>
   <block id="e2fadd98203b659772427cfe42d4a39e" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="9a91dd1025c16135359284037044a8d3" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.10 。</block>
   <block id="e16f67a9f3c6e6f9fd2a71ca2c71b042" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.0</block>
-  <block id="c82b43a4429e717f0637f9a165129a72" category="doc">将 Oracle Linux 7.0 与 NetApp ONTAP 结合使用</block>
   <block id="a8dc135d317a36a2ccd92726f9e0e598" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="33a1f2b8cd02575a35b77c10ba65d8f8" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="31db1dbc8875fe1d1fb0c598273975d6" category="paragraph">对于 Oracle Linux 7.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="40c5d9e1e896025a107a6c97b22c1167" category="list-text">使用 `dracut -f` 命令重新创建 initrd-image 。</block>
@@ -459,7 +447,6 @@
   <block id="9841401331f8c5563c4b060ff5370e72" category="inline-link-macro">15019</block>
   <block id="3c146cad71f41f0977cca30911d433b7" category="cell"><block ref="3c146cad71f41f0977cca30911d433b7" category="inline-link-macro-rx"></block></block>
   <block id="199f02bdbc224d2c63b2ecdb586ffdec" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.4</block>
-  <block id="c26038fbed8a35ee02f96936352801ca" category="doc">将 Red Hat Enterprise Linux 8.4 与 NetApp ONTAP 结合使用</block>
   <block id="f041d7aa93ccef62fcc7abea92526fc2" category="paragraph">上提供了 NetApp Linux Unified Host Utilities 软件包 <block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block> 在 64 位 .rpm 文件中。</block>
   <block id="722c71516edb740dbf949ee9187f7daa" category="list-text">从下载 64 位 Linux Unified Host Utilities 软件包<block ref="5d5134ddaf42180d688670ce5e1f032a" category="inline-link-rx"></block> 主机。</block>
   <block id="3f3aace2ffb7262d9561af1516e90d56" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e902c52a637fd9b5e253806bf7aafa95" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -467,7 +454,6 @@
   <block id="0c1a2fa6a162d103bd725793b80bb571" category="paragraph">RHEL 8.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="2d42bb9d7307ce616ea0bcece7fd8556" category="cell">"2 pG_INIT_retries 50"</block>
   <block id="a2e4546887c7d826529e2c2bc558c869" category="summary">介绍如何将 Oracle Linux 7.1 与 ONTAP 结合使用</block>
-  <block id="7c30b44b559434a28ec34eef25698142" category="doc">将 Oracle Linux 7.1 与 NetApp ONTAP 结合使用</block>
   <block id="409809eafe9ba8af313e70c545a2b09f" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="65858e88d5a37b29d5e945cdcd520db6" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="073055d89f87f920dc7706848774e7b2" category="paragraph">Oracle Linux 7.1 支持 Unbreakable Enterprise Kernel （ Uek ） R3 和 Uek r4 。默认情况下，操作系统使用 Uek R3 内核启动。</block>
   <block id="66cd34e86ff7d645147b1d5d5a6c9f10" category="paragraph">对于 Oracle Linux 7.1 Uek R3 ，创建一个空 multipath.conf 文件。默认情况下， Oracle Linux 7.1 Uek 的设置会自动更新 ALUA 和不更新 ALUA 。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -478,8 +464,6 @@
   <block id="8d1d1e53a5b8a67ed06ee929fcb68093" category="summary">介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用</block>
   <block id="87adc74f7e5083adf88fa77a4e7aaa7b" category="doc">Linux Unified Host Utilities 7.1</block>
   <block id="e11da9afe91d381489a365c86cc614ab" category="section-title">前提条件</block>
-  <block id="43483b029ef264a410a7bccd99e5f66a" category="list-text">为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。</block>
-  <block id="22faa027e7ce368aea785de25ef0414c" category="paragraph">您可以使用<block ref="77ab0bbf377853176c70e55d32dcb81a" category="inline-link-rx"></block> 以验证您的配置。</block>
   <block id="67d2c540b82f607f8c9d3201f2309ec6" category="list-text">您必须在供应商的网站上安装供应商提供的 HBA 管理软件包。</block>
   <block id="d361b7136a02633fc7c5b4ea205655d8" category="paragraph">通过管理软件， SAN 工具包命令可以收集有关 FC HBA 的信息，例如其 WWPN 。要使 sanlun fcp show 适配器正常工作，请确保安装了以下软件包：</block>
   <block id="a12eee609318f789b110fe7492bac976" category="list-text">QLogic HBA — QConvergeConsole CLI</block>
@@ -541,7 +525,6 @@
   <block id="6fb1a7b78cf35553296a12dc1837ac9b" category="paragraph">` # sanlun lun show`</block>
   <block id="a77e4ad3538b9cf71836906bd7b5d5a5" category="paragraph">此示例显示了 MPIO 多路径环境中 `sanlun lun show` 命令的典型输出。</block>
   <block id="0a4a555ba90159c1b3608a4b2e3295e1" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.4</block>
-  <block id="d0d45ae68c3b85d3e6ac89f423d578ce" category="doc">将 CentOS 7.4 与 NetApp ONTAP 结合使用</block>
   <block id="2c4482fc356b97d876c074f19f3c021c" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="14c4ef0ebddeee898c232e26b853e472" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="74b9535debb295fda5221dbd495584f5" category="paragraph">对于 CentOS 7.4 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.4 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="6b83d866c4dfa9b95b03b5a6ede846f7" category="summary">将 Windows Server 2019 与 ONTAP 结合使用</block>
@@ -550,7 +533,6 @@
   <block id="5b88fa50c8fa5adb567c3fdd8e0c00fc" category="admonition">如果选择 MPIO 支持，则 Windows Unified Host Utilities 将启用 Windows Server 2019 的随附 MPIO 功能。</block>
   <block id="e91fdc5014f1e70d6afdea6c60886518" category="paragraph">Windows Server 2019 没有已知问题。</block>
   <block id="77e11862f04c6ec12fa9eddd581dafa1" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.9</block>
-  <block id="056cf2ef3afb4d9f0677425ab6097f25" category="doc">将 Oracle Linux 7.9 与 NetApp ONTAP 结合使用</block>
   <block id="6dc52e1e053dff71affc3d2bba0668d4" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e5d3b515d8d9f71d6ecc6d12f04876c6" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="150ce233c309a7f628f109b1bf8bd7f6" category="paragraph">对于 Oracle Linux （ OL ） 7.9 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。OL 7.9 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="e604f6870b50383d4e1d8ffa3a2b18bb" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到非 ASA 和 ASA 角色的 LUN 的示例多路径输出。</block>
@@ -563,7 +545,6 @@
   <block id="7a5cdf95716ea8fdfcfafa0f545139e0" category="inline-link-macro">17319</block>
   <block id="69e5ae046a9943b657bd5c50bd583d28" category="cell"><block ref="69e5ae046a9943b657bd5c50bd583d28" category="inline-link-macro-rx"></block></block>
   <block id="f87d076eb7d3558e4df3a472ec88d6f2" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.6</block>
-  <block id="541a27f09949b345aba2634d6146896a" category="doc">将 Red Hat Enterprise Linux 6.6 与 NetApp ONTAP 结合使用</block>
   <block id="be07fd5a515d15ddc2960a66b75da141" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5d0c5cfb6f99c570837d3b798f48dd99" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="aaa84a008bcbd7b13ea49132c73d1afa" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.6 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="0280cbd8a9282986e27e929164001013" category="paragraph">RHEL 6.6 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -585,7 +566,6 @@
   <block id="1b9fbbbdfb63c72061ee9b73d3b68300" category="inline-link-macro">1151020</block>
   <block id="4d4d33d5567c483eb5e65c4545674190" category="cell"><block ref="4d4d33d5567c483eb5e65c4545674190" category="inline-link-macro-rx"></block></block>
   <block id="1669e5f0b1148e1054b39b7a819b7fdb" category="summary">介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用</block>
-  <block id="5526e4fbaeff80cd5d23977ccd71e110" category="doc">将 IBM AIX 7.2 和 / 或 PowerVM （ VIOS 3.1 ）与 NetApp ONTAP 结合使用</block>
   <block id="be02c5fbd2d78a32d06d7da8385cae85" category="list-text">在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 `oem_setup_env` 命令以成为 root 。</block>
   <block id="a40ecef4a09b118c1f7f8b069486d849" category="list-text">解压缩文件并提取 SAN 工具包软件包。</block>
   <block id="f79c6b17105bfd3884500ded694cb1f2" category="paragraph">SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX/PowerVM 主机的启动设备的过程。您可以将 SAN 启动 LUN 设置为在运行采用 FC 或 FCoE 协议的 AIX Host Utilities 的 AIX MPIO 环境中运行。在 AIX MPIO 环境中，用于创建 SAN 启动 LUN 并在其上安装新操作系统映像的方法可能会有所不同，具体取决于您使用的协议。</block>
@@ -595,7 +575,6 @@
   <block id="de6158aaf59eefd0e967674f80bf69a0" category="cell">1307653</block>
   <block id="d41d8cd98f00b204e9800998ecf8427e" category="cell"></block>
   <block id="efe683deb739d72b3d44d53878cbd348" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12</block>
-  <block id="2c814ca0b63de52ca6cd66cde0e904f8" category="doc">将 SUSE Linux Enterprise Server 12 与 NetApp ONTAP 结合使用</block>
   <block id="b94389e6af9ad2829e75db3797917210" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="7038607a0479f24929e014f2be329604" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="7ac69be8c86fae53d6626eba5e2377d9" category="paragraph">对于 SUSE Linux Enterprise Server 12 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="1ad7f1f0694cd5d565246dd8f5e08ff3" category="inline-link-macro">873555</block>
@@ -616,8 +595,6 @@
   <block id="f3c857b5b590c65054bfa6277dd7b8d8" category="cell">在存储或网络结构发生 I/O 故障期间，您可能会发现 SLES12 多路径守护进程上的路径故障。</block>
   <block id="a7fa045c10beb12763eabc5c7d40c12d" category="inline-link-macro">890854</block>
   <block id="2b269897e2264fa9a527c98486a50901" category="cell"><block ref="2b269897e2264fa9a527c98486a50901" category="inline-link-macro-rx"></block></block>
-  <block id="d5b87a9bead00882f8de6225046dcee1" category="doc">将 HP-UX 11i v3 与 NetApp ONTAP 结合使用</block>
-  <block id="2e8763624890988e007bc08afaef7ac9" category="section-title">安装 HP-UX Host Utilities</block>
   <block id="78dad9d652edc0f2255634fdd6120f93" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后，必须对其进行解压缩，以获取安装 Host Utilities 所需的软件包。</block>
   <block id="f814c4c509cfee1aaec985d122ae9223" category="list-text">解压缩文件。</block>
   <block id="71120ace9a1b2ca11e40c0238dfc437a" category="paragraph">`gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
@@ -643,7 +620,6 @@
   <block id="1288c56822a6bb56a7acdc5941948855" category="cell">1306354</block>
   <block id="fc3dae564fdea298fb1911d12d99bb45" category="cell">在 ONTAP 全 SAN 阵列中强制实施 1 MB 的 SCSI 最大传输长度。要在连接到 ONTAP 全 SAN 阵列时限制 HP-UX 主机的最大传输长度，需要将 HP-UX SCSI 子系统允许的最大 I/O 大小设置为 1 MB 。有关详细信息，请参见 HP-UX 供应商文档。</block>
   <block id="f2ec2908e789bd4d085520a7536b0d19" category="summary">介绍如何将 CentOS 6.10 与 ONTAP 结合使用</block>
-  <block id="0e83be94544606967434ef88712ad07b" category="doc">将 CentOS 6.10 与 NetApp ONTAP 结合使用</block>
   <block id="7436db3876fe5d542e3b6b58a534f7a4" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="b5b4b85cd71cbe960202af5e84538bed" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="4b3e0af5715dc402a6648fb7a4556734" category="paragraph">对于 CentOS 6.10 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.10 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="43387e22eb25565e2d012f61068ff5ff" category="paragraph">要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -651,7 +627,6 @@
   <block id="78bd859689f18ba7562b89cdcdf70e0d" category="paragraph">系统会对 CentOS 6.10 进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="fa82877b3beb26d7d7bc882389d60aca" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="9a91dd1025c16135359284037044a8d3" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.10 。</block>
   <block id="a0910b05bf7b380feb3e51dedef01f6e" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.1</block>
-  <block id="56dae044218e2b309646f0730651a8b0" category="doc">将 Red Hat Enterprise Linux 8.1 与 NetApp ONTAP 结合使用</block>
   <block id="75919ec422e4172d7a9aa1ac6607ac3c" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="f1f74b1d6778d497db7ab5df6c80940e" category="paragraph">RHEL 8.1 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="3220aa43d981bbff1470bdfc949b411d" category="inline-link-macro">1275843</block>
@@ -673,18 +648,15 @@
   <block id="0de74f329c314fdb51938166b2c287c5" category="inline-link-macro">1758504</block>
   <block id="6787b7492d135e7e607f2ac873e53ae1" category="cell"><block ref="6787b7492d135e7e607f2ac873e53ae1" category="inline-link-macro-rx"></block></block>
   <block id="60c701fe07370fac945573158f732b05" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP4</block>
-  <block id="67e1cc50445d9196739a5702120346bc" category="doc">将 SUSE Linux Enterprise Server 12 SP4 与 NetApp ONTAP 结合使用</block>
   <block id="3a754ad11b84b93f6a753f6d500e2e18" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="2ad585f32bf1ef6f5e41daa29755a76e" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3529e81ba1cd826d75b4d7a1b09ad42b" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP4 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="01f6871b863f8fbca0616c70ec368d8b" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP4 ，没有已知问题。</block>
   <block id="81a952f0a3b26ee44dabb3aa10180e75" category="summary">介绍如何在 ONTAP 中使用 CentOS 6.8</block>
-  <block id="5fdfc777bc6679732010b3027a9e2313" category="doc">将 CentOS 6.8 与 NetApp ONTAP 结合使用</block>
   <block id="aeb75138ac824554509c3b3d36b308ba" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="516e9c81d2e1659fb212fdf2d79e1e5b" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="60f8eeb8d7158ff3d8c8948d846f8e3b" category="paragraph">对于 CentOS 6.8 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.8 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="b470854a78b9856c135ae5a7ed45b720" category="paragraph">系统会对 CentOS 6.8 进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="1d153902c02cd7301318e3e1be83184a" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="7703b3b38de881e061b6dbcbbcaf9f81" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.8 。</block>
   <block id="880612d7054085e9af1cd3802ce4127d" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.4</block>
-  <block id="fa3bf7c49cf6385faaa35028851c1e95" category="doc">将 Oracle Linux 7.4 与 NetApp ONTAP 结合使用</block>
   <block id="8e9958756ea0631069f36b8e89a2d608" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="8d9c8de6f4b2e448cb81a405a9d25d82" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="491bbe882aaf63711fd558642fdb4958" category="paragraph">对于 Oracle Linux 7.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.4 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="2eb61a48a1fac76dc294d58129d11e72" category="admonition">要配置 Oracle Linux 7.4 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="0f891679fa4536a4e919969e65b85526" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.4 。</block>
@@ -693,7 +665,6 @@
   <block id="82acca8af52f5f8d8536c7d62c245815" category="cell">在使用 QLE8362 卡的 OL7.4 虚拟机管理程序上观察到固件转储</block>
   <block id="d6afe009ea52239221866c17107326f9" category="cell">在使用 QLE8362 卡的 OL7.4 虚拟机管理程序上执行存储故障转移操作期间，偶尔会观察到固件转储。固件转储可能会导致主机上的 I/O 中断，这可能长达 500 秒。适配器完成固件转储后， I/O 操作将以正常方式恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 8 ：固件转储保存到临时缓冲区（ 8/ffc90008901000 ），转储状态标志（ 0x3f ）</block>
   <block id="345708c99f04fb1a4ad3efd34001b3f3" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.6</block>
-  <block id="42d3f5ff107f6dc25aa90bf3ca4f70b3" category="doc">将 Oracle Linux 7.6 与 NetApp ONTAP 结合使用</block>
   <block id="5bd115055ddcf306cb31af8a3af1a92f" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="f109c5b6a89675687df14f8180af7396" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="73844c9e711a64b7c0cb09b929c5368f" category="paragraph">对于 Oracle Linux 7.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.6 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="02cfb45c5eca5d228b8fdc27610724b9" category="admonition">要配置 Oracle Linux 7.6 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="01c1a2a180a79aab210cc480d73c73eb" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.6 。</block>
@@ -729,7 +700,6 @@
   <block id="775a46e8c6d09ce5548db66cc249435c" category="inline-link-macro">16853</block>
   <block id="bd1474c0722e21037b60abd57027a5a8" category="cell"><block ref="bd1474c0722e21037b60abd57027a5a8" category="inline-link-macro-rx"></block></block>
   <block id="86d37c3499918a5cbe18b451f7900060" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.2</block>
-  <block id="8f2095186e969c0bbff5cc8714becb71" category="doc">将 Oracle Linux 7.2 与 NetApp ONTAP 结合使用</block>
   <block id="3b7adc7d1307fa9347f749b4d3af8dfe" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="60647916c5dfa2199413b5c9ab776d39" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="879a2e4d18651bb7cc6629fafa11ad2c" category="paragraph">Oracle Linux 7.2 支持 Unbreakable Enterprise Kernel （ Uek ） R3 和 Uek r4 。默认情况下，操作系统使用 Uek R3 内核启动。</block>
   <block id="5325d7d76c5577b461889cc0a50b355e" category="paragraph">对于 Oracle Linux 7.2 Uek R3 ，创建一个空 multipath.conf 文件。默认情况下， Oracle Linux 7.2 Uek 的设置会自动更新 ALUA 和不更新 ALUA 。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -754,7 +724,6 @@
   <block id="f17e2682405234dfca14c2a2181e2cd1" category="list-text">验证 lpfc_enable_FC4_type 是否设置为 3 。</block>
   <block id="36ee6988f1a73952a5c1d70203b97852" category="list-text">验证 NVMe/FC 启动程序端口是否已启用，正在运行且能够查看目标 LIF 。</block>
   <block id="28d6df6dca047dcc2e777e7124494ec5" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.0</block>
-  <block id="1f40e1a1a4e6362e04a98d9072900e16" category="doc">将 Red Hat Enterprise Linux 7.0 与 NetApp ONTAP 结合使用</block>
   <block id="546af78030809541fd22a7381f44e6f3" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="ac8113ff6c666fd4e19867c5326a1178" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="0522c3e73855540eb2f0017e0bee58f6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="4feea064d1000e2b82e86e44608847d0" category="paragraph">RHEL 7.0 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -841,13 +810,11 @@
   <block id="4d30c87ecbf573d3a03790c7a2971315" category="list-text">验证是否已创建命名空间。</block>
   <block id="8eabcd914763b27e42e21afc24ee68ce" category="paragraph">` +nve-list-ns+` 命令可列出指定 NVMe 目标的命名空间，其中列出了连接到主机的命名空间。</block>
   <block id="c973ee9c17b37717f62a4aff80aecfb5" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.1</block>
-  <block id="3ce6290065aca5f2379be4018bde8494" category="doc">将 Red Hat Enterprise Linux 7.1 与 NetApp ONTAP 结合使用</block>
   <block id="2b581afbd27b61920ecd4178bff90d65" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="43096333be688daf930575ef64d477b5" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="c828834315e5032a3d50d5a2a3c8c107" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="6348d7ef4eea2a689477f692799b8a5d" category="paragraph">RHEL 7.1 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="decf77540b0827bf2f8607451a3743f3" category="cell">在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 10G FCoE 主机（ OCe10102-FX-D ）上出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： " 驱动程序的缓冲区池为空， IO 繁忙， SCSI 层 I/O 中止请求状态 "</block>
   <block id="922724d30ab7c207a8746d06dbe805f2" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 8.2</block>
-  <block id="feb6906975dfa95bd38b1b7f935bb959" category="doc">将 Oracle Linux 8.2 与 NetApp ONTAP 结合使用</block>
   <block id="9dbfd05f0dcf7ea7f5d678dc3ac216c7" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e6f1d72f4eb45ad3af66c651a6a8a1b4" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="ace7da9c570d42fb25b932b78d3ece3e" category="paragraph">对于 Oracle Linux （ OL ） 8.2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。OL 8.2 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="04a5e299cf45ffa9952cc41f997c1f37" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。</block>
@@ -865,7 +832,6 @@
   <block id="810d931656eab0e7389d9a7b04b05ea6" category="paragraph">Oracle Linux 8.2 没有已知问题。</block>
   <block id="64017e4fce264fae779ea6ffb9022691" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="840d5abfe44b15b4222ea5c534ce82a9" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.2 。</block>
   <block id="9e1d6710e38a86bc7fd6db9a2a96438a" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP1</block>
-  <block id="5185d69f780771ca66c7c19448e25cdf" category="doc">将 SUSE Linux Enterprise Server 15 SP1 与 NetApp ONTAP 结合使用</block>
   <block id="0d6b5d3df8b9a42aafd9fa98a9641d82" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="4b97f5ca007d612f607bd68ef2a0c253" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="479f9363c9077236f354b87a168604f9" category="paragraph">对于 SUSE Linux Enterprise Server 15 SP1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="be882f43afb14bea32a5b5b195c394ac" category="inline-link-macro">1246622</block>
@@ -875,7 +841,6 @@
   <block id="12e2cfab649729e3b20b64d80b423083" category="inline-link-macro">1139137</block>
   <block id="c97f8d4c7b18c5daac79ce8d70751e54" category="cell"><block ref="c97f8d4c7b18c5daac79ce8d70751e54" category="inline-link-macro-rx"></block></block>
   <block id="53cded606153345462c89bc6a568b1dc" category="summary">提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置设置的指导</block>
-  <block id="6cfccda145f20c0cf60058deb053707c" category="doc">将适用于 Linux 的 Veritas Infoscale 7 与 NetApp ONTAP 结合使用</block>
   <block id="0b79795d3efc95b9976c7c5b933afce2" category="section-title">简介</block>
   <block id="988ade58b67caf90656e537886fb1daa" category="paragraph">本文档将为采用 FC ， FCoE 和 iSCSI 协议的 Red Hat Enterprise Linux 和 Oracle Linux （基于 RHCK ）平台的 Veritas Infoscale 存储基础 7 系列版本提供有关 ONTAP SAN 主机配置设置的指导。</block>
   <block id="31296a34c84ac7a114e2a64e59cc9d34" category="paragraph">在下图中， `sanlun show` 命令将返回 LUN 信息。</block>
@@ -904,7 +869,6 @@
   <block id="54f2286fb613ffaae5ab0ea0c95d2262" category="section-title">多路径共存</block>
   <block id="60365cf8d316c2c5ee81876935cba20c" category="paragraph">如果您使用的是包括 Veritas Infoscale ， Linux 原生设备映射程序和 LVM 卷管理器在内的异构多路径环境，请参见《 Veritas 产品管理指南》了解配置设置。</block>
   <block id="eb179c0936f34e2f183ff065cea19e3d" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.2</block>
-  <block id="044f242221df262f8603090674d49a40" category="doc">将 Red Hat Enterprise Linux 7.2 与 NetApp ONTAP 结合使用</block>
   <block id="1c94e989c366c894bad277fb008fd9f4" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="f576bbfe43e31aa8333db1d931e7e9f1" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="ebe448dc0ce5028084637ff291390170" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="66e3d647c1c5bb09a469ba22752e34ec" category="paragraph">RHEL 7.2 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -924,7 +888,6 @@
   <block id="7fa8390ac8c114f16d588d79fe36a1ee" category="admonition">如果主机 NQN 字符串不匹配，则应使用 vserver modify 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，使其与主机上 ` /etc/nve/hostnqn` 中的主机 NQN 字符串匹配。</block>
   <block id="769627b30441d87c853de2b1343baa09" category="list-text">复制并安装 Broadcom 发件箱自动连接脚本软件包。</block>
   <block id="f3a17d79f6544740456771291527984d" category="summary">介绍如何将 Oracle Linux 6.5 与 ONTAP 结合使用</block>
-  <block id="7892153bfe939e17bf485f5fd993312f" category="doc">将 Oracle Linux 6.5 与 NetApp ONTAP 结合使用</block>
   <block id="a7612c1b52cef63443272a841e63f053" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="3b4b1f1818c7805cf81dfa92e64600a8" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="33d395db2629e42725961d07de66379b" category="paragraph">对于 Oracle Linux 6.5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.5 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="b027f2cb101039990e34b69dadd64cc9" category="paragraph">Oracle Linux 6.5 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
@@ -932,7 +895,6 @@
   <block id="7c6d19ca68cd84cbf89340556bd048a2" category="paragraph">Oracle 6.5 没有已知问题。</block>
   <block id="834597fc454ac7d366bc8af44fcf5609" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="0158dc1052dab85818a92b1a427c95b7" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.5 。</block>
   <block id="6a94c5eba3910f79e55ae69f947dc541" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.0</block>
-  <block id="94ef96ca77c49f563cd4e9efb6e2caba" category="doc">将 Red Hat Enterprise Linux 8.0 与 NetApp ONTAP 结合使用</block>
   <block id="1e56b264d1c8b79d8067436bfdda0ea2" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="eb3208d8f7cf5a53017d9aeebb9a3433" category="paragraph">RHEL 8.0 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="c517a5fb26b575817c996f5b44f027c8" category="inline-link-macro">1238719</block>
@@ -972,7 +934,6 @@
   <block id="a4ce0de71d1077f7479ab2d2dd2983aa" category="summary">适用于采用 ONTAP 的 Windows Server 2012 R2 的 NVMe/FC 主机配置</block>
   <block id="a20db5f8d609188514b6dc14c4022e68" category="paragraph">适用于 Windows Server 2012 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="fefc4c656e279365e6f2d544c146d1c6" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP2</block>
-  <block id="b19a1aa2328ca72961ca90632fd634e5" category="doc">将 SUSE Linux Enterprise Server 15 SP2 与 NetApp ONTAP 结合使用</block>
   <block id="97a07fc4a1ebadd51e36c4395d58ecc2" category="paragraph">对于 SUSE Linux Enterprise Server 15 SP2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。使用 ` +multipath -ll+` 命令验证 ONTAP LUN 的设置。</block>
   <block id="27117d842bd89e527c563bbabce7e494" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="51a4a26e6b1bdae133374d340c097526" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。</block>
@@ -984,16 +945,13 @@
   <block id="db6f4e9686b1013e422f8ddc81760274" category="inline-link-macro">1167494</block>
   <block id="ff657e83469666666bbb5251199b464a" category="cell"><block ref="ff657e83469666666bbb5251199b464a" category="inline-link-macro-rx"></block></block>
   <block id="f4bba4cff96aef30f859bc5d933b86d1" category="summary">介绍如何将 CentOS 7.7 与 ONTAP 结合使用</block>
-  <block id="3d5742ce7d4d5ca13461bc85b97a93a6" category="doc">将 CentOS 7.7 与 NetApp ONTAP 结合使用</block>
   <block id="ff16e637ac4104828e13ea103025c195" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="78e9fc355bd36c3a43e4700024680370" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="85c1cd097e2b89074f8df27d3f429558" category="paragraph">对于 CentOS 7.7 ，必须存在 /etc/multipath.conf 文件，但不需要对该文件进行特定更改。CentOS 7.7 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="1c3173a9a070b56365701cc841994766" category="summary">介绍如何将 CentOS 6.6 与 ONTAP 结合使用</block>
-  <block id="9f1e4db89e8ce83ed880c63573ad8b5d" category="doc">将 CentOS 6.6 与 NetApp ONTAP 结合使用</block>
   <block id="f2ff9a4318af2aff0dcf758e87fcd4c8" category="paragraph">对于 CentOS 6.6 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.6 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="c9266caf4d9776dead8063d2c3d71e40" category="paragraph">系统会对 CentOS 6.6 操作系统进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="ff74c42c74c13fedc08a8ca1624e32b4" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="aad294b0550f33ea846ebc2598292576" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.6 。</block>
   <block id="9a8a0895e5f69c5c06d82e847ceb32e9" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.5</block>
-  <block id="724f685b8e77a5417a8a2703b3d831b2" category="doc">将 Red Hat Enterprise Linux 7.5 与 NetApp ONTAP 结合使用</block>
   <block id="253f9a8620f20f372c2bbdf28eec14f4" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="de6f4b59a170663afff37b664d89bb37" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="64d3c79e51098a109ef3ea4c847c2cf6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="b781063faa435636f2e9692d8b4fd728" category="paragraph">RHEL 7.5 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1022,7 +980,6 @@
   <block id="60d9cbffde4942666204f880d528d99d" category="inline-link-macro">1554777</block>
   <block id="57e599b93e06cf9786582520ac0bc21d" category="cell"><block ref="57e599b93e06cf9786582520ac0bc21d" category="inline-link-macro-rx"></block></block>
   <block id="df638353a182a7918b8592fc949dcf8c" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.4</block>
-  <block id="35764b35c24428477e00e911d5e66bbe" category="doc">将 Red Hat Enterprise Linux 7.4 与 NetApp ONTAP 结合使用</block>
   <block id="6d9367bff959eeca53afc4e48b616f9e" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.4 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="f5bd1c87a82329c908a6a69f3a08446a" category="paragraph">RHEL 7.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="616c70c8118c8dd6fcab27eaebd42bdf" category="summary">介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP1 配置 NVMe/FC</block>
@@ -1036,12 +993,10 @@
   <block id="3fe41fe376a1341c3fa6f7fc3469a815" category="list-text">在 SLES15 SP1 主机上，检查位于 ` /etc/nve/hostnqn` 的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上对应子系统的主机 NQN 字符串匹配。例如：</block>
   <block id="ee2f5b4a1ef164e582aea7f06ef626bc" category="list-text">验证您使用的是建议的 Broadcom lpfc 固件和原生收件箱驱动程序版本。</block>
   <block id="039c572446bfd0a2b1ec8e52fc45283c" category="summary">介绍如何将 CentOS 6.9 与 ONTAP 结合使用</block>
-  <block id="473b0a13f88c4ec4d764633d7504c8d6" category="doc">将 CentOS 6.9 与 NetApp ONTAP 结合使用</block>
   <block id="82449d0fd1c4caa6f1316fc8c60a0965" category="paragraph">对于 CentOS 6.9 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.9 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="4c8b41567795f35c88d1ebcfb4c0daec" category="paragraph">CentOS 6.9 操作系统经过编译，可以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="9c5b436e1bb8a6899180fe9890e5395b" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="6381fe6a72f9bd9f067a0ec390d2a8fb" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.9 。</block>
   <block id="7b226a13926b533ec9331dd4d86cd914" category="summary">介绍如何将 CentOS 6.7 与 ONTAP 结合使用</block>
-  <block id="e072e02d47be2b995212bae916981ccc" category="doc">将 CentOS 6.7 与 NetApp ONTAP 结合使用</block>
   <block id="2a1ab1135667d6dc77c69e8562aa36e0" category="paragraph">对于 CentOS 6.7 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.7 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="eb694d82bb8432a9005a1a1f219b1fa0" category="paragraph">系统会对 CentOS 6.7 操作系统进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="9d2a87ba78cec8237c139f77ffb44261" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="fd679b4991af24edfd6d66f5cbc5db76" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.7 。</block>
@@ -1049,7 +1004,6 @@
   <block id="a76193f5d9397d9c49ca283a20ccf649" category="inline-link-macro">《 SAN 管理指南》</block>
   <block id="8cb9ee34636093f5ba25008ebc7b7287" category="inline-link-macro">《 SAN 配置指南》</block>
   <block id="f75fbeea110530ab4a9306fd42a5e085" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 6.8</block>
-  <block id="e42b8222d080edbca329cec5517236ac" category="doc">将 Oracle Linux 6.8 与 NetApp ONTAP 结合使用</block>
   <block id="c2c3cb3deab4f22710adbed9c6148ed1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="0da8e8d8e04d92cff39dc5df78f41efc" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="f554c70908c90cf2ddb8539029693dc9" category="paragraph">对于 Oracle Linux 6.8 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="6485c78f22d3f3aa24bf7cbcea864cb3" category="paragraph">Oracle Linux 6.8 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
@@ -1057,7 +1011,6 @@
   <block id="4e93000b6ea11a0869ed53df589cdd71" category="paragraph">Oracle 6.8 没有已知问题。</block>
   <block id="cd78cb35643e7fcdb41ef3474518e9b9" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="7703b3b38de881e061b6dbcbbcaf9f81" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.8 。</block>
   <block id="952f921f0c7f4028f0bd8e1a05cade7b" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15</block>
-  <block id="1c389a640306f4b4f96132d621968dc2" category="doc">将 SUSE Linux Enterprise Server 15 与 NetApp ONTAP 结合使用</block>
   <block id="4b1a408f9163a3e5b5c1815fd26b6b6e" category="paragraph">对于 SUSE Linux Enterprise Server 15 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="9eb138f8329b6a05b2da910e54b750c9" category="inline-link-macro">1154309</block>
   <block id="1e45eb414e878e896ff6c8568d44aaed" category="cell"><block ref="409bdf20edf896ce4497acd46087929e" category="inline-link-macro-rx"></block></block>
@@ -1066,7 +1019,6 @@
   <block id="62dd7fb15e47b2ae7ac0c8828a09368e" category="inline-link-macro">1104173</block>
   <block id="fe5f3cc9f696069f06b3705195c48a2c" category="cell"><block ref="fe5f3cc9f696069f06b3705195c48a2c" category="inline-link-macro-rx"></block></block>
   <block id="bea05db7b205cebd49d85c581b86c97e" category="summary">提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导</block>
-  <block id="018e7312915cc7977d800bfc07ff8e98" category="doc">将 Veritas Storage Foundation 6 for Linux 与 NetApp ONTAP 结合使用</block>
   <block id="736c980a1fb2f447faa0dedf6080305f" category="paragraph">本文档将为采用 FC ， FCoE 和 iSCSI 协议的 Red Hat Enterprise Linux 和 Oracle Linux （基于 RHCK ）平台的 Veritas Storage Foundation 6 系列版本提供有关 ONTAP SAN 主机配置设置的指导。</block>
   <block id="5116d27ab3c67a2413a9afe024b82a38" category="summary">如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机</block>
   <block id="af59960049c1f2bff52a1746f8d7c912" category="doc">适用于采用 ONTAP 的 RHEL 8.3 的 NVMe/FC 主机配置</block>
@@ -1078,12 +1030,10 @@
   <block id="ebee10e27543a00ec2dbb31bf502034d" category="admonition">如果您要在同一个同时存在的 RHEL 8.3 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。</block>
   <block id="2f6bd60386ab0902a709ffef7502ea68" category="list-text">验证是否已在主机上创建并正确发现命名空间。</block>
   <block id="fde32bae28ce21f6dcfb99eaf23d2e50" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP1</block>
-  <block id="b395bff84d13aa48aed848b2cd844a1c" category="doc">将 SUSE Linux Enterprise Server 12 SP1 与 NetApp ONTAP 结合使用</block>
   <block id="a25366ea3f2c10a10d1307811212c68a" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="027e0a464cdf00de4a711147d832f324" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="082dbb21e0b198384fe053b2d5bdb626" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="b11a98375486489cb1837d76fcae9c17" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP1 ，没有已知问题。</block>
   <block id="579d7a7046fd4b01f78000a1f5680baa" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.5</block>
-  <block id="763195af6d7b2c38b0c9682c0c9d8a42" category="doc">将 Red Hat Enterprise Linux 6.5 与 NetApp ONTAP 结合使用</block>
   <block id="084dc848480db9d8a35c6d6e64c686b1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="c79d2b225d88e90c0622e3c5d7a524a7" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="85e17eb00215b5ddc7559e4c06c95724" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="9ae9889f119b7b05c0dd62bfe7085ce7" category="paragraph">RHEL 6.5 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1117,23 +1067,19 @@
   <block id="a62e4298a14b3b2b0eed1e03a1901a18" category="cell">在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 "</block>
   <block id="b6e351fa03836020bf63aed76e03399a" category="inline-link-macro">1068622</block>
   <block id="480c1af29fcb3cc17dbe8a841a6a3c06" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.2</block>
-  <block id="2257e3be4a13feb6dc7ad6ff9a38404a" category="doc">将 CentOS 8.2 与 NetApp ONTAP 结合使用</block>
   <block id="6cb3a6c6bbd7cf8c1ab700ad4342bed1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5791c19afbac364267fc3567cae2ba34" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="6d0ef457a6d83b808baa2444f1d454db" category="paragraph">对于 CentOS 8.2 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 8.2 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="f1beda93cf92219b8b55ae973eac7daa" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="840d5abfe44b15b4222ea5c534ce82a9" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.2 。</block>
   <block id="6ef4ca5514fc3496c82be53f21ea03d2" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.3</block>
-  <block id="cba10735819f3a0f3705658cb271e05c" category="doc">将 Red Hat Enterprise Linux 7.3 与 NetApp ONTAP 结合使用</block>
   <block id="3b8e165405f5e10d3920f8e146dde743" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="f8a436a3c9bbe06e4f88036e4f03a4f5" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="c0ee48ea1d7622a5cfe5ade7dd37cedc" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="89bd48c55808bc62ab1163663f834231" category="paragraph">RHEL 7.3 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="cec602aaab3b2957e3f2c033a88821aa" category="paragraph">RHEL 7.3 没有已知问题。</block>
   <block id="c11d050c295bbaf2511d25fa05b61010" category="summary">介绍如何将 CentOS 6.5 与 ONTAP 结合使用</block>
-  <block id="fdd111253a638fd9aeea75a310c033ea" category="doc">将 CentOS 6.5 与 NetApp ONTAP 结合使用</block>
   <block id="13d3312f60a1a5da3e4a008267f577b7" category="paragraph">对于 CentOS 6.5 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.5 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="81f9e960f5644067d610e1042c8ad0af" category="paragraph">系统会对 CentOS 6.5 操作系统进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="e79780a12540c43b1147fb9232479dc4" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="0158dc1052dab85818a92b1a427c95b7" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.5 。</block>
   <block id="b277f2029ada9ac25bce475d62557cb4" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.9</block>
-  <block id="9a57d403bb39ff42c58535b5695a4d75" category="doc">将 CentOS 7.9 与 NetApp ONTAP 结合使用</block>
   <block id="e6134970e8d5973c94d66165bc3ebc13" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5564eab34da8df006dd99a2c2ee21d68" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="266073eadfa1373804ed4272aa64c5e3" category="paragraph">对于 CentOS 7.9 ，必须存在 /etc/multipath.conf 文件，但不需要对该文件进行特定更改。CentOS 7.9 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="d7b453b4900f18089bb8c7a53ea15e98" category="summary">Windows Unified Host Utilities 包含一个安装程序，用于设置所需的 Windows 注册表和 HBA 参数，以便 Windows 主机正确处理 NetApp ONTAP 和 E 系列平台的存储系统行为。</block>
@@ -1329,18 +1275,14 @@
   <block id="64e869d9ef872c0eb27623237f739ca1" category="list-text">链路关闭超时（ linkdwnto ）— 30</block>
   <block id="c41a9d8b262cc81ee865acdfb4ddd138" category="list-text">端口关闭重试计数（ portdwnrc ）— 120</block>
   <block id="41e7560cde89e1cd58f68637cb85187c" category="summary">介绍如何将 CentOS 7.6 与 ONTAP 结合使用</block>
-  <block id="da9f40e3285e3c02f85bcebc7e825fec" category="doc">将 CentOS 7.6 与 NetApp ONTAP 结合使用</block>
   <block id="2cf246d491f7ad45523fc8e4a88fc641" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="7ce73c7ae176dd6b577d1c14b445f0cd" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="b0825624074d948cc02dab7178882abe" category="summary">介绍如何将 CentOS 8.1 与 ONTAP 结合使用</block>
-  <block id="7a84148d12b9721ad8119082edfec18b" category="doc">将 CentOS 8.1 与 NetApp ONTAP 结合使用</block>
   <block id="2cc89810a4025d52a6eccc82f2fdfc91" category="paragraph">对于 CentOS 8.1 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 8.1 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="4ed487db5845a58ae6349ab5f8fcc335" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="028e50bd59e6088e4c25abc993c5b456" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.1 。</block>
   <block id="39e2f887814ee9598f2240638f02ad73" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.3</block>
-  <block id="0c3b5a7f0382879805ac3bf9efaa2288" category="doc">将 CentOS 8.3 与 NetApp ONTAP 结合使用</block>
   <block id="ef00ac506f369c446209297666bbc1c1" category="paragraph">对于 CentOS 8.3 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 8.3 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="cdaab392c5ef9c222bc95dc907be230b" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="3c7f0100e93cbb394731ee7d8982c161" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.3 。</block>
   <block id="d469d8f0f0ea6195efacf51226ff8db4" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.7</block>
-  <block id="c477e146aa2504b0d213d6f060620e5c" category="doc">将 Oracle Linux 7.7 与 NetApp ONTAP 结合使用</block>
   <block id="83c8070e0465c3b76698f556c407a97a" category="paragraph">对于 Oracle Linux 7.7 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。Oracle Linux 7.7 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="5796236b218639aa54b317a2653fe843" category="admonition">要配置 Oracle Linux 7.7 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="d03bd5ac8fbc60aafcf4f05cb4079c96" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.7 。</block>
   <block id="1b61a7a3856fdbc478513136a65d30e6" category="inline-link-macro">1311575</block>
@@ -1363,12 +1305,10 @@
   <block id="af4bdc6f0612ae419e8be2df4a6dc1f8" category="cell">在 Qlogic QLE2672 （ 16G ）和 QLE2742 （ 32G ）的存储故障转移期间观察到 IO 延迟，并且 Rport 正在移至 " 已阻止 " ， " 不存在 " 状态</block>
   <block id="501bcccc8f9d47ad0f5a58eda68930e0" category="cell">在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online</block>
   <block id="af542c850dcba761107186a0c4f1cd8f" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.2</block>
-  <block id="2d022d8cbf7152df1b17c45be3158c88" category="doc">将 Red Hat Enterprise Linux 8.2 与 NetApp ONTAP 结合使用</block>
   <block id="4760c3b673835516c579d9024201af61" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="83aa98b0663a07abe5c12cd92f6e7e99" category="paragraph">RHEL 8.2 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="5201f3364243bc1b14657349eb16cf69" category="paragraph">RHEL 8.2 没有已知问题。</block>
   <block id="8e606d3994d1276c51a72c8493480d0d" category="summary">介绍如何将 CentOS 6.4 与 ONTAP 结合使用</block>
-  <block id="942161295f337fa972d985b0683c34d3" category="doc">将 CentOS 6.4 与 NetApp ONTAP 结合使用</block>
   <block id="5c418e7e8faea588a8aaca3632cdef5c" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="d51d9bd8ee469ad0aee13f86bf1610ea" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="ed81d40ee1a062d4852e88bbb707608d" category="paragraph">对于 CentOS 6.4 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。CentOS 6.4 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="c5b0e8703af1ccb56a53d3ccc87f83ac" category="paragraph">系统会对 CentOS 6.4 操作系统进行编译，以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1385,13 +1325,11 @@
   <block id="8c95c9542a975007e5a35ecad47efad2" category="paragraph">较新的 lpfc 驱动程序（收件箱和发件箱）的 lpfc_enable_FC4_type 默认设置为 3 。因此，您不需要在 ` /etc/modprobe.d/lpfc.conf` 中明确设置此值。</block>
   <block id="cd028f2be9225b4251e86c9754599aa3" category="paragraph">在上面的示例中，两个命名空间映射到 Oracle Linux 7.9 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。</block>
   <block id="120d1efb0373e4924670fa06d0e23b7d" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.3</block>
-  <block id="144b34679ac90c58d7b14a45facf571a" category="doc">将 Oracle Linux 7.3 与 NetApp ONTAP 结合使用</block>
   <block id="7be357df47dca653c69405dcffc9660e" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="7a0a4f9043c30954806605608d921df8" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="a62a1c6a3f1f4dcff8f3cfc9b1ff6c53" category="paragraph">对于 Oracle Linux 7.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.3 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="f554f8ae0fcea497dc4db54ed18e2e5b" category="admonition">要配置 Oracle Linux 7.3 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="afd18201682c20761a139e3ba1b44320" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.3 。</block>
   <block id="f909d8a9e3b0ea24e758ecf1323e3235" category="paragraph">Oracle Linux 7.3 没有已知问题。</block>
   <block id="6f7f69f453663da32b05f6e1d898fb8e" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.7</block>
-  <block id="9317600b8a1f42c9e19d23f969ce8d82" category="doc">将 Red Hat Enterprise Linux 7.7 与 NetApp ONTAP 结合使用</block>
   <block id="a1bdb7a660f71ebcfb10fb395252c57a" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.7 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.7 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="5ca5c69afcb4693dcca07eea3efbf3f2" category="paragraph">RHEL 7.7 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="d7fad245b12b629fd89fe1e208312a84" category="inline-link-macro">1258856</block>
@@ -1407,10 +1345,8 @@
   <block id="4f400899c26f61785cbe1bcc46b125af" category="inline-link-macro">1745995</block>
   <block id="acfc18ebe6da7c469ae8e3abf7ca0509" category="cell"><block ref="acfc18ebe6da7c469ae8e3abf7ca0509" category="inline-link-macro-rx"></block></block>
   <block id="3bb3263aa16bbeb228b8ecd7584a8064" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.3</block>
-  <block id="5c12d7919f70a52feb5b05d38f67a518" category="doc">将 CentOS 7.3 与 NetApp ONTAP 结合使用</block>
   <block id="ef96b3a7a075d8418a575b9d3ec01e49" category="paragraph">对于 CentOS 7.3 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="04dff1447143c8e4e6195f792be9979e" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.8</block>
-  <block id="d7504c3f9edea18dc5689240f0d4eca3" category="doc">将 Red Hat Enterprise Linux 6.8 与 NetApp ONTAP 结合使用</block>
   <block id="d58ee726eea2726eefac984fb7e051d6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.8 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="27903dacace5a068c1878082e92ceefc" category="paragraph">RHEL 6.8 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="fe88f0836c56baf22e2264574de8ae99" category="paragraph">RHEL 6.8 没有已知问题。</block>
@@ -1421,14 +1357,11 @@
   <block id="393fa042be04dcc3bde30500dcf40209" category="paragraph">`vserver nvme namespace create -vserver vs_1 -path /vol/nssvol/namespace1 -size 100g -ostype vmware -block-size 512B`</block>
   <block id="6a290a5d71dc6c05e5ec68fcd97cbe87" category="list-text">验证相应 NVMe/FC 命名空间设备的各个 ANA 路径的状态：</block>
   <block id="fbd83cf0e839e6dec73fa3ff243bb8c5" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.8</block>
-  <block id="9ae2e2f0116f96b133ac014c223f3745" category="doc">将 CentOS 7.8 与 NetApp ONTAP 结合使用</block>
   <block id="76174ed9b35d8ad81e135443f4af3887" category="paragraph">对于 CentOS 7.8 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="6a1bc9ef2b246f475f3565d08b0f7fff" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.8</block>
-  <block id="41a9aaf2c3a6baa8f83a110d087db8fa" category="doc">将 Red Hat Enterprise Linux 7.8 与 NetApp ONTAP 结合使用</block>
   <block id="4a498bc14dff7d28b1cbe385198ffd2e" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.8 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。RHEL 7.8 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="5765160c5d780dc6ba6425d1dd92e011" category="paragraph">RHEL 7.8 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="f016701b52511d7388e9b01258eaff35" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP3</block>
-  <block id="7c5674dabbccc0a7d51145478b428e7a" category="doc">将 SUSE Linux Enterprise Server 12 SP3 与 NetApp ONTAP 结合使用</block>
   <block id="7adcaa4e5a35b413a61f9652b9b8e6bd" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="2e3100a5f55723fd5f208c30b3d4a68b" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="72f35134635c6ac882f97d9681c93120" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="faa333743d9719ffabaef492f9d3addf" category="inline-link-macro">1089555</block>
@@ -1462,7 +1395,6 @@
   <block id="f70dec75289ffecc65a2aaca091ba2ca" category="inline-link-macro">1062514</block>
   <block id="815e3fd10e8c267f2111bacfdc657a8c" category="cell"><block ref="815e3fd10e8c267f2111bacfdc657a8c" category="inline-link-macro-rx"></block></block>
   <block id="bff4d094a082c06d638618c58e969418" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP3</block>
-  <block id="c0b30f92abe75e95b91d0898a24b22c4" category="doc">将 SUSE Linux Enterprise Server 15 SP3 与 NetApp ONTAP 结合使用</block>
   <block id="a9a140710f3b9cdfa623f06852051def" category="paragraph">对于 SUSE Linux Enterprise Server 15 SP3 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="95f8a3aebcf362ca4aacce74fc1c8cb9" category="paragraph">对 SUSE Linux Enterprise Server 15 SP3 操作系统进行了编译，以识别 ONTAP LUN 并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="f04e1570ab7c52f5f4c102c61f685d1b" category="paragraph">SUSE Linux Enterprise Server 15 SP3 没有已知问题。</block>
@@ -1491,12 +1423,10 @@
   <block id="9ba6b55ceee2f1425bbe62109b05bbf8" category="paragraph">` # sanlun lun show -p`</block>
   <block id="08bca029e13ca38021fc7509f607c4d1" category="paragraph">此示例显示了直连配置的 `sanlun lun show -p` 命令的典型输出。它还包括 `sanlun lun show -d hdisk9 -v` 命令，用于显示有关 hdisk9 的信息。此命令的输出已被截断。</block>
   <block id="cc04a552b7bd63c26430fa93dd280a82" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.8</block>
-  <block id="0dab7103dbbab010f9bfcee5af378d58" category="doc">将 Oracle Linux 7.8 与 NetApp ONTAP 结合使用</block>
   <block id="16a3fbe78a74d2c0274fa4740e085eed" category="paragraph">对于 Oracle Linux （ OL ） 7.8 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。OL 7.8 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="8499ac147d02c58a3d85f2d4f6752557" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了 LUN 映射的非 ASA 角色的示例多路径输出。</block>
   <block id="0abc977b99b5f67c94ba5221df34ff03" category="admonition">要配置 Oracle Linux 7.8 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="f258b7d81a3180e673755835c6a903ac" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.8 。</block>
   <block id="33fb3916b5bbccadc7502b97d2b47e0a" category="summary">介绍如何将 Citrix XenServer 7.x 与 ONTAP 结合使用</block>
-  <block id="9873f1b83211d16cf532c7bbb3c830b9" category="doc">将 Citrix XenServer 与 NetApp ONTAP 结合使用</block>
   <block id="a51e3210f96458fa393e6f4bf88caabc" category="paragraph">Citrix XenServer 中的多路径支持基于设备映射程序多路径组件。不会自动为呈现给 XenServer 的所有 LUN 创建设备映射器节点，并且只有在存储管理层（ API ）正在使用 LUN 时才会配置设备映射器节点。Citrix XenServer Storage Manager API 插件可自动激活和停用多路径节点。</block>
   <block id="614673c0b1eeb91e8ffc86cde6faa93b" category="paragraph">由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix XenServer 的标准供应商文档。</block>
   <block id="9fc86c956b59ea355d470ac30580447a" category="paragraph">Citrix XenServer 7.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix XenServer 7.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
@@ -1508,7 +1438,6 @@
   <block id="9d5bc46c4aa8d12cf17b1243dea3cdb8" category="paragraph">以下示例说明了如何更正被覆盖的默认值。在这种情况下， * 多路径 .conf * 文件定义了与 ONTAP LUN 不兼容的 * 路径检查程序 * 和 * 检测 _prio* 值。如果由于连接到主机的其他 SAN 阵列而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
   <block id="73087707ff2bdcd46af8a5eca4a750f8" category="admonition">对于支持的配置， Citrix XenServer 建议对所有基于 Linux 和 Windows 的子虚拟机使用 Citrix VM 工具。</block>
   <block id="95a7c4ebc7538126d41cf3497f8e09b4" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.4</block>
-  <block id="602eb1b3ced952ad08723d93cc7dc83f" category="doc">将 Red Hat Enterprise Linux 6.4 与 NetApp ONTAP 结合使用</block>
   <block id="f0fac0f2b3b710a9568f39594d5f9df3" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.4 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="857c2f89db30800ff3058931e331923e" category="paragraph">RHEL 6.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="523f9962862f3611c9e9f05e775a3ff2" category="inline-link-macro">673009</block>
@@ -1518,10 +1447,8 @@
   <block id="9a354393979d2f53fe302b3a221ab20a" category="inline-link-macro">907844</block>
   <block id="8dc9ebb53b5175d2fd3191b5f0c2c42b" category="cell"><block ref="8dc9ebb53b5175d2fd3191b5f0c2c42b" category="inline-link-macro-rx"></block></block>
   <block id="0b9f55b9dffba7eae6a1222b3c2e4753" category="summary">介绍如何将 CentOS 7.1 与 ONTAP 结合使用</block>
-  <block id="cb3913ee3213f28b1d82507efb22156d" category="doc">将 CentOS 7.1 与 NetApp ONTAP 结合使用</block>
   <block id="95f05a2f59b08c6cdec0baaa96182662" category="paragraph">对于 CentOS 7.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 7.1 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="3e6c084e49fee07ccce9fb194055ad83" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.5</block>
-  <block id="4f2ced01623c3b07f3ba30ae5adb8a5b" category="doc">将 Oracle Linux 7.5 与 NetApp ONTAP 结合使用</block>
   <block id="76090bbd3d36f6477a117f8815c55e34" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="44639981c8da89276a1df8d2ee193418" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="6c54367f89a8101fb18321adda6331eb" category="paragraph">对于 Oracle Linux 7.5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.5 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="813c36b15553267f324cd6908101a332" category="admonition">要配置 Oracle Linux 7.5 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="bd5476eff85991b1a8eb2197c27bdbeb" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.5 。</block>
@@ -1530,19 +1457,15 @@
   <block id="7d937b6efb504d37a46095c07e7716cd" category="cell">在存储故障转移操作期间，在使用 Qlogic QLE2672 16G FC 的 OL7.5 上观察到内核中断</block>
   <block id="7a1b52e64826aa344229a4f10a14cabf" category="cell">在使用内核 4.1.12-112.16.4.el7uek.x86_64 和 Qlogic QLE2672 HBA 的 Oracle Linux 7 （ OL7.5 ）上执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录中创建一个 vmcore 文件。可以在模块 "kmem_cache_alloc +118" 中观察到这种中断，该模块记录在 vmcore 文件中，并使用字符串 "Exception RIP ： kmem_cache_alloc +118" 进行标识。 发生内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复。</block>
   <block id="8aa8cd31ee59182d62283f54115dc626" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.3</block>
-  <block id="4137ad0ecb9476c03488b817fe529868" category="doc">将 Red Hat Enterprise Linux 8.3 与 NetApp ONTAP 结合使用</block>
   <block id="76a654b50e8a1ecef0af22f2af8b3a5e" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="5454d075074e8f827f59ce80d2e812c2" category="paragraph">RHEL 8.3 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="9128494ba0ee37c628f015b5af093f58" category="summary">介绍如何将 CentOS 7.0 与 ONTAP 结合使用</block>
-  <block id="7d13d9d03b198e9d73862389907f42a3" category="doc">将 CentOS 7.0 与 NetApp ONTAP 结合使用</block>
   <block id="5bd816c2094b5347fe9888b31305809d" category="paragraph">对于 CentOS 7.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 7.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="bc2395f0cdf95b5f51262e33c9faa5e6" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP2</block>
-  <block id="4187a178ebfd4740fe88cee2b18b8b28" category="doc">将 SUSE Linux Enterprise Server 12 SP2 与 NetApp ONTAP 结合使用</block>
   <block id="cf55f22cba1bd78a550b24129856d31b" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="7103ca6e78fec9daba4ed8d32067a33d" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="533852468832f0054559eec6bf0ecebe" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="643a6a2bdd020c4b3fb247c000912e7f" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP2 ，没有已知问题。</block>
   <block id="f8f27557fe3d0fcb534e0bcda02971bf" category="summary">介绍如何在 ONTAP 中使用适用于 Linux 的 Veritas Infoscale 7.3</block>
-  <block id="3069e09bbf1e92e611316810a6e78210" category="doc">将 VMware vSphere 7.x 与 NetApp ONTAP 结合使用</block>
   <block id="cc239a4513b4519cac8458b3c718aa7c" category="paragraph">本文档提供了有关采用 FC ， FCoE 和 iSCSI 协议的 vSphere 7.x 版本的 ONTAP SAN 主机配置设置的指导。</block>
   <block id="e1059765ab19f25f118520b9942cefe8" category="section-title">虚拟机管理程序 SAN 启动</block>
   <block id="98743d7644276c713659bcbc70ea0c5b" category="paragraph">ESXi 提供了一个称为原生多路径插件（ NMP ）的可扩展多路径模块，用于管理存储阵列类型插件（ Storage Array Type Plugin ， SATA ）和路径选择插件（ Path Selection Plugin ， PSP ）的子插件。默认情况下，这些 SATA 规则在 ESXi 中可用。</block>
@@ -1605,7 +1528,6 @@
   <block id="52f50d0f0ab285059648c7da67b4b07f" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="929c9a7053ca6d930b0835cb93342235" category="inline-link-macro">采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP</block>
   <block id="51a78203e5d6aa30e5bcafd469a2d2be" category="summary">介绍如何将 SUSE Linux Enterprise Server 12 SP5 与 ONTAP 结合使用</block>
-  <block id="b865018bdf70bd30fce954190d63da4f" category="doc">将 SUSE Linux Enterprise Server 12 SP5 与 NetApp ONTAP 结合使用</block>
   <block id="9a6a6fde9dc0b6c6cf58bb4752be3433" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="84c7846e7158b0d270be911eb58ad456" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3622b9af63906c6b9ad79d33b1f46e2e" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="e5a77b1a174097186e6d1fb9a005709f" category="inline-link-macro">1284293</block>
@@ -1615,14 +1537,12 @@
   <block id="c3581932e963b55b0a548c51181e8150" category="inline-link-macro">1157966</block>
   <block id="3765d9821a625e63ea42052e4bacd1e8" category="cell"><block ref="3765d9821a625e63ea42052e4bacd1e8" category="inline-link-macro-rx"></block></block>
   <block id="d6a549e2961efba4f33c4deb10965085" category="summary">介绍如何将 Oracle Linux 6.6 与 ONTAP 结合使用</block>
-  <block id="94208a234965797fceed6103c20a6005" category="doc">将 Oracle Linux 6.6 与 NetApp ONTAP 结合使用</block>
   <block id="f25e7d0c2e23e28b5e2fcc826eab9d89" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="20a6fac93934f3cd0fc46716c10ade14" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="b17be161e93154b1a8e4c9e17fc3b190" category="paragraph">对于 Oracle Linux 6.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.6 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="3c92bea3eb2289a6ec3282c1090533ba" category="paragraph">Oracle Linux 6.6 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="41e185c135ae2833eb96571ac238a3f6" category="admonition">要配置 Oracle Linux 6.6 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="206a39f130bf92080cb56256dd2c28f9" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.6 。</block>
   <block id="ae8aa154427258c6dd529e8c72110906" category="paragraph">Oracle 6.6 没有已知问题。</block>
   <block id="cdab1722faf4570592f09483d692f9a3" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="aad294b0550f33ea846ebc2598292576" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.6 。</block>
-  <block id="2ec06282192bf9b2cd91d1e3242e96f4" category="doc">将 Solaris 11.4 与 NetApp ONTAP 结合使用</block>
   <block id="c21dc92fb61425e1ad5ebfa7842ddfd3" category="list-text">使用 `tar xvf` 命令对文件进行解压缩。</block>
   <block id="70b7cc349994a5289908b02781aee538" category="paragraph">` /opt/NTAP/SANToolkit/bin/host_config &lt;-setup&gt; &lt;-protocol fcp_iscsi_mixed&gt; &lt;-multipath mpxio_dmp&gt; non&gt; （ -noalua ） [-mcc 60_90_120]`</block>
   <block id="90fbed0fe328b6c16dbe12568b1cb193" category="paragraph">要验证修补程序，请执行以下操作：</block>
@@ -1634,19 +1554,15 @@
   <block id="e782dc99ec8290da5a63ec5e81465380" category="cell">使用 OS 原生命令在使用 AA/pports 的 Solaris 主机上报告路径异常</block>
   <block id="87b607e68d04a531a2558265117f94cb" category="cell">使用 ASA 的 Solaris 11.4 出现间歇性路径报告问题</block>
   <block id="0fd599859ca499a908d11962595ba872" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.9</block>
-  <block id="5015c54f6ae860e4388dc79aec2d5365" category="doc">将 Red Hat Enterprise Linux 7.9 与 NetApp ONTAP 结合使用</block>
   <block id="02ef7cdb14b82d2d03d7952385e853c9" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.9 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.9 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="b9c3e890e59dd43c4f5634fcad20c6cf" category="paragraph">RHEL 7.9 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="c0b03114da162e4c4ce8e3c9e573e1f7" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.7</block>
-  <block id="2de08b2ba07c63129d6c0b4f841e8f57" category="doc">将 Red Hat Enterprise Linux 6.7 与 NetApp ONTAP 结合使用</block>
   <block id="7e6f60bf7bd831ecb9a591f4ed8bd2f2" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.7 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.7 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="5592861a9331f6fc89845ea236081712" category="paragraph">RHEL 6.7 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="cb07edcfd67f57e0e25c8ebdd7545fe5" category="paragraph">RHEL 6.7 没有已知问题。</block>
   <block id="35a2873560c7df91eb3565c5ce683568" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.2</block>
-  <block id="6d7ed438586af8771033a6222425dff3" category="doc">将 CentOS 7.2 与 NetApp ONTAP 结合使用</block>
   <block id="5e264cc9d3c17161fd51d23fc1227896" category="paragraph">对于 CentOS 7.2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 7.2 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="157584ac811d45f102c8c688e0c7c7a4" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 8.0</block>
-  <block id="d25d835edd5dae4c8da09161a31e26a8" category="doc">将 Oracle Linux 8.0 与 NetApp ONTAP 结合使用</block>
   <block id="66ea9cf358437f905712380440a8eddd" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="8c7533773fc489aa5fe9c5ca6e019e25" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="05b3b7ebfe3f9b8f7b7fa7d073f86fcd" category="paragraph">对于 Oracle Linux 8.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 8.0 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="e43b7887a27711ba5e2bd52d8cbffd65" category="admonition">要配置 Oracle Linux 8.0 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="dd019c9be944c1791639aca9ec9dceb1" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.0 。</block>
@@ -1660,7 +1576,6 @@
   <block id="f66be2d78c31b4dcc20cc20c3d56d86f" category="list-text">在 Oracle Linux 8.2 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="8c14192b8816f047aeb8cd691b0dcee5" category="paragraph">在上述示例中，两个命名空间映射到 Oracle Linux 8.2 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。</block>
   <block id="1007b7632045ad8e75cf3589b6d28f94" category="summary">介绍如何将 Oracle Linux 8.1 与 ONTAP 结合使用</block>
-  <block id="76b5f29f2210c120279557998f5b220b" category="doc">将 Oracle Linux 8.1 与 NetApp ONTAP 结合使用</block>
   <block id="3adfaacb5236083e12561cfda09586f4" category="paragraph">对于 Oracle Linux 8.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 8.1 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="80b15714c0bcc6206a8342b0b67b57a7" category="admonition">要配置 Oracle Linux 8.1 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="ba385beac84ef95968bf8513eda510a6" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.1 。</block>
   <block id="26ca817ec054dedbbbe822324c1f3666" category="paragraph">Oracle Linux 8.1 没有已知问题。</block>
@@ -1677,15 +1592,12 @@
   <block id="3c4bf282fc2deeb24018cd11152fa91c" category="paragraph">此原生 NVMe-CLI 软件包包含 NVMe/FC 自动连接脚本，用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 命名空间的 NetApp 插件。</block>
   <block id="817482a3243380822092c4032be58261" category="list-text">在 SLES15 SP2 主机上，检查位于 ` /etc/nve/hostnqn` 的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上对应子系统的主机 NQN 字符串匹配。例如：</block>
   <block id="c79c427e663f5e0ed0a4be02d2ceac02" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.10</block>
-  <block id="3b91d4a562877be849d6ee54b60e72c3" category="doc">将 Red Hat Enterprise Linux 6.10 与 NetApp ONTAP 结合使用</block>
   <block id="0279bb3bb8efcbb42b9c3f0326ab775c" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.10 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.10 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
   <block id="845baae8777888665cfa3588985a095e" category="paragraph">RHEL 6.10 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="73a3738e37f81fd8b61bfa733479496f" category="paragraph">RHEL 6.10 没有已知问题。</block>
   <block id="62d54f77039c15fe0a65691e9ff3f4c2" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.5</block>
-  <block id="3a33583e5c725c9344bba2426d9e143e" category="doc">将 CentOS 7.5 与 NetApp ONTAP 结合使用</block>
   <block id="6a2c85eca0b58ae9120cd4aa738a6949" category="paragraph">对于 CentOS 7.5 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.5 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="a51f869a9a131effa58d99e63266e02d" category="summary">介绍如何在 ONTAP 中使用 Citrix 虚拟机管理程序 8.x</block>
-  <block id="e9cb7b8f17e8f27f0130bdc68558c4cc" category="doc">将 Citrix 虚拟机管理程序与 NetApp ONTAP 结合使用</block>
   <block id="b4fb72e88112026a3055df686f0141d6" category="paragraph">本文档提供了有关使用 FC ， FCoE 和 iSCSI 协议的 Citrix 虚拟机管理程序 8 系列操作系统版本的 ONTAP SAN 主机配置设置的指导。</block>
   <block id="dfdecabe17f4f61a0c5b353fdc3dfeef" category="paragraph">Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
   <block id="4d9e4d5a080304464911deeebee0a0b3" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
@@ -1697,7 +1609,6 @@
   <block id="4a51081f62917f0c91cd1e1d09bd2d71" category="cell">在使用 QLogic QLE2742 32 GB HBA 的 Citrix Hypervisor 8.0 内核（ 4.19.0+1 ）上执行存储故障转移操作期间，可能会发生内核中断。此问题描述会提示重新启动操作系统并导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。您可以使用 vmcore 文件了解故障的发生原因。内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
   <block id="b008e43caaecb8f7dd34101d0643e3bf" category="inline-link-macro">NetApp-98</block>
   <block id="a6dc6c62ee31196ca4228a01ceaf054f" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.6</block>
-  <block id="bb416c7f83582cb630ec7e8f1451631f" category="doc">将 Red Hat Enterprise Linux 7.6 与 NetApp ONTAP 结合使用</block>
   <block id="4802d87aa5a1f81f51753e6e62f1e804" category="paragraph">RHEL 7.6 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="e3d8ce1190bfeaa278be5f7e8b0d5995" category="inline-link-macro">1186754</block>
   <block id="532edc5b4fd01c5e7e8eece87dabaeb4" category="cell"><block ref="8dbfd01f5544aaaa573a97a85d555718" category="inline-link-macro-rx"></block></block>
@@ -1714,7 +1625,6 @@
   <block id="3c04c0dd9302edadef0b0e9a03b2ac43" category="summary">适用于采用 ONTAP 的 Windows Server 2016 的 NVMe/FC 主机配置</block>
   <block id="dd19e6b1b8c34e56b1831595566adbf0" category="paragraph">适用于 Windows Server 2016 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="ba9c5cfb8923c683e175b0343242d5b2" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.0</block>
-  <block id="0e1d9d0b480ab0d07592a8355b51275c" category="doc">将 CentOS 8.0 与 NetApp ONTAP 结合使用</block>
   <block id="2abffb2205f281bc82ee25fbb0545967" category="paragraph">对于 CentOS 8.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 8.0 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="16c8f9caff89a168a424e7f5ade0f822" category="paragraph">有关 CentOS （ Red Hat 兼容内核）的已知问题，请参见 <block ref="13be8945161aaeca52d4e4a694080916" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.0 。</block>
   <block id="1aa66ef3a8e34a7a538960a80d2e1e31" category="sidebar">ESXi</block>
@@ -1778,7 +1688,6 @@
   <block id="47d254fd002b7f1a6c06e1aa7c25a4ef" category="sidebar">信息卷 7.</block>
   <block id="66b0812a8cbedc46db133ed5327291bd" category="sidebar">存储基础 6.</block>
   <block id="eea65c7c864efb688d55381c5b21a910" category="summary">介绍如何在 ONTAP 中使用适用于 Linux 的 Veritas Infoscale 6.5 和 6.7</block>
-  <block id="05d7c7c2b6d6ca4fb59e67f4f34b7e2b" category="doc">将 VMware vSphere 6.5 和 6.7 与 NetApp ONTAP 结合使用</block>
   <block id="cf46645d175a0f99f53e120079789f83" category="paragraph">本文档提供了有关采用 FC ， FCoE 和 iSCSI 协议的 vSphere 6.5.x 和 6.7.x 版本的 ONTAP SAN 主机配置设置的指导。</block>
   <block id="d285d6f90c81abd47d57e4425faf9ed5" category="paragraph">对于 NetApp ONTAP 存储，默认情况下会将 VMW_SAP_ALUA 插件与 `VMW_PSP_RR` 结合使用，作为路径选择策略（ PSP ）。可以使用以下命令来确认这一点。</block>
   <block id="97702a0c8ad7bf7deb907e6a931a9c14" category="paragraph">在上面的示例中， LUN 已从 NetApp 存储映射到 4 个路径（ 4 个主动优化路径）。</block>
@@ -1903,7 +1812,6 @@
   <block id="4229df34b7c87f8ff6267a879dfeabd5" category="cell">在 SFO 故障和直连 I/O 期间发现 VIOS 3.1.1.10 上的 I/O 问题</block>
   <block id="6e2bd974030ad99179fd5896ca5f2b92" category="cell">在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， `vfchost` 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述</block>
   <block id="1af1d134f1d2df0e60d3d26a745e9a9c" category="summary">介绍如何将 Oracle Linux 8.4 与 ONTAP 结合使用</block>
-  <block id="7bc6016873cc966321b4e882f304f708" category="doc">将 Oracle Linux 8.4 与 NetApp ONTAP 结合使用</block>
   <block id="3f3097c34940e47c43cc1e2aaf144513" category="paragraph">对于 Oracle Linux （ OL ） 8.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。OL 8.4 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="938f1047c15f00fdd0cbfc8e4cfa15e1" category="paragraph">* 示例 *</block>
   <block id="306a27cab6be29f525fedb01d2a9a56e" category="admonition">要配置 Oracle Linux 8.4 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="2a5bf462d4974235d181075f07ec40ac" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.4 。</block>
@@ -1921,7 +1829,6 @@
   <block id="221c50744b3c4471b399c8dfa3509684" category="list-text">安装 SAN 工具包：</block>
   <block id="8eeb8a6e3eaad8d96cb67c508c74079e" category="paragraph">`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit netapp.SAN_toolkit`</block>
   <block id="cea2e5f9065bd07d72cb5caab3c1db47" category="summary">介绍如何将 Oracle Linux 8.3 与 ONTAP 结合使用</block>
-  <block id="254bb3d9a7cf5cab4c0853ebfdd5582c" category="doc">将 Oracle Linux 8.3 与 NetApp ONTAP 结合使用</block>
   <block id="3512af03a0184fdf02e1a9a23f8da83c" category="paragraph">对于 Oracle Linux （ OL ） 8.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。OL 8.3 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="dfa4360b9ef5c59ee3bab4c95d016689" category="admonition">要配置 Oracle Linux 8.3 Red Hat Enterprise Kernel （ RHCK ），请使用 <block ref="4e79a9939610f9dc89e0e26786a809f0" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.3 。</block>
   <block id="dbe552aa6706cdda69944fc1f527ec35" category="paragraph">Oracle Linux 8.3 没有已知问题。</block>
@@ -1972,7 +1879,6 @@
 <block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
 <block ref="feedbf2928c5a2b3814dd0d36cd7d240" category="inline-link-macro-rx"></block></block>
   <block id="ab29bda450e857b3672661ee0b1f2ec3" category="paragraph">请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
-  <block id="901e57ec934f2bb4dcf9c00499d469dc" category="paragraph">您可以使用<block ref="d30d99bceb137a364ff5b7be97ceac80" category="inline-link-rx"></block> 以验证您的配置。</block>
   <block id="64d9950f8626931b9146221eb8361c4a" category="paragraph">上提供了 NetApp AIX Host Utilities 软件包<block ref="c333bb24ac578f01b89e18c713c1294b" category="inline-link-rx"></block> 在经过压缩的 tar.gz 文件中。</block>
   <block id="dffe2b4e459efd8935c7c22b9718180f" category="paragraph">对于 RHEL 8.3 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.3 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="5b905783a11f0709eab070d439f4bebe" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
@@ -2083,7 +1989,6 @@
   <block id="3226f4c6b2d594c2a4e8db91fcc55341" category="section-title">配置 Broadcom/Emulex</block>
   <block id="63d2eef6ffb1f9f0f6a378b0692f6dd3" category="section-title">配置 Marvell/QLogic</block>
   <block id="61092b92c56a8527051cc09db7ffcf96" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.5</block>
-  <block id="741d2402053ca439d535ee1e7db603b7" category="doc">将 Red Hat Enterprise Linux 8.5 与 NetApp ONTAP 结合使用</block>
   <block id="10a8491b4d5d18409c61a4a90c61750b" category="section-title">安装 Linux Unified Host Utilities</block>
   <block id="5297043b43f5cb19511228a79f308d23" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.5 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。RHEL 8.5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="685ee6c581bc2df3a8910672a2af1ac3" category="paragraph">RHEL 8.5 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -2091,7 +1996,6 @@
   <block id="c22c65685ac3f8701da1a00c478b1333" category="cell">1447287</block>
   <block id="778fd215ce10bd514de565e6df2b1758" category="cell">在 SM-BC 配置中，隔离主集群上的 AINFO 事件会导致 HP-UX 主机暂时中断</block>
   <block id="6f80f2e204ff92f2e954367d70413775" category="cell">如果在 SnapMirror 业务连续性（ SM-BC ）配置中的隔离主集群上发生自动计划外故障转移（ AUFO ）事件，则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
-  <block id="9e1ea4643210fa4abca0c804c4fe3eec" category="paragraph">您可以使用 <block ref="1c6d071c1749743e8ebf715f1c64c2a1" category="inline-link-macro-rx"></block> 以验证您的配置。</block>
   <block id="e6836ae92ec45bf946aba470c3ee98e5" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block>。下载文件后，必须在安装之前对其进行解压缩。</block>
   <block id="dd0ef0f389a16b505e475797a7b752ac" category="list-text">从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 连接到 HP-UX 主机。</block>
   <block id="5eaf61000f0f261f2e4793f7e336889a" category="list-text">输入以下命令解压缩 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` 文件：</block>
@@ -2102,7 +2006,6 @@
   <block id="e661cef1335457aaa4b6047327cfb656" category="paragraph">`swinstall` 命令可运行一个安装脚本，用于验证 HP-UX 设置的状态。如果您的系统满足要求，此脚本会将 `sanlun` 实用程序和诊断脚本安装在 ` /opt/netapp/santools/bin` 目录中。</block>
   <block id="96e0cae7407a65fe53018dd9c13dbbe7" category="section-title">配置 FC HBA 和交换机</block>
   <block id="13875804930272cb7e31a51605d09c65" category="doc">Solaris Host Utilities 6.2</block>
-  <block id="408c1c436b88f56a9e4cf815ca520ffc" category="list-text">为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。</block>
   <block id="8f3b9d0cc42d20c0623a5f0990c4181e" category="paragraph">Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
   <block id="ad13fbfcd593d66a0a805929eb221e19" category="section-title">安装 Solaris Host Utilities</block>
   <block id="03b4fa4e47ce5a6711a2ad9d886d63b4" category="paragraph">Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主 Host Utilities 环境包括：</block>
@@ -2126,7 +2029,6 @@
   <block id="8ae046464e598978903e62c0c706373c" category="list-text">Veritas DMP</block>
   <block id="a335fa6e5bef06439b229f8adabc7dfe" category="section-title">列出从给定 SVM/ 映射到主机的所有 LUN 列出映射到主机的给定 LUN 的所有属性</block>
   <block id="072bbeb072deda2033d37a6e9af67b96" category="summary">介绍如何在ONTAP 中使用Oracle Linux 8.5</block>
-  <block id="bebf74152cdc0b8f2233ff49a9112052" category="doc">将Oracle Linux 8.5与NetApp ONTAP 结合使用</block>
   <block id="5afff738a58f6889eebdd3efb2f2c405" category="paragraph">对于Oracle Linux (OL) 8.5、/etc/multipath.conf文件必须存在、但您不需要对该文件进行特定更改。OL 8.5是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
   <block id="2e4318e2eccbd53d66a800f6dabff27f" category="admonition">要配置Oracle Linux 8.5 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="7e47a54075763937d25ec51fa82726e1" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.5。</block>
   <block id="2e4b1a8e103650d2f0fe4c61f4f8d5fb" category="paragraph">Oracle Linux 8.5没有已知问题。</block>
@@ -2205,15 +2107,12 @@
   <block id="cb209f9eec3baeb4065409d39ca1f4d5" category="paragraph">Oracle Linux 8.3 操作系统经过编译，可以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="ce431e2558ea7b456c531991fb4a7e92" category="paragraph">Oracle Linux 8.4 操作系统经过编译，可以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="3eeb371f92f74d2b6501646282092ca7" category="summary">介绍如何在ONTAP 中使用CentOS 8.4</block>
-  <block id="32d86924bbcb8820c9a350a7d741cbea" category="doc">将CentOS 8.4与NetApp ONTAP 结合使用</block>
   <block id="e5a962185d7bd63be4f29de827478b1c" category="paragraph">对于CentOS 8.4、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。CentOS 8.4是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
   <block id="ea4f6ca54725c6a00ccdbd33cafe2aa2" category="paragraph">CentOS 8.4经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="c33b879e8a189cf4ded38992165273b7" category="summary">介绍如何在ONTAP 中使用CentOS 8.5</block>
-  <block id="d5af4406caf44199917cb9aa00203c40" category="doc">将CentOS 8.5与NetApp ONTAP 结合使用</block>
   <block id="60d0d78dbe9bb18e16690c35ce6867e1" category="paragraph">对于CentOS 8.5、必须存在`/etc/multipath.conf`文件、但不需要对该文件进行特定更改。CentOS 8.5会使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="fd586a803662833af2a4932bc04d30c2" category="paragraph">CentOS 8.5操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="18c14def8d42f0c0db0b8f08922c712b" category="paragraph">CentOS 8.5没有已知问题。</block>
-  <block id="6ae085cbc4684a00a3e68524ecf70cfa" category="doc">将适用于Linux的Veritas Infoscale 8与NetApp ONTAP 结合使用</block>
   <block id="1b2a59730ea53da6436d8353216d1a0c" category="paragraph">本文档提供了有关采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于RHCK)平台的Veritas Infoscale存储基础8系列版本的ONTAP SAN主机配置设置的指导。</block>
   <block id="c5b648f7fb06555dc55d907fcf7b4c14" category="paragraph">您必须验证您的配置是否满足系统要求。有关详细信息、请参见NetApp互操作性表工具和Veritas HCL表。</block>
   <block id="ce081634ead33780d73e0e1f6b9ea0ca" category="paragraph">使用 Veritas 动态多路径（ VxDMP ）时，您必须执行配置任务，将 NetApp LUN 声明为 Veritas 多路径设备。您必须安装 Veritas 为 NetApp 存储系统提供的阵列支持库（ Array Support Library ， Asl ）和阵列策略模块（ Array Policy Module ， apm ）软件包。虽然 Veritas Software Installation 会随产品一起加载默认的 ASl apm 软件包，但建议使用 Veritas 支持门户上列出的最新受支持的软件包。</block>
@@ -2257,7 +2156,6 @@
   <block id="c0965c2d259d63a3e2cbab60c837eaaa" category="inline-link-macro">为主机配置Host Utilities</block>
   <block id="2ee1fba4400a50245e66ef649b54d588" category="sidebar">安装AIX HU 6.1</block>
   <block id="b767aaa513fc8b09074940ccea06b212" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.6</block>
-  <block id="0202939493cea9d89d8217a646a65b54" category="doc">将Red Hat Enterprise Linux 8.6与NetApp ONTAP 结合使用</block>
   <block id="be200813e91d3b0e3285391fd2e20825" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.6、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。RHEL 8.6使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="98d83a607473e5d6dab1096f6758273a" category="paragraph">RHEL 8.6操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="9b402891c0d38b9c654dcfa36df9d722" category="sidebar">8.6.</block>
@@ -2265,7 +2163,6 @@
   <block id="b46a43d1dd4c2f14b94228f8a8b1e193" category="paragraph">本文档提供了有关使用FC、FCoE和iSCSI协议的Citrix XenServer 7系列操作系统版本的ONTAP SAN主机配置设置的指导。</block>
   <block id="c03432d938277a67cb7c8ce5d783b2ca" category="paragraph">以下示例显示了具有所有四个主动/优化路径的ONTAP LUN的正确输出：</block>
   <block id="c1326fec4f12ec093296d507d6b6e33a" category="summary">介绍如何在ONTAP 中使用Oracle Linux 8.6</block>
-  <block id="b53c88044f47f5b72ea564dc18bd61d6" category="doc">将Oracle Linux 8.6与NetApp ONTAP 结合使用</block>
   <block id="fa491ee178ddf6e96992dad027671112" category="paragraph">对于Oracle Linux (OL) 8.6、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。OL 8.6使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="ea11e68a3ea4e3736ee4012985057991" category="paragraph">Oracle Linux 8.6操作系统经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="805a476dee7a3e2c96d744778fabadf2" category="admonition">要配置Oracle Linux 8.6 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="db48836fc998d5e9210c21f83870f464" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.6。</block>
@@ -2278,7 +2175,6 @@
   <block id="ce41c78a17a5925101abf561eb152ad3" category="paragraph">要配置适用于SM-BC的AIX、请参阅知识库文章 <block ref="bfd553e439e8f0adcfe76e0cf010b4a4" category="inline-link-macro-rx"></block>。</block>
   <block id="90d3fa524bd535112a1305441a6b2d57" category="paragraph">RHEL 8.5没有已知问题。</block>
   <block id="ad2169ec031852e9940a4b4b46c207f8" category="paragraph">RHEL 8.4没有已知问题。</block>
-  <block id="16ded13e0c1b6477bffcca576db8e692" category="doc">将Red Hat Enterprise Linux 9.0与NetApp ONTAP 结合使用</block>
   <block id="ea1335497ead6bd540f2e523154123a0" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.0、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。RHEL 9.0使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="40aa2a6195f4abccde9c89cc1ad6965b" category="paragraph">RHEL 9.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="29cafbf989ec1577f968e04d52752f5e" category="paragraph">RHEL 9.0没有已知问题。</block>
@@ -2405,7 +2301,6 @@
   <block id="e4dbb8bc2f2492f010d3f33dd68f00c8" category="list-text">验证NVMe/TCP适配器的状态。</block>
   <block id="d4babb87959d757516a4f480642224cf" category="list-text">要列出NVMe/TCP连接、请使用以下命令：</block>
   <block id="75d2257ae841105f67aa7e6940b3fccb" category="list-text">要列出NVMe命名空间的路径数、请使用以下命令：</block>
-  <block id="d1672d22493ff360a1f07bc1cfac7524" category="doc">将SUSE Linux Enterprise Server 15 SP4与NetApp ONTAP 结合使用</block>
   <block id="aaf285a33d84d021ddb3cf7d93395617" category="paragraph">对于SUSE Linux Enterprise Server 15 SP4、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP4是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
   <block id="3dfda629d29a9eff997fc21c726b36da" category="paragraph">对SUSE Linux Enterprise Server 15 SP4操作系统进行了编译、以识别ONTAP LUN并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="bdb5443c5dd9643367f9496b5fb35d08" category="paragraph">要启动多路径守护进程、必须存在`multipath.conf`文件、但您可以使用以下命令创建一个空的零字节文件：`touch /etc/multipath.conf`</block>
@@ -2465,27 +2360,11 @@
   <block id="bd4300690dfdbe14b72c16ede45c8a40" category="paragraph">正确配置对于实现最佳性能和成功故障转移至关重要。</block>
   <block id="5206f5e3d376aae380267b11c8d7e8a0" category="sidebar">此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。SAN客户端和ONTAP 存储可以驻留在内部或云中。</block>
   <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">入门</block>
-  <block id="5547603ff69e3da92f703bcf50ce3f6b" category="sidebar">AIX主机实用程序发行说明</block>
-  <block id="07f600a27795dcb67160c1a6254ac955" category="sidebar">HP-UX Host Utilities发行说明</block>
-  <block id="e5df731937a491dd8cd0cc7b6ebee041" category="sidebar">Linux主机实用程序发行说明</block>
-  <block id="6ef0df02f01fe0ace4a41985abbcac96" category="sidebar">Solaris主机实用程序发行说明</block>
-  <block id="bb27f844f9da131bbc413a981aac48b0" category="sidebar">FCP和iSCSI主机配置</block>
-  <block id="5518a21314616fae9f003bf96e584f7f" category="sidebar">Red Hat Enterprise Linux 9.0</block>
-  <block id="28cf759ac2f6eab35d6588e5a7c44eac" category="sidebar">SUSE Linux Enterprise Server 15 SP4</block>
-  <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="sidebar">Windows Server 2022</block>
-  <block id="926f2d20f93d6be035bae2a94b2a5fc4" category="sidebar">IBM AIX 7.2和PowerVM (VIOS 3.1)</block>
-  <block id="48d339e5fe7e520b196955902fda50d4" category="sidebar">Oracle Solaris 11.4.</block>
-  <block id="524d2ef3f81ea92b8da31f7bfb61fdfa" category="sidebar">NVMe-oF主机配置</block>
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">更多资源</block>
   <block id="8f631f7b4d000947dcf86232c51cf147" category="sidebar">全SAN阵列软件配置</block>
   <block id="587c9aa3c6003c9a9fa1fc9c2ceb2eaa" category="sidebar">SAN 管理</block>
   <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">概述</block>
-  <block id="bd2327e60e0cfdc7632cb188bd1c7293" category="sidebar">SAN主机实用程序</block>
-  <block id="db3a7c082080fd11b89a35d4b36694db" category="sidebar">AIX主机实用程序</block>
-  <block id="6644e7ab2de97becedaef22c5a1099e9" category="sidebar">HP-UX主机实用程序</block>
-  <block id="237e46c87c95b6d72dceaf420c603d90" category="sidebar">Linux统一主机实用程序</block>
-  <block id="c134d5805f93afa1db7c6399465d2bd8" category="sidebar">Solaris主机实用程序</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
   <block id="47e2092f9d666fc24b67c7da02de84c7" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 <block ref="f7fe1c204ed60a7e9dd594c09fd7b1a5" category="inline-link-macro-rx"></block>。</block>
   <block id="38022ef96e4c7edb41b89fa3a008c3f6" category="inline-link-macro">Windows Host Utility Kit 7.1</block>
@@ -2536,7 +2415,6 @@
   <block id="6889073c7d1502d89a41a22f7b933a57" category="paragraph">本发行说明文档包含有关Solaris Host Utilities 6.2的最新信息、包括有关已知问题、限制、配置和管理ONTAP 存储系统的更新。</block>
   <block id="94ed2eb93c1ea841359ebf631638ec66" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="a667026321ffb956d941d648c0ad659f" category="paragraph">应在主机操作系统上安装可用于每个Linux分发版的RPM软件包"libhbaapi"和"libhbalinu"。</block>
-  <block id="2e2f435df31672c9332b32b2b69afe2a" category="sidebar">Windows Host Utilities发行说明</block>
   <block id="3972a4868b0682bd7aa086e3f90df6a5" category="paragraph">在此示例中、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
   <block id="b23eda8b5a2eb7f788559c0df550f0fa" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="ed53d9bb40cf906cb73ab578cb3adb1d" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
@@ -2566,7 +2444,6 @@
   <block id="4c865e0cb70fa33868e69a5e88daad47" category="cell">1479047</block>
   <block id="f890a2d3eb444832b655a9838102f3df" category="cell">2087000</block>
   <block id="de63239808aba6bc3b6e058c280e2334" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.7</block>
-  <block id="054dec9601134c2039198642192ad5cd" category="doc">将Red Hat Enterprise Linux 8.7与NetApp ONTAP 结合使用</block>
   <block id="42629720f0dd50e499b39533a5c8c6c6" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.7<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.7使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="c7ed23f5281d7f5b606a1019ecd9fd97" category="sidebar">8.7.</block>
   <block id="fc410d61e7ecc158420724cd4cfa51e2" category="paragraph">采用ANA (非对称命名空间访问)的RHEL 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。本主题详细介绍了如何在RHEL 8.7和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。</block>
@@ -2603,9 +2480,7 @@
   <block id="54bb88571442321a8544c55cb834deb7" category="cell">RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="c66549c6038d3ebbf4c13fa9699ba9c4" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
   <block id="666e694f580810d83f5f40c26c2bb04c" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 9.1</block>
-  <block id="0ead5c0058ad569b752f4737e6eec052" category="doc">将Red Hat Enterprise Linux 9.1与NetApp ONTAP 结合使用</block>
   <block id="61487574b79af0e445bb9b6a2353e6f4" category="paragraph">上提供了 NetApp Linux Unified Host Utilities 软件包 <block ref="79a5efacdd8155d1c0d2f7284cc3f087" category="inline-link-macro-rx"></block> 在 64 位 .rpm 文件中。</block>
-  <block id="641179201ab176df256f3cb5ec55e897" category="paragraph">NetApp强烈建议安装Linux Unified Host Utilities、但这并不是必需的。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。</block>
   <block id="a19e7b541def6d38087c1a02b106bef9" category="paragraph">如果您当前安装了某个版本的Linux Unified Host Utilities、则应升级或删除该版本、并按照以下步骤安装最新版本。</block>
   <block id="9c9e9d650c2c637a6eb987485cfd9382" category="list-text">从下载 64 位 Linux Unified Host Utilities 软件包 <block ref="330783be0d422b9930cc959c12faae82" category="inline-link-macro-rx"></block> 主机。</block>
   <block id="a72a8c81440a1f3a15a9e6f5c9eafacd" category="list-text">安装软件包：<block ref="0ce047b108d02190b0f47590efe3805d" prefix=" " category="inline-code"></block></block>
@@ -2623,7 +2498,6 @@
   <block id="19c0ae184ff29a5cb77c04c8bea684af" category="list-text">从ONTAP 9.7开始、VMware vSphere版本增加了对基于光纤通道的NVMe (NVMe/FC)的支持。</block>
   <block id="3a34596144aee2d13108623781ca1789" category="list-text">从7.0U3c开始、ESXi虚拟机管理程序支持NVMe/TCP功能。</block>
   <block id="98f0b197b8132a81e5d6da89bc6ded25" category="list-text">从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP功能。</block>
-  <block id="8f782d5cde04c444d313ce732c4c1552" category="section-title">安装AIX/VIOS主机实用程序</block>
   <block id="98ffdd0945470204439692dc82dc8d98" category="paragraph">在将AIX MPIO与NetApp ONTAP 存储结合使用时、必须安装AIX主机实用程序套件。</block>
   <block id="9aab5807a16ac54dff9ec8e124181169" category="paragraph">您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。</block>
   <block id="191896e66abb860542afaf3bc97289fc" category="section-title">SAN工具包</block>
@@ -2795,7 +2669,6 @@
   <block id="9d9a9c7064b8193ac433a5365fe1afdb" category="list-text"><block ref="9d9a9c7064b8193ac433a5365fe1afdb" category="inline-link-macro-rx"></block></block>
   <block id="8637d6c1f3e0436f7f2ec935b829bd22" category="paragraph">示例输出：</block>
   <block id="e5bb15bb11bc9d2f4a5298c657566227" category="summary">介绍如何在ONTAP 中使用Oracle Linux 9.0</block>
-  <block id="4218cca0e66f5dacb43716e0a9523276" category="doc">将Oracle Linux 9.0与NetApp ONTAP 结合使用</block>
   <block id="ae8e81252a704349cea5f061e9fb652e" category="paragraph">对于Oracle Linux (OL) 9.0<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。对OL 9.0进行了编译、其中包含识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="5e51169d33c14ff0aaa1bdcad247d216" category="paragraph">以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。</block>
   <block id="2722dd408e2c6dddce120893d4c5c0a7" category="paragraph">Oracle Linux 9.0操作系统经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
@@ -3037,7 +2910,6 @@
   <block id="dad160104969c39365dd2cd4c98dd300" category="inline-link-macro">TR-4400</block>
   <block id="a36f49fe4436012bee1d9977a9ab9b95" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及 <block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block> 和 <block ref="bcecf0e9ae9f2444b66065a431138ac6" category="inline-link-macro-rx"></block>。</block>
   <block id="ec28bcc44a923317b69c457e0afb81a2" category="summary">您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配置ONTAP SAN主机设置。</block>
-  <block id="4666c702a235d23b17ec55d988d16d3e" category="doc">将VMware vSphere 8.x与NetApp ONTAP 结合使用</block>
   <block id="826ec041a0aff526181c163b6a4e0c3d" category="section-title">虚拟机管理程序SAN启动</block>
   <block id="a2f3bc96cbc046a0257c4be3c7ced6d9" category="paragraph">ESXi提供了一个称为本机多路径插件(NMP)的可扩展多路径模块、用于管理子插件、存储阵列类型插件(Storage Array Type Plugin、SATP)和路径选择插件(Path Selection Plugins、PSP)。默认情况下、这些SATS规则在ESXi中可用。</block>
   <block id="5aec6957b0d2d12d3804dd3a930de977" category="paragraph">对于NetApp ONTAP 存储、<block ref="d4f7bd3bf4872a2f8cd0cbe400fb23d0" prefix=" " category="inline-code"></block> 默认情况下、插件与一起使用<block ref="4646bb781f9a95f64c182af129e43c7c" prefix=" " category="inline-code"></block> 作为路径选择策略(PSP)。您可以使用以下命令进行确认：</block>
@@ -3156,7 +3028,6 @@
   <block id="e960448316bedab459bbbe74933b507d" category="list-text">将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
   <block id="af1ef0e83aa109eafcb65ba8de6fe152" category="paragraph">您应始终检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。</block>
   <block id="6661a67145b2acf190d629ce621384e0" category="summary">介绍如何将Oracle Linux 8.7与ONTAP结合使用</block>
-  <block id="3b9b21578c86f68c48f7ed6a98dc875a" category="doc">将Oracle Linux 8.7与NetApp ONTAP结合使用</block>
   <block id="15d47787709114478b06814b72bcf21a" category="paragraph">安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
   <block id="25a88a400c35827341a424c2bbeeb8bc" category="paragraph">对于Oracle Linux (OL) 8.7、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在。您无需对文件进行特定更改、因为OL 8.7会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="f02ddfd1ea8ae7239f534d1963d46c47" category="paragraph">以下各节提供了映射到全SAN阵列(ASA)和非ASA配置的LUN的多路径输出示例。</block>
@@ -3259,7 +3130,6 @@ XXX</block>
   <block id="1abda550c3f2e968f7df0bf98e8e641d" category="paragraph">CentOS 7.3 OS经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
 。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="1884b884b7b96b6bbd38816a3a457356" category="summary">介绍如何将Red Hat Enterprise Linux 9.2与ONTAP结合使用</block>
-  <block id="e923157a81a0214419a53389d1fa9e73" category="doc">将Red Hat Enterprise Linux 9.2与NetApp ONTAP结合使用</block>
   <block id="446e05826da92a5188d43c8d744fbccf" category="section-title">SAN工具套件</block>
   <block id="a14bcd21a2868e61c289bb84b4f00fd7" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.2、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.2会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="f751ddd1491f6abf8ff4d17ce1f39b1e" category="paragraph">经过编译的RHEL 9.2操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
@@ -3321,12 +3191,10 @@ XXX</block>
   <block id="86d73f9a9eafbf2a1bc89961929ab3e0" category="inline-link-macro">18196</block>
   <block id="84ccd25799ec2ea76f7f5faab8db9837" category="cell"><block ref="84ccd25799ec2ea76f7f5faab8db9837" category="inline-link-macro-rx"></block></block>
   <block id="533f5c2e4bcf35d9cefe9c97046f7654" category="summary">介绍如何将Oracle Linux 9.1与ONTAP结合使用</block>
-  <block id="83b6364b5fed0880c85b1a8caf70b15f" category="doc">将Oracle Linux 9.1与NetApp ONTAP结合使用</block>
   <block id="c6951501d0b58604dc509284a2398484" category="admonition">要配置Oracle Linux 9.1 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 9.1。</block>
   <block id="da80aa62fc6cf6b66539a5a3933874a8" category="cell"><block ref="da80aa62fc6cf6b66539a5a3933874a8" category="inline-link-rx"></block></block>
   <block id="20e1c7fed64a39ad5334f26be4f4d8c7" category="paragraph">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)发现所需的库依赖关系：</block>
   <block id="945ae6ecd5de8145a44bcea8e9d26556" category="summary">介绍如何将Red Hat Enterprise Linux 8.8与ONTAP结合使用</block>
-  <block id="0c3cf35e9d17d9797fe9f979cd114434" category="doc">将Red Hat Enterprise Linux 8.8与NetApp ONTAP结合使用</block>
   <block id="03b42a28986c6f868e2df3814cdcbb0d" category="paragraph">安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
   <block id="a2bd0f8150b6236d72e1f415a678cf78" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.8、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.8会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="5dcf53fffd6ff60a6d2323ae00a871f3" category="paragraph">对RHEL 8.8操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
@@ -3370,7 +3238,6 @@ XXX</block>
   <block id="52b073397dc3c50d460ba25c1ff0ffdc" category="list-text">OL 9.2 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="50b3b109855fd86109ac2efd64fb0104" category="list-text">在OL 9.2主机上验证以下NVMe/FC设置：</block>
   <block id="5ca07756ac4e8650b2d00a4453c23b6c" category="summary">介绍如何将Oracle Linux 9.2与ONTAP结合使用</block>
-  <block id="0673df3f2f443598fc466c25c247d676" category="doc">将Oracle Linux 9.2与NetApp ONTAP结合使用</block>
   <block id="a55c64674e30e11be44367361a197b70" category="paragraph">对于OL 9.2、需要<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。OL 9.2包含识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="beb55dba3ba1d2be4056c146cb0bf458" category="paragraph">经过编译的Oracle Linux 9.2操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
   <block id="a706283e3f8c7062e0c4c4b423b93965" category="admonition">要配置Oracle Linux 9.2 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 9.2。</block>
@@ -3378,4 +3245,131 @@ XXX</block>
   <block id="02b2bcdfe73b2cce057d7b84806fa6ed" category="paragraph">具有NetApp ONTAP的Oracle Linux 9.1版本存在以下已知问题：</block>
   <block id="5890aebb0489382354458498eb36394e" category="paragraph">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)发现所需的库依赖关系：</block>
   <block id="cc40ed991073c638cc114ee18ad15d8c" category="paragraph">Oracle Linux 9.0 with NetApp ONTAP发行版存在以下已知问题：</block>
+  <block id="9f0988d93d2475f41e07c537ac5637e6" category="doc">将Citrix XenServer与ONTAP结合使用</block>
+  <block id="f419fe819afeb109ae85608ed6bd0ca7" category="doc">将Veritas Infoscale 7 for Linux与ONTAP结合使用</block>
+  <block id="30d85838b9488ee908d075559c8978cd" category="doc">将VMware vSphere 8.x与ONTAP结合使用</block>
+  <block id="865929b5ce33684ce3b72e7d45b233c0" category="doc">将Red Hat Enterprise Linux 8.3与ONTAP结合使用</block>
+  <block id="7dfa70c3f5b28c905e177a472ecf20d7" category="doc">将Oracle Linux 9.2与ONTAP结合使用</block>
+  <block id="b3b161a62f4799b82042e583aaeb90c8" category="doc">将Red Hat Enterprise Linux 7.3与ONTAP结合使用</block>
+  <block id="2b77070b5c32e55f23537589ffd4f81f" category="doc">将Red Hat Enterprise Linux 8.2与ONTAP结合使用</block>
+  <block id="6f304d3d0e5b539f0dcbc07ccaadfd0d" category="doc">将Solaris 11.4与ONTAP结合使用</block>
+  <block id="e3e7a0e78514daf4c04889e37e715428" category="doc">将CentOS 8.1与ONTAP结合使用</block>
+  <block id="58ae092d2eb1bac2dc39f0d21833a1cb" category="doc">将Red Hat Enterprise Linux 8.5与ONTAP结合使用</block>
+  <block id="5fe25092b093993c7d2b92173c947502" category="doc">将SUSE Linux Enterprise Server 12 SP2与ONTAP结合使用</block>
+  <block id="3f1fd9dbf7a4bd66d068caecb08183c0" category="doc">将CentOS 7.1与ONTAP结合使用</block>
+  <block id="92434d9005fca09d1be87854a8eba962" category="doc">将Red Hat Enterprise Linux 6.4与ONTAP结合使用</block>
+  <block id="fa3e4c48ee82eee0fd39bec2969d50e3" category="doc">将CentOS 7.2与ONTAP结合使用</block>
+  <block id="5b1dc80fba1c5b1c02a46a705987abf2" category="doc">将Oracle Linux 9.1与ONTAP结合使用</block>
+  <block id="b594df416eb09c0260d9d96034d385bd" category="doc">将Citrix虚拟机管理程序与ONTAP结合使用</block>
+  <block id="a7c0c5734c50dba03d00cc462a49e909" category="doc">将IBM AIX 7.2和/或PowerVM (VIOS 3.1)与ONTAP结合使用</block>
+  <block id="a98e19e158e45c713d0c58f53ab71762" category="section-title">安装AIX/VIOS主机实用程序</block>
+  <block id="69f1f3e6fa5c6e78868e005a7dfc6f7e" category="paragraph">下面是ONTAP LUN的一些建议参数设置。  安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。</block>
+  <block id="7e0b815f73afb730e7ee19f798970799" category="doc">将Oracle Linux 6.10与ONTAP结合使用</block>
+  <block id="cd601aaa63d4e342ac1e3d77f7719014" category="doc">将Red Hat Enterprise Linux 7.8与ONTAP结合使用</block>
+  <block id="3944147aca4bcb3598602ba7abb8ecb6" category="doc">将Red Hat Enterprise Linux 6.9与ONTAP结合使用</block>
+  <block id="0f2cd950288f136b10db6a4fbd009c63" category="doc">将Red Hat Enterprise Linux 7.6与ONTAP结合使用</block>
+  <block id="1a397af520340e4380a5c55e26c5d54d" category="doc">将CentOS 6.7与ONTAP结合使用</block>
+  <block id="cc4117db48a5e96b1494712383b1b668" category="doc">将Oracle Linux 6.4与ONTAP结合使用</block>
+  <block id="9aa797d15feccd1c092cc2d63807ff3b" category="doc">将CentOS 7.0与ONTAP结合使用</block>
+  <block id="b4f2e1989033d9a4807dc989417542da" category="doc">将SUSE Linux Enterprise Server 15 SP3与ONTAP结合使用</block>
+  <block id="0d32b2e93ea5b1b8a7aea87d09fdfddc" category="doc">将CentOS 8.3与ONTAP结合使用</block>
+  <block id="81ca09cce854923f3b702ee290b3097d" category="doc">使用运行ONTAP的Red Hat Enterprise Linux 8.1</block>
+  <block id="6088639a5afca847eaa9177590532eea" category="doc">将Oracle Linux 6.9与ONTAP结合使用</block>
+  <block id="9c45b061a4c38d17e217a2ae139d53e6" category="doc">将Oracle Linux 7.1与ONTAP结合使用</block>
+  <block id="1b10688ed96bd781bf6b13a4a6ad9df4" category="doc">将CentOS 8.2与ONTAP结合使用</block>
+  <block id="a725eb5c4d07de5cfbf959eafc92bacf" category="doc">将Red Hat Enterprise Linux 7.4与ONTAP结合使用</block>
+  <block id="f9674046dcea42f7f1b76662f92c73a5" category="doc">将Oracle Linux 7.3与ONTAP结合使用</block>
+  <block id="9d82b77b5ad44e26cf2dd2b29f643724" category="doc">将Oracle Linux 8.2与ONTAP结合使用</block>
+  <block id="d434272cc7e38b31b984d576320118d8" category="doc">将CentOS 7.5与ONTAP结合使用</block>
+  <block id="3f2293670d4541aec2b54ea60492a51f" category="doc">将Oracle Linux 8.4与ONTAP结合使用</block>
+  <block id="8d160e1e856e62e2daf74128e1ed2215" category="doc">将CentOS 7.9与ONTAP结合使用</block>
+  <block id="d8fbd5ac0666d17248d83c1cba75a567" category="doc">将Red Hat Enterprise Linux 6.7与ONTAP结合使用</block>
+  <block id="be7f27b620fb8819aad9996ccaf4b9ce" category="doc">将CentOS 7.8与ONTAP结合使用</block>
+  <block id="2018120e064c044d2251a465311b51c2" category="doc">将SUSE Linux Enterprise Server 15 SP4与ONTAP结合使用</block>
+  <block id="4acb27c024b3567bf9590979213b7333" category="doc">将Red Hat Enterprise Linux 8.6与ONTAP结合使用</block>
+  <block id="3efbcda09300e864ffdf03f9735d8517" category="doc">将Red Hat Enterprise Linux 8.7与ONTAP结合使用</block>
+  <block id="1a9652dbabd1fe583283db59098e884a" category="paragraph">您可以将某些SAN主机配置为使用ONTAP作为目标的FCP或iSCSI。首先安装相关的操作系统主机实用程序软件包(包括SAN工具包)、然后验证NetApp ONTAP LUN的多路径设置。</block>
+  <block id="b70f79f7541968cba061dec5df01b8ba" category="doc">将CentOS 8.4与ONTAP结合使用</block>
+  <block id="1f7d8244b764d5a7c149c4cbfad4c873" category="paragraph">您可以为某些SAN主机配置基于网络结构的NVMe (NVMe-oF)协议、其中包括基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)、并以ONTAP为目标。根据主机操作系统和ONTAP版本、您可以在主机上配置和/或验证NVMe/FC或NVMe/TCP协议。</block>
+  <block id="2b6cce58629e8dff15245e88ef1d8db6" category="doc">将SUSE Linux Enterprise Server 12 SP4与ONTAP结合使用</block>
+  <block id="9ad0749524277f1a9205afc7dc2e9660" category="doc">将Oracle Linux 9.0与ONTAP结合使用</block>
+  <block id="dd24b130575f90f51be7f3e394721469" category="doc">将Red Hat Enterprise Linux 7.2与ONTAP结合使用</block>
+  <block id="8835b0ba3ac161aabc3cdea1abe9d36e" category="doc">将Oracle Linux 7.9与ONTAP结合使用</block>
+  <block id="c0322d532bb4a34a74d20f749e0f5bdd" category="doc">将Red Hat Enterprise Linux 7.5与ONTAP结合使用</block>
+  <block id="35bb20a02ef634c3d602c7fcae47e8b4" category="doc">将SUSE Linux Enterprise Server 12 SP1与ONTAP结合使用</block>
+  <block id="a84715e6c4f285559b7478279590842c" category="doc">将Oracle Linux 8.0与ONTAP结合使用</block>
+  <block id="91addf30a04c0c5249fa7d52c99ad1b2" category="doc">将Oracle Linux 6.5与ONTAP结合使用</block>
+  <block id="1298fa83c27263623f4780e10072ad20" category="doc">将CentOS 6.9与ONTAP结合使用</block>
+  <block id="379f97722abe4a13e4bed62c347317a6" category="doc">将CentOS 6.8与ONTAP结合使用</block>
+  <block id="ad4f205edbe75d51b27959dc348a3f4b" category="doc">将SUSE Linux Enterprise Server 15 SP2与ONTAP结合使用</block>
+  <block id="08217a5efc6003d763362c3583c5640f" category="doc">将Red Hat Enterprise Linux 8.8与ONTAP结合使用</block>
+  <block id="91cbf6680aa73c0fd3805226334a31ec" category="doc">将Red Hat Enterprise Linux 6.5与ONTAP结合使用</block>
+  <block id="c35af07c43ab1d8770afcb3564b17436" category="doc">将CentOS 7.3与ONTAP结合使用</block>
+  <block id="e840497312acafea216ccb34f9bdc2a8" category="doc">将Red Hat Enterprise Linux 7.7与ONTAP结合使用</block>
+  <block id="9b4797ede46653751789a56a6cfefc8a" category="doc">将Red Hat Enterprise Linux 9.0与ONTAP结合使用</block>
+  <block id="94b44acd6321eb98d389648c6d23e87f" category="doc">将CentOS 6.6与ONTAP结合使用</block>
+  <block id="b602068f07b8d334c9d34aed8e3cb1fa" category="doc">将SUSE Linux Enterprise Server 12与ONTAP结合使用</block>
+  <block id="76a10186c32ada74e81aa00b639433fa" category="doc">将Oracle Linux 7.5与ONTAP结合使用</block>
+  <block id="b07ac99fc23cc93237d94545c954c876" category="doc">将SUSE Linux Enterprise Server 15与ONTAP结合使用</block>
+  <block id="8081080397baec608d84fd3afffdb29d" category="doc">将CentOS 6.5与ONTAP结合使用</block>
+  <block id="5fef9070d7cec9b1052ec5f805c82203" category="doc">将CentOS 8.0与ONTAP结合使用</block>
+  <block id="fcd5a26f819291c5057cf1bf9ba4b0e3" category="doc">将Red Hat Enterprise Linux 6.10与ONTAP结合使用</block>
+  <block id="0f58bb2843522e2206b491398ef785df" category="doc">将Veritas Storage Foundation 6 for Linux与ONTAP结合使用</block>
+  <block id="3e537edf35b6854e2685914d33b9835d" category="doc">将Solaris 11.3与ONTAP结合使用</block>
+  <block id="136a479cd65c7a7cb09b6cb800da37d1" category="doc">将CentOS 6.10与ONTAP结合使用</block>
+  <block id="3369bed83566ad14c6e2c04fbbca3406" category="doc">将Oracle Linux 7.7与ONTAP结合使用</block>
+  <block id="0bb42ad805a0ed69fa419191af218e74" category="doc">将IBM AIX 7.1与ONTAP结合使用</block>
+  <block id="2a93aec2ac948d43a3b7f879941df4e7" category="section-title">安装AIX Host Utilities</block>
+  <block id="4afa4c11176ed7a4b9619f600db347ba" category="doc">将SUSE Linux Enterprise Server 12 SP3与ONTAP结合使用</block>
+  <block id="19a3c68cbfae18afb1720bc598ea12bb" category="doc">将Oracle Linux 6.8与ONTAP结合使用</block>
+  <block id="8d19958f3e338523c5e956fbddc3c9af" category="doc">将VMware vSphere 6.5和6.7与ONTAP结合使用</block>
+  <block id="c2364621e801637244e2e7cbae8837cb" category="doc">将Oracle Linux 8.3与ONTAP结合使用</block>
+  <block id="da75d1c0a883e5675fe41c864ecff154" category="doc">将Oracle Linux 8.7与ONTAP结合使用</block>
+  <block id="64a59febc720b6f4cb6154dfc93a4512" category="doc">将SUSE Linux Enterprise Server 12 SP5与ONTAP结合使用</block>
+  <block id="1245eaf3c1a3b868117511418caf0fbd" category="doc">将Red Hat Enterprise Linux 9.1与ONTAP结合使用</block>
+  <block id="9c750b6e4dd7aeb71c66dfdf40f0a439" category="paragraph">NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。</block>
+  <block id="d5c69ee7983a74c7b20cb2b125456c2f" category="doc">将Red Hat Enterprise Linux 6.6与ONTAP结合使用</block>
+  <block id="eaa72704517d543af59911bc5e029612" category="doc">将CentOS 7.6与ONTAP结合使用</block>
+  <block id="d55410086bf109e244412e2249b9502d" category="doc">将Oracle Linux 8.1与ONTAP结合使用</block>
+  <block id="06de367c45268820a34c0126836e8b3c" category="doc">将CentOS 8.5与ONTAP结合使用</block>
+  <block id="f7f43689bc4a14e7e43cbf012e7a9ff4" category="doc">将Red Hat Enterprise Linux 9.2与ONTAP结合使用</block>
+  <block id="d9cce7ecf669e2c8bb05f82a666a162d" category="doc">将Red Hat Enterprise Linux 6.8与ONTAP结合使用</block>
+  <block id="016d8c2c520396c76232c5f9e6b5d55e" category="doc">将Oracle Linux 8.5与ONTAP结合使用</block>
+  <block id="f40ff3f9f8b490795a2c37b0ef868d7f" category="doc">将Oracle Linux 7.0与ONTAP结合使用</block>
+  <block id="23d193fcc8ed7c6b2c591b421e569903" category="doc">将Oracle Linux 7.6与ONTAP结合使用</block>
+  <block id="cdaf0f06db13799e2ad260ac73c24b40" category="doc">将Oracle Linux 7.8与ONTAP结合使用</block>
+  <block id="8eac186652ad7bb00e2e352205afba06" category="doc">将Oracle Linux 7.2与ONTAP结合使用</block>
+  <block id="cea8eb5b01ce4bca8faad7d5ae56d50e" category="doc">将Red Hat Enterprise Linux 7.1与ONTAP结合使用</block>
+  <block id="70071cccef1d92566469567fab1ee6df" category="doc">将SUSE Linux Enterprise Server 15 SP1与ONTAP结合使用</block>
+  <block id="3f774282fcdfb6c27b50967041caabfe" category="doc">将CentOS 6.4与ONTAP结合使用</block>
+  <block id="4101603df72240eb3cf7ba1a3021306f" category="doc">将Oracle Linux 8.6与ONTAP结合使用</block>
+  <block id="844879b32726e30356dab7d2fa8f11e8" category="doc">将Red Hat Enterprise Linux 8.4与ONTAP结合使用</block>
+  <block id="6682bbba7d1d665f82a03aa16687a123" category="doc">将CentOS 7.4与ONTAP结合使用</block>
+  <block id="8e847bab2f19483681e9542cd18a3d40" category="paragraph">发现有关SAN主机实用程序版本的最新信息、并访问适用于您的主机配置的安装操作步骤。</block>
+  <block id="1a6e90235fc328db0b487739d1ef87bb" category="admonition">为了在安装后可靠地运行、请使用<block ref="d30d99bceb137a364ff5b7be97ceac80" category="inline-link-rx"></block> 验证主机是否支持完整的基于网络结构的NVMe (包括基于TCP的NVMe和基于光纤通道的NVMe)、iSCSI、FC或FCoE配置。</block>
+  <block id="77c56d38249a39871b8ca1654fd80f59" category="doc">将Red Hat Enterprise Linux 8.0与ONTAP结合使用</block>
+  <block id="d6f50b679febabd5a029294f3687131d" category="doc">将Oracle Linux 7.4与ONTAP结合使用</block>
+  <block id="40db5019ed68654f4eb2cf21ec5021db" category="doc">将VMware vSphere 7.x与ONTAP结合使用</block>
+  <block id="96c79d6b70b9da95c3236e3cf0b071a3" category="doc">将Oracle Linux 6.7与ONTAP结合使用</block>
+  <block id="e3bec7c303d585ce50ef45481d0e77c2" category="doc">将Red Hat Enterprise Linux 7.0与ONTAP结合使用</block>
+  <block id="d8df57404793785937e9dea6422f0397" category="doc">将CentOS 7.7与ONTAP结合使用</block>
+  <block id="47d63174f5a8747823754dbe907413b8" category="doc">将Veritas Infoscale 8 for Linux与ONTAP结合使用</block>
+  <block id="bb6a1ceb13d5a6a98f1fab62ea2d512f" category="doc">将Oracle Linux 6.6与ONTAP结合使用</block>
+  <block id="33b0c3bf53cbf8938118e49f5538a05a" category="doc">将Red Hat Enterprise Linux 7.9与ONTAP结合使用</block>
+  <block id="e880125f3679cf40fd24e55f28d63538" category="doc">将HP-UX 11i v3与ONTAP结合使用</block>
+  <block id="cf5d40dc8478138e0c0d29b28520ae39" category="section-title">安装HP-UX Host Utilities</block>
+  <block id="4b983fff716674f120176e09551dd445" category="sidebar">产品概述</block>
+  <block id="8a4e695bd23e65bc1993b3356eeb2277" category="sidebar">《AIX Host Utilities发行说明》</block>
+  <block id="360baa7584a9f61d637775beeeeab041" category="sidebar">HP-UX Host Utilities发行说明</block>
+  <block id="e8496e75812b6bc1fac8161323e4bf5f" category="sidebar">《Linux Host Utilities发行说明》</block>
+  <block id="7a853228e7f8bfa3bae921256f8b8561" category="sidebar">《Solaris Host Utilities发行说明》</block>
+  <block id="50feb936873ade59710fe353d60b2370" category="sidebar">Windows Host Utilities发行说明</block>
+  <block id="83610226a06939c868c973094aaa036c" category="sidebar">安装和配置SAN主机</block>
+  <block id="984f04c55cb7e3836103c5de001d1b73" category="sidebar">安装SAN Host Utilities</block>
+  <block id="75fe51013726f2bbc2f27fa11e729441" category="sidebar">使用FCP和iSCSI配置主机</block>
+  <block id="e0e6cac7910fc81a1b1e43baf3884d5d" category="sidebar">使用NVMe-oF配置主机</block>
+  <block id="069c43556e66148f1f1eeabd7e9e7872" category="sidebar">AIX Host Utilities</block>
+  <block id="2cac689df6b99782e23a143c9bfa2346" category="sidebar">HP-UX Host Utilities</block>
+  <block id="a4d5754af636a6318ee2ffcd80c52e27" category="sidebar">Linux Unified Host Utilities</block>
+  <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
 </blocks>

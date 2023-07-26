@@ -4,7 +4,7 @@ permalink: hu_veritas_6x.html
 keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, multipathing, iscsi 
 summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导 
 ---
-= 将 Veritas Storage Foundation 6 for Linux 与 NetApp ONTAP 结合使用
+= 将Veritas Storage Foundation 6 for Linux与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
