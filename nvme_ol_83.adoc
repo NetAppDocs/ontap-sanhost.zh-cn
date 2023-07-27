@@ -395,7 +395,7 @@ Device      Vserver         Namespace Path             NSID UUID                
 
 == 已知问题
 
-使用ONTAP版本的OL 8.3的NVMe-oF主机配置存在以下已知问题：
+使用ONTAP的OL 8.3的NVMe-oF主机配置存在以下已知问题：
 
 [cols="20, 20, 50, 20"]
 |===

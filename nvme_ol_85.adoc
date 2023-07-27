@@ -405,7 +405,7 @@ NSID    UUID                                   Size
 
 == 已知问题
 
-使用ONTAP版本的OL 8.5的NVMe-oF主机配置存在以下已知问题：
+使用ONTAP的OL 8.5的NVMe-oF主机配置存在以下已知问题：
 
 [cols=""20"]
 |===

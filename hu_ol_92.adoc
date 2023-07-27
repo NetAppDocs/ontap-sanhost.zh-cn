@@ -290,7 +290,7 @@ NOTE: 要配置Oracle Linux 9.2 RedHat Enterprise Kernel (RHCK)、请使用 link
 
 == 已知问题
 
-Oracle Linux 9.2 with NetApp ONTAP版本存在以下已知问题：
+使用ONTAP的Oracle Linux 9.2存在以下已知问题：
 
 [cols="10,30,30,10"]
 |===

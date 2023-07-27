@@ -19,7 +19,7 @@ summary: 适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置
 
 
 [role="lead"]
-您可以在运行Windows Server 2019和ONTAP的主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。
+您可以使用ONTAP作为目标在运行Windows Server 2019的主机上配置基于光纤通道的NVMe (NVMe/FC)。
 
 对于 Windows Server 2019 ， ONTAP 9.7 或更高版本支持 NVMe/FC 。
 

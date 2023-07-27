@@ -488,7 +488,7 @@ NSID       UUID                                   Size
 
 == 已知问题
 
-使用ONTAP版本的Oracle Linux 9.0的NVMe-oF主机配置存在以下已知问题：
+使用ONTAP的Oracle Linux 9.0的NVMe-oF主机配置存在以下已知问题：
 
 [cols=""20"]
 |===

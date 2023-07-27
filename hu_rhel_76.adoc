@@ -48,7 +48,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 .示例
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
 
-[listing]
+[source, cli]
 ----
 # sanlun lun show all
 ----
