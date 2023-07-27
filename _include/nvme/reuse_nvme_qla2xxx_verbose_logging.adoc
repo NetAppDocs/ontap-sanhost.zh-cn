@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-NVMe/FC没有与类似的特定qla2xxx日志记录 `lpfc` 驱动程序。因此、您可以使用以下步骤设置常规qla2xxx日志记录级别：
+NVMe/FC没有类似于的特定qla2xxx日志记录 `lpfc` 驱动程序。而是应设置常规qla2xxx日志记录级别。
 
 .步骤
 . 将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。

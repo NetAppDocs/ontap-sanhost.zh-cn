@@ -31,7 +31,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 == 已知限制
 
-无
+没有已知限制。
 
 
 
@@ -242,7 +242,7 @@ Device                 Vserver                         Namespace Path           
 
 
 
-== 为 Broadcom NVMe/FC 启用 1 MB I/O 大小
+== 为Broadcom NVMe/FC启用1 MB I/O大小
 
 ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加 `lpfc` 的值 `lpfc_sg_seg_cnt` 参数从默认值64更改为256。
 

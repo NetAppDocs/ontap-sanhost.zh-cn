@@ -307,12 +307,3 @@ Unable to locate /usr/lib64/libHBAAPI.so library
 Make sure the package installing the library is installed & loaded
 ----| 不适用 
 |===
-
-
-== 发行说明
-
-
-
-=== ASM 镜像
-
-ASM镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。有关详细信息、请参见ONTAP 上的Oracle数据库。

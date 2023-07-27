@@ -20,7 +20,7 @@ summary: 介绍如何安装 Solaris 主机实用程序
 
 
 
-== 安装 Solaris Host Utilities
+== 安装Solaris Host Utilities
 
 您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的软件包。
 

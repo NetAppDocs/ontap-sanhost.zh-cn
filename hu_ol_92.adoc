@@ -290,7 +290,7 @@ NOTE: 要配置Oracle Linux 9.2 RedHat Enterprise Kernel (RHCK)、请使用 link
 
 == 已知问题
 
-具有NetApp ONTAP版本的Oracle Linux 9.2存在以下已知问题：
+Oracle Linux 9.2 with NetApp ONTAP版本存在以下已知问题：
 
 [cols="10,30,30,10"]
 |===
@@ -307,12 +307,3 @@ Unable to locate /usr/lib64/libHBAAPI.so library
 Make sure the package installing the library is installed & loaded
 ----| 不适用 
 |===
-
-
-== 发行说明
-
-
-
-=== ASM 镜像
-
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 link:https://www.netapp.com/us/media/tr-3633.pdf["基于 ONTAP 的 Oracle 数据库"^] 了解更多信息。

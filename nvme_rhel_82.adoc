@@ -371,6 +371,8 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
 
 == lpfc 详细日志记录
 
+设置NVMe/FC的lpfc驱动程序。
+
 .步骤
 . 设置 `lpfc_log_verbose` 将驱动程序设置为以下任意值以记录NVMe/FC事件。
 +
