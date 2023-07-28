@@ -27,7 +27,7 @@ NOTE: 在云环境中、主机通常称为客户端。此内容中的所有主�
 
 例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 或 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^] 连接到内部SAN主机或连接到SAN云客户端。
 
-正确配置对于实现最佳性能和成功故障转移至关重要。
+正确的配置对于获得最佳性能和成功进行故障转移至关重要。
 
 .相关信息
 * 。 link:https://docs.netapp.com/us-en/ontap/san-config/index.html["ONTAP SAN配置"^] 适用于您的ONTAP 版本

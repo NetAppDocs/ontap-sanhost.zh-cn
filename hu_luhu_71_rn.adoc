@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: hu_luhu_71_rn.html 
-keywords: host utilities, linux, 7.1, netapp, ontap, release, notes 
+keywords: host utilities, linux, 7.1, netapp, ontap, release, notes, linux 
 summary: 《Linux Unified Host Utilities 7.1发行说明》 
 ---
 = 《Linux Unified Host Utilities 7.1发行说明》
@@ -19,7 +19,7 @@ summary: 《Linux Unified Host Utilities 7.1发行说明》
 
 
 [role="lead"]
-本发行说明介绍了使用ONTAP存储系统配置和管理特定主机时的新增功能和增强功能、已知问题和限制以及重要注意事项。
+本发行说明介绍了有关使用ONTAP存储系统配置和管理特定主机的新增功能和增强功能、已知问题和限制以及重要注意事项。
 
 有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
 
@@ -45,8 +45,8 @@ NOTE: 本文档中提及的Host Utilities或Linux Host Utilities均指Linux Unif
 ** Citrix XenServer
 
 
-* 在Red Hat Enterprise Linux (RHEL) 6和RHEL 7主机上、现在支持一个经过调整的软件包、用于设置服务器配置文件。您可以使用 `tuned-adm` 命令以根据环境设置不同的配置文件。  例如、您还可以将虚拟子系统配置文件用作子虚拟机、并将企业存储配置文件用于使用企业存储阵列中的LUN的配置。  使用这些经过调整的软件包可以提高ONTAP的吞吐量和延迟。
-* 增加了对Broadcom Emulex和Marvell QLogic提供的32 Gb光纤通道适配器的支持。
+* 在Red Hat Enterprise Linux (RHEL) 6和RHEL 7主机上、现在支持一个经过调整的软件包、用于设置服务器配置文件。您可以使用 `tuned-adm` 命令以根据环境设置不同的配置文件。例如、您还可以将虚拟子系统配置文件用作子虚拟机、并将企业存储配置文件用于使用企业存储阵列中的LUN的配置。使用这些经过调整的软件包可以提高ONTAP的吞吐量和延迟。
+* 增加了对Broadcom Emulex和Marvell Qlogic中32 Gb FC适配器的支持。
 
 
 

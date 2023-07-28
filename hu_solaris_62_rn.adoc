@@ -19,7 +19,7 @@ summary: 《Solaris Host Utilities 6.2发行说明》
 
 
 [role="lead"]
-本发行说明文档包含有关Solaris Host Utilities 6.2的最新信息、包括有关已知问题、限制、配置和管理ONTAP 存储系统的更新。
+本发行说明文档提供了有关Solaris Host Utilities 6.2的最新信息，包括有关已知问题、限制、配置和管理ONTAP存储系统的更新。
 
 当有关使用Solaris Host Utilities的新信息可用时、将更新发行说明文档。
 
