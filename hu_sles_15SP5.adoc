@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_rhel_81.html 
-keywords: host utilities, red hat, rhel, linux, 8.1, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.1 
+permalink: hu_sles_15SP5.html 
+keywords: host utilities, suse linux enterprise server 15 sp5, suse, linux, 15 sp5, netapp, ontap 
+summary: 介绍如何将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用 
 ---
-= 使用运行ONTAP的Red Hat Enterprise Linux 8.1
+= 将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -22,16 +22,15 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.1
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
-如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
+如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
-.步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 主机。
-. 安装软件包：
+. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 站点到主机。
+. 使用以下命令安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
 
@@ -42,7 +41,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 
 
-== SAN 工具包
+== SAN工具包
 
 安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
 
@@ -70,7 +69,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=84067;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -90,7 +89,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 == 多路径
 
-对于 Red Hat Enterprise Linux （ RHEL ） 8.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。
+对于SUSE Linux Enterprise Server 15 SP5 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。SUSE Linux Enterprise Server 15 SP5经过编译、包含识别和正确管理ONTAP LUN所需的所有设置。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -106,13 +105,13 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 [listing]
 ----
 # multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
+3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
 size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
+  |- 3:0:7:9    sdco 69:192  active ready running
+  |- 3:0:8:9    sddi 71:0    active ready running
+  |- 14:0:8:9   sdjq 65:320  active ready running
+  `- 14:0:7:9   sdiw 8:256   active ready running
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
@@ -129,14 +128,14 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 [listing]
 ----
 # multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 16:0:6:35 sdwb  69:624  active ready running
-| |- 16:0:5:35 sdun  66:752  active ready running
+| |- 3:0:3:0    sdd  8:48    active ready running
+| |- 3:0:4:0    sdx  65:112  active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-  |- 15:0:0:35 sdaj  66:48   active ready running
-  |- 15:0:1:35 sdbx  68:176  active ready running
+  |- 14:0:2:0   sdfk 130:96  active ready running
+  `- 14:0:5:0   sdgz 132:240 active ready running
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
@@ -145,7 +144,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-RHEL 8.1 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。
+SUSE Linux Enterprise Server 15 SP5操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
 
 。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
@@ -208,7 +207,7 @@ blacklist {
 
 下表显示了关键 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
 
-[cols="2*"]
+[cols="2"]
 |===
 | 参数 | 正在设置 ... 
 
@@ -275,7 +274,6 @@ defaults {
    path_checker      readsector0
    no_path_retry      fail
 }
-
 devices {
    device {
       vendor         "NETAPP  "
@@ -287,24 +285,6 @@ devices {
 ----
 
 
-=== KVM设置
+== 已知问题
 
-您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
-
-
-
-== 已知问题和限制
-
-[cols="4*"]
-|===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275843["1275843"^] | 在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 可能会发生内核中断 | 在使用 QLogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。 QLogic QLE2672 HBA 事件的存储故障转移会影响 "kmem_cache_alloc+131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1760819["1760819"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275838["1275838"^] | 在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 会发生内核中断 | 在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2742 HBA 事件的存储故障转移会影响 "kmem_cache_alloc +131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1744082["1744082"^] 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1266250["1266250"^] | 在 iSCSI SAN LUN 上安装 Red Hat Enterprise Linux 8.1 期间，登录到多个路径失败 | 在 iSCSI SAN LUN 多路径设备上安装 Red Hat Enterprise Linux 8.1 期间，无法登录到多个路径。无法在多路径 iSCSI 设备上安装，并且 SAN 启动设备上未启用多路径服务。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1758504["1758504"^] 
-|===
+没有已知问题。

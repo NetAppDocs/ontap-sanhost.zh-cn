@@ -184,20 +184,23 @@ blacklist {
 +
 更换 `<DevId>` 使用 `WWID` 要排除的设备的字符串。
 
-
-
++
 .示例
-在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
+在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
 
++
 .步骤
-. 运行以下命令以确定 WWID ：
+.. 运行以下命令以确定 WWID ：
 +
 [listing]
 ----
 # /lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
++
+`sda` 是我们需要将其添加到黑名单中的本地SCSI磁盘。
+
+.. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
 [listing]
 ----
@@ -208,6 +211,8 @@ blacklist {
      devnode "^cciss.*"
 }
 ----
+
+
 
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
