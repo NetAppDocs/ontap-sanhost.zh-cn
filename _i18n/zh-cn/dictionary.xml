@@ -3399,4 +3399,5 @@
   <block id="6823ef6314c55fa0a8e99cebacd9594d" category="list-text">SLES 15 SP5内核中附带的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="2a7e9b55568d2461dc6a6662ab294d24" category="list-text">验证SLES 15 SP5主机上的以下NVMe/FC设置：</block>
   <block id="7027855d0b65fefb5ac52eae93da7ac6" category="sidebar">15 SP5.</block>
+  <block id="94d6233b644ab7d1ba2cc91a93f1ca2a" category="paragraph">如果要在同一个同时存在的Oracle Linux 8.7主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-path。这也意味着、ONTAP 命名空间应在dm-multipath中列入黑名单、以防止dm-multipath声明这些命名空间设备。可以通过添加来完成此操作<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
 </blocks>

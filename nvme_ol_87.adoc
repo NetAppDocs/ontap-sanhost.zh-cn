@@ -111,6 +111,22 @@ vs_ol_nvme  nvme_ss_ol_1    nqn.2014-08.org.nvmexpress:uuid:791c54eb-545d-4ed3-8
 
 NOTE: 如果 `hostnqn` 字符串不匹配、您可以使用 `vserver modify` 用于更新的命令 `hostnqn` 要匹配的相应ONTAP 阵列子系统上的字符串 `hostnqn` 字符串自 `/etc/nvme/hostnqn` 在主机上。
 
+. 重新启动主机。
++
+[NOTE]
+====
+如果要在同一个同时存在的Oracle Linux 8.7主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-path。这也意味着、ONTAP 命名空间应在dm-multipath中列入黑名单、以防止dm-multipath声明这些命名空间设备。可以通过添加来完成此操作 `enable_foreign` 设置为 `/etc/multipath.conf` 文件：
+
+[listing]
+----
+#cat /etc/multipath.conf
+defaults {
+    enable_foreign  NONE
+}
+----
+运行以重新启动multipathd守护进程 `systemctl restart multipathd` 命令以使新设置生效。
+
+====
 
 
 
