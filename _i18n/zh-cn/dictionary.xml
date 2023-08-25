@@ -525,12 +525,6 @@
   <block id="e604f6870b50383d4e1d8ffa3a2b18bb" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到非 ASA 和 ASA 角色的 LUN 的示例多路径输出。</block>
   <block id="89d8b4fe15405a87af2ec65fc634abbc" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `detect_prio` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
   <block id="4872a64c8bfb39aee94e3643229c1575" category="admonition">要配置 Oracle Linux 7.9 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="44610b841747038fd655ebbf0a88f02e" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.9 。</block>
-  <block id="11865fef1836f821ffed6eec18f2c0a0" category="inline-link-macro">1328943</block>
-  <block id="8266cf33622df229b81f9514ab689c0d" category="cell"><block ref="5ede96a42c1003ab3708b0ee377953cf" category="inline-link-macro-rx"></block></block>
-  <block id="1b6f85a0d130a3ebbc8bb2a5d02d32b5" category="cell">在 Emulex LPe32002 （ 32G ）主机的存储故障转移期间观察到 I/O 延迟</block>
-  <block id="166327ea23d320202db49689e089e8f1" category="cell">在使用 QLogic LPe32002 32G HBA 的 Oracle Linux 7.8 内核（ 5.4.17-2011.1.2.el8uek.x86_64 ）上执行存储故障转移操作期间， I/O 操作可能无法通过现有活动路径继续。如果在存储故障转移期间由于无法继续通过现有活动路径而导致 I/O 进度停止，则 I/O 操作可能无法恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后， I/O 操作才会恢复。</block>
-  <block id="7a5cdf95716ea8fdfcfafa0f545139e0" category="inline-link-macro">17319</block>
-  <block id="69e5ae046a9943b657bd5c50bd583d28" category="cell"><block ref="69e5ae046a9943b657bd5c50bd583d28" category="inline-link-macro-rx"></block></block>
   <block id="f87d076eb7d3558e4df3a472ec88d6f2" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.6</block>
   <block id="be07fd5a515d15ddc2960a66b75da141" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5d0c5cfb6f99c570837d3b798f48dd99" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="aaa84a008bcbd7b13ea49132c73d1afa" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.6 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -3401,4 +3395,28 @@
   <block id="ebdad4471cb6942a4f1ef284bb693304" category="list-text">从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 <block ref="43f1e3306c26d9daf12133f7af036caf" category="inline-link-macro-rx"></block> 主机。</block>
   <block id="b0bf0d1d6ab98a1d0403112fc17e274b" category="paragraph">如果要在同一个同时存在的Oracle Linux 8.7主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-path。这也意味着、ONTAP 命名空间应在dm-multipath中列入黑名单、以防止dm-multipath声明这些命名空间设备。您可以通过添加来执行此操作<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
   <block id="83444c1052de64c8564e51742b6d9650" category="paragraph">运行以重新启动multipathd守护进程<block ref="5a8f02947e83d77dcfc767816a70ab96" prefix=" " category="inline-code"></block> 命令以应用新设置。</block>
+  <block id="f34d1def2fe55a0d683939400c35dd41" category="summary">介绍如何将Oracle Linux 8.8与ONTAP结合使用</block>
+  <block id="71dc6cab38b813fe8170f94bad66e4ad" category="doc">将Oracle Linux 8.8与ONTAP结合使用</block>
+  <block id="09f1d704d3c8696d3b1141a3aa4d5588" category="paragraph">对于Oracle Linux (OL) 8.8、请使用<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。OL 8.8包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="b27760a2802c30e312a502124bce80eb" category="paragraph">经过编译的OL 8.8操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="fdfc689574cf5fb3fbd6c0bae92a98b2" category="admonition">要配置Oracle Linux 8.8 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="690c11dea402b4d6119bf0c00175eedb" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.8。</block>
+  <block id="04544654bde04401ad396d891040dc76" category="summary">适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置</block>
+  <block id="8880cd0c09153e73135dbdcb92bb36e4" category="paragraph">采用非对称命名空间访问(AANA)的Oracle Linux (OL) 8.8支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="0c552ba088ff7c5ec4a148f22c0280af" category="paragraph">对于采用ONTAP的OL 8.8、NVMe-oF主机配置支持以下功能：</block>
+  <block id="f664c687d53cbadf53c910f16307ad27" category="list-text">NVMe-oF 不支持 sanlun 。因此、在OL 8.8主机上、不存在对NVMe-oF的主机实用程序支持。您可以依赖本机中包含的NetApp插件<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 适用于所有NVMe-oF传输的软件包。</block>
+  <block id="5b4c96987e823bab53c550cb8414e9b7" category="list-text">默认情况下、Oracle Linux 8.8已为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。</block>
+  <block id="a3d213368ad78179b0d9b7b5d93b6385" category="list-text">目前不支持使用NVMe-oF协议启动SAN。</block>
+  <block id="d8d1102b4db591f67480bdb66d94ee14" category="paragraph">您可以使用以下操作步骤验证支持的最低OL 8.8软件版本。</block>
+  <block id="c408ea98ccca45811b56eb64f5019391" category="list-text">在服务器上安装OL 8.8 GA。安装完成后、请验证是否正在运行指定的OL 8.8 GA内核。</block>
+  <block id="fb0643787f6e7d41915f40cbd05f4efd" category="list-text">在Oracle Linux 8.8主机上、检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串位于<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="74081fa925de7d5872846d0fd3043b7c" category="paragraph">如果要在同一主机上同时运行NVMe和SCSI流量、NetApp建议对ONTAP命名空间和使用内核NVMe多路径<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 分别用于ONTAP LUN。这意味着应从中排除ONTAP名称源<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 以防止<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 声明这些命名空间设备。您可以添加<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
+  <block id="73979e21296f74435168d91cdb68bf33" category="paragraph">运行以重新启动multipathd守护进程<block ref="5a8f02947e83d77dcfc767816a70ab96" prefix=" " category="inline-code"></block> 命令以使新设置生效。</block>
+  <block id="c638ad2f78eb5f9c5e23fc0607165a2a" category="list-text">OL 8.8 GA内核中包含的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="e49a8f55b360ab37cfe1ebe68f1119d5" category="paragraph">使用ONTAP版本的OL 8.8版的NVMe-oF主机配置存在以下已知问题：</block>
+  <block id="856727a5f3e002ef1068c1b1229b19f6" category="cell">Oracle Linux 8.8 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="d345ceafdca15336eee317f7b245574f" category="cell">在OL 8.8 NVMe-oF主机上、通过传递创建永久性发现控制器(PDC)<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：对于给定的启动程序-目标组合、每次调用时只应创建一个PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：但是、从OL 8.x开始、NVMe-oF主机在每次调用时都会创建重复的PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项这会浪费主机和目标上的资源。</block>
+  <block id="2757a308d4d1083cccf0f8d499cc92dc" category="paragraph">具有ONTAP版本的Oracle Linux 7.9存在以下已知问题：</block>
+  <block id="eb1fc035eeba662cf025ce042074e2b4" category="cell">如果取消映射或映射LUN而不执行SCSI重新扫描、则可能导致主机上的数据损坏</block>
+  <block id="a270556d62ee2105297647391a10d53e" category="cell">设置时<block ref="08dba88199429f4a52c71e37581877d5" prefix=" " category="inline-code"></block> Multipath configuration parameter (多路径配置参数)设置为Yes (是)、则在全局标识符(WWID)发生更改时、将禁止访问路径设备。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。请参见 <block ref="5e3e42b5c40ab78809e1bb63eb29a681" category="inline-link-macro-rx"></block> 有关详细信息 ...</block>
+  <block id="e681a3b45989b468533c4b90ee960bf9" category="cell">不适用</block>
 </blocks>
