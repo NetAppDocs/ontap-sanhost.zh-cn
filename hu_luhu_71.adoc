@@ -31,7 +31,7 @@ Linux统一主机实用程序可帮助您管理连接到Linux主机的NetApp ONT
 
 
 .您需要的内容
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 在 32 位或 64 位 .rpm 文件中。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 32 位或 64 位 .rpm 文件中。
 
 * 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
 +
@@ -63,7 +63,7 @@ rpm -e netapp_linux_unified_host_utilities-7-1
 +
 对于较旧版本的Linux Host Utilities、请转到安装主机实用程序软件的目录、然后输入uninstall命令以删除已安装的软件包。
 
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 主机。
+. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
 . 转到软件包下载到的目录，然后使用以下命令进行安装：
 +
 [source, cli]
