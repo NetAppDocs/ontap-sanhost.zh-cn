@@ -22,14 +22,14 @@ summary: 介绍如何在 ONTAP 中使用 Oracle Linux 7.9
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 站点到主机。
+. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 站点到主机。
 . 使用以下命令安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -295,5 +295,5 @@ NOTE: 要配置 Oracle Linux 7.9 RedHat Enterprise Kernel （ RHCK ），请使�
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1440718 | 如果取消映射或映射LUN而不执行SCSI重新扫描、则可能导致主机上的数据损坏 | 设置时 `disable_changed_wwids` Multipath configuration parameter (多路径配置参数)设置为Yes (是)、则在全局标识符(WWID)发生更改时、将禁止访问路径设备。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^] 有关详细信息 ... | 不适用 
+| 1440718 | 如果取消映射或映射LUN而不执行SCSI重新扫描、则可能导致主机上的数据损坏 | 设置时 `disable_changed_wwids` Multipath configuration parameter (多路径配置参数)设置为Yes (是)、则在全局标识符(WWID)发生更改时、将禁止访问路径设备。多路径会禁用对路径设备的访问、直到路径的WWID还原为多路径设备的WWID为止。请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^] 有关详细信息 ... | 不适用 
 |===

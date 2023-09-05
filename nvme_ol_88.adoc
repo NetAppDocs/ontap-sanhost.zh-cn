@@ -24,7 +24,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 对于采用ONTAP的OL 8.8、NVMe-oF主机配置支持以下功能：
 
 * 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机中的NetApp插件 `nvme-cli` 软件包可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-* NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而NVMe多路径则可用于在主机上配置NVMe-oF命名空间设备。
+* NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
 * NVMe-oF 不支持 sanlun 。因此、在OL 8.8主机上、不存在对NVMe-oF的主机实用程序支持。您可以依赖本机中包含的NetApp插件 `nvme-cli` 适用于所有NVMe-oF传输的软件包。
 
 
@@ -34,15 +34,13 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 
 == 功能
 
-* 默认情况下、Oracle Linux 8.8已为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。
-
+默认情况下、Oracle Linux 8.8已为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。
 
 
 
 == 已知限制
 
-* 目前不支持使用NVMe-oF协议启动SAN。
-
+目前不支持使用NVMe-oF协议启动SAN。
 
 
 
@@ -127,7 +125,7 @@ defaults {
   enable_foreign     NONE
 }
 ----
-运行以重新启动multipathd守护进程 `systemctl restart multipathd` 命令以使新设置生效。
+运行以重新启动multipathd守护进程 `systemctl restart multipathd` 命令：这样、新设置将生效。
 
 ====
 
@@ -246,7 +244,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
 .步骤
-. OL 8.8 GA内核中包含的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. OL 8.8 GA内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----
@@ -400,7 +398,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr -l 1800
 您可以使用以下操作步骤验证NVMe-oF。
 
 .步骤
-. 通过检查以下内容来验证是否已启用内核NVMe多路径：
+. 验证是否已启用内核 NVMe 多路径：
 +
 [listing]
 ----
@@ -589,5 +587,5 @@ NSID       UUID                                   Size
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1517321 | Oracle Linux 8.8 NVMe-oF主机会创建重复的永久性发现控制器 | 在OL 8.8 NVMe-oF主机上、通过传递创建永久性发现控制器(PDC) `-p` 选项 `nvme discover` 命令：对于给定的启动程序-目标组合、每次调用时只应创建一个PDC `nvme discover` 命令：但是、从OL 8.x开始、NVMe-oF主机在每次调用时都会创建重复的PDC `nvme discover` 命令 `-p` 选项这会浪费主机和目标上的资源。 | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Oracle Linux 8.8 NVMe-oF主机会创建重复的PDC | 在OL 8.8 NVMe-oF主机上、通过传递创建永久性发现控制器(PDC) `-p` 选项 `nvme discover` 命令：对于给定的启动程序-目标组合、每次调用时只应创建一个PDC `nvme discover` 命令：但是、从OL 8.x开始、NVMe-oF主机在每次调用时都会创建重复的PDC `nvme discover` 命令 `-p` 选项这会浪费主机和目标上的资源。 | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
 |===

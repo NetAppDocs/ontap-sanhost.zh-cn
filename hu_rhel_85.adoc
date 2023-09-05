@@ -22,7 +22,7 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.5
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
@@ -30,7 +30,7 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^] 主机。
+. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`

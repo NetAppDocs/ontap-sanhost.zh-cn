@@ -22,14 +22,14 @@ summary: 介绍如何在 ONTAP 中使用 CentOS 7.9
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .您需要的内容
 如果您当前安装了某个版本的 Linux Unified Host Utilities ，则应进行升级，或者，应将其删除，然后按照以下步骤安装最新版本。
 
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 站点到主机。
+. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 站点到主机。
 . 使用以下命令安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`

@@ -24,7 +24,7 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 在将AIX MPIO与NetApp ONTAP 存储结合使用时、必须安装AIX主机实用程序套件。
 
-您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。
+您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。
 
 NetApp AIX Host Utilities 6.1 是最新版本。此版本可解决先前版本中报告的内存泄漏问题描述。有关追加信息，请参见发行说明部分。
 

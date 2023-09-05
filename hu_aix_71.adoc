@@ -22,9 +22,9 @@ summary: 介绍如何将 IBM AIX 7.1 与 ONTAP 结合使用
 
 == 安装AIX Host Utilities
 
-在将 AIX MPIO 与 NetApp ONTAP 存储结合使用时，必须安装 AIX 主机实用程序套件。
+在将AIX MPIO与NetApp ONTAP 存储结合使用时、必须安装AIX主机实用程序套件。
 
-您可以从 NetApp 支持站点下载包含 Host Utilities 软件包的压缩文件。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的两个软件包。
+您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的两个软件包。
 
 .步骤
 . 登录到主机。

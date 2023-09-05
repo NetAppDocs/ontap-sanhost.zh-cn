@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 在 32 位或 64 位 .rpm 文件中。
+上提供了 NetApp Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 32 位或 64 位 .rpm 文件中。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
@@ -14,7 +14,7 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 +
 对于旧版本的 Linux Host Utilities ，请转到安装了主机实用程序软件的目录，然后输入 `uninstall` 命令。
 
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/NOW/cgi-bin/software/?product=Host+Utilities+-+SAN&platform=Linux["NetApp 支持站点"^] 主机。
+. 从下载32位或64位Linux Unified Host Utilities软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
 . 转到软件包下载到的目录，然后使用以下命令进行安装：
 +
 `rpm -ivh netapp_linux_unified_host_utilities_7-1.x86_64 x xx.rpm`
