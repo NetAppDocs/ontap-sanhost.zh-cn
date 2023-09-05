@@ -515,7 +515,6 @@
   <block id="77e11862f04c6ec12fa9eddd581dafa1" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.9</block>
   <block id="6dc52e1e053dff71affc3d2bba0668d4" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e5d3b515d8d9f71d6ecc6d12f04876c6" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="150ce233c309a7f628f109b1bf8bd7f6" category="paragraph">对于 Oracle Linux （ OL ） 7.9 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。OL 7.9 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
-  <block id="e604f6870b50383d4e1d8ffa3a2b18bb" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到非 ASA 和 ASA 角色的 LUN 的示例多路径输出。</block>
   <block id="89d8b4fe15405a87af2ec65fc634abbc" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `detect_prio` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
   <block id="4872a64c8bfb39aee94e3643229c1575" category="admonition">要配置 Oracle Linux 7.9 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="44610b841747038fd655ebbf0a88f02e" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 7.9 。</block>
   <block id="f87d076eb7d3558e4df3a472ec88d6f2" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.6</block>
@@ -1273,7 +1272,6 @@
   <block id="af4bdc6f0612ae419e8be2df4a6dc1f8" category="cell">在 Qlogic QLE2672 （ 16G ）和 QLE2742 （ 32G ）的存储故障转移期间观察到 IO 延迟，并且 Rport 正在移至 " 已阻止 " ， " 不存在 " 状态</block>
   <block id="501bcccc8f9d47ad0f5a58eda68930e0" category="cell">在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online</block>
   <block id="af542c850dcba761107186a0c4f1cd8f" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.2</block>
-  <block id="4760c3b673835516c579d9024201af61" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 8.2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="83aa98b0663a07abe5c12cd92f6e7e99" category="paragraph">RHEL 8.2 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="5201f3364243bc1b14657349eb16cf69" category="paragraph">RHEL 8.2 没有已知问题。</block>
   <block id="8e606d3994d1276c51a72c8493480d0d" category="summary">介绍如何将 CentOS 6.4 与 ONTAP 结合使用</block>
@@ -3424,4 +3422,6 @@
   <block id="0433af93410c428ea57c876adfd242d8" category="cell">Oracle Linux 8.8 NVMe-oF主机会创建重复的PDC</block>
   <block id="fd0f0a6b64ca823427a2d1d6062c2102" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件<block ref="64a98ab9b930adade338f7896c6bf819" category="inline-link-rx"></block>。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的软件包。</block>
   <block id="e70f1869df403451e259e10988ea5f80" category="cell">设置时<block ref="08dba88199429f4a52c71e37581877d5" prefix=" " category="inline-code"></block> Multipath configuration parameter (多路径配置参数)设置为Yes (是)、则在全局标识符(WWID)发生更改时、将禁止访问路径设备。多路径会禁用对路径设备的访问、直到路径的WWID还原为多路径设备的WWID为止。请参见 <block ref="5e3e42b5c40ab78809e1bb63eb29a681" category="inline-link-macro-rx"></block> 有关详细信息 ...</block>
+  <block id="50f145df2b9dca1b51d6f136b1d6e045" category="section-title">非ASA配置</block>
+  <block id="bb515059c478efd249d74e65644dd114" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.2、请参见<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.2包含识别和正确管理ONTAP LUN所需的所有设置。</block>
 </blocks>
