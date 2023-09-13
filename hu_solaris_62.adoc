@@ -4,7 +4,7 @@ permalink: hu_solaris_62.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用 
 ---
-= Solaris Host Utilities 6.2
+= 安装Solaris Host Utilities 6.2
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -21,47 +21,30 @@ summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用
 [role="lead"]
 Solaris统一主机实用程序可帮助您管理连接到Solaris主机的NetApp ONTAP存储。
 
-
-
-== SAN 工具包
-
-Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
-
-.示例
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[listing]
-----
-#sanlun lun show all
-controller(7mode)/ device host lun
-vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
------------------------------------------------------------------------------------------------------------------------------------
-data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
-data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
-
-
-----
-
-NOTE: 此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。
-
-
-
-== 安装Solaris Host Utilities
-
-Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主 Host Utilities 环境包括：
+Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主要的Host Utilities环境包括：
 
 * 在使用 SPARC 处理器或 X86/64 处理器的系统上，使用光纤通道（ FC ）或 iSCSI 协议的 MPxIO 的原生 操作系统。
-* 在使用 SPARC 处理器的系统上使用 FC 或 iSCSI 协议，在使用 X86/64 处理器的系统上使用 iSCSI 协议的 Veritas 动态多路径（ DMP ）。
+* 在使用SPARC处理器的系统上使用FC或iSCSI协议的VERITAS动态多路径(DMP)，或者在使用x86/64处理器的系统上使用iSCSI协议的VERITAS动态多路径(DMP)。
 
 
+Solaris Unified Host Utilities 6.2仍支持以下版本的Solaris：
 
-NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 以压缩文件格式为您的处理器提供支持。您可以从支持站点下载适用于您的环境的 Host Utilities 软件包。
+* Solaris 11.x系列
+* Solaris 10.x系列
+
+
+.您需要的内容
+* 为了确保操作可靠、请确认您的整个iSCSI、FC或FCoE配置均受支持。
+
+
+您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
+
+
+NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["NetApp 支持站点"^] 以压缩文件格式供处理器使用。您可以从支持站点下载适用于您的环境的 Host Utilities 软件包。
 
 .步骤
 . 以 root 用户身份登录到主机。
-. 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 到主机上的目录。
+. 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["NetApp 支持站点"^] 到主机上的目录。
 +
 在编写本文档时，压缩的文件名为：
 
@@ -71,7 +54,7 @@ NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysuppor
 
 
 . 转到包含下载内容的目录。
-. 使用 gunzip 命令解压缩文件
+. 使用解压缩文件 `gunzip` 命令：
 +
 ` # gunzip netapp_solaris host_utilities_6_2_sparc.tar.gz`
 
@@ -111,7 +94,7 @@ drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
 -r-xr-xr-x   1 root     sys        12266 Sep 13  2017 host_config.1
 -r-xr-xr-x   1 root     sys         9044 Sep 13  2017 sanlun.1
 ----
-. 完成后，您必须使用 ` /opt/NTAP/SANToolkit/bin/host_config` 命令为您的环境配置主机参数：
+. 完成后、使用为您的环境配置主机参数 `/opt/NTAP/SANToolkit/bin/host_config` 命令：
 +
 ** MPxIO
 ** Veritas DMP
@@ -122,3 +105,28 @@ drwxr-xr-x   3 root     sys            4 Jul 22  2019 ..
 `sanlun 版本`
 
 
+
+
+
+== SAN 工具包
+
+Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
+
+.示例
+在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
+
+[listing]
+----
+#sanlun lun show all
+controller(7mode)/ device host lun
+vserver(Cmode)                     lun-pathname       filename                                       adapter protocol size mode
+-----------------------------------------------------------------------------------------------------------------------------------
+data_vserver                     /vol/vol1/lun1     /dev/rdsk/c0t600A098038304437522B4E694E49792Dd0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol0/lun2     /dev/rdsk/c0t600A098038304437522B4E694E497938d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol2/lun3     /dev/rdsk/c0t600A098038304437522B4E694E497939d0s2 qlc3   FCP       10g cDOT
+data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A098038304437522B4E694E497941d0s2 qlc3   FCP       10g cDOT
+
+
+----
+
+NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、某些工具包内容可能适用于一种配置、但不适用于另一种配置。未使用的组件不会影响系统性能。
