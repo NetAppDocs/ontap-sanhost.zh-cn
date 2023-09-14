@@ -1925,11 +1925,8 @@
   <block id="c22c65685ac3f8701da1a00c478b1333" category="cell">1447287</block>
   <block id="778fd215ce10bd514de565e6df2b1758" category="cell">在 SM-BC 配置中，隔离主集群上的 AINFO 事件会导致 HP-UX 主机暂时中断</block>
   <block id="6f80f2e204ff92f2e954367d70413775" category="cell">如果在 SnapMirror 业务连续性（ SM-BC ）配置中的隔离主集群上发生自动计划外故障转移（ AUFO ）事件，则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
-  <block id="e6836ae92ec45bf946aba470c3ee98e5" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block>。下载文件后，必须在安装之前对其进行解压缩。</block>
   <block id="dd0ef0f389a16b505e475797a7b752ac" category="list-text">从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 连接到 HP-UX 主机。</block>
-  <block id="5eaf61000f0f261f2e4793f7e336889a" category="list-text">输入以下命令解压缩 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` 文件：</block>
   <block id="93b6e09e96afb8006209af84f438ca2b" category="paragraph">` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
-  <block id="2a346f59c525e5728cec25bf9a377f2f" category="list-text">输入以下命令以安装软件：</block>
   <block id="2d903390e509c4d2f6da1a4d0787b5b6" category="paragraph">` # swinstall -s /storage_path`</block>
   <block id="999cc5e84fec57fdd157e6fdacc5c96a" category="paragraph">`dept_path` 提供存储库文件的路径和名称。</block>
   <block id="e661cef1335457aaa4b6047327cfb656" category="paragraph">`swinstall` 命令可运行一个安装脚本，用于验证 HP-UX 设置的状态。如果您的系统满足要求，此脚本会将 `sanlun` 实用程序和诊断脚本安装在 ` /opt/netapp/santools/bin` 目录中。</block>
@@ -2016,7 +2013,6 @@
   <block id="ebc6dd08dd10ab545441a995fcd41e3f" category="paragraph">CentOS 7.1没有已知问题。</block>
   <block id="4391e4a69364ebb845d6562846716af4" category="doc">《AIX Host Utilities 6.1发行说明》</block>
   <block id="66c2d1ced882bffc99d6170e17a232ef" category="paragraph">有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 <block ref="7ce73c7ae176dd6b577d1c14b445f0cd" category="inline-link-macro-rx"></block>。</block>
-  <block id="40289338bc754c0009f5e9a173f6e09a" category="list-text">AIX Host Utilities 6.1增加了对早期版本的AIX主机操作系统中发生的内存故障问题描述 的支持。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。MPIO和相关ODM保持不变。</block>
   <block id="31e6a451d2627922bc41740af153d931" category="cell">BugID</block>
   <block id="ce88cf74aded8b7f41efd83d007f21f2" category="inline-link-macro">872113</block>
   <block id="3a2f9996a60f471edd9edae7099e1d69" category="cell">在发生原因 某些版本的AIX主机操作系统上、`sanlun lun show–p`命令可能会出现内存故障</block>
@@ -2026,9 +2022,6 @@
   <block id="cad62af5cd7e448be659302e1eba73b4" category="cell">AIX HU Sanlun报告的HBA速度不正确</block>
   <block id="64c42781be8a2208b9ffdc60d28bc076" category="cell">运行`sanlun fcp show adapter–v`命令时、报告sanlun显示不正确的HBA速度的实例。`sanlun fcp show adapter–v`命令可显示HBA卡信息、例如适配器支持的速度和协商的速度。这似乎只是一个报告问题描述。要确定实际速度、请使用`fcstat fcsx`命令。</block>
   <block id="31dade612c24301b89dad4a9747ed73e" category="list-text">FCP常规：显示与特定主机无关的FC和HBA错误。</block>
-  <block id="b90eb3e688d069ada30157d4030b66f5" category="inline-link-macro">支持的光纤通道SAN拓扑</block>
-  <block id="a1976a5397f63f5caa13a0e86733d543" category="list-text"><block ref="a1976a5397f63f5caa13a0e86733d543" category="inline-link-macro-rx"></block></block>
-  <block id="c0965c2d259d63a3e2cbab60c837eaaa" category="inline-link-macro">为主机配置Host Utilities</block>
   <block id="2ee1fba4400a50245e66ef649b54d588" category="sidebar">安装AIX HU 6.1</block>
   <block id="b767aaa513fc8b09074940ccea06b212" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.6</block>
   <block id="be200813e91d3b0e3285391fd2e20825" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.6、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。RHEL 8.6使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
@@ -2083,8 +2076,6 @@
   <block id="ce420cebd9b134c2ee33ae6a490c31ba" category="paragraph">如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。</block>
   <block id="6507882f376544268e31289f84d4ee08" category="doc">HP-UX Host Utilities 6.0</block>
   <block id="0f03ad1ba726a38547e37a072e28a71f" category="paragraph">HP-UX Host Utilities是一款NetApp主机软件、可在HP-UX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
-  <block id="272bb0cd3faf2ede65f3ff18b59a2e04" category="section-title">安装HP-UX Host Utilities</block>
-  <block id="8d8dc06df50e7cce23a5ef1dbeed7796" category="paragraph">上提供了NetApp HP-UX Host Utilities软件包 <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 在压缩文件中。</block>
   <block id="c0a1ecccf7e7b3c14696d029be49ed25" category="paragraph">RHEL 8.6没有已知问题。</block>
   <block id="dfd9db293eabf1724158b5cc08e4dd12" category="cell">HP-UX 11.31主机在ASA 设置中间歇性报告路径状态不正确。</block>
   <block id="478829f91ffe1d5a9fcb7ae0a4fa2eda" category="cell">HP-UX LVM创建会发送块大小超过1 MB的I/O</block>
@@ -2097,29 +2088,14 @@
   <block id="61699638eccafbea1975db4ccc09e234" category="cell"><block ref="61699638eccafbea1975db4ccc09e234" category="inline-link-macro-rx"></block></block>
   <block id="a86ba0de523aff5743fd70c108891432" category="cell">HUK 6.2中需要更改Solaris 11.4 FC驱动程序绑定</block>
   <block id="00dc1b7be02ff53d2291441f5821cfa6" category="paragraph"><block ref="355b22d66d025f6de0a19431aae0f536" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。您可能需要使用的一些关键字组合和错误类型包括：</block>
-  <block id="3c7828b2d190734834ce40e8064c1dac" category="list-text"><block ref="3c7828b2d190734834ce40e8064c1dac" category="inline-link-macro-rx"></block></block>
-  <block id="2aa7ada2848fa0738fbfac1114907aa4" category="list-text"><block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> (以前称为《系统配置指南》)</block>
-  <block id="c52f3cfca61100f76a974648c1c9a180" category="list-text"><block ref="c52f3cfca61100f76a974648c1c9a180" category="inline-link-macro-rx"></block></block>
   <block id="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="cell"><block ref="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="inline-link-macro-rx"></block></block>
   <block id="ba57f19b6b69755c2919b58188582a77" category="cell"><block ref="ba57f19b6b69755c2919b58188582a77" category="inline-link-macro-rx"></block></block>
   <block id="230a02b4afeea5b0d97c6a68a6530da3" category="summary">《HPUX Host Utilities 6.0发行说明》</block>
   <block id="e16c4360565a75371ee1b578b4c1ecca" category="doc">《HP-UX Host Utilities 6.0发行说明》</block>
-  <block id="02f8eb4aa3c5b1158e37fd1a9c849ca8" category="section-title">关于HP-UX Host Utilities 6.0版本</block>
-  <block id="18691c1295f4b1c26d2e8a9a5b67cfb9" category="paragraph">HP-UX Host Utilities支持多个HP-UX环境和多个协议。HP-UX Host Utilities支持以下环境：</block>
   <block id="8017a7ef798d9749aaed2e77fcebed98" category="list-text">原生 MPIO</block>
   <block id="4aade2cc63558a9db8aa3c9a6c9639d3" category="list-text">Veritas动态多路径(DMP)</block>
-  <block id="89d83ddcffe2153b6741a0e85d8548a2" category="admonition">为了立即明确所使用的环境、本文档有时会为Veritas DMP环境指定"DMP"、为HP-UX原生 环境指定"MPIO"。在某些情况下、您使用的命令可能会因所使用的驱动程序而异。在这些情况下、系统会同时指定环境和驱动程序类型。</block>
-  <block id="06cc7f9865c73b00a63121a0f4b0b752" category="section-title">HP-UX Host Utilities 6.0增强功能</block>
-  <block id="8812d57ba4da4daf9e7f43422d05e0a9" category="paragraph">随着新信息的提供、发行说明会在不同产品版本之间进行更新。HP-UX Host Utilities 6.0仍支持以下版本：</block>
   <block id="c7c7e4d1fc8a47f946a88914900694c3" category="list-text">HP-UX 11iv2.</block>
   <block id="4feac8845db3a6b1f4e4ead570b6b3ad" category="list-text">HP-UX 11iv3.</block>
-  <block id="7a1ba2e6d3a8198d5626f5d4e55d2293" category="paragraph">HP-UX 6.0版本没有已知问题。</block>
-  <block id="5f5628241e19b1175cc4bdd9c398f5b7" category="inline-link-macro">适用于您的ONTAP 版本的ONTAP 软件设置指南</block>
-  <block id="3b0fe6f7d254eb266d210040bae111f5" category="list-text">。 <block ref="18f02cc408dbe2e94ae9ae202c089ef8" category="inline-link-macro-rx"></block></block>
-  <block id="29ecce87abc03f76c20d3fe564e26dbe" category="inline-link-macro">适用于您的ONTAP 版本的ONTAP SAN管理指南</block>
-  <block id="2895d2b5c5ce91fe3e854c5054f19b62" category="list-text">。 <block ref="13c491dae34255ba8eee5d0f620c1f33" category="inline-link-macro-rx"></block></block>
-  <block id="13d4f4be1ab239d2cd36fb812fad5fc1" category="inline-link-macro">适用于您的ONTAP 版本的ONTAP 发行说明</block>
-  <block id="d7b5ae94e622a21572fe07c48e20da09" category="list-text">。 <block ref="2ba744c2429cbcfc53bdb0428522a053" category="inline-link-macro-rx"></block></block>
   <block id="60cb9c3f22cf2b74a314e1d7baf48bef" category="paragraph">CentOS 8.4没有已知问题。</block>
   <block id="032f858f49a253e7a44870c242d0aa5b" category="sidebar">安装HP-UX HU 6.0</block>
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">发行说明</block>
@@ -3197,7 +3173,6 @@
   <block id="e0e6cac7910fc81a1b1e43baf3884d5d" category="sidebar">使用NVMe-oF配置主机</block>
   <block id="069c43556e66148f1f1eeabd7e9e7872" category="sidebar">AIX Host Utilities</block>
   <block id="2cac689df6b99782e23a143c9bfa2346" category="sidebar">HP-UX Host Utilities</block>
-  <block id="a4d5754af636a6318ee2ffcd80c52e27" category="sidebar">Linux Unified Host Utilities</block>
   <block id="8557e53cdfdd197b67dd8b986e602bf0" category="paragraph">您可以对采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于RHCK)平台的Veritas Infoscale存储基础7系列版本使用ONTAP SAN主机配置设置。</block>
   <block id="1bbb67631847a06bbd9b2e9dafec2134" category="section-title">安装Solaris Host Utilities</block>
   <block id="3f20da7f97c0948dba60855f74d8feb3" category="paragraph">您可以在运行SUSE Linux Enterprise Server 15 SP1和ONTAP的主机上将基于光纤通道的NVMe (NVMe/FC)配置为目标。</block>
@@ -3268,7 +3243,6 @@
   <block id="e1cd7b537be6453e906049c111d7b248" category="paragraph">您可以按主机设备文件名检索ONTAP LUN属性列表。</block>
   <block id="364c9974898b89845661be07a4997db2" category="paragraph">您可以检索指定SVM目标LIF WWPN在主机上发现的ONTAP LUN的列表。</block>
   <block id="e214de5ea0b1a8eb765598cf4b80a404" category="summary">您可以为某些SAN主机配置基于网络结构的NVMe (NVMe-oF)协议。</block>
-  <block id="b27a9cd7f027cd14587ddd1e70ef495c" category="paragraph">HP-UX统一主机实用程序可帮助您管理连接到HP-UX主机的NetApp ONTAP存储。</block>
   <block id="b1199565b654a20a5acee144d68ae4cb" category="paragraph">使用ONTAP的RHEL 9.0的NVMe-oF主机配置存在以下已知问题：</block>
   <block id="b6351e6ceb9609fde0ff665d6ec8e551" category="paragraph">您可以使用ONTAP作为目标在运行Windows Server 2022的主机上配置基于光纤通道的NVMe (NVMe/FC)。</block>
   <block id="71451af1b87baede129f9469cc138039" category="paragraph">使用ONTAP的RHEL 8.7的NVMe-oF主机配置存在以下已知问题：</block>
@@ -3302,7 +3276,6 @@
   <block id="1e1ac2f92ca06b1f068f6aa6c61883c0" category="paragraph">本发行说明介绍了有关使用ONTAP存储系统配置和管理特定主机的新增功能和增强功能、已知问题和限制以及重要注意事项。</block>
   <block id="2ad9563dae62baefb397a0b93e22f08a" category="list-text">在Red Hat Enterprise Linux (RHEL) 6和RHEL 7主机上、现在支持一个经过调整的软件包、用于设置服务器配置文件。您可以使用<block ref="44559c6617511944fd997c63b107ee6b" prefix=" " category="inline-code"></block> 命令以根据环境设置不同的配置文件。例如、您还可以将虚拟子系统配置文件用作子虚拟机、并将企业存储配置文件用于使用企业存储阵列中的LUN的配置。使用这些经过调整的软件包可以提高ONTAP的吞吐量和延迟。</block>
   <block id="b91c8d257cb2ab1f821c4201c4d98d12" category="list-text">增加了对Broadcom Emulex和Marvell Qlogic中32 Gb FC适配器的支持。</block>
-  <block id="f6a506796011f5db21cf0cc405fcd88e" category="paragraph">本发行说明文档介绍了有关HP-UX Host Utilities 6.0版本的最新信息、包括有关已知问题、限制以及配置和管理ONTAP存储系统的更新。当有关使用HP-UX Host Utilities的新信息可用时、发行说明文档将进行更新。</block>
   <block id="a26aa7b42e8c5d7d2a6c295dc3421eb4" category="paragraph">正确的配置对于获得最佳性能和成功进行故障转移至关重要。</block>
   <block id="8b98a90c0f8d947a6126ce4314f1d147" category="paragraph">本发行说明文档提供了有关Windows Unified Host Utilities 7.2和7.1版的最新信息、包括有关新增功能、增强功能和已知问题的更新。当有关使用Windows Host Utilities的新信息可用时、本文档将进行更新。</block>
   <block id="d183f649aa9dd1befe9fbbbebb9ce6f3" category="paragraph">在此示例中、我们将确定设备的WWID并添加到中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件</block>
@@ -3383,7 +3356,6 @@
   <block id="7f31ebe6735efb5b2186c87408e0e0f8" category="cell">Solaris 11.4和HUK建议：
 FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c" prefix=" " category="inline-code"></block> to<block ref="200efcf5dbc2c08d7c76deba0c7ecda8" prefix=" " category="inline-code"></block>。移动中的配置<block ref="d5ef7f69fa74e42b54d8244ee447ab2b" prefix=" " category="inline-code"></block> to<block ref="88cafedaeae385b0e8278ab1804829cd" prefix=" " category="inline-code"></block> 如Oracle中所述(文档ID 2595926.1)。在新安装的Solaris 11.4系统和从11.3或更低版本升级的系统中，此行为会有所不同。</block>
   <block id="eb5d1a08cb5aa5e6c62dcec6f972d7ef" category="list-text">FCP常规：显示与特定主机无关的FC和主机总线适配器(HBA)错误。</block>
-  <block id="f6c2fd3ebbf068920b8c4d046c994e6a" category="list-text">FCP Solaris</block>
   <block id="82481f4407d05dc717ce43c2341e3316" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.2、请参见<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.2包含识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="aba18b63e77de37f7f9427743a3354c1" category="doc">安装Solaris Host Utilities 6.2</block>
   <block id="d29f4dfa68674c60d4b487fde42cc6bf" category="paragraph">Solaris统一主机实用程序可帮助您管理连接到Solaris主机的NetApp ONTAP存储。</block>
@@ -3401,14 +3373,10 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="92636cb01d99cfde50d65355f5255bf8" category="paragraph">您可以使用AIX Host Utilities 6.1示例命令参考使用Host Utilities工具对NetApp存储配置进行端到端验证。</block>
   <block id="5cbce7f0ea158500dcff175373e3cbcf" category="paragraph">本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定AIX主机相关的重要注意事项。</block>
   <block id="33871b6190a8d5adbe8b15282054766c" category="section-title">新增功能</block>
-  <block id="1a82b73de761a6a59be95bd9d53da872" category="paragraph">AIX Host Utilities 6.1版包含以下新增功能和增强功能：</block>
-  <block id="13248c5a515080cbbc3bcbf8a6b0b086" category="list-text">FCP AIX</block>
   <block id="dc5f647593f94c8f6abf309012633912" category="doc">安装AIX Host Utilities 6.1</block>
-  <block id="8967f1758ff8784982c669fc54020cd1" category="paragraph">支持以下协议：</block>
   <block id="6b8f0029ce30f9b4d5fe0def33875511" category="list-text">FC</block>
   <block id="14eae6ee278098bfad4f8a10fd6c1195" category="list-text">FCoE</block>
   <block id="e4e1c13bb0b14f6cb7608cbecea948ef" category="list-text">iSCSI</block>
-  <block id="a44498fdad524a976114bdc646d860cb" category="paragraph">以下是支持的环境：</block>
   <block id="8c39f3d0a1e77e978ada064489abe290" category="list-text">AIX MPIO (本机操作系统)</block>
   <block id="c791b15d48a2be7d8c6a9c0b2badc362" category="list-text">PowerVM</block>
   <block id="f46d29974d2e1fa7b1fb4f55e009f7c2" category="paragraph">有关PowerVM的详细信息、请参见IBM PowerVM Live Partition Mobility红皮书。</block>
@@ -3418,6 +3386,26 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="7cfc2a0609811d433edc27220510bde6" category="list-text">转至<block ref="4885f2a79813769d8236c375fd40eeb7" category="inline-link-rx"></block> 并将包含Host Utilities的压缩文件下载到主机上的目录中。</block>
   <block id="f8d5aed6f51d94047f74a803aca5670b" category="list-text">解压缩文件并提取SAN工具包软件包。</block>
   <block id="d7acb320d7561ff28aba5271a650f74e" category="list-text">安装SAN工具包：</block>
-  <block id="62265376e9c5bff602dc413020e3dbf6" category="paragraph">AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和HBA。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
-  <block id="61fea2801e02db33558a5fdb707a3986" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。</block>
+  <block id="d371e5ff58b865f46aa4c65beb73405c" category="paragraph">本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定HP-UX主机相关的重要注意事项。</block>
+  <block id="3517bcea87b684bd347c95104562d327" category="paragraph">HP-UX Host Utilities 6.0仍支持以下版本：</block>
+  <block id="a869215e627d2812c817b80130aa7824" category="paragraph">HP-UX Host Utilities 6.0版没有新增功能、增强功能、已知限制或注意事项。</block>
+  <block id="f19106aa57c6316e97d751c16d547b41" category="list-text">FCP—Solaris</block>
+  <block id="7c0e66bb6addd5d99fc9457c74d9f1e5" category="summary">介绍如何在ONTAP中使用HP-UX Unified Host Utilities 6.0</block>
+  <block id="6dea40462e0a36a918cc6ee609a75f0c" category="paragraph">使用HP-UX Host Utilities可以将HP-UX主机连接到NetApp存储。</block>
+  <block id="0a6cda4b6b1ee30ff2b1c2e7b1452c79" category="paragraph">HP-UX Host Utilities支持多个HP-UX环境和多个协议。以下是支持的环境：</block>
+  <block id="466488bfcdd5dd2620fa669f44a082d5" category="admonition">为了指明所使用的环境、本文档有时会为Veritas DMP环境指定"DMP"、为HP-UX本机环境指定"MPIO"。在某些情况下、您使用的命令可能会因所使用的驱动程序而异。在这些情况下、系统会同时指定环境和驱动程序类型。</block>
+  <block id="db0942d60692ceb816c153d46b6755a4" category="list-text">为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。</block>
+  <block id="bbe48fb854ea022537208eeeff822f91" category="paragraph-title">关于此任务</block>
+  <block id="4b9a66cc328c269b47204207ea997015" category="paragraph">上提供了NetApp HP-UX Host Utilities软件包 <block ref="47b65262ba52aec6a3b66c8c933e9234" category="inline-link-macro-rx"></block> 在压缩文件中。下载文件后，必须在安装之前对其进行解压缩。</block>
+  <block id="89b1d0829beb11befe8cef17a1a88149" category="list-text">登录到主机。</block>
+  <block id="411f721c4d437c447636df81f300973a" category="list-text">解压<block ref="dfa8e0cbcc24953d6f700e7d845f35aa" prefix=" " category="inline-code"></block> 文件：</block>
+  <block id="685e21144e7e399ef67e8a809cd52a1e" category="list-text">安装软件：</block>
+  <block id="9b9e3c5faedc6bf7e489b0030b0ecd14" category="paragraph">AIX Host Utilities 6.1版包含以下新增功能和增强功能：</block>
+  <block id="9ce16fbccdcb870f5e9db74a7bb90874" category="list-text">AIX Host Utilities 6.1增加了对早期版本的AIX主机操作系统中发生的内存故障问题描述的支持。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。MPIO和相关ODM保持不变。</block>
+  <block id="09244b95824d6e702b6eaab2034bdeec" category="list-text">FCP—AIX</block>
+  <block id="dd7ff764bddd19a335d884f8e17ede8d" category="paragraph">AIX Host Utilities支持以下协议：</block>
+  <block id="01cf7b9650b6a23329edafdd13452ac5" category="paragraph">AIX Host Utilities支持以下环境：</block>
+  <block id="09c2778b4197dd6dcc821c85eaf45906" category="paragraph">AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
+  <block id="bdaec84e97380168b375e0f6cc8968bc" category="admonition">此工具包适用于所有Host Utilities配置和协议。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。</block>
+  <block id="237e46c87c95b6d72dceaf420c603d90" category="sidebar">Linux统一主机实用程序</block>
 </blocks>
