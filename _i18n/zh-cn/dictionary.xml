@@ -224,7 +224,6 @@
   <block id="681e25842821aed88b9536b9cde94730" category="list-text">验证 `lpfc_sg_seg_cnt` 是否为 256 。</block>
   <block id="911e585c5684ba9f5c2b87af879f4a13" category="summary">如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机</block>
   <block id="1e2ea077f54493b4670fb3cb63e05215" category="doc">适用于采用 ONTAP 的 RHEL 8.2 的 NVMe/FC 主机配置</block>
-  <block id="c6669fd579995b65e30bee38f5da1a94" category="paragraph">对于 RHEL 8.2 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.2 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
   <block id="797aea72ebbc1431192817ec206cafb4" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.2 GA 。</block>
   <block id="219a0c52523adf3bd5e0b81ca98a88a1" category="paragraph">如果使用 `yum update/upgrade` 从 RHEL 8.1 升级到 RHEL 8.2 ，则您的 ` /etc/nve/host*` 文件可能会丢失。要避免文件丢失，请执行以下操作：</block>
   <block id="6af8ec9e9e6b66a700434d4b32213979" category="list-text">备份 ` /etc/nvme/host*` 文件。</block>
@@ -683,7 +682,6 @@
   <block id="2e3750c608ef9c088598a72e91ddb608" category="list-text">RHEL 8.1</block>
   <block id="23573be9c7dbe4494659f6a90bc05b8a" category="list-text">NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。您可以使用 HBA 供应商提供的外部自动连接脚本。</block>
   <block id="1293e1b1ae6bd1e6a01f05541df9ce9f" category="list-text">默认情况下， NVMe 多路径处于禁用状态。必须手动启用它。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
-  <block id="0d683aa46dbb260c50031bd00c3f5e6f" category="list-text">默认情况下，不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 RHEL 8.1 上启用 NVMe/FC 的章节提供了相关步骤。</block>
   <block id="1f66f3a5a69d2cce3c5a6e2c4cee2b1a" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.1 。</block>
   <block id="6f72b48df47d9c45155f84a6cbab74f6" category="list-text">安装 NVMe-CLI-1.8.1-3.el8 软件包。</block>
   <block id="e8b45cd7975466cea80842914943b27f" category="list-text">在 RHEL 8.1 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
@@ -988,7 +986,6 @@
   <block id="bea05db7b205cebd49d85c581b86c97e" category="summary">提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导</block>
   <block id="5116d27ab3c67a2413a9afe024b82a38" category="summary">如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机</block>
   <block id="af59960049c1f2bff52a1746f8d7c912" category="doc">适用于采用 ONTAP 的 RHEL 8.3 的 NVMe/FC 主机配置</block>
-  <block id="c7bc96121734b19b104696509562ddf4" category="paragraph">对于 RHEL 8.3 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。下一节 " 在 RHEL 8.3 上启用 NVMe/FC " 介绍了执行此操作的步骤。</block>
   <block id="23cd3fb20334805933445d4e9e38f375" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.3 GA 。</block>
   <block id="a5846cf11c0c17a2d80c96a138e56624" category="paragraph">如果使用 `yum update/upgrade` 从 RHEL 8.2 升级到 RHEL 8.3 ，则您的 ` /etc/nve/host*` 文件可能会丢失。要避免文件丢失，请执行以下操作：</block>
   <block id="d72d2f5661cb55b44d10f141c8b04ac2" category="list-text">安装完成后，验证您是否正在运行指定的 Red Hat Enterprise Linux 内核。</block>
@@ -1676,10 +1673,6 @@
   <block id="1124bd13d48eff16726e09da76f5e2b3" category="doc">适用于采用 ONTAP 的 RHEL 8.4 的 NVMe-oF 主机配置</block>
   <block id="c86cc04a60faa82236164aaa2faeb7fd" category="paragraph">采用 ANA （非对称命名空间访问）的 RHEL 8.4 支持基于网络结构的 NVMe 或 NVMe-oF （包括 NVMe/FC 和其他传输）。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在 RHEL 8.4 和 ONTAP 上使用 ANA 作为目标的内核 NVMe 多路径中启用 NVMe-oF 的详细信息。</block>
   <block id="98f770b0af18ca763421bac22b4b6805" category="section-title">功能</block>
-  <block id="b7474f811791dcc10dc5c4c83cd68ff8" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中包含 `nve-fc auto-connect` 脚本。您可以使用这些原生自动连接脚本，而不必安装外部供应商提供的出箱自动连接脚本。</block>
-  <block id="1edfd9e2cff717b737df6889a024b9e7" category="list-text">从 RHEL 8.2 开始，已在 `NVMe-CLI` 软件包中提供原生 `udev` 规则，该软件包可为 NVMe 多路径启用轮循负载平衡。您无需再手动创建此规则（如 RHEL 8.1 中所做的那样）。</block>
-  <block id="230e651755d5387d3a7fc2291f07bfec" category="list-text">从 RHEL 8.2 开始， NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以照常为 SCSI LUN 配置 `dm-multipath` ，从而生成 `mpath` 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。</block>
-  <block id="bd89f3a395591c17f8cb7f0aaea6cc0b" category="list-text">从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中的 NetApp 插件还可以显示 ONTAP 命名空间的 ONTAP 详细信息。</block>
   <block id="509e52d19112a7c7188376d101160b4c" category="paragraph">对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。</block>
   <block id="c8fe594dab6cb1395df34d73b005c900" category="section-title">配置要求</block>
   <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">示例</block>
@@ -1717,7 +1710,6 @@
   <block id="9ecac4a21a7fe6b2f71d8fdffa72bb05" category="list-text">SLES15 SP3 支持 NVMe/FC 和其他传输。</block>
   <block id="79b488f9eaea99a6d3f6667b30d733e5" category="list-text">NVMe-oF 不支持 sanlun 。因此，在 SLES15 SP3 上，不存在对 NVMe-oF 的 Lu 支持。您可以改用原生 NVMe-CLI 中包含的 NetApp 插件。此操作应适用于所有 NVMe-oF 传输。</block>
   <block id="fcfc5ba070a0675d68aab9fb9f245c43" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以像往常一样为 SCSI LUN 配置 `dm-multipath` ，从而生成 mpath 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。</block>
-  <block id="1733de5a596dfd8c9179b7f061fe9051" category="paragraph">没有已知限制。</block>
   <block id="83314818bb7c47b391616d0ff767a7de" category="section-title">NVMe-oF 启动程序包</block>
   <block id="abc4d57007eba9b1d8b3f88edac97e68" category="list-text">验证 SLES15 SP3 MU 主机上是否已安装所需的内核和 NVMe-CLI MU 软件包。</block>
   <block id="21c405f2155cb8a6afae52ce69ea30ba" category="paragraph">上述 NVMe-CLI MU 软件包现在包括以下内容：</block>
@@ -2075,7 +2067,6 @@
   <block id="e7e8e011c8e0651dc3a6d06305d8279e" category="paragraph">RHEL 8.3没有已知问题。</block>
   <block id="ce420cebd9b134c2ee33ae6a490c31ba" category="paragraph">如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。</block>
   <block id="6507882f376544268e31289f84d4ee08" category="doc">HP-UX Host Utilities 6.0</block>
-  <block id="0f03ad1ba726a38547e37a072e28a71f" category="paragraph">HP-UX Host Utilities是一款NetApp主机软件、可在HP-UX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。</block>
   <block id="c0a1ecccf7e7b3c14696d029be49ed25" category="paragraph">RHEL 8.6没有已知问题。</block>
   <block id="dfd9db293eabf1724158b5cc08e4dd12" category="cell">HP-UX 11.31主机在ASA 设置中间歇性报告路径状态不正确。</block>
   <block id="478829f91ffe1d5a9fcb7ae0a4fa2eda" category="cell">HP-UX LVM创建会发送块大小超过1 MB的I/O</block>
@@ -3387,16 +3378,13 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="f8d5aed6f51d94047f74a803aca5670b" category="list-text">解压缩文件并提取SAN工具包软件包。</block>
   <block id="d7acb320d7561ff28aba5271a650f74e" category="list-text">安装SAN工具包：</block>
   <block id="d371e5ff58b865f46aa4c65beb73405c" category="paragraph">本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定HP-UX主机相关的重要注意事项。</block>
-  <block id="3517bcea87b684bd347c95104562d327" category="paragraph">HP-UX Host Utilities 6.0仍支持以下版本：</block>
   <block id="a869215e627d2812c817b80130aa7824" category="paragraph">HP-UX Host Utilities 6.0版没有新增功能、增强功能、已知限制或注意事项。</block>
   <block id="f19106aa57c6316e97d751c16d547b41" category="list-text">FCP—Solaris</block>
   <block id="7c0e66bb6addd5d99fc9457c74d9f1e5" category="summary">介绍如何在ONTAP中使用HP-UX Unified Host Utilities 6.0</block>
   <block id="6dea40462e0a36a918cc6ee609a75f0c" category="paragraph">使用HP-UX Host Utilities可以将HP-UX主机连接到NetApp存储。</block>
-  <block id="0a6cda4b6b1ee30ff2b1c2e7b1452c79" category="paragraph">HP-UX Host Utilities支持多个HP-UX环境和多个协议。以下是支持的环境：</block>
   <block id="466488bfcdd5dd2620fa669f44a082d5" category="admonition">为了指明所使用的环境、本文档有时会为Veritas DMP环境指定"DMP"、为HP-UX本机环境指定"MPIO"。在某些情况下、您使用的命令可能会因所使用的驱动程序而异。在这些情况下、系统会同时指定环境和驱动程序类型。</block>
   <block id="db0942d60692ceb816c153d46b6755a4" category="list-text">为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。</block>
   <block id="bbe48fb854ea022537208eeeff822f91" category="paragraph-title">关于此任务</block>
-  <block id="4b9a66cc328c269b47204207ea997015" category="paragraph">上提供了NetApp HP-UX Host Utilities软件包 <block ref="47b65262ba52aec6a3b66c8c933e9234" category="inline-link-macro-rx"></block> 在压缩文件中。下载文件后，必须在安装之前对其进行解压缩。</block>
   <block id="89b1d0829beb11befe8cef17a1a88149" category="list-text">登录到主机。</block>
   <block id="411f721c4d437c447636df81f300973a" category="list-text">解压<block ref="dfa8e0cbcc24953d6f700e7d845f35aa" prefix=" " category="inline-code"></block> 文件：</block>
   <block id="685e21144e7e399ef67e8a809cd52a1e" category="list-text">安装软件：</block>
@@ -3407,5 +3395,14 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="01cf7b9650b6a23329edafdd13452ac5" category="paragraph">AIX Host Utilities支持以下环境：</block>
   <block id="09c2778b4197dd6dcc821c85eaf45906" category="paragraph">AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
   <block id="bdaec84e97380168b375e0f6cc8968bc" category="admonition">此工具包适用于所有Host Utilities配置和协议。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。</block>
-  <block id="237e46c87c95b6d72dceaf420c603d90" category="sidebar">Linux统一主机实用程序</block>
+  <block id="19d92ebb7cd64db05a92ba4d1f8c169a" category="paragraph">HP-UX Host Utilities 6.0仍支持以下版本：</block>
+  <block id="aa4b835c1f569c111bb0517546a161b9" category="list-text">对于 RHEL 8.2 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。</block>
+  <block id="86d2f7a04841036a331f83b9d4f4c8b5" category="list-text">对于RHEL 8.3、默认情况下、内核NVMe多路径仍处于禁用状态。因此，您需要手动启用它。</block>
+  <block id="6dc5c9d254e31b97a6a6ca189c137c1a" category="paragraph">HP-UX Host Utilities支持多种协议和以下环境：</block>
+  <block id="1d150b0bd2398e740a0840f9f22c0926" category="paragraph">上提供了NetApp HP-UX Host Utilities软件包 <block ref="47b65262ba52aec6a3b66c8c933e9234" category="inline-link-macro-rx"></block> 在压缩文件中。下载文件后、必须在安装之前对其进行解压缩。</block>
+  <block id="f6548a8dc796bca1238a2023b7facffa" category="paragraph">HP-UX Host Utilities是一款NetApp主机软件、可在HP-UX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器。(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
+  <block id="a1b24514cc1570dc7f2dc2843ef4ced8" category="admonition">此工具包适用于所有Host Utilities配置和协议。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
+  <block id="aa07c7ef7fefb6efdf9ed0ebebbac729" category="list-text">默认情况下，不会启用轮循负载平衡。
+要启用此功能，必须编写 udev 规则。</block>
+  <block id="c8ef204b9a39e596096e42f5bdae91e9" category="sidebar">Linux Unified Host Utilities</block>
 </blocks>

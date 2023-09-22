@@ -40,7 +40,7 @@ summary: 适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP5的NVMe-oF主
 
 == 已知限制
 
-没有已知限制。
+目前不支持使用NVMe-oF协议启动SAN。
 
 
 

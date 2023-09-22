@@ -19,10 +19,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机
 :toc-position: content
 
 
-
-
-== 可支持性
-
+[role="lead"]
 采用 ANA （非对称命名空间访问）的 RHEL 8.4 支持基于网络结构的 NVMe 或 NVMe-oF （包括 NVMe/FC 和其他传输）。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处介绍了在 RHEL 8.4 和 ONTAP 上使用 ANA 作为目标的内核 NVMe 多路径中启用 NVMe-oF 的详细信息。
 
 
@@ -30,20 +27,11 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 
 
-== 功能
-
-* 从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中包含 `nve-fc auto-connect` 脚本。您可以使用这些原生自动连接脚本，而不必安装外部供应商提供的出箱自动连接脚本。
-* 从 RHEL 8.2 开始，已在 `NVMe-CLI` 软件包中提供原生 `udev` 规则，该软件包可为 NVMe 多路径启用轮循负载平衡。您无需再手动创建此规则（如 RHEL 8.1 中所做的那样）。
-* 从 RHEL 8.2 开始， NVMe 和 SCSI 流量均可在同一主机上运行。实际上，这应该是客户通常部署的主机配置。因此，对于 SCSI ，您可以照常为 SCSI LUN 配置 `dm-multipath` ，从而生成 `mpath` 设备，而 NVMe 多路径则可用于在主机上配置 NVMe-of 多路径设备。
-* 从 RHEL 8.2 开始，原生 `NVMe-CLI` 软件包中的 NetApp 插件还可以显示 ONTAP 命名空间的 ONTAP 详细信息。
-
-
-
-
 == 已知限制
 
 * 对于 RHEL 8.4 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。
 * 由于出现未解决的问题， RHEL 8.4 上的 NVMe/TCP 仍是一项技术预览功能。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.4_release_notes/index#technology-preview_file-systems-and-storage["RHEL 8.4 发行说明"^] 了解详细信息。
+* 目前不支持使用NVMe-oF协议启动SAN。
 
 
 

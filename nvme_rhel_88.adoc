@@ -35,6 +35,7 @@ summary: 如何使用ONTAP为RHEL 8.8配置NVMe-oF主机
 
 * 默认情况下、对于RHEL 8.8 NVMe-oF主机、内核NVMe多路径处于禁用状态。因此，您需要手动启用它。
 * 在RHEL 8.8主机上、由于存在未决问题、NVMe/TCP是一项技术预览功能。
+* 目前不支持使用NVMe-oF协议启动SAN。
 
 
 

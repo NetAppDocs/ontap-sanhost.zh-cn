@@ -41,7 +41,7 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 
 == 已知限制
 
-没有已知限制。
+目前不支持使用NVMe-oF协议启动SAN。
 
 
 

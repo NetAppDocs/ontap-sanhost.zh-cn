@@ -33,7 +33,7 @@ sidebar:
         url: "/hu_hpux_60.html"
       - title: 命令参考示例
         url: "/hu_hpux_60_cmd.html"
-    - title: Linux统一主机实用程序
+    - title: Linux Unified Host Utilities
       entries:
       - title: 发行说明
         url: "/hu_luhu_71_rn.html"

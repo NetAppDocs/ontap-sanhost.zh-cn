@@ -34,6 +34,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 * 在 `NVMe-CLI` 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。
 * 默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 7.9 上启用 NVMe/FC 的章节提供了相关步骤。
 * 在 Oracle Linux 7.9 上，不支持 NVMe/FC ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。
+* 目前不支持使用NVMe-oF协议启动SAN。
 
 
 

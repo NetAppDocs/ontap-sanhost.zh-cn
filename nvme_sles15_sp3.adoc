@@ -36,7 +36,7 @@ summary: 介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP3 配置
 
 == 已知限制
 
-没有已知限制。
+目前不支持使用NVMe-oF协议启动SAN。
 
 
 
