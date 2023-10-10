@@ -4,7 +4,7 @@ permalink: nvme_rhel_87.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP 的RHEL 8.7的NVMe-oF主机配置
+= 适用于采用ONTAP的RHEL 8.7的NVMe-oF主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,14 +19,10 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 :toc-position: content
 
 
+[role="lead"]
+采用ANA (非对称命名空间访问)的Red Hat Enterprise Linux (RHEL) 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。在此操作步骤期间、您可以使用RHEL 8.7上的ANA和ONTAP作为目标、使用内核NVMe多路径启用NVMe-oF。
 
-
-== 可支持性
-
-采用ANA (非对称命名空间访问)的RHEL 8.7支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。本主题详细介绍了如何在RHEL 8.7和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
-
-
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的配置的准确详细信息。
 
 
 
@@ -45,13 +41,9 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 
 
-== 配置要求
-
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
-
-
-
 == 启用内核 NVMe 多路径
+
+您可以使用以下操作步骤启用内核NVMe多路径。
 
 .步骤
 . 在服务器上安装RHEL 8.7。
@@ -104,7 +96,7 @@ NOTE: 如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令
 +
 [NOTE]
 ====
-如果要在同一主机上同时运行NVMe和SCSI共存流量、建议分别对ONTAP 命名空间使用内核NVMe多路径、对ONTAP LUN使用dm-multipath。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。可以通过向添加enable_foreign.设置来实现此目的 `/etc/multipath.conf` 文件：
+如果要在同一主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。为此、您可以将enable外部设置添加到中 `/etc/multipath.conf` 文件：
 
 [listing]
 ----
@@ -113,18 +105,21 @@ defaults {
         enable_foreign     NONE
 }
 ----
+运行 `systemctl restart multipathd` 命令以使新设置生效，从而重新启动 multipathd 守护进程。
+
 ====
-. 运行 `systemctl restart multipathd` 命令以使新设置生效，从而重新启动 multipathd 守护进程。
 
 
 
 
 == 配置 NVMe/FC
 
+您可以为Broadcom/Emulex或Marvell/Qlogic适配器配置NVMe/FC。
 
-
-=== Broadcom/Emulex
-
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
 .步骤
 . 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器的最新列表。
 +
@@ -193,39 +188,12 @@ FCP CMPL: xb 0000006b Err 00017f99
 ----
 
 
-
-
-==== 启用1 MB I/O大小(可选)
-
-ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是，对于 Broadcom NVMe/FC 主机 1 MB 大小的问题描述 I/O 请求， lpfc 参数 `lpfc_sg_seg_cnt` 也应从默认值 64 增加到 256 。请按照以下说明执行此操作：
+--
+.适用于NVMe/FC的Marvell/QLogic FC适配器
+--
+本机收件箱 `qla2xxx` RHEL 8.7内核中包含的驱动程序包含最新的修复程序、这些修复程序对于ONTAP支持至关重要。
 
 .步骤
-. 在相应的 `modprobe lpfc.conf` 文件中附加值 `256` ：
-+
-[listing]
-----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f` 命令，然后重新启动主机。
-. 重新启动后，通过检查对应的 `sysfs` 值来验证是否已应用上述设置：
-+
-[listing]
-----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
-----
-+
-现在、Broadcom FC-NVMe主机应该能够在ONTAP 命名空间设备上发送高达1 MB的I/O请求。
-
-
-
-
-
-=== Marvell/QLogic
-
-本机收件箱 `qla2xxx` RHEL 8.7内核中包含的驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
-
 . 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
@@ -243,17 +211,40 @@ QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 ----
 
 
+--
+====
+
+
+=== 启用1 MB I/O (可选)
+
+ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加 `lpfc` 的值 `lpfc_sg_seg_cnt` 参数从默认值64更改为256。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+
+NOTE: 这不适用于逻辑NVMe/FC主机。
+
 
 
 == 配置 NVMe/TCP
 
-与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
-
-* * 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。
-* * 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。
-
-
-您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：
+NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
@@ -374,6 +365,8 @@ sectype: none
 
 
 == 验证 NVMe-oF
+
+您可以使用以下操作步骤验证NVMe-oF。
 
 .步骤
 . 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：

@@ -4,7 +4,7 @@ permalink: nvme_rhel_82.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机 
 ---
-= 适用于采用 ONTAP 的 RHEL 8.2 的 NVMe/FC 主机配置
+= 适用于采用ONTAP的RHEL 8.2的NVMe/FC主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,27 +19,37 @@ summary: 如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机
 
 
 [role="lead"]
-对于 RHEL 8.2 ， ONTAP 9.6 或更高版本支持 NVMe/FC 。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+对于Red Hat Enterprise Linux (RHEL) 8.2、ONTAP 9.6或更高版本支持NVMe/FC。RHEL 8.2 主机通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。
+
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 了解最新的受支持配置列表。
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+
+== 功能
+
+* 从RHEL 8.2开始、 `nvme-fc auto-connect` 本机中包含脚本 `nvme-cli` 软件包。您可以使用这些原生自动连接脚本，而不必安装外部供应商提供的出箱自动连接脚本。
+* 从RHEL 8.2开始、是一种本机 `udev` 规则已作为的一部分提供 `nvme-cli` 此软件包可为NVMe多路径启用轮循负载平衡。您无需再手动创建此规则（如 RHEL 8.1 中所做的那样）。
+* 从RHEL 8.2开始、NVMe和SCSI流量均可在同一主机上运行。实际上、这是预期部署的主机配置。因此、对于SCSI、您可以进行配置 `dm-multipath` 与往常一样、SCSI LUN会导致 `mpath` 设备、而NVMe多路径可用于在主机上配置NVMe-oF多路径设备。
+* 从RHEL 8.2开始、是本机中的NetApp插件 `nvme-cli` 软件包能够显示ONTAP名称库的ONTAP详细信息。
+
 
 
 
 == 已知限制
 
-* 对于 RHEL 8.2 ，默认情况下，内核 NVMe 多路径保持禁用状态。因此，您需要手动启用它。
+* 对于RHEL 8.2、默认情况下会禁用内核NVMe多路径。因此，您需要手动启用它。
 * 目前不支持使用NVMe-oF协议启动SAN。
 
 
 
 
-== 在 RHEL 8.2 上启用 NVMe/FC
+== 启用 NVMe/FC
 
+您可以使用以下操作步骤启用NVMe/FC。
+
+.步骤
 . 在服务器上安装 Red Hat Enterprise Linux 8.2 GA 。
-+
-如果使用 `yum update/upgrade` 从 RHEL 8.1 升级到 RHEL 8.2 ，则您的 ` /etc/nve/host*` 文件可能会丢失。要避免文件丢失，请执行以下操作：
-
+. 如果要使用从RHEL 8.1升级到RHEL 8.2 `yum update/upgrade`，您的 `/etc/nvme/host*` 文件可能会丢失。要避免文件丢失、请执行以下操作：
 +
 .. 备份 ` /etc/nvme/host*` 文件。
 .. 如果您已手动编辑 `udev` 规则，请将其删除：
@@ -72,7 +82,7 @@ yum install nvmecli
 4.18.0-193.el8.x86_64
 ----
 +
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关最新的受支持版本列表。
 
 . 安装 NVMe-CLI 软件包。
 +
@@ -87,7 +97,7 @@ nvme-cli-1.9.5.el8.x86_64
 ----
 # grubby –args=nvme_core.multipath=Y –update-kernel /boot/vmlinuz-4.18.0-193.el8.x86_64
 ----
-. 在 RHEL 8.2 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。
+. 在RHEL 8.2主机上、检查中的主机NQN字符串 `/etc/nvme/hostnqn` 并验证它是否与ONTAP阵列上对应子系统的主机NQN字符串匹配。
 +
 [listing]
 ----
@@ -103,12 +113,12 @@ Vserver      Subsystem        Host           NQN
         nqn.2014-08.org.nvmexpress:uuid:9ed5b327-b9fc-4cf5-97b3-1b5d986345d1
 ----
 +
-如果主机 NQN 字符串不匹配，请使用 `vserver modify` 命令更新相应 ONTAP 阵列子系统上的主机 NQN 字符串，使其与主机上 /etc/nve/hostnqn 中的主机 NQN 字符串匹配。
+如果主机NQN字符串不匹配、请使用 `vserver modify` 用于更新相应ONTAP阵列子系统上的主机NQN字符串以与中的主机NQN字符串匹配的命令 `/etc/nvme/hostnqn` 在主机上。
 
 . 重新启动主机。
 . 更新 `enable_Foreign` Setting _ （ optional ） _ 。
 +
-如果您要在同一个同时存在的 RHEL 8.2 主机上同时运行 NVMe 和 SCSI 流量，建议您分别对 ONTAP 命名空间使用内核 NVMe 多路径，对 ONTAP LUN 使用 dm-multipath 。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此，您可以将 `enable_Foreign` 设置添加到 /etc/multipath.conf 中，如下所示。
+如果要在同一个同时存在的RHEL 8.2主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。您可以通过添加来执行此操作 `enable_foreign` 设置为 `/etc/multipath.conf`，如下所示。
 
 +
 [listing]
@@ -125,7 +135,9 @@ defaults {
 
 == 为 NVMe/FC 配置 Broadcom FC 适配器
 
-有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+您可以使用以下操作步骤配置Broadcom FC适配器。
+
+有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
 .步骤
 . 验证您使用的是受支持的适配器。
@@ -297,6 +309,9 @@ options lpfc lpfc_sg_seg_cnt=256
 
 == 验证 NVMe/FC
 
+您可以使用以下操作步骤 来验证NVMe/FC。
+
+.步骤
 . 验证以下 NVMe/FC 设置。
 +
 [listing]
@@ -363,34 +378,5 @@ Device   Vserver  Namespace Path             NSID   UUID   Size
          "Namespace_Size" : 13107200
     }
 ]
-----
-
-
-
-
-== lpfc 详细日志记录
-
-设置NVMe/FC的lpfc驱动程序。
-
-.步骤
-. 设置 `lpfc_log_verbose` 将驱动程序设置为以下任意值以记录NVMe/FC事件。
-+
-[listing]
-----
-#define LOG_NVME 0x00100000 /* NVME general events. */
-#define LOG_NVME_DISC 0x00200000 /* NVME Discovery/Connect events. */
-#define LOG_NVME_ABTS 0x00400000 /* NVME ABTS events. */
-#define LOG_NVME_IOERR 0x00800000 /* NVME IO Error events. */
-----
-. 设置值后、运行 `dracut-f` 命令并重新启动主机。
-. 验证设置。
-+
-[listing]
-----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_log_verbose=0xf00083
-
-# cat /sys/module/lpfc/parameters/lpfc_log_verbose
-15728771
 ----
 

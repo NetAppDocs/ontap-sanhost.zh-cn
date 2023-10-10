@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
 .步骤
 . 验证您使用的是受支持的适配器。

@@ -4,7 +4,7 @@ permalink: nvme_rhel_90.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP 的RHEL 9.0的NVMe-oF主机配置
+= 适用于采用ONTAP的RHEL 9.0的NVMe-oF主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -42,8 +42,10 @@ RHEL 9.0支持NVMe-oF (包括NVMe/FC和NVMe/TCP)、并且ONTAP 阵列上运行�
 
 == 启用内核 NVMe 多路径
 
+您可以使用以下操作步骤启用内核NVMe多路径。
+
 .步骤
-. 在服务器上安装RHEL 9.0。安装完成后、验证您是否正在运行指定的RHEL 9.0内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 在服务器上安装RHEL 9.0。
 . 安装完成后、验证您是否正在运行指定的RHEL 9.0内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
 +
 [listing]
@@ -84,10 +86,13 @@ NOTE: 如果主机NQN字符串不匹配、则应使用`vserver modify`命令更�
 
 == 配置 NVMe/FC
 
+您可以为Broadcom/Emulex或Marvell/Qlogic适配器配置NVMe/FC。
 
-
-=== Broadcom/Emulex
-
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
+.步骤
 . 验证您使用的是受支持的适配器。有关支持的适配器的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 +
 [listing]
@@ -170,19 +175,49 @@ Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
 abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
 FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
-. 启用1 MB I/O大小。
-+
-对于`lpfc`驱动程序到问题描述 I/O请求、需要将`lpfc_SG_seg_cnt`参数设置为`256`、最大大小为1 MB。
 
+
+--
+.Marvell/QLogic
+--
+RHEL 9.0内核中附带的本机内置qla2xxx驱动程序包含最新的修复程序、这些修复程序是ONTAP支持必不可少的。
+
+.步骤
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
+
+
+[listing]
+----
+# cat /sys/class/fc_host/host*/symbolic_name
+QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
+QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
+----
+. 验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够用作 NVMe/FC 启动程序：
+
+
+[listing]
+----
+# cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+1
+----
+--
+====
+
+
+=== 启用1 MB I/O (可选)
+
+ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加 `lpfc` 的值 `lpfc_sg_seg_cnt` 参数从默认值64更改为256。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
 +
 [listing]
 ----
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-+
-.. 运行 `dracut -f` 命令，然后重新启动主机。
-.. 主机启动后、验证`lpfc_sg_seg_cnt`是否设置为`256`。
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
 +
 [listing]
 ----
@@ -192,37 +227,13 @@ options lpfc lpfc_sg_seg_cnt=256
 
 
 
+NOTE: 这不适用于逻辑NVMe/FC主机。
 
-
-
-=== Marvell/QLogic
-
-RHEL 9.0内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这对于ONTAP 支持至关重要。验证您是否正在运行受支持的适配器驱动程序和固件版本：
-
-[listing]
-----
-# cat /sys/class/fc_host/host*/symbolic_name
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
-QLE2742 FW:v9.06.02 DVR:v10.02.00.200-k
-----
-验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够用作 NVMe/FC 启动程序：
-
-[listing]
-----
-# cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
-1
-----
 
 
 == 配置 NVMe/TCP
 
-与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
-
-* * 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。
-* * 主机启动期间无自动连接 * NVMe/TCP 也无法在主机启动期间自动连接。
-
-
-您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：
+NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。
 
 .步骤
 . 验证启动程序端口是否能够通过支持的NVMe/TCP LIF提取发现日志页面数据：
@@ -286,7 +297,9 @@ sectype: none
 
 
 
-== 验证NVMf
+== 验证 NVMe-oF
+
+您可以使用以下操作步骤验证NVMe-oF。
 
 .步骤
 . 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：

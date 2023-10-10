@@ -4,7 +4,7 @@ permalink: nvme_rhel_91.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP 的RHEL 9.1的NVMe-oF主机配置
+= 适用于采用ONTAP的RHEL 9.1的NVMe-oF主机配置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -91,11 +91,12 @@ NOTE: 如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令
 
 == 配置 NVMe/FC
 
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
 
-
-=== Broadcom/Emulex
-
-.步骤
+--
 . 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
 +
 [listing]
@@ -180,38 +181,10 @@ FCP CMPL: xb 00000000 Err 00000004
 ----
 
 
+--
 
-
-==== 启用 1 MB I/O 大小（可选）
-
-ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX Data 传输大小）为 8 ，这意味着最大 I/O 请求大小应最多为 1 MB 。但是、对于Broadcom NVMe/FC主机1 MB大小的问题描述 I/O请求、lpfc参数lpfc_sg_seg_cnt也应从默认值64增加到256。请按照以下说明执行此操作：
-
-.步骤
-. 在相应的 `modprobe lpfc.conf` 文件中附加值 `256` ：
-+
-[listing]
-----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f` 命令，然后重新启动主机。
-. 重新启动后，通过检查对应的 `sysfs` 值来验证是否已应用上述设置：
-+
-[listing]
-----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
-----
-+
-现在， Broadcom FC-NVMe 主机应该能够在 ONTAP 命名空间设备上发送最多 1 MB 的 I/O 请求。
-
-
-
-
-
-=== Marvell/QLogic
-
-本机收件箱 `qla2xxx` RHEL 9.1内核中包含的驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
+--
+本机收件箱 `qla2xxx` RHEL 9.1内核中包含的驱动程序包含最新的修复程序、这些修复程序对于ONTAP支持至关重要。
 
 .步骤
 . 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：
@@ -231,17 +204,42 @@ QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 ----
 
 
+--
+
+--
+====
+
+
+=== 启用1 MB I/O (可选)
+
+ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加 `lpfc` 的值 `lpfc_sg_seg_cnt` 参数从默认值64更改为256。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt` 参数设置为 256 。
++
+[listing]
+----
+# cat /etc/modprobe.d/lpfc.conf
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f` 命令，然后重新启动主机。
+. 验证 `lpfc_sg_seg_cnt` 是否为 256 。
++
+[listing]
+----
+# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+256
+----
+
+
+
+NOTE: 这不适用于逻辑NVMe/FC主机。
+
 
 
 == 配置 NVMe/TCP
 
-与 NVMe/FC 不同， NVMe/TCP 没有自动连接功能。这表明 Linux NVMe/TCP 主机存在两个主要限制：
-
-* * 恢复路径后不会自动重新连接 * NVMe/TCP 无法自动重新连接到在路径关闭后 10 分钟内恢复的路径，此路径超出了默认值 `Ctrl-los-tm` timer 。
-* *主机启动期间无自动连接* NVMe/TCP无法在主机启动期间自动连接。
-
-
-您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加的值来增加重试期限 `ctrl_loss_tmo timer` 使用以下操作步骤 ：
+NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的 NVMe/TCP LIF 提取发现日志页面数据：
@@ -306,6 +304,8 @@ sectype: none
 
 
 == 验证 NVMe-oF
+
+您可以使用以下操作步骤验证NVMe-oF。
 
 .步骤
 . 通过检查以下各项验证是否确实已启用内核 NVMe 多路径：
