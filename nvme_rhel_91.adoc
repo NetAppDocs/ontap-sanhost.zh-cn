@@ -22,16 +22,19 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 [role="lead"]
 采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的RHEL 9.1支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在RHEL 9.1和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的准确详细信息。
+对于采用ONTAP的RHEL 9.1、NVMe-oF主机配置支持以下功能：
+
+* 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
+* 在给定主机总线适配器(HBA)的同一主机上同时使用NVMe和SCSI流量、而不使用显式dm-dpath设置、以防止声明NVMe命名空间。
+
+
+请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的配置的准确详细信息。
 
 
 
 == 功能
 
-* 除了NVMe/FC之外、RHEL 9.1还支持NVMe/TCP。本机中的NetApp插件 `nvme-cli` 软件包可以显示NVMe/FC和NVMe/TCP命名空间的ONTAP 详细信息。
-* 默认情况下、RHEL 9.1支持为NVMe命名空间启用内核NVMe多路径、而无需显式设置。
-* RHEL 9.1支持在给定HBA适配器的同一主机上使用NVMe和SCSI共存的流量、而不使用显式 `dm-multipath` 用于防止声明NVMe命名空间的设置。
-
+默认情况下、RHEL 9.1支持为NVMe命名空间启用内核NVMe多路径、而无需显式设置。
 
 
 
@@ -43,9 +46,11 @@ summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机
 
 == 启用内核NVMe多路径
 
+您可以使用以下操作步骤启用内核NVMe多路径。
+
 .步骤
-. 在服务器上安装RHEL 9.1。安装完成后、验证您是否正在运行指定的RHEL 9.1内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
-. 安装完成后、验证您是否正在运行指定的RHEL 9.1内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 在服务器上安装RHEL 9.1。
+. 安装完成后、验证是否正在运行指定的RHEL 9.1内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关最新的受支持版本列表。
 +
 示例
 
@@ -91,13 +96,14 @@ NOTE: 如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令
 
 == 配置 NVMe/FC
 
+您可以为Broadcom/Emulex或Marvell/Qlogic适配器配置NVMe/FC。
+
 [role="tabbed-block"]
 ====
 .Broadcom/Emulex
 --
-
---
-. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+.步骤
+. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器的最新列表。
 +
 [listing]
 ----
@@ -111,7 +117,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器驱动程序和固件版本的最新列表。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器驱动程序和固件版本的最新列表。
 +
 [listing]
 ----
@@ -182,7 +188,7 @@ FCP CMPL: xb 00000000 Err 00000004
 
 
 --
-
+.适用于NVMe/FC的Marvell/QLogic FC适配器
 --
 本机收件箱 `qla2xxx` RHEL 9.1内核中包含的驱动程序包含最新的修复程序、这些修复程序对于ONTAP支持至关重要。
 
@@ -203,8 +209,6 @@ QLE2772 FW:v9.08.02 DVR:v10.02.07.400-k-debug
 1
 ----
 
-
---
 
 --
 ====
@@ -373,7 +377,10 @@ nvme-subsys1 - NQN=nqn.1992-08.com.netapp:sn.bf0691a7c74411ec8187d039ea14107d:su
  +- nvme3 tcp traddr=192.168.167.21,trsvcid=4420,host_traddr=192.168.167.5 live non-optimized
  +- nvme4 tcp traddr=192.168.167.20,trsvcid=4420,host_traddr=192.168.167.5 live optimized
 ----
-. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如：
+. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。
++
+示例(A)：
+
 +
 [listing]
 ----
@@ -408,7 +415,7 @@ NSID  UUID                                   Size
 }
 ----
 +
-示例(b)
+示例(b)：
 
 +
 [listing]

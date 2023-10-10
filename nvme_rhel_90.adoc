@@ -22,13 +22,13 @@ summary: 如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机
 [role="lead"]
 RHEL 9.0支持NVMe-oF (包括NVMe/FC和NVMe/TCP)、并且ONTAP 阵列上运行正常的存储故障转移(Storage Failovers、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVM-oF环境中的ALUA等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在RHEL 9.0和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的配置的确切详细信息。
+有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 
 
 
 == 功能
 
-* 从RHEL 9.0开始、NVMe/TCP不再是技术预览功能(与RHEL 8不同)、而是完全受支持的企业功能本身。
+* 从RHEL 9.0开始、NVMe/TCP不再是一种技术预览功能(与RHEL 8不同)、而是一种完全受支持的企业级功能。
 * 从RHEL 9.0开始、默认情况下会为NVMe命名空间启用内核NVMe多路径、而无需显式设置(与RHEL 8不同)。
 
 
@@ -93,7 +93,7 @@ NOTE: 如果主机NQN字符串不匹配、则应使用`vserver modify`命令更�
 .Broadcom/Emulex
 --
 .步骤
-. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 验证您使用的是受支持的适配器。有关支持的适配器的更多详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
 +
 [listing]
 ----
@@ -324,7 +324,10 @@ NetApp ONTAP Controller
 round-robin
 round-robin
 ----
-. 验证 ONTAP 命名空间是否正确反映在主机上。例如(a)、
+. 验证 ONTAP 命名空间是否正确反映在主机上。
++
+示例(A)：
+
 +
 [listing]
 ----
@@ -352,7 +355,10 @@ Format         FW Rev
 -----------------------
 4 KiB + 0 B   FFFFFFFF
 ----
-. 验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态。例如(a)、
+. 验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态。
++
+示例(A)：
+
 +
 [listing]
 ----
@@ -378,7 +384,10 @@ nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.56e362e9bb4f11ebbaded039ea165abc:su
 +- nvme15 tcp traddr=192.168.2.57 trsvcid=4420 host_traddr=192.168.2.9 live non-optimized
 +- nvme5 tcp traddr=192.168.1.52 trsvcid=4420 host_traddr=192.168.1.8 live non-optimized
 ----
-. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。例如(a)、
+. 验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。
++
+示例(A)：
+
 +
 [listing]
 ----
@@ -390,7 +399,10 @@ Device       Vserver        Namespace Path                            NSID
 UUID                                   Size
 --------------------------------------------
 72b887b1-5fb6-47b8-be0b-33326e2542e2   85.90GB
-
+----
++
+[listing]
+----
 # nvme netapp ontapdevices -o json
 {
 "ONTAPdevices" : [
