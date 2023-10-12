@@ -125,7 +125,6 @@
   <block id="579c809b7cf293fc0f5db92d1dba3775" category="cell">物理块大小</block>
   <block id="f7efa4f864ae9b88d43527f4b14f750f" category="cell">4096</block>
   <block id="3d37ecaaa38a68cc4cb45fa6244e970c" category="section-title">MetroCluster 的建议设置</block>
-  <block id="8f9dff1e201aa562bc3dd3aafff4d268" category="section-title">Oracle Solaris 虚拟化</block>
   <block id="d73e6214e3336f5200c990aa71164cec" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。</block>
   <block id="5526d07285513042d4092f2ededbb3d5" category="list-text">在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。</block>
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">NetApp 互操作性表</block>
@@ -1481,16 +1480,12 @@
   <block id="41e185c135ae2833eb96571ac238a3f6" category="admonition">要配置 Oracle Linux 6.6 RedHat Enterprise Kernel （ RHCK ），请使用 <block ref="206a39f130bf92080cb56256dd2c28f9" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.6 。</block>
   <block id="ae8aa154427258c6dd529e8c72110906" category="paragraph">Oracle 6.6 没有已知问题。</block>
   <block id="cdab1722faf4570592f09483d692f9a3" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="aad294b0550f33ea846ebc2598292576" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.6 。</block>
-  <block id="c21dc92fb61425e1ad5ebfa7842ddfd3" category="list-text">使用 `tar xvf` 命令对文件进行解压缩。</block>
   <block id="70b7cc349994a5289908b02781aee538" category="paragraph">` /opt/NTAP/SANToolkit/bin/host_config &lt;-setup&gt; &lt;-protocol fcp_iscsi_mixed&gt; &lt;-multipath mpxio_dmp&gt; non&gt; （ -noalua ） [-mcc 60_90_120]`</block>
   <block id="90fbed0fe328b6c16dbe12568b1cb193" category="paragraph">要验证修补程序，请执行以下操作：</block>
   <block id="dd1e6355fcc2ca3c16ece42015663e00" category="cell">1362435</block>
   <block id="393cfee0a3b5d3e706f8a0cdeefa3ed8" category="cell">Huk 6.2 和 Solaris_11.4 FC 驱动程序绑定更改</block>
   <block id="8e831c271747ab1b149f40a1bfc61175" category="cell">（文档 ID 2595926.1 ）</block>
-  <block id="09fbe9d1ed2fdf31b8ac5fe56aa3ffbb" category="cell">对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见</block>
   <block id="78d3960bdb072ec713e8a4ab4adcd520" category="cell">1345622</block>
-  <block id="e782dc99ec8290da5a63ec5e81465380" category="cell">使用 OS 原生命令在使用 AA/pports 的 Solaris 主机上报告路径异常</block>
-  <block id="87b607e68d04a531a2558265117f94cb" category="cell">使用 ASA 的 Solaris 11.4 出现间歇性路径报告问题</block>
   <block id="0fd599859ca499a908d11962595ba872" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.9</block>
   <block id="02ef7cdb14b82d2d03d7952385e853c9" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.9 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.9 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="b9c3e890e59dd43c4f5634fcad20c6cf" category="paragraph">RHEL 7.9 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1734,12 +1729,9 @@
   <block id="dbe552aa6706cdda69944fc1f527ec35" category="paragraph">Oracle Linux 8.3 没有已知问题。</block>
   <block id="273955f9a81b6001ec0fed11c89c61c3" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="3c7f0100e93cbb394731ee7d8982c161" category="inline-link-macro-rx"></block> 一节。</block>
   <block id="095f17ad6c7f706c5fa881fa28d2b0e2" category="sidebar">XenServer 7.</block>
-  <block id="7818dfcab7a1c05d51aa00ac15f3beac" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下，对于 Solaris 11.4 ， Oracle Solaris I/O 多路径（ MPxIO ）处于启用状态。` /kernel/drv/fp.conf` 中的默认设置更改为 mpxio-disable="no" 。</block>
-  <block id="26aa8c05766be362fe2c469284c66a45" category="paragraph">如果 * 换片 * 的值不是 12 ，请验证是否安装了正确的修补程序，然后重新检查 `vDC.conf` 的内容。</block>
   <block id="025006946b1c53786cbb29eef3d30229" category="paragraph">按照说明配置 override 参数：</block>
   <block id="570f5761e2e0bfb396196b06d19e21b0" category="paragraph">`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl</block>
   <block id="5492ce934067a932652b5c7aa5dd991b" category="inline-link">Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置</block>
-  <block id="8b30a2a046838a554ec8551f6130f395" category="cell">在 Emulex 端到端配置上运行 `cfgadm -c configure` 会导致 I/O 错误。此问题已在 9.5P17 ， 9.6P14 ， 9.7P13 和 9.8P2 中修复</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
   <block id="38a445b35a68bb2b838316376b083c19" category="doc">适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置</block>
   <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。</block>
@@ -1763,8 +1755,6 @@
   <block id="109d2ee1c560df7a2148394570cdbc69" category="cell"><block ref="109d2ee1c560df7a2148394570cdbc69" category="inline-link-macro-rx"></block></block>
   <block id="2152e4c49c3814e1e3bba79274326fde" category="cell"><block ref="2152e4c49c3814e1e3bba79274326fde" category="inline-link-macro-rx"></block></block>
   <block id="5193fa62de727bc1b09d9ac908612e4d" category="cell"><block ref="5193fa62de727bc1b09d9ac908612e4d" category="inline-link-macro-rx"></block></block>
-  <block id="692dca145cf34dacba629a9ddf6d4c42" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
-  <block id="73710dbb0bb38e18d8eb3c739564246e" category="list-text">仅使用虚拟化存储资源（例如 vdskk ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们无法直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block>。</block>
   <block id="f58813ca14ecba2def986836fee74fc0" category="paragraph">适用于 Oracle Linux 8.1 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.1 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="0a9d709578599cebfffb10775d3641a7" category="list-text">安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="3a70a917bfcb66912a844601f3334965" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
@@ -2256,7 +2246,6 @@
   <block id="c25aa2a919e3a63ca18f5d2ba0d93494" category="paragraph">验证是否准确<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串已添加到NetApp阵列上的相应子系统中(使用进行验证<block ref="0e04d4bf4054a77eef58ff3d9b9e59ae" prefix=" " category="inline-code"></block> 命令)。</block>
   <block id="d517a34201e69d7cbd98e82863cbb016" category="paragraph">在控制器关联或指定操作已创建或正在创建时观察到。在上述自动连接脚本中可能会发生这种情况。</block>
   <block id="ed88a4dfde1eda848d0cd0880569e29d" category="paragraph">无尝试运行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令。适用于<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block> 和<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>、运行<block ref="b0f1705bbfcfb10368af21a019072318" prefix=" " category="inline-code"></block> 命令以验证是否已创建命名空间设备并将其显示在主机上。</block>
-  <block id="1b047686d1675f4b3beb6b06153998c1" category="section-title">建议的虚拟化设置</block>
   <block id="23013fc45b1e28aeba8b4521f80156eb" category="section-title">SnapMirror业务连续性的建议设置</block>
   <block id="7682043e346a0976ad107c7cb3989145" category="list-text">创建配置文件<block ref="2c50293ac08c6ad6b30ce2ba7a8fcd9c" prefix=" " category="inline-code"></block> 对于连接到主机的NetApp存储类型、此条目类似于以下内容：</block>
   <block id="976902513d73f70373bf832d81070379" category="admonition">从ONTAP 9.1.1开始、Solaris 11.4主机支持SM-BC设置配置。</block>
@@ -2268,7 +2257,6 @@
   <block id="e246c6fa1d97174589605e1deac30e48" category="list-text">使用<block ref="01fe732856e5259c0c505f9054c784ba" prefix=" " category="inline-code"></block> 和<block ref="801693b1d56b19d77272b3c6db46a751" prefix=" " category="inline-code"></block> 用于验证是否已成功应用覆盖参数的命令：</block>
   <block id="206258ae3de99b2eff4c714432cf5621" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
   <block id="ce9171caa524742973555de6b74fd04b" category="paragraph">要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
-  <block id="f70abbfa68e7755bcd0d439688edae06" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block> 。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
   <block id="d1b191cbd6f86528470b91fa5f92dac0" category="paragraph">采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 8.6支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在Oracle Linux 8.6和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。</block>
   <block id="ec06aef1c4fa2ded8e780a551fa4da6b" category="list-text">默认情况下、Oracle Linux 8.6为NVMe命名空间启用了内核NVMe多路径。</block>
   <block id="3d2513530d064dd18ec62aadb74704e2" category="list-text">使用Oracle Linux 8.6、<block ref="dafde1b5ed9f22cccd76aeeb9844345b" prefix=" " category="inline-code"></block> 本机中包含脚本<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 软件包。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的出箱自动连接脚本。</block>
@@ -2589,11 +2577,6 @@
   <block id="8f4e34dd626d27db6da17b83e4d7f329" category="cell">Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误</block>
   <block id="a387e31363493fb3c0fbdcc0d7458c52" category="list-text">解压缩文件。</block>
   <block id="8fe0dc9943c3dbce8070a7613545cb91" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于x86－64平台，请使用<block ref="2dea9af09f7e80915b8298deb9ca9b8a" prefix=" " category="inline-code"></block> 软件包。</block>
-  <block id="db3593f61ef4c56ea67fd06ebc7a6825" category="admonition">从适用于Solaris主机的ONTAP 9.8开始、支持所有SAN阵列(ASA)配置。</block>
-  <block id="f8af07f878832a82df53431926e7c3f6" category="paragraph">以下是为采用 NetApp ONTAP LUN 的 Solaris 11.4 SPARC 和 x86_64 建议的一些参数设置。这些参数值由 Host Utilities 设置。有关 Solaris 11.4 系统的其他设置，请参见 Oracle 文档 ID ： 2595926.1</block>
-  <block id="3cdb50c8bf082811e79154b6cdabdb1f" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述 、必须修补LDOM操作系统以修复_Oracle错误15824910_和<block ref="3328fba80b08b36663ffae0684f6c578" prefix=" " category="inline-code"></block> 必须创建将虚拟磁盘的块大小设置为4096的文件。有关详细信息，请参见 Oracle 文档 2157669.1 。</block>
-  <block id="c39a85f8ec6b0a29f08919e66d066295" category="cell">请遵循Solaris 11.4和HUK的建议。FC 驱动程序绑定已从 SSD （ 4D ）更改为 SD （ 4D ）。移动中的配置<block ref="d5ef7f69fa74e42b54d8244ee447ab2b" prefix=" " category="inline-code"></block> to<block ref="88cafedaeae385b0e8278ab1804829cd" prefix=" " category="inline-code"></block> 如 Oracle 中所述（文档 ID 2595926.1 ）。新安装的 Solaris 11.4 系统以及从 11.3 或更低版本升级的系统的行为会有所不同。</block>
-  <block id="cb5a5fbf7b377c4121e5a7dee7e950e5" category="cell">Solaris 11.x<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 导致端到端Emulex配置出现I/O错误</block>
   <block id="a15ed55b009e93df31791bff39016875" category="paragraph">请参见 <block ref="a39850964251401babb6e797f9dd15c1" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
   <block id="ec1f030f0caddb932644a46761f74630" category="list-text"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block></block>
   <block id="e0ace13bee28a678ec04ad1b076b4b00" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有igrou设置、因此无需在VVOLs环境中创建或管理iGroup。</block>
@@ -2602,9 +2585,6 @@
   <block id="a59067c75792ec364887962f5388c9af" category="list-text">更改x86和SPARC系统的光纤通道和SCSI驱动程序设置</block>
   <block id="168fdc611543547ce1e8f26fcfc2b182" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值为<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关追加信息 和建议的默认设置更改、请参见知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
   <block id="4ace21de4701510a7868bf0b96619e05" category="cell">正在运行<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中修复</block>
-  <block id="2d15eeef1c034eb367e3e2bdf54c1d44" category="paragraph">您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见<block ref="d20544b1cb103be423151e95ebf1c3ce" category="inline-link-rx"></block> 有关在Solaris MPIO环境中SAN启动LUN的详细信息。</block>
-  <block id="46f0926a49e1e94eb293a199875f98b9" category="paragraph">默认情况下，如果 LUN 的所有路径都丢失，则 Solaris 操作系统将在 20 秒后使 I/O 失败。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到* 120秒*、以确保I/O在包括计划外故障转移在内的操作期间不会过早超时。有关默认设置的其他信息和建议更改、请参见知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
-  <block id="ff91b353cdd0cfbd758a014f3a8eb777" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于不同的架构、但它们通常已更名为"Oracle虚拟机"。</block>
   <block id="7ff276d19a76a720d17e3dcf4d050ee3" category="summary">您可以在运行ESXi 8.x和ONTAP 的启动程序主机上将基于网络结构的NVMe (NVMe-oF)配置为目标。</block>
   <block id="c719ab5e5b2a188adebd62c0829a9f96" category="doc">适用于采用ONTAP 的ESXi 8.x的NVMe-oF主机配置</block>
   <block id="53b4135529508b3c01c35cf73dca64d0" category="list-text">从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP协议。</block>
@@ -3248,7 +3228,6 @@
   <block id="97c7cddc356e6c9a7edda318fd4e3a01" category="list-text">从下载 64 位 Linux Unified Host Utilities 软件包<block ref="f3adb37009df4865b12833eb62333f96" category="inline-link-rx"></block> 主机。</block>
   <block id="937cdc7611a7f50b97c9bc710ff4a761" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="211aeebd084ff2a0f2d3a6667de35200" category="inline-link-macro-rx"></block>。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。</block>
   <block id="0a0990c5ca1e9aa6bb4871721a00290c" category="list-text">安装 <block ref="7e5271dd15da7840bc647fc6451145a6" category="inline-link-macro-rx"></block> 设置FC和NVMe通用的驱动程序参数。</block>
-  <block id="191d7bcb434f24066e6263286c506e07" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件<block ref="64a98ab9b930adade338f7896c6bf819" category="inline-link-rx"></block>。获得该文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的软件包。</block>
   <block id="bba935ec6b4a409a039f2c174658a92b" category="list-text">从下载包含 Host Utilities 的压缩文件的副本<block ref="64a98ab9b930adade338f7896c6bf819" category="inline-link-rx"></block> 到主机上的目录。</block>
   <block id="203f51559c2ba23f9c255fff4a3d1a69" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件 <block ref="211aeebd084ff2a0f2d3a6667de35200" category="inline-link-macro-rx"></block>。获取此文件后，您必须将其解压缩，以获取安装 Host Utilities 所需的两个软件包。</block>
   <block id="d93f4eaa8e066c5ee8f2b24ebc969b6b" category="paragraph">以下各节提供了映射到ASA和非ASA配置的LUN的多路径输出示例。</block>
@@ -3409,4 +3388,47 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="f881ebad820aa982c82a8b50a1b39070" category="list-text">验证 ONTAP 命名空间是否正确反映在主机上。</block>
   <block id="e35ada62930c3b590684fb1ae4386cac" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态。</block>
   <block id="051ff3071e673676a5e48635fa7f872b" category="list-text">验证 NetApp 插件是否为每个 ONTAP 命名空间设备显示了正确的值。</block>
+  <block id="0c2e4e8d9a115357b8ff43b023bb36e7" category="paragraph">您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标Solaris 11.4。</block>
+  <block id="6b7d3d5a3de7d0586c43a4c6bd3fab44" category="paragraph">您可以从下载包含 Host Utilities 软件包的压缩文件<block ref="64a98ab9b930adade338f7896c6bf819" category="inline-link-rx"></block>。下载此文件后、必须解压缩此zip文件、以获取安装Host Utilities所需的软件包。</block>
+  <block id="3883ec6f7836f1107e516b21d2ae366d" category="list-text">使用<block ref="310cb972d0a51b72a4a64dd98fcc2fb1" prefix=" " category="inline-code"></block> 命令以提取文件。</block>
+  <block id="54ff83b5bc6079d4dc76316f58f3f649" category="list-text">将从.tar文件中提取的软件包添加到主机中。</block>
+  <block id="1d860eed50575e626226d83c9e374f4b" category="paragraph">要完成安装、您必须使用为您的环境(此处为Oracle Solaris I/O多路径或MPxIO)配置主机参数<block ref="3062dc928daa4d85f6e34b6dea110a00" prefix=" " category="inline-code"></block> 命令：</block>
+  <block id="c2eadbb359ff75801c07ea6a379dde12" category="list-text">更改x86和SPARC系统的FC和SCSI驱动程序设置</block>
+  <block id="e360843d65db0a5c317a80f568520649" category="list-text">为两种MPxIO配置提供SCSI超时设置</block>
+  <block id="6933ba7787543ab037c8d471cdc15d45" category="list-text">为x86和SPARC系统配置MPxIO和SCSI驱动程序使用的ALOA设置</block>
+  <block id="9ee206ddc94e6d325848405742e81349" category="paragraph">您可以使用FC协议并运行Solaris Host Utilities来设置SAN启动LUN、使其在Solaris MPxIO环境中工作。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 <block ref="b3ac3f3068c650055703257df96c0b5f" category="inline-link-macro-rx"></block> 有关Solaris MPIO (多路径I/O)环境中的SAN启动LUN的详细信息。</block>
+  <block id="e4b0166fe04a8f062a3188cd6f0f64b6" category="paragraph">通过多路径、您可以在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。默认情况下、对于Solaris 11.4、Oracle Solaris I/O多路径或MPxIO处于启用状态。中的默认设置<block ref="ab59b9330e3576612c9d0cd036f54f6b" prefix=" " category="inline-code"></block> 对mpxio-disable"的更改。</block>
+  <block id="24f50168c97bfb606aff7863e9808a88" category="admonition">从适用于Solaris主机的ONTAP 9.8开始、支持所有SAN阵列(ASA)配置。</block>
+  <block id="945301fc1d212e479df5428999ef622e" category="paragraph">NetApp建议对带有NetApp ONTAP LUN的Solaris 11.4 SPARC和x86_64使用以下参数设置。这些参数值由 Host Utilities 设置。有关其他Solaris 11.4系统设置，请参见Oracle文档ID：2595926.1。</block>
+  <block id="d85f3a3285c707eb9f536dca7363eb41" category="paragraph">所有Solaris OS版本(包括Solaris 10.x和Solaris 11.x)均支持Solaris HUK 6.2。</block>
+  <block id="65812a8b83f911fd4f60ef29b626b7a6" category="list-text">对于Solaris 11.4、FC驱动程序绑定已从更改为<block ref="d4576b3b305e1df6f8ef4517ec2f9615" prefix=" " category="inline-code"></block> to<block ref="6226f7cbe59e99a90b5cef6f94f966fd" prefix=" " category="inline-code"></block>。在HUK 6.2安装过程中、以下配置文件会部分更新：</block>
+  <block id="71574a9156cf1c3ea25fa51ac7ac81bd" category="list-text"><block ref="0522a9d7597c185ad53329c40159d9e7" prefix="" category="inline-code"></block></block>
+  <block id="6aefd1cd8a9da6b62dff345e8de8dbd6" category="list-text"><block ref="2c50293ac08c6ad6b30ce2ba7a8fcd9c" prefix="" category="inline-code"></block></block>
+  <block id="67a84b7dd007fa5b963b572161a95ef1" category="list-text">对于Solaris 11.3、FC驱动程序绑定使用<block ref="d4576b3b305e1df6f8ef4517ec2f9615" prefix=" " category="inline-code"></block>。在HUK 6.2安装过程中、以下配置文件会部分更新：</block>
+  <block id="bab40425283ecb7b6de8c4fadeb374ee" category="list-text"><block ref="baa31d5c43ee36bd5123c82a38e07242" prefix="" category="inline-code"></block></block>
+  <block id="cc519dfcb2acd12ae3cbc8d28aa9661f" category="list-text">对于Solaris 10.x、以下配置文件将在HUK 6.2安装过程中进行全面更新：</block>
+  <block id="62b73c21fda6c7987b28ed563c3095c0" category="list-text"><block ref="0e6b1ed8e7951f7d67d064d2f8acb1c0" prefix="" category="inline-code"></block></block>
+  <block id="674829c3ef16f11938cfab4ec338d8b2" category="inline-link-macro">支持HUK 6.2的Solaris主机建议是什么</block>
+  <block id="243e648a0826c15ecceaea95e6e4ac97" category="paragraph">要解决任何配置问题、请参见知识库文章 <block ref="4b8cc17873af7532a35b857d33b6cf55" category="inline-link-macro-rx"></block>。</block>
+  <block id="ed7840ddcc9614de2b5e9b0a0dfd6fd8" category="paragraph">要在使用NetApp LUN的zpool中成功执行4 KB对齐I/O、NetApp建议执行以下操作：</block>
+  <block id="0fcd9d23d3d1aaf0bdd0f3b852c45eed" category="list-text">验证您运行的Solaris操作系统是否足够新，以确保支持4 KB I/O大小对齐的所有Solaris功能均可用。</block>
+  <block id="9f68947aa923b1f85f16b51ee804664e" category="list-text">验证Solaris 10 Update 11是否安装了最新的内核修补程序，以及Solaris 11.4是否安装了最新的支持存储库更新(SRU)。</block>
+  <block id="ebd535fd0d05445188203ab3da759935" category="list-text">NetApp逻辑单元必须具有<block ref="4fa039151b5ee7284eb35ec4ab19b4a9" prefix=" " category="inline-code"></block> 作为<block ref="eaf36c98b91893b7f79bd5184a23d377" prefix=" " category="inline-code"></block> 无论LUN大小如何。</block>
+  <block id="5e669062721edb89f75480cfc11b5791" category="paragraph">默认情况下，如果LUN的所有路径都丢失，Solaris OS将在*20s*后无法执行I/O操作。这由控制<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 参数。的默认值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 适用于标准ONTAP 集群。但是、在MetroCluster 配置中、的值<block ref="23bc35b0d0a6788857b3169bbd3adddd" prefix=" " category="inline-code"></block> 必须增加到*120s*，以确保I/O不会在包括计划外故障转移在内的操作期间过早超时。有关追加信息 和建议的默认设置更改、请参见知识库文章<block ref="193f3884faade962417df8b9640856de" category="inline-link-rx"></block>。</block>
+  <block id="b670e0ab1e707dbe8efcea7b75d21631" category="list-text">Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于不同的架构、但它们通常被重新命名为"Oracle虚拟机"。</block>
+  <block id="ffabe20817fc5e7ecdf0ccc29d41e6a2" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 <block ref="e65d5dc611a70f61b74f4247aa5bf590" category="inline-link-macro-rx"></block> 在支持的配置中。其中包括根容器、LLOM I/O域以及使用NPIV访问LUN的LLOM。</block>
+  <block id="8c99899017f52a07cb80447f61ad907e" category="list-text">仅使用虚拟化存储资源(例如)的分区或虚拟机<block ref="dd1b72ccf817859175e584ec8bd92247" prefix=" " category="inline-code"></block>，不需要特定的限制条件，因为它们不能直接访问NetApp LUN。只能在中找到直接访问底层LUN的分区或虚拟机、例如LDOM I/O域 <block ref="5564eab34da8df006dd99a2c2ee21d68" category="inline-link-macro-rx"></block>。</block>
+  <block id="3fd445473ec7cd69e206687f4d1c9b41" category="paragraph">如果在 LDOM 中将 LUN 用作虚拟磁盘设备，则虚拟化会屏蔽 LUN 的源，而 LDOM 将无法正确检测块大小。要防止出现此问题描述、必须修补_Oracle错误信息：_oracle错误信息：9824910_和<block ref="3328fba80b08b36663ffae0684f6c578" prefix=" " category="inline-code"></block> 必须创建将虚拟磁盘的块大小设置为的文件<block ref="f7efa4f864ae9b88d43527f4b14f750f" prefix=" " category="inline-code"></block>。有关详细信息、请参见Oracle文档：2157669.1。</block>
+  <block id="25bf44f4015fc028f21a62c878e44061" category="list-text">运行<block ref="1615297782a0dff59b20451e2ca97ea7" prefix=" " category="inline-code"></block> 并验证*ashift,的值是否为<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>。</block>
+  <block id="83b7acfdc97d935459ec53ae7ab7bf2b" category="paragraph">如果*ashift,的值不是<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>，验证是否安装了正确的修补程序，然后重新检查的内容<block ref="3328fba80b08b36663ffae0684f6c578" prefix=" " category="inline-code"></block>。</block>
+  <block id="22e4e094e328e606ba04a7acfe2e4b3b" category="paragraph">在*ashifift *显示的值为之前，请勿继续操作<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>。</block>
+  <block id="ca1d91e2d1ade577213cc4880d92b088" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。有关追加信息和建议的默认设置更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
+  <block id="1abf5d50c59892ce0d08917cc4119e38" category="paragraph">Solaris 11.4 with ONTAP发行版具有以下已知问题：</block>
+  <block id="ea97d5c2ead91159f0f6b9bb0c5482a0" category="cell">请参见Solaris 11.4和HUK建议。FC驱动程序绑定已从更改为<block ref="4ac64d4c80a809df47ac078b5c56d623" prefix=" " category="inline-code"></block> to<block ref="0d1e6498671862209810e5029cd1e779" prefix=" " category="inline-code"></block>。从移动现有配置<block ref="d5ef7f69fa74e42b54d8244ee447ab2b" prefix=" " category="inline-code"></block> to<block ref="88cafedaeae385b0e8278ab1804829cd" prefix=" " category="inline-code"></block> 如Oracle文档2595926.1中所述)。在新安装的Solaris 11.4系统和从Solaris 11.3或更早版本升级的系统中，此行为会有所不同。</block>
+  <block id="65afcaea10e26dc5c66de4f6bf0ade99" category="cell">在x86 Arch上使用Emulex 32G主机总线适配器(HBA)执行存储故障转移(Storage Failover、SFo)恢复操作期间、系统会注意到Solaris LIF问题描述</block>
+  <block id="6fd6cac960c790ec771aa2a46b85554f" category="cell">在x86_64平台上、Emulex固件版本12.6.x及更高版本会注意到Solaris LIF问题描述。</block>
+  <block id="724f60d60d5d6eb7dda595c8816bc22f" category="cell">Solaris 11.x<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 导致端到端Emulex配置出现I/O错误</block>
+  <block id="bc3d78b9928b53d2bf1c5a9d42dda638" category="cell">正在运行<block ref="cb4b12dfd645e3fcd47ea6dec988643f" prefix=" " category="inline-code"></block> 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中得到修复</block>
+  <block id="9a3d1b207d17fa417c10e7c159b0b0fd" category="cell">使用操作系统本机命令在具有ASA/pport的Solaris主机上报告异常路径</block>
+  <block id="b3158ff5812b423b7633a78e4d877db7" category="cell">在使用全SAN阵列(ASA)的Solaris 11.4上发现间歇性路径报告问题。</block>
 </blocks>
