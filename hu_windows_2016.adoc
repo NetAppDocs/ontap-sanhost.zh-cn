@@ -18,6 +18,9 @@ summary: 将 Windows Server 2016 与 ONTAP 结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2016。
+
 
 
 == 正在启动操作系统
@@ -145,6 +148,6 @@ NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设
 
 
 
-== 已知限制
+== 已知问题
 
-Windows Server 2016 没有已知问题。
+具有ONTAP版本的Windows Server 2016没有已知问题。

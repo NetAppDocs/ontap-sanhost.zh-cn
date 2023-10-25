@@ -18,6 +18,9 @@ summary: 介绍如何将Oracle Linux 9.1与ONTAP结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将使用ONTAP的Oracle Linux 9.1配置为目标。
+
 
 
 == 安装 Linux Unified Host Utilities

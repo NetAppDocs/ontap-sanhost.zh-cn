@@ -18,6 +18,9 @@ summary: 介绍如何将Red Hat Enterprise Linux 8.8与ONTAP结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 8.8配置为目标ONTAP。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -293,4 +296,4 @@ devices {
 
 == 已知问题
 
-RHEL 8.8没有已知问题。
+对于安装了ONTAP版本的RHEL 8.8、没有已知问题。

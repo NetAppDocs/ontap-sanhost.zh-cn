@@ -18,6 +18,9 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.8
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 7.8配置为目标ONTAP。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -292,7 +295,9 @@ devices {
 
 
 
-== 已知问题和限制
+== 已知问题
+
+带有ONTAP版本的RHEL 7.8存在以下已知问题：
 
 [cols="4*"]
 |===

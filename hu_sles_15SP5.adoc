@@ -18,6 +18,9 @@ summary: 介绍如何将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的SUSE Linux Enterprise Server 15 SP5。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -287,4 +290,4 @@ devices {
 
 == 已知问题
 
-没有已知问题。
+具有ONTAP版本的SUSE Linux Enterprise Server 15 SP5没有已知问题。

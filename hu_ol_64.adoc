@@ -18,6 +18,9 @@ summary: 介绍如何在 ONTAP 中使用 Oracle Linux 6.4
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 6.4配置为目标。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -265,7 +268,9 @@ NOTE: 要配置 Oracle Linux 6.4 RedHat Enterprise Kernel （ RHCK ），请使�
 
 
 
-== 已知问题和限制
+== 已知问题
+
+具有ONTAP版本的Oracle Linux 6.4存在以下已知问题：
 
 [cols="4*"]
 |===

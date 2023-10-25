@@ -18,6 +18,9 @@ summary: 介绍如何将 Oracle Linux 6.7 与 ONTAP 结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 6.7配置为目标。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -265,9 +268,9 @@ NOTE: 要配置 Oracle Linux 6.7 RedHat Enterprise Kernel （ RHCK ），请使�
 
 
 
-== 已知问题和限制
+== 已知问题
 
-Oracle 6.7 没有已知问题。
+Oracle Linux 6.7 with ONTAP发行版没有已知问题。
 
 
 NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_67.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.7 。

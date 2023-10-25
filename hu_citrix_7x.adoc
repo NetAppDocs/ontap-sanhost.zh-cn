@@ -247,6 +247,6 @@ NOTE: 对于支持的配置， Citrix XenServer 建议对所有基于 Linux 和 
 
 
 
-== 已知问题和限制
+== 已知问题
 
-没有已知问题和限制。
+Citrix XenServer with ONTAP版本没有已知问题。

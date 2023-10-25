@@ -18,6 +18,9 @@ summary: 将 Windows Server 2019 与 ONTAP 结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标Windows Server 2019。
+
 
 
 == 正在启动操作系统
@@ -145,6 +148,6 @@ NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设
 
 
 
-== 已知限制
+== 已知问题
 
-Windows Server 2019 没有已知问题。
+运行ONTAP版本的Windows Server 2019没有已知问题。

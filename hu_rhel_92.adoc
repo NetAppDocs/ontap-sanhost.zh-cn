@@ -18,6 +18,9 @@ summary: 介绍如何将Red Hat Enterprise Linux 9.2与ONTAP结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标Red Hat Enterprise Linux 9.2。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -294,7 +297,7 @@ devices {
 
 == 已知问题
 
-使用ONTAP版本的RHEL 9.2的NVMe-oF主机配置存在以下已知问题：
+使用ONTAP的RHEL 9.2版本存在以下已知问题：
 
 [cols="20, 20, 50,20"]
 |===

@@ -18,9 +18,9 @@ summary: 将Windows Server 2022与ONTAP 结合使用
 :toc-position: content
 
 
-
-
-== 正在启动操作系统
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2022。
+===引导操作系统
 
 启动操作系统有两个选项：使用本地启动或 SAN 启动。要进行本地启动，请在本地硬盘（ SSD ， SATA ， RAID 等）上安装操作系统。有关 SAN 启动的信息，请参见以下说明。
 
@@ -142,6 +142,6 @@ NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设
 
 
 
-== 已知限制
+== 已知问题
 
-Windows Server 2022没有已知问题。
+运行ONTAP版本的Windows Server 2022没有已知问题。

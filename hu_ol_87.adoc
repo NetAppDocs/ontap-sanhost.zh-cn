@@ -18,6 +18,9 @@ summary: 介绍如何将Oracle Linux 8.7与ONTAP结合使用
 :toc-position: content
 
 
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将使用ONTAP的Oracle Linux 8.7配置为目标。
+
 
 
 == 安装 Linux Unified Host Utilities
@@ -296,4 +299,4 @@ NOTE: 要配置Oracle Linux 8.7 RedHat Enterprise Kernel (RHCK)、请使用 link
 
 == 已知问题
 
-Oracle Linux 8.7没有已知问题。
+Oracle Linux 8.7 with ONTAP版本没有已知问题。

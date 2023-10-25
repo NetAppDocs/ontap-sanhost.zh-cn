@@ -267,6 +267,6 @@ NOTE: 有关 Veritas 专用的所有其他设置，请参阅标准 Veritas Infos
 
 
 
-== 已知问题和限制
+== 已知问题
 
-没有已知问题和限制。
+Veritas Storage Foundation 6 for Linux with ONTAP版本没有已知问题。
