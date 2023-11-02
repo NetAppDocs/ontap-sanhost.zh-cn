@@ -1885,20 +1885,10 @@
   <block id="2813f127dc58929fb553bc32684c2e46" category="section-title">已知问题和限制</block>
   <block id="8b777dc32f2f743eb513fca0bfd52348" category="cell">1457017</block>
   <block id="0078173d6c66e3e11217e80e4ecc1d1b" category="cell">`sanlun`安装问题与`libdevmapper.so`和`libnl.so`库相关的警告消息。这些警告不会影响`sanlun` kit的功能。</block>
-  <block id="7431f7a183aa9cfe2910bb761205485d" category="section-title">从何处查找产品文档和其他信息</block>
-  <block id="c5079a4f9245d0085178c5ad194bac89" category="paragraph">您可以访问所有NetApp产品的文档、并在NetApp公司站点的产品文档页面上查找其他产品信息资源、例如技术报告和白皮书。</block>
-  <block id="3ff27b1e3325a6e4ca7c06c3dec9d13c" category="paragraph">*配置和管理ONTAP 存储系统*</block>
-  <block id="86236b49ff131485c2b4de4baab79770" category="inline-link-macro">《ONTAP 软件设置指南》</block>
-  <block id="5bfadca807c3aa6dc047b074d813aff4" category="list-text">。 <block ref="eb97e344065e5b8076466213afb4528b" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
   <block id="e14a95309ebbad9203e12ea129172d1e" category="inline-link-macro">《ONTAP SAN管理指南》</block>
   <block id="0088ffe866af761d6d172abf73c2504c" category="list-text">。 <block ref="dcbc5977eb4eae232288be25155552fa" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
   <block id="626a7cbe056796bcb1c158b143866230" category="inline-link-macro">《 ONTAP 发行说明》</block>
   <block id="a60d936499718f3c1e7b5ddddae45c91" category="list-text">。 <block ref="6991a2ee8a93b15fb816a46b15ea0677" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
-  <block id="77fcedc082e9efc45f62c54e77698ccc" category="paragraph">*配置和管理E系列存储系统*</block>
-  <block id="027a98b335c07e30bf607b1f1bca9a1f" category="list-text">适用于您的协议的《SANtricity 存储管理器Windows配置和配置快速指南》</block>
-  <block id="1dd312da5024844045e50a58abaf9db6" category="list-text">适用于您的操作系统、协议和SANtricity 版本的《SANtricity 存储管理器配置和配置快速指南》。</block>
-  <block id="353be7c67f0bea9221f8808465816d0c" category="list-text">适用于您的SANtricity 版本的《SANtricity 存储管理器软件安装参考》。</block>
-  <block id="eb6dfbdfc2c6cfdacfb27a9630c40334" category="list-text">适用于您的SANtricity 版本的《SANtricity 存储管理器发行说明》。</block>
   <block id="5f93f381aa8df330451fa5b834f54def" category="inline-link-macro">E 系列文档</block>
   <block id="2c0074fce84282581b2b52e56eacf78e" category="sidebar">安装LUhu 7.1</block>
   <block id="3e88abad927ef9520e50cf89d3f1ddf7" category="paragraph">您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。</block>
@@ -2087,26 +2077,12 @@
   <block id="125c89a36748abb41fb38e89f5009ec9" category="inline-link-macro">将Windows Server 2022与ONTAP 结合使用</block>
   <block id="eff83cf87307f9f0c4cf876914031ade" category="inline-link-macro">安装Windows修补程序</block>
   <block id="74c96d3ba2305a0f126dc2494f4cd977" category="admonition"><block ref="c6686e038b760393cddd662d474b7627" category="inline-link-macro-rx"></block> 提供有关的说明 <block ref="9dcc96c7a1b888cfbb8ae39c864be341" category="inline-link-macro-rx"></block> 对于Windows Server 2022。请参见"主机配置"类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。</block>
-  <block id="34eb6bacd27b9f225e7ca9de29f4668b" category="paragraph">通过Windows Unified Host Utilities、您可以将Windows主机计算机连接到NetApp存储系统。Windows Unified Host Utilities包含一个安装程序、用于设置所需的Windows注册表和HBA值。</block>
-  <block id="8e81245b7f02b8484320ddb3e4b13c18" category="list-text">Windows 2012</block>
-  <block id="1347f9ce905795bee095e16712f81913" category="list-text">Windows 2012R2</block>
-  <block id="4083fee85864d55c66d5e0b21a7928b3" category="list-text">Windows 2016</block>
-  <block id="0a412bceaa4a8d671231ab04d2e0296e" category="list-text">Windows 2019</block>
-  <block id="3ffd22c07b48a1c76b76f941ad1cad96" category="list-text">Windows 2022</block>
-  <block id="f30ac79774ac72cad690c3f814efd2fa" category="admonition">NetApp对Host Utilities软件两个版本之间的其他组件进行了资格认定。有关系统要求的最新信息、请参见 <block ref="454ffc53fb26d285d765b8fbe8c25a5d" category="inline-link-macro-rx"></block>。</block>
   <block id="ff71b00ca4f59efb041754af8a3c5633" category="paragraph">Windows Unified Host Utilities 7.1支持E系列存储系统、支持ONTAP 9及更高版本、并增强了iSCSI超时功能、可加快故障转移速度。</block>
-  <block id="2f7c358042ffb7d37991aff648b1cb3d" category="section-title">重要注意事项</block>
-  <block id="aacc0d256c74ef3a06a601980b807a0e" category="paragraph">在部署最新版本的Windows Host Utilities之前、您必须阅读可用信息、以帮助您确定并解决可能影响系统运行的问题。</block>
-  <block id="7cd36e8f4d329b5cfafec87711c36cbd" category="paragraph">有关单个错误的详细信息以及探索其他与错误相关的工具、请参见 <block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block>。</block>
-  <block id="14604b92d34df545c8df1df02158a241" category="section-title">安装所需的修补程序</block>
-  <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Windows Host Utilities文档</block>
   <block id="95dc0391ce7b396d7dd5622284e8fc3e" category="section-title">已知问题</block>
   <block id="56659c18435d50a38e076a58b32163a4" category="cell">运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本</block>
-  <block id="ea42119311b1ebffaae8c2a3d60d8cfd" category="cell">您不再需要运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 用于更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时的脚本、因为正在使用默认超时设置。。<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 先前版本的Host Utilities中包含的脚本不再包含在Windows Unified Host Utilities中。Windows Unified Host Utilities 7.1使用默认磁盘超时设置。</block>
   <block id="e91b41f5f9d74fcfaa3733fe1534d7c8" category="cell">使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接</block>
   <block id="03a5ef9a07e32294246c302f24714cba" category="cell">在多路径I/O (MPIO)配置或同时具有IPv4和IPv6端点的多个会话连接(MCS)配置中、某些iSCSI会话可能无法在重新启动Windows主机后重新连接。</block>
   <block id="9ffe40d778f0a3ffe9e1f6de2a49fb40" category="cell">iSCSI软件启动不支持MCS</block>
-  <block id="63f871187249b3071dc36a54982c1e17" category="cell">如果将iSCSI软件启动与每个会话的iSCSI多个连接(MCS)结合使用、则无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、从而导致主机崩溃。</block>
   <block id="a77cd68a790d44f2359fe8a4dd45b1dc" category="cell">对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。</block>
   <block id="05aa4f4bc5b51efef2c52f4fb2ddc55f" category="paragraph"><block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。</block>
   <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
@@ -2378,18 +2354,8 @@
   <block id="6faca8b2572cd22ef1b619e4be0a8165" category="paragraph">NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。</block>
   <block id="ffb6c4a21213679507c7941f550bd2c7" category="summary">《Windows Unified Host Utilities发行说明》</block>
   <block id="51372fd44786d9688cfe76623106730b" category="doc">《Windows Unified Host Utilities发行说明》</block>
-  <block id="d203490d9623c1e2d75f42f5f678e00f" category="section-title">关于Windows Unified Host Utilities</block>
-  <block id="c58bbb489cf9a676efa84ccbf8f2d95f" category="paragraph">Windows Unified Host Utilities仍支持以下版本的Windows：</block>
   <block id="d01454be7f3c4cdc6a05c67e9f6dd9a9" category="list-text">Windows Unified Host Utilities 7.2支持NVMe/FC驱动程序参数设置、并可修复新供应商卡的错误。</block>
-  <block id="187b2c71236e059ed6f664dc1411522d" category="paragraph">要确保成功安装或升级Windows Unified Host Utilities、您需要安装特定的Windows修补程序。某些修补程序是Windows更新的一个组件。</block>
-  <block id="9644563034c132befaa37ffb45768f62" category="paragraph">请参见 <block ref="b3cd2c632efe322584e2546723e4258f" category="inline-link-macro-rx"></block> 以满足您的特定配置修补程序要求。</block>
-  <block id="93ce7e3cf1064757d340e99f7eaeb042" category="paragraph">在7.1版中、我们发现了一些意外的、可能不受欢迎的行为、以及在某些情况下避免这些行为的解决方法。</block>
   <block id="6136261711c49bf0e8e1dcb22a2c524f" category="cell">不适用</block>
-  <block id="644434a661679638ee73920a1fe05471" category="cell">要在重新启动后验证所有iSCSI路径是否均返回、请使用所有IPv4端点或所有IPv6。请勿混合使用IPv4和IPv6。</block>
-  <block id="0208bd845202f1393154775e9ceb1968" category="section-title">关于SAN主机配置文档</block>
-  <block id="dc4ae5e39f966feaee538e0bac3d396d" category="inline-link-macro">ONTAP SAN主机配置文档</block>
-  <block id="fea53c4695433409c2501af776af21c3" category="paragraph">有关SAN主机实用程序的文档、请参见 <block ref="83855932909dca92603efe77cb42c173" category="inline-link-macro-rx"></block>。ONTAP SAN主机配置文档是累积的、涵盖所有当前的SAN主机版本。各个版本之间的任何功能差异都会在上下文中注明。</block>
-  <block id="b941110e14a54d454e0dea4fa380b5b9" category="list-text">适用于您的SANtricity 版本的SANtricity 存储管理器多路径驱动程序指南。</block>
   <block id="54ed56ff6f53cace0a89cfd9c793d498" category="paragraph">您还可以使用建议的设置来配置基于内核的虚拟机(KVM)。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。</block>
   <block id="e0a63b6c7b84f763f3ca8d8b86db69b8" category="summary">Windows统一主机实用程序包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理NetApp ONTAP 和E系列平台的存储系统行为。</block>
   <block id="e16334a1a12d2e212a82720b2f25b627" category="doc">Windows Unified Host Utilities 7.2</block>
@@ -2534,7 +2500,6 @@
   <block id="8f4e34dd626d27db6da17b83e4d7f329" category="cell">Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误</block>
   <block id="a387e31363493fb3c0fbdcc0d7458c52" category="list-text">解压缩文件。</block>
   <block id="8fe0dc9943c3dbce8070a7613545cb91" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于x86－64平台，请使用<block ref="2dea9af09f7e80915b8298deb9ca9b8a" prefix=" " category="inline-code"></block> 软件包。</block>
-  <block id="a15ed55b009e93df31791bff39016875" category="paragraph">请参见 <block ref="a39850964251401babb6e797f9dd15c1" category="inline-link-macro-rx"></block> 查找SANtricity 相关文档。</block>
   <block id="ec1f030f0caddb932644a46761f74630" category="list-text"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block></block>
   <block id="e0ace13bee28a678ec04ad1b076b4b00" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有igrou设置、因此无需在VVOLs环境中创建或管理iGroup。</block>
   <block id="a2093eec2c1b326b4a76efce454cc95a" category="paragraph">有关配置和管理 VVOL 的详细信息，请参见适用于 VMware vSphere 的 ONTAP 工具文档以及<block ref="fc9815e7b1405959c49ad47e9a23e3a5" category="inline-link-rx"></block> 和 <block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
@@ -3124,7 +3089,6 @@
   <block id="2ad9563dae62baefb397a0b93e22f08a" category="list-text">在Red Hat Enterprise Linux (RHEL) 6和RHEL 7主机上、现在支持一个经过调整的软件包、用于设置服务器配置文件。您可以使用<block ref="44559c6617511944fd997c63b107ee6b" prefix=" " category="inline-code"></block> 命令以根据环境设置不同的配置文件。例如、您还可以将虚拟子系统配置文件用作子虚拟机、并将企业存储配置文件用于使用企业存储阵列中的LUN的配置。使用这些经过调整的软件包可以提高ONTAP的吞吐量和延迟。</block>
   <block id="b91c8d257cb2ab1f821c4201c4d98d12" category="list-text">增加了对Broadcom Emulex和Marvell Qlogic中32 Gb FC适配器的支持。</block>
   <block id="a26aa7b42e8c5d7d2a6c295dc3421eb4" category="paragraph">正确的配置对于获得最佳性能和成功进行故障转移至关重要。</block>
-  <block id="8b98a90c0f8d947a6126ce4314f1d147" category="paragraph">本发行说明文档提供了有关Windows Unified Host Utilities 7.2和7.1版的最新信息、包括有关新增功能、增强功能和已知问题的更新。当有关使用Windows Host Utilities的新信息可用时、本文档将进行更新。</block>
   <block id="d183f649aa9dd1befe9fbbbebb9ce6f3" category="paragraph">在此示例中、我们将确定设备的WWID并添加到中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件</block>
   <block id="9befbb0a2a211b5683af5265f22799fb" category="paragraph"><block ref="59b466fd93164953e56bdd1358dc0044" prefix="" category="inline-code"></block> 是我们需要将其添加到黑名单中的本地SCSI磁盘。</block>
   <block id="8f832cd06827c0d578f135a31564e7cf" category="summary">介绍如何将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用</block>
@@ -3580,4 +3544,9 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="f0602fb611da233f60bc957edbba1033" category="sidebar">安装SAN Host Utilities</block>
   <block id="a4d5754af636a6318ee2ffcd80c52e27" category="sidebar">Linux Unified Host Utilities</block>
   <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
+  <block id="9338e945bac01c9e32a8c2af440cac72" category="paragraph">本发行说明介绍了一些新增功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定Windows主机相关的重要注意事项。</block>
+  <block id="d2fedb92befc8dc2e258f7e604f48c11" category="paragraph">您应了解以下已知问题和限制、这些问题和限制可能会影响特定主机的性能。Windows Unified Host Utilities 7.1版中确定了一些意外的和可能不希望出现的行为、以及避免这些行为的解决方法。</block>
+  <block id="4f87354ce94dcb67a9c01f1fd7b4ea2c" category="cell">您不再需要运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 用于更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时的脚本、因为正在使用默认超时设置。。<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 以前版本的Host Utilities中包含的脚本不再包含在Windows Unified Host Utilities 7.1版中。Windows Unified Host Utilities 7.1使用默认磁盘超时设置。</block>
+  <block id="58bd1409abe12b095d09bb31094aafa1" category="cell">使用所有IPv4端点或IPv6端点。请勿混合使用IPv4和IPv6。</block>
+  <block id="3efca860156d5ad3cdf93f3fcef9b74c" category="cell">如果将iSCSI软件启动与iSCSI每个会话多个连接(MCS)结合使用、则无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、从而导致主机系统中断。</block>
 </blocks>
