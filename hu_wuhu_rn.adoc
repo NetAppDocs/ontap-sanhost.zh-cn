@@ -48,6 +48,6 @@ summary: 《Windows Unified Host Utilities发行说明》
 | 使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接 | 在多路径I/O (MPIO)配置或同时具有IPv4和IPv6端点的多个会话连接(MCS)配置中、某些iSCSI会话可能无法在重新启动Windows主机后重新连接。 | 使用所有IPv4端点或IPv6端点。请勿混合使用IPv4和IPv6。 
 
 
-| iSCSI软件启动不支持MCS | 如果将iSCSI软件启动与iSCSI每个会话多个连接(MCS)结合使用、则无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、从而导致主机系统中断。 | 对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。 
+| iSCSI软件启动不支持每秒多个连接(MCS) | 将iSCSI软件启动与iSCSI MCS结合使用时、无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、并导致发生原因主机系统中断。 | 对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。

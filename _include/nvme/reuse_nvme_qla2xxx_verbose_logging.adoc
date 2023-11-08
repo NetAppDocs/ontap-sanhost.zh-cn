@@ -6,12 +6,19 @@ NVMe/FC没有类似于的特定qla2xxx日志记录 `lpfc` 驱动程序。而是�
 
 .步骤
 . 将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。
-. 运行 `dracut -f` 命令重新创建 `initramfs` ，然后重新启动主机。
-. 重新启动后，验证是否已按如下所示应用详细日志记录：
+. 执行 `dracut -f` 命令、然后重新启动主机。
+. 重新启动后、验证是否已启用详细日志记录：
 +
 [listing]
 ----
 # cat /etc/modprobe.d/qla2xxx.conf
+----
++
+示例输出：
+
++
+[listing]
+----
 options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 # cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
 507510784

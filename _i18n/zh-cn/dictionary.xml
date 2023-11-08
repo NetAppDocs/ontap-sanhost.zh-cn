@@ -362,7 +362,6 @@
   <block id="32ef1514a118a90d123d7385cc9d865f" category="paragraph">您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。</block>
   <block id="481485305bd44028530f59a9a9614451" category="paragraph">RHEL 6.9 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="639757de418f2423907f2b63fbc1458b" category="paragraph">首次创建此文件时，您可能需要启用并启动多路径服务。</block>
-  <block id="6e7eef95f0e9ee9b717340ce72d65e5b" category="paragraph">不需要直接向 `multipath.conf` 文件添加任何内容，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。</block>
   <block id="36da0e0b56843a1256e96e81029390fa" category="paragraph">您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。</block>
   <block id="ff73d7e0f0c6051bbd80575105bb1cb1" category="list-text">将此 WWID 添加到 ` /etc/multipath.conf` 中的黑名单 stanza 中：</block>
   <block id="e652073cb2a43641b24496c09164f62a" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。</block>
@@ -1635,9 +1634,6 @@
   <block id="01e99a43df9a9e103daa49144d80325a" category="list-text">使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="996bc8c555f8b2265c43a9a361d7bcd2" category="list-text">验证是否已设置 `ql2xnvmeenable` ，以使 Marvell 适配器能够使用以下命令作为 NVMe/FC 启动程序运行：</block>
   <block id="0199c49af15b1997cf6d2ddd0ea8adf4" category="list-text">将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。</block>
-  <block id="5d14823339a99ad173c461c5934c7795" category="list-text">运行 `dracut -f` 命令重新创建 `initramfs` ，然后重新启动主机。</block>
-  <block id="18c1ce7cd10cb855d9571af493e60d2f" category="list-text">重新启动后，验证是否已按如下所示应用详细日志记录：</block>
-  <block id="bd578ecd5b4e2ae0680ca3e17e20ed2a" category="cell">`NVMe-CLI` 显示的错误</block>
   <block id="e8a5a7214d896558232c2e63f40a05c2" category="cell">可能的发生原因</block>
   <block id="7aebfa1e2291377e040de92d7f7f335f" category="cell">临时解决策</block>
   <block id="37ea58a1ef8410b6d6bf6ec383fdb9bb" category="cell">`无法写入 /dev/nve-Fabric ：参数` 无效</block>
@@ -1891,7 +1887,6 @@
   <block id="a60d936499718f3c1e7b5ddddae45c91" category="list-text">。 <block ref="6991a2ee8a93b15fb816a46b15ea0677" category="inline-link-macro-rx"></block> 适用于您的ONTAP 版本</block>
   <block id="5f93f381aa8df330451fa5b834f54def" category="inline-link-macro">E 系列文档</block>
   <block id="2c0074fce84282581b2b52e56eacf78e" category="sidebar">安装LUhu 7.1</block>
-  <block id="3e88abad927ef9520e50cf89d3f1ddf7" category="paragraph">您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。</block>
   <block id="51f210eb8bfa53321744e9dca7258c87" category="paragraph">Oracle Linux 8.1 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="60f09d4774647857c92f5a51f6de2354" category="paragraph">Oracle Linux 8.0 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="ffe5b32185032e3b293e94d4a0232f34" category="paragraph">Oracle Linux 8.2 操作系统经过编译，可以识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -2010,31 +2005,9 @@
   <block id="75d2257ae841105f67aa7e6940b3fccb" category="list-text">要列出NVMe命名空间的路径数、请使用以下命令：</block>
   <block id="aaf285a33d84d021ddb3cf7d93395617" category="paragraph">对于SUSE Linux Enterprise Server 15 SP4、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP4是使用识别和正确管理ONTAP LUN所需的所有设置进行编译的。</block>
   <block id="3dfda629d29a9eff997fc21c726b36da" category="paragraph">对SUSE Linux Enterprise Server 15 SP4操作系统进行了编译、以识别ONTAP LUN并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
-  <block id="bdb5443c5dd9643367f9496b5fb35d08" category="paragraph">要启动多路径守护进程、必须存在`multipath.conf`文件、但您可以使用以下命令创建一个空的零字节文件：`touch /etc/multipath.conf`</block>
-  <block id="a96d8f77801154cf5d51080e06fa3215" category="paragraph">将`&lt;DevID&gt;`替换为要排除的设备的`WWID`字符串。使用以下命令确定`WWID`：</block>
   <block id="9d29c9f01ddee621ba147e8ccc4bc7b0" category="list-text">运行以下命令以确定`WWID`：</block>
-  <block id="e97b2c87e2a473e6975fd85e7af8bc02" category="list-text">将此`WWID`添加到`/etc/multipath.conf`中的黑名单stanza中：</block>
-  <block id="588664bdfe3aca23316ad7f26a08e2a5" category="paragraph">下表显示了ONTAP LUN的关键多路径参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
   <block id="cf79be42f6c9a2f2225f202bfec080c2" category="sidebar">15 SP4</block>
   <block id="8da61845fa1ac07e5d54097fe9d2a4cb" category="summary">介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVMe/FC</block>
-  <block id="8eb74debb51b4f25feba23cb4c810b37" category="doc">适用于采用ONTAP 的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置</block>
-  <block id="c75db19ac5a0dcb194a365e12ad2a6df" category="paragraph">采用ANA (非对称命名空间访问)的SUSE Linux Enterprise Server 15 SP4 (SLES15 SP4)支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA 是 NVMe-oF 环境中的 ALUA 等效产品，目前已通过内核 NVMe 多路径实施。此处详细介绍了如何在SLES15 SP4和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。</block>
-  <block id="6bf6f26e72e1a43152386a3d529598cb" category="list-text">SLES15 SP4支持NVMe/FC和其他传输。</block>
-  <block id="142ea2bd2623f2c2d64d9ef53c347b24" category="list-text">不支持`sanlun` nve-oF。因此、在SLES15 SP4上、不支持对NVMe-oF使用任何Lu支持。您可以改用原生 `NVMe-CLI`中包含的NetApp插件。此操作应适用于所有 NVMe-oF 传输。</block>
-  <block id="10bc893eed35189e5092c4f181aedb5e" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。实际上、这应该是通常部署的主机配置。因此、对于SCSI、您可以像往常一样为SCSI LUN配置`dm-multipath`、从而生成mpath设备、而NVMe多路径则可用于在主机上配置NVMe-of多路径设备。</block>
-  <block id="4b148e1d7f44cff075101f1edbc6a9fe" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
-  <block id="b545ab3ca975cd0517fdd21a1729e795" category="paragraph">默认情况下、内核NVMe多路径已在SLES15 SP4等SLES主机上启用。因此，此处不需要其他设置。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
-  <block id="4933033127862860b194cbe455635310" category="list-text">确认SLES15 SP4 MU主机上安装了所需的内核和`NVMe-CLI`维护更新(维护更新)(MU)软件包。</block>
-  <block id="c5887937b5b23714e6333cc2805b4864" category="list-text">检查主机上`/etc/nve/hostnqn`处的`hostnqn`字符串、并确保其与ONTAP 阵列上相应子系统的`hostnqn`字符串正确匹配。例如：</block>
-  <block id="d9f4f7d9a9eb182e8b8863d6c183e841" category="paragraph">根据主机上使用的FC适配器、继续执行以下步骤。</block>
-  <block id="75870a630c07f219a37133dad55f104f" category="paragraph">较新的lpfc驱动程序(收件箱和发件箱)已将`lpfc_enable_FC4_type` default设置为3、因此、您不再需要在`/etc/modprobe.d/lpfc.conf`中明确设置此设置、并重新创建`initrd`。默认情况下，已启用 `lpfc NVMe` 支持：</block>
-  <block id="32ecb9890aed827558c7cd1a318fda14" category="paragraph">现有的原生收件箱 lpfc 驱动程序已经是最新版本，并且与 NVMe/FC 兼容。因此、您无需安装lpfc即装即用(OOB)驱动程序。</block>
-  <block id="ce48d43c1e6c7a418733e722925a43b8" category="list-text">确认 NVMe/FC 启动程序端口已启用，并且您能够看到目标端口，并且所有端口均已启动且正在运行。在此示例中、仅启用了一个启动程序端口、并与两个目标LIF进行连接、如输出所示：</block>
-  <block id="bc1eafdc5546c34f6a9034570437fcc0" category="list-text">运行dracut -f命令、然后重新启动主机。</block>
-  <block id="61efa8d63e1b266809e1e79422fed58f" category="paragraph">较新的SLES15 SP4 MU内核中包含的原生 收件箱qla2xxx驱动程序具有最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。</block>
-  <block id="859c1dcdb0decd8fe22f184abe2b92f7" category="list-text">路径恢复后无自动重新连接NVMe/TCP无法自动重新连接到路径关闭后10分钟的默认`Ctrl-los-tm`计时器之后恢复的路径。</block>
-  <block id="1077e8ad3542ff8af32bed26b6b21ee8" category="list-text">主机启动期间无自动连接NVMe/TCP也无法在主机启动期间自动连接。</block>
-  <block id="b2edbac4a48e893081ffbe4cda9a7dec" category="list-text">验证相应ONTAP 命名空间的适当NVMe-oF设置(例如、将型号设置为NetApp ONTAP 控制器并将负载平衡程序设置为轮循)是否正确反映在主机上：</block>
   <block id="0882578f9915da36a8ab5c612728ad30" category="paragraph">示例(A)：</block>
   <block id="806707e47ee8fe684a6d5e5b0898539a" category="sidebar">NVMeF OL</block>
   <block id="0b6a095cb9010243600ae8c7163d4eab" category="summary">适用于采用ONTAP 的Windows Server 2022的NVMe/FC主机配置</block>
@@ -2082,7 +2055,6 @@
   <block id="56659c18435d50a38e076a58b32163a4" category="cell">运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本</block>
   <block id="e91b41f5f9d74fcfaa3733fe1534d7c8" category="cell">使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接</block>
   <block id="03a5ef9a07e32294246c302f24714cba" category="cell">在多路径I/O (MPIO)配置或同时具有IPv4和IPv6端点的多个会话连接(MCS)配置中、某些iSCSI会话可能无法在重新启动Windows主机后重新连接。</block>
-  <block id="9ffe40d778f0a3ffe9e1f6de2a49fb40" category="cell">iSCSI软件启动不支持MCS</block>
   <block id="a77cd68a790d44f2359fe8a4dd45b1dc" category="cell">对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。</block>
   <block id="05aa4f4bc5b51efef2c52f4fb2ddc55f" category="paragraph"><block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。</block>
   <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
@@ -2103,7 +2075,6 @@
   <block id="3972a4868b0682bd7aa086e3f90df6a5" category="paragraph">在此示例中、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
   <block id="b23eda8b5a2eb7f788559c0df550f0fa" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="ed53d9bb40cf906cb73ab578cb3adb1d" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
-  <block id="9ac1e2761e536d1b08b677a24976cad9" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 在期间、计时器重试时间(例如30分钟、可通过-l 1800设置)<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block> 以便在路径丢失时重试较长时间。例如：</block>
   <block id="1272c37c0c38bd618d6d76d763f54041" category="paragraph">在本示例中、对于Citrix虚拟机管理程序8.x、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
   <block id="1de6caecfe16b961f2f1c858579203f0" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="557c4124a10a18982aa7103d5c4f8b02" category="paragraph">在本示例中、对于Citrix XenServer 7.x、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
@@ -3548,5 +3519,74 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="d2fedb92befc8dc2e258f7e604f48c11" category="paragraph">您应了解以下已知问题和限制、这些问题和限制可能会影响特定主机的性能。Windows Unified Host Utilities 7.1版中确定了一些意外的和可能不希望出现的行为、以及避免这些行为的解决方法。</block>
   <block id="4f87354ce94dcb67a9c01f1fd7b4ea2c" category="cell">您不再需要运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 用于更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时的脚本、因为正在使用默认超时设置。。<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block> 以前版本的Host Utilities中包含的脚本不再包含在Windows Unified Host Utilities 7.1版中。Windows Unified Host Utilities 7.1使用默认磁盘超时设置。</block>
   <block id="58bd1409abe12b095d09bb31094aafa1" category="cell">使用所有IPv4端点或IPv6端点。请勿混合使用IPv4和IPv6。</block>
-  <block id="3efca860156d5ad3cdf93f3fcef9b74c" category="cell">如果将iSCSI软件启动与iSCSI每个会话多个连接(MCS)结合使用、则无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、从而导致主机系统中断。</block>
+  <block id="194918718b492bb08c4ceb2c1063575c" category="paragraph">。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用命令创建一个空的零字节文件：<block ref="307e748c432594fde04ec1d02c6808e4" prefix=" " category="inline-code"></block>。</block>
+  <block id="80b3dcca095ff047032f5421282d56f0" category="paragraph">替换<block ref="2f7ac3c5a9070e3fa18615d7bf03ce76" prefix=" " category="inline-code"></block> 使用<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 要排除的设备的字符串。使用以下命令确定<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block>：</block>
+  <block id="b76bbd9898d442ee1f504e1dbfcd8bb1" category="list-text">添加<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 中黑名单的值<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
+  <block id="3b839ec0f9be7e06670afc4a1a40f03f" category="paragraph">下表显示了ONTAP LUN的关键多路径参数以及所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在中的后续步骤中进行更正<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 具体适用于ONTAP LUN。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
+  <block id="b257f5893979fe648d54dcf693a4e4cb" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件定义的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法删除这些参数、则可以专门针对具有设备标准的ONTAP LUN进行更正。</block>
+  <block id="11bc52330473c77af7c9af92d91670d8" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置</block>
+  <block id="1e0824a41921c35ae75109745c612112" category="paragraph">具有非对称命名空间访问(AANA)的SUSE Linux Enterprise Server (SLES) 15 SP4支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的AUA多路径功能、并通过内核NVMe多路径实施。</block>
+  <block id="4cf7fe92c394fa4fc2b1bf18982c0e2a" category="paragraph">以下支持适用于采用ONTAP的SLES 15 SP4的NVMe-oF主机配置：</block>
+  <block id="6a3b837c447567576db8a7b274129d75" category="list-text">支持NVMe安全带内身份验证</block>
+  <block id="9a92ce4e989d773249e020a05ba01fda" category="list-text">支持使用唯一发现NQN的永久性发现控制器(PDC)</block>
+  <block id="23a3dd6969f2fd3146cb091b83b4ac09" category="list-text">NVMe-oF不支持sanlun。因此、SLES15 SP5主机上的NVMe-oF不支持主机实用程序。您可以依靠本机NVMe-CLI软件包中提供的NetApp插件来进行所有NVMe-oF传输。</block>
+  <block id="77539abf8642dd04b00f6fdcfa4b1b88" category="paragraph">您可以为Broadcom/Emulex FC适配器或Marvell/Qlogic FC适配器配置NVMe/FC。</block>
+  <block id="8a747e40f001b558841e011caff1be9d" category="list-text">确认您使用的是建议的适配器型号：</block>
+  <block id="98e60d5165e4e32dd13ecc867cd3fe85" category="list-text">验证适配器型号问题描述：</block>
+  <block id="77f11940400c51d3757e984a0832fa8c" category="list-text">验证是否正在使用建议的Emulex主机总线适配器(HBA)固件版本：</block>
+  <block id="e316d8e318452be8fb3f411a5b75740a" category="list-text">验证是否正在使用建议的lpfc驱动程序版本：</block>
+  <block id="4cd8a0ed1af264c4d308453d188bf895" category="list-text">验证是否可以查看启动程序端口：</block>
+  <block id="ed1d503af7b244498872a4e8f68ad0ea" category="list-text">验证启动程序端口是否联机：</block>
+  <block id="ff477f85b2409de7be48c00555d051c9" category="list-text">验证NVMe/FC启动程序端口是否已启用且目标端口是否可见：</block>
+  <block id="7e0cbf28ccc89995c1daf32f5daedd02" category="paragraph">在此示例中、一个启动程序端口已启用、并与两个目标生命周期关联。</block>
+  <block id="e86acb5227ff2edf84308d3a10d6883d" category="list-text">SLES 15 SP4内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="77c96566e3c78688f34abe91700ea32c" category="list-text">验证是否已<block ref="a8961a0cb8d5dfd91556db806f0f2cfc" prefix=" " category="inline-code"></block> 参数设置为1：</block>
+  <block id="0c1b72e395c1933da2da0ebb8f7fe9a0" category="section-title">启用NVMe服务</block>
+  <block id="59888b5268cc13974726c98a3d894d8d" category="paragraph">您可以使用以下操作步骤启用NVMe服务。</block>
+  <block id="f409d4c6497d1c2cec5c498fdcdaf32f" category="paragraph">中包含两个NVMe/FC启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 但是、_ONLY _<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> 已启用、可在系统启动期间启动； <block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 未启用。因此、您需要手动启用<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 在系统引导期间启动。</block>
+  <block id="404c9db3810293328aa6b6e3e3d75b2f" category="list-text">-enable<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>：</block>
+  <block id="46bb931cbfa3a27a99c1f1877eeee986" category="list-text">请验证<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 和<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> 在系统启动后运行：</block>
+  <block id="baada05b728885e319c5403cda805aab" category="paragraph">您可以使用以下操作步骤配置NVMe/TCP。</block>
+  <block id="5f4f678aad12f1e93623021404b1cd76" category="list-text">验证所有其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：</block>
+  <block id="99c66119d6b08daedeeade4ea3314f28" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：</block>
+  <block id="8b1603b35e6819621dc1f0cc444c575f" category="admonition">NetApp建议设置<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block> 选项<block ref="6bb61e3b7bce0931da574d19d1d82c88" prefix=" " category="inline-code"></block> 这样、如果路径丢失、NVMe/TCP启动程序就会无限期地尝试重新连接。</block>
+  <block id="06de15d425458e9e7eaf5908bf68638b" category="list-text">验证主机是否具有适用于ONTAP NVMe命名卷的正确控制器型号：</block>
+  <block id="f82da621d58f05378174a2c3b797cc33" category="list-text">验证相应ONTAP NVMe I/O控制器的NVMe I/O策略：</block>
+  <block id="fcb5bee63d6460f40e0f810d9b88ff19" category="list-text">验证ONTAP名称卷是否对主机可见：</block>
+  <block id="051e7c8fe85493aa4fca34ecb724d7f5" category="paragraph"><block ref="7ee98ee108f160c92a9c1dd2307ab6a5" prefix="" category="inline-code"></block></block>
+  <block id="462943f55eaa51bdddde8bbb7361ad5a" category="paragraph"><block ref="bef03e474ce211e47fcb917ac4b0601e" prefix="" category="inline-code"></block></block>
+  <block id="80782d927009a28ba6444564924d02eb" category="section-title">发现增强功能</block>
+  <block id="859f68c87f883fa78618600b15339105" category="paragraph">从ONTAP 9.11.1开始、您可以使用以下操作步骤为SLES 15 SP4主机创建永久性发现控制器(PDC)。要自动检测NVMe子系统添加或删除方案以及对发现日志页面数据的更改、需要PDC。</block>
+  <block id="d48ddf14c1b8a3a92106ad1a14d18258" category="list-text">验证发现日志页面数据是否可用、并且可以通过启动程序端口和目标LIF组合进行检索：</block>
+  <block id="4b251899b86291ee2ea3a4ec31bd27d2" category="list-text">为发现子系统创建PDC：</block>
+  <block id="cc9b331553f2bcc4120c4d935ac45124" category="list-text">从ONTAP控制器中、验证是否已创建PDC：</block>
+  <block id="808ef0d960a275630df5320d10b4e17a" category="section-title">设置安全带内身份验证</block>
+  <block id="e2c8ace04a879a9e25c44c01e276ca44" category="paragraph">从ONTAP 9.12.1开始、支持在SLES 15 SP4主机和ONTAP控制器之间通过NVMe/TCP和NVMe/FC进行安全的带内身份验证。</block>
+  <block id="73fd59b3c9a3572b90f709cc5c917c78" category="paragraph">要设置安全身份验证、每个主机或控制器都必须与关联<block ref="f4ec72363eeda8a3e6391c779684b2be" prefix=" " category="inline-code"></block> 密钥、它是NVMe主机或控制器的NQN与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。</block>
+  <block id="563237c884bab6356a13da886807f1d9" category="paragraph">您可以使用命令行界面或Config JSON文件设置安全带内身份验证。如果需要为不同的子系统指定不同的dhchap密钥、则必须使用config JSON文件。</block>
+  <block id="91af5705f16502125e8b2187e64202c0" category="open-title">命令行界面</block>
+  <block id="130ea6273a6f2f8dd4847cd415a8dce1" category="list-text">获取主机NQN：</block>
+  <block id="ba350b7d92692b61c2a6def18ee16927" category="list-text">为SLES15 SP4主机生成dhchap密钥：</block>
+  <block id="23edd95065130b4cb5f75361f442edd0" category="paragraph">+
+在以下示例中、将生成一个随机dhchap密钥、其中HMAC设置为3 (SHA-512)。</block>
+  <block id="be970af96a2d347df16aa0902707d220" category="list-text">在ONTAP控制器上、添加主机并指定两个dhchap密钥：</block>
+  <block id="6250c5a6dfbdfa6456828e5c1fe8d570" category="list-text">主机支持两种类型的身份验证方法：单向和双向。在主机上、连接到ONTAP控制器并根据所选身份验证方法指定dhchap密钥：</block>
+  <block id="fc4c8739f30c2752c3c17a6352aa09b4" category="list-text">验证<block ref="696f58758da9e4474854ee0c48e9a3ec" prefix=" " category="inline-code"></block> 命令、验证主机和控制器dhchap密钥：</block>
+  <block id="fce0c40fc78df8eaae6a5d537031d2e9" category="list-text">验证主机dhchap密钥：</block>
+  <block id="96bd6c4f8486135e67ea7768ebfd660b" category="paragraph">*单向配置的示例输出:*</block>
+  <block id="053fe6a5806392c2d3f3d0b9560aef43" category="list-text">验证控制器dhchap密钥：</block>
+  <block id="84ea3979460de46128b29ddab7d89cd0" category="paragraph">*双向配置的输出示例:*</block>
+  <block id="a6c9e3a7671c1fd9d7328c3be5d107b5" category="open-title">JSON 文件</block>
+  <block id="e8bdd625277829c32849608bfaaf1041" category="paragraph">您可以使用<block ref="2be2042afe5d55c4305aa3ff91b1ff5f" prefix=" " category="inline-code"></block> 文件<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令ONTAP。</block>
+  <block id="be0bd4d71e13a5ad44e756862b63fb17" category="inline-link-macro">ONTAP 手册页</block>
+  <block id="32c203213cf44e803bc3c227bd240164" category="paragraph">您可以使用生成JSON文件<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> 选项请参见 <block ref="4d8de0f1b018ca27a073061938808cb9" category="inline-link-macro-rx"></block> 了解更多语法选项。</block>
+  <block id="7be934ce8b58f4891a1f5bec99cfea5f" category="list-text">配置 JSON 文件：</block>
+  <block id="76dfba31c261b7600a97b27a404095b4" category="list-text">使用config JSON文件连接到ONTAP控制器：</block>
+  <block id="fbcde6a9a9bc69bb6785a0b0a3403428" category="list-text">验证是否已为每个子系统的相应控制器启用dhchap密码：</block>
+  <block id="8b298a30ff335320eb3dc5fa82948392" category="paragraph">具有ONTAP版本的SLES 15 SP4没有已知问题。</block>
+  <block id="e20cbb947afcf84cf58de1358ee1068d" category="cell">错误消息</block>
+  <block id="8cfe2b11255c36622bc84e4bd2dfb53c" category="list-text">执行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block> 命令、然后重新启动主机。</block>
+  <block id="9688ec84efd5b1cb7c885e598b6ebf4a" category="list-text">重新启动后、验证是否已启用详细日志记录：</block>
+  <block id="684c45496e08c180fd6b056747c6d7e6" category="cell">iSCSI软件启动不支持每秒多个连接(MCS)</block>
+  <block id="a22d253913fa8deba78982e6393df807" category="cell">将iSCSI软件启动与iSCSI MCS结合使用时、无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、并导致发生原因主机系统中断。</block>
 </blocks>

@@ -149,15 +149,16 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 对SUSE Linux Enterprise Server 15 SP4操作系统进行了编译、以识别ONTAP LUN并自动为ASA 和非ASA配置正确设置所有配置参数。
 
-要启动多路径守护进程、必须存在`multipath.conf`文件、但您可以使用以下命令创建一个空的零字节文件：`touch /etc/multipath.conf`
+。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用命令创建一个空的零字节文件：
+`touch /etc/multipath.conf`。
 
 首次创建此文件时，您可能需要启用并启动多路径服务。
 
-不需要直接向 `multipath.conf` 文件添加任何内容，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。
+无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
 
 您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。
 
-将`<DevID>`替换为要排除的设备的`WWID`字符串。使用以下命令确定`WWID`：
+替换 `<DevId>` 使用 `WWID` 要排除的设备的字符串。使用以下命令确定 `WWID`：
 
 .示例
 在此示例中、 `sda` 是需要添加到黑名单中的本地SCSI磁盘。
@@ -170,7 +171,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 # /usr/lib/udev/scsi_id -gud /dev/sda
 360030057024d0730239134810c0cb833
 ----
-. 将此`WWID`添加到`/etc/multipath.conf`中的黑名单stanza中：
+. 添加 `WWID` 中黑名单的值 `/etc/multipath.conf` 文件：
 +
 [listing]
 ----
@@ -182,9 +183,9 @@ devnode "^cciss.*"
 ----
 
 
-您应始终检查 ` /etc/multipath.conf` 文件中的原有设置，尤其是默认部分中的原有设置，这些设置可能会覆盖默认设置。
+您应始终检查 `/etc/multipath.conf` 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了ONTAP LUN的关键多路径参数以及所需值。如果某个主机已从其他供应商连接到 LUN ，并且这些参数中的任何一个被覆盖，则需要在 `multipath.conf` 中稍后使用 stantzas 进行更正，该 stantzas 专门应用于 ONTAP LUN 。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
+下表显示了ONTAP LUN的关键多路径参数以及所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在中的后续步骤中进行更正 `multipath.conf` 具体适用于ONTAP LUN。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。
 
 [cols="2"]
 |===
@@ -245,7 +246,7 @@ devnode "^cciss.*"
 | 供应商 | NetApp 
 |===
 .示例
-以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
+以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示 `multipath.conf` 文件定义的值 `path_checker` 和 `no_path_retry` 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法删除这些参数、则可以专门针对具有设备标准的ONTAP LUN进行更正。
 
 [listing]
 ----

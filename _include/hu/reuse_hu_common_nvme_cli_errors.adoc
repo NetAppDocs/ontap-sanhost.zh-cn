@@ -10,7 +10,7 @@
 
 [cols="20, 20, 50"]
 |===
-| `NVMe-CLI` 显示的错误 | 可能的发生原因 | 临时解决策 
+| 错误消息 | 可能的发生原因 | 临时解决策 
 
 
 | `无法写入 /dev/nve-Fabric ：参数` 无效 | 语法不正确 | 验证是否对使用了正确的语法 `nvme discover`， `nvme connect`，和 `nvme connect-all` 命令 

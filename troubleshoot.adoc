@@ -53,11 +53,9 @@ NOTE: 故障排除说明不适用于AIX、Windows和ESXi主机。
 +
 [listing]
 ----
-# cat /etc/modprobe.d/lpfc.conf
-options lpfc lpfc_log_verbose=0xf00083
+# cat /etc/modprobe.d/lpfc.conf options lpfc lpfc_log_verbose=0xf00083
 
-# cat /sys/module/lpfc/parameters/lpfc_log_verbose
-15728771
+# cat /sys/module/lpfc/parameters/lpfc_log_verbose 15728771
 ----
 
 
@@ -68,12 +66,19 @@ NVMe/FC没有类似于的特定qla2xxx日志记录 `lpfc` 驱动程序。而是�
 
 .步骤
 . 将 `ql2xextended_error_logging=0x1e400000` 值附加到相应的 `modprobe qla2xxx conf` 文件中。
-. 运行 `dracut -f` 命令重新创建 `initramfs` ，然后重新启动主机。
-. 重新启动后，验证是否已按如下所示应用详细日志记录：
+. 执行 `dracut -f` 命令、然后重新启动主机。
+. 重新启动后、验证是否已启用详细日志记录：
 +
 [listing]
 ----
 # cat /etc/modprobe.d/qla2xxx.conf
+----
++
+示例输出：
+
++
+[listing]
+----
 options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 # cat /sys/module/qla2xxx/parameters/ql2xextended_error_logging
 507510784
@@ -90,7 +95,7 @@ options qla2xxx ql2xnvmeenable=1 ql2xextended_error_logging=0x1e400000
 
 [cols="20, 20, 50"]
 |===
-| `NVMe-CLI` 显示的错误 | 可能的发生原因 | 临时解决策 
+| 错误消息 | 可能的发生原因 | 临时解决策 
 
 
 | `无法写入 /dev/nve-Fabric ：参数` 无效 | 语法不正确 | 验证是否对使用了正确的语法 `nvme discover`， `nvme connect`，和 `nvme connect-all` 命令 
