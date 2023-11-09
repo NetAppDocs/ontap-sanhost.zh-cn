@@ -3578,8 +3578,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="84ea3979460de46128b29ddab7d89cd0" category="paragraph">*双向配置的输出示例:*</block>
   <block id="a6c9e3a7671c1fd9d7328c3be5d107b5" category="open-title">JSON 文件</block>
   <block id="e8bdd625277829c32849608bfaaf1041" category="paragraph">您可以使用<block ref="2be2042afe5d55c4305aa3ff91b1ff5f" prefix=" " category="inline-code"></block> 文件<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令ONTAP。</block>
-  <block id="be0bd4d71e13a5ad44e756862b63fb17" category="inline-link-macro">ONTAP 手册页</block>
-  <block id="32c203213cf44e803bc3c227bd240164" category="paragraph">您可以使用生成JSON文件<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> 选项请参见 <block ref="4d8de0f1b018ca27a073061938808cb9" category="inline-link-macro-rx"></block> 了解更多语法选项。</block>
   <block id="7be934ce8b58f4891a1f5bec99cfea5f" category="list-text">配置 JSON 文件：</block>
   <block id="76dfba31c261b7600a97b27a404095b4" category="list-text">使用config JSON文件连接到ONTAP控制器：</block>
   <block id="fbcde6a9a9bc69bb6785a0b0a3403428" category="list-text">验证是否已为每个子系统的相应控制器启用dhchap密码：</block>
@@ -3589,4 +3587,5 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="9688ec84efd5b1cb7c885e598b6ebf4a" category="list-text">重新启动后、验证是否已启用详细日志记录：</block>
   <block id="684c45496e08c180fd6b056747c6d7e6" category="cell">iSCSI软件启动不支持每秒多个连接(MCS)</block>
   <block id="a22d253913fa8deba78982e6393df807" category="cell">将iSCSI软件启动与iSCSI MCS结合使用时、无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、并导致发生原因主机系统中断。</block>
+  <block id="86891fa05c8b78ad9621085c8abc1fb4" category="paragraph">您可以使用生成JSON文件<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> 选项有关更多语法选项、请参见NVMe Connect-all手册页。</block>
 </blocks>
