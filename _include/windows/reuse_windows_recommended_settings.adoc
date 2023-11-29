@@ -29,4 +29,4 @@
 | PortDownRetransCount | 10 
 |===
 
-NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["《 Windows 7.1 Host Utilities 安装指南》"^]。
+NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"] 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。

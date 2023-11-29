@@ -44,7 +44,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 
 
-== 安装 Windows 修补程序
+== 安装Windows修补程序
 
 建议在服务器上安装 * 最新的累积更新 * 。
 
@@ -65,9 +65,9 @@ TIP: 许多修补程序都需要重新启动 Windows 主机，但您可以选择
 
 
 
-== 安装 Windows Unified Host Utilities
+== 安装Windows Unified Host Utilities
 
-Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["WUHU 7.1 文档"]。
+Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置的信息和说明、请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Unified Host Utilities文档"] 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。
 
 
 
@@ -144,7 +144,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 | PortDownRetransCount | 10 
 |===
 
-NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["《 Windows 7.1 Host Utilities 安装指南》"^]。
+NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"] 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。
 
 
 

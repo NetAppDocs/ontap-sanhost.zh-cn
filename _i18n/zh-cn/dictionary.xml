@@ -255,7 +255,6 @@
   <block id="7fbd0449d14b878cf9b9ba9434075a41" category="paragraph">如果您选择使用 SAN 启动，则您的配置必须支持它。您可以使用 NetApp 互操作性表工具验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="e6b99fad9f3e47e4b52f44d0b0dac069" category="list-text">验证多个路径是否可用。请记住，只有在主机操作系统启动并在多个路径上运行后，多个路径才可用。</block>
   <block id="03ed98061513afaf0a716e8d7756931a" category="list-text">在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。</block>
-  <block id="34fbc6aa2d83f69c8f3d03faf01392c7" category="section-title">安装 Windows 修补程序</block>
   <block id="c812232f894e468682a433753368a4f5" category="paragraph">建议在服务器上安装 * 最新的累积更新 * 。</block>
   <block id="880b9ba9933b6e3ce087d9412e66470b" category="inline-link-macro">Microsoft Update Catalog 2012 R2</block>
   <block id="0732474ba551155a9a0983a068b65a4e" category="admonition">转至 <block ref="c91fa8395bb99838be8ab4e7b48666cc" category="inline-link-macro-rx"></block> 用于获取并安装适用于您的 Windows 版本的所需 Windows 修补程序的网站。</block>
@@ -263,8 +262,6 @@
   <block id="623e88bd2085eeb3f49a2784ec97654e" category="admonition">某些修补程序不能直接下载。在这种情况下，您需要向 Microsoft 支持人员请求给定的修补程序。</block>
   <block id="5a3b43f9090be87b411af7ac82adcb38" category="list-text">按照 Microsoft 提供的说明安装修补程序。</block>
   <block id="56dd1899b4280d897ff6670fb0968e02" category="admonition">许多修补程序都需要重新启动 Windows 主机，但您可以选择等待重新启动主机，直到安装或升级 Host Utilities 为止。</block>
-  <block id="36b258cf83367d27741cf0be3d246eca" category="section-title">安装 Windows Unified Host Utilities</block>
-  <block id="ba490f365e20da97a23546cfe0da8569" category="inline-link-macro">WUHU 7.1 文档</block>
   <block id="d25621141f24193488d8ea2276c47e01" category="paragraph">如果 Windows 主机具有多条存储系统路径，则必须安装 MPIO 软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。</block>
   <block id="a0e497cbff11ff2d61625663418c3fc8" category="paragraph">在 Windows 系统上，任何 MPIO 解决方案的两个主要组件是 DSM 和 Windows MPIO 。在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO 。</block>
   <block id="60bdc643bd0e4fed0f4a29dbcd77bc2b" category="admonition">选择 MPIO 支持后， Windows Unified Host Utilities 将启用 Windows Server 2012 R2 的随附 MPIO 功能。</block>
@@ -288,7 +285,6 @@
   <block id="a432483f271039135d89450152b7c2cd" category="paragraph">您可以从 NetApp 社区下载 ONTAP PowerShell 工具包。您必须将 `Dataontap.zip` 文件解压缩到环境变量 ` %PSModulePath%` 指定的位置（或使用 `Install.ps1` 脚本为您执行此操作）。完成安装后，请使用 `SHow-NaHelp` cmdlet 获取 cmdlet 帮助。</block>
   <block id="1390f52cfb4ccd4f9cbdcd7bcdb075a9" category="paragraph">PowerShell 工具包仅支持具有 MBR 类型分区的固定大小 VHD 文件。不支持使用 Windows 动态磁盘或 GPT 分区的 VHD 。此外， PowerShell 工具包还要求最小分区大小为 4 GB 。较小的分区无法正确对齐。</block>
   <block id="1104f990ade81e5b4d644288a54cf49a" category="admonition">对于在 VHD 上使用 Grub 启动加载程序的 Linux 虚拟机，您需要在运行 PowerShell 工具包后更新启动配置。</block>
-  <block id="f4f9ad21012cf66e650af6b1058ce16b" category="section-title">使用 PowerShell 工具包更正 MBR 对齐后重新安装适用于 Linux 的 Grub 子系统</block>
   <block id="b9ef2c298abb1a6d04513bf9fee94dda" category="paragraph">在使用 Grub 启动加载程序的 Linux 子操作系统上使用 PowerShell 工具包对磁盘运行 `mbralign` 以更正 MBR 对齐后，您必须重新安装 Grub 以确保子操作系统正确启动。</block>
   <block id="a6e4f0d5cc29281e962b33fc7c84286f" category="paragraph">已对虚拟机的 VHD 文件完成 PowerShell 工具包 cmdlet 。本主题仅适用于使用 Grub 启动加载程序和 `SystemRescueCd` 的 Linux 子操作系统。</block>
   <block id="972f2c4ba9001b48966c37ef2a152dc0" category="list-text">为虚拟机挂载正确版本的 Linux 安装 CD 中磁盘 1 的 ISO 映像。</block>
@@ -316,8 +312,6 @@
   <block id="74802e20676d4776b1eea0dca80bcb9a" category="paragraph">对于 QLogic 光纤通道 HBA ：</block>
   <block id="08a7801aadb2d395506d0735d17dcf62" category="cell">LinkDownTimeOut</block>
   <block id="f9c8e6ceed8ad8db75740e78e48a6236" category="cell">PortDownRetransCount</block>
-  <block id="881b9c4cb273bade29a78089e1cf6ee9" category="inline-link-macro">《 Windows 7.1 Host Utilities 安装指南》</block>
-  <block id="c5fac7adc428bbd803e2710cafe09003" category="admonition">Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 <block ref="53418a54750628f8c611b4cd8982473c" category="inline-link-macro-rx"></block>。</block>
   <block id="cdf5d86cb1edacde3eb5e2a5ecdde6c3" category="summary">介绍如何将 Oracle Linux 6.7 与 ONTAP 结合使用</block>
   <block id="7a10fec24c048df32aa9daca418df81a" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="b5abfd2250ee315cd6ad25de3df45edd" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="7c7b1ac412755c409b674d6d1d5261c8" category="paragraph">对于 Oracle Linux 6.7 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.7 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -2042,7 +2036,6 @@
   <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">概述</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
-  <block id="47e2092f9d666fc24b67c7da02de84c7" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 <block ref="f7fe1c204ed60a7e9dd594c09fd7b1a5" category="inline-link-macro-rx"></block>。</block>
   <block id="38022ef96e4c7edb41b89fa3a008c3f6" category="inline-link-macro">Windows Host Utility Kit 7.1</block>
   <block id="a94e97667092f5ff8b67813ccebdb0ca" category="paragraph">Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见<block ref="b7322bec4509d45107de6de43ca1f517" category="inline-link-rx"></block>。</block>
   <block id="0165fb41a35ddb937948f77394256403" category="inline-link-macro">SAN主机Windows文档</block>
@@ -3488,8 +3481,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="0b3c2391c446a11bbd0c66a38ea6904b" category="paragraph">具有ONTAP版本的CentOS 7.6存在以下已知问题：</block>
   <block id="cdf4bf81cf3ee1a54f731160152019cf" category="paragraph">您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 7.2配置为目标。</block>
   <block id="12816f6cc6e072d421258f60c7368dd0" category="paragraph">Oracle Linux 7.2 with ONTAP发行版没有已知问题。</block>
-  <block id="1fed0d1f2feda6954357b22995ac7bd0" category="paragraph">您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2022。
-===引导操作系统</block>
   <block id="7145b773c01d1ea2262969c3644747a0" category="paragraph">运行ONTAP版本的Windows Server 2022没有已知问题。</block>
   <block id="57175c72c9ec2223e90f7a6f933b0c1b" category="paragraph">您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 7.6配置为目标。</block>
   <block id="a2ad6d83a8574c572c9a8b9c0652127e" category="paragraph">带有ONTAP的Oracle Linux 7.6版本存在以下已知问题：</block>
@@ -3585,7 +3576,15 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="e20cbb947afcf84cf58de1358ee1068d" category="cell">错误消息</block>
   <block id="8cfe2b11255c36622bc84e4bd2dfb53c" category="list-text">执行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block> 命令、然后重新启动主机。</block>
   <block id="9688ec84efd5b1cb7c885e598b6ebf4a" category="list-text">重新启动后、验证是否已启用详细日志记录：</block>
-  <block id="684c45496e08c180fd6b056747c6d7e6" category="cell">iSCSI软件启动不支持每秒多个连接(MCS)</block>
   <block id="a22d253913fa8deba78982e6393df807" category="cell">将iSCSI软件启动与iSCSI MCS结合使用时、无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、并导致发生原因主机系统中断。</block>
   <block id="86891fa05c8b78ad9621085c8abc1fb4" category="paragraph">您可以使用生成JSON文件<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> 选项有关更多语法选项、请参见NVMe Connect-all手册页。</block>
+  <block id="0ecfee1e5b63a34e0c870ad349ab2d79" category="section-title">安装Windows修补程序</block>
+  <block id="fa5be5c2e2b86b59c46b48b7021f967f" category="section-title">安装Windows Unified Host Utilities</block>
+  <block id="7f0107becb6328e412aa5e8712724378" category="inline-link-macro">Windows Unified Host Utilities文档</block>
+  <block id="b4c9abb2b32b490ded389f27627f9510" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置的信息和说明、请参见 <block ref="b25c56f0835abca42f2574922a5bff40" category="inline-link-macro-rx"></block> 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。</block>
+  <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Windows Host Utilities文档</block>
+  <block id="fc51d3fbe5dd41d133c1f25388a68493" category="admonition">Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 <block ref="1035103116c48a69520d80b6269bd2d8" category="inline-link-macro-rx"></block> 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。</block>
+  <block id="cffc00678708e63d08b03d05ada52624" category="paragraph">您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2022。</block>
+  <block id="6f49a4f8a77775eb655aad7d40795d50" category="section-title">使用PowerShell工具包更正MBR对齐后、重新安装适用于Linux子系统的GRUB</block>
+  <block id="29bdde7506503e06e915420031c09cbf" category="cell">iSCSI软件启动不支持每个会话多个连接(MCS)</block>
 </blocks>

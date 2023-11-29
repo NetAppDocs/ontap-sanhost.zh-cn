@@ -44,7 +44,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 
 
-== 安装 Windows 修补程序
+== 安装Windows修补程序
 
 建议在服务器上安装 * 最新的累积更新 * 。
 
@@ -65,9 +65,9 @@ TIP: 许多修补程序都需要重新启动 Windows 主机，但您可以选择
 
 
 
-== 安装 Windows Unified Host Utilities
+== 安装Windows Unified Host Utilities
 
-Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。建议下载并安装最新的实用程序套件。有关 Wuhu 配置的信息和说明，请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71.html["WUHU 7.1 文档"]。
+Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置的信息和说明、请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Unified Host Utilities文档"] 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。
 
 
 
@@ -135,7 +135,7 @@ NOTE: 对于在 VHD 上使用 Grub 启动加载程序的 Linux 虚拟机，您�
 
 
 
-=== 使用 PowerShell 工具包更正 MBR 对齐后重新安装适用于 Linux 的 Grub 子系统
+=== 使用PowerShell工具包更正MBR对齐后、重新安装适用于Linux子系统的GRUB
 
 在使用 Grub 启动加载程序的 Linux 子操作系统上使用 PowerShell 工具包对磁盘运行 `mbralign` 以更正 MBR 对齐后，您必须重新安装 Grub 以确保子操作系统正确启动。
 
@@ -211,7 +211,7 @@ Linux 应急功能将关闭，然后重新启动。
 | PortDownRetransCount | 10 
 |===
 
-NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://library.netapp.com/ecmdocs/ECMLP2789202/html/index.html["《 Windows 7.1 Host Utilities 安装指南》"^]。
+NOTE: Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"] 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。
 
 
 
