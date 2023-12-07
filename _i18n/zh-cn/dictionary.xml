@@ -255,7 +255,6 @@
   <block id="7fbd0449d14b878cf9b9ba9434075a41" category="paragraph">如果您选择使用 SAN 启动，则您的配置必须支持它。您可以使用 NetApp 互操作性表工具验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="e6b99fad9f3e47e4b52f44d0b0dac069" category="list-text">验证多个路径是否可用。请记住，只有在主机操作系统启动并在多个路径上运行后，多个路径才可用。</block>
   <block id="03ed98061513afaf0a716e8d7756931a" category="list-text">在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。</block>
-  <block id="c812232f894e468682a433753368a4f5" category="paragraph">建议在服务器上安装 * 最新的累积更新 * 。</block>
   <block id="880b9ba9933b6e3ce087d9412e66470b" category="inline-link-macro">Microsoft Update Catalog 2012 R2</block>
   <block id="0732474ba551155a9a0983a068b65a4e" category="admonition">转至 <block ref="c91fa8395bb99838be8ab4e7b48666cc" category="inline-link-macro-rx"></block> 用于获取并安装适用于您的 Windows 版本的所需 Windows 修补程序的网站。</block>
   <block id="b9ae3f85c9e860efac72637c24ed529b" category="list-text">从 Microsoft 支持站点下载修补程序。</block>
@@ -2610,7 +2609,6 @@
   <block id="f2e04893e244d58e7312b018d7c330cd" category="admonition">主机操作系统启动并在多个路径上运行后、这些路径将变为可用。</block>
   <block id="159e1cf7b9f0c43c83e2d3d06cfe2786" category="list-text">重新启动主机以验证启动是否成功。</block>
   <block id="ddd1090ee13f345d376753ed7188e15e" category="section-title">所有SAN阵列配置</block>
-  <block id="a8b4b0587b094d82b6d3386124d9175b" category="paragraph">在ASA配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。</block>
   <block id="e7110b576f4777e8b343b6406c8d4267" category="paragraph">对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="8f9d6e3424d24a4eceeb55656ad594c9" category="paragraph">自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 <block ref="85b4e48fbc653b43bc1d23927e9a43d3" category="inline-link-macro-rx"></block> 了解更多信息。</block>
   <block id="b8aace167dae62ec049916430a97c733" category="paragraph">NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。</block>
@@ -3581,10 +3579,36 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="0ecfee1e5b63a34e0c870ad349ab2d79" category="section-title">安装Windows修补程序</block>
   <block id="fa5be5c2e2b86b59c46b48b7021f967f" category="section-title">安装Windows Unified Host Utilities</block>
   <block id="7f0107becb6328e412aa5e8712724378" category="inline-link-macro">Windows Unified Host Utilities文档</block>
-  <block id="b4c9abb2b32b490ded389f27627f9510" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置的信息和说明、请参见 <block ref="b25c56f0835abca42f2574922a5bff40" category="inline-link-macro-rx"></block> 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。</block>
   <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Windows Host Utilities文档</block>
   <block id="fc51d3fbe5dd41d133c1f25388a68493" category="admonition">Windows Unified Host Utility 将设置这些值。有关详细的建议设置，请参见 <block ref="1035103116c48a69520d80b6269bd2d8" category="inline-link-macro-rx"></block> 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。</block>
   <block id="cffc00678708e63d08b03d05ada52624" category="paragraph">您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2022。</block>
   <block id="6f49a4f8a77775eb655aad7d40795d50" category="section-title">使用PowerShell工具包更正MBR对齐后、重新安装适用于Linux子系统的GRUB</block>
   <block id="29bdde7506503e06e915420031c09cbf" category="cell">iSCSI软件启动不支持每个会话多个连接(MCS)</block>
+  <block id="54ad52b5df3732f47860c7a90de604ee" category="paragraph">在全SAN阵列(ASA)配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。</block>
+  <block id="f27074de856fd7a4a667b8e75fcdfbec" category="paragraph">NetApp建议在服务器上安装*最新累积更新*。</block>
+  <block id="023ddc072704b8577d3a1995f95da01a" category="paragraph">Windows Unified Host Utilities （ Wuhu ）是一组软件程序，其中包含一些文档，可用于将主机计算机连接到 NetApp SAN 上的虚拟磁盘（ LUN ）。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置的信息和说明、请参见 <block ref="b25c56f0835abca42f2574922a5bff40" category="inline-link-macro-rx"></block> 并选择适用于您的Windows Unified Host Utilities版本的安装操作步骤。</block>
+  <block id="3a891098b79eaa53ca214516fa78a5e6" category="summary">如何使用ONTAP为RHEL 9.1配置NVMe-oF主机</block>
+  <block id="5464d39105cc61c77c01f61a6c049eae" category="summary">如何使用ONTAP为RHEL 9.2配置NVMe-oF主机</block>
+  <block id="a5b8980d9b2b30a00ffe7dac19c43d5d" category="summary">介绍如何将Red Hat Enterprise Linux 9.3与ONTAP结合使用</block>
+  <block id="e220bc30f436cfd7ed1ad2fa29b77016" category="doc">将Red Hat Enterprise Linux 9.3与ONTAP结合使用</block>
+  <block id="55c6c04ab1e74d4f888bffdb9eadb982" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 9.3配置为ONTAP作为目标。</block>
+  <block id="54672e6edf11ac3f47cd65851485ed75" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e902c52a637fd9b5e253806bf7aafa95" category="inline-link-macro-rx"></block> 验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。</block>
+  <block id="76810b2b6b720475d6af795ed8a9ae08" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.3、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.3会编译为包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="3168dc7483c9ec2f5a78cb4a5aa2d3b7" category="paragraph">经过编译的RHEL 9.3操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="dd0349280970fded4c7b0c07431f162d" category="paragraph">使用ONTAP的RHEL 9.3版本存在以下已知问题：</block>
+  <block id="13aa98a5d20992675bbf7111d4bcf7cc" category="cell">NetApp Linux主机实用程序命令行界面需要具有其他库软件包依赖关系、才能支持Emulex主机总线适配器(HBA)适配器发现</block>
+  <block id="818bb7ee3fe4c47c57de7ff54cbec4b7" category="cell">在RHEL 9.x中、是指NetApp LINUX SAN主机实用程序命令行界面<block ref="621925cc88c3305079fc7287b11ebf60" prefix=" " category="inline-code"></block> 失败、因为找不到支持Emulex主机总线适配器(HBA)发现的库软件包依赖项。</block>
+  <block id="447d82560b23d134af7247622d397daf" category="summary">如何使用ONTAP为RHEL 9.3配置NVMe-oF主机</block>
+  <block id="73e91cc996ce2d039530485f96ea07bb" category="doc">适用于采用ONTAP的RHEL 9.3的NVMe-oF主机配置</block>
+  <block id="d825b944ff2e130a26d9c4f866191cb5" category="paragraph">具有非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 9.3支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="17e6fca095916e663e6874f461b7cd2b" category="paragraph">对于采用ONTAP的RHEL 9.3的NVMe-oF主机配置、可获得以下支持：</block>
+  <block id="42edbb6b2787a5246d32929c778d04e1" category="list-text">在给定主机总线适配器(HBA)上的同一主机上使用NVMe和SCSI流量并无明确的dm-dpath设置、以防止声明NVMe命名空间。</block>
+  <block id="53b33721fef6f8bedb109eed881ea6a5" category="paragraph">默认情况下、RHEL 9.3已为NVMe命名空间启用内核NVMe多路径；因此、无需显式设置。</block>
+  <block id="23ef7f4e50c0c07c0f66e08c60163597" category="paragraph">您可以使用以下操作步骤验证支持的最低RHEL 9.3软件版本。</block>
+  <block id="cd78954dacd072b75b2c79c3cecedcd3" category="list-text">在服务器上安装RHEL 9.3。安装完成后、验证是否正在运行指定的RHEL 9.3内核：</block>
+  <block id="f0df503d34398fb211cacbbacc8824b9" category="list-text">在RHEL 9.3主机上、检查中的hostnqn字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="de959e2062252433b5a9534a6512b4e1" category="list-text">RHEL 9.3 GA内核中附带的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="af1363e13388a6153d5ee5e31361b059" category="list-text">验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据：</block>
+  <block id="4d2ccda8ed0dd9cdf2d1d56f266ef18c" category="paragraph">对于采用ONTAP版本的RHEL 9.3、NVMe-oF主机配置没有已知问题。</block>
+  <block id="7391a7cd9aaad0e97cd0084d95a4c0fd" category="sidebar">9.3.</block>
 </blocks>

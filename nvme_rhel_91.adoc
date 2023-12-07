@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: nvme_rhel_91.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机 
+summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机 
 ---
 = 适用于采用ONTAP的RHEL 9.1的NVMe-oF主机配置
 :toc: macro

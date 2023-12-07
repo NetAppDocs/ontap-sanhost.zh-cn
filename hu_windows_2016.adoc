@@ -46,7 +46,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 == 安装Windows修补程序
 
-建议在服务器上安装 * 最新的累积更新 * 。
+NetApp建议在服务器上安装*最新累积更新*。
 
 
 NOTE: 转至 link:https://www.catalog.update.microsoft.com/Search.aspx?q=Update+Windows+Server+2016["Microsoft Update Catalog 2016"^] 用于获取并安装适用于您的 Windows 版本的所需 Windows 修补程序的网站。
