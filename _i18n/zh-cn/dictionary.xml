@@ -3613,9 +3613,23 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="7391a7cd9aaad0e97cd0084d95a4c0fd" category="sidebar">9.3.</block>
   <block id="9bc6d3e09829b4f5254ca05574123571" category="summary">介绍如何将Red Hat Enterprise Linux 8.9与ONTAP结合使用</block>
   <block id="07401b9dd6cd70fd46911f32946adf00" category="doc">将Red Hat Enterprise Linux 8.9与ONTAP结合使用</block>
-  <block id="e501d2dbdb42de58f02c1f3abfe2b8a1" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 8.9与ONTAP配置为目标。</block>
-  <block id="ae6778e372ba1bd8a8b15c0befa78706" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.9、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.9会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
-  <block id="b0ba321d68fcbee6d08cb969c6dee835" category="paragraph">对RHEL 8.9操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
   <block id="51856bc21ee60e0edd3d375bda86c100" category="paragraph">RHEL 8.9没有已知问题。</block>
   <block id="4407c95e5daa7102b34d0879e4eb12ed" category="sidebar">8.9.</block>
+  <block id="e4cc2fc31e52d967b132cdb20604920c" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux (RHEL) 8.9配置为目标ONTAP。</block>
+  <block id="58dd0e1ebbd63a74eeec446438f07176" category="paragraph">对于RHEL 8.9、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.9会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="f82568d65ed8e2b4327f5865560fd156" category="paragraph">RHEL 8.9操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="b434464d1a1076f0912b586e6f0da437" category="summary">如何使用ONTAP为RHEL 8.9配置NVMe-oF主机</block>
+  <block id="77cb6ce6b5771f472e998f91b24df1d8" category="doc">适用于采用ONTAP的RHEL 8.9的NVMe-oF主机配置</block>
+  <block id="34c678313217e1652ad03feef8847586" category="paragraph">采用非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 8.9支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="da90c6502b166b990e4597540fab45f1" category="paragraph">对于采用ONTAP的RHEL 8.9、NVMe-oF主机配置支持以下功能：</block>
+  <block id="9acbcdf236a131602c43133c826c1cf0" category="list-text">默认情况下、对于RHEL 8.9 NVMe-oF主机、内核NVMe多路径处于禁用状态。因此，您需要手动启用它。</block>
+  <block id="9cc30a8ae74eb53c08ef6662a46c13ff" category="list-text">在RHEL 8.9主机上、由于存在未决问题、NVMe/TCP是一项技术预览功能。</block>
+  <block id="9122912f58fa882044fcab72507c8ee9" category="paragraph">您可以使用以下操作步骤启用内核多路径。</block>
+  <block id="581fd0f922f7530dd86eaa5a01ad9dff" category="list-text">在主机服务器上安装RHEL 8.9。</block>
+  <block id="8a1c0f590b55b233cc831d3edab5e663" category="list-text">安装完成后、验证是否正在运行指定的RHEL 8.9内核：</block>
+  <block id="868c750d60086f65688792e47ff303d5" category="paragraph">如果要在同一主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。这应从dm-Multipath中排除ONTAP命名空间、并防止dm-Multipath声明这些命名空间设备。您可以通过添加来执行此操作<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
+  <block id="3f655d42055c3b04ef4e22af7af58b9a" category="list-text">RHEL 8.9 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="fb117390ac885fd422b6653159fac30e" category="paragraph">适用于采用ONTAP版本的RHEL 8.9的NVMe-oF主机配置具有以下已知问题描述：</block>
+  <block id="c6f6aa643de410a6ea50d0b32d115bbb" category="cell">RHEL 8.9 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="e46afea398abac288711eb6774571ab9" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.9、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
 </blocks>
