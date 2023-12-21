@@ -5,17 +5,14 @@ keywords: host utilities, aix, powervm, 7.2 netapp, ontap, luns, configure, disc
 summary: 介绍如何使用 PowerVM vSCSI 发现和配置 LUN 
 ---
 = （ PowerVM vSCSI ）发现和配置 LUN
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

@@ -5,17 +5,14 @@ keywords: nvme, oracle linux, 8.8, host configuration
 summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置 
 ---
 = 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

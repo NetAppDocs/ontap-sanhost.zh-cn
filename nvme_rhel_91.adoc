@@ -5,18 +5,15 @@ keywords: nvme, linux, rhel, red hat, enterprise
 summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机 
 ---
 = 适用于采用ONTAP的RHEL 9.1的NVMe-oF主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
 :source-highlighter: highlighter.js
-:toc-position: content
 
 
 [role="lead"]

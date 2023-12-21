@@ -5,17 +5,14 @@ keywords: nvme, windows, enterprise
 summary: 适用于采用ONTAP 的Windows Server 2022的NVMe/FC主机配置 
 ---
 = 适用于采用ONTAP 的Windows Server 2022的NVMe/FC主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

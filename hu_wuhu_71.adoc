@@ -5,17 +5,14 @@ keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp
 summary: Windows Unified Host Utilities 包含一个安装程序，用于设置所需的 Windows 注册表和 HBA 参数，以便 Windows 主机正确处理 NetApp ONTAP 和 E 系列平台的存储系统行为。 
 ---
 = Windows Unified Host Utilities 7.1
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 

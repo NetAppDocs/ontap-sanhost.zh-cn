@@ -5,17 +5,14 @@ keywords: host utilities, suse linux enterprise server 15 sp3, suse, linux, 15 s
 summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP3 
 ---
 = 将SUSE Linux Enterprise Server 15 SP3与ONTAP结合使用
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

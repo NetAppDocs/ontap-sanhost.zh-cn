@@ -5,17 +5,14 @@ keywords: host utilities, cent, os, 6.9, netapp, ontap, linux
 summary: 介绍如何将 CentOS 6.9 与 ONTAP 结合使用 
 ---
 = 将CentOS 6.9与ONTAP结合使用
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

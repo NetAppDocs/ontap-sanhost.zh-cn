@@ -5,17 +5,14 @@ keywords: host utilities, hpux, 6.0, netapp, ontap, release, notes
 summary: 《HPUX Host Utilities 6.0发行说明》 
 ---
 = 《HP-UX Host Utilities 6.0发行说明》
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定HP-UX主机相关的重要注意事项。

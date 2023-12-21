@@ -5,17 +5,14 @@ keywords: nvme, esxi, ontap, nvme/fc, hypervisor
 summary: '您可以在运行ESXi 8.x和ONTAP 的启动程序主机上将基于网络结构的NVMe (NVMe-oF)配置为目标。' 
 ---
 = 适用于采用ONTAP 的ESXi 8.x的NVMe-oF主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]

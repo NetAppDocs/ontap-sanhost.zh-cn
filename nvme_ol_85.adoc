@@ -5,17 +5,14 @@ keywords: nvme, linux, oracle,
 summary:  
 ---
 = 适用于采用ONTAP 的Oracle Linux 8.5的NVMe/FC主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 

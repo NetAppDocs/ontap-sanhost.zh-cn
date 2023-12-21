@@ -5,17 +5,14 @@ keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracl
 summary: 此内容针对分发提供了有关如何配置连接到Cloud Volumes ONTAP 的云客户端以及连接到内部ONTAP 存储的Amazon FSX for ONTAP 和SAN主机的指南。 
 ---
 = SAN主机配置概述
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。

@@ -5,18 +5,15 @@ keywords: nvme, linux, rhel, red hat, enterprise
 summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机 
 ---
 = 适用于采用 ONTAP 的 RHEL 8.4 的 NVMe-oF 主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
 :source-highlighter: highlighter.js
-:toc-position: content
 
 
 [role="lead"]

@@ -5,17 +5,14 @@ keywords: nvme, windows, enterprise
 summary: 适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置 
 ---
 = 适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]
