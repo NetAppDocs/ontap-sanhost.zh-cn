@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_troubleshoot.html 
+keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
+summary: Windows Unified Host Utilities 包含一个安装程序，用于设置所需的 Windows 注册表和 HBA 参数，以便 Windows 主机正确处理 NetApp ONTAP 和 E 系列平台的存储系统行为。 
+---
+= 故障排除
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+您可以使用Windows Host Utilities的常规故障排除技术。请务必查看最新的发行说明以了解已知问题和解决方案。
+
+下面列出了您可以针对潜在的互操作性问题调查的不同方面：
+
+* 要确定潜在的互操作性问题、请确认Host Utilities支持您的主机操作系统软件、主机硬件、ONTAP软件和存储系统硬件组合。请参见 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^] 有关详细信息 ...
+* 验证是否具有正确的iSCSI配置。
+* 如果iSCSI LUN在重新启动后不可用，请验证目标是否在Microsoft iSCSI启动程序GUI的*永久性 目标*选项卡上列为永久性。
+* 如果使用LUN的应用程序在启动时显示错误、请验证是否已将应用程序配置为依赖iSCSI服务。
+* 对于运行ONTAP的存储控制器的FC路径、请验证FC交换机是否使用目标LIFs的WWPN (而不是节点上物理端口的WWPN)进行分区。
+* 查看 link:hu_wuhu_71_rn.html["发行说明"] 让Windows Host Utilities检查已知问题。发行说明包括一个已知问题和限制列表。
+* 查看适用于您的ONTAP版本的《SAN管理指南》中的故障排除信息。
+* 搜索 https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 最近发现的问题。
++
+** 在“高级搜索”下的“错误类型”字段中，选择*iSCSI - Windows*，然后选择*GO。您应重复搜索错误类型* fcp -windows*。
+
+
+* 收集有关系统的信息。
+* 记录主机或存储系统控制台上显示的所有错误消息。
+* 收集主机和存储系统日志文件。
+* 记录问题的症状以及在问题出现之前对主机或存储系统所做的任何更改。
+* 如果无法解决此问题、请联系NetApp技术支持以获得帮助。
+

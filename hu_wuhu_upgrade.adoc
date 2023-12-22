@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: hu_wuhu_upgrade.html 
+keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
+summary: Windows Unified Host Utilities 包含一个安装程序，用于设置所需的 Windows 注册表和 HBA 参数，以便 Windows 主机正确处理 NetApp ONTAP 和 E 系列平台的存储系统行为。 
+---
+= 升级Windows Unified Host Utilities
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:toc-position: content
+
+
+[role="lead"]
+新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照说明以交互方式或从Windows命令行安装Host Utilities、以便升级安装包。
+
+[role="tabbed-block"]
+====
+.以交互方式升级
+--
+要以交互方式升级Host Utilities软件包、必须运行Host Utilities安装程序并按照提示进行操作。
+
+.步骤
+. 更改为下载可执行文件的目录。
+. 运行可执行文件并按照屏幕上的说明进行操作。
+. 出现提示时重新启动 Windows 主机。
+. 重新启动完成后、请检查主机实用程序版本：
++
+.. 打开 * 控制面板 * 。
+.. 转至 * 程序和功能 * 并检查主机实用程序版本。
+
+
+
+
+--
+.从命令行升级
+--
+您可以在Windows命令提示符处输入相应的命令、以静默(无人值守)方式升级新的Host Utilities。
+
+.步骤
+. 在Windows命令提示符处输入以下命令：
++
+`msiexec /i installer.msi /quiet multipath= ｛ 0` 1 ｝ [INSTALLDIR=inst_path]
+
++
+** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
+** 多路径用于指定是否安装 MPIO 支持。允许的值为"0"表示否、"1"表示是。
+** `inst_path` 是安装 Host Utilities 文件的路径。默认路径为 `C ： \Program Files\NetApp\Windows Host Utilities\` 。
+
+
+
+
+
+NOTE: 要查看用于日志记录和其他功能的标准Microsoft安装程序(MSI)选项、请输入 `msiexec /help` 在Windows命令提示符处。例如、 `msiexec /i install.msi /quiet /l*v <install.log> LOGVERBOSE=1` 命令可显示日志记录信息。
+
+安装完成后，系统将自动重新启动。
+
+--
+====
