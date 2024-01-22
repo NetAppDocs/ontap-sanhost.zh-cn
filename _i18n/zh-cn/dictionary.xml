@@ -2900,24 +2900,7 @@
   <block id="f380df15f54bded5a312678b9e8d1316" category="doc">将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用</block>
   <block id="36143cd0461c285a2eca19136916ef01" category="paragraph">对于SUSE Linux Enterprise Server 15 SP5<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。SUSE Linux Enterprise Server 15 SP5经过编译、包含识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="dc0fc37f340703d773442e3a17af6d7a" category="paragraph">SUSE Linux Enterprise Server 15 SP5操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="6927b4ed365e3f3d6b1daf74c1ed53f2" category="summary">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP5的NVMe-oF主机配置</block>
-  <block id="cef327de24717c0ad1a3577819070251" category="paragraph">具有非对称命名空间访问(AANA)的SUSE Linux Enterprise Server (SLES) 15 SP5支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
   <block id="b1342a2fc9721ae555225a23c38646ee" category="paragraph">以下支持适用于采用ONTAP的SLES 15 SP5的NVMe-oF主机配置：</block>
-  <block id="adc8ef4a0481c8ef901d03cbd4bf8186" category="list-text">除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。</block>
-  <block id="006918920124fa71bdbcdf36bd28ae8a" category="list-text">NVMe-oF 不支持 sanlun 。因此、SLES15 SP5主机上不支持NVMe-oF的主机实用程序。您可以依靠本机NVMe-CLI软件包中提供的NetApp插件来进行所有NVMe-oF传输。</block>
-  <block id="d4e23fcba4bc0b1061b10f6685f457d0" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而NVMe多路径则可用于在主机上配置NVMe-oF命名空间设备。</block>
-  <block id="9289ca9c2249e04ae2bff00d83dcc81a" category="paragraph">默认情况下、SLES 15 SP5已为NVMe命名空间启用内核NVMe多路径。因此、无需显式设置。</block>
-  <block id="e19a5cfce66766fef9f35d8014318a0d" category="paragraph">您可以使用以下操作步骤验证支持的最低SLES 15 SP5软件版本。</block>
-  <block id="c294ad6ecc5f6261d8e788ca4d8d70e8" category="list-text">确认SLES15 SP5维护更新主机上安装了必需的内核和NVMe-CLI维护更新软件包。</block>
-  <block id="5168cf93841071a3e1f60a0f4b0c3d43" category="paragraph">。<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 维护更新包包括以下内容：</block>
-  <block id="d739ab3b1cb915174aa72612ba6c2a52" category="list-text">* NVMe/FC自动连接脚本*—在还原命名空间的底层路径时以及主机重新启动期间、NVMe/FC自动重新连接需要使用自动连接脚本：</block>
-  <block id="dce4a7fd8636104bab20d3ef1ecafee2" category="list-text">* ONTAP UDEv规则*—新增<block ref="ab775c875d5f89d991a670444dd32ad2" prefix=" " category="inline-code"></block> 用于验证默认情况下NVMe多路径轮循负载平衡器适用场景所有ONTAP命名空间的规则：</block>
-  <block id="de16dfda1a2f3a67b92c3c6961d20447" category="list-text">*适用于ONTAP设备的NetApp插件*—修改现有NetApp插件以包含ONTAP名称空间。</block>
-  <block id="a0eeee903845ea8eb9c7b13f5d7a9c4a" category="list-text">检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串位于<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
-  <block id="83f602f6ddd60bbecd2701b962883e96" category="paragraph">现有本机收件箱<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block> 驱动程序是最新版本、与NVMe/FC兼容。因此、您无需安装lpfc即装即用(OOB)驱动程序。验证驱动程序版本：</block>
-  <block id="1ebdde2be7f564cea3a55372d3a0f091" category="paragraph">。<block ref="7c21ff5d058ac57f39085c6b934e1ac8" prefix=" " category="inline-code"></block> 默认情况下、支持处于启用状态。较新的lpfc驱动程序(收件箱和发件箱)具有<block ref="2daa99bd4c709cddaca678ef2050fb39" prefix=" " category="inline-code"></block> 参数设置为3、因此、您不再需要在中显式配置此参数<block ref="39cb7236e95ada10fc0d69173bd48cdb" prefix=" " category="inline-code"></block> 文件、然后重新创建<block ref="a35ad41999d0ef4fe38eeb93c6e7076b" prefix=" " category="inline-code"></block>。您可以对此进行验证<block ref="2daa99bd4c709cddaca678ef2050fb39" prefix=" " category="inline-code"></block> 设置为<block ref="eccbc87e4b5ce2fe28308fd9f2a7baf3" prefix=" " category="inline-code"></block>：</block>
-  <block id="6823ef6314c55fa0a8e99cebacd9594d" category="list-text">SLES 15 SP5内核中附带的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
-  <block id="2a7e9b55568d2461dc6a6662ab294d24" category="list-text">验证SLES 15 SP5主机上的以下NVMe/FC设置：</block>
   <block id="7027855d0b65fefb5ac52eae93da7ac6" category="sidebar">15 SP5.</block>
   <block id="2df02b8065e072b3f4cef52fb022e714" category="paragraph">上提供了 NetApp Linux Unified Host Utilities 软件包 <block ref="43f1e3306c26d9daf12133f7af036caf" category="inline-link-macro-rx"></block> 在 32 位或 64 位 .rpm 文件中。</block>
   <block id="ebdad4471cb6942a4f1ef284bb693304" category="list-text">从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 <block ref="43f1e3306c26d9daf12133f7af036caf" category="inline-link-macro-rx"></block> 主机。</block>
@@ -3374,7 +3357,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="e86acb5227ff2edf84308d3a10d6883d" category="list-text">SLES 15 SP4内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="77c96566e3c78688f34abe91700ea32c" category="list-text">验证是否已<block ref="a8961a0cb8d5dfd91556db806f0f2cfc" prefix=" " category="inline-code"></block> 参数设置为1：</block>
   <block id="0c1b72e395c1933da2da0ebb8f7fe9a0" category="section-title">启用NVMe服务</block>
-  <block id="59888b5268cc13974726c98a3d894d8d" category="paragraph">您可以使用以下操作步骤启用NVMe服务。</block>
   <block id="f409d4c6497d1c2cec5c498fdcdaf32f" category="paragraph">中包含两个NVMe/FC启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 但是、_ONLY _<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> 已启用、可在系统启动期间启动； <block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 未启用。因此、您需要手动启用<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 在系统引导期间启动。</block>
   <block id="404c9db3810293328aa6b6e3e3d75b2f" category="list-text">-enable<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>：</block>
   <block id="46bb931cbfa3a27a99c1f1877eeee986" category="list-text">请验证<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> 和<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block> 在系统启动后运行：</block>
@@ -3387,7 +3369,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="fcb5bee63d6460f40e0f810d9b88ff19" category="list-text">验证ONTAP名称卷是否对主机可见：</block>
   <block id="051e7c8fe85493aa4fca34ecb724d7f5" category="paragraph"><block ref="7ee98ee108f160c92a9c1dd2307ab6a5" prefix="" category="inline-code"></block></block>
   <block id="462943f55eaa51bdddde8bbb7361ad5a" category="paragraph"><block ref="bef03e474ce211e47fcb917ac4b0601e" prefix="" category="inline-code"></block></block>
-  <block id="80782d927009a28ba6444564924d02eb" category="section-title">发现增强功能</block>
   <block id="859f68c87f883fa78618600b15339105" category="paragraph">从ONTAP 9.11.1开始、您可以使用以下操作步骤为SLES 15 SP4主机创建永久性发现控制器(PDC)。要自动检测NVMe子系统添加或删除方案以及对发现日志页面数据的更改、需要PDC。</block>
   <block id="d48ddf14c1b8a3a92106ad1a14d18258" category="list-text">验证发现日志页面数据是否可用、并且可以通过启动程序端口和目标LIF组合进行检索：</block>
   <block id="4b251899b86291ee2ea3a4ec31bd27d2" category="list-text">为发现子系统创建PDC：</block>
@@ -3555,4 +3536,16 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="9d7f686c283e7f060d447a80713ba1cc" category="open-title">QLogic HBA驱动程序</block>
   <block id="af36a24915f9684eb097c2a342d018d9" category="sidebar">升级芜湖</block>
   <block id="e0e7d7dbabff4e65a87fb4e85bffb751" category="sidebar">维修并拆除芜湖</block>
+  <block id="00076810353f5bc14e56852d5c38ee2b" category="summary">介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP5配置NVMe/FC</block>
+  <block id="d1af0bdf73ee6058c3b3b0742832aa5a" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP5的NVMe-oF主机配置</block>
+  <block id="cb73cea439c20b7597b7672eb9a21cf0" category="paragraph">具有非对称命名空间访问(AANA)的SUSE Linux Enterprise Server (SLES) 15 SP5支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的AUA多路径功能、并通过内核NVMe多路径实施。</block>
+  <block id="8f37bd5d440c7ad40a8829ec7ebe9f0f" category="list-text">没有<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 支持NVMe-oF。因此、在SLES 15 SP5主机上、主机实用程序不支持NVMe-oF。您可以依靠本机NVMe-CLI软件包中提供的NetApp插件来进行所有NVMe-oF传输。</block>
+  <block id="4bd5bd4d2b1b5b4d45d52aa3025e20d9" category="paragraph">您可以为Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。</block>
+  <block id="3f001d09022cef2ff7195d40a2cb9d34" category="list-text">SLES 15 SP5内核中附带的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="5d672db52f749787478547eba4ca55f3" category="section-title">创建永久性发现控制器</block>
+  <block id="2941f59619cf11f5bd13e11152c6a563" category="paragraph">从ONTAP 9.11.1开始、您可以使用以下操作步骤为SLES 15 SP5主机创建永久性发现控制器(PDC)。要自动检测NVMe子系统添加或删除方案以及对发现日志页面数据的更改、需要PDC。</block>
+  <block id="16733f7022b95afa90a2e27cc617f456" category="paragraph">从ONTAP 9.12.1开始、支持在SLES 15 SP5主机和ONTAP控制器之间通过NVMe/TCP和NVMe/FC进行安全带内身份验证。</block>
+  <block id="6a96fe80380b5c7c7a686cbebfad76d9" category="list-text">为SLES15 SP5主机生成dhchap密钥：</block>
+  <block id="d3e220182499e43aeadc8bda16bcb3db" category="paragraph">在以下示例中、将生成一个随机dhchap密钥、其中HMAC设置为3 (SHA-512)。</block>
+  <block id="bd8e8f9aa877bbf46ba78e30655f8fcb" category="paragraph">具有ONTAP版本的SLES 15 SP5没有已知问题。</block>
 </blocks>

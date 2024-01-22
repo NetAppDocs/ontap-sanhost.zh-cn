@@ -249,8 +249,6 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 === 启用NVMe服务
 
-您可以使用以下操作步骤启用NVMe服务。
-
 中包含两个NVMe/FC启动服务 `nvme-cli` 但是、_ONLY _ `nvmefc-boot-connections.service` 已启用、可在系统启动期间启动；  `nvmf-autoconnect.service` 未启用。因此、您需要手动启用 `nvmf-autoconnect.service` 在系统引导期间启动。
 
 .步骤
@@ -568,7 +566,7 @@ Device           Vserver                   Namespace Path                       
 
 
 
-== 发现增强功能
+== 创建永久性发现控制器
 
 从ONTAP 9.11.1开始、您可以使用以下操作步骤为SLES 15 SP4主机创建永久性发现控制器(PDC)。要自动检测NVMe子系统添加或删除方案以及对发现日志页面数据的更改、需要PDC。
 
