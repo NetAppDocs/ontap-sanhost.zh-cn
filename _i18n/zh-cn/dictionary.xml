@@ -3558,4 +3558,31 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="3d945423f8e9496c429a5d8c65b4604f" category="sidebar">Ubuntu</block>
   <block id="4ecf3c9493d36f3a582a25b68e645741" category="sidebar">Ubuntu FCP</block>
   <block id="7cd95c816f8a04ff858a857e3e5a484d" category="sidebar">20.04.</block>
+  <block id="61b07fd83e5960959693b88b1afdfcbe" category="summary">介绍如何将Ubuntu 22.04与ONTAP结合使用</block>
+  <block id="d2142f1d82ab3f8920c5e47446631d4b" category="doc">将Ubuntu 22.04与ONTAP结合使用</block>
+  <block id="4fbbd56106aac3814f8ddd0f05db140b" category="paragraph">您可以使用ONTAP SAN主机配置设置将目标ONTAP配置为Ubuntu 22.04。</block>
+  <block id="7c1e8635bc3420ecd446913f429d9ea8" category="admonition">NetApp Linux Unified Host Utilities软件包不适用于Ubuntu 22.04操作系统。</block>
+  <block id="aa9b36be0bfd178660104314442edd58" category="paragraph">对于Ubuntu 22.04、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。Ubuntu 22.04包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="918af3e81e1488cf1519a1f43482b774" category="paragraph">Ubuntu 22.04操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="268d764f10521ffc4e0f9dfd03765bd6" category="paragraph">对于Ubuntu 22.04 ONTAP版本、没有已知问题。</block>
+  <block id="78550e91fbb2b5810210b43b287b7c4e" category="summary">如何使用ONTAP为Ubuntu 22.04配置NVMe-oF主机</block>
+  <block id="be09412791a80b1e99189d1da97f513c" category="doc">适用于采用ONTAP的Ubuntu 22.04的NVMe-oF主机配置</block>
+  <block id="c6846e0213409c96ad77f710fa307642" category="paragraph">采用非对称命名空间访问(AANA)的Ubuntu 22.04支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="71251761db71d74ce129581af51deea0" category="paragraph">对于采用ONTAP的Ubuntu 22.04的NVMe-oF主机配置、可获得以下支持：</block>
+  <block id="c7b8b08d4869ac84fdd57c23e53885a4" category="list-text">本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC命名库的ONTAP详细信息。</block>
+  <block id="ee255f2b3c440f68a5bcc9252dfbbd03" category="paragraph">默认情况下、Ubuntu 22.04已为NVMe命名空间启用内核NVMe多路径。因此、无需显式设置。</block>
+  <block id="3621191bce4af482b56d942fb4c692d3" category="paragraph">您可以使用以下操作步骤验证支持的最低Ubuntu 22.04软件版本。</block>
+  <block id="daeaa7aff0b3adc4e01d754047800447" category="list-text">在服务器上安装Ubuntu 22.04。安装完成后、验证是否正在运行指定的Ubuntu 22.04内核：</block>
+  <block id="8f3ce7816b499a01a35c5c583a9b91a5" category="list-text">在Ubuntu 22.04主机上、检查中的hostnqn字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="c720f9a8702e2d5947dcfd0b4d0f2744" category="list-text">Ubuntu 22.04 GA内核中包含的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="9b581488b49c5ac223f72f44dce46098" category="list-text">对节点中所有受支持的NVMe/TCP启动程序-目标Li运行NVMe Connect-all命令、并将控制器丢失超时期限设置为至少30分钟或1800秒：</block>
+  <block id="2d737bddc26fec4760722ea17aae3833" category="open-title">NVMe/TCP</block>
+  <block id="b410fbf5a06284dbc3bed26b9ccd2094" category="paragraph">对于采用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置、没有已知问题。</block>
+  <block id="90fc24312f4ab09ff404f0abfb26b105" category="cell">IRA ID</block>
+  <block id="fb99255f11e8a5c23d9e98c28ef9997d" category="cell">1593771</block>
+  <block id="970c941050f97a801dd7266734957b39" category="cell">在存储移动操作期间、Red Hat Enterprise Linux 9.3 QLogic SAN主机会丢失部分多路径</block>
+  <block id="a33a041bd9f15b20d1f9f0d86a594262" category="cell">在ONTAP存储控制器接管操作期间、多路径中有一半应关闭或切换到故障转移模式、然后在恢复工作流期间恢复到完整路径计数。但是、对于Red Hat Enterprise Linux (RHEL) 9.3 QLogic主机、在执行存储故障转移恢复操作后、只会恢复部分多路径。</block>
+  <block id="a98f12afd377cfff4657909446bff74a" category="cell">RHEL 17811</block>
+  <block id="e764fe6b8f8825a307a87cedbef45678" category="sidebar">22.04.</block>
+  <block id="829d28d8727a4d458f1c35bda30f5ad7" category="sidebar">NVMeoF Ubuntu</block>
 </blocks>

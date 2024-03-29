@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_rhel_93.html 
-keywords: host utilities, red hat, rhel, linux, 9.3, netapp, ontap, rhel 
-summary: 介绍如何将Red Hat Enterprise Linux 9.3与ONTAP结合使用 
+permalink: hu_ubuntu_2204.html 
+keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu 
+summary: 介绍如何将Ubuntu 22.04与ONTAP结合使用 
 ---
-= 将Red Hat Enterprise Linux 9.3与ONTAP结合使用
+= 将Ubuntu 22.04与ONTAP结合使用
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,57 +16,17 @@ summary: 介绍如何将Red Hat Enterprise Linux 9.3与ONTAP结合使用
 
 
 [role="lead"]
-您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 9.3配置为ONTAP作为目标。
+您可以使用ONTAP SAN主机配置设置将目标ONTAP配置为Ubuntu 22.04。
 
 
+NOTE: NetApp Linux Unified Host Utilities软件包不适用于Ubuntu 22.04操作系统。
 
-== 安装 Linux Unified Host Utilities
-
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
-
-NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
-
-.您需要的内容
-如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
-
-.步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
-. 安装软件包：
-+
-`rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
-
-
-
-
-
-== SAN工具套件
-
-安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和HBA。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
-
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[source, cli]
-----
-# sanlun lun show all
-----
-*示例输出：*
-
-[listing]
-----
-controller(7mode/E-Series)/            device     host               lun
-vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
-------------------------------------------------------------------------------------
-vs_147_32glpe	         /vol/vol1/lun	 /dev/sdb	Host11  FCP        10g	cDOT
-vs_147_32glpe	         /vol/vol1/lun	 /dev/sdx	Host11  FCP        10g	cDOT
-vs_147_32glpe	         /vol/vol2/lun	 /dev/sdbt  host12 FCP        10g	cDOT
-vs_147_32glpe	         /vol/vol2/lun	 /dev/sdax	host12  FCP        10g	cDOT
-----
 
 
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -86,7 +46,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 == 多路径
 
-对于Red Hat Enterprise Linux (RHEL) 9.3、 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.3会编译为包含识别和正确管理ONTAP LUN所需的所有设置。
+对于Ubuntu 22.04、 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。Ubuntu 22.04包含识别和正确管理ONTAP LUN所需的所有设置。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
 
@@ -102,13 +62,14 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 [listing]
 ----
 # multipath -ll
-3600a098038314359725d516c69733471 dm-22 NETAPP,LUN C-Mode
-size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a098038314559533f524d6c652f62 dm-24 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:3:0  sdau 66:224 active ready running
-  |- 12:0:4:0  sdco 69:192 active ready running
-  |- 12:0:0:0  sdav 66:240 active ready running
-  `- 11:0:2:0  sdat 66:208 active ready running
+  |- 11:0:1:13 sdm  8:192  active ready running
+  |- 11:0:3:13 sdah 66:16  active ready running
+  |- 12:0:1:13 sdbc 67:96  active ready running
+  `- 12:0:3:13 sdbx 68:176 active ready running
+
 ----
 
 NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
@@ -125,14 +86,14 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 [listing]
 ----
 # multipath -ll
-3600a0980383149783224544d334a644d dm-10 NETAPP,LUN C-Mode
+3600a098038314c4c715d5732674e6141 dm-0 NETAPP,LUN C-Mode
 size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
-| |- 12:0:0:18 sdbj 67:208 active ready running
-| `- 11:0:1:18 sdan 66:112 active ready running
+| |- 11:0:1:0 sda 8:0  active ready running
+| `- 12:0:2:0 sdd 8:48 active ready running
 `-+- policy='service-time 0' prio=10 status=enabled
-  |- 11:0:0:18 sdt  65:48  active ready running
-  `- 12:0:3:18 sdcf 69:48  active ready running
+  |- 11:0:2:0 sdb 8:16 active ready running
+  `- 12:0:1:0 sdc 8:32 active ready running
 
 ----
 
@@ -142,7 +103,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-经过编译的RHEL 9.3操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
+Ubuntu 22.04操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
 
 。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
@@ -292,15 +253,4 @@ devices {
 
 == 已知问题
 
-使用ONTAP的RHEL 9.3版本存在以下已知问题：
-
-[cols="20, 20, 50,20"]
-|===
-| NetApp 错误 ID | 标题 | Description | IRA ID 
-
-
-| 1508554 | NetApp Linux主机实用程序命令行界面需要具有其他库软件包依赖关系、才能支持Emulex主机总线适配器(HBA)适配器发现 | 在RHEL 9.x中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持Emulex主机总线适配器(HBA)发现的库软件包依赖项。 | 不适用 
-
-
-| 1593771 | 在存储移动操作期间、Red Hat Enterprise Linux 9.3 QLogic SAN主机会丢失部分多路径 | 在ONTAP存储控制器接管操作期间、多路径中有一半应关闭或切换到故障转移模式、然后在恢复工作流期间恢复到完整路径计数。但是、对于Red Hat Enterprise Linux (RHEL) 9.3 QLogic主机、在执行存储故障转移恢复操作后、只会恢复部分多路径。 | RHEL 17811 
-|===
+对于Ubuntu 22.04 ONTAP版本、没有已知问题。
