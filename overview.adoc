@@ -15,16 +15,21 @@ summary: 此内容针对分发提供了有关如何配置连接到Cloud Volumes 
 :imagesdir: ./media/
 
 
-此内容提供了特定于主机和版本的最佳实践、用于快速配置连接到ONTAP 存储的SAN主机。
+[role="lead"]
+应为SAN主机配置多路径、并使用特定参数和设置、这些参数和设置对于ONTAP LUN的正常运行至关重要。  主机配置因主机操作系统和协议而异。  正确的配置对于获得最佳性能和成功进行故障转移至关重要。
+
+您应将SAN主机配置为使用NetApp SAN主机实用程序。SAN Host Utilities可帮助您管理和监控LUN和主机总线适配器(HBA)。例如、您可以使用SAN主机实用程序检索映射到主机的所有LUN的列表、或者查看映射到主机的特定LUN的所有属性的列表。如果您的问题描述需要帮助、NetApp客户支持还可以使用SAN主机实用程序收集有关您的配置的信息。
+
+如果SAN主机可用、NetApp建议使用SAN Host Utilities软件。
+
+如果您的SAN配置支持SAN、则还可以将主机配置为使用SAN启动、以简化部署并提高可扩展性。使用SAN启动、您可以通过将多个新服务器连接到SAN并配置适当的启动设置来部署这些新服务器。这样就无需在每台服务器上单独安装操作系统、从而节省了时间。
 
 您的SAN主机和ONTAP 存储可以位于内部、云中、也可以同时位于这两者。
 
 
 NOTE: 在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。
 
-例如、您可以将内部ONTAP 存储配置为连接到内部SAN主机或连接到SAN云客户端。您也可以配置 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 或 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^] 连接到内部SAN主机或连接到SAN云客户端。
-
-正确的配置对于获得最佳性能和成功进行故障转移至关重要。
+例如、您可以将内部ONTAP存储配置为连接到内部SAN主机或SAN云客户端。您还可以配置在云环境(例如)上运行的存储服务 link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 或 link:https://docs.netapp.com/us-en/bluexp-fsx-ontap/index.html["适用于 NetApp ONTAP 的 Amazon FSX"^] 连接到内部SAN主机或SAN云客户端。
 
 .相关信息
 * 。 link:https://docs.netapp.com/us-en/ontap/san-config/index.html["ONTAP SAN配置"^] 适用于您的ONTAP 版本
