@@ -3585,4 +3585,25 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="f76b486098082341b739c343f962d5d9" category="paragraph">如果您的SAN配置支持SAN、则还可以将主机配置为使用SAN启动、以简化部署并提高可扩展性。使用SAN启动、您可以通过将多个新服务器连接到SAN并配置适当的启动设置来部署这些新服务器。这样就无需在每台服务器上单独安装操作系统、从而节省了时间。</block>
   <block id="4d82a1ec1af02725042c8c785564ee7a" category="inline-link-macro">适用于 NetApp ONTAP 的 Amazon FSX</block>
   <block id="cbd5bf3ac18c40540e157027878d3965" category="paragraph">例如、您可以将内部ONTAP存储配置为连接到内部SAN主机或SAN云客户端。您还可以配置在云环境(例如)上运行的存储服务 <block ref="54a9edfbbcc641d603aea65a27251f05" category="inline-link-macro-rx"></block> 或 <block ref="32496c00ec9be403fcfaf96fbaeed4b1" category="inline-link-macro-rx"></block> 连接到内部SAN主机或SAN云客户端。</block>
+  <block id="99fc62da3c4063c517d61da1e5cb3ea3" category="summary">如何使用ONTAP为RHEL 9.4配置NVMe-oF主机</block>
+  <block id="0f57fe9eb655baeaa1793e610b42c2f4" category="doc">适用于采用ONTAP的RHEL 9.4的NVMe-oF主机配置</block>
+  <block id="d6b5282a090c91c3f085ec6086ba3812" category="paragraph">采用非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 9.4支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="90cb969c9c4cfedd40361241a5d9c71b" category="paragraph">对于采用ONTAP的RHEL 9.4、NVMe-oF主机配置支持以下功能：</block>
+  <block id="7e625f4c4c9c1ccd710847cc4037c2c5" category="list-text">默认情况下、RHEL 9.4已为NVMe命名空间启用内核NVMe多路径；因此、无需显式设置。</block>
+  <block id="f3dc69e0cba8d4237a37a786c899f4c3" category="list-text">支持使用NVMe/FC协议启动SAN。</block>
+  <block id="1733de5a596dfd8c9179b7f061fe9051" category="paragraph">没有已知限制。</block>
+  <block id="ad9672840bc0ef8e354ab95610d4aad0" category="paragraph">您可以使用以下操作步骤验证支持的最低RHEL 9.4软件版本。</block>
+  <block id="1fc43ef5bbf00643a63f0cb17e89513c" category="list-text">在服务器上安装RHEL 9.4。安装完成后、验证是否正在运行指定的RHEL 9.4内核：</block>
+  <block id="a64e6eb6496dd553f89b6df74f0198bd" category="list-text">在RHEL 9.4主机上、检查中的hostnqn字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="877a23b250be27d69c46a42ea66ce372" category="list-text">RHEL 9.4 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="8f222056258c7ab02f5add2e3dcea705" category="paragraph">NVMe/TCP没有自动连接功能。因此、我们需要手动执行NVMe/TCP连接或全部连接功能来发现NVMe/TCP子系统和命名共享。</block>
+  <block id="6cac16b75ec7c1c0cf3fdcb09bb8b510" category="admonition">从RHEL 9.4开始、这是NVMe/TCP的默认设置<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 使用NVMe connect或NVMe Connect-all命令时的超时持续时间(选项-l)。使用此默认行为时、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。</block>
+  <block id="93955aae7b33676909e1f1724f699b74" category="paragraph">对于采用ONTAP版本的RHEL 9.4的NVMe-oF主机配置、没有已知问题。</block>
+  <block id="c78033326da0dc85293c84954e3b3012" category="summary">介绍如何将Red Hat Enterprise Linux 9.4与ONTAP结合使用</block>
+  <block id="4b56958d28f3694a2adfefd32d8705e7" category="doc">将Red Hat Enterprise Linux 9.4与ONTAP结合使用</block>
+  <block id="788e0ec94e64fbc7dd232fb1cecd4052" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 9.4配置为目标ONTAP。</block>
+  <block id="3ce1443ad7e3181c19eca5a21a312153" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.4、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.4会编译为包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="aec8d85637dcc004808d5ebb83597d99" category="paragraph">对RHEL 9.4操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="d0416aff963666e337ccc38e2c8cf339" category="paragraph">对于运行ONTAP版本的RHEL 9.4、FC主机配置没有已知问题。</block>
+  <block id="b68de8f1f938e0330acdf64c63b08b9a" category="sidebar">9.4.</block>
 </blocks>

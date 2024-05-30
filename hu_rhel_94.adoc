@@ -1,0 +1,298 @@
+---
+sidebar: sidebar 
+permalink: hu_rhel_94.html 
+keywords: host utilities, red hat, rhel, linux, 9.4, netapp, ontap, rhel 
+summary: 介绍如何将Red Hat Enterprise Linux 9.4与ONTAP结合使用 
+---
+= 将Red Hat Enterprise Linux 9.4与ONTAP结合使用
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 9.4配置为目标ONTAP。
+
+
+
+== 安装 Linux Unified Host Utilities
+
+上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
+
+NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+
+.您需要的内容
+如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
+
+.步骤
+. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 安装软件包：
++
+`rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
+
+
+
+
+
+== SAN工具套件
+
+安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和HBA。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
+
+在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
+
+[source, cli]
+----
+# sanlun lun show all
+----
+*示例输出：*
+
+[listing]
+----
+controller(7mode/E-Series)/            device     host               lun
+vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
+------------------------------------------------------------------------------------
+vs_147_32glpe	         /vol/vol1/lun	 /dev/sdb	Host11  FCP        10g	cDOT
+vs_147_32glpe	         /vol/vol1/lun	 /dev/sdx	Host11  FCP        10g	cDOT
+vs_147_32glpe	         /vol/vol2/lun	 /dev/sdbt  host12 FCP        10g	cDOT
+vs_147_32glpe	         /vol/vol2/lun	 /dev/sdax	host12  FCP        10g	cDOT
+----
+
+
+== SAN 启动
+
+.您需要的内容
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
+
+.步骤
+. 将 SAN 启动 LUN 映射到主机。
+. 验证是否有多个可用路径。
++
+
+NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将变为可用。
+
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机以验证启动是否成功。
+
+
+
+
+== 多路径
+
+对于Red Hat Enterprise Linux (RHEL) 9.4、 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.4会编译为包含识别和正确管理ONTAP LUN所需的所有设置。
+
+您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
+
+
+
+=== 所有SAN阵列配置
+
+在全SAN阵列(ASA)配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+.示例
+以下示例显示了 ONTAP LUN 的正确输出：
+
+[listing]
+----
+# multipath -ll
+3600a098038314359725d516c69733471 dm-22 NETAPP,LUN C-Mode
+size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+|- 11:0:3:0	sdau 66:224 active ready running
+|- 12:0:4:0	sdco 69:192 active ready running
+|- 12:0:0:0	sdav 66:240 active ready running
+`- 11:0:2:0	sdat 66:208 active ready running
+
+----
+
+NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+
+
+
+=== 非ASA配置
+
+对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
+
+.示例
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+
+[listing]
+----
+# multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
+size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
+----
+
+NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+
+
+
+== 建议设置
+
+对RHEL 9.4操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
+
+。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
+
+`touch /etc/multipath.conf`
+
+首次创建此文件时、可能需要启用并启动多路径服务：
+
+[listing]
+----
+# systemctl enable multipathd
+# systemctl start multipathd
+----
+* 无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
+* 要排除不需要的设备、请将以下语法添加到中 `multipath.conf` 文件。
++
+[listing]
+----
+blacklist {
+        wwid <DevId>
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
++
+更换 `<DevId>` 使用 `WWID` 要排除的设备的字符串。
+
++
+.示例
+在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+
++
+.步骤
+.. 运行以下命令以确定 WWID ：
++
+[listing]
+----
+# /lib/udev/scsi_id -gud /dev/sda
+360030057024d0730239134810c0cb833
+----
++
+`sda` 是我们需要将其添加到黑名单中的本地SCSI磁盘。
+
+.. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
++
+[listing]
+----
+blacklist {
+     wwid   360030057024d0730239134810c0cb833
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
+----
+
+
+
+
+您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
+
+下表显示了关键 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
+
+[cols="2*"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | lun.* 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+.示例
+以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示 `multipath.conf` 文件定义的值 `path_checker` 和 `no_path_retry` 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。
+
+[listing]
+----
+defaults {
+   path_checker      readsector0
+   no_path_retry     fail
+}
+
+devices {
+   device {
+      vendor         "NETAPP  "
+      product         "LUN.*"
+      no_path_retry    queue
+      path_checker     tur
+   }
+}
+----
+
+
+=== KVM设置
+
+您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+
+
+
+== 已知问题
+
+对于运行ONTAP版本的RHEL 9.4、FC主机配置没有已知问题。
+
+|===
+|===
