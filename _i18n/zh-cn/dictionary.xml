@@ -1356,7 +1356,6 @@
   <block id="784c795c066fdf3c4713aae58af639ff" category="paragraph">没有已知问题。</block>
   <block id="c2e11c6f1a87d8cf2bf465e9c2562bdb" category="inline-link-macro">TR-4597 ：采用 ONTAP 的 VMware vSphere</block>
   <block id="52f50d0f0ab285059648c7da67b4b07f" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
-  <block id="929c9a7053ca6d930b0835cb93342235" category="inline-link-macro">采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP</block>
   <block id="51a78203e5d6aa30e5bcafd469a2d2be" category="summary">介绍如何将 SUSE Linux Enterprise Server 12 SP5 与 ONTAP 结合使用</block>
   <block id="9a6a6fde9dc0b6c6cf58bb4752be3433" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="84c7846e7158b0d270be911eb58ad456" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3622b9af63906c6b9ad79d33b1f46e2e" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
@@ -1613,7 +1612,6 @@
   <block id="095f17ad6c7f706c5fa881fa28d2b0e2" category="sidebar">XenServer 7.</block>
   <block id="025006946b1c53786cbb29eef3d30229" category="paragraph">按照说明配置 override 参数：</block>
   <block id="570f5761e2e0bfb396196b06d19e21b0" category="paragraph">`root@host-A ：~ # devprop -v -n /scsi_vhci scsi-vhcI-failover-override scsi-vhcI-failover-netapp lun + f_tpgs root@host-A ：~ # echo "* scsi_vhci_dip ：： print -x struct dev_info dev_vvi_l_net_lvnvnv_l_l_l_sbl ：` sv_l_net_l_l_l_net_l_lf_lfs_lfs_lmcit_l_l_lf_l_lf_lf_lf_lf_sbl</block>
-  <block id="5492ce934067a932652b5c7aa5dd991b" category="inline-link">Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置</block>
   <block id="1da730d18c28f088385f1eaca3cb2f71" category="summary">介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF</block>
   <block id="38a445b35a68bb2b838316376b083c19" category="doc">适用于采用 ONTAP 的 ESXi 7.x 的 NVMe-oF 主机配置</block>
   <block id="1149b7a7ae9be623a3a7a3f347ff721f" category="list-text">从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。</block>
@@ -1631,7 +1629,6 @@
   <block id="a4e09728b21e07eb8de92849a3239079" category="admonition">在 ONTAP 9.7 中， NVMe/FC 命名空间的默认块大小为 4k 。此默认大小与 ESXi 不兼容。因此，在为 ESXi 创建命名空间时，必须将命名空间块大小设置为 512b 。您可以使用 `vserver nvme namespace create` 命令执行此操作。</block>
   <block id="b19cff5a6d037faf5ffa796506cf839f" category="inline-link-macro">ONTAP 9 命令手册页</block>
   <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
-  <block id="0a7c052037789d22811592a15b7a2e17" category="inline-link-macro">NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x</block>
   <block id="ff09581cb2c13d8ad132e71c1320dc7e" category="cell"><block ref="108e2d22c5beb633cb3cfe03baa4f66f" category="inline-link-macro-rx"></block></block>
   <block id="8286a7d77eb7d53445229f3c12d8c18f" category="cell"><block ref="8286a7d77eb7d53445229f3c12d8c18f" category="inline-link-macro-rx"></block></block>
   <block id="109d2ee1c560df7a2148394570cdbc69" category="cell"><block ref="109d2ee1c560df7a2148394570cdbc69" category="inline-link-macro-rx"></block></block>
@@ -1644,9 +1641,6 @@
   <block id="b0a76d3d3c0c115749b76b173897a127" category="list-text">请参见，检查所需驱动程序 / 固件是否支持此配置 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="3c5ff01a1cadf5679b57603dbc59e554" category="list-text">请参见，检查所需驱动程序 / 固件是否支持配置 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="9a85ce7daf00cd97d2ba489c461c944f" category="paragraph">请参见 <block ref="6bc1436da9f0920d54a0f738830d902f" category="inline-link-macro-rx"></block> 了解更多详细信息。</block>
-  <block id="d1456688e4d9e6236e75dfb01f3ed2ec" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
-<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
-<block ref="feedbf2928c5a2b3814dd0d36cd7d240" category="inline-link-macro-rx"></block></block>
   <block id="ab29bda450e857b3672661ee0b1f2ec3" category="paragraph">请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置和版本列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="2d3e43ea7c8c91fc0a78b6056554ec91" category="paragraph">适用于 Oracle Linux 7.9 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.9 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="fe11a5d007b30b19387669fa13d0bc9d" category="paragraph">请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的配置的准确详细信息。</block>
@@ -1660,7 +1654,6 @@
   <block id="2a0a4348e3cfffb7106ae13ae6827b6d" category="paragraph">适用于 Oracle Linux 8.2 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 8.2 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="24b832a3c490bb4e76193c9ae615cd2b" category="admonition">为映射到 VMware vSphere 的所有 LUN 启用 space-alloc 设置，以便 UNMAP 正常工作。有关详细信息，请参见<block ref="ecbbd19c2959ac5708c6c4723def4492" category="inline-link-rx"></block>。</block>
   <block id="8a515fe16331b7269862c5871e55c7e4" category="list-text"><block ref="8a515fe16331b7269862c5871e55c7e4" category="inline-link-macro-rx"></block></block>
-  <block id="5306229c164cfe6b066f8442f64d8268" category="list-text"><block ref="5306229c164cfe6b066f8442f64d8268" category="inline-link-macro-rx"></block></block>
   <block id="ffc3e17a9258b28dbcb840e63a4da4d4" category="list-text">NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区<block ref="0a2387641ef9263b02d75ca03cdebda2" category="inline-link-rx"></block> 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。</block>
   <block id="ce5e3ba4f12b670c7cec88d808b05d5b" category="list-text">仅使用虚拟化存储资源（例如 `vdskk` ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们不能直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域<block ref="0a2387641ef9263b02d75ca03cdebda2" category="inline-link-rx"></block>。</block>
   <block id="806bc64df06f53e39492ea141c1547ac" category="paragraph">适用于 Oracle Linux 7.8 的 ONTAP 9.6 或更高版本支持 NVMe/FC 。Oracle Linux 7.8 主机可以通过相同的光纤通道（ FC ）启动程序适配器端口运行 NVMe 和 SCSI 流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。有关支持的最新配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
@@ -1734,8 +1727,6 @@
   <block id="685ee6c581bc2df3a8910672a2af1ac3" category="paragraph">RHEL 8.5 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="845e85fa64a2d6037055beba19fe0bd8" category="sidebar">8.5</block>
   <block id="c22c65685ac3f8701da1a00c478b1333" category="cell">1447287</block>
-  <block id="778fd215ce10bd514de565e6df2b1758" category="cell">在 SM-BC 配置中，隔离主集群上的 AINFO 事件会导致 HP-UX 主机暂时中断</block>
-  <block id="6f80f2e204ff92f2e954367d70413775" category="cell">如果在 SnapMirror 业务连续性（ SM-BC ）配置中的隔离主集群上发生自动计划外故障转移（ AUFO ）事件，则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
   <block id="dd0ef0f389a16b505e475797a7b752ac" category="list-text">从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` <block ref="a42716fdd3c80ae75cadfb8024b65de0" category="inline-link-macro-rx"></block> 连接到 HP-UX 主机。</block>
   <block id="93b6e09e96afb8006209af84f438ca2b" category="paragraph">` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
   <block id="2d903390e509c4d2f6da1a4d0787b5b6" category="paragraph">` # swinstall -s /storage_path`</block>
@@ -1828,11 +1819,7 @@
   <block id="ea11e68a3ea4e3736ee4012985057991" category="paragraph">Oracle Linux 8.6操作系统经过编译、可以识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="805a476dee7a3e2c96d744778fabadf2" category="admonition">要配置Oracle Linux 8.6 RedHat Enterprise Kernel (RHCK)、请使用 <block ref="db48836fc998d5e9210c21f83870f464" category="inline-link-macro-rx"></block> 适用于Red Hat Enterprise Linux (RHEL) 8.6。</block>
   <block id="5ebe49302359fb6e4d762fdceb288864" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="10ee08d1b3d909bc389f3b317276174b" category="inline-link-macro-rx"></block> 一节。</block>
-  <block id="c0555368ec9919ce9b1c9712c00dbb76" category="section-title">SM-BC支持AIX</block>
-  <block id="a87c560166b76536072b61a847b883d2" category="paragraph">从ONTAP 9.11.1开始、SM-BC支持AIX。在AIX配置中、主集群是"活动"集群。</block>
   <block id="244c37afdc307098d90d497c08f88069" category="paragraph">在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。</block>
-  <block id="ba865279c8bb1f9a639935e3cb2406b0" category="inline-link-macro">如何为SnapMirror业务连续性(SM-BC)配置AIX主机</block>
-  <block id="ce41c78a17a5925101abf561eb152ad3" category="paragraph">要配置适用于SM-BC的AIX、请参阅知识库文章 <block ref="bfd553e439e8f0adcfe76e0cf010b4a4" category="inline-link-macro-rx"></block>。</block>
   <block id="ea1335497ead6bd540f2e523154123a0" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.0、必须存在`/etc/multipath.conf`文件、但您不需要对该文件进行特定更改。RHEL 9.0使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="40aa2a6195f4abccde9c89cc1ad6965b" category="paragraph">RHEL 9.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。</block>
   <block id="587384a32d909bff27b8405e18d9d7cf" category="summary">如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机</block>
@@ -2041,17 +2028,11 @@
   <block id="c25aa2a919e3a63ca18f5d2ba0d93494" category="paragraph">验证是否准确<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 字符串已添加到NetApp阵列上的相应子系统中(使用进行验证<block ref="0e04d4bf4054a77eef58ff3d9b9e59ae" prefix=" " category="inline-code"></block> 命令)。</block>
   <block id="d517a34201e69d7cbd98e82863cbb016" category="paragraph">在控制器关联或指定操作已创建或正在创建时观察到。在上述自动连接脚本中可能会发生这种情况。</block>
   <block id="ed88a4dfde1eda848d0cd0880569e29d" category="paragraph">无尝试运行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令。适用于<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block> 和<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>、运行<block ref="b0f1705bbfcfb10368af21a019072318" prefix=" " category="inline-code"></block> 命令以验证是否已创建命名空间设备并将其显示在主机上。</block>
-  <block id="23013fc45b1e28aeba8b4521f80156eb" category="section-title">SnapMirror业务连续性的建议设置</block>
   <block id="7682043e346a0976ad107c7cb3989145" category="list-text">创建配置文件<block ref="2c50293ac08c6ad6b30ce2ba7a8fcd9c" prefix=" " category="inline-code"></block> 对于连接到主机的NetApp存储类型、此条目类似于以下内容：</block>
-  <block id="976902513d73f70373bf832d81070379" category="admonition">从ONTAP 9.1.1开始、Solaris 11.4主机支持SM-BC设置配置。</block>
   <block id="e49ccc598a2a177291bac4be5c852c5f" category="cell"><block ref="e49ccc598a2a177291bac4be5c852c5f" category="inline-link-macro-rx"></block></block>
   <block id="edd08258c3c5f3718f84028ff5971d1d" category="section-title">Oracle Solaris虚拟化</block>
   <block id="fd515dc1fb4215f1d4f9c5a754b19cab" category="section-title">建议的虚拟化设置</block>
-  <block id="c25aaa60cb981e43df9a60c24d76e170" category="paragraph">要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
-  <block id="a581ca8b747415e1f36b69571ad2cd82" category="admonition">从ONTAP 9.1.1开始、Solaris 11.3主机支持SM-BC设置配置。</block>
   <block id="e246c6fa1d97174589605e1deac30e48" category="list-text">使用<block ref="01fe732856e5259c0c505f9054c784ba" prefix=" " category="inline-code"></block> 和<block ref="801693b1d56b19d77272b3c6db46a751" prefix=" " category="inline-code"></block> 用于验证是否已成功应用覆盖参数的命令：</block>
-  <block id="206258ae3de99b2eff4c714432cf5621" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
-  <block id="ce9171caa524742973555de6b74fd04b" category="paragraph">要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
   <block id="d1b191cbd6f86528470b91fa5f92dac0" category="paragraph">采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 8.6支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在Oracle Linux 8.6和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。</block>
   <block id="ec06aef1c4fa2ded8e780a551fa4da6b" category="list-text">默认情况下、Oracle Linux 8.6为NVMe命名空间启用了内核NVMe多路径。</block>
   <block id="3d2513530d064dd18ec62aadb74704e2" category="list-text">使用Oracle Linux 8.6、<block ref="dafde1b5ed9f22cccd76aeeb9844345b" prefix=" " category="inline-code"></block> 本机中包含脚本<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 软件包。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的出箱自动连接脚本。</block>
@@ -2438,7 +2419,6 @@
   <block id="0139c4257b602afedfc14532f6e3bb7f" category="list-text">从ONTAP 9.13.1开始、为IBM AIX 7.2 TL5 SP6、AIX 7.3 TL1 SP2和VIOS 3.1.4.21版本增加了NVMe/FC支持、并支持物理堆栈和虚拟堆栈的SAN启动。有关设置SAN启动支持的详细信息、请参见IBM文档。</block>
   <block id="a4ade56204fe77a5b8d5d68b727936f2" category="list-text">POWER9和Power10 IBM服务器支持NVMe/FC。</block>
   <block id="5e8f203d5d8eb8937b5474cdb4d3286d" category="list-text">NVMe设备不需要单独的PCM (路径控制模块)、例如Host Utilities for AIX SCSI Multipath I/O (MPIO)支持。</block>
-  <block id="30c37d249753c00e3fd1f47b490ef907" category="list-text">如果您使用的是MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅公共报告1553249。</block>
   <block id="8fe6fdeeaabeb226f9ccb84c20ce5acd" category="list-text">默认情况下、AIX主机操作系统的非对称命名空间访问过渡超时(AATT)值为30秒。IBM提供了一个临时修复(IFIX)、该修复会将ANATT值上限设置为60秒；您需要从IBM网站安装IFIX、以确保所有ONTAP工作流均无中断。</block>
   <block id="01f38bfb1f565f2f3109ceb671a58dff" category="admonition">要获得NVMe/FC AIX支持、必须在AIX OS的GA版本上安装IFIX。VIOS/PowerVM操作系统不需要执行此操作。</block>
   <block id="3438c3bd2528bd32664a6b6c3c8e7c73" category="paragraph">下表显示了分配给AIX LPAR (AIX逻辑分区)或物理堆栈的HBA：</block>
@@ -2829,13 +2809,6 @@
   <block id="7636f503a3339c628c780594076ebb17" category="section-title">此版本已修复</block>
   <block id="977dc544e187df2c36b93ee4767972aa" category="paragraph">运行时发生的间歇性主机操作系统故障问题描述<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block> SLES12SP1、OL7.2、RHEL7.2和RHEL 6.8中的命令已在此版本中修复。</block>
   <block id="d2eefe458609a5477d08446697ea1261" category="paragraph">Linux Host Utilities 7.1版具有以下已知问题和限制。</block>
-  <block id="bb49904ee226b5b028402a9c2c228bf2" category="cell">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)所需的库依赖关系
-位于：
-
-[root@hostname ~]# sanlun fcp show adapter -v
-找不到/usr/lib64/libHABAPI.so库
-确保安装库的软件包已安装并加载
-请参阅公共报告1508554。</block>
   <block id="7d21aae7a58430ed491d0dcc91fdc835" category="paragraph">使用ONTAP的OL 8.4的NVMe-oF主机配置存在以下已知问题：</block>
   <block id="9de20e72ce939c2312bbc9e7045ded44" category="paragraph">您可以在运行Windows Server 2012 R2的主机上使用ONTAP作为目标来配置基于光纤通道的NVMe (NVMe/FC)。</block>
   <block id="e7183ec32fe608cc18cd79de6aab8c7f" category="inline-link-macro">ONTAP SAN配置</block>
@@ -3118,7 +3091,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="25bf44f4015fc028f21a62c878e44061" category="list-text">运行<block ref="1615297782a0dff59b20451e2ca97ea7" prefix=" " category="inline-code"></block> 并验证*ashift,的值是否为<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>。</block>
   <block id="83b7acfdc97d935459ec53ae7ab7bf2b" category="paragraph">如果*ashift,的值不是<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>，验证是否安装了正确的修补程序，然后重新检查的内容<block ref="3328fba80b08b36663ffae0684f6c578" prefix=" " category="inline-code"></block>。</block>
   <block id="22e4e094e328e606ba04a7acfe2e4b3b" category="paragraph">在*ashifift *显示的值为之前，请勿继续操作<block ref="c20ad4d76fe97759aa27a0c99bff6710" prefix=" " category="inline-code"></block>。</block>
-  <block id="ca1d91e2d1ade577213cc4880d92b088" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。有关追加信息和建议的默认设置更改、请参阅NetApp知识库文章<block ref="0b0122d84e6b5077349fe91550e086e2" category="inline-link-rx"></block>。</block>
   <block id="1abf5d50c59892ce0d08917cc4119e38" category="paragraph">Solaris 11.4 with ONTAP发行版具有以下已知问题：</block>
   <block id="ea97d5c2ead91159f0f6b9bb0c5482a0" category="cell">请参见Solaris 11.4和HUK建议。FC驱动程序绑定已从更改为<block ref="4ac64d4c80a809df47ac078b5c56d623" prefix=" " category="inline-code"></block> to<block ref="0d1e6498671862209810e5029cd1e779" prefix=" " category="inline-code"></block>。从移动现有配置<block ref="d5ef7f69fa74e42b54d8244ee447ab2b" prefix=" " category="inline-code"></block> to<block ref="88cafedaeae385b0e8278ab1804829cd" prefix=" " category="inline-code"></block> 如Oracle文档2595926.1中所述)。在新安装的Solaris 11.4系统和从Solaris 11.3或更早版本升级的系统中，此行为会有所不同。</block>
   <block id="65afcaea10e26dc5c66de4f6bf0ade99" category="cell">在x86 Arch上使用Emulex 32G主机总线适配器(HBA)执行存储故障转移(Storage Failover、SFo)恢复操作期间、系统会注意到Solaris LIF问题描述</block>
@@ -3596,8 +3568,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="1fc43ef5bbf00643a63f0cb17e89513c" category="list-text">在服务器上安装RHEL 9.4。安装完成后、验证是否正在运行指定的RHEL 9.4内核：</block>
   <block id="a64e6eb6496dd553f89b6df74f0198bd" category="list-text">在RHEL 9.4主机上、检查中的hostnqn字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
   <block id="877a23b250be27d69c46a42ea66ce372" category="list-text">RHEL 9.4 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
-  <block id="8f222056258c7ab02f5add2e3dcea705" category="paragraph">NVMe/TCP没有自动连接功能。因此、我们需要手动执行NVMe/TCP连接或全部连接功能来发现NVMe/TCP子系统和命名共享。</block>
-  <block id="6cac16b75ec7c1c0cf3fdcb09bb8b510" category="admonition">从RHEL 9.4开始、这是NVMe/TCP的默认设置<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 使用NVMe connect或NVMe Connect-all命令时的超时持续时间(选项-l)。使用此默认行为时、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。</block>
   <block id="93955aae7b33676909e1f1724f699b74" category="paragraph">对于采用ONTAP版本的RHEL 9.4的NVMe-oF主机配置、没有已知问题。</block>
   <block id="c78033326da0dc85293c84954e3b3012" category="summary">介绍如何将Red Hat Enterprise Linux 9.4与ONTAP结合使用</block>
   <block id="4b56958d28f3694a2adfefd32d8705e7" category="doc">将Red Hat Enterprise Linux 9.4与ONTAP结合使用</block>
@@ -3606,4 +3576,76 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="aec8d85637dcc004808d5ebb83597d99" category="paragraph">对RHEL 9.4操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
   <block id="d0416aff963666e337ccc38e2c8cf339" category="paragraph">对于运行ONTAP版本的RHEL 9.4、FC主机配置没有已知问题。</block>
   <block id="b68de8f1f938e0330acdf64c63b08b9a" category="sidebar">9.4.</block>
+  <block id="2458556d35196c49f0dbc83fec025e84" category="section-title">AIX支持SnapMirror主动同步</block>
+  <block id="c3553449ebe9e4dbb55bf9f614e9683b" category="paragraph">从ONTAP 9.11.1开始、SnapMirror主动同步支持AIX。在AIX配置中、主集群是"活动"集群。</block>
+  <block id="b6758eb9c7ac57209dfad7db602a24d4" category="inline-link-macro">如何为SnapMirror活动同步配置AIX主机</block>
+  <block id="1114b50a7a661e33f53cee05da42b09f" category="paragraph">要为AIX配置SnapMirror活动同步、请参阅知识库文章 <block ref="61477c15fb0eb0fa0cb713009db4ee54" category="inline-link-macro-rx"></block>。</block>
+  <block id="a9e760f9ba2dad33870cce967a12f75a" category="cell"><block ref="a9e760f9ba2dad33870cce967a12f75a" category="inline-link-macro-rx"></block></block>
+  <block id="8a0e59d557c48debea02376efc489435" category="cell"><block ref="8a0e59d557c48debea02376efc489435" category="inline-link-macro-rx"></block></block>
+  <block id="0d2b4c4b2840eab7bfae167b812970ef" category="cell"><block ref="0d2b4c4b2840eab7bfae167b812970ef" category="inline-link-macro-rx"></block></block>
+  <block id="af3b3cf0d6ceafbe31919aa407157743" category="cell"><block ref="af3b3cf0d6ceafbe31919aa407157743" category="inline-link-macro-rx"></block></block>
+  <block id="bc2c3049c0f4d679fb14b74cd64723c8" category="cell"><block ref="bc2c3049c0f4d679fb14b74cd64723c8" category="inline-link-macro-rx"></block></block>
+  <block id="9dc0fe6bf4f1ba89590a2f6796e0ffe4" category="paragraph">要配置适用于SM-BC的AIX、请参阅知识库文章 <block ref="61477c15fb0eb0fa0cb713009db4ee54" category="inline-link-macro-rx"></block>。</block>
+  <block id="e3fc51a32f8d53fd1edcd8a7ba414fd5" category="list-text">在给定主机总线适配器(HBA)上的同一主机上使用NVMe和SCSI流量并无明确的dm-dpath设置、以防止声明NVMe命名空间。</block>
+  <block id="7c124572f4bca997fbffe6d57ed1dbd0" category="paragraph">NVMe/TCP没有自动连接功能。因此、您需要手动执行NVMe/TCP连接或全部连接功能、才能发现NVMe/TCP子系统和命名共享。</block>
+  <block id="b6143632d17dd26c84f31a8c6ac3d645" category="admonition">从RHEL 9.4开始、这是NVMe/TCP的默认设置<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 使用时的超时持续时间<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block> 或<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令(选项-l)。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。</block>
+  <block id="c96b4702a07478185cc851585d0055b6" category="inline-link-macro">采用NetApp SnapMirror的NetApp ONTAP与VMware vSphere城域存储集群(VMSC)进行活动同步</block>
+  <block id="8b3f58063486fce853bcbb473e73c56f" category="list-text"><block ref="8b3f58063486fce853bcbb473e73c56f" category="inline-link-macro-rx"></block></block>
+  <block id="7ce2c81c828f2a1b54c1127149fe015e" category="summary">如何使用ONTAP为RHEL 8.10配置NVMe-oF主机</block>
+  <block id="f10d0e37a588d1f07d49d4a8fcea4752" category="doc">适用于采用ONTAP的RHEL 8.10的NVMe-oF主机配置</block>
+  <block id="b4c08aaedf475ce47e6623660aaa00df" category="paragraph">采用非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 8.10支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="5a5bc5602fe9f931767405aaaef0de37" category="paragraph">对于采用ONTAP的RHEL 8.10的NVMe-oF主机配置、可获得以下支持：</block>
+  <block id="25faad39893d37d8787d5e2b02fb8ea6" category="list-text">默认情况下、对于RHEL 8.10 NVMe-oF主机、内核NVMe多路径处于禁用状态。因此，您需要手动启用它。</block>
+  <block id="d66635253b6aaf6f2db675ed35185ba0" category="list-text">在RHEL 8.10主机上、由于存在未决问题、NVMe/TCP是一项技术预览功能。</block>
+  <block id="f98bcccbb710d0c88303ee4bb4c26d7a" category="list-text">在主机服务器上安装RHEL 8.10。</block>
+  <block id="559ebd58b1ddd945caa1b9c033782855" category="list-text">安装完成后、验证是否正在运行指定的RHEL 8.10内核：</block>
+  <block id="52e529d58370b4d027a9d97cac867e36" category="list-text">RHEL 8.10 GA内核中附带的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="54d5fbe39d4349a06e6a2dc7b7d5b917" category="paragraph">使用ONTAP的RHEL 8.10的NVMe-oF主机配置具有以下已知问题描述：</block>
+  <block id="18afb8a9c90d10fa4944c5e77101cab1" category="cell">RHEL 8.10 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="45e7643ebc2b41741a8515e9d1730a76" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.10、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
+  <block id="23c3f6b1dc0958b81d21563a91eecfa6" category="cell"><block ref="23c3f6b1dc0958b81d21563a91eecfa6" category="inline-link-macro-rx"></block></block>
+  <block id="e59f05c9149caf590d63da27c24797cb" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp®SnapMirror主动同步</block>
+  <block id="6fc38196f3941bcd7083730d812df39a" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
+<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
+<block ref="d28f7a65afd9b0a0129dadbafa84555d" category="inline-link-macro-rx"></block></block>
+  <block id="2a41c03d949869222b758867aff845ff" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步</block>
+  <block id="c8dc0bfd6733fa8c798fed363e1469e3" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
+<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
+<block ref="5f61a87054f37a4d758972ec77cfdf5e" category="inline-link-macro-rx"></block></block>
+  <block id="33bd005b46fadc3ac5ff4dc797b52e07" category="list-text">如果您具有MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅NetApp错误在线- <block ref="31191f9686b6d08dd8653718c76edbf6" category="inline-link-macro-rx"></block>。</block>
+  <block id="4d580b4b5071142b4be038164aad8343" category="cell"><block ref="4d580b4b5071142b4be038164aad8343" category="inline-link-macro-rx"></block></block>
+  <block id="0122bdec62d25017bba3ae0743d2526e" category="cell"><block ref="0122bdec62d25017bba3ae0743d2526e" category="inline-link-macro-rx"></block></block>
+  <block id="65bd7ad27ce676ed0cf60efc3d837fec" category="cell"><block ref="65bd7ad27ce676ed0cf60efc3d837fec" category="inline-link-macro-rx"></block></block>
+  <block id="54ca397a82c26d7a2bd0c2727b4056ac" category="cell"><block ref="54ca397a82c26d7a2bd0c2727b4056ac" category="inline-link-macro-rx"></block></block>
+  <block id="b93bfb624076fdeba743428e46605535" category="section-title">SnapMirror活动同步的建议设置</block>
+  <block id="c1d268f2b4a0ec1baaab1ca12f936c74" category="paragraph">为了验证在SnapMirror活动同步环境中发生计划外站点故障转移切换时Solaris客户端应用程序是否无中断、您必须在Solaris 11.4主机上配置以下设置。此设置将覆盖故障转移模块<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
+  <block id="75df81bfa5a2f39d6cb2556e1fd59367" category="admonition">从ONTAP 9.9.1开始、Solaris 11.4主机支持SnapMirror活动同步设置配置。</block>
+  <block id="2b9f901eb077ef55bfa374239724dab6" category="inline-link">Solaris主机支持SnapMirror主动同步配置中的建议设置</block>
+  <block id="0c01679208616cb3891299503241a9d1" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。有关追加信息和建议的默认设置更改、请参阅NetApp知识库文章<block ref="38eefb55aea51664f737ddbdc6c85594" category="inline-link-rx"></block>。</block>
+  <block id="15c955d1a65ba68c954ff38dc3c7a06d" category="cell"><block ref="15c955d1a65ba68c954ff38dc3c7a06d" category="inline-link-macro-rx"></block></block>
+  <block id="72dce086d3753af675540f6ccf3eca26" category="cell"><block ref="72dce086d3753af675540f6ccf3eca26" category="inline-link-macro-rx"></block></block>
+  <block id="c7328d059b13a8945ca960e2518c53f9" category="cell"><block ref="c7328d059b13a8945ca960e2518c53f9" category="inline-link-macro-rx"></block></block>
+  <block id="b5f9d2f440544d4a434475338d9ac946" category="cell"><block ref="b5f9d2f440544d4a434475338d9ac946" category="inline-link-macro-rx"></block></block>
+  <block id="f7ecd2eaa0c3e12b7825947252116185" category="cell"><block ref="f7ecd2eaa0c3e12b7825947252116185" category="inline-link-macro-rx"></block></block>
+  <block id="d569e2e2e36f96bb452e054f6bc87080" category="cell">在SnapMirror活动同步配置中、隔离主集群上的AUFO事件会导致HP-UX主机暂时中断</block>
+  <block id="fd4b7aa4410ba62613ac655e982dfa85" category="cell">如果在SnapMirror活动同步配置中的隔离主集群上发生自动计划外故障转移(AUFO)事件、则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
+  <block id="7311e6a0230a8f28266c6a6cdcb069ca" category="summary">介绍如何将Red Hat Enterprise Linux 8.10与ONTAP结合使用</block>
+  <block id="7c242222a8c1a8509a2288212dc2df22" category="doc">将Red Hat Enterprise Linux 8.10与ONTAP结合使用</block>
+  <block id="4bd2cfb10fe3b79990b45f4312a0ce11" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux (RHEL) 8.10配置为目标ONTAP。</block>
+  <block id="8eb2b72539757ff9ba21219da7bfacec" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="d122f411fa737dc5e80c66639f091aea" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
+  <block id="a3eda5fd57294144e255aab216fb69c9" category="paragraph">对于RHEL 8.10、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.10包含识别和正确管理ONTAP LUN所需的所有设置。</block>
+  <block id="605bf278704a07487c0859e4f4804b0a" category="paragraph">RHEL 8.10操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="207db3a5fa43fa362d879afbe86c2774" category="paragraph">RHEL 8.10没有已知问题。</block>
+  <block id="af0c3a60d1e34dd093fb89cacd5f4e14" category="cell">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)所需的库依赖关系
+位于：
+
+[root@hostname ~]# sanlun fcp show adapter -v
+找不到/usr/lib64/libHABAPI.so库
+确保安装库的软件包已安装并加载
+请参阅NetApp错误在线- <block ref="af3b3cf0d6ceafbe31919aa407157743" category="inline-link-macro-rx"></block>。</block>
+  <block id="d0dba2146745b50f092ff7e9479ffe78" category="paragraph">为了验证在SnapMirror活动同步环境中发生计划外站点故障转移切换时Solaris客户端应用程序是否无中断、您必须在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块<block ref="e66960c74638cf8300fb234ed66fcdb7" prefix=" " category="inline-code"></block> 以防止执行检测到冲突的代码路径。</block>
+  <block id="16c88309c173f2a1b5a9c5127f8b3bbe" category="admonition">从ONTAP 9.9.1开始、Solaris 11.3主机支持SnapMirror活动同步设置配置。</block>
+  <block id="0705687e23a55c98a49a67821189d6b8" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。
+有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="38eefb55aea51664f737ddbdc6c85594" category="inline-link-rx"></block>。</block>
+  <block id="24ae7542f38ef52be0ec1f780221fd23" category="sidebar">8.10.</block>
 </blocks>

@@ -28,7 +28,7 @@ summary: 如何使用ONTAP为AIX配置NVMe/FC主机
 
 .您需要的内容
 * 确认您已安装32 Gb FC Emulex适配器(EN1A、EN1B、EN1L)或64 Gb FC适配器(EN1n、EN1P)、且适配器固件为12.4.257.半 及更高版本。
-* 如果您使用的是MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅公共报告1553249。
+* 如果您具有MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅NetApp错误在线- link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1553249["1553249."^]。
 * 默认情况下、AIX主机操作系统的非对称命名空间访问过渡超时(AATT)值为30秒。IBM提供了一个临时修复(IFIX)、该修复会将ANATT值上限设置为60秒；您需要从IBM网站安装IFIX、以确保所有ONTAP工作流均无中断。
 +
 
@@ -323,16 +323,16 @@ hdisk1  11       Enabled  Sel,Non      nvme60  fcnvme0, 9
 | BURT ID (BURT ID) | 标题 | Description 
 
 
-| 1553249. | 要修改的AIX NVMe/FC默认APD时间、以支持MCC计划外切换事件 | 默认情况下、AIX操作系统会对NVMe/FC使用全路径关闭(APD)超时值20秒。  但是、ONTAP MetroCluster自动计划外切换(Automatic Undurrated SwitchOver、AUSO)和Tieb破碎 机启动的切换工作流所需时间可能比APD超时窗口要长一些、从而导致I/O错误。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1553249["1553249."^] | 要修改的AIX NVMe/FC默认APD时间、以支持MCC计划外切换事件 | 默认情况下、AIX操作系统会对NVMe/FC使用全路径关闭(APD)超时值20秒。  但是、ONTAP MetroCluster自动计划外切换(Automatic Undurrated SwitchOver、AUSO)和Tieb破碎 机启动的切换工作流所需时间可能比APD超时窗口要长一些、从而导致I/O错误。 
 
 
-| 1546017 | AIX NVMe/FC将ANATT上限设置为60秒、而不是ONTAP公布的120秒 | ONTAP在控制器标识中显示ANA (非对称命名空间访问)过渡超时为120秒。目前、借助IFIX、AIX会从控制器标识读取ANA过渡超时、但如果超过此限制、则会将其有效地固定到60秒。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1546017["1546017"^] | AIX NVMe/FC将ANATT上限设置为60秒、而不是ONTAP公布的120秒 | ONTAP在控制器标识中显示ANA (非对称命名空间访问)过渡超时为120秒。目前、借助IFIX、AIX会从控制器标识读取ANA过渡超时、但如果超过此限制、则会将其有效地固定到60秒。 
 
 
-| 1541386 | 在AATT到期后、AIX NVMe/FC会命中EIO | 对于任何存储故障转移(Storage Failover、SFO)事件、如果ANA (非对称命名空间访问)过渡超过给定路径上的ANA过渡超时上限、则AIX NVMe/FC主机将失败、并显示I/O错误、尽管命名空间具有备用的运行状况良好的路径。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1541386["1541386"^] | 在AATT到期后、AIX NVMe/FC会命中EIO | 对于任何存储故障转移(Storage Failover、SFO)事件、如果ANA (非对称命名空间访问)过渡超过给定路径上的ANA过渡超时上限、则AIX NVMe/FC主机将失败、并显示I/O错误、尽管命名空间具有备用的运行状况良好的路径。 
 
 
-| 1541380 | AIX NVMe/FC等待半/全AATT过期、然后在ANA AEN之后恢复I/O | IBM AIX NVMe/FC不支持ONTAP发布的某些异步通知(Aschron也 会通知、AEN)。这种次优ANA处理方式会导致SFB操作期间性能欠佳。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1541380["1541380"^] | AIX NVMe/FC等待半/全AATT过期、然后在ANA AEN之后恢复I/O | IBM AIX NVMe/FC不支持ONTAP发布的某些异步通知(Aschron也 会通知、AEN)。这种次优ANA处理方式会导致SFB操作期间性能欠佳。 
 |===
 
 

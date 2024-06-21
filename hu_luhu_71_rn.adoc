@@ -72,6 +72,6 @@ Linux Host Utilities 7.1版具有以下已知问题和限制。
 [root@hostname ~]# sanlun fcp show adapter -v
 找不到/usr/lib64/libHABAPI.so库
 确保安装库的软件包已安装并加载
-请参阅公共报告1508554。 
+请参阅NetApp错误在线- link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^]。 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。

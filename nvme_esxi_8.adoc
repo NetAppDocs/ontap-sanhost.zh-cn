@@ -289,4 +289,4 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
 .相关信息
 link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
 link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
-link:https://kb.vmware.com/s/article/83370["NetApp ® SnapMirror ® Business Continuity （ SM-BC ）支持 VMware vSphere 6.x 和 7.x"^]
+link:https://kb.vmware.com/s/article/83370["VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步"^]

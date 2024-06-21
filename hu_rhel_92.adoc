@@ -301,8 +301,8 @@ devices {
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1508554 | 要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项 | 在RHEL 9.2中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持HBA发现的库软件包依赖关系。 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | 要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项 | 在RHEL 9.2中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持HBA发现的库软件包依赖关系。 | 不适用 
 
 
-| 1537359 | 使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断 | 在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况 `kdump` 配置、则会生成 `vmcore` 文件 `/var/crash/` 目录。正在使用对问题描述进行分类 `lpfc` 驱动程序、但无法一致地复制。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=2173947["2173947"^] 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1537359["1537359"^] | 使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断 | 在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况 `kdump` 配置、则会生成 `vmcore` 文件 `/var/crash/` 目录。正在使用对问题描述进行分类 `lpfc` 驱动程序、但无法一致地复制。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=2173947["2173947"^] 
 |===

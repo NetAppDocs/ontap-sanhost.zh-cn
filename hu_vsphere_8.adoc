@@ -355,12 +355,12 @@ naa.600a098038304731783f506670553355
 | NetApp 错误 ID | 标题 | Description 
 
 
-| 1543660 | 如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误  a| 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1543660["1543660"^] | 如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误  a| 
 运行vSphere 8.x及更高版本并使用虚拟NVMe (vNVME)适配器的Linux VM会遇到I/O错误、因为默认情况下、vNVMe重试操作处于禁用状态。为了避免在所有路径关闭(All Paths Down、APD)或I/O负载繁重期间对运行旧内核的Linux VM造成中断、VMware引入了可调"VSCSIDisableNvmeRetry"以禁用vNVMe重试操作。
 
 |===
 .相关信息
 * link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
 * link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
-* link:https://kb.vmware.com/s/article/83370["采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP"^]
+* link:https://kb.vmware.com/s/article/83370["采用NetApp SnapMirror的NetApp ONTAP与VMware vSphere城域存储集群(VMSC)进行活动同步"^]
 

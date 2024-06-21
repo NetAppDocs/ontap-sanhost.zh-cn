@@ -216,13 +216,13 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 
 
-== SM-BC支持AIX
+== AIX支持SnapMirror主动同步
 
-从ONTAP 9.11.1开始、SM-BC支持AIX。在AIX配置中、主集群是"活动"集群。
+从ONTAP 9.11.1开始、SnapMirror主动同步支持AIX。在AIX配置中、主集群是"活动"集群。
 
 在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。
 
-要配置适用于SM-BC的AIX、请参阅知识库文章 link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["如何为SnapMirror业务连续性(SM-BC)配置AIX主机"^]。
+要为AIX配置SnapMirror活动同步、请参阅知识库文章 link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["如何为SnapMirror活动同步配置AIX主机"^]。
 
 
 
@@ -235,11 +235,11 @@ up     primary  path3  fcs1    fc_aix_4     1
 | NetApp 错误 ID | 标题 | Description | 合作伙伴 ID 
 
 
-| 1416221. | AIX 7200-05-01 在存储故障转移期间遇到虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）的 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL5 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上虚拟 iSCSI 磁盘（ hdisk ）的 `rw_timeout` 值将为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。根据 IBM 的要求，在应用 APAR - IJ34739 （即将发布的版本）后，我们可以使用 `chdev` 命令动态更改 rw_timeout 值。 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1416221["1416221."^] | AIX 7200-05-01 在存储故障转移期间遇到虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）的 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL5 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上虚拟 iSCSI 磁盘（ hdisk ）的 `rw_timeout` 值将为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。根据 IBM 的要求，在应用 APAR - IJ34739 （即将发布的版本）后，我们可以使用 `chdev` 命令动态更改 rw_timeout 值。 | 不适用 
 
 
-| 1414700 | 在存储故障转移期间， AIX 7.2 TL04 的虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）发生 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL4 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上 vSCSI 适配器的 `rw_timeout` 值为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1414700["1414700"^] | 在存储故障转移期间， AIX 7.2 TL04 的虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）发生 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL4 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上 vSCSI 适配器的 `rw_timeout` 值为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。 | 不适用 
 
 
-| 1307653 | 在 SFO 故障和直连 I/O 期间发现 VIOS 3.1.1.10 上的 I/O 问题 | 在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， `vfchost` 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | 在 SFO 故障和直连 I/O 期间发现 VIOS 3.1.1.10 上的 I/O 问题 | 在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， `vfchost` 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述 | 不适用 
 |===

@@ -331,5 +331,5 @@ naa.600a098038304731783f506670553355
 .相关信息
 * link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
 * link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
-* link:https://kb.vmware.com/s/article/83370["采用 NetApp SnapMirror 业务连续性（ SM-BC ）和 VMware vSphere Metro Storage Cluster （ VMSC ）的 NetApp ONTAP"^]
+* link:https://kb.vmware.com/s/article/83370["采用NetApp SnapMirror的NetApp ONTAP与VMware vSphere城域存储集群(VMSC)进行活动同步"^]
 

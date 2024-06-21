@@ -213,13 +213,13 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 
 
-== SM-BC支持AIX
+== AIX支持SnapMirror主动同步
 
-从ONTAP 9.11.1开始、SM-BC支持AIX。在AIX配置中、主集群是"活动"集群。
+从ONTAP 9.11.1开始、SnapMirror主动同步支持AIX。在AIX配置中、主集群是"活动"集群。
 
 在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。
 
-要配置适用于SM-BC的AIX、请参阅知识库文章 link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["如何为SnapMirror业务连续性(SM-BC)配置AIX主机"^]。
+要配置适用于SM-BC的AIX、请参阅知识库文章 link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["如何为SnapMirror活动同步配置AIX主机"^]。
 
 
 

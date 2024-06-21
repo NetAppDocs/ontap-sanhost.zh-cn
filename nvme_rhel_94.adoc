@@ -21,7 +21,7 @@ summary: 如何使用ONTAP为RHEL 9.4配置NVMe-oF主机
 
 对于采用ONTAP的RHEL 9.4、NVMe-oF主机配置支持以下功能：
 
-* 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
+* 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机中的NetApp插件 `nvme-cli` 软件包可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
 * 在给定主机总线适配器(HBA)上的同一主机上使用NVMe和SCSI流量并无明确的dm-dpath设置、以防止声明NVMe命名空间。
 
 
@@ -296,7 +296,7 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 == 配置 NVMe/TCP
 
-NVMe/TCP没有自动连接功能。因此、我们需要手动执行NVMe/TCP连接或全部连接功能来发现NVMe/TCP子系统和命名共享。
+NVMe/TCP没有自动连接功能。因此、您需要手动执行NVMe/TCP连接或全部连接功能、才能发现NVMe/TCP子系统和命名共享。
 
 您可以使用以下操作步骤配置NVMe/TCP。
 
@@ -446,7 +446,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 
 
 
-NOTE: 从RHEL 9.4开始、这是NVMe/TCP的默认设置 `ctrl_loss_tmo` 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定 `ctrl_loss_tmo` 使用NVMe connect或NVMe Connect-all命令时的超时持续时间(选项-l)。使用此默认行为时、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
+NOTE: 从RHEL 9.4开始、这是NVMe/TCP的默认设置 `ctrl_loss_tmo` 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定 `ctrl_loss_tmo` 使用时的超时持续时间 `nvme connect` 或 `nvme connect-all` 命令(选项-l)。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
 
 
 

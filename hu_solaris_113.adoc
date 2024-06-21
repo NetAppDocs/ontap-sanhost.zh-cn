@@ -214,12 +214,12 @@ NOTE: 对于各种版本的 Solaris 上的 Oracle 错误 15824910 ，我们提�
 
 
 
-== SnapMirror业务连续性的建议设置
+== SnapMirror活动同步的建议设置
 
-要在SnapMirror业务连续性(SM-BC)环境中发生计划外站点故障转移切换时验证Solaris客户端应用程序是否无中断、必须在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` 以防止执行检测到冲突的代码路径。
+为了验证在SnapMirror活动同步环境中发生计划外站点故障转移切换时Solaris客户端应用程序是否无中断、您必须在Solaris 11.3主机上配置以下设置。此设置将覆盖故障转移模块 `f_tpgs` 以防止执行检测到冲突的代码路径。
 
 
-NOTE: 从ONTAP 9.1.1开始、Solaris 11.3主机支持SM-BC设置配置。
+NOTE: 从ONTAP 9.9.1开始、Solaris 11.3主机支持SnapMirror活动同步设置配置。
 
 按照说明配置 override 参数：
 
@@ -244,7 +244,8 @@ svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
 
 
 
-NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name`。有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris 主机支持 SnapMirror 业务连续性（ SM-BC ）配置中的建议设置"^]。
+NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name`。
+有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris主机支持SnapMirror主动同步配置中的建议设置"^]。
 
 
 
@@ -257,8 +258,8 @@ NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl
 | NetApp 错误 ID | 标题 | Description | Oracle ID 
 
 
-| 1366780 | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1366780["1366780"^] | 在 x86 架构上使用 Emulex 32G HBA 时发生 Solaris LIF 问题 | 对于 x86_64 平台上的 Emulex 固件版本 12.6.x 及更高版本，请参见 | SR 3-24746803021 
 
 
-| 1368957 | Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误 | 正在运行 `cfgadm -c configure` 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中修复 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1368957["1368957"^] | Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误 | 正在运行 `cfgadm -c configure` 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中修复 | 不适用 
 |===

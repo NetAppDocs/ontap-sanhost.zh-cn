@@ -299,8 +299,8 @@ devices {
 | NetApp 错误 ID | 标题 | Description | IRA ID 
 
 
-| 1508554 | NetApp Linux主机实用程序命令行界面需要具有其他库软件包依赖关系、才能支持Emulex主机总线适配器(HBA)适配器发现 | 在RHEL 9.x中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持Emulex主机总线适配器(HBA)发现的库软件包依赖项。 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | NetApp Linux主机实用程序命令行界面需要具有其他库软件包依赖关系、才能支持Emulex主机总线适配器(HBA)适配器发现 | 在RHEL 9.x中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持Emulex主机总线适配器(HBA)发现的库软件包依赖项。 | 不适用 
 
 
-| 1593771 | 在存储移动操作期间、Red Hat Enterprise Linux 9.3 QLogic SAN主机会丢失部分多路径 | 在ONTAP存储控制器接管操作期间、多路径中有一半应关闭或切换到故障转移模式、然后在恢复工作流期间恢复到完整路径计数。但是、对于Red Hat Enterprise Linux (RHEL) 9.3 QLogic主机、在执行存储故障转移恢复操作后、只会恢复部分多路径。 | RHEL 17811 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1593771["1593771"^] | 在存储移动操作期间、Red Hat Enterprise Linux 9.3 QLogic SAN主机会丢失部分多路径 | 在ONTAP存储控制器接管操作期间、多路径中有一半应关闭或切换到故障转移模式、然后在恢复工作流期间恢复到完整路径计数。但是、对于Red Hat Enterprise Linux (RHEL) 9.3 QLogic主机、在执行存储故障转移恢复操作后、只会恢复部分多路径。 | RHEL 17811 
 |===

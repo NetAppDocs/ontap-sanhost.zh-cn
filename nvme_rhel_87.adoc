@@ -66,9 +66,13 @@ nvme-cli-1.16-5.el8.x86_64
 ----
 . 启用内核 NVMe 多路径。
 +
+* 示例 *
+
++
 [listing]
 ----
-# grubby --args=nvme_core.multipath=Y --update-kernel /boot/vmlinuz-4.18.0-425.3.1.el8.x86_64
+# grubby --args=nvme_core.multipath=Y --update-kernel
+/boot/vmlinuz-4.18.0-425.3.1.el8.x86_64
 ----
 . 在主机上，检查 ` /etc/nve/hostnqn` 处的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。示例
 +
