@@ -294,7 +294,7 @@ SLES 15 SP3 with ONTAP版本存在以下已知问题：
 | NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| link:https://https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | 在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042847["1042847"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | 在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042847["1042847"^] 
 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089561["1089561"^] | 在存储故障转移操作期间，在采用 Emulex LPe32002 32 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe32002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_free_hbq+76" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_free_hbq+76 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042807["1042807"^] 

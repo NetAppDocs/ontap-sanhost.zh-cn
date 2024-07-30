@@ -271,10 +271,7 @@
   <block id="502fbd3ccf57633c65ae1692b6d1a9e4" category="paragraph">优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。</block>
   <block id="9a5314b1a306337a06216b7efd89d414" category="admonition">只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="098ea71f2042c61bc1f4527ee7d06503" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。</block>
-  <block id="8f2eee8da6df59eb11ac9371e3b986f6" category="image-alt">非 ASA</block>
   <block id="7a0a3a29c4e371b5125adb49cae3a738" category="section-title">全 SAN 阵列配置</block>
-  <block id="e1c9ad969fa62c5a5a7b128c39c401d9" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径；也就是说，它们由控制器提供服务，并在所有活动路径上发送 I/O 。</block>
-  <block id="457391c9c82bfdcbb4947278c0401e41" category="image-alt">ASA</block>
   <block id="6aa0ace12fc074a16fce7ea7a0a32c67" category="admonition">请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
   <block id="c9bbd6792eac761da84ef7d035e5b41c" category="section-title">Hyper-V VHD 需要对齐才能获得最佳性能</block>
   <block id="b5db8e140c9b8a986547e3b2766d1acf" category="paragraph">如果磁盘分区的数据块边界与底层 LUN 的块边界不对齐，则存储系统通常必须为每个操作系统块读取或写入完成两次块读取或写入。错位导致的额外块读取和写入可能会导致严重的性能问题。</block>
@@ -1200,7 +1197,6 @@
   <block id="7adcaa4e5a35b413a61f9652b9b8e6bd" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="2e3100a5f55723fd5f208c30b3d4a68b" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="72f35134635c6ac882f97d9681c93120" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="faa333743d9719ffabaef492f9d3addf" category="inline-link-macro">1089555</block>
-  <block id="6d83a402d5f48246e4a8aa47a51d84af" category="cell"><block ref="09d0a792ca32715872125a5125deab57" category="inline-link-macro-rx"></block></block>
   <block id="0474958a1d6d3dac5a2d4f89aa906f00" category="cell">在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断</block>
   <block id="e473d01bdff0fd380180c07445efe5f1" category="cell">在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
   <block id="2355ee326a65b78534c760ffc28282b3" category="inline-link-macro">1042847</block>
@@ -2692,7 +2688,6 @@
   <block id="2018120e064c044d2251a465311b51c2" category="doc">将SUSE Linux Enterprise Server 15 SP4与ONTAP结合使用</block>
   <block id="4acb27c024b3567bf9590979213b7333" category="doc">将Red Hat Enterprise Linux 8.6与ONTAP结合使用</block>
   <block id="3efbcda09300e864ffdf03f9735d8517" category="doc">将Red Hat Enterprise Linux 8.7与ONTAP结合使用</block>
-  <block id="1a9652dbabd1fe583283db59098e884a" category="paragraph">您可以将某些SAN主机配置为使用ONTAP作为目标的FCP或iSCSI。首先安装相关的操作系统主机实用程序软件包(包括SAN工具包)、然后验证NetApp ONTAP LUN的多路径设置。</block>
   <block id="b70f79f7541968cba061dec5df01b8ba" category="doc">将CentOS 8.4与ONTAP结合使用</block>
   <block id="1f7d8244b764d5a7c149c4cbfad4c873" category="paragraph">您可以为某些SAN主机配置基于网络结构的NVMe (NVMe-oF)协议、其中包括基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)、并以ONTAP为目标。根据主机操作系统和ONTAP版本、您可以在主机上配置和/或验证NVMe/FC或NVMe/TCP协议。</block>
   <block id="2b6cce58629e8dff15245e88ef1d8db6" category="doc">将SUSE Linux Enterprise Server 12 SP4与ONTAP结合使用</block>
@@ -2791,7 +2786,6 @@
   <block id="0659d428df833a806e29e65e632d380a" category="inline-link-macro">NetApp 支持</block>
   <block id="b3303f1e3e1d5672f6b839c968637989" category="paragraph">如果您仍然遇到问题、请收集以下文件和命令输出并联系 <block ref="39332fc74dd50b9d9a8e9919506502c0" category="inline-link-macro-rx"></block> 进一步鉴别：</block>
   <block id="8e2fe53ccb05734b777fbcc2363d25ab" category="paragraph">您可以对采用FC、FCoE和iSCSI协议的vSphere 7.x版使用ONTAP SAN主机配置设置。</block>
-  <block id="d9a42f0deac96b98dbebf2e560cd7f5c" category="paragraph">在对任何NVMe/FC故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规范。如果您仍然遇到问题、请联系 <block ref="39332fc74dd50b9d9a8e9919506502c0" category="inline-link-macro-rx"></block> 以便进一步鉴别。</block>
   <block id="3a4b11723a00030809010d89daf7ebe2" category="paragraph">您可以对采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于RHCK)平台的Veritas Infoscale存储基础8系列版本使用ONTAP SAN主机配置设置。</block>
   <block id="4a09c73fa303eedb14779e29343fb862" category="paragraph">您可以为使用FC、FCoE和iSCSI协议的Citrix XenServer 7系列操作系统版本配置ONTAP SAN主机配置设置。</block>
   <block id="0dfb15ad6e48119187bdf68b2798b551" category="paragraph">您可以使用Solaris Host Utilities 6.2示例命令参考来使用Host Utilities工具对NetApp存储配置进行端到端验证。</block>
@@ -3648,4 +3642,20 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="0705687e23a55c98a49a67821189d6b8" category="admonition">之后<block ref="ce0493257bc72d9f3741350d87a14b7d" prefix=" " category="inline-code"></block> 已应用、<block ref="3a8e4c06e471595f6eb262bb9b5582d9" prefix=" " category="inline-code"></block> 已添加到<block ref="552db9f221945d76c9e04206b850f3bc" prefix=" " category="inline-code"></block>。
 有关追加信息 以及对默认设置的建议更改、请参阅NetApp知识库文章<block ref="38eefb55aea51664f737ddbdc6c85594" category="inline-link-rx"></block>。</block>
   <block id="24ae7542f38ef52be0ec1f780221fd23" category="sidebar">8.10.</block>
+  <block id="116d55b793d97066c1d9e8d10b5f4cf9" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径；也就是说，它们由控制器提供服务，并在所有活动路径上发送 I/O 。</block>
+  <block id="e0838e6ee58912186f2b21f886daa80d" category="image-alt">具有主动/优化路径的ONTAP LUN的屏幕截图</block>
+  <block id="d485a78eda6522675d5ac87291b0f93b" category="image-alt">包含两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的屏幕截图</block>
+  <block id="c562be7af2a3a19ec7e17ebb8a3eeb49" category="paragraph">您可以将某些SAN主机配置为使用ONTAP作为目标的FCP或iSCSI。首先安装相关的操作系统主机实用程序软件包、其中包括SAN工具包。然后、验证NetApp ONTAP LUN的多路径设置。</block>
+  <block id="2c88ec62d1d721428e4602e651219de8" category="cell"><block ref="70d91751d74c1680862a2be7b819ad17" category="inline-link-macro-rx"></block></block>
+  <block id="064b7e55844a47b2141de66819277d1d" category="paragraph">在对任何NVMe/FC故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规格。如果您仍面临问题、请联系 <block ref="ea2f4052f3eaf8e0d09bdf7668185025" category="inline-link-macro-rx"></block> 进行进一步鉴别。</block>
+  <block id="efc0d0203167a4accd82de64fa1b2a96" category="paragraph">您可以在运行ESXi 7.x和ONTAP 的启动程序主机上将基于网络结构的NVMe (NVMe-oF)配置为目标。</block>
+  <block id="c4da6ff30732307baf77258e8de32da5" category="paragraph">您可以在运行Oracle Linux 7.7和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="9de6120ac9f396086f7930cb4e65e361" category="paragraph">您可以在运行Oracle Linux 7.8和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="2141c16de580bae376b1049a6457379b" category="paragraph">您可以在运行Oracle Linux 7.9和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="9533c57da615314e9588d7a35f505896" category="paragraph">您可以在运行Oracle Linux 8.1和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="0a5ca905765e1a02ca40ef37c84a9154" category="paragraph">您可以在运行Oracle Linux 8.2和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="07e593b59695dd79c5c59a654408d2b1" category="paragraph">您可以在运行Oracle Linux 8.3和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="3524a0cbde7d5a506bfeb1822866a92b" category="paragraph">您可以在运行Oracle Linux 8.4和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="a8927346ef72516041053a51c124299c" category="paragraph">您可以在运行Oracle Linux 8.5和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
+  <block id="02c6431ec6bbc359f494834894f54864" category="paragraph">您可以在运行Oracle Linux 8.6和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。</block>
 </blocks>

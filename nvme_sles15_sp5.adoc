@@ -15,7 +15,6 @@ summary: 介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP5配置N
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 :toc-position: content
 
 

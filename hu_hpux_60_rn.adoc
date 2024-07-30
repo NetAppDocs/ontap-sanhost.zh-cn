@@ -15,6 +15,7 @@ summary: 《HPUX Host Utilities 6.0发行说明》
 :imagesdir: ./media/
 
 
+[role="lead"]
 本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定HP-UX主机相关的重要注意事项。
 
 HP-UX Host Utilities 6.0仍支持以下版本：

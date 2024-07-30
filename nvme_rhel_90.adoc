@@ -13,7 +13,6 @@ summary: 如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 
 
 [role="lead"]

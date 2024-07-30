@@ -15,6 +15,9 @@ summary: 使用 ONTAP 为 Oracle Linux 7.8 设置 VME/FC 主机配置，包括�
 :imagesdir: ./media/
 
 
+[role="lead"]
+您可以在运行Oracle Linux 7.8和ONTAP的启动程序主机上配置基于光纤通道的NVMe (NVMe/FC)作为目标。
+
 
 
 == 可支持性

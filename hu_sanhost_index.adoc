@@ -15,6 +15,7 @@ summary:
 :imagesdir: ./media/
 
 
+[role="lead"]
 发现有关SAN主机实用程序版本的最新信息、并访问适用于您的主机配置的安装操作步骤。
 
 

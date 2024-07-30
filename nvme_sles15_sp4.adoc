@@ -13,7 +13,6 @@ summary: 介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVM
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 
 
 [role="lead"]

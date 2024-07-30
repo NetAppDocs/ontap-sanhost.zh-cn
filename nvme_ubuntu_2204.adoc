@@ -13,7 +13,6 @@ summary: 如何使用ONTAP为Ubuntu 22.04配置NVMe-oF主机
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:source-highlighter: highlighter.js
 
 
 [role="lead"]

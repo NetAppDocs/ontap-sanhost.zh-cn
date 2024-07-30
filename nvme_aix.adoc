@@ -338,4 +338,4 @@ hdisk1  11       Enabled  Sel,Non      nvme60  fcnvme0, 9
 
 == 故障排除
 
-在对任何NVMe/FC故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规范。如果您仍然遇到问题、请联系 link:mysupport.netapp.com["NetApp 支持"^] 以便进一步鉴别。
+在对任何NVMe/FC故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规格。如果您仍面临问题、请联系 link:https://mysupport.netapp.com["NetApp 支持"^] 进行进一步鉴别。
