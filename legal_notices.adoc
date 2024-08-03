@@ -1,5 +1,5 @@
 ---
-permalink: legal-notices.html 
+permalink: legal_notices.html 
 sidebar: sidebar 
 keywords: legal, notices, copyright, trademarks, patents 
 summary: 法律声明提供对版权声明、商标、专利等的访问。 
