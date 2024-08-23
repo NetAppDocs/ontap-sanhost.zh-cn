@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_ol_91.html 
-keywords: host utilities, oracle, linux, 9.1, netapp, ontap 
-summary: 介绍如何将Oracle Linux 9.1与ONTAP结合使用 
+permalink: hu_ol_93.html 
+keywords: host utilities, oracle, linux, 9.3, netapp, ontap 
+summary: 介绍如何将Oracle Linux 9.3与ONTAP结合使用 
 ---
-= 将Oracle Linux 9.1与ONTAP结合使用
+= 将Oracle Linux 9.3与ONTAP结合使用
 :hardbreaks:
 :toclevels: 1P
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 介绍如何将Oracle Linux 9.1与ONTAP结合使用
 
 
 [role="lead"]
-您可以使用ONTAP SAN主机配置设置将使用ONTAP的Oracle Linux 9.1配置为目标。
+您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的Oracle Linux 9.3。
 
 
 
@@ -56,10 +56,11 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
 -------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       80.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       80.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       80.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       80.0g  cDOT
+vs_175_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       10g  cDOT
+vs_175_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       10g  cDOT
+vs_175_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       10g  cDOT
+vs_175_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       10g  cDOT
+
 ----
 
 
@@ -86,7 +87,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 == 多路径
 
-对于OL 9.1、请使用 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。OL 9.1包含识别和正确管理ONTAP LUN所需的所有设置。
+对于OL 9.3、此 `/etc/multipath.conf`文件必须存在、但您不需要对此文件进行特定更改。OL 9.3包含识别和正确管理ONTAP LUN所需的所有设置。
 
 您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。
 
@@ -105,7 +106,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 ----
 # multipath -ll
 3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
   |- 11:0:7:6   sdbz 68:208  active ready running
   |- 11:0:11:6  sddn 71:80   active ready running
@@ -128,7 +129,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 ----
 # multipath -ll
 3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 16:0:6:35 sdwb  69:624  active ready running
 | |- 16:0:5:35 sdun  66:752  active ready running
@@ -143,7 +144,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-经过编译的Oracle Linux 9.1操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
+Oracle Linux 9.3操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
 
 。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
 
@@ -283,7 +284,7 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 9.1 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_91.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 9.1的。
+NOTE: 要配置Oracle Linux 9.3 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_91.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 9.3的。
 
 
 
@@ -295,7 +296,7 @@ NOTE: 要配置Oracle Linux 9.1 Red Hat Enterprise Kernel (RHCK)、请使用link
 
 == 已知问题
 
-具有NetApp ONTAP的Oracle Linux 9.1版本存在以下已知问题：
+带有ONTAP的Oracle Linux 9.3版本存在以下已知问题：
 
 [cols="10,30,30,10"]
 |===

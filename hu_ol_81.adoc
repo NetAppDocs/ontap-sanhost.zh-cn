@@ -256,7 +256,7 @@ devices {
 }
 ----
 
-NOTE: 要配置 Oracle Linux 8.1 RedHat Enterprise Kernel （ RHCK ），请使用 link:hu_rhel_81.html#recommended-settings["建议设置"] 适用于 Red Hat Enterprise Linux （ RHEL ） 8.1 。
+NOTE: 要配置Oracle Linux 8.1 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_81.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.1的。
 
 
 

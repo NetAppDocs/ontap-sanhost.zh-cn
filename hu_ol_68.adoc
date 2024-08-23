@@ -261,7 +261,7 @@ devices {
 }
 ----
 
-NOTE: 要配置 Oracle Linux 6.8 RedHat Enterprise Kernel （ RHCK ），请使用 link:hu_rhel_68.html#recommended-settings["建议设置"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.8 。
+NOTE: 要配置Oracle Linux 6.8 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_68.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 6.8的。
 
 
 
