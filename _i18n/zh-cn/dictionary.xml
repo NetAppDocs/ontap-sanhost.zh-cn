@@ -3653,13 +3653,11 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="2026d2310fc2424795c036d93b9ede10" category="admonition">要配置Oracle Linux 8.8 Red Hat Enterprise Kernel、请使用<block ref="690c11dea402b4d6119bf0c00175eedb" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.8的。</block>
   <block id="d95c2403b93ac14ffcf47c8e500ca18b" category="admonition">要配置Oracle Linux 9.0 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="db48836fc998d5e9210c21f83870f464" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.0的。</block>
   <block id="189ec3cd54035d4865dbc8a0c4501bad" category="admonition">要配置Oracle Linux 9.1 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.1的。</block>
-  <block id="7c6866a085937d8df414ddef9a2dc72d" category="admonition">要配置Oracle Linux 9.2 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.2的。</block>
   <block id="a83d1438dc3047a6938e3c9a7a2eea6b" category="summary">介绍如何将Oracle Linux 9.3与ONTAP结合使用</block>
   <block id="3fca70163c38ce3aeaad83b1acb54703" category="doc">将Oracle Linux 9.3与ONTAP结合使用</block>
   <block id="a210d69f837ecbdbf71f84e8f39fc01b" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的Oracle Linux 9.3。</block>
   <block id="209ea84b7e9da962ac8d3949bbfc88d4" category="paragraph">对于OL 9.3、此<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件必须存在、但您不需要对此文件进行特定更改。OL 9.3包含识别和正确管理ONTAP LUN所需的所有设置。</block>
   <block id="cb9ab58d378e13ff5ba784ea2111ac56" category="paragraph">Oracle Linux 9.3操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="3d446a4b508a9ee5d15723930e489fe7" category="admonition">要配置Oracle Linux 9.3 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="972cf8eba53bcbbce4fc47d6efe3d4ad" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.3的。</block>
   <block id="553920b0052a46c8b10be33add5e61aa" category="paragraph">带有ONTAP的Oracle Linux 9.3版本存在以下已知问题：</block>
   <block id="3cdcb189cf0f4cfba9e074ca26cec233" category="paragraph">适用于Oracle Linux 7.7的ONTAP 9.6或更高版本支持NVMe/FC。Oracle Linux 7.7主机可通过相同的光纤通道启动程序适配器端口同时运行NVMe和SCSI流量。有关支持的FC适配器和控制器的列表、请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 。有关最新的受支持配置列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="0e02571623de208737c8c59f0ee774bb" category="summary">适用于采用ONTAP的Oracle Linux 9.3的NVMe-oF主机配置</block>
@@ -3675,4 +3673,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="6015ee0c3c4dbc37f534783a65239e72" category="example-title">显示示例</block>
   <block id="84b0dce03a1f0b594addcb101eab6c2c" category="list-text">在OL 9.3主机上验证以下NVMe/FC设置：</block>
   <block id="0f184640fa014a23c70b94529da4bca4" category="paragraph">具有ONTAP版本的Oracle Linux 9.3没有已知问题。</block>
+  <block id="42fbeb17f790bf6d3c9744236968cf00" category="admonition">要配置Oracle Linux 9.2 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="5ab13879c64fa7edac23d51636b59ed3" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.2的。</block>
+  <block id="4099fbc5685a209f2d831acd40be70be" category="admonition">要配置Oracle Linux 9.3 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="aa2da13d93f93b231e31aba556996ce9" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.3的。</block>
 </blocks>
