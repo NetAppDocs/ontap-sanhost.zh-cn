@@ -274,7 +274,7 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用link:hu_rhel_88.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.9的。
+NOTE: 要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用link:hu_rhel_89.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.9的。
 
 
 

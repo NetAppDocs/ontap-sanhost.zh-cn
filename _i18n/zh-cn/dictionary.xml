@@ -3640,7 +3640,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="dcf21194ace1cd7a19e5742d5b41364d" category="paragraph">对于Oracle Linux (OL) 8.9、该<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件必须存在。您无需更改此文件、因为Oracle Linux 8.9会使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="ee71c3aec581b41b036dbef689b7884a" category="admonition">一个LUN不应要求四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
   <block id="fa7b015244e235f53eacd30d6fd87f64" category="paragraph">经过编译的Oracle Linux 8.9操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置设置正确的配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="c838fc33f29d97a9d7592ccc9576eea1" category="admonition">要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用<block ref="690c11dea402b4d6119bf0c00175eedb" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.9的。</block>
   <block id="2df37fd98bd7f04cdf8ebbea351923d5" category="paragraph">具有ONTAP版本的Oracle Linux 8.9没有已知问题。</block>
   <block id="5daec9db4313ccd1b2792d3cf7c32475" category="paragraph">SUSE Linux Enterprise Server 12操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="b9c5f65d82eeb0c89b6cdd2f97ac474a" category="paragraph">SUSE Linux Enterprise Server 12 SP1操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
@@ -3673,4 +3672,5 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="f7c286fb287f187b00b4cae6b506a3e6" category="paragraph">Oracle Linux 8.9 NVMe-oF主机会创建重复的PDC</block>
   <block id="7eb74ae68650bec7b2e7e925779ef3f0" category="paragraph">在Oracle Linux 8.9 NVMe-oF主机上、通过将<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>选项传递到<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令时应创建一个PDC。但是、从Oracle Linux 8.x开始、NVMe-oF主机会创建重复数据。这会浪费主机和目标上的资源。</block>
   <block id="dd18a4327ac3c05d3a1b1b1a4512a436" category="example-title">显示示例输出：</block>
+  <block id="8ea7d65541343d381b99affa2d1c6996" category="admonition">要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用<block ref="ce7483c182b39cf5b993c406b0ed7268" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.9的。</block>
 </blocks>
