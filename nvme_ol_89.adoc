@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_ol_88.html 
-keywords: nvme, oracle linux, 8.8, host configuration 
-summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置 
+permalink: nvme_ol_89.html 
+keywords: nvme, oracle linux, 8.9, host configuration 
+summary: 适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置 
 ---
-= 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
+= 适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,13 +16,13 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 
 
 [role="lead"]
-采用非对称命名空间访问(AANA)的Oracle Linux (OL) 8.8支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。
+采用非对称命名空间访问(AANA)的Oracle Linux 8.9支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。
 
-对于采用ONTAP的OL 8.8、NVMe-oF主机配置支持以下功能：
+以下支持适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置：
 
-* 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机中的NetApp插件 `nvme-cli` 软件包可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-* NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
-* NVMe-oF 不支持 sanlun 。因此、在OL 8.8主机上、不存在对NVMe-oF的主机实用程序支持。您可以依赖本机中包含的NetApp插件 `nvme-cli` 适用于所有NVMe-oF传输的软件包。
+* 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机 `nvme-cli`软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
+* NVMe 和 SCSI 流量均可在同一主机上运行。因此、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
+* NVMe-oF 不支持 sanlun 。因此、在Oracle Linux 8.9主机上、不存在针对NVMe-oF的主机实用程序支持。您可以依靠本机 `nvme-cli`软件包中包含的NetApp插件进行所有NVMe-oF传输。
 
 
 有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
@@ -31,7 +31,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 
 == 功能
 
-默认情况下、Oracle Linux 8.8已为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。
+默认情况下、Oracle Linux 8.9已为NVMe命名空间启用内核NVMe多路径；因此、无需显式设置。
 
 
 
@@ -43,10 +43,10 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 
 == 验证软件版本
 
-您可以使用以下操作步骤验证支持的最低OL 8.8软件版本。
+验证支持的最低Oracle Linux 8.9软件版本。
 
 .步骤
-. 在服务器上安装OL 8.8 GA。安装完成后、请验证是否正在运行指定的OL 8.8 GA内核。
+. 在服务器上安装Oracle Linux 8.9 GA。安装完成后、验证是否正在运行指定的Oracle Linux 8.9 GA内核：
 +
 [listing]
 ----
@@ -58,7 +58,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 +
 [listing]
 ----
-5.15.0-101.103.2.1.el8uek.x86_64
+5.15.0-200.131.27.el8uek.x86_64
 ----
 . 安装 `NVMe-CLI` 软件包：
 +
@@ -72,9 +72,9 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 +
 [listing]
 ----
-nvme-cli-1.16-7.el8.x86_64
+nvme-cli-1.16-9.el8.x86_64
 ----
-. 在Oracle Linux 8.8主机上、检查 `hostnqn` 字符串位于 `/etc/nvme/hostnqn`：
+. 在Oracle Linux 8.9主机上，检查 `hostnqn` `/etc/nvme/hostnqn`以下位置的字符串：
 +
 [listing]
 ----
@@ -86,13 +86,13 @@ nvme-cli-1.16-7.el8.x86_64
 +
 [listing]
 ----
-nqn.2014-08.org.nvmexpress:uuid:bc59d14c-47f3-11eb-b93c-3a68dd48673f
+nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
 ----
 . 验证是否已 `hostnqn` 字符串与匹配 `hostnqn` ONTAP 阵列上对应子系统的字符串：
 +
 [listing]
 ----
-::> vserver nvme subsystem host show -vserver vs_ol_nvme
+::> vserver nvme subsystem host show -vserver vs_nvme177
 ----
 +
 *示例输出：*
@@ -102,7 +102,7 @@ nqn.2014-08.org.nvmexpress:uuid:bc59d14c-47f3-11eb-b93c-3a68dd48673f
 ----
 Vserver     Subsystem          Host NQN
 ----------- --------------- ----------------------------------------------------------
-vs_nvme207   nvme_ss_ol_1    nqn.2014-08.org.nvmexpress:uuid:bc59d14c-47f3-11eb-b93c-3a68dd48673f
+vs_nvme177  nvme_ss_ol_1       nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
 ----
 +
 
@@ -131,7 +131,7 @@ defaults {
 
 == 配置 NVMe/FC
 
-您可以为Broadcom/Emulex适配器或Marvell/Qlogic适配器配置NVMe/FC。
+为Broadcom/Emulex适配器或Marvell/Qlogic适配器配置NVMe/FC。
 
 [role="tabbed-block"]
 ====
@@ -208,6 +208,9 @@ Online
 Online
 ----
 +
+.显示示例
+[%collapsible]
+=====
 [listing]
 ----
 # cat /sys/class/scsi_host/host*/nvme_info
@@ -233,15 +236,15 @@ LS XMIT: Err 00000000 CMPL: xb 00000000 Err 00000000
 Total FCP Cmpl 000000002e14f170 Issue 000000002e14f17a OutIO 000000000000000a
 abort 000016bb noxri 00000000 nondlp 00000000 qdepth 00000000 wqerr 00000000 err 00000000
 FCP CMPL: xb 00001f50 Err 0000d9f8
-
 ----
+=====
 
 
 --
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
 .步骤
-. OL 8.8 GA内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. Oracle Linux 8.9 GA内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----
@@ -291,7 +294,7 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 == 配置 NVMe/TCP
 
-NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。为了防止超时、您应将故障转移事件的重试期限至少设置为30分钟。
+NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。要避免出现这种情况、您应使用以下过程设置存储故障转移事件的重试期限。
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
@@ -301,9 +304,9 @@ NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并
 nvme discover -t tcp -w host-traddr -a traddr
 ----
 +
-*示例输出：*
-
-+
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 #  nvme discover -t tcp -w 192.168.6.13 -a 192.168.6.15
@@ -349,9 +352,8 @@ subnqn: nqn.1992-08.com.netapp:sn.1c6ac66338e711eda41dd039ea3ad566:subsystem.hos
 traddr: 192.168.6.17
 sectype: none
 ..........
-
-
 ----
+====
 . 验证其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：
 +
 [listing]
@@ -364,16 +366,16 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 [listing]
 ----
-# nvme discover -t tcp -w 192.168.5.13 -a 192.168.5.15
-# nvme discover -t tcp -w 192.168.5.13 -a 192.168.5.17
-# nvme discover -t tcp -w 192.168.6.13 -a 192.168.6.15
-# nvme discover -t tcp -w 192.168.6.13 -a 192.168.6.17
+# nvme discover -t tcp -w 192.168.6.1 -a 192.168.6.10
+# nvme discover -t tcp -w 192.168.6.1 -a 192.168.6.11
+# nvme discover -t tcp -w 192.168.5.1 -a 192.168.5.10
+# nvme discover -t tcp -w 192.168.5.1 -a 192.168.5.11
 ----
-. 运行 `nvme connect-all` 命令、并将控制器丢失超时期限至少设置为30分钟或1800秒：
+. 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
 [listing]
 ----
-nvme connect-all -t tcp -w host-traddr -a traddr -l 1800
+nvme connect-all -t tcp -w host-traddr -a traddr -l <ctrl_loss_timeout_in_seconds>
 ----
 +
 *示例输出：*
@@ -381,11 +383,15 @@ nvme connect-all -t tcp -w host-traddr -a traddr -l 1800
 +
 [listing]
 ----
-# nvme connect-all -t tcp -w 192.168.5.13 -a 192.168.5.15 -l 1800
-# nvme connect-all -t tcp -w 192.168.5.13 -a 192.168.5.17 -l 1800
-# nvme connect-all -t tcp -w 192.168.6.13 -a 192.168.6.15 -l 1800
-# nvme connect-all -t tcp -w 192.168.6.13 -a 192.168.6.17 -l 1800
+#	nvme	connect-all	-t	tcp	-w	192.168.5.1	-a	192.168.5.10	-l -1
+#	nvme	connect-all	-t	tcp	-w	192.168.5.1	-a	192.168.5.11 	-l -1
+#	nvme	connect-all	-t	tcp	-w	192.168.6.1	-a	192.168.6.10	-l -1
+#	nvme	connect-all	-t	tcp	-w	192.168.6.1	-a	192.168.6.11	-l -1
 ----
++
+
+NOTE: NetApp建议设置 `ctrl-loss-tmo` 选项 `-1` 这样、如果路径丢失、NVMe/TCP启动程序就会无限期地尝试重新连接。
+
 
 
 
@@ -479,12 +485,13 @@ nvme list-subsys /dev/nvme1n22
 
 [listing]
 ----
-nvme-subsys1 - NQN=nqn.1992-   08.com.netapp:sn.68c036aaa3cf11edbb95d039ea243511:subsystem.tcp
+nvme-subsys0 - NQN=nqn.1992- 08.com.netapp: sn.44986b09cadc11eeb309d039eab31e9d:subsystem.ol_nvme
 \
-+- nvme2 tcp traddr=192.168.8.49,trsvcid=4420,host_traddr=192.168.8.1 live non-optimized
-+- nvme3 tcp traddr=192.168.8.48,trsvcid=4420,host_traddr=192.168.8.1 live non-optimized
-+- nvme6 tcp traddr=192.168.9.49,trsvcid=4420,host_traddr=192.168.9.1 live optimized
-+- nvme7 tcp traddr=192.168.9.48,trsvcid=4420,host_traddr=192.168.9.1 live optimized
++- nvme1 tcp traddr=192.168.5.11 trsvcid=4420 host_traddr=192.168.5.1 src_addr=192.168.5.1 live non-optimized
++- nvme2 tcp traddr=192.168.5.10 trsvcid=4420 host_traddr=192.168.5.1 src_addr=192.168.5.1 live optimized
++- nvme3 tcp traddr=192.168.6.11 trsvcid=4420 host_traddr=192.168.6.1 src_addr=192.168.6.1 live non-optimized
++- nvme4 tcp traddr=192.168.6.10 trsvcid=4420 host_traddr=192.168.6.1 src_addr=192.168.6.1 live  optimized
+
 
 ----
 --
@@ -503,21 +510,19 @@ nvme-subsys1 - NQN=nqn.1992-   08.com.netapp:sn.68c036aaa3cf11edbb95d039ea243511
 
 [listing]
 ----
-Device        Vserver   Namespace Path
------------------------ ------------------------------
-/dev/nvme0n1   vs_ol_nvme  /vol/ol_nvme_vol_1_1_0/ol_nvme_ns
-/dev/nvme0n2   vs_ol_nvme  /vol/ol_nvme_vol_1_0_0/ol_nvme_ns
-/dev/nvme0n3   vs_ol_nvme  /vol/ol_nvme_vol_1_1_1/ol_nvme_ns
+Device        Vserver     Namespace Path
+------------  ----------  -----------------
+/dev/nvme0n1	vs_nvme177	/vol/vol1/ns1
+/dev/nvme0n2	vs_nvme177	/vol/vol2/ns2
+/dev/nvme0n3	vs_nvme177	/vol/vol3/ns3
 
 
 
-
-
-NSID       UUID                                   Size
-------------------------------------------------------------
-1          72b887b1-5fb6-47b8-be0b-33326e2542e2   85.90GB
-2          04bf9f6e-9031-40ea-99c7-a1a61b2d7d08   85.90GB
-3          264823b1-8e03-4155-80dd-e904237014a4   85.90GB
+NSID     UUID                                   Size
+-------- -------------------------------------- -----------
+1	       72b887b1-5fb6-47b8-be0b-33326e2542e2	  85.90GB
+2	       04bf9f6e-9031-40ea-99c7-a1a61b2d7d08	  85.90GB
+3	       264823b1-8e03-4155-80dd-e904237014a4	  85.90GB
 
 
 
@@ -535,38 +540,33 @@ NSID       UUID                                   Size
 ----
 {
 "ONTAPdevices" : [
-    {
-        "Device" : "/dev/nvme0n1",
-        "Vserver" : "vs_ol_nvme",
-        "Namespace_Path" : "/vol/ol_nvme_vol_1_1_0/ol_nvme_ns",
-        "NSID" : 1,
-        "UUID" : "72b887b1-5fb6-47b8-be0b-33326e2542e2",
-        "Size" : "85.90GB",
-        "LBA_Data_Size" : 4096,
-        "Namespace_Size" : 20971520
-    },
-    {
-        "Device" : "/dev/nvme0n2",
-        "Vserver" : "vs_ol_nvme",
-        "Namespace_Path" : "/vol/ol_nvme_vol_1_0_0/ol_nvme_ns",
-        "NSID" : 2,
-        "UUID" : "04bf9f6e-9031-40ea-99c7-a1a61b2d7d08",
-        "Size" : "85.90GB",
-        "LBA_Data_Size" : 4096,
-        "Namespace_Size" : 20971520
-      },
-      {
-         "Device" : "/dev/nvme0n3",
-         "Vserver" : "vs_ol_nvme",
-         "Namespace_Path" : "/vol/ol_nvme_vol_1_1_1/ol_nvme_ns",
-         "NSID" : 3,
-         "UUID" : "264823b1-8e03-4155-80dd-e904237014a4",
-         "Size" : "85.90GB",
-         "LBA_Data_Size" : 4096,
-         "Namespace_Size" : 20971520
-       },
-  ]
+{
+"Device" : "/dev/nvme0n1", "Vserver" : "vs_nvme177",
+"Namespace_Path" : "/vol/vol1/ns1",
+"NSID" : 1,
+"UUID" : "72b887b1-5fb6-47b8-be0b-33326e2542e2", "Size" : "85.90GB",
+"LBA_Data_Size" : 4096,
+"Namespace_Size" : 5242880
+},
+{
+"Device" : "/dev/nvme0n2", "Vserver" : "vs_nvme177",
+"Namespace_Path" : "/vol/vol2/ns2",
+ "NSID" : 2,
+"UUID" : "04bf9f6e-9031-40ea-99c7-a1a61b2d7d08", "Size" : "85.90GB",
+"LBA_Data_Size" : 4096,
+"Namespace_Size" : 20971520
+},
+{
+"Device" : "/dev/nvme0n3", "Vserver" : "vs_nvme177",
+"Namespace_Path" : "/vol/vol3/ns3",
+ "NSID" : 3,
+"UUID" : "264823b1-8e03-4155-80dd-e904237014a4", "Size" : "85.90GB",
+"LBA_Data_Size" : 4096,
+"Namespace_Size" : 20971520
+},
+]
 }
+
 
 ----
 --
@@ -577,12 +577,30 @@ NSID       UUID                                   Size
 
 == 已知问题
 
-使用ONTAP版本的OL 8.8版的NVMe-oF主机配置存在以下已知问题：
+使用ONTAP版本的Oracle Linux 8.9的NVMe-oF主机配置存在以下已知问题：
 
-[cols=""20"]
+[cols="1a, 2a, 6a, 1a, options="]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
 
 
-| 1517321 | Oracle Linux 8.8 NVMe-oF主机会创建重复的PDC | 在OL 8.8 NVMe-oF主机上、可通过将 `-p`选项传递到 `nvme discover`命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行 `nvme discover`命令时应创建一个PDC。但是、从OL 8.x开始、NVMe-oF主机会创建重复的PDC。这会浪费主机和目标上的资源。 | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+ a| 
+NetApp 错误 ID
+ a| 
+标题
+ a| 
+Description
+ a| 
+Bugzilla ID
+
+
+
+ a| 
+link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1517321["1517321"^]
+ a| 
+Oracle Linux 8.9 NVMe-oF主机会创建重复的PDC
+ a| 
+在Oracle Linux 8.9 NVMe-oF主机上、通过将 `-p`选项传递到 `nvme discover`命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行 `nvme discover`命令时应创建一个PDC。但是、从Oracle Linux 8.x开始、NVMe-oF主机会创建重复数据。这会浪费主机和目标上的资源。
+ a| 
+https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^]
+
 |===

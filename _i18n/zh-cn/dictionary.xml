@@ -100,7 +100,6 @@
   <block id="2dde53d56f3621a460e634d6d12b32a5" category="paragraph">SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。</block>
   <block id="39242df65d7d9cca33b0be6a74f57145" category="paragraph">多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。</block>
   <block id="56dcd6f4fc148f38b926523ede2073aa" category="section-title">Non-ASA 配置</block>
-  <block id="d77810c832bfd20ceec8a3c51f948767" category="paragraph">对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="5fedfc5a04eb29a4d6e049f629f9d9b2" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：</block>
   <block id="a63b2b5307b2543c7245f5a90ff9c36a" category="paragraph">在 OS 原生 `mpathadm show lu &lt;lun&gt;` 命令中，每个 LUN 的 * 访问状态 * 部分会显示路径优先级。</block>
   <block id="dba35953d3af1713968cdc2eba05813a" category="section-title">全 SAN 阵列配置</block>
@@ -215,9 +214,7 @@
   <block id="72663606b8411ccc0666f2a99b78df08" category="list-text">验证是否已创建命名空间。</block>
   <block id="d58a6348af94cbfcbf65485358c4a07d" category="list-text">验证 ANA 路径的状态。</block>
   <block id="61713dcee5b85916fbe59e04b45b37d0" category="list-text">验证适用于 ONTAP 设备的 NetApp 插件。</block>
-  <block id="b2c535b12eae5c28a532e07cea962627" category="list-text">将 `lpfc_sg_seg_cnt` 参数设置为 256 。</block>
   <block id="d73152e7a2f3eb9fac20bc98a1ee9686" category="list-text">运行 `dracut -f` 命令，然后重新启动主机。</block>
-  <block id="681e25842821aed88b9536b9cde94730" category="list-text">验证 `lpfc_sg_seg_cnt` 是否为 256 。</block>
   <block id="911e585c5684ba9f5c2b87af879f4a13" category="summary">如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机</block>
   <block id="797aea72ebbc1431192817ec206cafb4" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.2 GA 。</block>
   <block id="6af8ec9e9e6b66a700434d4b32213979" category="list-text">备份 ` /etc/nvme/host*` 文件。</block>
@@ -268,7 +265,6 @@
   <block id="62400040936d82d99ac08dd73758a123" category="paragraph">对于非 ASA 配置，应存在两组具有不同优先级的路径。</block>
   <block id="052d14b0f88c518cfcaa937d0cd9cd22" category="paragraph">优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。</block>
   <block id="502fbd3ccf57633c65ae1692b6d1a9e4" category="paragraph">优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。</block>
-  <block id="9a5314b1a306337a06216b7efd89d414" category="admonition">只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="098ea71f2042c61bc1f4527ee7d06503" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。</block>
   <block id="7a0a3a29c4e371b5125adb49cae3a738" category="section-title">全 SAN 阵列配置</block>
   <block id="6aa0ace12fc074a16fce7ea7a0a32c67" category="admonition">请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
@@ -848,7 +844,6 @@
   <block id="a20db5f8d609188514b6dc14c4022e68" category="paragraph">适用于 Windows Server 2012 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="fefc4c656e279365e6f2d544c146d1c6" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP2</block>
   <block id="97a07fc4a1ebadd51e36c4395d58ecc2" category="paragraph">对于 SUSE Linux Enterprise Server 15 SP2 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP2 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。使用 ` +multipath -ll+` 命令验证 ONTAP LUN 的设置。</block>
-  <block id="27117d842bd89e527c563bbabce7e494" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="51a4a26e6b1bdae133374d340c097526" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。</block>
   <block id="981941d0f214612af70f593a167f17f2" category="paragraph">对 SUSE Linux Enterprise Server 15 SP2 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。</block>
   <block id="2844e304c2e162332243113572206ac6" category="inline-link-macro">1308744</block>
@@ -1243,7 +1238,6 @@
   <block id="614673c0b1eeb91e8ffc86cde6faa93b" category="paragraph">由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix XenServer 的标准供应商文档。</block>
   <block id="9fc86c956b59ea355d470ac30580447a" category="paragraph">Citrix XenServer 7.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix XenServer 7.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
   <block id="410267f88a5f79f5d40838a8e7a35e62" category="paragraph">从 * XenCenter 管理门户 * 启用主机多路径服务，并验证多路径服务是否已启用且正在运行。</block>
-  <block id="cd96c3aa1c1e2627c438d2fe6fda056c" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 `multipath.conf` 文件中，以排除不需要的设备。</block>
   <block id="b00ab7c17a141468a5921157cdf11ec3" category="admonition">将 * &lt;DevID&gt;* 替换为要排除的设备的 WWID 字符串。</block>
   <block id="ec8b35f300ba884a5dff762db20c0a35" category="paragraph">使用 ` $multipathd show config` 命令查看多路径参数运行时配置。您应始终检查正在运行的配置中是否存在可能会覆盖默认设置的旧设置，尤其是在默认设置部分。</block>
   <block id="aea5fd959632948a3225c2ddd5323d43" category="paragraph">下表显示了 ONTAP LUN 的关键 * 多路径 * 参数以及所需值。如果某个主机已连接到其他供应商的 LUN ，并且这些参数中的任何一个被覆盖，则需要在专门适用于 ONTAP LUN 的 * multipath.conf* 中使用稍后的 stantzas 进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才能覆盖以下默认值，并且只有在完全了解其影响时才会覆盖这些默认值。</block>
@@ -1391,7 +1385,6 @@
   <block id="6a2c85eca0b58ae9120cd4aa738a6949" category="paragraph">对于 CentOS 7.5 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.5 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
   <block id="a51f869a9a131effa58d99e63266e02d" category="summary">介绍如何在 ONTAP 中使用 Citrix 虚拟机管理程序 8.x</block>
   <block id="dfdecabe17f4f61a0c5b353fdc3dfeef" category="paragraph">Citrix 虚拟机管理程序 8.x 操作系统会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。对于 Citrix Hypervisor 8.x ，必须存在空的 zerobyte ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。</block>
-  <block id="4d9e4d5a080304464911deeebee0a0b3" category="paragraph">不需要将内容附加到 ` /etc/multipath.conf` 文件，除非您的设备不希望由多路径管理，或者您的现有设置覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
   <block id="891983ab249dd51fa02a51e1da92fd57" category="admonition">对于支持的配置， Citrix 虚拟机管理程序建议对所有基于 Linux 和 Windows 的子虚拟机使用 Citrix VM 工具。</block>
   <block id="39f11cb747dafe51ae2cd54386744d96" category="cell">Citrix Tracker ID</block>
   <block id="37a4830e2093543aff3053de0d030043" category="inline-link-macro">1242343</block>
@@ -1905,16 +1898,12 @@
   <block id="05aa4f4bc5b51efef2c52f4fb2ddc55f" category="paragraph"><block ref="06c8d471f4d0311b3446a94e54fc8a82" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。</block>
   <block id="748753e893fd2f6b904a298d120af491" category="sidebar">Windows Unified Host Utilities</block>
   <block id="7b4c9d36bd8121e0d136897711d66090" category="sidebar">安装Wuhu 7.1</block>
-  <block id="1f87ccc57172166c30629890b2884f0e" category="paragraph">您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="1bad318175e7aa1eb67e6db2256bb9b1" category="paragraph">系统会将提取的软件放置在解压缩存储库文件的目录中。</block>
-  <block id="39b3dd6edf4819881415b4ccbfcf4d58" category="paragraph">对于 Oracle Linux 7.1 Uek r4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.1 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
-  <block id="36889db7961eacd91f01477a29a2c5ea" category="list-text">验证的输出<block ref="76b66d5f379b691153dc22425201f6ae" prefix=" " category="inline-code"></block> 命令以确保设置完成。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block> 命令以验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="3ad269cd9c25c5c028bf155f768f0618" category="paragraph">默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 <block ref="682b92f396ad2229bd62e99c5a518610" category="inline-link-macro-rx"></block></block>
   <block id="eae76491b6011f6e80494775aea500b6" category="paragraph">对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动/优化路径、这意味着它们由控制器提供服务、并通过所有活动路径发送I/O。</block>
   <block id="3012ce3908219f8e726469f86858ac26" category="paragraph">对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM是存储供应商提供的代码、用于处理路径管理。在 Host Utilities 安装过程中会安装并启用此功能。</block>
   <block id="f5188f0db18a0455b279280c37baccd9" category="list-text">解压缩文件。您可以使用<block ref="310cb972d0a51b72a4a64dd98fcc2fb1" prefix=" " category="inline-code"></block> 命令执行此操作。</block>
   <block id="bb80358d422ec918cde74cab08e90d5c" category="admonition">在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。</block>
-  <block id="94ed2eb93c1ea841359ebf631638ec66" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="3972a4868b0682bd7aa086e3f90df6a5" category="paragraph">在此示例中、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block> 是需要添加到黑名单中的本地SCSI磁盘。</block>
   <block id="b23eda8b5a2eb7f788559c0df550f0fa" category="list-text">运行<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block> 命令。确保设置较长的<block ref="07e325c4a466379e41eabbb9333963e2" prefix=" " category="inline-code"></block> 计时器重试期限(例如、30分钟、可设置为到<block ref="31d4084d03582af5cedde443232aa924" prefix=" " category="inline-code"></block>)、以便在发生路径丢失时重试较长时间。例如：</block>
   <block id="ed53d9bb40cf906cb73ab578cb3adb1d" category="paragraph">您应将故障转移事件的重试期限至少设置为30分钟、以防止超时。您可以通过增加Ctrl_los_TMOs计时器的值来增加重试期限。详细信息如下：</block>
@@ -1928,7 +1917,6 @@
   <block id="c4243d3bfe77762a42bf710ef09d7a49" category="paragraph-title">Oracle Linux 7.1 Uek r4配置</block>
   <block id="f76dacb09cf26865aa39e565e340c25b" category="paragraph-title">Oracle Linux 7.2 Uek R3配置</block>
   <block id="214edbb0ed79a899577c5689a76a98e3" category="paragraph-title">Oracle Linux 7.2 Uek r4配置</block>
-  <block id="563bea0904ae52572ef481dbaa30e7b6" category="paragraph">无需直接向添加任何内容<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。</block>
   <block id="98a246e1f1b81f16a2ceb0cc274c4da8" category="summary">如何使用ONTAP 为RHEL 8.7配置NVMe-oF主机</block>
   <block id="a3492942cb4c45f8a31e3e3845c9f04a" category="paragraph">除了NVMe/FC之外、RHEL 8.7还支持NVMe/TCP (作为技术预览功能)。原生 NVMe-CLI软件包中的NetApp插件能够显示NVMe/FC和NVMe/TCP命名空间的ONTAP 详细信息。</block>
   <block id="0e15c36dca614df066cc960ea227ce1c" category="list-text">对于RHEL 8.7、默认情况下、内核NVMe多路径保持禁用状态。因此，您需要手动启用它。</block>
@@ -2395,12 +2383,10 @@
   <block id="f2e04893e244d58e7312b018d7c330cd" category="admonition">主机操作系统启动并在多个路径上运行后、这些路径将变为可用。</block>
   <block id="159e1cf7b9f0c43c83e2d3d06cfe2786" category="list-text">重新启动主机以验证启动是否成功。</block>
   <block id="ddd1090ee13f345d376753ed7188e15e" category="section-title">所有SAN阵列配置</block>
-  <block id="e7110b576f4777e8b343b6406c8d4267" category="paragraph">对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。</block>
   <block id="8f9d6e3424d24a4eceeb55656ad594c9" category="paragraph">自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 <block ref="85b4e48fbc653b43bc1d23927e9a43d3" category="inline-link-macro-rx"></block> 了解更多信息。</block>
   <block id="b8aace167dae62ec049916430a97c733" category="paragraph">NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。</block>
   <block id="d72f84b2b8b1587fe9b792507fec3ba3" category="paragraph">如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。</block>
   <block id="3b8031b77b02d24160100543956f1809" category="list-text">安装软件包：</block>
-  <block id="c2cf4076df2fdb507736cb2d40b34172" category="paragraph">ONTAP会在"识别控制器"数据中报告MDTS (MAX Data传输大小)为8、这意味着最大I/O请求大小最多可以为1 MB。但是、要使Broadcom NVMe/FC主机的问题描述I/O请求大小为1 MB、必须增加<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block> 的值<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block> 参数从默认值64更改为256。</block>
   <block id="479c56a6c2e71cd83eb8b7b82e7309de" category="admonition">这不适用于逻辑NVMe/FC主机。</block>
   <block id="98d5ba10607d84ac10d9c3ea5eee402b" category="list-text">无需直接向添加任何内容<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件、除非您的设备不希望多路径管理、或者您的现有设置覆盖默认值。</block>
   <block id="e960448316bedab459bbbe74933b507d" category="list-text">将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
@@ -2438,68 +2424,16 @@
   <block id="0ecd11c1d7a287401d148a23bbd7a2f8" category="open-title">JSON</block>
   <block id="942bc9ba97662019cbc2b7e41f8381db" category="paragraph">使用ONTAP版本的OL 8.7的NVMe-oF主机配置存在以下已知问题：</block>
   <block id="4d85197b1029241623e97a28c5823630" category="cell">Oracle Linux 8.7 NVMe-oF主机会创建重复的永久性发现控制器</block>
-  <block id="07ad87616fe3ef97097ef4a56610ba36" category="cell">在OL 8.7 NVMe-oF主机上、通过传递创建永久性发现控制器(PDC)<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：对于给定的启动程序-目标组合、每次调用时只应创建一个PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：但是、从OL 8.x开始、NVMe-oF主机在每次调用时都会创建重复的PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项这会浪费主机和目标上的资源。</block>
   <block id="564a7e3459c5ede626fd0f47cac71ff3" category="list-text">OL 9.0 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="a3bfd4755428917359c01fd362495acc" category="paragraph">。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="e30c75b0dc59992b638dfe73b8bf5597" category="paragraph"><block ref="307e748c432594fde04ec1d02c6808e4" prefix="" category="inline-code"></block></block>
-  <block id="cf0c07eb31e8fda788f0ed252dc6975a" category="paragraph">首次创建此文件时、可能需要启用并启动多路径服务：</block>
-  <block id="d076fede057f77e9c8eadb6ea9148d99" category="list-text">要排除不需要的设备、请将以下语法添加到中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件。</block>
-  <block id="1fd87989e1c095d26f07886e23108895" category="paragraph">更换<block ref="2f7ac3c5a9070e3fa18615d7bf03ce76" prefix=" " category="inline-code"></block> 使用<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 要排除的设备的字符串。</block>
   <block id="390aba4e671b0fd367d546b4f0fedeba" category="list-text">添加<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 到黑名单中<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>：</block>
   <block id="e60ab2432e10a11e164b359dce018f99" category="paragraph">您应始终检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。</block>
-  <block id="85857b8756a465fa84e2c7124fcda4e5" category="paragraph">下表显示了关键<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。</block>
-  <block id="edbf0b156fa9598ccf5c30f50c851ac9" category="paragraph">系统会对 CentOS 7.1 操作系统进行编译，以便识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="ad45be88e30130dd9932ef3308a98ddf" category="paragraph">SUSE Linux Enterprise Server 12 SP5操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="d75cad0e10fec8218230dfd86583b04c" category="paragraph">经过编译的Oracle Linux 7.2操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="01234d496872a7212e40f734e3bbf802" category="paragraph">安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和HBA。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
-  <block id="d386d72f0b2981069101247e93061896" category="paragraph">SUSE Linux Enterprise Server 15 SP1操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="4c4e0f6def4c3c31e4359ea022f05c66" category="paragraph">经过编译的Oracle Linux 7.9操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="ddba7ab8e622cf1db0fb972476c91c57" category="paragraph">SUSE Linux Enterprise Server 12 SP2操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="cb93be0045ac47445d9781e9dc6f592b" category="paragraph">经过编译的Oracle Linux 7.6操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="c876744381120355738591a0b4bb4f8c" category="paragraph">对 SUSE Linux Enterprise Server 12 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="5ae3dd4e20ae06edeec75ac35eb0eabe" category="paragraph">对CentOS 7.7操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="a9a30443d5c61af840622798585ed189" category="paragraph">系统会对 CentOS 8.2 操作系统进行编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="1a2a2644be89b0c14a60162bcf90d1bc" category="paragraph">经过编译的Oracle Linux 7.8操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="bacdf39f0efa87d2ae29c5033809e6f3" category="paragraph"><block ref="307e748c432594fde04ec1d02c6808e4" prefix="" category="inline-code"></block>。</block>
   <block id="2e12f8ec511dd4a7bc1f7bf40fbe48aa" category="list-text">您可以将以下语法添加到中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 用于排除不需要的设备的文件：</block>
   <block id="cb92646723384142b732079acc35b146" category="list-text">将此WWID添加到中的"黑名单"部分<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>：</block>
-  <block id="6ddc55ace9e5ea32cb1e8a71353842bd" category="paragraph">下表显示了关键<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> ONTAP LUN的参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须稍后在中的zas中对其进行更正<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。</block>
-  <block id="1486b2c0465a7a3e69804c44e8bc6881" category="paragraph">对CentOS 7.6操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="d25dfb29f5943151635be4743deec208" category="paragraph">对CentOS 7.2操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="04b6e652b2bb452fe8cd6ca30041ec1b" category="paragraph">经过编译的Oracle Linux 7.4操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="1d8d4969ca6b2f0931e4784b04752571" category="paragraph">对CentOS 7.9操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="a95f33dc5653e3955d576a7efbf72f24" category="paragraph">SUSE Linux Enterprise Server 12 SP1操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="68ead0f2317cf898478d97cfdf699ef8" category="paragraph">SUSE Linux Enterprise Server 15操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="25c979c9105366dabca7ce42b6dbdd5b" category="paragraph">对CentOS 7.5操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="bdb9182f58ee6f1a68c716548c63053e" category="paragraph">经过编译的Oracle Linux 7.5操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="d45cbf3d4daa66554801bb2584790c01" category="paragraph">经过编译的Oracle Linux 7.7操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="060cf1688c558dfe1e0cc194f0a504d0" category="paragraph">CentOS 8.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="e776ce1a028be18cf4525ba991156302" category="paragraph">RHEL 8.7操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="fe07fe53f205e5781a50331c8fcc3c4e" category="paragraph">对CentOS 8.1操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="1abda550c3f2e968f7df0bf98e8e641d" category="paragraph">CentOS 7.3 OS经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="1884b884b7b96b6bbd38816a3a457356" category="summary">介绍如何将Red Hat Enterprise Linux 9.2与ONTAP结合使用</block>
   <block id="446e05826da92a5188d43c8d744fbccf" category="section-title">SAN工具套件</block>
   <block id="a14bcd21a2868e61c289bb84b4f00fd7" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 9.2、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 9.2会编译为识别和正确管理ONTAP LUN所需的所有设置。</block>
@@ -2525,20 +2459,6 @@
   <block id="18b65bc41e8c8da147a70b70eb89f63f" category="paragraph">您可以使用以下操作步骤验证NVMe-oF。</block>
   <block id="8872970684e912db5d3cedce11e8f59c" category="list-text">验证是否已启用内核NVMe多路径：</block>
   <block id="f61222023dff7dff4f1f07b6593dfa16" category="list-text">验证相应ONTAP命名库的适当NVMe-oF设置(例如、型号设置为NetApp ONTAP控制器、负载平衡iopolicy设置为循环)是否正确反映在主机上：</block>
-  <block id="4d41372cd2a11681d8228d7a88034c6a" category="paragraph">CentOS 7.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="d0bce44026a6709bbfa23c6b7e47cc3b" category="paragraph">SUSE Linux Enterprise Server 12 SP3操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="829d2c771cf1ae94cf77efebf3fdeb60" category="paragraph">对 SUSE Linux Enterprise Server 12 SP4 操作系统进行了编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="d25601f41b94cf619e8ea2c0ab14de17" category="paragraph">对CentOS 8.3操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="0a0768ae6a237dc83dc7cd51926a51d4" category="paragraph">CentOS 7.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="fafb27543a3f8957d3f26b782d10388f" category="paragraph">对CentOS 7.8操作系统进行编译以识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
-  <block id="fa084ae8b2dbc6a95f37460eeee74436" category="paragraph">经过编译的Oracle Linux 7.3操作系统可识别ONTAP LUN并自动正确设置所有配置参数。
-。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="43784ec2c1aaa42346ed96f22c8410b6" category="sidebar">9.2.</block>
   <block id="30c9201611d0a0e2f87585a1866fa4bd" category="doc">适用于采用ONTAP的Oracle Linux 9.1的NVMe-oF主机配置</block>
   <block id="de83b7a38e0f01ada520a571da1c0ae7" category="paragraph">以下支持适用于采用ONTAP的OL 9.1的NVMe-oF主机配置：</block>
@@ -2847,7 +2767,6 @@
   <block id="fb0643787f6e7d41915f40cbd05f4efd" category="list-text">在Oracle Linux 8.8主机上、检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block> 字符串位于<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
   <block id="74081fa925de7d5872846d0fd3043b7c" category="paragraph">如果要在同一主机上同时运行NVMe和SCSI流量、NetApp建议对ONTAP命名空间和使用内核NVMe多路径<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 分别用于ONTAP LUN。这意味着应从中排除ONTAP名称源<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 以防止<block ref="3c66321496e85b9ce8f7b49be0316b0a" prefix=" " category="inline-code"></block> 声明这些命名空间设备。您可以添加<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block> 设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
   <block id="e49a8f55b360ab37cfe1ebe68f1119d5" category="paragraph">使用ONTAP版本的OL 8.8版的NVMe-oF主机配置存在以下已知问题：</block>
-  <block id="d345ceafdca15336eee317f7b245574f" category="cell">在OL 8.8 NVMe-oF主机上、通过传递创建永久性发现控制器(PDC)<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：对于给定的启动程序-目标组合、每次调用时只应创建一个PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令：但是、从OL 8.x开始、NVMe-oF主机在每次调用时都会创建重复的PDC<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block> 命令<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block> 选项这会浪费主机和目标上的资源。</block>
   <block id="2757a308d4d1083cccf0f8d499cc92dc" category="paragraph">具有ONTAP版本的Oracle Linux 7.9存在以下已知问题：</block>
   <block id="eb1fc035eeba662cf025ce042074e2b4" category="cell">如果取消映射或映射LUN而不执行SCSI重新扫描、则可能导致主机上的数据损坏</block>
   <block id="e681a3b45989b468533c4b90ee960bf9" category="cell">不适用</block>
@@ -3261,7 +3180,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="194918718b492bb08c4ceb2c1063575c" category="paragraph">。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 要启动多路径守护进程、必须存在文件、但您可以使用命令创建一个空的零字节文件：<block ref="307e748c432594fde04ec1d02c6808e4" prefix=" " category="inline-code"></block>。</block>
   <block id="80b3dcca095ff047032f5421282d56f0" category="paragraph">替换<block ref="2f7ac3c5a9070e3fa18615d7bf03ce76" prefix=" " category="inline-code"></block> 使用<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 要排除的设备的字符串。使用以下命令确定<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block>：</block>
   <block id="b76bbd9898d442ee1f504e1dbfcd8bb1" category="list-text">添加<block ref="7f82ca1acc93bec0dcd43c7f37ce4512" prefix=" " category="inline-code"></block> 中黑名单的值<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件：</block>
-  <block id="3b839ec0f9be7e06670afc4a1a40f03f" category="paragraph">下表显示了ONTAP LUN的关键多路径参数以及所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在中的后续步骤中进行更正<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 具体适用于ONTAP LUN。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与 NetApp 和 / 或操作系统供应商协商后，才应覆盖这些默认值，并且只有在完全了解影响的情况下才应覆盖这些默认值。</block>
   <block id="b257f5893979fe648d54dcf693a4e4cb" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件定义的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法删除这些参数、则可以专门针对具有设备标准的ONTAP LUN进行更正。</block>
   <block id="11bc52330473c77af7c9af92d91670d8" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置</block>
   <block id="1e0824a41921c35ae75109745c612112" category="paragraph">具有非对称命名空间访问(AANA)的SUSE Linux Enterprise Server (SLES) 15 SP4支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的AUA多路径功能、并通过内核NVMe多路径实施。</block>
@@ -3675,4 +3593,84 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="0f184640fa014a23c70b94529da4bca4" category="paragraph">具有ONTAP版本的Oracle Linux 9.3没有已知问题。</block>
   <block id="42fbeb17f790bf6d3c9744236968cf00" category="admonition">要配置Oracle Linux 9.2 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="5ab13879c64fa7edac23d51636b59ed3" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.2的。</block>
   <block id="4099fbc5685a209f2d831acd40be70be" category="admonition">要配置Oracle Linux 9.3 Red Hat Enterprise Kernel (RHCK)、请使用<block ref="aa2da13d93f93b231e31aba556996ce9" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 9.3的。</block>
+  <block id="5cf1d1f6d95b6f33a53785c2b8968543" category="paragraph">对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="89028382351a67fa94b0007ca3430735" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="4799f5cc43477bfa829d8bf18c120f65" category="paragraph"><block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="26adbe58d014b17e22edee324b7c14d8" category="paragraph">首次创建<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件时、可能需要使用以下命令启用并启动多路径服务：</block>
+  <block id="43f6f503ccaee7e4dd2b34ad0a4d7ef5" category="paragraph">不需要直接向<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加任何内容、除非您有不希望多路径管理的设备或现有设置覆盖默认值。要排除不需要的设备、请在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加以下语法、将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
+  <block id="9be8f861c4242e3e0691ad61694073a0" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
+  <block id="959d703d9e0cc46608970f776d39cee8" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中专门适用于ONTAP LUN的后续条款进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
+  <block id="f4db575c389511be5cb287f3760fe673" category="paragraph">ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block><block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数的值从默认值64增加到256。</block>
+  <block id="524b08ad750352e65f141bb6a45404ad" category="list-text">将<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数设置为256：</block>
+  <block id="ed01a5029bce78f038174f31df740f89" category="list-text">运行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block>命令并重新启动主机：</block>
+  <block id="3130175d0e970c2fe403eca33806ba0f" category="list-text">验证是否<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>为256：</block>
+  <block id="032f906dd9faf121059404519f7da75d" category="admonition">只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="ee227d3a1852592cb484550c6a7d76a5" category="paragraph">CentOS 7.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="a691017dd52fcde62a62166a111a44b0" category="paragraph">CentOS 7.1操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="c9d50fea83dcc4ac5b855f91ac9645f2" category="paragraph">CentOS 7.2操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="d25a7193170bb26a573af6859c54d07e" category="paragraph">CentOS 7.3操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="92910dc1bd3ee6dedbf6e2abf57c04ef" category="paragraph">CentOS 7.4操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="e889c0f4c36b9bd7bf8cb529fd8cb889" category="paragraph">CentOS 7.5操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="b4a636d77248ded7eddaef37cebef67e" category="paragraph">CentOS 7.6操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="396d451cda3f8bece75a66ee116c24cf" category="paragraph">CentOS 7.7操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="3c78812ec59c50fa4070bce198a6c817" category="paragraph">CentOS 7.8操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="ba5077bb065ad41eee10b11a22664f73" category="paragraph">CentOS 7.9操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="043546a65a4d758110971a816fdbd9d0" category="paragraph">CentOS 8.0操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="a6881a4e1a1c23d051381128b045f033" category="paragraph">CentOS 8.1操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="3a0d0f762c75870f1bdaf3891361f4af" category="paragraph">您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block>命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="cb032ffd0bd3308732de42df23937d8e" category="paragraph">系统会对 CentOS 8.2 操作系统进行编译，以识别 ONTAP LUN 并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="2f0fc0ab1d3a4c8bb70398a91c1b46e6" category="paragraph">CentOS 8.3操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="4e6815a5eaf606ab0b37b61763f811c3" category="paragraph">不需要向<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件附加内容、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。您可以将以下语法添加到<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中以排除不需要的设备。</block>
+  <block id="ad39807c4c11f0cfd86419e91fc59088" category="paragraph">对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="f2d86a1e1d50cd6070c7ed2e2ac2a324" category="paragraph">不需要向<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件附加内容、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。您可以将以下语法添加到 multipath.conf 文件中，以排除不需要的设备。</block>
+  <block id="b730d18bf6ba9c6603406ac07609286f" category="list-text">验证<block ref="76b66d5f379b691153dc22425201f6ae" prefix=" " category="inline-code"></block>命令的输出以确保设置完整。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block>命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="2e28170e3c8113f27d7a0779e0b11903" category="paragraph">对于 Oracle Linux 7.1 Uek r4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.1 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block>命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="e0f41ec581093d7124bdd2c0a3d3a19e" category="paragraph">经过编译的Oracle Linux 7.2操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="b1543caa078e0d881d55b6523d61b379" category="paragraph">经过编译的Oracle Linux 7.3操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="d02ef8a8e8ebc0bddf6decdf28f82417" category="paragraph">经过编译的Oracle Linux 7.4操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="187aa2331c2340e8b041a8118922fd66" category="paragraph">经过编译的Oracle Linux 7.5操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="ea557bbd023a2e714a52a891b28c6e9d" category="paragraph">经过编译的Oracle Linux 7.6操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="4242bd03681073206573d868f8975fe1" category="paragraph">经过编译的Oracle Linux 7.7操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="f843e0f2d567cab0a174ae5abb1007c7" category="paragraph">经过编译的Oracle Linux 7.8操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="bb71dc201102ce50e78598a31fa7ec16" category="paragraph">经过编译的Oracle Linux 7.9操作系统可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="8d3d223fd7a6303b1d21d5a6d2ff42cf" category="summary">介绍如何将Oracle Linux 8.9与ONTAP结合使用</block>
+  <block id="82ccd7f4292a5fcdb3c91b2dac42a0ee" category="doc">将Oracle Linux 8.9与ONTAP结合使用</block>
+  <block id="18b1f91c51b933e6287d49ea6806740e" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的Oracle Linux 8.9。</block>
+  <block id="09163e096a651dfe9b819525d83f5e24" category="paragraph">您的配置支持SAN启动。请参见<block ref="e6f1d72f4eb45ad3af66c651a6a8a1b4" category="inline-link-macro-rx"></block>以验证您的操作系统、HBA、HBA固件以及HBA启动BIOS和ONTAP版本是否受支持。</block>
+  <block id="dcf21194ace1cd7a19e5742d5b41364d" category="paragraph">对于Oracle Linux (OL) 8.9、该<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件必须存在。您无需更改此文件、因为Oracle Linux 8.9会使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
+  <block id="ee71c3aec581b41b036dbef689b7884a" category="admonition">一个LUN不应要求四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
+  <block id="fa7b015244e235f53eacd30d6fd87f64" category="paragraph">经过编译的Oracle Linux 8.9操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置设置正确的配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
+  <block id="c838fc33f29d97a9d7592ccc9576eea1" category="admonition">要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用<block ref="690c11dea402b4d6119bf0c00175eedb" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.9的。</block>
+  <block id="2df37fd98bd7f04cdf8ebbea351923d5" category="paragraph">具有ONTAP版本的Oracle Linux 8.9没有已知问题。</block>
+  <block id="5daec9db4313ccd1b2792d3cf7c32475" category="paragraph">SUSE Linux Enterprise Server 12操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="b9c5f65d82eeb0c89b6cdd2f97ac474a" category="paragraph">SUSE Linux Enterprise Server 12 SP1操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="3728182bce0e0599bf96cfd3dddef484" category="paragraph">SUSE Linux Enterprise Server 12 SP2操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="c570f72a7ccb045e23a1d0b387480dee" category="paragraph">SUSE Linux Enterprise Server 12 SP3操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="352d83c2564652006ff54ba45d19f2a8" category="paragraph">SUSE Linux Enterprise Server 12 SP4操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="ddb57442af445e89d1fd9fa2bf228fc1" category="paragraph">SUSE Linux Enterprise Server 12 SP5操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="f5540ce79d1f5c8dcb0bdf24b24eb02f" category="paragraph">SUSE Linux Enterprise Server 15操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="bd976f7b26e5e347b3c169e387230c2c" category="paragraph">SUSE Linux Enterprise Server 15 SP1操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
+  <block id="c4b3ab6170ecbae144a10ab1bb6e45a9" category="paragraph">应存在两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
+  <block id="fd4330b9644e1d448dea61dfd1b2b367" category="paragraph">不需要直接向<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加任何内容、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。</block>
+  <block id="00d5139ac2479e412b88e1fd317373d3" category="paragraph">下表显示了ONTAP LUN的关键多路径参数以及所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要通过中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>专门适用于ONTAP LUN的后续条款进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
+  <block id="f1a95ec0fb91ac168edabfe7bbb45e77" category="cell">在OL 8.7 NVMe-oF主机上、通过将<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>选项传递到<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令时应创建一个PDC。但是、从OL 8.x开始、NVMe-oF主机会创建重复的PDC。这会浪费主机和目标上的资源。</block>
+  <block id="af4c7af55d02fc4883b224fec0b52ae7" category="cell">在OL 8.8 NVMe-oF主机上、可通过将<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>选项传递到<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令时应创建一个PDC。但是、从OL 8.x开始、NVMe-oF主机会创建重复的PDC。这会浪费主机和目标上的资源。</block>
+  <block id="6d322292fb24619a726c13d055b40ab0" category="summary">适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置</block>
+  <block id="a7fab33264601dba0da8fc6800137477" category="paragraph">采用非对称命名空间访问(AANA)的Oracle Linux 8.9支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
+  <block id="4d8c72e364a13b27a8c6ef6ed8383c8d" category="paragraph">以下支持适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置：</block>
+  <block id="f52866deb88251003c82fe28b07fe253" category="list-text">除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。</block>
+  <block id="065e56d7f500528b2ebf1bc93bd33d93" category="list-text">NVMe 和 SCSI 流量均可在同一主机上运行。因此、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。</block>
+  <block id="5681ca777f3abafe80823417b4bf2991" category="list-text">NVMe-oF 不支持 sanlun 。因此、在Oracle Linux 8.9主机上、不存在针对NVMe-oF的主机实用程序支持。您可以依靠本机<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包中包含的NetApp插件进行所有NVMe-oF传输。</block>
+  <block id="b753e76b4bd79ecda9ec89ae16128134" category="paragraph">默认情况下、Oracle Linux 8.9已为NVMe命名空间启用内核NVMe多路径；因此、无需显式设置。</block>
+  <block id="d3486a1fd420cdd946d675eed6b0cc6f" category="paragraph">验证支持的最低Oracle Linux 8.9软件版本。</block>
+  <block id="5a61fc6313b04e5ea34dd86779cf9598" category="list-text">在服务器上安装Oracle Linux 8.9 GA。安装完成后、验证是否正在运行指定的Oracle Linux 8.9 GA内核：</block>
+  <block id="3853f839d3cdc7a7ab2d26c39f242079" category="list-text">在Oracle Linux 8.9主机上，检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block><block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>以下位置的字符串：</block>
+  <block id="8a72b3e88c545cbd34a9834cf6212a2b" category="paragraph">为Broadcom/Emulex适配器或Marvell/Qlogic适配器配置NVMe/FC。</block>
+  <block id="b2a24ec59c85868d273bf3147777df1e" category="list-text">Oracle Linux 8.9 GA内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
+  <block id="673ef6cfd90abefe0182063139fcac53" category="paragraph">NVMe/TCP没有自动连接功能。因此、如果某个路径发生故障、并且未在默认超时时间10分钟内恢复、则NVMe/TCP无法自动重新连接。要避免出现这种情况、您应使用以下过程设置存储故障转移事件的重试期限。</block>
+  <block id="fda6806f5068796f7eabff558c7b4b8a" category="paragraph">使用ONTAP版本的Oracle Linux 8.9的NVMe-oF主机配置存在以下已知问题：</block>
+  <block id="ac391a39aff48483ed4104b4c763d051" category="paragraph"><block ref="ac391a39aff48483ed4104b4c763d051" category="inline-link-macro-rx"></block></block>
+  <block id="f7c286fb287f187b00b4cae6b506a3e6" category="paragraph">Oracle Linux 8.9 NVMe-oF主机会创建重复的PDC</block>
+  <block id="7eb74ae68650bec7b2e7e925779ef3f0" category="paragraph">在Oracle Linux 8.9 NVMe-oF主机上、通过将<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>选项传递到<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令时应创建一个PDC。但是、从Oracle Linux 8.x开始、NVMe-oF主机会创建重复数据。这会浪费主机和目标上的资源。</block>
+  <block id="dd18a4327ac3c05d3a1b1b1a4512a436" category="example-title">显示示例输出：</block>
 </blocks>

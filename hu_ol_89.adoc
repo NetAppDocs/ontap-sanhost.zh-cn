@@ -1,14 +1,14 @@
 ---
 sidebar: sidebar 
-permalink: hu_rhel_87.html 
-keywords: host utilities, red hat, rhel, linux, 8.7, netapp, ontap, rhel 
-summary: 介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.7 
+permalink: hu_ol_89.html 
+keywords: host utilities, oracle, linux, 8.9, netapp, ontap 
+summary: 介绍如何将Oracle Linux 8.9与ONTAP结合使用 
 ---
-= 将Red Hat Enterprise Linux 8.7与ONTAP结合使用
+= 将Oracle Linux 8.9与ONTAP结合使用
 :hardbreaks:
-:toclevels: 1
+:toclevels: 1P
 :allow-uri-read: 
-:toclevels: 1
+:toclevels: 1P
 :nofooter: 
 :icons: font
 :linkattrs: 
@@ -16,7 +16,7 @@ summary: 介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.7
 
 
 [role="lead"]
-您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 8.7配置为目标ONTAP。
+您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的Oracle Linux 8.9。
 
 
 
@@ -38,39 +38,34 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
 
+== SAN工具包
 
+安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
-== SAN 工具包
-
-安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
-
-.示例
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[source, cli]
-----
-# sanlun lun show all
-----
-示例输出：
 
 [listing]
 ----
-controller(7mode/E-Series)/            device     host               lun
-vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
--------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
+# sanlun lun show all
+----
+.示例输出：
+[listing]
+----
+controller(7mode/E-Series)/              device     host               lun
+vserver(cDOT/FlashRay)  lun-pathname     filename   adapter  protocol  size   Product
+-------------------------------------------------------------------------------------
+data_vserver            /vol/vol1/lun1   /dev/sdb   host16   FCP       80.0g  cDOT
+data_vserver            /vol/vol1/lun1   /dev/sdc   host15   FCP       80.0g  cDOT
+data_vserver            /vol/vol2/lun2   /dev/sdd   host16   FCP       80.0g  cDOT
+data_vserver            /vol/vol2/lun2   /dev/sde   host15   FCP       80.0g  cDOT
 ----
 
 
 == SAN 启动
 
 .您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+您的配置支持SAN启动。请参见link:https://mysupport.netapp.com/matrix/imt.jsp?components=91863;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]以验证您的操作系统、HBA、HBA固件以及HBA启动BIOS和ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -90,9 +85,11 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 == 多路径
 
-对于Red Hat Enterprise Linux (RHEL) 8.7 `/etc/multipath.conf` 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.7使用识别和正确管理ONTAP LUN所需的所有设置进行编译。
+对于Oracle Linux (OL) 8.9、该 `/etc/multipath.conf`文件必须存在。您无需更改此文件、因为Oracle Linux 8.9会使用识别和正确管理ONTAP LUN所需的所有设置进行编译。
 
-您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
+您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。
+
+以下各节提供了映射到ASA和非ASA配置的LUN的多路径输出示例。
 
 
 
@@ -107,15 +104,15 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 ----
 # multipath -ll
 3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
-`-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:7:1    sdfi   130:64   active ready running
-  |- 11:0:9:1    sdiy  8:288     active ready running
-  |- 11:0:10:1  sdml 69:464   active ready running
-  |- 11:0:11:1  sdpt  131:304  active ready running
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:7:6   sdbz 68:208  active ready running
+  |- 11:0:11:6  sddn 71:80   active ready running
+  |- 11:0:15:6  sdfb 129:208 active ready running
+  |- 12:0:1:6   sdgp 132:80  active ready running
 ----
 
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应要求四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
 
 
 
@@ -129,8 +126,8 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 [listing]
 ----
 # multipath -ll
-3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
-size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 16:0:6:35 sdwb  69:624  active ready running
 | |- 16:0:5:35 sdun  66:752  active ready running
@@ -145,7 +142,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 == 建议设置
 
-RHEL 8.7操作系统经过编译、可识别ONTAP LUN、并自动为ASA 和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
+经过编译的Oracle Linux 8.9操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置设置正确的配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
 
  `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：
 
@@ -208,7 +205,7 @@ blacklist {
 | detect_prio | 是的。 
 
 
-| dev_los_TMO | " 无限 " 
+| dev_los_TMO | 无限 
 
 
 | 故障恢复 | 即时 
@@ -217,7 +214,7 @@ blacklist {
 | fast_io_fail_sMO | 5. 
 
 
-| features | "2 pG_INIT_retries 50" 
+| features | 2 pG_INIT_retries 50 
 
 
 | flush_on_last_del | 是的。 
@@ -229,13 +226,13 @@ blacklist {
 | no_path_retry | 队列 
 
 
-| path_checker | "TUR" 
+| path_checker | TUR 
 
 
-| path_grouping_policy | "Group_by-prio" 
+| path_grouping_policy | Group_by-prio 
 
 
-| path_selector | " 服务时间 0" 
+| path_selector | 服务时间 0 
 
 
 | Polling interval | 5. 
@@ -250,7 +247,7 @@ blacklist {
 | Retain Attached Hw_handler | 是的。 
 
 
-| rr_weight | " 统一 " 
+| rr_weight | 统一 
 
 
 | user_friendly_names | 否 
@@ -259,32 +256,34 @@ blacklist {
 | 供应商 | NetApp 
 |===
 .示例
-以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
+以下示例说明了如何更正覆盖的默认值。在这种情况下、将显示 `multipath.conf` 文件定义的值 `path_checker` 和 `no_path_retry` 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。
 
 [listing]
 ----
 defaults {
-   path_checker      readsector0
-   no_path_retry      fail
-}
-
+ path_checker readsector0
+ no_path_retry fail
+ }
 devices {
-   device {
-      vendor         "NETAPP  "
-      product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
-   }
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ no_path_retry queue
+ path_checker tur
+ }
 }
 ----
 
+NOTE: 要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用link:hu_rhel_88.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.9的。
 
-=== KVM设置
 
-您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+
+== KVM设置
+
+您还可以使用建议的设置来配置基于内核的虚拟机(KVM)。配置KVM不需要进行任何更改、因为此LUN已映射到虚拟机管理程序。
 
 
 
 == 已知问题
 
-对于运行ONTAP版本的RHEL 8.7、没有已知问题。
+具有ONTAP版本的Oracle Linux 8.9没有已知问题。

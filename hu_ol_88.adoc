@@ -49,8 +49,7 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 ----
 # sanlun lun show all
 ----
-示例输出：
-
+.示例输出：
 [listing]
 ----
 controller(7mode/E-Series)/            device     host               lun
@@ -119,7 +118,7 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 === 非ASA配置
 
-对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在没有优化路径可用时，才会使用非优化路径。
+对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
@@ -145,20 +144,19 @@ NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四
 
 经过编译的OL 8.8操作系统可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。
 
-。 `multipath.conf` 要启动多路径守护进程、必须存在文件、但您可以使用以下命令创建一个空的零字节文件：
+ `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：
 
 `touch /etc/multipath.conf`
 
-首次创建此文件时、可能需要启用并启动多路径服务：
+首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
 [listing]
 ----
-# systemctl enable multipathd
-# systemctl start multipathd
+# chkconfig multipathd on
+# /etc/init.d/multipathd start
 ----
-* 无需直接向添加任何内容 `multipath.conf` 文件、除非您的设备不希望由多路径管理、或者您的现有设置覆盖默认值。
-* 要排除不需要的设备、请将以下语法添加到中 `multipath.conf` 文件。
-+
+不需要直接向 `multipath.conf`文件中添加任何内容、除非您有不希望多路径管理的设备或现有设置覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+
 [listing]
 ----
 blacklist {
@@ -168,16 +166,11 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-+
-更换 `<DevId>` 使用 `WWID` 要排除的设备的字符串。
-
-+
 .示例
 在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
 
-+
 .步骤
-.. 运行以下命令以确定 WWID ：
+. 运行以下命令以确定 WWID ：
 +
 [listing]
 ----
@@ -187,7 +180,7 @@ blacklist {
 +
 `sda` 是我们需要将其添加到黑名单中的本地SCSI磁盘。
 
-.. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
 [listing]
 ----
@@ -200,11 +193,9 @@ blacklist {
 ----
 
 
-
-
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了关键 `multipathd` ONTAP LUN的参数和所需值。如果主机已连接到其他供应商的LUN、并且这些参数中的任何一个参数被覆盖、则需要稍后在中使用stanzas进行更正 `multipath.conf` 专用于ONTAP LUN的文件。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
