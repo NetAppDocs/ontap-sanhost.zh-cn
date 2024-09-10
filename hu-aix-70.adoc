@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_aix_61.html 
-keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
-summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用 
+permalink: hu-aix-70.html 
+keywords: host utilities, aix, powervm, vios, 3.1, 7.0, netapp, ontap 
+summary: AIX统一主机实用程序可帮助您管理连接到AIX主机的NetApp ONTAP存储。 
 ---
-= 安装AIX Host Utilities 6.1
+= 安装AIX Host Utilities 7.0
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -34,7 +34,7 @@ AIX Host Utilities支持以下环境：
 
 
 
-.您需要的内容
+.开始之前
 * 为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。
 +
 您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
@@ -43,7 +43,7 @@ AIX Host Utilities支持以下环境：
 
 
 
-NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^] 在经过压缩的 tar.gz 文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
+NOTE: NetApp AIX Host Utilities软件包位于上的link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
 
 .步骤
 . 登录到主机。
@@ -52,29 +52,75 @@ NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.ne
 ** 在PowerVM主机上，以*padmin*身份登录，然后输入 `oem_setup_env`命令以成为root用户。
 
 
-. 转至 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^] 并将包含Host Utilities的压缩文件下载到主机上的目录中。
+. 转到 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]、并将包含Host Utilities的压缩文件下载到主机上的目录中。
 . 转到包含下载内容的目录。
-. 解压缩文件并提取SAN工具包软件包。
+. 解压缩文件并提取SAN工具包软件包：
 +
-`# tar -xvf ntap_aix_host_utilities_6.1.tar.gz`
+`# tar -xvf ntap_aix_host_utilities_7.0.tar.gz`
 
 +
-解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
+解压缩文件时将创建以下目录： `ntap_aix_host_utilities_7.0`。此目录包含以下子目录之一：MPIO、NNO_MPIO或SAN_Tool_Kit。
 
 . 安装 AIX MPIO ：
 +
-`# installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
+`# installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/MPIO NetApp.MPIO_Host_Utilities_Kit`
 
 . 安装SAN工具包：
 +
-`# installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`
+`# installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/SAN_Tool_Kit/NetApp.SAN_toolkit`
 
 . 重新启动主机。
 . 验证安装。
 +
+`# lslpp -l |grep -i netapp`
+
++
 [listing]
 ----
-# sanlun version
+NetApp.MPIO_Host_Utilities_Kit.config
+                             7.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.fcp
+                             7.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.iscsi
+                             7.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.pcmodm
+                             7.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+NetApp.SAN_toolkit.sanlun  7.0.0.0  COMMITTED  NetApp SAN Toolkit sanlun
+----
+. 确认软件版本：
++
+`# sanlun version`
+
++
+[listing]
+----
+7.0.725.3521
+----
+.  `lbp_enabled`运行以下命令、验证是否已将SCSI UNMAP参数添加到ODM：
++
+`# odmget -q "uniquetype=disk/fcp/NetAppMPIO" PdAt |grep  "lbp_enabled"`
+
++
+[listing]
+----
+attribute = "lbp_enabled"
+----
++
+`# odmget -q "uniquetype=disk/fcp/NetAppMPIO and attribute=lbp_enabled" PdAt`
+
++
+[listing]
+----
+PdAt:
+        uniquetype = "disk/fcp/NetAppMPIO"
+        attribute = "lbp_enabled"
+        deflt = "true"
+        values = "true,false"
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "s"
+        nls_index = 18
 ----
 
 

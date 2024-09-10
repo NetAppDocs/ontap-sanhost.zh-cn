@@ -13,7 +13,7 @@ indexpage:
     - title: 产品概述
       url: "/overview.html"
     - title: "《AIX Host Utilities发行说明》"
-      url: "/hu_aix_61_rn.html"
+      url: "/hu_aix_rn.html"
     - title: HP-UX Host Utilities发行说明
       url: "/hu_hpux_60_rn.html"
     - title: "《Linux Host Utilities发行说明》"

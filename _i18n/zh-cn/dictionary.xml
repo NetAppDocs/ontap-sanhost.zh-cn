@@ -1570,7 +1570,6 @@
   <block id="fcd0175f66a20efc7cd1c6567f9a5578" category="paragraph">在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。</block>
   <block id="df806afef9dae5d43f20297c99fb14ca" category="admonition">此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。</block>
   <block id="ee3c9604966f68c69c5d81299e5c5913" category="paragraph">解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit</block>
-  <block id="8eeb8a6e3eaad8d96cb67c508c74079e" category="paragraph">`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit netapp.SAN_toolkit`</block>
   <block id="cea2e5f9065bd07d72cb5caab3c1db47" category="summary">介绍如何将 Oracle Linux 8.3 与 ONTAP 结合使用</block>
   <block id="3512af03a0184fdf02e1a9a23f8da83c" category="paragraph">对于 Oracle Linux （ OL ） 8.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。OL 8.3 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="dfa4360b9ef5c59ee3bab4c95d016689" category="admonition">要配置 Oracle Linux 8.3 Red Hat Enterprise Kernel （ RHCK ），请使用 <block ref="4e79a9939610f9dc89e0e26786a809f0" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 8.3 。</block>
@@ -1755,12 +1754,7 @@
   <block id="432a6b98702aceeda0bf1a325e31bcf4" category="inline-link-macro">NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏</block>
   <block id="0317854ad5c788fd489e5dfe652c06cd" category="cell">如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 <block ref="5e3e42b5c40ab78809e1bb63eb29a681" category="inline-link-macro-rx"></block>。</block>
   <block id="382b0f5185773fa0f67a8ed8056c7759" category="cell">不适用</block>
-  <block id="4391e4a69364ebb845d6562846716af4" category="doc">《AIX Host Utilities 6.1发行说明》</block>
   <block id="66c2d1ced882bffc99d6170e17a232ef" category="paragraph">有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 <block ref="7ce73c7ae176dd6b577d1c14b445f0cd" category="inline-link-macro-rx"></block>。</block>
-  <block id="31e6a451d2627922bc41740af153d931" category="cell">BugID</block>
-  <block id="ce88cf74aded8b7f41efd83d007f21f2" category="inline-link-macro">872113</block>
-  <block id="3a2f9996a60f471edd9edae7099e1d69" category="cell">在发生原因 某些版本的AIX主机操作系统上、`sanlun lun show–p`命令可能会出现内存故障</block>
-  <block id="74aed4fe3d0a3c89158ce037c3d1305f" category="cell">运行`sanlun lun show -p`命令时报告了AIX核心转储的间歇实例。Sanlun的`lun show -p`选项可为主机上发现的所有LUN提供多路径信息。它会对这些信息进行排列、以显示哪个SCSI设备来自哪个LUN、路径状态(主设备或二级设备)以及其他详细信息。但是、在某些运行`sanlun lun show -p`命令的AIX主机发生原因 上、可能会出现内存故障。只有在使用`-p`选项运行sanlun命令时、才会出现此问题描述。</block>
   <block id="b066ca6122c9857ad1ee3a44f18cc5e7" category="cell">错误 ID</block>
   <block id="31a061fd71807c34f31d154d95c10691" category="inline-link-macro">1069147</block>
   <block id="cad62af5cd7e448be659302e1eba73b4" category="cell">AIX HU Sanlun报告的HBA速度不正确</block>
@@ -1806,7 +1800,6 @@
   <block id="61699638eccafbea1975db4ccc09e234" category="cell"><block ref="61699638eccafbea1975db4ccc09e234" category="inline-link-macro-rx"></block></block>
   <block id="a86ba0de523aff5743fd70c108891432" category="cell">HUK 6.2中需要更改Solaris 11.4 FC驱动程序绑定</block>
   <block id="00dc1b7be02ff53d2291441f5821cfa6" category="paragraph"><block ref="355b22d66d025f6de0a19431aae0f536" category="inline-link-macro-rx"></block> 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。您可能需要使用的一些关键字组合和错误类型包括：</block>
-  <block id="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="cell"><block ref="0d39b3cffd5d0d33f0a5ed2db83a7aea" category="inline-link-macro-rx"></block></block>
   <block id="ba57f19b6b69755c2919b58188582a77" category="cell"><block ref="ba57f19b6b69755c2919b58188582a77" category="inline-link-macro-rx"></block></block>
   <block id="230a02b4afeea5b0d97c6a68a6530da3" category="summary">《HPUX Host Utilities 6.0发行说明》</block>
   <block id="e16c4360565a75371ee1b578b4c1ecca" category="doc">《HP-UX Host Utilities 6.0发行说明》</block>
@@ -2811,8 +2804,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="07e168dcc54f84ac7caf50498cebc4e7" category="list-text">完成后、使用为您的环境配置主机参数<block ref="ed10a966011bfd951bc8388936b92fcc" prefix=" " category="inline-code"></block> 命令：</block>
   <block id="16337c2b0ad3e64aaeb3714d78256deb" category="paragraph">Solaris Host Utilities 是一款 NetApp 主机软件，可在 Oracle Solaris 主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
   <block id="faf8b03496c6795f0d8ad52fa186087e" category="admonition">此工具包适用于所有Host Utilities配置和协议。因此、某些工具包内容可能适用于一种配置、但不适用于另一种配置。未使用的组件不会影响系统性能。</block>
-  <block id="96dedac61a50b89c04ee6770a7a5300b" category="doc">AIX Host Utilities 6.1示例命令参考</block>
-  <block id="92636cb01d99cfde50d65355f5255bf8" category="paragraph">您可以使用AIX Host Utilities 6.1示例命令参考使用Host Utilities工具对NetApp存储配置进行端到端验证。</block>
   <block id="5cbce7f0ea158500dcff175373e3cbcf" category="paragraph">本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定AIX主机相关的重要注意事项。</block>
   <block id="33871b6190a8d5adbe8b15282054766c" category="section-title">新增功能</block>
   <block id="dc5f647593f94c8f6abf309012633912" category="doc">安装AIX Host Utilities 6.1</block>
@@ -2839,7 +2830,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="89b1d0829beb11befe8cef17a1a88149" category="list-text">登录到主机。</block>
   <block id="411f721c4d437c447636df81f300973a" category="list-text">解压<block ref="dfa8e0cbcc24953d6f700e7d845f35aa" prefix=" " category="inline-code"></block> 文件：</block>
   <block id="685e21144e7e399ef67e8a809cd52a1e" category="list-text">安装软件：</block>
-  <block id="9b9e3c5faedc6bf7e489b0030b0ecd14" category="paragraph">AIX Host Utilities 6.1版包含以下新增功能和增强功能：</block>
   <block id="9ce16fbccdcb870f5e9db74a7bb90874" category="list-text">AIX Host Utilities 6.1增加了对早期版本的AIX主机操作系统中发生的内存故障问题描述的支持。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。MPIO和相关ODM保持不变。</block>
   <block id="09244b95824d6e702b6eaab2034bdeec" category="list-text">FCP—AIX</block>
   <block id="dd7ff764bddd19a335d884f8e17ede8d" category="paragraph">AIX Host Utilities支持以下协议：</block>
@@ -3673,4 +3663,31 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="7eb74ae68650bec7b2e7e925779ef3f0" category="paragraph">在Oracle Linux 8.9 NVMe-oF主机上、通过将<block ref="b3868ba70a8f4cf55464dd9926381db1" prefix=" " category="inline-code"></block>选项传递到<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行<block ref="c4014d0307156b07d4412051f511221a" prefix=" " category="inline-code"></block>命令时应创建一个PDC。但是、从Oracle Linux 8.x开始、NVMe-oF主机会创建重复数据。这会浪费主机和目标上的资源。</block>
   <block id="dd18a4327ac3c05d3a1b1b1a4512a436" category="example-title">显示示例输出：</block>
   <block id="8ea7d65541343d381b99affa2d1c6996" category="admonition">要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用<block ref="ce7483c182b39cf5b993c406b0ed7268" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.9的。</block>
+  <block id="1f74246c73996c337fbedc14cd7d21b9" category="doc">安装AIX Host Utilities 7.0</block>
+  <block id="135b308ed83c53f1516b7c754566d1c4" category="list-title">开始之前</block>
+  <block id="46a8afec081a24bad40f6f988c628fb2" category="admonition">NetApp AIX Host Utilities软件包位于上的<block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block>压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。</block>
+  <block id="bf901697b7694abb028baf6a3b45caa8" category="list-text">在PowerVM主机上，以*padmin*身份登录，然后输入<block ref="cf9ef914abc1d1025acbd5649d68a228" prefix=" " category="inline-code"></block>命令以成为root用户。</block>
+  <block id="30c4a481d5eebab4d7ecb692852fdad1" category="list-text">转到<block ref="5d5134ddaf42180d688670ce5e1f032a" category="inline-link-rx"></block>、并将包含Host Utilities的压缩文件下载到主机上的目录中。</block>
+  <block id="7515d24f2cf1755d908ccd75d4806228" category="list-text">解压缩文件并提取SAN工具包软件包：</block>
+  <block id="a4a53a1d716fd706dc0d6653df07cd18" category="paragraph"><block ref="02ae515861e4e233362298f11cb9eef3" prefix="" category="inline-code"></block></block>
+  <block id="dfeb26940493cf0ca07dfbf198c98918" category="paragraph">解压缩文件时将创建以下目录：<block ref="666ee7336e2d1a70fa06a334c624dce0" prefix=" " category="inline-code"></block>。此目录包含以下子目录之一：MPIO、NNO_MPIO或SAN_Tool_Kit。</block>
+  <block id="08170d10720c0fb899ec695d4fd53f4a" category="paragraph"><block ref="7e3b57f2b8eff456c048316a5f27fc1d" prefix="" category="inline-code"></block></block>
+  <block id="22a14cf4ef45ee9f25f03a618ea09c46" category="paragraph"><block ref="14f22fae2f403239ed46b211fb187db3" prefix="" category="inline-code"></block></block>
+  <block id="37d2266123768f5396b4ff9de84d7309" category="paragraph"><block ref="7c440fefdeae703ef22d0311a240c394" prefix="" category="inline-code"></block></block>
+  <block id="71083863a948571a8f27335105fd6269" category="list-text">确认软件版本：</block>
+  <block id="ee5391998decf3a96f0ec776cd7144f8" category="paragraph"><block ref="cb12b459974e296c2b38e4550b0070ec" prefix="" category="inline-code"></block></block>
+  <block id="d2f9b679b0ea3abf86a0ab4680ede362" category="list-text"><block ref="ce7e54a230e7d7f6125c862b6201f954" prefix=" " category="inline-code"></block>运行以下命令、验证是否已将SCSI UNMAP参数添加到ODM：</block>
+  <block id="fc1dfe9e042d640c93dd3ca2a623b1e0" category="paragraph"><block ref="e7e95bf0f273e8940acbc8851eb5f38c" prefix="" category="inline-code"></block></block>
+  <block id="fd97cc14c798a5c29ed1aaf2730bbfe8" category="paragraph"><block ref="185d689a67393760fd6cc0f2c7d17397" prefix="" category="inline-code"></block></block>
+  <block id="4adfcf90c09aefd4b667d59ecc9550b8" category="paragraph"><block ref="674742143cb6833db13557df8b74e907" prefix="" category="inline-code"></block></block>
+  <block id="2504b7fd70ceee9322fd9fd5d4125de3" category="paragraph"><block ref="d95cdff732bcf199b913111f1b5e8c83" prefix="" category="inline-code"></block></block>
+  <block id="73869e9dce2321ce472003939ab8f2f4" category="paragraph"><block ref="c12f7b93eb294749d1961ad2bc96c48f" prefix="" category="inline-code"></block></block>
+  <block id="c840ca4bf83155ee16a93c9782fc3726" category="summary">您可以使用AIX Host Utilities示例命令参考、使用Host Utilities工具对NetApp存储配置进行端到端验证。</block>
+  <block id="3611c3cc68b4ecac8bc30e2c032ad3dc" category="doc">AIX Host Utilities示例命令参考</block>
+  <block id="8bcfee74cc2c8be35dd3adbc80bfb29a" category="doc">《AIX Host Utilities发行说明》</block>
+  <block id="b30c926bc7c2c631e70c112178610786" category="paragraph">AIX Host Utilities的最新版本包含以下新增功能和增强功能：</block>
+  <block id="6919ca52878e24946a6a73aa37f083ee" category="list-text">AIX Host Utilities 7.0支持AIX主机操作系统上的SCSI UNMAP。借助AIX Host Utilities 7.0、SCSI精简配置可与FC设备的AIX和NetApp LUN无缝配合使用。</block>
+  <block id="cf66257c19e5d30697f97afd2fd4245c" category="cell">NetApp ONTAP iSCSI LUN的SCSI UNMAP支持</block>
+  <block id="6f60d2b701807f15296111f9ab2ce1c3" category="cell">AIX Host Utilities 7.0仅支持FC设备的SCSI UNMAP功能。此版本不支持对iSCSI设备的SCSI UNMAP。</block>
+  <block id="c10866775dae5d5cea46cbcd3d083ef2" category="sidebar">安装AIX HU 7.0</block>
 </blocks>
