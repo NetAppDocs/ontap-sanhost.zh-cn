@@ -181,7 +181,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -209,7 +209,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -300,22 +300,22 @@ devices {
 
 使用ONTAP的RHEL 6.5版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=760515["760515"^] | 在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起 | 在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1033136["1033136"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=760515["760515"^] | 在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起 | 在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=758271["758271"^] | 使用自定义 initrd 启动时无法加载 bnx2 固件（ dracut -f ） | Broadcom NetXtreme II 千兆控制器端口无法 ping ，因为在使用自定义 initrd 启动期间无法加载 bnx2 固件。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1007463["1007463."^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=758271["758271"^] | 使用自定义 initrd 启动时无法加载 bnx2 固件（ dracut -f ） | Broadcom NetXtreme II 千兆控制器端口无法 ping ，因为在使用自定义 initrd 启动期间无法加载 bnx2 固件。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799394["799394."^] | RHEL 6U5 ：在执行存储故障转移操作的 I/O 期间，会出现 Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，出现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1063699["1063699"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799394["799394."^] | RHEL 6U5 ：在执行存储故障转移操作的 I/O 期间，会出现 Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，出现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=786571["786571"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE 主机挂起 / 路径故障 | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE （ QLE8242 ）主机挂起 / 路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB[0]=0x54 。计划 ISP 中止 " 消息，此消息会导致主机挂起 / 路径故障。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1068619["1068619"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=786571["786571"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE 主机挂起 / 路径故障 | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE （ QLE8242 ）主机挂起 / 路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB[0]=0x54 。计划 ISP 中止 " 消息，此消息会导致主机挂起 / 路径故障。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=801580["801580"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障 | 在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 " | link:https://bugzilla.redhat.com/show_bug.cgi?id=1068622["1068622"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=801580["801580"^] | 在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障 | 在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 " 
 |===

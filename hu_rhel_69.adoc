@@ -181,7 +181,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -209,7 +209,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -300,13 +300,13 @@ devices {
 
 采用ONTAP的RHEL 6.9版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1067272["1067272"^] | 在存储故障转移操作期间， Emulex LPe32002 主机上的远程端口状态可能处于 " 已阻止 " 状态 | 在存储故障转移操作期间，使用 LPe32002 适配器的 RHEL 6.9 主机上的某些远程端口状态可能会进入 " 已阻止 " 状态。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 " 已阻止 " 状态。但是，当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口状态应为 " 联机 " 。但是，在某些情况下，远程端口仍处于 " 已阻止 " 状态。此状态会对多路径层的 LUN 显示为 "Failed Failed" 。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1427496["427496"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1067272["1067272"^] | 在存储故障转移操作期间， Emulex LPe32002 主机上的远程端口状态可能处于 " 已阻止 " 状态 | 在存储故障转移操作期间，使用 LPe32002 适配器的 RHEL 6.9 主机上的某些远程端口状态可能会进入 " 已阻止 " 状态。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 " 已阻止 " 状态。但是，当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口状态应为 " 联机 " 。但是，在某些情况下，远程端口仍处于 " 已阻止 " 状态。此状态会对多路径层的 LUN 显示为 "Failed Failed" 。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1076584["1076584"^] | 存储故障转移操作期间， Red Hat Enterprise Linux 6.9 QLogic QE8362 HBA 上会发生固件转储 | 在使用 QLogic QLE8362 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 6.9 主机上执行存储故障转移操作期间，可能会发生固件转储，但有时会观察到固件转储。固件转储可能会表现为主机上的 I/O 中断，持续时间长达 1200 秒。适配器完成固件核心转储后， I/O 操作将正常恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： kernel ： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90018b01000 ），转储状态标志（ 0x3f ） | link:https://bugzilla.redhat.com/show_bug.cgi?id=1438711["1438711"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1076584["1076584"^] | 存储故障转移操作期间， Red Hat Enterprise Linux 6.9 QLogic QE8362 HBA 上会发生固件转储 | 在使用 QLogic QLE8362 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 6.9 主机上执行存储故障转移操作期间，可能会发生固件转储，但有时会观察到固件转储。固件转储可能会表现为主机上的 I/O 中断，持续时间长达 1200 秒。适配器完成固件核心转储后， I/O 操作将正常恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： kernel ： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90018b01000 ），转储状态标志（ 0x3f ） 
 |===

@@ -507,4 +507,9 @@ NSID       UUID                                   Size
 
 == 已知问题
 
-对于采用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置、没有已知问题。
+使用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置存在以下已知问题：
+
+[cols="15,20,50,15"]
+|===
+| NetApp 错误 ID | 标题 | Description | CONTAPEXT-2037 
+|===

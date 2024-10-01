@@ -168,7 +168,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -196,7 +196,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -280,22 +280,22 @@ devices {
 
 SLES 15 SP3 with ONTAP版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | 在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042847["1042847"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089555["1089555"^] | 在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089561["1089561"^] | 在存储故障转移操作期间，在采用 Emulex LPe32002 32 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe32002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_free_hbq+76" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_free_hbq+76 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1042807["1042807"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1089561["1089561"^] | 在存储故障转移操作期间，在采用 Emulex LPe32002 32 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断 | 在对采用 Emulex LPe32002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_free_hbq+76" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_free_hbq+76 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117248["1117248"^] | 在存储故障转移操作期间，在使用 QLogic QLE2562 8 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 QLogic QLE2562 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，由于内核发生崩溃，观察到内核中断。内核崩溃会导致操作系统重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/ 目录下生成 vmcore 文件。发生内核崩溃时，可以使用 vmcore 文件来了解故障的发生原因。示例：在这种情况下，在 "blk_final_request+289" 模块中观察到崩溃。它会使用以下字符串记录在 vmcore 文件中： "Exception RIP ： blk_final_request+289" 内核中断后，您可以通过重新启动主机操作系统来恢复操作系统。您可以根据需要重新启动应用程序。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062496["1062496"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117248["1117248"^] | 在存储故障转移操作期间，在使用 QLogic QLE2562 8 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 QLogic QLE2562 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，由于内核发生崩溃，观察到内核中断。内核崩溃会导致操作系统重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/ 目录下生成 vmcore 文件。发生内核崩溃时，可以使用 vmcore 文件来了解故障的发生原因。示例：在这种情况下，在 "blk_final_request+289" 模块中观察到崩溃。它会使用以下字符串记录在 vmcore 文件中： "Exception RIP ： blk_final_request+289" 内核中断后，您可以通过重新启动主机操作系统来恢复操作系统。您可以根据需要重新启动应用程序。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117261["1117261"^] | 在存储故障转移操作期间，在具有 Qlogic QLE2662 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Qlogic QLE2662 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 " 未知或无效地址 " 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中—异常 RIP ：未知或无效地址。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062508["1062508"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117261["1117261"^] | 在存储故障转移操作期间，在具有 Qlogic QLE2662 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Qlogic QLE2662 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 " 未知或无效地址 " 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中—异常 RIP ：未知或无效地址。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117274["1117274"^] | 在存储故障转移操作期间，在使用 Emulex LPe16002 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Emulex LPe16002 HBA 对 Sles12sp3 内核（ kernel-default-4.4.87% -3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 "raw_spin_lock_irqsav+30" 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中：–异常 RIP ： _raw_spin_lock_irqsav+30 。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 | link:http://bugzilla.suse.com/show_bug.cgi?id=1062514["1062514"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1117274["1117274"^] | 在存储故障转移操作期间，在使用 Emulex LPe16002 16 Gb FC 的 SLES12SP3 上观察到内核中断 | 在使用 Emulex LPe16002 HBA 对 Sles12sp3 内核（ kernel-default-4.4.87% -3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 "raw_spin_lock_irqsav+30" 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中：–异常 RIP ： _raw_spin_lock_irqsav+30 。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。 
 |===

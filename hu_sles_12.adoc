@@ -168,7 +168,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -196,7 +196,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -277,16 +277,16 @@ devices {
 
 带有ONTAP版本的SLES 12存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=873555["873555"^] | 在本地启动时启动多路径期间， SCSI_DH_ALUA 模块未加载 | SCSI_DH_ALUA 是一个 Linux ALUA 设备处理程序模块。在本地启动的 multipathd 启动期间，不会加载此数据。由于此原因，虽然在目标端启用了 ALUA ，但不会加载设备处理程序。 | link:https://bugzilla.suse.com/show_bug.cgi?id=908529["908529"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=873555["873555"^] | 在本地启动时启动多路径期间， SCSI_DH_ALUA 模块未加载 | SCSI_DH_ALUA 是一个 Linux ALUA 设备处理程序模块。在本地启动的 multipathd 启动期间，不会加载此数据。由于此原因，虽然在目标端启用了 ALUA ，但不会加载设备处理程序。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863584["863584"^] | 在 SLES12 上创建 DM 设备时，屏幕上会显示消息 " 发现冲突的设备节点 "/dev/mapper/360xx" | 您可能会发现在 SLES 12 的 /dev/mapper 目录下创建指向 DM 设备的链接失败，并看到消息 "Conflicting device node '/dev/mapper/360xx" found" 。 | link:https://bugzilla.suse.com/show_bug.cgi?id=903001["903001"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863584["863584"^] | 在 SLES12 上创建 DM 设备时，屏幕上会显示消息 " 发现冲突的设备节点 "/dev/mapper/360xx" | 您可能会发现在 SLES 12 的 /dev/mapper 目录下创建指向 DM 设备的链接失败，并看到消息 "Conflicting device node '/dev/mapper/360xx" found" 。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=847490["84749"^] | 多路径守护进程显示了 SLES 12 上的路径故障 | 在存储或网络结构发生 I/O 故障期间，您可能会发现 SLES12 多路径守护进程上的路径故障。 | link:https://bugzilla.novell.com/show_bug.cgi?id=890854["890854"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=847490["84749"^] | 多路径守护进程显示了 SLES 12 上的路径故障 | 在存储或网络结构发生 I/O 故障期间，您可能会发现 SLES12 多路径守护进程上的路径故障。 
 |===

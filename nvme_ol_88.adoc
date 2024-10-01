@@ -581,8 +581,8 @@ NSID       UUID                                   Size
 
 [cols=""20"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| 1517321 | Oracle Linux 8.8 NVMe-oF主机会创建重复的PDC | 在OL 8.8 NVMe-oF主机上、可通过将 `-p`选项传递到 `nvme discover`命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行 `nvme discover`命令时应创建一个PDC。但是、从OL 8.x开始、NVMe-oF主机会创建重复的PDC。这会浪费主机和目标上的资源。 | https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^] 
+| 1517321 | Oracle Linux 8.8 NVMe-oF主机会创建重复的PDC | 在OL 8.8 NVMe-oF主机上、可通过将 `-p`选项传递到 `nvme discover`命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行 `nvme discover`命令时应创建一个PDC。但是、从OL 8.x开始、NVMe-oF主机会创建重复的PDC。这会浪费主机和目标上的资源。 
 |===

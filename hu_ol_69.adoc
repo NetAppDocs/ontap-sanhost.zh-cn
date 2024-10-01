@@ -182,7 +182,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -269,12 +269,12 @@ NOTE: 要配置Oracle Linux 6.9 Red Hat Enterprise Kernel (RHCK)、请使用link
 
 具有ONTAP版本的Oracle Linux 6.9存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1082780["1082780"^] | 使用 QLE8362 卡的 OL6.9 虚拟机管理程序偶尔会出现固件转储 | 在使用 QLE8362 卡的 OL6.9 虚拟机管理程序上执行存储故障转移操作期间，偶尔会观察到固件转储。固件转储可能会导致主机上的 I/O 中断，中断时间可能长达数千秒。适配器完成固件转储后， I/O 操作将以正常方式恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90008901000 ），转储状态标志（ 0x3f ）。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=16039["16039"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1082780["1082780"^] | 使用 QLE8362 卡的 OL6.9 虚拟机管理程序偶尔会出现固件转储 | 在使用 QLE8362 卡的 OL6.9 虚拟机管理程序上执行存储故障转移操作期间，偶尔会观察到固件转储。固件转储可能会导致主机上的 I/O 中断，中断时间可能长达数千秒。适配器完成固件转储后， I/O 操作将以正常方式恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90008901000 ），转储状态标志（ 0x3f ）。 
 |===
 
 NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_69.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.9 。

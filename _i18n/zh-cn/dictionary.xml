@@ -67,13 +67,10 @@
   <block id="8e164918c56328c6560a73785d09e24f" category="cell">NetApp 错误 ID</block>
   <block id="b78a3223503896721cca1303f776159b" category="cell">标题</block>
   <block id="b5a7adde1af5c87d7fd797b6245c2a39" category="cell">Description</block>
-  <block id="e84ba13cb7ac93e87b8a828e83224c06" category="cell">Bugzilla ID</block>
   <block id="634ce17c0c1f028975bdefe291d45220" category="inline-link-macro">1082780</block>
   <block id="777197cb0e422c596874100405fc362f" category="cell"><block ref="91e82093309bf20c099d28c5559f3009" category="inline-link-macro-rx"></block></block>
   <block id="38b857ac7145e662f13bf1705fe21a46" category="cell">使用 QLE8362 卡的 OL6.9 虚拟机管理程序偶尔会出现固件转储</block>
   <block id="10968bb02641daba6ea997ddf4f9106c" category="cell">在使用 QLE8362 卡的 OL6.9 虚拟机管理程序上执行存储故障转移操作期间，偶尔会观察到固件转储。固件转储可能会导致主机上的 I/O 中断，中断时间可能长达数千秒。适配器完成固件转储后， I/O 操作将以正常方式恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90008901000 ），转储状态标志（ 0x3f ）。</block>
-  <block id="009d69d2d1b986815e7b825382d73af5" category="inline-link-macro">16039</block>
-  <block id="4669d0134fa80f8f8565af912be55d7c" category="cell"><block ref="4669d0134fa80f8f8565af912be55d7c" category="inline-link-macro-rx"></block></block>
   <block id="e7565a20fc615772fc73eed9c1b34d4a" category="inline-link-macro">已知问题</block>
   <block id="6d7f9adf0bf7944b1d3ff491429c9aa3" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="6381fe6a72f9bd9f067a0ec390d2a8fb" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.9 。</block>
   <block id="5dd03e8d039863e563e049be198c3fd3" category="section-title">发行说明</block>
@@ -316,26 +313,18 @@
   <block id="0cd135086668eba9ddaef37e78d77f1e" category="cell"><block ref="f16938549e28826d7c8dd807dbea5e81" category="inline-link-macro-rx"></block></block>
   <block id="79f201b7fe80e54927437e15bc553fda" category="cell">对于接管 / 交还和重新启动等控制器故障，使用 UEK2 的 OL6.4 和 OL5.9 会显示 QLogic 适配器重置</block>
   <block id="dbfbaf84e7d693312dc4a94d1b83d0c8" category="cell">如果发生控制器故障（例如接管，交还和重新启动），则在使用 UEK2 的 OL6.4 主机（ kernel-UEK-2.6.39-400.17.1.el6uek ）或使用 UEK2 的 OL5.9 主机（ kernel-UEK-2.6.39 400.17.1.el5uek ）上会显示 QLogic 适配器重置。这些重置是间歇性的。发生这些适配器重置时，可能会发生长时间的 I/O 中断（有时超过 10 分钟），直到适配器重置成功且路径状态由 dm-multipath 更新为止。在 /var/log/messages 中，如果遇到此错误，则会显示类似于以下内容的消息： kernel ： qla2xxx [0000 ： 11 ： 00.0]-8018 ： 0 ： adapter reset issued nexus=0 ： 2 ： 13 。这一点在内核版本中可见：在 OL6.4 上： kernel-UEK-2.6.39-400.171.el6uek 在 OL5.9 上： kernel-UEK-2.6.39-400.171.el5uek</block>
-  <block id="1ad93267910df9c994eae8e51f527c7b" category="inline-link-macro">13999</block>
-  <block id="7f7561e4143163119b13af6a2108f109" category="cell"><block ref="7f7561e4143163119b13af6a2108f109" category="inline-link-macro-rx"></block></block>
   <block id="102e1da9281e0b32f9b431ce48529bea" category="inline-link-macro">715217</block>
   <block id="6594707e38059de09488d34baa325a17" category="cell"><block ref="266e6e2d9bbadc25ae6193fd8a9a77a8" category="inline-link-macro-rx"></block></block>
   <block id="79533d80ff43942fa2eb66ec4bf65e8b" category="cell">使用 UEK2 的 OL6.4 或 OL5.9 主机上的路径恢复延迟可能会导致控制器或网络结构故障的 I/O 恢复延迟</block>
   <block id="45d39d9a54a6f9899f9b5ea6d07e6087" category="cell">在使用 UEK2 内核的 Oracle Linux 6.4 或 Oracle Linux 5.9 主机上，如果 I/O 发生控制器故障（存储故障转移或交还，重新启动等）或网络结构故障（ FC 端口禁用或启用），则 DM-Multipath 的路径恢复需要很长时间（ 4 分钟）。到 10 分钟）。有时，在将路径恢复到活动状态期间，还会出现以下 lpfc 驱动程序错误：内核： SD 0 ： 0 ： 8 ： 3 ： [SDLT] 结果： hostbyte=did_error driverbyte=driver_OK 由于故障事件期间路径恢复延迟， I/O 恢复也会延迟。OL 6.4 版本： device-mapper-1.02.7-9.el6 device-mapper-multipath-0.4.9-64.0.1.el6 kernel-UEK-2.6.39-400.171.el6uek OL 5.9 版本： device-mapper-1.02.7-9.el5 device-mapper-3.9-64.9.4.0.9.-64.1.elek-kernel5-17.1.5uele.5.17.1</block>
-  <block id="c47a3ba2c793b5b9e21260f903c37d4d" category="inline-link-macro">14001</block>
-  <block id="4db6d2f73b06fdf69b87d966cab54b34" category="cell"><block ref="4db6d2f73b06fdf69b87d966cab54b34" category="inline-link-macro-rx"></block></block>
   <block id="6f3a2ae9be03559c1880f12626561ea5" category="inline-link-macro">709911</block>
   <block id="402ff352b5b7120831a3dccefef4b5dc" category="cell"><block ref="4222d77b1ef65545c702a6cbec804e78" category="inline-link-macro-rx"></block></block>
   <block id="788f15e101785a60949d4926bf0906ae" category="cell">存储故障后，使用 UEK2 内核的 OL6.4 和 OL5.9 iSCSI 上的 DM 多路径需要很长时间才能更新 LUN 路径状态</block>
   <block id="9aeace4ea17e27b31802153d35eb0e3e" category="cell">在运行 Oracle Linux 6 Update4 和 Oracle Linux 5 Update9 iSCSI 以及 Unbreakable Enterprise Kernel Release 2 （ UEK2 ）的系统上，在存储故障事件期间出现问题，其中 DM Multipath （ DMMP ）需要大约 15 分钟来更新设备映射程序（ DM ）设备（ LUN ）的路径状态。如果在此时间间隔内运行 "multipath -ll" 命令，则该 DM 设备（ LUN ）的路径状态将显示为 "Failed ready Runing" 。路径状态最终更新为 "active ready running" 。 以下版本会显示此问题描述： Oracle Linux 6 Update 4 ： UEK2 内核： 2.6.39-400.17.1.el6uek.x86_64 多路径： device-mapper-multipath-0.4.0.9-64.1.el6.x86_64 iSCSI ： iscsi-initiator-utils-6.2.0.873-2.0.el6.1.el6.0.9_1.vmf_1.640.5-iscsi_4.0.5-1.vmf_1.vmfs.0.5-1.iscsi-8.0.5-1.vmfs.0.5-1.vmfs.0.5-iscsi ： iscsi ： iscsi ： iscsi-utils-6.0.873-utils-us-8.0.8-8.0.8-4.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.</block>
-  <block id="bf15fc6473a38b79c0a233e9c6581775" category="inline-link-macro">13984</block>
-  <block id="8db06c6e2c0de0ad27c52fbe6aab99bc" category="cell"><block ref="8db06c6e2c0de0ad27c52fbe6aab99bc" category="inline-link-macro-rx"></block></block>
   <block id="842cd6b2d622e6f6d6f096991479222c" category="inline-link-macro">739909</block>
   <block id="23aa57b371bac8344dedcd1613b8be86" category="cell"><block ref="27cd76b3a4455543cfaba6391cb8f5b5" category="inline-link-macro-rx"></block></block>
   <block id="c0f2efac60484d28bcdd08cfb17caa1d" category="cell">使用 UEK2 的 OL6.x 和 OL5.x 主机出现 FC 故障后， dm-multipath 设备上的 SG_IO ioctl 系统调用失败</block>
   <block id="97e64aa1a81f574216de1997c1b5ba68" category="cell">在使用 UEK2 内核的 Oracle Linux 6.x 主机和使用 UEK2 内核的 Oracle Linux 5.x 主机上出现问题。多路径设备上的 SG_* 命令在发生网络结构故障后失败，并显示 EAGAin 错误代码（ errno ），从而使活动路径组中的所有路径都关闭。只有在多路径设备未发生 I/O 时，才会出现此问题。以下是示例： # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 查询数据库： 12 00 00 24 00 ioctl （ SG_IO v3 ）失败，并显示 OS_err （ errno ） = 11 查询：传递操作系统错误：资源暂时不可用 HDIO_get_ioctl 身份失败： 资源暂时不可用 [11] /dev/mapper/3600a098041764937303f436c75324370 # 上的 SCSI 查询和提取 ATA 信息失败。发生此问题的原因是，在 ioctl（ ）调用期间，如果 DM-Multipath 设备上没有发生 I/O ，则无法激活路径组切换到其他活动组。在以下版本的 kernel-Uek 和 device-mapper-multipath 软件包中发现了此问题： OL6.4 版本： kernel-UEK-2.6.39-400.171.el6uek device-mapper-multipath-0.4.9.-64.1.el6 OL5.9 版本： kernel-UEK-2.6.39-400.17.1.el5uek-device-4.0.5-1.el6 多路径映射程序</block>
-  <block id="ee0f827fe45c91c956bacfd78d91d47b" category="inline-link-macro">14082</block>
-  <block id="01dab0d6fe6067acdd00c767b503f115" category="cell"><block ref="01dab0d6fe6067acdd00c767b503f115" category="inline-link-macro-rx"></block></block>
   <block id="7b9fb98af3d3330107d455e90e676611" category="admonition">有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 <block ref="f736929b1834226891236b2c0b0b218e" category="inline-link-macro-rx"></block> 适用于 Red Hat Enterprise Linux （ RHEL ） 6.4 。</block>
   <block id="903b07b1963af0c45e65b6d887a9b059" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.9</block>
   <block id="30882960e4e91384155a1bff6c886630" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="70efe35e64cc9ba99c6f021b1f4d02ec" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
@@ -354,14 +343,10 @@
   <block id="15af5af1296f3b00950876c7349c589b" category="cell"><block ref="eb38e5b23df5e0f2a1ba579e254db319" category="inline-link-macro-rx"></block></block>
   <block id="6689d526e6da9f46eb73959de7ccfb3d" category="cell">在存储故障转移操作期间， Emulex LPe32002 主机上的远程端口状态可能处于 " 已阻止 " 状态</block>
   <block id="dfc052f6b0b40c1faced595a085c2d50" category="cell">在存储故障转移操作期间，使用 LPe32002 适配器的 RHEL 6.9 主机上的某些远程端口状态可能会进入 " 已阻止 " 状态。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 " 已阻止 " 状态。但是，当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口状态应为 " 联机 " 。但是，在某些情况下，远程端口仍处于 " 已阻止 " 状态。此状态会对多路径层的 LUN 显示为 "Failed Failed" 。</block>
-  <block id="f6324e9e3ba7fc3d910e1e675b9ce321" category="inline-link-macro">427496</block>
-  <block id="f94b92a960ca7340be0a051407ff734e" category="cell"><block ref="f94b92a960ca7340be0a051407ff734e" category="inline-link-macro-rx"></block></block>
   <block id="41c83455913a93be4b440521e4eac4a6" category="inline-link-macro">1076584</block>
   <block id="bd280470f9fb5a81e270305b53204d0f" category="cell"><block ref="9caa015d3334857faa7c3d61e0b9334f" category="inline-link-macro-rx"></block></block>
   <block id="8a35d17d4ad08e708a249ff2f9752b5a" category="cell">存储故障转移操作期间， Red Hat Enterprise Linux 6.9 QLogic QE8362 HBA 上会发生固件转储</block>
   <block id="c61e89bea3bd59d60d354b2b2ee41bb6" category="cell">在使用 QLogic QLE8362 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 6.9 主机上执行存储故障转移操作期间，可能会发生固件转储，但有时会观察到固件转储。固件转储可能会表现为主机上的 I/O 中断，持续时间长达 1200 秒。适配器完成固件核心转储后， I/O 操作将正常恢复。主机上不需要进一步的恢复操作步骤。要指示固件转储， /var/log/message 文件中会显示以下消息： kernel ： qla2xxx [0000 ： 0c ： 00.3]-d001 ： 3 ：已将固件转储保存到临时缓冲区（ 3/ffc90018b01000 ），转储状态标志（ 0x3f ）</block>
-  <block id="b720a262f078ee7e33e54643f48df1b0" category="inline-link-macro">1438711</block>
-  <block id="bd70b4627500ea5c8939b9ea0e8ba9df" category="cell"><block ref="bd70b4627500ea5c8939b9ea0e8ba9df" category="inline-link-macro-rx"></block></block>
   <block id="99d5775ff67d3ebcdc6e872f0bb0e7bd" category="summary">介绍如何将 Oracle Linux 6.10 与 ONTAP 结合使用</block>
   <block id="31df1b3be5d57ead2772d8f24d7f3661" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="0c6007e6b6b7d891a61a3130a6b08c13" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3b3051e9028e74cd5ada27ca8f32e352" category="paragraph">对于 Oracle Linux 6.10 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.10 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -377,38 +362,26 @@
   <block id="36449de1465a8388d5bd6898a3ae93a1" category="cell"><block ref="7ace244e7f60745da9174ac22c242ea9" category="inline-link-macro-rx"></block></block>
   <block id="f7f82c29a44c5277ce27b17a6e4a45c0" category="cell">OL7.0 ：由于 Emulex 8G （ LPe12002 ）主机上的 OL 7.0 Uek r3U5 测试版出现 "RSCN 超时 " 错误，主机丢失 LUN 的所有路径并挂起</block>
   <block id="09e33a526489b73c952a64dd843c9a3b" category="cell">您可能会发现，在对 I/O 执行存储故障转移操作期间， Emulex 8G （ LPe12002 ）主机挂起，并且 I/O 中断率较高您可能会发现路径无法恢复，这是由于 RSCN 超时导致的，主机丢失所有路径并挂起。达到此问题描述的概率很高。</block>
-  <block id="722bdebbbc5e6f165bdb8a939be2a35f" category="inline-link-macro">14898</block>
-  <block id="d43c7062a321897475a74301e48fe8f9" category="cell"><block ref="d43c7062a321897475a74301e48fe8f9" category="inline-link-macro-rx"></block></block>
   <block id="b15feddd9b4f1d23e73c109324c3a1d3" category="inline-link-macro">901557</block>
   <block id="4e9eb27f9ba0d13fc056bc68489f4cc5" category="cell"><block ref="757afc833102d287158052ecff4aa0f8" category="inline-link-macro-rx"></block></block>
   <block id="905be380a5cf4045892a845261cf2ca9" category="cell">OL 7.0 ：在使用 IO 执行存储故障转移操作期间，在 QLogic 8G FC （ QLE2562 ） SAN 主机上观察到高 IO 中断</block>
   <block id="9ca61b9ed5c5b141e2e563126e3fe821" category="cell">在使用 IO 执行存储故障转移操作期间，您可能会发现 QLogic 8G FC （ QLE2562 ）主机上的 IO 中断较高。中止和设备重置会在主机上表现为 IO 中断。遇到此 IO 中断的可能性很高。</block>
-  <block id="d7c603d749620911ae33948d0d688b6a" category="inline-link-macro">14894</block>
-  <block id="50b66d8442d1a889ad9f6824fdecb53c" category="cell"><block ref="50b66d8442d1a889ad9f6824fdecb53c" category="inline-link-macro-rx"></block></block>
   <block id="b57fe8d67ce7e8b23436c6228a9844ae" category="inline-link-macro">894766</block>
   <block id="1e7db3fd2dab6919804846f952f02300" category="cell"><block ref="6960627c9953978229447a40b4f35f7e" category="inline-link-macro-rx"></block></block>
   <block id="243e8d80abd39f22538ed54c7b95b785" category="cell">OL7.0 ： dracut 无法在 UEKR3U5 alpha 上的 initramfs 中包含 scsi_dh_alua.ko 模块</block>
   <block id="2b240993e14d428bca40885f69c834d2" category="cell">即使在内核命令行中添加参数 "rdloaddriver=SCSI_DH_ALUA" 并创建了 dracut ， SCSI_DH_ALUA 模块也可能无法加载。因此，未按建议为 NetApp LUN 启用 ALUA 。</block>
-  <block id="2d6f064d4b257e01d5595f970ed714fc" category="inline-link-macro">14860</block>
-  <block id="35f00962ea0e0524efaa1d498615d7af" category="cell"><block ref="35f00962ea0e0524efaa1d498615d7af" category="inline-link-macro-rx"></block></block>
   <block id="0f52c52921eb352109559caece80f1fe" category="inline-link-macro">894796</block>
   <block id="ecc82191bb7a9a243d2283ea9c7b0216" category="cell"><block ref="e5c2727a17035b48e2347f7bebb799e2" category="inline-link-macro-rx"></block></block>
   <block id="43bce7f4fa80451d6519c90b20bc882a" category="cell">尽管在安装 OL 7.0 操作系统期间登录成功，但 Anaconda 仍会显示 iSCSI 登录失败消息</block>
   <block id="111244c57c63118901aaf37fd7dc6652" category="cell">在安装 OL 7.0 时， anaconda 安装屏幕会显示 iSCSI 登录到多个目标 IP 失败，尽管 iSCSI 登录成功。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 OL 7.0 操作系统。</block>
-  <block id="1d7466dd4217d4f000c48e9f2cdbfce9" category="inline-link-macro">14870</block>
-  <block id="89a604b2fc4306436f64848cbf18928a" category="cell"><block ref="89a604b2fc4306436f64848cbf18928a" category="inline-link-macro-rx"></block></block>
   <block id="0b49dd30562999499de068c03e8d8475" category="inline-link-macro">894771</block>
   <block id="e36fc25b14a43aecb2be9299a4d1a15f" category="cell"><block ref="2ade0e7a464a0266f27561f87bd72d36" category="inline-link-macro-rx"></block></block>
   <block id="76ac94ee86c78014de635dac93c950cb" category="cell">OL7.0 ： Anacondup 不会在内核 cmd 行中添加 bootdev 参数来设置 iSCSI SANboot OS 安装的 IP 地址</block>
   <block id="5e60ad980d93367ed750fec269220ca4" category="cell">Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 OL 7.0 操作系统期间设置 IPv4 地址。因此，您不能为任何配置为在 OL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。</block>
-  <block id="55e71b4408e917b9c7bb0df7d0b81af4" category="inline-link-macro">14871</block>
-  <block id="cc0da9d8191a444fe3bbea67cdc455b6" category="cell"><block ref="cc0da9d8191a444fe3bbea67cdc455b6" category="inline-link-macro-rx"></block></block>
   <block id="31d4b7b1b5735d1ba80e9d02816156ef" category="inline-link-macro">916501</block>
   <block id="d29e31150c6fcebfe259ef1e60f97a7a" category="cell"><block ref="aaf2fffdc60a7c2259559deac3f25e1c" category="inline-link-macro-rx"></block></block>
   <block id="f83731b7eb4660b4b25652429ded993f" category="cell">在使用 IO 执行存储故障转移操作期间观察到 QLogic 10G FCoE （ QLE8152 ）主机内核崩溃</block>
   <block id="2a5337b34ae2f42558961dd451ec2a21" category="cell">您可能会发现 10G FCoE Qlogic （ QLE8152 ）主机上的 Qlogic 驱动程序模块发生内核崩溃。在使用 IO 执行存储故障转移操作期间发生崩溃。发生此崩溃的可能性较高，从而导致主机上的 IO 中断时间较长。</block>
-  <block id="9841401331f8c5563c4b060ff5370e72" category="inline-link-macro">15019</block>
-  <block id="3c146cad71f41f0977cca30911d433b7" category="cell"><block ref="3c146cad71f41f0977cca30911d433b7" category="inline-link-macro-rx"></block></block>
   <block id="199f02bdbc224d2c63b2ecdb586ffdec" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.4</block>
   <block id="3f3aace2ffb7262d9561af1516e90d56" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="e902c52a637fd9b5e253806bf7aafa95" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="cd1096d4eecda656e5c9911606fb0c35" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 8.4 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。RHEL 8.4 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
@@ -489,19 +462,13 @@
   <block id="7c6368b45cd4a10d967aedcac959efaa" category="cell"><block ref="d55a62707aaaf29806d28ef6f3b7058c" category="inline-link-macro-rx"></block></block>
   <block id="cfc3ef228e5c554b3af78e00b3866bd7" category="cell">在存储故障期间， RHEL 6U6 主机发生内核崩溃</block>
   <block id="86bcd8bb1315a4f054fd1f555f9d899c" category="cell">在存储 / 网络结构期间，您可能会发现 RHEL 6U6 主机上发生内核崩溃。</block>
-  <block id="40956347cef6494ff3c3ef61bbcc1287" category="inline-link-macro">1158363</block>
-  <block id="306f2643a2658b159e8dd3393fb52742" category="cell"><block ref="306f2643a2658b159e8dd3393fb52742" category="inline-link-macro-rx"></block></block>
   <block id="2704e91bd5f573cbad7eba20723ba864" category="cell"><block ref="378b02b2d7a64c9eae783f8e2a49ec5e" category="inline-link-macro-rx"></block></block>
   <block id="40b50e78109d71c974de2da8c30f4afa" category="cell">在 RHEL 6U4 中发生存储故障期间， QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞时间高达 300 秒</block>
   <block id="034e508587b2a511fa0b5f33efc527be" category="cell">在存储 / 网络结构出现故障期间，您可能会发现 QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞长达 300 秒。</block>
-  <block id="a2110af557f7501c388329c163189694" category="inline-link-macro">1135962.</block>
-  <block id="e39c75b884f0fd6f578b62f243ed4a2e" category="cell"><block ref="e39c75b884f0fd6f578b62f243ed4a2e" category="inline-link-macro-rx"></block></block>
   <block id="b9f3e02ef3d9223f789bce52be09acab" category="inline-link-macro">795684</block>
   <block id="c7d76ba7e2d3e0a292f2b51c84704276" category="cell"><block ref="61a24ea643a2edb19ad6c476806b4823" category="inline-link-macro-rx"></block></block>
   <block id="43736b02ccf596e4213cc67f0c6102c5" category="cell">RHEL6 U5 multipathd 在模块和存储故障转移故障操作期间错误地对多路径映射进行分组</block>
   <block id="f549ae562768e489107707fb1bef11e9" category="cell">在 LUN 按需移动操作期间，您可能会发现 LUN 上的路径分组不正确，并出现存储故障。在 LUN 移动操作期间，由于存储故障导致设备故障，多路径的路径优先级将发生变化，并且多路径无法重新加载设备表。这会导致路径分组不正确。</block>
-  <block id="1b9fbbbdfb63c72061ee9b73d3b68300" category="inline-link-macro">1151020</block>
-  <block id="4d4d33d5567c483eb5e65c4545674190" category="cell"><block ref="4d4d33d5567c483eb5e65c4545674190" category="inline-link-macro-rx"></block></block>
   <block id="1669e5f0b1148e1054b39b7a819b7fdb" category="summary">介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用</block>
   <block id="be02c5fbd2d78a32d06d7da8385cae85" category="list-text">在 PowerVM 主机上，以 * padmin* 身份登录，然后输入 `oem_setup_env` 命令以成为 root 。</block>
   <block id="a40ecef4a09b118c1f7f8b069486d849" category="list-text">解压缩文件并提取 SAN 工具包软件包。</block>
@@ -518,20 +485,14 @@
   <block id="5bc6dd2808e58ceb12daa3fa188c92d2" category="cell"><block ref="46d58291164df69e74195823c43d724c" category="inline-link-macro-rx"></block></block>
   <block id="3f173227feb8878f022ad1b36c91e876" category="cell">在本地启动时启动多路径期间， SCSI_DH_ALUA 模块未加载</block>
   <block id="d3810cc1f6dda6df4587ddfeb62972ee" category="cell">SCSI_DH_ALUA 是一个 Linux ALUA 设备处理程序模块。在本地启动的 multipathd 启动期间，不会加载此数据。由于此原因，虽然在目标端启用了 ALUA ，但不会加载设备处理程序。</block>
-  <block id="287067aef77ff4738a7cc3c50b3339e4" category="inline-link-macro">908529</block>
-  <block id="fed658b9cfd79da37615650ca2c42093" category="cell"><block ref="fed658b9cfd79da37615650ca2c42093" category="inline-link-macro-rx"></block></block>
   <block id="79c7a9bb0aa24422c212e2b382099d0a" category="inline-link-macro">863584</block>
   <block id="4d73614eae0a505c039fae3f1ee9900d" category="cell"><block ref="3c45cc75b4c66415e3786feb781dcee8" category="inline-link-macro-rx"></block></block>
   <block id="a42499118062067bb57ae3e080112f10" category="cell">在 SLES12 上创建 DM 设备时，屏幕上会显示消息 " 发现冲突的设备节点 "/dev/mapper/360xx"</block>
   <block id="0f002f358a4edc403bdbf073453e31c0" category="cell">您可能会发现在 SLES 12 的 /dev/mapper 目录下创建指向 DM 设备的链接失败，并看到消息 "Conflicting device node '/dev/mapper/360xx" found" 。</block>
-  <block id="ff10bb6c0f40e17e1883d63e28693d0e" category="inline-link-macro">903001</block>
-  <block id="e8e776800f4382d5eb416732843fe83f" category="cell"><block ref="e8e776800f4382d5eb416732843fe83f" category="inline-link-macro-rx"></block></block>
   <block id="43f008f2dfc233acd97b155115e02d78" category="inline-link-macro">84749</block>
   <block id="442330e970ceb587a68e59d052af913a" category="cell"><block ref="4c1cf8590d2642eac66c4c5c98ac5df5" category="inline-link-macro-rx"></block></block>
   <block id="aa5d2614a5cdd3ecb6439fff78eae1c5" category="cell">多路径守护进程显示了 SLES 12 上的路径故障</block>
   <block id="f3c857b5b590c65054bfa6277dd7b8d8" category="cell">在存储或网络结构发生 I/O 故障期间，您可能会发现 SLES12 多路径守护进程上的路径故障。</block>
-  <block id="a7fa045c10beb12763eabc5c7d40c12d" category="inline-link-macro">890854</block>
-  <block id="2b269897e2264fa9a527c98486a50901" category="cell"><block ref="2b269897e2264fa9a527c98486a50901" category="inline-link-macro-rx"></block></block>
   <block id="f814c4c509cfee1aaec985d122ae9223" category="list-text">解压缩文件。</block>
   <block id="71120ace9a1b2ca11e40c0238dfc437a" category="paragraph">`gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`</block>
   <block id="aff7322c9fe28f35bf9e7856103e8654" category="list-text">输入以下命令以安装软件：</block>
@@ -569,20 +530,14 @@
   <block id="e6d42473201caaea82de0b5c2a555d7a" category="cell"><block ref="4f55b76a23d8369790b6e42bb31d2f7d" category="inline-link-macro-rx"></block></block>
   <block id="7d9311eb75abaaf8a1ae1ac3d36997a2" category="cell">在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 可能会发生内核中断</block>
   <block id="4857e16a42f8b19c60491d1697a00941" category="cell">在使用 QLogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。 QLogic QLE2672 HBA 事件的存储故障转移会影响 "kmem_cache_alloc+131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序</block>
-  <block id="320a3be8f022635b190f4a46b82defbc" category="inline-link-macro">1760819</block>
-  <block id="7957891c4d80535102988fd9cfed1dcf" category="cell"><block ref="7957891c4d80535102988fd9cfed1dcf" category="inline-link-macro-rx"></block></block>
   <block id="15ad2e1adac4ea9b6229ed1eefd94fe8" category="inline-link-macro">1275838</block>
   <block id="9c43375f927b99273a306d0aebeb2994" category="cell"><block ref="4bbb58887cd919ace315c85680b9a039" category="inline-link-macro-rx"></block></block>
   <block id="e0b97884fc83fb859795a6a777d0967f" category="cell">在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 会发生内核中断</block>
   <block id="a9da78f9446abea28b98061980144d02" category="cell">在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2742 HBA 事件的存储故障转移会影响 "kmem_cache_alloc +131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序。</block>
-  <block id="bceda67102d714db7eabc71a5613196f" category="inline-link-macro">1744082</block>
-  <block id="0ddcdd1631fc8bb76d218948403203a2" category="cell"><block ref="0ddcdd1631fc8bb76d218948403203a2" category="inline-link-macro-rx"></block></block>
   <block id="9b1553709d838b9b131df89b8a3464da" category="inline-link-macro">1266250</block>
   <block id="be2cbf983ce5aaf5cec559b7a8d44b84" category="cell"><block ref="35083bea0af3fa7f91401543bde4bbe0" category="inline-link-macro-rx"></block></block>
   <block id="9e6450c950b8558765ce9270afe312a9" category="cell">在 iSCSI SAN LUN 上安装 Red Hat Enterprise Linux 8.1 期间，登录到多个路径失败</block>
   <block id="30045ce4258ea19d1fa94bb454681b76" category="cell">在 iSCSI SAN LUN 多路径设备上安装 Red Hat Enterprise Linux 8.1 期间，无法登录到多个路径。无法在多路径 iSCSI 设备上安装，并且 SAN 启动设备上未启用多路径服务。</block>
-  <block id="0de74f329c314fdb51938166b2c287c5" category="inline-link-macro">1758504</block>
-  <block id="6787b7492d135e7e607f2ac873e53ae1" category="cell"><block ref="6787b7492d135e7e607f2ac873e53ae1" category="inline-link-macro-rx"></block></block>
   <block id="60c701fe07370fac945573158f732b05" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP4</block>
   <block id="3a754ad11b84b93f6a753f6d500e2e18" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="2ad585f32bf1ef6f5e41daa29755a76e" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="3529e81ba1cd826d75b4d7a1b09ad42b" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP4 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。</block>
@@ -604,34 +559,26 @@
   <block id="9f1d7307449f2a1971a05bc6e54a02e9" category="inline-link-macro">1202736</block>
   <block id="3b8a92ff3e01668248ad17ab6e44808a" category="cell">由于使用 QLogic QLE2742 适配器的 OL7U6 主机上的远程端口处于 " 不存在 " 状态，因此 LUN 在主机发现期间可能不可用</block>
   <block id="266caf48844d8cdb3bb559a8663357b3" category="cell">在主机发现期间，使用 QLogic QLE2742 适配器的 OL7U6 主机上的光纤通道（ Fibre Channel ， FC ）远程端口的状态可能会进入 " 不存在 " 状态。处于 " 不存在 " 状态的远程端口可能会使 LUN 的发生原因路径不可用。在存储故障转移期间，路径冗余可能会减少并导致 I/O 中断。您可以输入以下命令来检查远程端口状态： # cat /sys/class/fc_remote_ports/rport-*/port_state 以下是显示的输出示例：联机不存在联机</block>
-  <block id="f95008d294f277e432261d458fe91c76" category="inline-link-macro">16613</block>
-  <block id="b51283a454db6279c0f85ca8d39b071b" category="cell"><block ref="b51283a454db6279c0f85ca8d39b071b" category="inline-link-macro-rx"></block></block>
   <block id="5624202524c863954fd4270ff814d9ec" category="inline-link-macro">1204078</block>
   <block id="e053b68e3667628d3c9f9104950b35b4" category="cell"><block ref="779f6732159318ae884ba5b402eebb3b" category="inline-link-macro-rx"></block></block>
   <block id="110e0b5a03d1167053a9543acb43aacf" category="cell">在存储故障转移操作期间，使用 Qlogic （ QLE2672 ） 16 Gb FC HBA 运行的 Oracle Linux 7.6 会发生内核中断</block>
   <block id="c0bf7a084fa2c4a01bd1c93955f36853" category="cell">在使用 Qlogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，由于内核发生崩溃，发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
-  <block id="81853dc778186bff64ba4b47dacfe8aa" category="inline-link-macro">16606</block>
   <block id="f9de5b33d228fc7a257b05e2d0b6c683" category="inline-link-macro">1204451</block>
   <block id="3c392133be4d94a24a2bafbe80d3f9fa" category="cell"><block ref="e4f067f2a87df9a65f3b48107d7ac51a" category="inline-link-macro-rx"></block></block>
   <block id="4b97d2c9a1fc0afb4fde2570b328366a" category="cell">在存储故障转移操作期间，使用 Qlogic （ QLE2742 ） 32 Gb FC HBA 运行的 Oracle Linux 7.6 可能会发生内核中断</block>
   <block id="a41dd8fa5c4b21d6d565247a17260afc" category="cell">在使用 Qlogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，内核可能会因发生崩溃而发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
-  <block id="3f38fd6bbb9e743a2fb63f16cfbbbe8c" category="inline-link-macro">16605</block>
   <block id="d6c0c50761ad6452637a662cef9b7c83" category="inline-link-macro">1204352</block>
   <block id="49c68535f9d278fae88a21a2b48a79ef" category="cell"><block ref="2d73099ef4fd4b2be1ad69d22e7490ca" category="inline-link-macro-rx"></block></block>
   <block id="233dfa37455a25cad0ff70b82758fd04" category="cell">在存储故障转移操作期间，使用 Emulex （ LPe32002 — M2 ） 32 Gb FC HBA 运行的 Oracle Linux 7.6 可能会发生内核中断</block>
   <block id="de4751a6623d2dc19176d3eefc40a63a" category="cell">在使用 Emulex LPe32002 — M2 光纤通道（ FC ）主机总线适配器（ HBA ）的 Oracle Linux 7.6 上执行存储故障转移操作期间，内核可能会因发生崩溃而发生内核中断。内核崩溃会导致 Oracle Linux 7.6 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动任何应用程序。</block>
-  <block id="b3a5a6df0cf1dfc30882b20f8a493092" category="inline-link-macro">16607</block>
   <block id="1be16d281967c5fd1105ba268364fdff" category="inline-link-macro">11246134.</block>
   <block id="596f5900897f794536e4fd09d9e67d1b" category="cell"><block ref="b642b2365a114acdecf31316d612089a" category="inline-link-macro-rx"></block></block>
   <block id="6493a407c9bbe979a9aad945277aad29" category="cell">在存储故障转移操作期间，使用 Emulex LPe16002B-M6 16G FC HBA 运行的 Oracle Linux 7.6 和 UEK5U2 内核上的 I/O 未进度</block>
   <block id="310e18c99baea86232364acadb939a15" category="cell">在运行了 Emulex LPe16002B-M6 16G 光纤通道（ FC ）主机总线适配器（ HBA ）的 UEK5U2 内核的 Oracle Linux 7.6 上执行存储故障转移操作期间， I/O 进度可能会因报告被阻止而停止。存储故障转移操作报告从 " 联机 " 状态更改为 " 已阻止 " 状态，从而导致读取和写入操作延迟。操作成功完成后，报告将无法返回到 " 联机 " 状态，并继续保持 " 已阻止 " 状态。</block>
-  <block id="65ddc1f88e46d28edac152bdb47193e0" category="inline-link-macro">16852</block>
   <block id="7f7d7442869ba0a43e1c8a7628283fb6" category="inline-link-macro">1246327</block>
   <block id="425d6a0675c65fcbb55962fe041d3750" category="cell"><block ref="2fc4638611f41ecf99c51cb3b7693e41" category="inline-link-macro-rx"></block></block>
   <block id="803346e13fcd7415573e4bec58e22f89" category="cell">存储故障转移操作期间， QLogic QLE2672 16G 主机上的远程端口状态被阻止</block>
   <block id="b2aadc0859a33b6672ced88dfb500d44" category="cell">在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online</block>
-  <block id="775a46e8c6d09ce5548db66cc249435c" category="inline-link-macro">16853</block>
-  <block id="bd1474c0722e21037b60abd57027a5a8" category="cell"><block ref="bd1474c0722e21037b60abd57027a5a8" category="inline-link-macro-rx"></block></block>
   <block id="86d37c3499918a5cbe18b451f7900060" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.2</block>
   <block id="3b7adc7d1307fa9347f749b4d3af8dfe" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="60647916c5dfa2199413b5c9ab776d39" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="879a2e4d18651bb7cc6629fafa11ad2c" category="paragraph">Oracle Linux 7.2 支持 Unbreakable Enterprise Kernel （ Uek ） R3 和 Uek r4 。默认情况下，操作系统使用 Uek R3 内核启动。</block>
@@ -649,52 +596,34 @@
   <block id="6c17b0f0234f39da13553a38107913c1" category="cell"><block ref="95a9102507af9f3ef170e893db92aa0d" category="inline-link-macro-rx"></block></block>
   <block id="69460499fb32604ce99d2202e67c3b50" category="cell">在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃</block>
   <block id="938ae41ce3b0130f6ec39355095fef8e" category="cell">在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。</block>
-  <block id="f9124d1d4dd608a600a3766f5120e47d" category="inline-link-macro">1131393</block>
-  <block id="d5482cb5ecf45971276c5b64006e4601" category="cell"><block ref="d5482cb5ecf45971276c5b64006e4601" category="inline-link-macro-rx"></block></block>
   <block id="6405b7880498750d41c93c6ff89cff96" category="inline-link-macro">811587</block>
   <block id="d92bbc344480c1c4676dd6c7e7c9051a" category="cell"><block ref="25d4a04a283671c8f8df69363684eeb6" category="inline-link-macro-rx"></block></block>
-  <block id="0f0f2a7f79c2c3ba23fa1559babfa30e" category="inline-link-macro">1079735</block>
-  <block id="95638024faeb1b88e63544893187319a" category="cell"><block ref="95638024faeb1b88e63544893187319a" category="inline-link-macro-rx"></block></block>
   <block id="e3a4319bc10063852c504b5613965892" category="inline-link-macro">803071</block>
   <block id="18b0326d52bd20b9f07e25f01ff7a7f8" category="cell"><block ref="d76156bb15a180ce870200aaa220a25c" category="inline-link-macro-rx"></block></block>
-  <block id="25075cc65a40b38f598bf74d44085187" category="inline-link-macro">1067895</block>
-  <block id="56fb59c990e9312e128da1b0e75d0ad7" category="cell"><block ref="56fb59c990e9312e128da1b0e75d0ad7" category="inline-link-macro-rx"></block></block>
   <block id="fe10bf02cac14b527073d56ad68ea0d9" category="inline-link-macro">820163</block>
   <block id="e61b41ec03dc6a7a5c73f96233f3f803" category="cell"><block ref="911c76fb9ad4021a1f383f66b11e6a74" category="inline-link-macro-rx"></block></block>
   <block id="6b1b934c2f0a24d69275ea2e6f568b91" category="cell">在存储故障转移操作的 I/O 期间观察到 QLogic 主机挂起或路径故障</block>
   <block id="44c8ddef58e9a1a6681cc56a75963cce" category="cell">在执行存储故障转移操作的 I/O 期间，您可能会发现 QLogic 主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB&lt;0]=0x54 and Firmware dump saved to temp buffer" ，这会导致主机挂起 / 路径故障。</block>
-  <block id="ed270290a71bf02ff89a0d5ff81e0dc1" category="inline-link-macro">1090378</block>
-  <block id="25efc82113873d1cad6809f7cac40e33" category="cell"><block ref="25efc82113873d1cad6809f7cac40e33" category="inline-link-macro-rx"></block></block>
   <block id="7ced44d26ed0cab51eebd7115b20664d" category="inline-link-macro">799323</block>
   <block id="adb237a95eaa1f6584cb4481fea5bbb1" category="cell"><block ref="f10a7befc9bc4d4101abc10635a20919" category="inline-link-macro-rx"></block></block>
   <block id="28ffca95f560b372f37e92a47d022750" category="cell">在存储故障转移操作的 I/O 期间观察到 Emulex FCoE （ OCe10102-FX-D ）主机挂起或路径故障</block>
   <block id="d55d79b6330424fc43bbdce9eb47ec8b" category="cell">在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 10G FCoE 主机（ OCe10102-FX-D ）上出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "DRIVER's buffer pool is empty ， IO useded and SCSI Layer I/O Abort Request Status" （驱动程序的缓冲池为空， IO 繁忙和 SCSI 层 I/O 中止请求状态）消息，这些消息会导致主机挂起 / 路径故障。</block>
-  <block id="e58aede2c9be7f325d55bb4c4ccd5e3f" category="inline-link-macro">1061755</block>
-  <block id="d3a6abf57d967be1b2ca961c01c4f93b" category="cell"><block ref="d3a6abf57d967be1b2ca961c01c4f93b" category="inline-link-macro-rx"></block></block>
   <block id="d696987992555daac44e6e0221ca5aa8" category="inline-link-macro">849212</block>
   <block id="333d134a2f4244baf148d678579abef9" category="cell"><block ref="4c874aa4796d22540097a0906a154f2c" category="inline-link-macro-rx"></block></block>
   <block id="f4d030c17534e71245b7ad007df27f45" category="cell">在存储故障转移操作的 I/O 期间，观察到 Emulex 16G FC （ LPe16002B-M6 ）主机挂起或路径故障</block>
   <block id="4ca1bd1052174da8e9aa737bbb1b32fd" category="cell">在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 16G FC （ LPe16002B-M6 ）主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "RSCN 超时数据和 iotag x1301 超出范围：最大 iotag" 消息，这些消息会导致主机挂起 / 路径故障。</block>
-  <block id="9d68fa54bf7ad8cdef855ce856a5dfde" category="inline-link-macro">1109274</block>
-  <block id="a3477c48ec4cc3717a8bc1e138229f37" category="cell"><block ref="a3477c48ec4cc3717a8bc1e138229f37" category="inline-link-macro-rx"></block></block>
   <block id="4ef8ad7e74bdf446d5db36da2dd1b24a" category="inline-link-macro">836800</block>
   <block id="3d23d6bf2cafcca60ba9774578396d12" category="cell"><block ref="5adc4cadb3537d660246eb69c4800937" category="inline-link-macro-rx"></block></block>
   <block id="56c232b9fb8984a71220d9c5a78fea18" category="cell">尽管在安装 RHEL 7.0 操作系统期间登录成功，但 Anacondation 仍会显示 iSCSI 登录失败消息</block>
   <block id="99e7a8ab2ec7111edb9e26a71a6c0a86" category="cell">在 iSCSI 多路径 LUN 上安装 root （ / ）时，以太网接口的 IP 地址会在内核命令行中指定，以便在 iSCSI 服务启动之前分配 IP 地址。但是，在 iSCSI 服务启动之前， dracut 无法在启动期间为所有以太网端口分配 IP 地址。这会导致 iSCSI 登录在没有 IP 地址的接口上失败。您将看到 iSCSI 服务多次尝试登录，这将导致操作系统启动时间出现发生原因延迟。</block>
-  <block id="82c537bd6ca0ad5de09f0dbfec40d4c6" category="inline-link-macro">11149696</block>
-  <block id="1a62cde3612df1efca4d12fd4a32f94c" category="cell"><block ref="1a62cde3612df1efca4d12fd4a32f94c" category="inline-link-macro-rx"></block></block>
   <block id="a8c077074773359e7cd193725f41a860" category="inline-link-macro">836875</block>
   <block id="5f2c9318592eaf6ee83d6c6bb5a5d002" category="cell"><block ref="83d2e393f0ac9d3a1c3786fb315d90c6" category="inline-link-macro-rx"></block></block>
   <block id="d44e6fb07493c929aa84d152539e0412" category="cell">在启动 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统期间，并不总是分配 IP 地址</block>
   <block id="8b5e0ba2f3aea90174a30a7c43bebcee" category="cell">安装 RHEL 7.0 时， anacondation 安装屏幕会显示 iSCSI 登录成功后，对多个目标 IP 的 iSCSI 登录失败。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 RHEL 7.0 操作系统。</block>
-  <block id="dbea348e345c9dc3ff3f4f607ac1f83a" category="inline-link-macro">1114820</block>
-  <block id="d8bfb33ec6a7d7df212d1ce5855ecf68" category="cell"><block ref="d8bfb33ec6a7d7df212d1ce5855ecf68" category="inline-link-macro-rx"></block></block>
   <block id="ecf13e437df4cb2ff5ec5edeeab0adbe" category="inline-link-macro">836657</block>
   <block id="8f1e30f29d9588ad4042431720826957" category="cell"><block ref="041c2851ebb0c7c2f188babcdefb8252" category="inline-link-macro-rx"></block></block>
   <block id="d8eb8fe260fdcd93af7707dd8bac33ee" category="cell">Anaconda/kernel cmd 行中不会添加 bootdev 参数来为 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统设置 IP 地址</block>
   <block id="6ad39c26575ec2ca15832d288d5cb802" category="cell">Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 RHEL 7.0 操作系统期间设置 IPv4 地址。这样可以防止向任何配置为在 RHEL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。</block>
-  <block id="eb3bcbb68e079ea47da67205a19dc8fc" category="inline-link-macro">1114464</block>
-  <block id="fee00e9426ca326e086b5ed3ca226599" category="cell"><block ref="fee00e9426ca326e086b5ed3ca226599" category="inline-link-macro-rx"></block></block>
   <block id="6b41fb8eea99b0d8d062e30f5b71d616" category="summary">适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置</block>
   <block id="20a78b272b5f3dce057f1a808d44d00c" category="paragraph">对于 Windows Server 2019 ， ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="959ca5b147c021ab1f2cf1f45d4db6bb" category="paragraph">请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。</block>
@@ -754,8 +683,6 @@
   <block id="70362c286bd10cfb0e918378e9aa3a94" category="cell"><block ref="af9a1c0589f6efd607b09bbc5f492e3f" category="inline-link-macro-rx"></block></block>
   <block id="b47148f0acf3e7b3db202890d4c8c0c4" category="cell">在存储故障转移操作期间，使用 Emulex LPe12002 8 Gb FC 的 SLES15SP1 上的远程端口传输到阻止状态。</block>
   <block id="15427ef3cacf89471c2525932d2937ee" category="cell">在存储故障转移操作期间，使用 Emulex LPe12002 8 Gb 光纤通道（ FC ）的 SLES15SP1 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。 有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。 此状态可能会导致多路径层的 LUN 路径出现 " 故障 " ，并导致这些 LUN 的 I/O 中断。您可以根据以下示例命令检查 remoteport 的详细信息： -- cat /sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/port_name cat/sys/class/fc_host/host*/device/rport*/fc_remote_ports/rport*/rport_state</block>
-  <block id="12e2cfab649729e3b20b64d80b423083" category="inline-link-macro">1139137</block>
-  <block id="c97f8d4c7b18c5daac79ce8d70751e54" category="cell"><block ref="c97f8d4c7b18c5daac79ce8d70751e54" category="inline-link-macro-rx"></block></block>
   <block id="53cded606153345462c89bc6a568b1dc" category="summary">提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置设置的指导</block>
   <block id="31296a34c84ac7a114e2a64e59cc9d34" category="paragraph">在下图中， `sanlun show` 命令将返回 LUN 信息。</block>
   <block id="9bdb0807ef78c7192456335c7ef96e18" category="paragraph">请参见 Veritas 支持门户（产品表，平台查找， HCL 表）以验证 SAN 启动配置可支持性和已知注意事项。</block>
@@ -810,20 +737,14 @@
   <block id="228d243156f27b227dbffd03f56f02b7" category="cell"><block ref="cf56f7936c19e5af5e4aa99ffc3fc54e" category="inline-link-macro-rx"></block></block>
   <block id="cb5cb6cd9eae3b558f871729ba82fea1" category="cell">存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL8 上的内核中断</block>
   <block id="12d1cd1c5d1740dd79dab4f739fc3096" category="cell">在使用 QLogic QLE2672 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 8 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致操作系统重新启动。重新启动会导致应用程序中断，如果配置了 kdump ，则会在 /var/crash/directory 下生成 vmcore 文件。使用 vmcore 文件确定故障的发生原因。在这种情况下，中断发生在 "kmem_cache_alloc +160" 模块中。它会使用以下字符串记录在 vmcore 文件中： "[ 异常 RIP ： kmem_cache_alloc+160]" 。重新启动主机操作系统以恢复操作系统，然后重新启动应用程序。</block>
-  <block id="a0da65f7308e21b74d8171397d6dc538" category="inline-link-macro">1710009</block>
-  <block id="2fcd0ae372e33e9ba53dc43d09e26597" category="cell"><block ref="2fcd0ae372e33e9ba53dc43d09e26597" category="inline-link-macro-rx"></block></block>
   <block id="8b3506ef6df97bfa8dfebb3f5c5ec1a3" category="inline-link-macro">1226783</block>
   <block id="58b38bde85e210194d53764fe475769d" category="cell"><block ref="47e35d77a30ef1b3537191c93f23095d" category="inline-link-macro-rx"></block></block>
   <block id="425d344578afde4c716376f753b30240" category="cell">如果在所有光纤通道（ FC ）主机总线适配器（ HBA ）上映射了 204 个以上的 SCSI 设备，则 RHEL8 操作系统将启动至 " 紧急模式 "</block>
   <block id="3a28bca720f3da85de6d53a25e114da5" category="cell">如果在操作系统重新启动过程中将主机映射到 204 个以上的 SCSI 设备， RHEL8 操作系统将无法启动到 " 正常模式 " 并进入 " 紧急模式 " 。这会导致大多数主机服务变得不可用。</block>
-  <block id="f66eee4da00a20e82b3b619c4a880da7" category="inline-link-macro">1690356</block>
-  <block id="78190beed3e4bea9c462fcff81d8bb98" category="cell"><block ref="78190beed3e4bea9c462fcff81d8bb98" category="inline-link-macro-rx"></block></block>
   <block id="d7a4f35655789400261de0f84c7b9a60" category="inline-link-macro">1230882</block>
   <block id="d3219e821d1d59c1b779a247e33ff85a" category="cell"><block ref="c69520e650bfdbdedc426594f88a3b75" category="inline-link-macro-rx"></block></block>
   <block id="911fc6d267b57fb6abed088e72864c9f" category="cell">在 RHEL8 安装期间，无法在 iSCSI 多路径设备上创建分区。</block>
   <block id="e1f37db2e0922aa7641c6a4832f2c0ab" category="cell">在 RHEL 8 安装期间，磁盘选择中未列出 iSCSI SAN LUN 多路径设备。因此， SAN 启动设备上未启用多路径服务。</block>
-  <block id="d91b1cebbe656a64c45236f96fe182fe" category="inline-link-macro">1709995</block>
-  <block id="0e6ca90cc43355495838f67a38a60e0f" category="cell"><block ref="0e6ca90cc43355495838f67a38a60e0f" category="inline-link-macro-rx"></block></block>
   <block id="90d1c9c74bbddec0167854bf74485c3d" category="inline-link-macro">12359998</block>
   <block id="280334e73b95ef1b616f10df6df3c8dd" category="cell"><block ref="a353ae97c4b569e1b5ed86fe9487a1e5" category="inline-link-macro-rx"></block></block>
   <block id="dd893bec301bd3aec1f0e5caf954f120" category="cell">rescan-scsi-bus.sh -a 命令扫描的设备不超过 328 个</block>
@@ -832,14 +753,10 @@
   <block id="787672779364bdb3b18ca4d26532a47a" category="cell"><block ref="621e20fe8c17a1f479bcb226e8e134d7" category="inline-link-macro-rx"></block></block>
   <block id="a20fc7e8875e389d921849189f100d1b" category="cell">在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb FC 的 RHEL8 上的远程端口传输到阻止状态</block>
   <block id="a533106d1920fdeb35d758f3abbd2dea" category="cell">在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 "</block>
-  <block id="58f38d39e8fd3c02f8ee1783f7386b03" category="inline-link-macro">1702005</block>
-  <block id="4423e53b1d3613c850f71c4fa550fb0e" category="cell"><block ref="4423e53b1d3613c850f71c4fa550fb0e" category="inline-link-macro-rx"></block></block>
   <block id="aacb68c96c69417b59cbda0ddb1b5f71" category="inline-link-macro">1231098</block>
   <block id="128e6e11e880ba8678f174b92f4abec5" category="cell"><block ref="8cec4913fe5b07185f0c16a8a3e0f3c5" category="inline-link-macro-rx"></block></block>
   <block id="bf5a222f8e3d9f399a1266b069eb4993" category="cell">在存储故障转移操作期间，使用 Emulex LPe32002 32 Gb FC 的 RHEL8 上的远程端口传输到 Blocked 状态</block>
   <block id="d68e531e9b1b70b7033496b5b71eda91" category="cell">在存储故障转移操作期间，使用 Emulex LPe32002 32 GB 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。</block>
-  <block id="b8c14c907614e89be80685d370b26007" category="inline-link-macro">1705573</block>
-  <block id="cb013a5d5deecc5ad6cf63bd5936d222" category="cell"><block ref="cb013a5d5deecc5ad6cf63bd5936d222" category="inline-link-macro-rx"></block></block>
   <block id="a4ce0de71d1077f7479ab2d2dd2983aa" category="summary">适用于采用 ONTAP 的 Windows Server 2012 R2 的 NVMe/FC 主机配置</block>
   <block id="a20db5f8d609188514b6dc14c4022e68" category="paragraph">适用于 Windows Server 2012 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="fefc4c656e279365e6f2d544c146d1c6" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP2</block>
@@ -850,8 +767,6 @@
   <block id="939827454c3bb8453033ba1bd60c555e" category="cell"><block ref="c8bdc7961e7fb79cc7e51cf734b247fb" category="inline-link-macro-rx"></block></block>
   <block id="7978eecd5f9889df6029ba6c41b90611" category="cell">完成 SLES15SP2 操作系统安装后，从 SAN 启动 iSCSI 无法使用静态 IP 配置启动</block>
   <block id="bf7deb12251c3036dfa3c51f45c1b2c1" category="paragraph">使用静态 IP 配置完成 SLES 15 SP2 操作系统安装后， iSCSI 已通过 sanboot 的 LUN 无法启动。每次使用静态 IP 配置时都会发生启动失败。这会导致服务器拒绝继续启动过程，并显示以下错误消息：</block>
-  <block id="db6f4e9686b1013e422f8ddc81760274" category="inline-link-macro">1167494</block>
-  <block id="ff657e83469666666bbb5251199b464a" category="cell"><block ref="ff657e83469666666bbb5251199b464a" category="inline-link-macro-rx"></block></block>
   <block id="f4bba4cff96aef30f859bc5d933b86d1" category="summary">介绍如何将 CentOS 7.7 与 ONTAP 结合使用</block>
   <block id="ff16e637ac4104828e13ea103025c195" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="78e9fc355bd36c3a43e4700024680370" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="85c1cd097e2b89074f8df27d3f429558" category="paragraph">对于 CentOS 7.7 ，必须存在 /etc/multipath.conf 文件，但不需要对该文件进行特定更改。CentOS 7.7 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
@@ -867,26 +782,18 @@
   <block id="1295ae9315edfd5b220cf2daf1aa17e6" category="cell"><block ref="007697ca9026c19e168d3fdf666001ca" category="inline-link-macro-rx"></block></block>
   <block id="9dc352394728d1be345a1e8fa64a71ad" category="cell">在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL7.5 发生内核中断</block>
   <block id="c72893cf0f959738c7d9d4448ab69c9c" category="cell">在使用 QLogic QLE2672 16 Gb 光纤通道主机总线适配器对 RHEL7U5 内核执行存储故障转移操作期间，内核发生崩溃。内核崩溃导致 RHEL 7.5 重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/directory 下生成 vmcore 文件。vmcore 文件用于了解故障的发生原因。在这种情况下，在 vmcore 文件中使用以下字符串记录的 "get_next_timer_interruption+440" 模块中观察到崩溃： " 【异常 RIP ： get_next_timer_interruption+440] 】发生内核中断后，您可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。</block>
-  <block id="f2f31533672fd04a5aafc604a4b46f42" category="inline-link-macro">1542564</block>
-  <block id="9ac48cf5a6fc64842f3d1b4957db9169" category="cell"><block ref="9ac48cf5a6fc64842f3d1b4957db9169" category="inline-link-macro-rx"></block></block>
   <block id="a091672e9523f13695b5ce236a025cfa" category="inline-link-macro">1138536</block>
   <block id="a596200cfc306d0de00f26be2a8f777c" category="cell"><block ref="c6f70118bf7bd1ac73b4c76b9feb75ea" category="inline-link-macro-rx"></block></block>
   <block id="f7fff0e4d49653725b3503ea6599c461" category="cell">在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC 的 RHEL7U5 发生内核中断</block>
   <block id="b531bab4f04d588f25830af15dd9732f" category="cell">在使用 QLogic QLE2742 HBA 的 Red Hat Enterprise Linux （ RHEL ） RHEL7U5 内核上执行存储故障转移操作期间，由于内核发生崩溃，导致内核中断。内核崩溃会导致操作系统重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/ 目录下生成 vmcore 文件。当内核崩溃时，您可以使用 vmcore 文件调查失败的原因。以下示例显示了 bget_next_timer_interruption+440b 模块中发生崩溃。崩溃记录在 vmcore 文件中，并包含以下字符串： " [Exception RIP ： get_next_timer_interruption+440" 您可以根据需要重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
-  <block id="cfa977023e7c458724e283999af8563d" category="inline-link-macro">1541972.</block>
-  <block id="4b0f2703df00ede958f5a03556f1334b" category="cell"><block ref="4b0f2703df00ede958f5a03556f1334b" category="inline-link-macro-rx"></block></block>
   <block id="692dec64260aae5d0dd37a2adee5ade4" category="inline-link-macro">1148090</block>
   <block id="1bf7bac4b210e706865d12510d6cd9cc" category="cell"><block ref="7f5fbed4010b651f3d0035e9e60eec99" category="inline-link-macro-rx"></block></block>
   <block id="2889b5c407bd32dd8473d8f2ea939832" category="cell">在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 RHEL 7.5 发生内核中断</block>
   <block id="e780d267955ef9d13c386e99e3e69711" category="cell">在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 7.5 内核上执行存储故障转移操作期间，由于内核发生崩溃，发生内核中断。内核崩溃导致 RHEL 7.5 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核崩溃将生成位于 /var/crash/ 目录中的 vmcore 文件。您可以分析 vmcore 文件以确定崩溃的发生原因。在这种情况下，发生 QLogic QLE2742 HBA 事件的存储故障转移时， "native_queued_spin_lock_slowpath+464" 模块将受到影响。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： native_queued_spin_lock_slowpath+464]" 内核中断后，您可以重新启动主机操作系统并恢复操作系统，然后根据需要重新启动应用程序。</block>
-  <block id="fd404e036f03a645eb47146f542e3560" category="inline-link-macro">1559050</block>
-  <block id="f2b75d249be3b2d6ef9ee986f70a4904" category="cell"><block ref="f2b75d249be3b2d6ef9ee986f70a4904" category="inline-link-macro-rx"></block></block>
   <block id="ca04edb5871b22fb77d8fe405800b5aa" category="inline-link-macro">1146898</block>
   <block id="682e4a71760a5129450fd59e2e95f3c4" category="cell"><block ref="220f7a19228a0baba7045dc91e92095a" category="inline-link-macro-rx"></block></block>
   <block id="49aace017ee0842a9697ff4e8796b414" category="cell">在存储故障转移操作期间，使用 Emulex HBA 的 RHEL 7.5 会发生内核中断</block>
   <block id="cd254c710e508f1521cd808f014d9514" category="cell">在使用 Emulex LPe32002 M2 32 Gb FC 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 7.5 系统上执行存储故障转移操作期间，内核发生中断。内核中断会导致操作系统重新启动，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成 vmcore 文件。您可以使用 vmcore 文件确定故障的发生原因。在以下示例中，您可以在 "lpfc_HBA_clean-txcmplq+368" 模块中看到中断。此中断会记录在包含以下字符串的 vmcore 文件中： " [Exception RIP ： lpfc_HBA_clean-txcmplq+368]" 内核中断后，重新启动主机操作系统以恢复操作系统。根据需要重新启动应用程序。</block>
-  <block id="60d9cbffde4942666204f880d528d99d" category="inline-link-macro">1554777</block>
-  <block id="57e599b93e06cf9786582520ac0bc21d" category="cell"><block ref="57e599b93e06cf9786582520ac0bc21d" category="inline-link-macro-rx"></block></block>
   <block id="df638353a182a7918b8592fc949dcf8c" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.4</block>
   <block id="6d9367bff959eeca53afc4e48b616f9e" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.4 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.4 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="f5bd1c87a82329c908a6a69f3a08446a" category="paragraph">RHEL 7.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -918,8 +825,6 @@
   <block id="1e45eb414e878e896ff6c8568d44aaed" category="cell"><block ref="409bdf20edf896ce4497acd46087929e" category="inline-link-macro-rx"></block></block>
   <block id="4ccdcef8fc98cb6452f9ba7aa1df1c0c" category="cell">重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式</block>
   <block id="c6bc802c921069bf472f1e8359672c59" category="cell">重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式。维护模式将变为单用户模式，并显示以下消息： `为维护提供 root 密码（或按 Control-D 继续）`</block>
-  <block id="62dd7fb15e47b2ae7ac0c8828a09368e" category="inline-link-macro">1104173</block>
-  <block id="fe5f3cc9f696069f06b3705195c48a2c" category="cell"><block ref="fe5f3cc9f696069f06b3705195c48a2c" category="inline-link-macro-rx"></block></block>
   <block id="bea05db7b205cebd49d85c581b86c97e" category="summary">提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导</block>
   <block id="5116d27ab3c67a2413a9afe024b82a38" category="summary">如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机</block>
   <block id="23cd3fb20334805933445d4e9e38f375" category="list-text">在服务器上安装 Red Hat Enterprise Linux 8.3 GA 。</block>
@@ -935,31 +840,22 @@
   <block id="243da89cf867b347c2cdf3a124dd79b3" category="cell"><block ref="7ebb9447894bd2a8ae903079bdb0ba32" category="inline-link-macro-rx"></block></block>
   <block id="35ff8a31e7e43ab2149f0953acd85e95" category="cell">在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起</block>
   <block id="5fb0af32d419d1ce3bf31b76b50c3d02" category="cell">在存储故障转移操作期间，在 RHEL 6.5 8G Qlogic FC SAN 主机中观察到路径故障或主机挂起。</block>
-  <block id="67305ea16a6e2e1c78449c88064683b4" category="inline-link-macro">1033136</block>
-  <block id="dbdfdf859991c66ee50d1334ac653dfd" category="cell"><block ref="dbdfdf859991c66ee50d1334ac653dfd" category="inline-link-macro-rx"></block></block>
   <block id="28701edb25458185d37b2540356e6277" category="inline-link-macro">758271</block>
   <block id="50cd670c75298aa10c9b84b4b7994363" category="cell"><block ref="b3048e7a899eced67978d5ffa9d56597" category="inline-link-macro-rx"></block></block>
   <block id="89c1277823b0a1248fc95de91b1ea803" category="cell">使用自定义 initrd 启动时无法加载 bnx2 固件（ dracut -f ）</block>
   <block id="8c8f585604e1606fc35bdcace1522cf7" category="cell">Broadcom NetXtreme II 千兆控制器端口无法 ping ，因为在使用自定义 initrd 启动期间无法加载 bnx2 固件。</block>
-  <block id="30b018ea972b48ea57b46bbcdce7884d" category="inline-link-macro">1007463.</block>
-  <block id="890ba67b16f690b59b143048151ee638" category="cell"><block ref="890ba67b16f690b59b143048151ee638" category="inline-link-macro-rx"></block></block>
   <block id="16840b9e6effbc5ab69dd8881a6ccfab" category="inline-link-macro">799394.</block>
   <block id="654eadcb200b9ffa725b02fdd8afc0a5" category="cell"><block ref="e2a85abec4200c0008487aa3cd10ccd6" category="inline-link-macro-rx"></block></block>
   <block id="8923d2902e44fe7f3f8794dea2c1ed47" category="cell">RHEL 6U5 ：在执行存储故障转移操作的 I/O 期间，会出现 Emulex 16G FC （ LPe16002B-M6 ）主机崩溃</block>
   <block id="89bd24c458ce5bb4aef9ad351b120d0a" category="cell">在执行存储故障转移操作的 I/O 期间，出现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。</block>
-  <block id="fdea35086b1cb85703eec6e735c8660c" category="inline-link-macro">1063699</block>
-  <block id="e916b41452a9d7ecb1eef401dbf60942" category="cell"><block ref="e916b41452a9d7ecb1eef401dbf60942" category="inline-link-macro-rx"></block></block>
   <block id="9ff744f86f7d5b8f9aa97a474d022d3d" category="inline-link-macro">786571</block>
   <block id="cca285e74c2f9677ba98375d8baef66b" category="cell"><block ref="1f0bad4c5ece7b0a35dcbf01ee955754" category="inline-link-macro-rx"></block></block>
   <block id="281ed23f425fc37d1a62ffd7bce04ae9" category="cell">在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE 主机挂起 / 路径故障</block>
   <block id="205f0b8a90fa3a29cfd7137d063a9ef6" category="cell">在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic FCoE （ QLE8242 ）主机挂起 / 路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB[0]=0x54 。计划 ISP 中止 " 消息，此消息会导致主机挂起 / 路径故障。</block>
-  <block id="b25d016ccd715526c7cee690c3e5367b" category="inline-link-macro">1068619</block>
-  <block id="cf515b87cdcb91333eba576e0110d793" category="cell"><block ref="cf515b87cdcb91333eba576e0110d793" category="inline-link-macro-rx"></block></block>
   <block id="ac143edc551ca0f939bb8e4b680e5ba4" category="inline-link-macro">801580</block>
   <block id="963f318de0bb50b8c58b27664dff7bd9" category="cell"><block ref="bebaa8c57093221d69ca3e75cf045786" category="inline-link-macro-rx"></block></block>
   <block id="46b5e459ba83be6f3933222f42a4caac" category="cell">在存储故障转移操作的 I/O 期间，在 RHEL 6.5 中观察到 QLogic 16G FC 主机挂起或路径故障</block>
   <block id="a62e4298a14b3b2b0eed1e03a1901a18" category="cell">在存储故障转移操作期间， QLogic 16G FC 主机（ QLE2672 ）会出现 600 秒以上的 I/O 延迟。在这种情况下，将显示以下消息： "Failed mbx[0]=54 ， MB1]=0 ， MB2]=76b9 ， MB3]=5200 ， cmd=54 "</block>
-  <block id="b6e351fa03836020bf63aed76e03399a" category="inline-link-macro">1068622</block>
   <block id="480c1af29fcb3cc17dbe8a841a6a3c06" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.2</block>
   <block id="6cb3a6c6bbd7cf8c1ab700ad4342bed1" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 <block ref="5791c19afbac364267fc3567cae2ba34" category="inline-link-macro-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="6d0ef457a6d83b808baa2444f1d454db" category="paragraph">对于 CentOS 8.2 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 8.2 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
@@ -1104,19 +1000,14 @@
   <block id="a30ebc25935788a02b62f5c31dd68ff4" category="cell"><block ref="267c5dd990c8ab56721888f5900e0ee0" category="inline-link-macro-rx"></block></block>
   <block id="7256202799e1cc52fa1bfe78899975cf" category="cell">在使用 Qlogic QLE2672 （ 16G ）进行存储故障转移期间，由于读 / 写操作无法通过二级路径切换而观察到 IO 延迟</block>
   <block id="1a0e4d0026b3ac15a923132544984581" category="cell">在使用 QLogic QLE2672 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。</block>
-  <block id="ffb04b3fde58882155c0f560b7e20bea" category="inline-link-macro">17171</block>
-  <block id="1d8ffbb8f805e591f142144f8c828381" category="cell"><block ref="1d8ffbb8f805e591f142144f8c828381" category="inline-link-macro-rx"></block></block>
   <block id="f32d9fbfd3260ad4f93224817ee55b7b" category="inline-link-macro">1311576</block>
   <block id="8f82eaddc5433072fa47bef87ad2bbbb" category="cell"><block ref="cccef1478e8fcadf27979573716d7b1c" category="inline-link-macro-rx"></block></block>
   <block id="1d12a6f973bbe0e6a8487112455bc428" category="cell">使用 Emulex LPe16002 （ 16G ）进行存储故障转移期间，由于读 / 写操作无法通过二级路径切换，导致观察到 IO 延迟</block>
   <block id="11530752ab9f40fa1149a3d6f8ba9999" category="cell">在使用 Emulex LPe16002 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。</block>
-  <block id="51c9d0385c088de752dfb41cfa835a37" category="inline-link-macro">17172</block>
-  <block id="a0a8c4c9ec05cb6c3e8cb95dcee81f2b" category="cell"><block ref="a0a8c4c9ec05cb6c3e8cb95dcee81f2b" category="inline-link-macro-rx"></block></block>
   <block id="4e486911a10e3fffaba70e13f82fd319" category="inline-link-macro">1246134.</block>
   <block id="f1ed8010b222ca665b73581bc564dfbb" category="cell"><block ref="9f94588b71f175c6fb8a48dc1c897075" category="inline-link-macro-rx"></block></block>
   <block id="116824fa5f36407773b9af1e47763391" category="cell">使用 Emulex LPe16002 （ 16G ）执行存储故障转移期间观察到的 IO 延迟以及报告移至 " 已阻止 " ， " 不存在 " 状态</block>
   <block id="d1e8c721d32f2d555893470672bb537f" category="cell">在运行了 Emulex LPe16002B-M6 16G 光纤通道（ FC ）主机总线适配器（ HBA ）的 UEK5U2 内核的 Oracle Linux 7.6 上执行存储故障转移操作期间， I/O 进度可能会因报告被阻止而停止。存储故障转移操作报告从 " 联机 " 状态更改为 " 已阻止 " 状态，从而导致读取和写入操作延迟。成功完成此操作后，报告将无法返回到 " 联机 " 状态并继续保持 " 已阻止 " 状态。</block>
-  <block id="cb9494e0d3d982ccefb8f386e222951e" category="cell"><block ref="cb9494e0d3d982ccefb8f386e222951e" category="inline-link-macro-rx"></block></block>
   <block id="af4bdc6f0612ae419e8be2df4a6dc1f8" category="cell">在 Qlogic QLE2672 （ 16G ）和 QLE2742 （ 32G ）的存储故障转移期间观察到 IO 延迟，并且 Rport 正在移至 " 已阻止 " ， " 不存在 " 状态</block>
   <block id="501bcccc8f9d47ad0f5a58eda68930e0" category="cell">在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online</block>
   <block id="af542c850dcba761107186a0c4f1cd8f" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.2</block>
@@ -1147,14 +1038,10 @@
   <block id="3b6b215a71077b84727e3c7236fe2162" category="cell"><block ref="8cbdd34ea1179295cbf8f3baf8a265b7" category="inline-link-macro-rx"></block></block>
   <block id="f0bf2f8e80766c6042932e1f36ea6c1e" category="cell">在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb FC 的 RHEL7U7 上的远程端口传输到阻止状态</block>
   <block id="a41cff6600524079541f57663691afd7" category="cell">在存储故障转移操作期间，使用 LPe16002 16 Gb FC 适配器的 RHEL 7.7 主机上的远程端口可能会传输到 " 已阻止 " 状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。</block>
-  <block id="a84775ec487f382651d8d05a569e9c2f" category="inline-link-macro">1743667</block>
-  <block id="912104487af45a6f12a4fe6c56eef21b" category="cell"><block ref="912104487af45a6f12a4fe6c56eef21b" category="inline-link-macro-rx"></block></block>
   <block id="655dd2c13c5d63b0a2fc94b680533b22" category="inline-link-macro">1261474</block>
   <block id="208f21e7140ce8dbee86e2ae4acc5c66" category="cell"><block ref="0d668094fd68805b827c56bb7f3873cf" category="inline-link-macro-rx"></block></block>
   <block id="24d7acc632c5ded196817c3cfb589a5a" category="cell">在采用 Emulex LPe32002 32 Gb FC 的 RHEL7U7 上，远程端口传输到 Blocked 状态</block>
   <block id="6074aae24d017a1d81afefcd4fd284f3" category="cell">在存储故障转移操作期间，使用 LPe32002 32 Gb FC 适配器的 RHEL 7.7 主机上的远程端口可能会传输到 " 已阻止 " 状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。</block>
-  <block id="4f400899c26f61785cbe1bcc46b125af" category="inline-link-macro">1745995</block>
-  <block id="acfc18ebe6da7c469ae8e3abf7ca0509" category="cell"><block ref="acfc18ebe6da7c469ae8e3abf7ca0509" category="inline-link-macro-rx"></block></block>
   <block id="3bb3263aa16bbeb228b8ecd7584a8064" category="summary">介绍如何在 ONTAP 中使用 CentOS 7.3</block>
   <block id="ef96b3a7a075d8418a575b9d3ec01e49" category="paragraph">对于 CentOS 7.3 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 7.3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="04dff1447143c8e4e6195f792be9979e" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.8</block>
@@ -1177,32 +1064,22 @@
   <block id="faa333743d9719ffabaef492f9d3addf" category="inline-link-macro">1089555</block>
   <block id="0474958a1d6d3dac5a2d4f89aa906f00" category="cell">在存储故障转移操作期间，在采用 Emulex LPe16002 16 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断</block>
   <block id="e473d01bdff0fd380180c07445efe5f1" category="cell">在对采用 Emulex LPe16002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_ringtxcml_pt_5e" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_ringtxcmpl_pt_51 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
-  <block id="2355ee326a65b78534c760ffc28282b3" category="inline-link-macro">1042847</block>
-  <block id="850382cb7f00d2b91edbc13c8c882810" category="cell"><block ref="850382cb7f00d2b91edbc13c8c882810" category="inline-link-macro-rx"></block></block>
   <block id="a589b9691d471fdbcfcbed00289ff95f" category="inline-link-macro">1089561</block>
   <block id="52b22b314256e76d5ce7c9f4b449e75e" category="cell"><block ref="c46197206f006ddca20b9528971eb8a2" category="inline-link-macro-rx"></block></block>
   <block id="50468e9e489c6f64df69a9b2050b5c03" category="cell">在存储故障转移操作期间，在采用 Emulex LPe32002 32 Gb FC 的内核版本 SLES12 SP3 上观察到内核中断</block>
   <block id="35bd2083d35550687ccc83eda9de58bd" category="cell">在对采用 Emulex LPe32002 HBA 的内核版本 SLES12 SP3 执行存储故障转移操作期间，可能会发生内核中断。内核中断会提示重新启动操作系统，进而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/directory 下生成一个 vmcore 文件。您可以在 vmcore 文件中调查故障的发生原因。示例：在观察到的情况下，在模块 "lpfc_SLI_free_hbq+76" 中观察到内核中断，并记录在 vmcore 文件中—异常 RIP ： lpfc_SLI_free_hbq+76 。在内核中断后，通过重新启动主机操作系统并重新启动应用程序来恢复操作系统。</block>
-  <block id="1912eaed604c90b16a85c2a426ee4ad4" category="inline-link-macro">1042807</block>
-  <block id="818e47fa424ee37f87bd46f1a63166e4" category="cell"><block ref="818e47fa424ee37f87bd46f1a63166e4" category="inline-link-macro-rx"></block></block>
   <block id="87cb91fa2b27bd295cf6cb3ab5625b5a" category="inline-link-macro">1117248</block>
   <block id="8e44470268c498635871633867199cf8" category="cell"><block ref="2bc8591437ea8a0ab5e4a9dc7b8cf226" category="inline-link-macro-rx"></block></block>
   <block id="8657c4ef49cd9bde003a33d3c79613d9" category="cell">在存储故障转移操作期间，在使用 QLogic QLE2562 8 Gb FC 的 SLES12SP3 上观察到内核中断</block>
   <block id="069104042a617bd6267aa1b9aa15c171" category="cell">在使用 QLogic QLE2562 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，由于内核发生崩溃，观察到内核中断。内核崩溃会导致操作系统重新启动，从而导致应用程序中断。如果配置了 kdump ，内核崩溃将在 /var/crash/ 目录下生成 vmcore 文件。发生内核崩溃时，可以使用 vmcore 文件来了解故障的发生原因。示例：在这种情况下，在 "blk_final_request+289" 模块中观察到崩溃。它会使用以下字符串记录在 vmcore 文件中： "Exception RIP ： blk_final_request+289" 内核中断后，您可以通过重新启动主机操作系统来恢复操作系统。您可以根据需要重新启动应用程序。</block>
-  <block id="1eb70e87ba465cef65333e568c9f2ba8" category="inline-link-macro">1062496</block>
-  <block id="0663171cafe6ea1a5c814a0d9820557a" category="cell"><block ref="0663171cafe6ea1a5c814a0d9820557a" category="inline-link-macro-rx"></block></block>
   <block id="5f8a31b40158a3881c423f19cbe43336" category="inline-link-macro">1117261</block>
   <block id="b9041783185cb4c07cb13dc636f9fe2c" category="cell"><block ref="610aa731a80c19f0997775dc3dd0e227" category="inline-link-macro-rx"></block></block>
   <block id="a8955b831ee58d47a67ef51745c0b4c5" category="cell">在存储故障转移操作期间，在具有 Qlogic QLE2662 16 Gb FC 的 SLES12SP3 上观察到内核中断</block>
   <block id="02b00e954d820a7d9250b98b4049906d" category="cell">在使用 Qlogic QLE2662 HBA 对 Sles12sp3 内核（ kernel-default-4.4.82-6.3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 " 未知或无效地址 " 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中—异常 RIP ：未知或无效地址。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。</block>
-  <block id="5181a3e4a234cc235387a485157d48d2" category="inline-link-macro">1062508</block>
-  <block id="7edc9b74664db0dc976360ce3bedfbc5" category="cell"><block ref="7edc9b74664db0dc976360ce3bedfbc5" category="inline-link-macro-rx"></block></block>
   <block id="3b13be33c3c4e5bc96d1614404203912" category="inline-link-macro">1117274</block>
   <block id="1fc265bafea1a8916f986a6847bd1910" category="cell"><block ref="06edb5bde68f86e3606b213ec5575e58" category="inline-link-macro-rx"></block></block>
   <block id="3800975d23c462cc9945e7b5174cd2ff" category="cell">在存储故障转移操作期间，在使用 Emulex LPe16002 16 Gb FC 的 SLES12SP3 上观察到内核中断</block>
   <block id="751f8b88fa9fa7a82232c514979e6d24" category="cell">在使用 Emulex LPe16002 HBA 对 Sles12sp3 内核（ kernel-default-4.4.87% -3.1 ）执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录下生成一个 vmcore 文件。可以使用 vmcore 文件了解故障的发生原因。示例：在这种情况下，在模块 "raw_spin_lock_irqsav+30" 中观察到内核中断，并使用以下字符串记录在 vmcore 文件中：–异常 RIP ： _raw_spin_lock_irqsav+30 。内核中断后，可以通过重新启动主机操作系统并根据需要重新启动应用程序来恢复操作系统。</block>
-  <block id="f70dec75289ffecc65a2aaca091ba2ca" category="inline-link-macro">1062514</block>
-  <block id="815e3fd10e8c267f2111bacfdc657a8c" category="cell"><block ref="815e3fd10e8c267f2111bacfdc657a8c" category="inline-link-macro-rx"></block></block>
   <block id="bff4d094a082c06d638618c58e969418" category="summary">介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 15 SP3</block>
   <block id="a9a140710f3b9cdfa623f06852051def" category="paragraph">对于 SUSE Linux Enterprise Server 15 SP3 ，必须存在 ` /etc/multipath.conf` 文件，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 15 SP3 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="95f8a3aebcf362ca4aacce74fc1c8cb9" category="paragraph">对 SUSE Linux Enterprise Server 15 SP3 操作系统进行了编译，以识别 ONTAP LUN 并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
@@ -1250,8 +1127,6 @@
   <block id="a9927553fafc276c5d2ee1dad0e61037" category="cell"><block ref="2ed902a18c5937c4d45e0f1b6d65e574" category="inline-link-macro-rx"></block></block>
   <block id="4576384480fab68c9ff4fab12c287bd5" category="cell">在 LV 上创建 ext4 文件系统，并在 15 个或更多启用了丢弃且精简配置的多路径设备上进行条带化，这会触发 "request botched" 内核错误</block>
   <block id="bc9d2295f7997ff93de371bc0c88ea73" category="cell">当用户尝试在启用了丢弃的精简配置多路径设备上创建 ext4 文件系统时，出现 " 请求 blotched" 内核错误。因此，创建 ext4 文件系统可能需要较长时间才能完成，偶尔会发生中断。只有在运行 Red Hat Enterprise Linux 6.x 和 Data ONTAP 8.1.3 及更高版本且以 7- 模式运行的系统上，用户尝试在 LV 上创建 ext4 文件系统时，才会发生此问题描述。之所以出现问题描述，是因为内核错误地尝试合并丢弃请求，而 Red Hat Enterprise Linux 6.x 目前不支持这种做法。发生此问题描述时，系统会将以下消息的多个实例写入系统日志（ /var/log/messages ）： kernel ： blk ： request botched 。因此，文件系统创建所需时间可能比预期要长。</block>
-  <block id="9a354393979d2f53fe302b3a221ab20a" category="inline-link-macro">907844</block>
-  <block id="8dc9ebb53b5175d2fd3191b5f0c2c42b" category="cell"><block ref="8dc9ebb53b5175d2fd3191b5f0c2c42b" category="inline-link-macro-rx"></block></block>
   <block id="0b9f55b9dffba7eae6a1222b3c2e4753" category="summary">介绍如何将 CentOS 7.1 与 ONTAP 结合使用</block>
   <block id="95f05a2f59b08c6cdec0baaa96182662" category="paragraph">对于 CentOS 7.1 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。CentOS 7.1 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="3e6c084e49fee07ccce9fb194055ad83" category="summary">介绍如何在 ONTAP 中使用 Oracle Linux 7.5</block>
@@ -1334,8 +1209,6 @@
   <block id="1de66e64e76f786a82bec52a2cab5118" category="cell"><block ref="579531e464015b6b9b3dc77dc4c47e40" category="inline-link-macro-rx"></block></block>
   <block id="d92dccde54014b78d3cee57124dc1c25" category="cell">存储故障转移操作期间，使用 QLogic QLE2562 8 Gb FC HBA 的 SLES12 SP5 上发生内核中断</block>
   <block id="c086ba1cb82d2640bcad8ebcee84deca" category="cell">使用 QLogic QLE2562 光纤通道（ FC ）主机总线适配器（ HBA ）对 SLES12 SP5 内核执行存储故障转移操作期间，发生内核中断。内核中断会导致 SLES12 SP5 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2562 HBA 事件的存储故障转移会影响 "thread_info ： ffff8aedf723c2c0" 模块。通过查找以下字符串在 vmcore 文件中找到此事件： " [thread_info ： ffff8aedf723c2c0]" 。内核中断后，重新启动主机操作系统以使其能够恢复。然后重新启动应用程序。</block>
-  <block id="c3581932e963b55b0a548c51181e8150" category="inline-link-macro">1157966</block>
-  <block id="3765d9821a625e63ea42052e4bacd1e8" category="cell"><block ref="3765d9821a625e63ea42052e4bacd1e8" category="inline-link-macro-rx"></block></block>
   <block id="d6a549e2961efba4f33c4deb10965085" category="summary">介绍如何将 Oracle Linux 6.6 与 ONTAP 结合使用</block>
   <block id="f25e7d0c2e23e28b5e2fcc826eab9d89" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。您可以使用<block ref="20a6fac93934f3cd0fc46716c10ade14" category="inline-link-rx"></block> 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。</block>
   <block id="b17be161e93154b1a8e4c9e17fc3b190" category="paragraph">对于 Oracle Linux 6.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 6.6 会使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -1398,14 +1271,10 @@
   <block id="532edc5b4fd01c5e7e8eece87dabaeb4" category="cell"><block ref="8dbfd01f5544aaaa573a97a85d555718" category="inline-link-macro-rx"></block></block>
   <block id="4fdd995ab037517f3a8a22f0d1dce429" category="cell">在主机发现期间，具有 QLogic QLE2742 主机的 RHEL7U6 上的远程端口状态可能会被阻止</block>
   <block id="63881d899fc9dba0492fe0e8b9ba540e" category="cell">在主机发现期间，使用 QLogic QLE2742 适配器的 RHEL7U6 主机上的 FC 远程端口状态可能会进入 " 已阻止 " 状态。这些被阻止的远程端口可能会导致 LUN 的路径不可用。在存储故障转移期间，路径冗余可能会减少并导致 I/O 中断。您可以输入以下命令来检查远程端口状态： # cat /sys/class/fc_remote_ports/rport-*/port_state</block>
-  <block id="57c643a3b00b517992be28c022087965" category="inline-link-macro">1628039</block>
-  <block id="24251c49f3daec94998e3583d3f476a6" category="cell"><block ref="24251c49f3daec94998e3583d3f476a6" category="inline-link-macro-rx"></block></block>
   <block id="1b602286dc5045d99a549759ecfdc9d2" category="inline-link-macro">1190698</block>
   <block id="a5fcd7e0e32bcd7b79ba21fcbaab4a61" category="cell"><block ref="1c061382cffd1ef980d60e4d1cda99f0" category="inline-link-macro-rx"></block></block>
   <block id="2afcce12bf741e426f0a49dfee981cdc" category="cell">在存储故障转移操作期间，具有 QLogic QLE2672 主机的 RHEL7U6 上的远程端口状态可能会被阻止</block>
   <block id="6ec9e586bca93270bdd317231ac24e7f" category="cell">在存储故障转移操作期间， QLogic QLE2672 主机的 Red Hat Enterprise Linux （ RHEL ） 7U6 上的 FC 远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程 portsmight 仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_state</block>
-  <block id="f7fab1293df7ccb3da0e34e5fbba3efb" category="inline-link-macro">1643459</block>
-  <block id="f839c839363f41c1d123d76c407767e5" category="cell"><block ref="f839c839363f41c1d123d76c407767e5" category="inline-link-macro-rx"></block></block>
   <block id="3c04c0dd9302edadef0b0e9a03b2ac43" category="summary">适用于采用 ONTAP 的 Windows Server 2016 的 NVMe/FC 主机配置</block>
   <block id="dd19e6b1b8c34e56b1831595566adbf0" category="paragraph">适用于 Windows Server 2016 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。</block>
   <block id="ba9c5cfb8923c683e175b0343242d5b2" category="summary">介绍如何在 ONTAP 中使用 CentOS 8.0</block>
@@ -1595,10 +1464,6 @@
   <block id="b19cff5a6d037faf5ffa796506cf839f" category="inline-link-macro">ONTAP 9 命令手册页</block>
   <block id="471e82326ed5017bfdb518b5d33377cc" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="ff09581cb2c13d8ad132e71c1320dc7e" category="cell"><block ref="108e2d22c5beb633cb3cfe03baa4f66f" category="inline-link-macro-rx"></block></block>
-  <block id="8286a7d77eb7d53445229f3c12d8c18f" category="cell"><block ref="8286a7d77eb7d53445229f3c12d8c18f" category="inline-link-macro-rx"></block></block>
-  <block id="109d2ee1c560df7a2148394570cdbc69" category="cell"><block ref="109d2ee1c560df7a2148394570cdbc69" category="inline-link-macro-rx"></block></block>
-  <block id="2152e4c49c3814e1e3bba79274326fde" category="cell"><block ref="2152e4c49c3814e1e3bba79274326fde" category="inline-link-macro-rx"></block></block>
-  <block id="5193fa62de727bc1b09d9ac908612e4d" category="cell"><block ref="5193fa62de727bc1b09d9ac908612e4d" category="inline-link-macro-rx"></block></block>
   <block id="0a9d709578599cebfffb10775d3641a7" category="list-text">安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="3a70a917bfcb66912a844601f3334965" category="list-text">验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block>。</block>
   <block id="48041afc31abe79fadb7695b8cbfd4f7" category="list-text">ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 <block ref="d46722d88b0f3e3641b7ffb0d0a65333" category="inline-link-macro-rx"></block> 有关支持的 FC 适配器和控制器的列表。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关支持的最新配置和版本列表。</block>
@@ -1917,7 +1782,6 @@
   <block id="8c2b765ab97c39979798e34af69b0f1c" category="list-text">由于出现未解决的问题、RHEL 8.7上的NVMe/TCP仍是一项技术预览功能。请参见 <block ref="3b0b5f7859cfdb8f0e4748ec41710206" category="inline-link-macro-rx"></block> 了解详细信息。</block>
   <block id="37d7cdc3434cd2c93f357a0dbab71896" category="list-text">安装完成后、验证您是否正在运行指定的RHEL 8.7内核。请参见 <block ref="5b880de3118511ac9479bd0428b63139" category="inline-link-macro-rx"></block> 有关最新的受支持版本列表。</block>
   <block id="4c865e0cb70fa33868e69a5e88daad47" category="cell">1479047</block>
-  <block id="f890a2d3eb444832b655a9838102f3df" category="cell">2087000</block>
   <block id="de63239808aba6bc3b6e058c280e2334" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 8.7</block>
   <block id="42629720f0dd50e499b39533a5c8c6c6" category="paragraph">对于Red Hat Enterprise Linux (RHEL) 8.7<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。RHEL 8.7使用识别和正确管理ONTAP LUN所需的所有设置进行编译。</block>
   <block id="c7ed23f5281d7f5b606a1019ecd9fd97" category="sidebar">8.7.</block>
@@ -1935,7 +1799,6 @@
   <block id="0929df0c2d7b307ae019137c488669a8" category="cell">1503468</block>
   <block id="2f8adf6e51ddcf7b0618dad0e63a4144" category="cell"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block> 命令返回给定子系统的重复NVMe控制器列表</block>
   <block id="95a3009a54be763a347295539b3b924d" category="cell">。<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令应返回与给定子系统关联的唯一NVMe控制器列表。在RHEL 9.1中、将显示<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令将返回属于给定子系统的所有命名空间的NVMe控制器及其相应的ANA状态。但是、ANA状态是每个命名空间的属性、因此、如果您列出了给定命名空间的子系统命令语法、则最好显示具有路径状态的唯一NVMe控制器条目。</block>
-  <block id="83dccde7d3d49df72143822cd414e991" category="cell">2130106.</block>
   <block id="54bb88571442321a8544c55cb834deb7" category="cell">RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="c66549c6038d3ebbf4c13fa9699ba9c4" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
   <block id="666e694f580810d83f5f40c26c2bb04c" category="summary">介绍如何在ONTAP 中使用Red Hat Enterprise Linux 9.1</block>
@@ -2001,7 +1864,6 @@
   <block id="e458f63778247824ed926e89e86375d3" category="cell">1517321</block>
   <block id="eadd99715c27e14fe7508d5c9bf2c8bc" category="cell">Oracle Linux 8.6 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="f775b9dd25663187ef2a06904bcffd62" category="cell">在Oracle Linux 8.6基于网络结构的NVMe (NVMe-oF)主机上、您可以使用<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 用于创建永久性发现控制器(POC)的命令。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果在NVMe-oF主机上运行ONTAP 9.10.1和Oracle Linux 8.6、则每次都会创建一个重复的PDC<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 已执行。这会导致不必要地使用主机和目标上的资源。</block>
-  <block id="ea537a490c78c08866a1149ac8451043" category="cell">18118</block>
   <block id="6a133285885bbf7ad82fbc82c4bfd8ee" category="summary">使用ONTAP 为Oracle Linux 8.4设置VME/FC主机配置、包括示例</block>
   <block id="2d60c3fc33d0bb9862234393561976b3" category="doc">适用于采用ONTAP 的Oracle Linux 8.4的NVMe/FC主机配置</block>
   <block id="d06d1d488461357bdc27f97d34980d21" category="paragraph">采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 8.4支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所必需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本主题详细介绍了如何在Oracle Linux 8.4上使用ANA作为ONTAP 目标来启用采用内核NVMe多路径的NVMe-oF。</block>
@@ -2068,10 +1930,8 @@
   <block id="33eda3f108e6a865cc7c69e56699b9b4" category="list-text">验证Oracle Linux 8.3主机上的以下NVMe/FC设置。</block>
   <block id="9250c9dc2074f15915cd9f351b3d2bf3" category="list-text">验证是否已创建命名空间并在主机上正确发现这些命名空间。</block>
   <block id="78c6a7b756695fb0e4c3e8b0c0e2ebb5" category="list-text">验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态。</block>
-  <block id="848681cafaf3e4b7d36fcccbee28152b" category="cell">Oracle Bugzilla</block>
   <block id="5a382a0d16fd724dbbce44cdf5af7eca" category="cell">Oracle Linux 8.3 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="4e6a857733e32ae83acdd4ed33d3c00a" category="cell">在Oracle Linux 8.3基于网络结构的NVMe (NVMe-oF)主机上、您可以使用<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 用于创建永久性发现控制器(POC)的命令。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果在运行ONTAP 9.10.1和Oracle Linux 8.3的NVMe-oF主机上运行、则每次都会创建一个重复的PDC<block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 已执行。这会导致不必要地使用主机和目标上的资源。</block>
-  <block id="167fb290c077b2cc639e8aee53540600" category="cell"><block ref="167fb290c077b2cc639e8aee53540600" category="inline-link-rx"></block></block>
   <block id="c54aa3a5ccb3bc9eb58568b3841aa9c2" category="paragraph">采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的Oracle Linux 8.5支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在Oracle Linux 8.5和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。</block>
   <block id="cc21ef7d4e60ab3e3e6f909682520cdc" category="list-text">默认情况下、Oracle Linux 8.5为NVMe命名空间启用了内核NVMe多路径。</block>
   <block id="95c91b9773480f0a5488cf4116cad4d7" category="list-text">使用Oracle Linux 8.5、<block ref="dafde1b5ed9f22cccd76aeeb9844345b" prefix=" " category="inline-code"></block> 本机中包含脚本<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 软件包。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的出箱自动连接脚本。</block>
@@ -2435,8 +2295,6 @@
   <block id="18246cd8a2065d6c9969e5b7974134d4" category="cell">1537359</block>
   <block id="6a3ab9709740397036937a3dd3536644" category="cell">使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断</block>
   <block id="8a6c2cd607c7c6f2122c62101018f706" category="cell">在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况<block ref="0f4f5143108e314ddd308d075021efb3" prefix=" " category="inline-code"></block> 配置、则会生成<block ref="fa8dda84ceacd7343d25ccd506ad982a" prefix=" " category="inline-code"></block> 文件<block ref="0e1f3f8d334b46b5beffee9e435a3fcc" prefix=" " category="inline-code"></block> 目录。正在使用对问题描述进行分类<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block> 驱动程序、但无法一致地复制。</block>
-  <block id="758f4d225ba2789019f011195e19dab8" category="inline-link-macro">2173947</block>
-  <block id="b5ab66a4d21f0a6cb7e30e20b29c6b89" category="cell"><block ref="b5ab66a4d21f0a6cb7e30e20b29c6b89" category="inline-link-macro-rx"></block></block>
   <block id="34fedef752e7a52649043c91aeccbee2" category="paragraph">具有非对称命名空间访问(AANA)的Red Hat Enterprise Linux (RHEL) 9.2支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
   <block id="04ec169afac6b24f7cf654cbb22077ab" category="paragraph">对于采用ONTAP的RHEL 9.2、NVMe-oF主机配置支持以下功能：</block>
   <block id="0741c9b5716032a843b4139129bd0a9e" category="list-text">除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。</block>
@@ -2466,12 +2324,8 @@
   <block id="bed8afd121bcc77f7679ad8aa66edc6e" category="cell">1536937</block>
   <block id="277f83d9faff75a0f8017279fcf07969" category="cell"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block> 命令会为子系统打印重复的NVMe控制器</block>
   <block id="8e34704e7af729eb74fd3ebaac0a9342" category="cell">。<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令应返回与给定子系统关联的NVMe控制器的唯一列表。在Oracle Linux 9.1中、<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令将返回属于给定子系统的所有命名空间的NVMe控制器以及相应的非对称命名空间访问(AANA)状态。但是、如果列出给定命名空间的子系统命令语法、则显示路径状态的唯一NVMe控制器条目会很有用、因为ANA状态是每个命名空间的属性。</block>
-  <block id="260e47ef04cdd6f9d4989f12facd3a91" category="inline-link-macro">17998</block>
-  <block id="1c68cdd2e6afb2c09809c25810c520aa" category="cell"><block ref="1c68cdd2e6afb2c09809c25810c520aa" category="inline-link-macro-rx"></block></block>
   <block id="5cf8c44d0d04885f386e9f0d05461ec2" category="cell">1539101</block>
   <block id="91a845901382406af3acfb27b99025ea" category="cell">Oracle Linux 9.1 NVMe-oF主机无法创建永久性发现控制器</block>
-  <block id="86d73f9a9eafbf2a1bc89961929ab3e0" category="inline-link-macro">18196</block>
-  <block id="84ccd25799ec2ea76f7f5faab8db9837" category="cell"><block ref="84ccd25799ec2ea76f7f5faab8db9837" category="inline-link-macro-rx"></block></block>
   <block id="533f5c2e4bcf35d9cefe9c97046f7654" category="summary">介绍如何将Oracle Linux 9.1与ONTAP结合使用</block>
   <block id="da80aa62fc6cf6b66539a5a3933874a8" category="cell"><block ref="da80aa62fc6cf6b66539a5a3933874a8" category="inline-link-rx"></block></block>
   <block id="20e1c7fed64a39ad5334f26be4f4d8c7" category="paragraph">在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)发现所需的库依赖关系：</block>
@@ -2733,7 +2587,6 @@
   <block id="1e1ac2f92ca06b1f068f6aa6c61883c0" category="paragraph">本发行说明介绍了有关使用ONTAP存储系统配置和管理特定主机的新增功能和增强功能、已知问题和限制以及重要注意事项。</block>
   <block id="2ad9563dae62baefb397a0b93e22f08a" category="list-text">在Red Hat Enterprise Linux (RHEL) 6和RHEL 7主机上、现在支持一个经过调整的软件包、用于设置服务器配置文件。您可以使用<block ref="44559c6617511944fd997c63b107ee6b" prefix=" " category="inline-code"></block> 命令以根据环境设置不同的配置文件。例如、您还可以将虚拟子系统配置文件用作子虚拟机、并将企业存储配置文件用于使用企业存储阵列中的LUN的配置。使用这些经过调整的软件包可以提高ONTAP的吞吐量和延迟。</block>
   <block id="b91c8d257cb2ab1f821c4201c4d98d12" category="list-text">增加了对Broadcom Emulex和Marvell Qlogic中32 Gb FC适配器的支持。</block>
-  <block id="d183f649aa9dd1befe9fbbbebb9ce6f3" category="paragraph">在此示例中、我们将确定设备的WWID并添加到中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件</block>
   <block id="9befbb0a2a211b5683af5265f22799fb" category="paragraph"><block ref="59b466fd93164953e56bdd1358dc0044" prefix="" category="inline-code"></block> 是我们需要将其添加到黑名单中的本地SCSI磁盘。</block>
   <block id="8f832cd06827c0d578f135a31564e7cf" category="summary">介绍如何将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用</block>
   <block id="f380df15f54bded5a312678b9e8d1316" category="doc">将SUSE Linux Enterprise Server 15 SP5与ONTAP结合使用</block>
@@ -3409,7 +3262,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="c720f9a8702e2d5947dcfd0b4d0f2744" category="list-text">Ubuntu 22.04 GA内核中包含的本机内置qla2xxx驱动程序具有ONTAP支持所必需的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：</block>
   <block id="9b581488b49c5ac223f72f44dce46098" category="list-text">对节点中所有受支持的NVMe/TCP启动程序-目标Li运行NVMe Connect-all命令、并将控制器丢失超时期限设置为至少30分钟或1800秒：</block>
   <block id="2d737bddc26fec4760722ea17aae3833" category="open-title">NVMe/TCP</block>
-  <block id="b410fbf5a06284dbc3bed26b9ccd2094" category="paragraph">对于采用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置、没有已知问题。</block>
   <block id="90fc24312f4ab09ff404f0abfb26b105" category="cell">IRA ID</block>
   <block id="fb99255f11e8a5c23d9e98c28ef9997d" category="cell">1593771</block>
   <block id="970c941050f97a801dd7266734957b39" category="cell">在存储移动操作期间、Red Hat Enterprise Linux 9.3 QLogic SAN主机会丢失部分多路径</block>
@@ -3588,8 +3440,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="4799f5cc43477bfa829d8bf18c120f65" category="paragraph"><block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：</block>
   <block id="26adbe58d014b17e22edee324b7c14d8" category="paragraph">首次创建<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件时、可能需要使用以下命令启用并启动多路径服务：</block>
   <block id="43f6f503ccaee7e4dd2b34ad0a4d7ef5" category="paragraph">不需要直接向<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加任何内容、除非您有不希望多路径管理的设备或现有设置覆盖默认值。要排除不需要的设备、请在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加以下语法、将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
-  <block id="9be8f861c4242e3e0691ad61694073a0" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
-  <block id="959d703d9e0cc46608970f776d39cee8" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中专门适用于ONTAP LUN的后续条款进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
   <block id="f4db575c389511be5cb287f3760fe673" category="paragraph">ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block><block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数的值从默认值64增加到256。</block>
   <block id="524b08ad750352e65f141bb6a45404ad" category="list-text">将<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数设置为256：</block>
   <block id="ed01a5029bce78f038174f31df740f89" category="list-text">运行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block>命令并重新启动主机：</block>
@@ -3665,9 +3515,7 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="8ea7d65541343d381b99affa2d1c6996" category="admonition">要配置Oracle Linux 8.9 RedHat Enterprise Kernel、请使用<block ref="ce7483c182b39cf5b993c406b0ed7268" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.9的。</block>
   <block id="1f74246c73996c337fbedc14cd7d21b9" category="doc">安装AIX Host Utilities 7.0</block>
   <block id="135b308ed83c53f1516b7c754566d1c4" category="list-title">开始之前</block>
-  <block id="46a8afec081a24bad40f6f988c628fb2" category="admonition">NetApp AIX Host Utilities软件包位于上的<block ref="6197019285627f055449b196a622ffa6" category="inline-link-macro-rx"></block>压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。</block>
   <block id="bf901697b7694abb028baf6a3b45caa8" category="list-text">在PowerVM主机上，以*padmin*身份登录，然后输入<block ref="cf9ef914abc1d1025acbd5649d68a228" prefix=" " category="inline-code"></block>命令以成为root用户。</block>
-  <block id="30c4a481d5eebab4d7ecb692852fdad1" category="list-text">转到<block ref="5d5134ddaf42180d688670ce5e1f032a" category="inline-link-rx"></block>、并将包含Host Utilities的压缩文件下载到主机上的目录中。</block>
   <block id="7515d24f2cf1755d908ccd75d4806228" category="list-text">解压缩文件并提取SAN工具包软件包：</block>
   <block id="a4a53a1d716fd706dc0d6653df07cd18" category="paragraph"><block ref="02ae515861e4e233362298f11cb9eef3" prefix="" category="inline-code"></block></block>
   <block id="dfeb26940493cf0ca07dfbf198c98918" category="paragraph">解压缩文件时将创建以下目录：<block ref="666ee7336e2d1a70fa06a334c624dce0" prefix=" " category="inline-code"></block>。此目录包含以下子目录之一：MPIO、NNO_MPIO或SAN_Tool_Kit。</block>
@@ -3690,4 +3538,10 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="cf66257c19e5d30697f97afd2fd4245c" category="cell">NetApp ONTAP iSCSI LUN的SCSI UNMAP支持</block>
   <block id="6f60d2b701807f15296111f9ab2ce1c3" category="cell">AIX Host Utilities 7.0仅支持FC设备的SCSI UNMAP功能。此版本不支持对iSCSI设备的SCSI UNMAP。</block>
   <block id="c10866775dae5d5cea46cbcd3d083ef2" category="sidebar">安装AIX HU 7.0</block>
+  <block id="e524cdfb3608e63e43de03206471310a" category="paragraph">以下示例将确定设备的WWID并将其添加到文件中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>。</block>
+  <block id="3ae05a17cacf5437dfbe2dbdf1e4e12c" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。</block>
+  <block id="6674d265c9797b8b9966b427e0b2c1a0" category="admonition">NetApp AIX Host Utilities软件包位于上的<block ref="015937b9b2ae1569ddb5b3136103b5c7" category="inline-link-macro-rx"></block>压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。</block>
+  <block id="95fdb97b04811943bd6001978d618d31" category="list-text">转到<block ref="97bc3f4ff245555de180ca8882444906" category="inline-link-rx"></block>、并将包含Host Utilities的压缩文件下载到主机上的目录中。</block>
+  <block id="0142c1c78731d2b44a6976490ee04599" category="paragraph">使用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置存在以下已知问题：</block>
+  <block id="364053ddb08791e86bba8694da89f153" category="cell">CONTAPEXT-2037</block>
 </blocks>

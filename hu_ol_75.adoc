@@ -138,7 +138,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -166,7 +166,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -250,13 +250,13 @@ NOTE: 要配置Oracle Linux 7.5 Red Hat Enterprise Kernel (RHCK)、请使用link
 
 带有ONTAP版本的Oracle Linux 7.5存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 | 不适用 
+| 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参见 link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1177239["1177239"^] | 在存储故障转移操作期间，在使用 Qlogic QLE2672 16G FC 的 OL7.5 上观察到内核中断 | 在使用内核 4.1.12-112.16.4.el7uek.x86_64 和 Qlogic QLE2672 HBA 的 Oracle Linux 7 （ OL7.5 ）上执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录中创建一个 vmcore 文件。可以在模块 "kmem_cache_alloc +118" 中观察到这种中断，该模块记录在 vmcore 文件中，并使用字符串 "Exception RIP ： kmem_cache_alloc +118" 进行标识。 发生内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复。 |  
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1177239["1177239"^] | 在存储故障转移操作期间，在使用 Qlogic QLE2672 16G FC 的 OL7.5 上观察到内核中断 | 在使用内核 4.1.12-112.16.4.el7uek.x86_64 和 Qlogic QLE2672 HBA 的 Oracle Linux 7 （ OL7.5 ）上执行存储故障转移操作期间，您可能会发现内核中断。此操作会提示重新启动操作系统，从而导致应用程序中断。如果配置了 kdump ，则内核中断会在 /var/crash/ 目录中创建一个 vmcore 文件。可以在模块 "kmem_cache_alloc +118" 中观察到这种中断，该模块记录在 vmcore 文件中，并使用字符串 "Exception RIP ： kmem_cache_alloc +118" 进行标识。 发生内核中断后，您可以通过重新启动主机操作系统并重新启动应用程序来恢复。 
 |===

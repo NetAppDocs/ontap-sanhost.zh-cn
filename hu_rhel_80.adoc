@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -197,7 +197,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -288,25 +288,25 @@ devices {
 
 带有ONTAP的RHEL 8.0版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1238719["1238719"^] | 存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL8 上的内核中断 | 在使用 QLogic QLE2672 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 8 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致操作系统重新启动。重新启动会导致应用程序中断，如果配置了 kdump ，则会在 /var/crash/directory 下生成 vmcore 文件。使用 vmcore 文件确定故障的发生原因。在这种情况下，中断发生在 "kmem_cache_alloc +160" 模块中。它会使用以下字符串记录在 vmcore 文件中： "[ 异常 RIP ： kmem_cache_alloc+160]" 。重新启动主机操作系统以恢复操作系统，然后重新启动应用程序。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1710009["1710009"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1238719["1238719"^] | 存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL8 上的内核中断 | 在使用 QLogic QLE2672 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 8 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致操作系统重新启动。重新启动会导致应用程序中断，如果配置了 kdump ，则会在 /var/crash/directory 下生成 vmcore 文件。使用 vmcore 文件确定故障的发生原因。在这种情况下，中断发生在 "kmem_cache_alloc +160" 模块中。它会使用以下字符串记录在 vmcore 文件中： "[ 异常 RIP ： kmem_cache_alloc+160]" 。重新启动主机操作系统以恢复操作系统，然后重新启动应用程序。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1226783["1226783"^] | 如果在所有光纤通道（ FC ）主机总线适配器（ HBA ）上映射了 204 个以上的 SCSI 设备，则 RHEL8 操作系统将启动至 " 紧急模式 " | 如果在操作系统重新启动过程中将主机映射到 204 个以上的 SCSI 设备， RHEL8 操作系统将无法启动到 " 正常模式 " 并进入 " 紧急模式 " 。这会导致大多数主机服务变得不可用。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1690356["1690356"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1226783["1226783"^] | 如果在所有光纤通道（ FC ）主机总线适配器（ HBA ）上映射了 204 个以上的 SCSI 设备，则 RHEL8 操作系统将启动至 " 紧急模式 " | 如果在操作系统重新启动过程中将主机映射到 204 个以上的 SCSI 设备， RHEL8 操作系统将无法启动到 " 正常模式 " 并进入 " 紧急模式 " 。这会导致大多数主机服务变得不可用。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1230882["1230882"^] | 在 RHEL8 安装期间，无法在 iSCSI 多路径设备上创建分区。 | 在 RHEL 8 安装期间，磁盘选择中未列出 iSCSI SAN LUN 多路径设备。因此， SAN 启动设备上未启用多路径服务。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1709995["1709995"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1230882["1230882"^] | 在 RHEL8 安装期间，无法在 iSCSI 多路径设备上创建分区。 | 在 RHEL 8 安装期间，磁盘选择中未列出 iSCSI SAN LUN 多路径设备。因此， SAN 启动设备上未启用多路径服务。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1235998["12359998"^] | rescan-scsi-bus.sh -a 命令扫描的设备不超过 328 个 | 如果 Red Hat Enterprise Linux 8 主机映射的 SCSI 设备超过 328 个，则主机操作系统命令 rescan-scsi-bus.sh -a 仅会扫描 328 个设备。主机不会发现任何剩余的映射设备。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1709995["1709995"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1235998["12359998"^] | rescan-scsi-bus.sh -a 命令扫描的设备不超过 328 个 | 如果 Red Hat Enterprise Linux 8 主机映射的 SCSI 设备超过 328 个，则主机操作系统命令 rescan-scsi-bus.sh -a 仅会扫描 328 个设备。主机不会发现任何剩余的映射设备。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231087["1231087"^] | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb FC 的 RHEL8 上的远程端口传输到阻止状态 | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " | link:https://bugzilla.redhat.com/show_bug.cgi?id=1702005["1702005"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231087["1231087"^] | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb FC 的 RHEL8 上的远程端口传输到阻止状态 | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | 在存储故障转移操作期间，使用 Emulex LPe32002 32 Gb FC 的 RHEL8 上的远程端口传输到 Blocked 状态 | 在存储故障转移操作期间，使用 Emulex LPe32002 32 GB 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1705573["1705573"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | 在存储故障转移操作期间，使用 Emulex LPe32002 32 Gb FC 的 RHEL8 上的远程端口传输到 Blocked 状态 | 在存储故障转移操作期间，使用 Emulex LPe32002 32 GB 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。 
 |===

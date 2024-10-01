@@ -151,7 +151,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -179,7 +179,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -263,25 +263,25 @@ NOTE: 要配置Oracle Linux 7.0 Red Hat Enterprise Kernel (RHCK)、请使用link
 
 Oracle Linux 7.0 with ONTAP版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 ：由于 Emulex 8G （ LPe12002 ）主机上的 OL 7.0 Uek r3U5 测试版出现 "RSCN 超时 " 错误，主机丢失 LUN 的所有路径并挂起 | 您可能会发现，在对 I/O 执行存储故障转移操作期间， Emulex 8G （ LPe12002 ）主机挂起，并且 I/O 中断率较高您可能会发现路径无法恢复，这是由于 RSCN 超时导致的，主机丢失所有路径并挂起。达到此问题描述的概率很高。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=14898["14898"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 ：由于 Emulex 8G （ LPe12002 ）主机上的 OL 7.0 Uek r3U5 测试版出现 "RSCN 超时 " 错误，主机丢失 LUN 的所有路径并挂起 | 您可能会发现，在对 I/O 执行存储故障转移操作期间， Emulex 8G （ LPe12002 ）主机挂起，并且 I/O 中断率较高您可能会发现路径无法恢复，这是由于 RSCN 超时导致的，主机丢失所有路径并挂起。达到此问题描述的概率很高。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 ：在使用 IO 执行存储故障转移操作期间，在 QLogic 8G FC （ QLE2562 ） SAN 主机上观察到高 IO 中断 | 在使用 IO 执行存储故障转移操作期间，您可能会发现 QLogic 8G FC （ QLE2562 ）主机上的 IO 中断较高。中止和设备重置会在主机上表现为 IO 中断。遇到此 IO 中断的可能性很高。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=14894["14894"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 ：在使用 IO 执行存储故障转移操作期间，在 QLogic 8G FC （ QLE2562 ） SAN 主机上观察到高 IO 中断 | 在使用 IO 执行存储故障转移操作期间，您可能会发现 QLogic 8G FC （ QLE2562 ）主机上的 IO 中断较高。中止和设备重置会在主机上表现为 IO 中断。遇到此 IO 中断的可能性很高。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0 ： dracut 无法在 UEKR3U5 alpha 上的 initramfs 中包含 scsi_dh_alua.ko 模块 | 即使在内核命令行中添加参数 "rdloaddriver=SCSI_DH_ALUA" 并创建了 dracut ， SCSI_DH_ALUA 模块也可能无法加载。因此，未按建议为 NetApp LUN 启用 ALUA 。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14860["14860"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0 ： dracut 无法在 UEKR3U5 alpha 上的 initramfs 中包含 scsi_dh_alua.ko 模块 | 即使在内核命令行中添加参数 "rdloaddriver=SCSI_DH_ALUA" 并创建了 dracut ， SCSI_DH_ALUA 模块也可能无法加载。因此，未按建议为 NetApp LUN 启用 ALUA 。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796["894796"^] | 尽管在安装 OL 7.0 操作系统期间登录成功，但 Anaconda 仍会显示 iSCSI 登录失败消息 | 在安装 OL 7.0 时， anaconda 安装屏幕会显示 iSCSI 登录到多个目标 IP 失败，尽管 iSCSI 登录成功。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 OL 7.0 操作系统。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14870["14870"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796["894796"^] | 尽管在安装 OL 7.0 操作系统期间登录成功，但 Anaconda 仍会显示 iSCSI 登录失败消息 | 在安装 OL 7.0 时， anaconda 安装屏幕会显示 iSCSI 登录到多个目标 IP 失败，尽管 iSCSI 登录成功。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 OL 7.0 操作系统。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 ： Anacondup 不会在内核 cmd 行中添加 bootdev 参数来设置 iSCSI SANboot OS 安装的 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 OL 7.0 操作系统期间设置 IPv4 地址。因此，您不能为任何配置为在 OL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14871["14871"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 ： Anacondup 不会在内核 cmd 行中添加 bootdev 参数来设置 iSCSI SANboot OS 安装的 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 OL 7.0 操作系统期间设置 IPv4 地址。因此，您不能为任何配置为在 OL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | 在使用 IO 执行存储故障转移操作期间观察到 QLogic 10G FCoE （ QLE8152 ）主机内核崩溃 | 您可能会发现 10G FCoE Qlogic （ QLE8152 ）主机上的 Qlogic 驱动程序模块发生内核崩溃。在使用 IO 执行存储故障转移操作期间发生崩溃。发生此崩溃的可能性较高，从而导致主机上的 IO 中断时间较长。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=15019["15019"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | 在使用 IO 执行存储故障转移操作期间观察到 QLogic 10G FCoE （ QLE8152 ）主机内核崩溃 | 您可能会发现 10G FCoE Qlogic （ QLE8152 ）主机上的 Qlogic 驱动程序模块发生内核崩溃。在使用 IO 执行存储故障转移操作期间发生崩溃。发生此崩溃的可能性较高，从而导致主机上的 IO 中断时间较长。 
 |===

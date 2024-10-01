@@ -43,7 +43,7 @@ AIX Host Utilities支持以下环境：
 
 
 
-NOTE: NetApp AIX Host Utilities软件包位于上的link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
+NOTE: NetApp AIX Host Utilities软件包位于上的link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["NetApp 支持站点"^]压缩tar.gz文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
 
 .步骤
 . 登录到主机。
@@ -52,7 +52,7 @@ NOTE: NetApp AIX Host Utilities软件包位于上的link:https://mysupport.netap
 ** 在PowerVM主机上，以*padmin*身份登录，然后输入 `oem_setup_env`命令以成为root用户。
 
 
-. 转到 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab["NetApp 支持站点"^]、并将包含Host Utilities的压缩文件下载到主机上的目录中。
+. 转到 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["NetApp 支持站点"^]、并将包含Host Utilities的压缩文件下载到主机上的目录中。
 . 转到包含下载内容的目录。
 . 解压缩文件并提取SAN工具包软件包：
 +

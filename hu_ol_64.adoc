@@ -182,7 +182,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -269,21 +269,21 @@ NOTE: 要配置Oracle Linux 6.4 Red Hat Enterprise Kernel (RHCK)、请使用link
 
 具有ONTAP版本的Oracle Linux 6.4存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=713555["713555"^] | 对于接管 / 交还和重新启动等控制器故障，使用 UEK2 的 OL6.4 和 OL5.9 会显示 QLogic 适配器重置 | 如果发生控制器故障（例如接管，交还和重新启动），则在使用 UEK2 的 OL6.4 主机（ kernel-UEK-2.6.39-400.17.1.el6uek ）或使用 UEK2 的 OL5.9 主机（ kernel-UEK-2.6.39 400.17.1.el5uek ）上会显示 QLogic 适配器重置。这些重置是间歇性的。发生这些适配器重置时，可能会发生长时间的 I/O 中断（有时超过 10 分钟），直到适配器重置成功且路径状态由 dm-multipath 更新为止。在 /var/log/messages 中，如果遇到此错误，则会显示类似于以下内容的消息： kernel ： qla2xxx [0000 ： 11 ： 00.0]-8018 ： 0 ： adapter reset issued nexus=0 ： 2 ： 13 。这一点在内核版本中可见：在 OL6.4 上： kernel-UEK-2.6.39-400.171.el6uek 在 OL5.9 上： kernel-UEK-2.6.39-400.171.el5uek | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=13999["13999"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=713555["713555"^] | 对于接管 / 交还和重新启动等控制器故障，使用 UEK2 的 OL6.4 和 OL5.9 会显示 QLogic 适配器重置 | 如果发生控制器故障（例如接管，交还和重新启动），则在使用 UEK2 的 OL6.4 主机（ kernel-UEK-2.6.39-400.17.1.el6uek ）或使用 UEK2 的 OL5.9 主机（ kernel-UEK-2.6.39 400.17.1.el5uek ）上会显示 QLogic 适配器重置。这些重置是间歇性的。发生这些适配器重置时，可能会发生长时间的 I/O 中断（有时超过 10 分钟），直到适配器重置成功且路径状态由 dm-multipath 更新为止。在 /var/log/messages 中，如果遇到此错误，则会显示类似于以下内容的消息： kernel ： qla2xxx [0000 ： 11 ： 00.0]-8018 ： 0 ： adapter reset issued nexus=0 ： 2 ： 13 。这一点在内核版本中可见：在 OL6.4 上： kernel-UEK-2.6.39-400.171.el6uek 在 OL5.9 上： kernel-UEK-2.6.39-400.171.el5uek 
 
 
-| link:htthttps://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=715217["715217"^] | 使用 UEK2 的 OL6.4 或 OL5.9 主机上的路径恢复延迟可能会导致控制器或网络结构故障的 I/O 恢复延迟 | 在使用 UEK2 内核的 Oracle Linux 6.4 或 Oracle Linux 5.9 主机上，如果 I/O 发生控制器故障（存储故障转移或交还，重新启动等）或网络结构故障（ FC 端口禁用或启用），则 DM-Multipath 的路径恢复需要很长时间（ 4 分钟）。到 10 分钟）。有时，在将路径恢复到活动状态期间，还会出现以下 lpfc 驱动程序错误：内核： SD 0 ： 0 ： 8 ： 3 ： [SDLT] 结果： hostbyte=did_error driverbyte=driver_OK 由于故障事件期间路径恢复延迟， I/O 恢复也会延迟。OL 6.4 版本： device-mapper-1.02.7-9.el6 device-mapper-multipath-0.4.9-64.0.1.el6 kernel-UEK-2.6.39-400.171.el6uek OL 5.9 版本： device-mapper-1.02.7-9.el5 device-mapper-3.9-64.9.4.0.9.-64.1.elek-kernel5-17.1.5uele.5.17.1 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14001["14001"^] 
+| link:htthttps://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=715217["715217"^] | 使用 UEK2 的 OL6.4 或 OL5.9 主机上的路径恢复延迟可能会导致控制器或网络结构故障的 I/O 恢复延迟 | 在使用 UEK2 内核的 Oracle Linux 6.4 或 Oracle Linux 5.9 主机上，如果 I/O 发生控制器故障（存储故障转移或交还，重新启动等）或网络结构故障（ FC 端口禁用或启用），则 DM-Multipath 的路径恢复需要很长时间（ 4 分钟）。到 10 分钟）。有时，在将路径恢复到活动状态期间，还会出现以下 lpfc 驱动程序错误：内核： SD 0 ： 0 ： 8 ： 3 ： [SDLT] 结果： hostbyte=did_error driverbyte=driver_OK 由于故障事件期间路径恢复延迟， I/O 恢复也会延迟。OL 6.4 版本： device-mapper-1.02.7-9.el6 device-mapper-multipath-0.4.9-64.0.1.el6 kernel-UEK-2.6.39-400.171.el6uek OL 5.9 版本： device-mapper-1.02.7-9.el5 device-mapper-3.9-64.9.4.0.9.-64.1.elek-kernel5-17.1.5uele.5.17.1 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=709911["709911"^] | 存储故障后，使用 UEK2 内核的 OL6.4 和 OL5.9 iSCSI 上的 DM 多路径需要很长时间才能更新 LUN 路径状态 | 在运行 Oracle Linux 6 Update4 和 Oracle Linux 5 Update9 iSCSI 以及 Unbreakable Enterprise Kernel Release 2 （ UEK2 ）的系统上，在存储故障事件期间出现问题，其中 DM Multipath （ DMMP ）需要大约 15 分钟来更新设备映射程序（ DM ）设备（ LUN ）的路径状态。如果在此时间间隔内运行 "multipath -ll" 命令，则该 DM 设备（ LUN ）的路径状态将显示为 "Failed ready Runing" 。路径状态最终更新为 "active ready running" 。 以下版本会显示此问题描述： Oracle Linux 6 Update 4 ： UEK2 内核： 2.6.39-400.17.1.el6uek.x86_64 多路径： device-mapper-multipath-0.4.0.9-64.1.el6.x86_64 iSCSI ： iscsi-initiator-utils-6.2.0.873-2.0.el6.1.el6.0.9_1.vmf_1.640.5-iscsi_4.0.5-1.vmf_1.vmfs.0.5-1.iscsi-8.0.5-1.vmfs.0.5-1.vmfs.0.5-iscsi ： iscsi ： iscsi ： iscsi-utils-6.0.873-utils-us-8.0.8-8.0.8-4.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1. | link:http://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=13984["13984"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=709911["709911"^] | 存储故障后，使用 UEK2 内核的 OL6.4 和 OL5.9 iSCSI 上的 DM 多路径需要很长时间才能更新 LUN 路径状态 | 在运行 Oracle Linux 6 Update4 和 Oracle Linux 5 Update9 iSCSI 以及 Unbreakable Enterprise Kernel Release 2 （ UEK2 ）的系统上，在存储故障事件期间出现问题，其中 DM Multipath （ DMMP ）需要大约 15 分钟来更新设备映射程序（ DM ）设备（ LUN ）的路径状态。如果在此时间间隔内运行 "multipath -ll" 命令，则该 DM 设备（ LUN ）的路径状态将显示为 "Failed ready Runing" 。路径状态最终更新为 "active ready running" 。 以下版本会显示此问题描述： Oracle Linux 6 Update 4 ： UEK2 内核： 2.6.39-400.17.1.el6uek.x86_64 多路径： device-mapper-multipath-0.4.0.9-64.1.el6.x86_64 iSCSI ： iscsi-initiator-utils-6.2.0.873-2.0.el6.1.el6.0.9_1.vmf_1.640.5-iscsi_4.0.5-1.vmf_1.vmfs.0.5-1.iscsi-8.0.5-1.vmfs.0.5-1.vmfs.0.5-iscsi ： iscsi ： iscsi ： iscsi-utils-6.0.873-utils-us-8.0.8-8.0.8-4.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1.vmfs.0.5-1. 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=739909["739909"^] | 使用 UEK2 的 OL6.x 和 OL5.x 主机出现 FC 故障后， dm-multipath 设备上的 SG_IO ioctl 系统调用失败 | 在使用 UEK2 内核的 Oracle Linux 6.x 主机和使用 UEK2 内核的 Oracle Linux 5.x 主机上出现问题。多路径设备上的 SG_* 命令在发生网络结构故障后失败，并显示 EAGAin 错误代码（ errno ），从而使活动路径组中的所有路径都关闭。只有在多路径设备未发生 I/O 时，才会出现此问题。以下是示例： # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 查询数据库： 12 00 00 24 00 ioctl （ SG_IO v3 ）失败，并显示 OS_err （ errno ） = 11 查询：传递操作系统错误：资源暂时不可用 HDIO_get_ioctl 身份失败： 资源暂时不可用 [11] /dev/mapper/3600a098041764937303f436c75324370 # 上的 SCSI 查询和提取 ATA 信息失败。发生此问题的原因是，在 ioctl（ ）调用期间，如果 DM-Multipath 设备上没有发生 I/O ，则无法激活路径组切换到其他活动组。在以下版本的 kernel-Uek 和 device-mapper-multipath 软件包中发现了此问题： OL6.4 版本： kernel-UEK-2.6.39-400.171.el6uek device-mapper-multipath-0.4.9.-64.1.el6 OL5.9 版本： kernel-UEK-2.6.39-400.17.1.el5uek-device-4.0.5-1.el6 多路径映射程序 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=14082["14082"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=739909["739909"^] | 使用 UEK2 的 OL6.x 和 OL5.x 主机出现 FC 故障后， dm-multipath 设备上的 SG_IO ioctl 系统调用失败 | 在使用 UEK2 内核的 Oracle Linux 6.x 主机和使用 UEK2 内核的 Oracle Linux 5.x 主机上出现问题。多路径设备上的 SG_* 命令在发生网络结构故障后失败，并显示 EAGAin 错误代码（ errno ），从而使活动路径组中的所有路径都关闭。只有在多路径设备未发生 I/O 时，才会出现此问题。以下是示例： # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 查询数据库： 12 00 00 24 00 ioctl （ SG_IO v3 ）失败，并显示 OS_err （ errno ） = 11 查询：传递操作系统错误：资源暂时不可用 HDIO_get_ioctl 身份失败： 资源暂时不可用 [11] /dev/mapper/3600a098041764937303f436c75324370 # 上的 SCSI 查询和提取 ATA 信息失败。发生此问题的原因是，在 ioctl（ ）调用期间，如果 DM-Multipath 设备上没有发生 I/O ，则无法激活路径组切换到其他活动组。在以下版本的 kernel-Uek 和 device-mapper-multipath 软件包中发现了此问题： OL6.4 版本： kernel-UEK-2.6.39-400.171.el6uek device-mapper-multipath-0.4.9.-64.1.el6 OL5.9 版本： kernel-UEK-2.6.39-400.17.1.el5uek-device-4.0.5-1.el6 多路径映射程序 
 |===
 
 NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_64.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.4 。

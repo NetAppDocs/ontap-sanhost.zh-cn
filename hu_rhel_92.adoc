@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -197,7 +197,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -288,13 +288,13 @@ devices {
 
 使用ONTAP的RHEL 9.2版本存在以下已知问题：
 
-[cols="20, 20, 50,20"]
+[cols="20,40,40"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | 要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项 | 在RHEL 9.2中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持HBA发现的库软件包依赖关系。 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^] | 要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项 | 在RHEL 9.2中、是指NetApp LINUX SAN主机实用程序命令行界面 `sanlun fcp show adapter -v` 失败、因为找不到支持HBA发现的库软件包依赖关系。 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1537359["1537359"^] | 使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断 | 在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况 `kdump` 配置、则会生成 `vmcore` 文件 `/var/crash/` 目录。正在使用对问题描述进行分类 `lpfc` 驱动程序、但无法一致地复制。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=2173947["2173947"^] 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1537359["1537359"^] | 使用Emulex HBA启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断 | 在存储故障转移交还操作期间、使用Emulex主机总线适配器(HBA)启动Red Hat Linux 9.2 SAN的主机遇到停滞的任务、从而导致内核中断。内核中断会导致操作系统重新启动、如果发生这种情况 `kdump` 配置、则会生成 `vmcore` 文件 `/var/crash/` 目录。正在使用对问题描述进行分类 `lpfc` 驱动程序、但无法一致地复制。 
 |===

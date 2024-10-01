@@ -170,7 +170,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -198,7 +198,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -289,16 +289,16 @@ devices {
 
 带有ONTAP的RHEL 8.1版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275843["1275843"^] | 在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 可能会发生内核中断 | 在使用 QLogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。 QLogic QLE2672 HBA 事件的存储故障转移会影响 "kmem_cache_alloc+131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1760819["1760819"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275843["1275843"^] | 在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 可能会发生内核中断 | 在使用 QLogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。 QLogic QLE2672 HBA 事件的存储故障转移会影响 "kmem_cache_alloc+131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275838["1275838"^] | 在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 会发生内核中断 | 在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2742 HBA 事件的存储故障转移会影响 "kmem_cache_alloc +131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1744082["1744082"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275838["1275838"^] | 在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 会发生内核中断 | 在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2742 HBA 事件的存储故障转移会影响 "kmem_cache_alloc +131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1266250["1266250"^] | 在 iSCSI SAN LUN 上安装 Red Hat Enterprise Linux 8.1 期间，登录到多个路径失败 | 在 iSCSI SAN LUN 多路径设备上安装 Red Hat Enterprise Linux 8.1 期间，无法登录到多个路径。无法在多路径 iSCSI 设备上安装，并且 SAN 启动设备上未启用多路径服务。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1758504["1758504"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1266250["1266250"^] | 在 iSCSI SAN LUN 上安装 Red Hat Enterprise Linux 8.1 期间，登录到多个路径失败 | 在 iSCSI SAN LUN 多路径设备上安装 Red Hat Enterprise Linux 8.1 期间，无法登录到多个路径。无法在多路径 iSCSI 设备上安装，并且 SAN 启动设备上未启用多路径服务。 
 |===

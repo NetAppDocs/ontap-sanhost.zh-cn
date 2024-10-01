@@ -554,11 +554,11 @@ NSID       UUID                                   Size
 
 [cols=""20"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| 1536937 | `nvme list-subsys` 命令会为子系统打印重复的NVMe控制器 | 。 `nvme list-subsys` 命令应返回与给定子系统关联的NVMe控制器的唯一列表。在Oracle Linux 9.1中、 `nvme list-subsys` 命令将返回属于给定子系统的所有命名空间的NVMe控制器以及相应的非对称命名空间访问(AANA)状态。但是、如果列出给定命名空间的子系统命令语法、则显示路径状态的唯一NVMe控制器条目会很有用、因为ANA状态是每个命名空间的属性。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=17998["17998"^] 
+| 1536937 | `nvme list-subsys` 命令会为子系统打印重复的NVMe控制器 | 。 `nvme list-subsys` 命令应返回与给定子系统关联的NVMe控制器的唯一列表。在Oracle Linux 9.1中、 `nvme list-subsys` 命令将返回属于给定子系统的所有命名空间的NVMe控制器以及相应的非对称命名空间访问(AANA)状态。但是、如果列出给定命名空间的子系统命令语法、则显示路径状态的唯一NVMe控制器条目会很有用、因为ANA状态是每个命名空间的属性。 
 
 
-| 1539101 | Oracle Linux 9.1 NVMe-oF主机无法创建永久性发现控制器 | 在Oracle Linux 9.1 NVMe-oF主机上、您可以使用 `nvme discover -p` 用于创建永久性发现控制器(POC)的命令。使用此命令时、应为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Oracle Linux 9.1、则在中创建PDC将失败 `nvme discover -p` 已执行命令。 | link:https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18196["18196"^] 
+| 1539101 | Oracle Linux 9.1 NVMe-oF主机无法创建永久性发现控制器 | 在Oracle Linux 9.1 NVMe-oF主机上、您可以使用 `nvme discover -p` 用于创建永久性发现控制器(POC)的命令。使用此命令时、应为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Oracle Linux 9.1、则在中创建PDC将失败 `nvme discover -p` 已执行命令。 
 |===

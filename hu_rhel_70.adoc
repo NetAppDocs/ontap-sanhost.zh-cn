@@ -169,7 +169,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -197,7 +197,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -288,34 +288,34 @@ devices {
 
 带有ONTAP的RHEL 7.0版本存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=844417["844417"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1131393["1131393"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=844417["844417"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=811587["811587"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1079735["1079735"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=811587["811587"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=803071["803071"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1067895["1067895"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=803071["803071"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=820163["820163"^] | 在存储故障转移操作的 I/O 期间观察到 QLogic 主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 QLogic 主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB<0]=0x54 and Firmware dump saved to temp buffer" ，这会导致主机挂起 / 路径故障。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1090378["1090378"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=820163["820163"^] | 在存储故障转移操作的 I/O 期间观察到 QLogic 主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 QLogic 主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB<0]=0x54 and Firmware dump saved to temp buffer" ，这会导致主机挂起 / 路径故障。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323["799323"^] | 在存储故障转移操作的 I/O 期间观察到 Emulex FCoE （ OCe10102-FX-D ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 10G FCoE 主机（ OCe10102-FX-D ）上出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "DRIVER's buffer pool is empty ， IO useded and SCSI Layer I/O Abort Request Status" （驱动程序的缓冲池为空， IO 繁忙和 SCSI 层 I/O 中止请求状态）消息，这些消息会导致主机挂起 / 路径故障。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1061755["1061755"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323["799323"^] | 在存储故障转移操作的 I/O 期间观察到 Emulex FCoE （ OCe10102-FX-D ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 10G FCoE 主机（ OCe10102-FX-D ）上出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "DRIVER's buffer pool is empty ， IO useded and SCSI Layer I/O Abort Request Status" （驱动程序的缓冲池为空， IO 繁忙和 SCSI 层 I/O 中止请求状态）消息，这些消息会导致主机挂起 / 路径故障。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=849212["849212"^] | 在存储故障转移操作的 I/O 期间，观察到 Emulex 16G FC （ LPe16002B-M6 ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 16G FC （ LPe16002B-M6 ）主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "RSCN 超时数据和 iotag x1301 超出范围：最大 iotag" 消息，这些消息会导致主机挂起 / 路径故障。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1109274["1109274"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=849212["849212"^] | 在存储故障转移操作的 I/O 期间，观察到 Emulex 16G FC （ LPe16002B-M6 ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 16G FC （ LPe16002B-M6 ）主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "RSCN 超时数据和 iotag x1301 超出范围：最大 iotag" 消息，这些消息会导致主机挂起 / 路径故障。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836800["836800"^] | 尽管在安装 RHEL 7.0 操作系统期间登录成功，但 Anacondation 仍会显示 iSCSI 登录失败消息 | 在 iSCSI 多路径 LUN 上安装 root （ / ）时，以太网接口的 IP 地址会在内核命令行中指定，以便在 iSCSI 服务启动之前分配 IP 地址。但是，在 iSCSI 服务启动之前， dracut 无法在启动期间为所有以太网端口分配 IP 地址。这会导致 iSCSI 登录在没有 IP 地址的接口上失败。您将看到 iSCSI 服务多次尝试登录，这将导致操作系统启动时间出现发生原因延迟。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1114966["11149696"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836800["836800"^] | 尽管在安装 RHEL 7.0 操作系统期间登录成功，但 Anacondation 仍会显示 iSCSI 登录失败消息 | 在 iSCSI 多路径 LUN 上安装 root （ / ）时，以太网接口的 IP 地址会在内核命令行中指定，以便在 iSCSI 服务启动之前分配 IP 地址。但是，在 iSCSI 服务启动之前， dracut 无法在启动期间为所有以太网端口分配 IP 地址。这会导致 iSCSI 登录在没有 IP 地址的接口上失败。您将看到 iSCSI 服务多次尝试登录，这将导致操作系统启动时间出现发生原因延迟。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875["836875"^] | 在启动 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统期间，并不总是分配 IP 地址 | 安装 RHEL 7.0 时， anacondation 安装屏幕会显示 iSCSI 登录成功后，对多个目标 IP 的 iSCSI 登录失败。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 RHEL 7.0 操作系统。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1114820["1114820"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875["836875"^] | 在启动 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统期间，并不总是分配 IP 地址 | 安装 RHEL 7.0 时， anacondation 安装屏幕会显示 iSCSI 登录成功后，对多个目标 IP 的 iSCSI 登录失败。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 RHEL 7.0 操作系统。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836657["836657"^] | Anaconda/kernel cmd 行中不会添加 bootdev 参数来为 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统设置 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 RHEL 7.0 操作系统期间设置 IPv4 地址。这样可以防止向任何配置为在 RHEL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1114464["1114464"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836657["836657"^] | Anaconda/kernel cmd 行中不会添加 bootdev 参数来为 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统设置 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 RHEL 7.0 操作系统期间设置 IPv4 地址。这样可以防止向任何配置为在 RHEL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 
 |===

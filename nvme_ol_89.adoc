@@ -579,7 +579,7 @@ NSID     UUID                                   Size
 
 使用ONTAP版本的Oracle Linux 8.9的NVMe-oF主机配置存在以下已知问题：
 
-[cols="1a, 2a, 6a, 1a, options="]
+[cols="1a,4a,4a, options="]
 |===
 
 
@@ -589,8 +589,6 @@ NetApp 错误 ID
 标题
  a| 
 Description
- a| 
-Bugzilla ID
 
 
 
@@ -600,7 +598,5 @@ link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1517321["1
 Oracle Linux 8.9 NVMe-oF主机会创建重复的PDC
  a| 
 在Oracle Linux 8.9 NVMe-oF主机上、通过将 `-p`选项传递到 `nvme discover`命令来创建永久性发现控制器(PDC)。对于给定的启动程序-目标组合、每次执行 `nvme discover`命令时应创建一个PDC。但是、从Oracle Linux 8.x开始、NVMe-oF主机会创建重复数据。这会浪费主机和目标上的资源。
- a| 
-https://bugzilla.oracle.com/bugzilla/show_bug.cgi?id=18118["18118"^]
 
 |===

@@ -451,10 +451,10 @@ NSID UUID                                   Size
 
 使用ONTAP的RHEL 9.1的NVMe-oF主机配置存在以下已知问题：
 
-[cols="10,30,30,10"]
+[cols="20,40,40"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| 1503468 | `nvme list-subsys` 命令返回给定子系统的重复NVMe控制器列表 | 。 `nvme list-subsys` 命令应返回与给定子系统关联的唯一NVMe控制器列表。在RHEL 9.1中、将显示 `nvme list-subsys` 命令将返回属于给定子系统的所有命名空间的NVMe控制器及其相应的ANA状态。但是、ANA状态是每个命名空间的属性、因此、如果您列出了给定命名空间的子系统命令语法、则最好显示具有路径状态的唯一NVMe控制器条目。 | 2130106. 
+| 1503468 | `nvme list-subsys` 命令返回给定子系统的重复NVMe控制器列表 | 。 `nvme list-subsys` 命令应返回与给定子系统关联的唯一NVMe控制器列表。在RHEL 9.1中、将显示 `nvme list-subsys` 命令将返回属于给定子系统的所有命名空间的NVMe控制器及其相应的ANA状态。但是、ANA状态是每个命名空间的属性、因此、如果您列出了给定命名空间的子系统命令语法、则最好显示具有路径状态的唯一NVMe控制器条目。 
 |===

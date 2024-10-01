@@ -181,7 +181,7 @@ blacklist {
 }
 ----
 .示例
-在此示例中、我们将确定设备的WWID并添加到中 `multipath.conf` 文件
+以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
 . 运行以下命令以确定 WWID ：
@@ -209,7 +209,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf` 文件中的文件、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -300,16 +300,16 @@ devices {
 
 带有ONTAP版本的RHEL 6.6存在以下已知问题：
 
-[cols="4*"]
+[cols="3*"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863878["863878"^] | 在存储故障期间， RHEL 6U6 主机发生内核崩溃 | 在存储 / 网络结构期间，您可能会发现 RHEL 6U6 主机上发生内核崩溃。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1158363["1158363"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863878["863878"^] | 在存储故障期间， RHEL 6U6 主机发生内核崩溃 | 在存储 / 网络结构期间，您可能会发现 RHEL 6U6 主机上发生内核崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | 在 RHEL 6U4 中发生存储故障期间， QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞时间高达 300 秒 | 在存储 / 网络结构出现故障期间，您可能会发现 QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞长达 300 秒。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1135962["1135962."^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | 在 RHEL 6U4 中发生存储故障期间， QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞时间高达 300 秒 | 在存储 / 网络结构出现故障期间，您可能会发现 QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞长达 300 秒。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=795684["795684"^] | RHEL6 U5 multipathd 在模块和存储故障转移故障操作期间错误地对多路径映射进行分组 | 在 LUN 按需移动操作期间，您可能会发现 LUN 上的路径分组不正确，并出现存储故障。在 LUN 移动操作期间，由于存储故障导致设备故障，多路径的路径优先级将发生变化，并且多路径无法重新加载设备表。这会导致路径分组不正确。 | link:https://bugzilla.redhat.com/show_bug.cgi?id=1151020["1151020"^] 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=795684["795684"^] | RHEL6 U5 multipathd 在模块和存储故障转移故障操作期间错误地对多路径映射进行分组 | 在 LUN 按需移动操作期间，您可能会发现 LUN 上的路径分组不正确，并出现存储故障。在 LUN 移动操作期间，由于存储故障导致设备故障，多路径的路径优先级将发生变化，并且多路径无法重新加载设备表。这会导致路径分组不正确。 
 |===

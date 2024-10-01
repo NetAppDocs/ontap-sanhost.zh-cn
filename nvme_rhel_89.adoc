@@ -529,10 +529,10 @@ NSID       UUID                                   Size
 
 适用于采用ONTAP版本的RHEL 8.9的NVMe-oF主机配置具有以下已知问题描述：
 
-[cols="10,30,30,10"]
+[cols="20,40,40"]
 |===
-| NetApp 错误 ID | 标题 | Description | Bugzilla ID 
+| NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | RHEL 8.9 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.9、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 | 2087000 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | RHEL 8.9 NVMe-oF主机会创建重复的永久性发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.9、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 
 |===
