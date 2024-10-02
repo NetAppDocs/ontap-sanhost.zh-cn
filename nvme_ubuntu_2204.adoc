@@ -509,7 +509,10 @@ NSID       UUID                                   Size
 
 使用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置存在以下已知问题：
 
-[cols="15,20,50,15"]
+[cols="20,20,60"]
 |===
-| NetApp 错误 ID | 标题 | Description | CONTAPEXT-2037 
+| NetApp 错误 ID | 标题 | Description 
+
+
+| CONTAPEXT-2037 | Ubuntu 22.04 NVMe-oF主机会创建重复的永久性发现控制器 | 在NVMe-oF主机上、可以使用"NVMe discover -p"命令创建永久性发现控制器(PDC)。此命令应仅为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Ubuntu 22.04、则每次执行"nNVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。 
 |===

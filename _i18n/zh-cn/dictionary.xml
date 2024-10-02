@@ -3544,4 +3544,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="95fdb97b04811943bd6001978d618d31" category="list-text">转到<block ref="97bc3f4ff245555de180ca8882444906" category="inline-link-rx"></block>、并将包含Host Utilities的压缩文件下载到主机上的目录中。</block>
   <block id="0142c1c78731d2b44a6976490ee04599" category="paragraph">使用ONTAP版本的Ubuntu 22.04的NVMe-oF主机配置存在以下已知问题：</block>
   <block id="364053ddb08791e86bba8694da89f153" category="cell">CONTAPEXT-2037</block>
+  <block id="e53d231580138a5c74d1783c30057235" category="cell">Ubuntu 22.04 NVMe-oF主机会创建重复的永久性发现控制器</block>
+  <block id="f7529407d6b5167c4740699e83603d32" category="cell">在NVMe-oF主机上、可以使用"NVMe discover -p"命令创建永久性发现控制器(PDC)。此命令应仅为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Ubuntu 22.04、则每次执行"nNVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
 </blocks>
