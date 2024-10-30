@@ -237,8 +237,10 @@ FCP CMPL: xb 00000629 Err 0001bd3d
 --
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
+RHEL 9.4 GA内核中附带的本机内置qla2xxx驱动程序已进行了最新修复。这些修复程序对于ONTAP支持至关重要。
+
 .步骤
-. RHEL 9.4 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----
@@ -295,9 +297,7 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 == 配置 NVMe/TCP
 
-NVMe/TCP没有自动连接功能。因此、您需要手动执行NVMe/TCP连接或全部连接功能、才能发现NVMe/TCP子系统和命名共享。
-
-您可以使用以下操作步骤配置NVMe/TCP。
+NVMe/TCP没有自动连接功能。因此、您应使用以下过程通过手动执行NVMe/TCP连接或全部连接功能来发现NVMe/TCP子系统和命名共享。
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
@@ -445,7 +445,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 
 
 
-NOTE: 从RHEL 9.4开始、这是NVMe/TCP的默认设置 `ctrl_loss_tmo` 超时已关闭、这意味着对重试次数没有限制(无限期重试)。因此、您无需手动配置特定 `ctrl_loss_tmo` 使用时的超时持续时间 `nvme connect` 或 `nvme connect-all` 命令(选项-l)。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
+NOTE: 从RHEL 9.4开始、NVMe/TCP超时的默认设置 `ctrl_loss_tmo`已关闭。这意味着对重试次数没有限制(无限期重试)。因此，在使用或 `nvme connect-all`命令(选项-l)时，无需手动配置特定的 `ctrl_loss_tmo`超时持续时间 `nvme connect`。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
 
 
 

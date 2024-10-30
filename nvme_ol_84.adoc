@@ -32,7 +32,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 == 功能
 
 * 默认情况下、Oracle Linux 8.4为NVMe命名空间启用了内核NVMe多路径。
-* 使用Oracle Linux 8.4、 `nvme-fc auto-connect` 本机中包含脚本 `nvme-cli` 软件包。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的出箱自动连接脚本。
+* 对于Oracle Linux 8.4、 `nvme-fc auto-connect`本机软件包中包含脚本 `nvme-cli`。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的机外自动连接脚本。
 * 使用Oracle Linux 8.4、本机 `udev` 规则在中提供 `nvme-cli` 此软件包可为NVMe多路径启用轮循负载平衡。因此、您不再需要手动创建此规则。
 * 在Oracle Linux 8.4中、NVMe和SCSI流量均可在同一主机上运行。实际上、这应该是通常部署的主机配置。因此、您可以像往常一样为SCSI LUN配置dm-multipath以生成mpath设备、而NVMe多路径则可用于配置NVMe-of多路径设备(例如、 `/dev/nvmeXnY`)。
 * 使用Oracle Linux 8.4、本机中的NetApp插件 `nvme-cli` 软件包可以显示ONTAP 详细信息以及ONTAP 命名空间。
@@ -217,8 +217,10 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 == 为NVMe/FC配置Marvell/QLogic FC适配器
 
+OL 8.4 GA内核中包含的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。
+
 .步骤
-. 验证您是否正在运行受支持的适配器驱动程序和固件版本。OL8.4 GA内核中包含的本机收件箱qla2xxx驱动程序提供了最新的上游修复程序、这些修复程序对于ONTAP 支持至关重要。
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----

@@ -237,17 +237,21 @@ FCP CMPL: xb 00000821 Err 00012fcd
 --
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
+RHEL 8.8 GA内核中附带的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。
+
 .步骤
-. RHEL 8.8 GA内核中包含的本机内置qla2xxx驱动程序包含对ONTAP支持至关重要的最新上游修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
+验证您是否正在运行受支持的适配器驱动程序和固件版本：
+
 +
+
 [listing]
 ----
 # cat /sys/class/fc_host/host*/symbolic_name
 ----
-+
-*示例输出*
++*示例输出*
 
 +
+
 [listing]
 ----
 QLE2772 FW:v9.10.11 DVR:v10.02.07.900-k-debug

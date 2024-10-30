@@ -26,8 +26,7 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-.您需要的内容
-如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
+如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。
 
 .步骤
 . 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
@@ -96,7 +95,7 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 您必须验证您的配置是否满足系统要求。有关详细信息，请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 和 Veritas HCL 表。
 
 .示例
-在此示例中，使用 `vxdmpadm` 命令验证 VxDMP 多路径是否已连接 ONTAP 目标阵列。
+在以下示例中、 `vxdmpadm`使用命令验证VxDMP多路径是否已连接ONTAP目标阵列。
 
 [listing]
 ----
@@ -144,7 +143,7 @@ ARRAY_TYPE  ALUA, A/A
 
 === 非ASA配置
 
-对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
+对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
@@ -160,7 +159,7 @@ sdcj  ENABLED(A)  Active/Optimized     c14   SFRAC       sfrac0     -      -
 sdea  ENABLED     Active/Non-Optimized c14   SFRAC       sfrac0     -      -
 ----
 
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
 
 
 

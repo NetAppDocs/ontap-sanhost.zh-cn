@@ -6,7 +6,7 @@ settings:
   prod:
     pdf_enabled: true
     harmony_enabled: false
-  langs: zh-cn,us-en,de-de,es-es,fr-fr,it-it,pt-br,ja-jp,ko-kr,zh-tw
+  langs: zh-cn,us-en,ja-jp,ko-kr,zh-tw,de-de,es-es,fr-fr,it-it
 sidebar:
   entries:
   - title: 配置SAN主机和云客户端
@@ -317,11 +317,11 @@ sidebar:
         url: "/hu_solaris_114.html"
       - title: '11.3'
         url: "/hu_solaris_113.html"
-    - title: SLES
+    - title: SUSE Linux Enterprise Server
       entries:
       - title: 发行说明
         url: "/hu_sles_asm_release_notes.html"
-      - title: SLES 15
+      - title: SUSE Linux Enterprise Server 15
         pdf-filename: sle-15-fcp
         entries:
         - title: 15 SP5.
@@ -336,7 +336,7 @@ sidebar:
           url: "/hu_sles_15SP1.html"
         - title: '15'
           url: "/hu_sles_15.html"
-      - title: SLES 12
+      - title: SUSE Linux Enterprise Server 12
         entries:
         - title: 12 SP 5
           url: "/hu_sles_12SP5.html"
@@ -468,10 +468,10 @@ sidebar:
           url: "/nvme_rhel_82.html"
         - title: '8.1'
           url: "/nvme_rhel_81.html"
-    - title: SLES
+    - title: SUSE Linux Enterprise Server
       pdf-filename: NVMeoF SLES
       entries:
-      - title: SLES 15
+      - title: SUSE Linux Enterprise Server 15
         entries:
         - title: 15 SP5.
           url: "/nvme_sles15_sp5.html"
@@ -501,7 +501,7 @@ sidebar:
     - title: 故障排除
       url: "/troubleshoot.html"
   - title: 法律声明
-    url: "/legal_notices.html"
+    url: "/legal-notices.html"
 product-family:
   name: ONTAP
   repo: ontap-family

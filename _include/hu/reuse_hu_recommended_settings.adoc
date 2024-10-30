@@ -13,7 +13,7 @@
 # chkconfig multipathd on
 # /etc/init.d/multipathd start
 ----
-不需要直接向 `multipath.conf`文件中添加任何内容、除非您有不希望多路径管理的设备或现有设置覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+除非您的设备不希望多路径管理、或者您的现有设置覆盖默认值、否则不需要直接向文件中添加任何内容 `multipath.conf`。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
 
 [listing]
 ----
@@ -28,7 +28,7 @@ blacklist {
 以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
-. 运行以下命令以确定 WWID ：
+. 确定WWID：
 +
 [listing]
 ----
@@ -36,7 +36,7 @@ blacklist {
 360030057024d0730239134810c0cb833
 ----
 +
-`sda` 是我们需要将其添加到黑名单中的本地SCSI磁盘。
+`sda`是要添加到黑名单中的本地SCSI磁盘。
 
 . 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +

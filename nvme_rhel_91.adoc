@@ -16,7 +16,7 @@ summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机
 
 
 [role="lead"]
-采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的RHEL 9.1支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在RHEL 9.1和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
+采用非对称命名空间访问(Asymmetric Namespace Access、ANA)的RHEL 9.1支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和NVMe/TCP)、这是ONTAP 阵列上运行正常的存储故障转移(Storage Failover、SFO)所需的。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。通过此过程、您可以使用RHEL 9.1上的ANA和ONTAP作为目标、使用内核NVMe多路径启用NVMe-oF。
 
 对于采用ONTAP的RHEL 9.1、NVMe-oF主机配置支持以下功能：
 
@@ -186,7 +186,7 @@ FCP CMPL: xb 00000000 Err 00000004
 --
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
-本机收件箱 `qla2xxx` RHEL 9.1内核中包含的驱动程序包含最新的修复程序、这些修复程序对于ONTAP支持至关重要。
+RHEL 9.1内核中包含的本机内置 `qla2xxx`驱动程序具有最新的修复程序、这些修复程序是。这些修复程序对于ONTAP支持至关重要。
 
 .步骤
 . 使用以下命令验证您是否正在运行受支持的适配器驱动程序和固件版本：

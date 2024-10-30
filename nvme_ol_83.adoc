@@ -22,7 +22,7 @@ summary: 使用ONTAP 为Oracle Linux 8.3设置VME/FC主机配置、包括示例
 
 == 可支持性
 
-Oracle Linux 8.3支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC)、并且在ONTAP 阵列上执行无故障存储故障转移(Storage Failover、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVMe-oF环境中的ALUA等效产品、目前已通过内核NVMe多路径实施。本文档详细介绍了如何在OL 8.3和ONTAP 上使用ANA作为目标来启用采用内核NVMe多路径的NVMe-oF。
+Oracle Linux 8.3支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC)、并且在ONTAP 阵列上执行无故障存储故障转移(Storage Failover、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVMe-oF环境中的ALUA等效产品、目前已通过内核NVMe多路径实施。通过此过程、您可以使用基于OL 8.3的ANA和ONTAP作为目标、为NVMe-oF启用内核NVMe多路径。
 
 
 NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
@@ -32,7 +32,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 == 功能
 
 * 默认情况下、Oracle Linux 8.3为NVMe命名空间启用了内核NVMe多路径。
-* 使用Oracle Linux 8.3、 `nvme-fc auto-connect` 脚本包含在本机NVMe-CLI软件包中。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的出箱自动连接脚本。
+* 对于Oracle Linux 8.3、 `nvme-fc auto-connect`本机NVMe-CLI软件包中包含脚本。您可以使用这些本机自动连接脚本、而不是安装外部供应商提供的机外自动连接脚本。
 * 使用Oracle Linux 8.3、这是一种本机 `udev` 规则在中提供 `nvme-cli` 此软件包可为NVMe多路径启用轮循负载平衡。因此、您不再需要手动创建此规则。
 * 在Oracle Linux 8.3中、NVMe和SCSI流量均可在同一主机上运行。实际上、这应该是通常部署的主机配置。因此、对于SCSI、您可以像往常一样为SCSI LUN配置dm-multipath以生成mpath设备、而NVMe多路径则可用于配置NVMe-of多路径设备(例如、 `/dev/nvmeXnY`)。
 * 使用Oracle Linux 8.3时、本机中的NetApp插件 `nvme-cli` 软件包可以显示ONTAP 详细信息以及ONTAP 命名空间。
@@ -224,8 +224,10 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 
 == 为NVMe/FC配置Marvell/QLogic FC适配器
 
+OL 8.3 GA内核中包含的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。
+
 .步骤
-. 验证您是否正在运行受支持的适配器驱动程序和固件版本。OL 8.3 GA内核中包含的本机收件箱qla2xxx驱动程序提供了对ONTAP 支持至关重要的最新上游修复程序。
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----

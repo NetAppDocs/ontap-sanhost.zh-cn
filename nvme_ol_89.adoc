@@ -22,7 +22,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置
 
 * 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机 `nvme-cli`软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
 * NVMe 和 SCSI 流量均可在同一主机上运行。因此、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
-* NVMe-oF 不支持 sanlun 。因此、在Oracle Linux 8.9主机上、不存在针对NVMe-oF的主机实用程序支持。您可以依靠本机 `nvme-cli`软件包中包含的NetApp插件进行所有NVMe-oF传输。
+* NVMe-oF 不支持 sanlun 。因此、在Oracle Linux 8.9主机上、不存在针对NVMe-oF的主机实用程序支持。您可以使用本机软件包中的NetApp插件 `nvme-cli`进行所有NVMe-oF传输。
 
 
 有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
@@ -243,8 +243,10 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 --
 .适用于NVMe/FC的Marvell/QLogic FC适配器
 --
+Oracle Linux 8.9 GA内核中包含的本机内置qla2xxx驱动程序已进行了最新修复。这些修复程序对于ONTAP支持至关重要。
+
 .步骤
-. Oracle Linux 8.9 GA内核中包含的本机内置qla2xxx驱动程序包含ONTAP支持所必需的最新修复程序。验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]
 ----

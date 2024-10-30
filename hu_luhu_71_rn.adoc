@@ -53,7 +53,7 @@ NOTE: 在初始版本之后、NetApp将继续与Host Utilities配合使用、以
 
 == 此版本已修复
 
-运行时发生的间歇性主机操作系统故障问题描述 `sanlun lun show -p` SLES12SP1、OL7.2、RHEL7.2和RHEL 6.8中的命令已在此版本中修复。
+此版本修复了在SUSE Linux Enterprise Server 12 SP1、OL 7.2、RHEL 7.2和RHEL 6.8中运行命令时出现的间歇性主机操作系统故障问题 `sanlun lun show -p`。
 
 
 

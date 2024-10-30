@@ -24,7 +24,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.2 配置 NVMe/FC 主机
 
 == 功能
 
-* 从RHEL 8.2开始、 `nvme-fc auto-connect` 本机中包含脚本 `nvme-cli` 软件包。您可以使用这些原生自动连接脚本，而不必安装外部供应商提供的出箱自动连接脚本。
+* 从RHEL 8.2开始、 `nvme-fc auto-connect`本机软件包中包含脚本 `nvme-cli`。您可以使用这些本机自动连接脚本、而不必安装外部供应商提供的发件箱自动连接脚本。
 * 从RHEL 8.2开始、是一种本机 `udev` 规则已作为的一部分提供 `nvme-cli` 此软件包可为NVMe多路径启用轮循负载平衡。您无需再手动创建此规则（如 RHEL 8.1 中所做的那样）。
 * 从RHEL 8.2开始、NVMe和SCSI流量均可在同一主机上运行。实际上、这是预期部署的主机配置。因此、对于SCSI、您可以进行配置 `dm-multipath` 与往常一样、SCSI LUN会导致 `mpath` 设备、而NVMe多路径可用于在主机上配置NVMe-oF多路径设备。
 * 从RHEL 8.2开始、是本机中的NetApp插件 `nvme-cli` 软件包能够显示ONTAP名称库的ONTAP详细信息。

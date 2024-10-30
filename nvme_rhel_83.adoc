@@ -44,7 +44,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机
 . 在服务器上安装 Red Hat Enterprise Linux 8.3 GA 。
 . 如果要使用从RHEL 8.2升级到RHEL 8.3 `yum update/upgrade` 命令、您的 `/etc/nvme/host*` 文件可能会丢失。要避免文件丢失、请使用以下操作步骤：
 +
-.步骤
+.显示示例输出
 [%collapsible]
 ====
 .. 备份 ` /etc/nvme/host*` 文件。

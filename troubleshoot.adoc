@@ -16,7 +16,7 @@ summary: 您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配
 
 
 [role="lead"]
-在对RHEL、OL和SLES主机的任何NVMe-oF故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规范、然后继续执行后续步骤以调试任何主机端问题。
+在对RHEL、OL和SUSE Linux Enterprise Server主机的任何NVMe-oF故障进行故障排除之前、请验证您运行的配置是否符合互操作性表工具(IMT)规范、然后继续执行后续步骤以调试任何主机端问题。
 
 
 NOTE: 故障排除说明不适用于AIX、Windows和ESXi主机。

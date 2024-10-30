@@ -26,8 +26,7 @@ summary: 介绍如何在 ONTAP 中使用 CentOS 8.3
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-.您需要的内容
-如果您当前安装的是Linux Unified Host Utilities版本、则应升级或删除该版本、然后按照以下步骤安装最新版本。
+如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。
 
 .步骤
 . 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
@@ -59,7 +58,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 ----
 controller(7mode/E-Series)/            device     host               lun
 vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
--------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
 data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
 data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
@@ -92,7 +91,9 @@ NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将�
 
 对于 CentOS 8.3 ，必须存在 /etc/multipath.conf 文件，但您不需要对该文件进行特定更改。CentOS 8.3 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。
 
-您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。以下各节提供了映射到 ASA 和非 ASA 角色的 LUN 的示例多路径输出。
+您可以使用 `multipath -ll` 命令验证 ONTAP LUN 的设置。
+
+以下各节提供了映射到ASA和非ASA用户身份的LUN的示例多路径输出。
 
 
 
@@ -115,13 +116,13 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 11:0:11:1  sdpt  131:304  active ready running
 ----
 
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
 
 
 
 === 非ASA配置
 
-对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动 / 优化路径，这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态，但未进行优化，因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
+对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
@@ -139,7 +140,7 @@ size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=
   |- 15:0:1:35 sdbx  68:176  active ready running
 ----
 
-NOTE: 请勿使用过多的路径访问单个 LUN 。所需路径不应超过四个。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
 
 
 
@@ -156,7 +157,7 @@ CentOS 8.3操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非A
 # chkconfig multipathd on
 # /etc/init.d/multipathd start
 ----
-不需要直接向 `multipath.conf`文件中添加任何内容、除非您有不希望多路径管理的设备或现有设置覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+除非您的设备不希望多路径管理、或者您的现有设置覆盖默认值、否则不需要直接向文件中添加任何内容 `multipath.conf`。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
 
 [listing]
 ----
@@ -171,7 +172,7 @@ blacklist {
 以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
 
 .步骤
-. 运行以下命令以确定 WWID ：
+. 确定WWID：
 +
 [listing]
 ----
@@ -179,7 +180,7 @@ blacklist {
 360030057024d0730239134810c0cb833
 ----
 +
-`sda` 是我们需要将其添加到黑名单中的本地SCSI磁盘。
+`sda`是要添加到黑名单中的本地SCSI磁盘。
 
 . 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
