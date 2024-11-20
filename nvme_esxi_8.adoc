@@ -22,8 +22,9 @@ summary: '您可以在运行ESXi 8.x和ONTAP 的启动程序主机上将基于�
 
 == 可支持性
 
-* 从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP协议。
+* 从NVMe.161开始、所有新创建的ONTAP 9命名空间都会默认启用空间分配。
 * 从ONTAP 9.9.1 P3开始、ESXi 8及更高版本支持NVMe/FC协议。
+* 从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP协议。
 
 
 
@@ -266,6 +267,38 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
    Path State: active
    Path Config: {ANA_GRP_id=6,*ANA_GRP_state=AO*,health=UP}
 ----
+
+
+
+
+== 启用空间分配
+
+ESXi 8.x及更高版本支持空间分配。
+
+启用空间分配后、如果命名空间用尽、则ONTAP会与主机通信、指出没有可用空间可用于写入操作；命名空间将保持联机、并继续为读取操作提供服务。当有更多可用空间可用时、写入操作将恢复。空间分配还允许主机执行 `UNMAP`(有时称为 `TRIM`)操作。通过取消映射操作、主机可以确定不再需要的数据块、因为这些数据块不再包含有效数据。然后、存储系统可以取消分配这些数据块、以便可以在其他位置使用这些空间。
+
+.开始之前
+link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html["在ONTAP存储系统上启用空间分配"^](英文)然后、您应在ESXi主机上执行以下步骤。
+
+.步骤
+. 在ESXi主机上、验证DSM是否已禁用：
++
+`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+
++
+预期值为0。
+
+. 启用NVMe DSM：
++
+`esxcfg-advcfg -s 1 /Scsi/NvmeUseDsmTp4040`
+
+. 验证DSM是否已启用：
++
+`esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
+
++
+预期值为1。
+
 
 
 

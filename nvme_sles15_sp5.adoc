@@ -236,12 +236,20 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将 `lpfc` `lpfc_sg_seg_cnt`参数的值从默认值64增加到256。
 
+
+NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
+
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
 +
 [listing]
 ----
-# cat /etc/modprobe.d/lpfc.conf
+cat /etc/modprobe.d/lpfc.conf
+----
++
+.示例输出
+[listing]
+----
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机：
@@ -249,13 +257,12 @@ options lpfc lpfc_sg_seg_cnt=256
 +
 [listing]
 ----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
++
+预期值为256。
 
 
-
-NOTE: 这不适用于逻辑NVMe/FC主机。
 
 
 
@@ -273,7 +280,7 @@ Created symlink /etc/systemd/system/default.target.wants/nvmf- autoconnect.servi
 
 ----
 . 重新启动主机。
-. 请验证 `nvmf-autoconnect.service` 和 `nvmefc-boot-connections.service` 在系统启动后运行：
+. 验证和 `nvmefc-boot-connections.service`是否 `nvmf-autoconnect.service`在系统启动后运行：
 +
 *示例输出：*
 

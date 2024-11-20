@@ -22,7 +22,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.8的NVMe-oF主机配置
 
 * 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机中的NetApp插件 `nvme-cli` 软件包可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
 * NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
-* NVMe-oF 不支持 sanlun 。因此、在OL 8.8主机上、不存在对NVMe-oF的主机实用程序支持。您可以使用本机软件包中的NetApp插件 `nvme-cli`进行所有NVMe-oF传输。
+* NVMe-oF 不支持 sanlun 。因此、在OL 8.8主机上、不存在对NVMe-oF的主机实用程序支持。您可以依靠本机 `nvme-cli`软件包中包含的NetApp插件进行所有NVMe-oF传输。
 
 
 有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
@@ -268,12 +268,20 @@ QLE2742 FW:v9.12.00 DVR:v10.02.08.100-k
 
 ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将 `lpfc` `lpfc_sg_seg_cnt`参数的值从默认值64增加到256。
 
+
+NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
+
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
 +
 [listing]
 ----
-# cat /etc/modprobe.d/lpfc.conf
+cat /etc/modprobe.d/lpfc.conf
+----
++
+.示例输出
+[listing]
+----
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机：
@@ -281,13 +289,12 @@ options lpfc lpfc_sg_seg_cnt=256
 +
 [listing]
 ----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
++
+预期值为256。
 
 
-
-NOTE: 这不适用于逻辑NVMe/FC主机。
 
 
 

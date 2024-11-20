@@ -39,7 +39,7 @@ summary: 介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVM
 == 已知限制
 
 * 目前不支持使用NVMe-oF协议启动SAN。
-* NVMe-oF不支持sanlun。因此、在SUSE Linux Enterprise Server 15 SP5主机上、主机实用程序不支持NVMe-oF。您可以使用本机NVMe-CLI软件包中提供的NetApp插件进行所有NVMe-oF传输。
+* NVMe-oF不支持sanlun。因此、在SUSE Linux Enterprise Server 15 SP5主机上、主机实用程序不支持NVMe-oF。您可以依靠本机NVMe-CLI软件包中提供的NetApp插件来进行所有NVMe-oF传输。
 
 
 
@@ -225,12 +225,20 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将 `lpfc` `lpfc_sg_seg_cnt`参数的值从默认值64增加到256。
 
+
+NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
+
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
 +
 [listing]
 ----
-# cat /etc/modprobe.d/lpfc.conf
+cat /etc/modprobe.d/lpfc.conf
+----
++
+.示例输出
+[listing]
+----
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机：
@@ -238,13 +246,12 @@ options lpfc lpfc_sg_seg_cnt=256
 +
 [listing]
 ----
-# cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-256
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
++
+预期值为256。
 
 
-
-NOTE: 这不适用于逻辑NVMe/FC主机。
 
 
 
@@ -261,7 +268,7 @@ NOTE: 这不适用于逻辑NVMe/FC主机。
 Created symlink /etc/systemd/system/default.target.wants/nvmf-autoconnect.service → /usr/lib/systemd/system/nvmf-autoconnect.service.
 ----
 . 重新启动主机。
-. 请验证 `nvmf-autoconnect.service` 和 `nvmefc-boot-connections.service` 在系统启动后运行：
+. 验证和 `nvmefc-boot-connections.service`是否 `nvmf-autoconnect.service`在系统启动后运行：
 +
 *示例输出：*
 
