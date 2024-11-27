@@ -172,7 +172,7 @@ sdcj  ENABLED(A)  Active/Optimized     c14   SFRAC       sfrac0     -      -
 sdea  ENABLED     Active/Non-Optimized c14   SFRAC       sfrac0     -      -
 ----
 
-NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个、则可能会在存储故障期间导致路径问题。
 
 
 

@@ -79,7 +79,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. 运行 `dracut -f` 命令，然后重新启动主机。
+. 运行 `dracut -f`命令、然后重新启动主机。
 . 主机启动后，验证 lpfc_sg_seg_cnt 是否设置为 256 。
 +
 [listing]

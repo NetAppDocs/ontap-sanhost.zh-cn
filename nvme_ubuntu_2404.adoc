@@ -1,0 +1,591 @@
+---
+sidebar: sidebar 
+permalink: nvme_ubuntu_2404.html 
+keywords: nvme, linux, rhel, red hat, enterprise 
+summary: 如何使用ONTAP为Ubuntu 24.04配置NVMe-oF主机 
+---
+= 适用于采用ONTAP的Ubuntu 24.04的NVMe-oF主机配置
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Ubuntu 24.04和非对称命名空间访问(AANA)支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。
+
+对于采用ONTAP的Ubuntu 24.04的NVMe-oF主机配置、可获得以下支持：
+
+* 本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC命名库的ONTAP详细信息。
+* 在给定主机总线适配器(HBA)的同一主机上同时使用NVMe和SCSI流量、而不使用显式dm-dpath设置、以防止声明NVMe命名空间。
+
+
+有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+
+
+
+== 功能
+
+默认情况下、Ubuntu 24.04已为NVMe命名空间启用内核NVMe多路径。这意味着您不需要显式设置。
+
+
+
+== 已知限制
+
+对于采用ONTAP的Ubuntu 24.04、当前不支持使用NVMe-oF协议启动SAN。
+
+
+
+== 验证软件版本
+
+您可以使用以下操作步骤验证支持的最低Ubuntu 24.04软件版本。
+
+.步骤
+. 在服务器上安装Ubuntu 24.04。安装完成后、验证是否正在运行指定的Ubuntu 24.04内核：
++
+[listing]
+----
+uname -r
+----
++
+[listing]
+----
+6.8.0-31-generic
+----
+. 安装 `NVMe-CLI` 软件包：
++
+[listing]
+----
+apt list | grep nvme
+----
++
+[listing]
+----
+nvme-cli/noble-updates 2.8-1ubuntu0.1 amd64
+----
+. 在Ubuntu 24.04主机上，检查hostnqn字符串，网址为 `/etc/nvme/hostnqn`：
++
+[listing]
+----
+cat /etc/nvme/hostnqn
+----
++
+[listing]
+----
+nqn.2014-08.org.nvmexpress:uuid:ace18dd8-1f5a-11ec-b0c3-3a68dd61a6ff
+----
+. 验证中的字符串是否 `hostnqn`与ONTAP阵列上对应子系统的字符串 `/etc/nvme/hostnqn`匹配 `hostnqn`：
++
+[listing]
+----
+vserver nvme subsystem host show -vserver vs_106_fc_nvme
+----
++
+[listing]
+----
+Vserver     Subsystem          Host NQN
+----------- --------------- ----------------------------------------------------------
+vs_106_fc_nvme ub_106 nqn.2014-08.org.nvmexpress:uuid:c04702c8-e91e-4353-9995-ba4536214631
+----
++
+
+NOTE: 如果 `hostnqn`字符串不匹配、请使用 `vserver modify`命令更新 `hostnqn`相应ONTAP阵列子系统上的字符串、使其与主机上的字符串 `/etc/nvme/hostnqn`匹配 `hostnqn`。
+
+
+
+
+
+== 配置 NVMe/FC
+
+您可以为Broadcom/Emulex或Marvell/Qlogic适配器配置NVMe/FC。
+
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
+为Broadcom/Emulex适配器配置NVMe/FC。
+
+.步骤
+. 确认您使用的是受支持的适配器型号：
++
+.. `cat /sys/class/scsi_host/host*/modelname`
++
+[listing]
+----
+LPe36002-M64
+LPe36002-M64
+
+----
+.. `cat /sys/class/scsi_host/host*/modeldesc`
++
+[listing]
+----
+Emulex LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
+Emulex LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
+
+----
+
+
+. 确认您使用的是建议的Broadcom `lpfc`固件和内置驱动程序。
++
+.. `cat /sys/class/scsi_host/host*/fwrev`
++
+[listing]
+----
+14.4.317.10, sli-4:6:d
+14.4.317.10, sli-4:6:d
+----
+.. `cat /sys/module/lpfc/version`
++
+[listing]
+----
+0:14.2.0.17
+----
++
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+
+
+
+. 请验证 `lpfc_enable_fc4_type` 设置为 `3`：
++
+[listing]
+----
+cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+----
++
+预期输出为3。
+
+. 验证启动程序端口是否已启动且正在运行、以及您是否可以看到目标生命周期：
++
+.. `cat /sys/class/fc_host/host*/port_name`
++
+[listing]
+----
+0x100000109bf0447b
+0x100000109bf0447c
+----
+.. `cat /sys/class/fc_host/host*/port_state`
++
+[listing]
+----
+Online
+Online
+----
+.. `cat /sys/class/scsi_host/host*/nvme_info`
++
+.显示示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x100000109bf0447b WWNN x200000109bf0447b DID x022600 *ONLINE*
+NVME RPORT       WWPN x200fd039eaa8138b WWNN x200ad039eaa8138b DID x021006 *TARGET DISCSRVC ONLINE*
+
+NVME Statistics
+LS: Xmt 0000000187 Cmpl 0000000187 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 0000000014096514 Issue 000000001407fcd6 OutIO fffffffffffe97c2
+        abort 00000048 noxri 00000000 nondlp 0000001c qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00000048 Err 00000077
+
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x100000109bf0447c WWNN x200000109bf0447c DID x022300 *ONLINE*
+NVME RPORT       WWPN x2010d039eaa8138b WWNN x200ad039eaa8138b DID x021106 *TARGET DISCSRVC ONLINE*
+
+NVME Statistics
+LS: Xmt 0000000187 Cmpl 0000000187 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 00000000140970ed Issue 00000000140813da OutIO fffffffffffea2ed
+        abort 00000047 noxri 00000000 nondlp 0000002b qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 00000047 Err 00000075
+----
+=====
+
+
+
+
+--
+.适用于NVMe/FC的Marvell/QLogic FC适配器
+--
+Ubuntu 24.04 GA内核中包含的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。
+
+.步骤
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
++
+[listing]
+----
+cat /sys/class/fc_host/host*/symbolic_name
+----
++
+[listing]
+----
+QLE2872 FW: v9.15.00 DVR: v10.02.09.100-k
+QLE2872 FW: v9.15.00 DVR: v10.02.09.100-k
+----
+. 请验证 `ql2xnvmeenable` 已设置。这样、Marvell适配器便可用作NVMe/FC启动程序：
++
+[listing]
+----
+cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+----
++
+预期输出为1。
+
+
+
+--
+====
+
+
+=== 启用1 MB I/O (可选)
+
+ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、必须将 `lpfc` `lpfc_sg_seg_cnt`参数的值从默认值64增加到256。
+
+
+NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[listing]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+.示例输出
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机：
+. 验证是否 `lpfc_sg_seg_cnt`为256：
++
+[listing]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
++
+预期值为256。
+
+
+
+
+
+== 配置 NVMe/TCP
+
+NVMe/TCP不支持自动连接功能。而是可以使用或 `connect-all`命令手动发现NVMe/TCP子系统和命名路径 `connect`。
+
+.步骤
+. 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
++
+[listing]
+----
+nvme discover -t tcp -w <host-traddr> -a <traddr>
+----
++
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+# nvme discover -t tcp -w 192.168.167.150 -a 192.168.167.155
+Discovery Log Number of Records 8, Generation counter 10
+=====Discovery Log Entry 0======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  4
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:discovery
+traddr:  192.168.167.156
+eflags:  *explicit discovery connections, duplicate discovery information*
+sectype: *none*
+=====Discovery Log Entry 1======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  2
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:discovery
+traddr:  192.168.166.156
+eflags:  *explicit discovery connections, duplicate discovery information*
+sectype: *none*
+=====Discovery Log Entry 2======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  3
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:discovery
+traddr:  192.168.167.155
+eflags:  *explicit discovery connections, duplicate discovery information*
+sectype: *none*
+=====Discovery Log Entry 3======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  1
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:discovery
+traddr:  192.168.166.155
+eflags:  *explicit discovery connections, duplicate discovery information*
+sectype: *none*
+=====Discovery Log Entry 4======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  4
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:subsystem.ubuntu_24.04_tcp_211
+traddr:  192.168.167.156
+eflags:  none
+sectype: none
+=====Discovery Log Entry 5======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  2
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:subsystem.ubuntu_24.04_tcp_211
+traddr:  192.168.166.156
+eflags:  none
+sectype: none
+=====Discovery Log Entry 6======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  3
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:subsystem.ubuntu_24.04_tcp_211
+traddr:  192.168.167.155
+eflags:  none
+sectype: none
+=====Discovery Log Entry 7======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  1
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:subsystem.ubuntu_24.04_tcp_211
+traddr:  192.168.166.155
+eflags:  none
+sectype: none
+----
+====
+. 验证其他NVMe/TCP启动程序-目标LIF组合是否可以提取发现日志页面数据：
++
+[listing]
+----
+nvme discover -t tcp -w <host-traddr> -a <traddr>
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+#nvme discover -t tcp -w 192.168.167.150 -a 192.168.167.155
+#nvme discover -t tcp -w 192.168.167.150 -a 192.168.167.156
+#nvme discover -t tcp -w 192.168.166.150 -a 192.168.166.155
+#nvme discover -t tcp -w 192.168.166.150 -a 192.168.166.156
+----
+====
+. 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
++
+[listing]
+----
+nvme connect-all -t tcp -w <host-traddr> -a <traddr>
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+#nvme connect-all -t tcp -w 192.168.167.150 -a 192.168.167.155
+#nvme connect-all -t tcp -w 192.168.167.150 -a 192.168.167.156
+#nvme connect-all -t tcp -w 192.168.166.150 -a 192.168.166.155
+#nvme connect-all -t tcp -w 192.168.166.150 -a 192.168.166.156
+----
+====
++
+
+NOTE: 从Ubuntu 24.04开始、NVMe/TCP的Ctrl_loss _TMo超时默认设置已关闭。这意味着对重试次数没有限制(无限期重试)，使用或 `nvme connect-all`命令时，您无需手动配置特定的Ctrl_loss－Tol超时持续时间 `nvme connect`(选项-l)。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
+
+
+
+
+
+== 验证 NVMe-oF
+
+您可以使用以下操作步骤验证NVMe-oF。
+
+.步骤
+. 验证是否已启用内核NVMe多路径：
++
+[listing]
+----
+cat /sys/module/nvme_core/parameters/multipath
+----
++
+预期输出为"Y"。
+
+. 验证NetApp ONTAP主机上是否正确显示了相应ONTAP命名库的适当NVMe-oF设置(例如、型号设置为"NVMe-Controller"、负载平衡iopolicy设置为"round -robin")：
++
+.. `cat /sys/class/nvme-subsystem/nvme-subsys*/model`
++
+[listing]
+----
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
+.. `cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy`
++
+[listing]
+----
+round-robin
+round-robin
+----
+
+
+. 验证是否已在主机上创建并正确发现命名空间：
++
+[listing]
+----
+nvme list
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+Node         SN                         Model
+---------------------------------------------------------
+/dev/nvme0n1 81CZ5BQuUNfGAAAAAAAB	NetApp ONTAP Controller
+
+
+Namespace Usage   Format                FW            Rev
+-----------------------------------------------------------
+1                 21.47 GB / 21.47 GB	4 KiB + 0 B   FFFFFFFF
+----
+====
+. 验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态：
++
+[role="tabbed-block"]
+====
+.NVMe/FC
+--
+[listing]
+----
+nvme list-subsys /dev/nvme0n1
+----
+.显示示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.8763d311b2ac11ed950ed039ea951c46:subsystem. ubuntu_24.04 \
++- nvme1 *fc* traddr=nn-0x20a6d039ea954d17:pn-0x20a7d039ea954d17,host_traddr=nn-0x200000109b1b95ef:pn-0x100000109b1b95ef *live optimized*
++- nvme2 *fc* traddr=nn-0x20a6d039ea954d17:pn-0x20a8d039ea954d17,host_traddr=nn-0x200000109b1b95f0:pn-0x100000109b1b95f0 *live optimized*
++- nvme3 *fc* traddr=nn-0x20a6d039ea954d17:pn-0x20aad039ea954d17,host_traddr=nn-0x200000109b1b95f0:pn-0x100000109b1b95f0 *live non-optimized*
++- nvme5 *fc* traddr=nn-0x20a6d039ea954d17:pn-0x20a9d039ea954d17,host_traddr=nn-0x200000109b1b95ef:pn-0x100000109b1b95ef *live non-optimized*
+----
+=====
+--
+.NVMe/TCP
+--
+[listing]
+----
+nvme list-subsys /dev/nvme1n1
+----
+.显示示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:subsystem.ubuntu_24.04_tcp_211
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0050-3410-8035-c3c04f4a5933
+               iopolicy=round-robin
+ +- nvme0 *tcp* traddr=192.168.166.155,trsvcid=4420,host_traddr=192.168.166.150,src_addr=192.168.166.150 *live optimized*
+ +- nvme1 *tcp* traddr=192.168.167.155,trsvcid=4420,host_traddr=192.168.167.150,src_addr=192.168.167.150 *live optimized*
+ +- nvme2 *tcp* traddr=192.168.166.156,trsvcid=4420,host_traddr=192.168.166.150,src_addr=192.168.166.150 *live non-optimized*
+ +- nvme3 *tcp* traddr=192.168.167.156,trsvcid=4420,host_traddr=192.168.167.150,src_addr=192.168.167.150 *live non-optimized*
+----
+=====
+--
+====
+. 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
++
+[role="tabbed-block"]
+====
+.列
+--
+[listing]
+----
+nvme netapp ontapdevices -o column
+----
+.显示示例输出
+[%collapsible]
+=====
+[listing]
+----
+Device        Vserver        Namespace Path          NSID UUID                                   Size
+------------- -------------  ----------------------- ---- -------------------------------------- ---------
+/dev/nvme0n1   vs_211_tcp    /vol/tcpvol1/ns1        1    1cc7bc78-8d7b-4d8e-a3c4-750f9461a6e9   21.47GB
+----
+=====
+--
+.JSON
+--
+[listing]
+----
+nvme netapp ontapdevices -o json
+----
+.显示示例输出
+[%collapsible]
+=====
+[listing]
+----
+{
+
+"ONTAPdevices" : [
+{
+      "Device":"/dev/nvme0n9",
+      "Vserver":"vs_211_tcp",
+      "Namespace_Path":"/vol/tcpvol9/ns9",
+      "NSID":9,
+      "UUID":"99640dd9-8463-4c12-8282-b525b39fc10b",
+      "Size":"21.47GB",
+      "LBA_Data_Size":4096,
+      "Namespace_Size":5242880
+    }
+  ]
+}
+
+----
+=====
+--
+====
+
+
+
+
+== 已知问题
+
+使用ONTAP版本的Ubuntu 24.04的NVMe-oF主机配置没有已知问题。

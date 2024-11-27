@@ -119,7 +119,7 @@ size=80G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_hand
   |- 0:0:19:37 sddu 71:192  active ready running
 ----
 
-NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。
+NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个、则可能会在存储故障期间导致路径问题。
 
 
 
@@ -127,9 +127,7 @@ NOTE: 一个LUN不应需要四个以上的路径。在存储故障期间，超�
 
 Oracle Linux 6.9 操作系统经过编译，可识别 ONTAP LUN 并自动正确设置所有配置参数。
 
- `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用以下命令创建一个空的零字节文件：
-
-`touch /etc/multipath.conf`
+ `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件 `touch /etc/multipath.conf`。
 
 首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
@@ -173,7 +171,7 @@ blacklist {
 ----
 
 
-您应始终检查 `/etc/multipath.conf` 文件、用于传统设置、尤其是在默认值部分中、这些设置可能会覆盖默认设置。
+您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
 
 下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 

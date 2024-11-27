@@ -217,7 +217,7 @@ ONTAP 在 "Identify Controller" （识别控制器）数据中报告 MTS （ MAX
 # cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. 运行 `dracut -f` 命令，然后重新启动主机。
+. 运行 `dracut -f`命令并重新启动主机。
 . 重新启动后，通过检查相应的 sysfs 值来验证是否已应用上述设置：
 +
 [listing]
