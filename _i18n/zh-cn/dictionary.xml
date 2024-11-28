@@ -3378,7 +3378,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="364053ddb08791e86bba8694da89f153" category="cell">CONTAPEXT-2037</block>
   <block id="e53d231580138a5c74d1783c30057235" category="cell">Ubuntu 22.04 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="f7529407d6b5167c4740699e83603d32" category="cell">在NVMe-oF主机上、可以使用"NVMe discover -p"命令创建永久性发现控制器(PDC)。此命令应仅为每个启动程序-目标组合创建一个PDC。但是、如果您在NVMe-oF主机上运行Ubuntu 22.04、则每次执行"nNVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
-  <block id="ec1fba1237506df59a6228cbfc26fd26" category="admonition">一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
   <block id="89ee331d6db284677b24c21600e6743e" category="paragraph">如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。</block>
   <block id="19da5996e127dc42574323b94bce7dc8" category="paragraph">以下各节提供了映射到ASA和非ASA用户身份的LUN的示例多路径输出。</block>
   <block id="22842eddc6851487a56907e9a4c8df95" category="paragraph">对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
@@ -3664,4 +3663,5 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="198ef744f24c6814a980b52a8b628dbd" category="paragraph">使用ONTAP版本的Ubuntu 24.04的NVMe-oF主机配置没有已知问题。</block>
   <block id="cd5fcfe02b1d4f040fde5ba738d7572a" category="sidebar">24.04</block>
   <block id="4d2491544460a0c7af79b0ca7492e6fd" category="paragraph">您应始终检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。</block>
+  <block id="d7b408d96809ae22d6292a5e84814c2a" category="admonition">一个LUN不应需要四个以上的路径。超过四个路径可能会在存储故障期间导致路径问题。</block>
 </blocks>

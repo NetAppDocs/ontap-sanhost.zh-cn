@@ -243,7 +243,6 @@ NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
 cat /etc/modprobe.d/lpfc.conf
 ----
 +
-.示例输出
 [listing]
 ----
 options lpfc lpfc_sg_seg_cnt=256
