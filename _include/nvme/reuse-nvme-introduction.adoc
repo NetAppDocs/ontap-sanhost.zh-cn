@@ -1,0 +1,5 @@
+= 
+:allow-uri-read: 
+
+
+您可以对ONTAP LUN使用NVMe-oF。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的ALOA多路径；它通过内核NVMe多路径功能来实施。

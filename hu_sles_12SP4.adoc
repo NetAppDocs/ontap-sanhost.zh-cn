@@ -22,15 +22,15 @@ summary: 介绍如何在 ONTAP 中使用 SUSE Linux Enterprise Server 12 SP4
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 32 位和 64 位 .rpm 文件中。如果您不知道哪个文件适合您的配置，请使用 link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^] 验证所需的配置。
+NetApp LINUX统一主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux统一主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。
+如果您当前已安装Linux Unified Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 站点到主机。
-. 使用以下命令安装软件包：
+. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
 
@@ -76,7 +76,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 . 验证是否有多个可用路径。
 +
 
-NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将变为可用。
+NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变为可用。
 
 . 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
 +
@@ -147,7 +147,7 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 
 == 建议设置
 
-SUSE Linux Enterprise Server 12 SP4操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。 `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件 `touch /etc/multipath.conf`
+SUSE Linux Enterprise Server 12 SP4操作系统经过编译、可识别ONTAP LUN并自动正确设置所有配置参数。 `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件 `touch /etc/multipath.conf`。
 
 首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
@@ -193,7 +193,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
 
-下表显示了ONTAP LUN的关键 `multipathd`参数以及所需设置。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
