@@ -99,10 +99,10 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 === 所有SAN阵列配置
 
-在全SAN阵列(ASA)配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+全SAN阵列(ASA)配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
 
 .示例
-以下示例显示了 ONTAP LUN 的正确输出：
+以下示例显示了ONTAP LUN的正确输出。
 
 [listing]
 ----
@@ -125,7 +125,7 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
-以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
 
 [listing]
 ----
@@ -152,10 +152,12 @@ RHEL 7.0 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和�
 
 首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-您无需直接向文件中添加任何内容 `multipath.conf`、除非您的设备不需要多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+您无需直接向文件中添加任何内容 `multipath.conf`、除非您的设备不需要多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请在文件中添加以下语法 `multipath.conf`、将<DevId>替换为要排除的设备的全球通用标识符(WWID)字符串：
 
 [listing]
 ----
@@ -173,146 +175,101 @@ blacklist {
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
 360030057024d0730239134810c0cb833
-----
-+
-`sda`是要添加到黑名单中的本地SCSI磁盘。
-
-. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
-+
-[listing]
-----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
-----
 
 
-您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
-
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
-
-[cols="2*"]
-|===
-| 参数 | 正在设置 ... 
-
-
-| detect_prio | 是的。 
-
-
-| dev_los_TMO | " 无限 " 
-
-
-| 故障恢复 | 即时 
-
-
-| fast_io_fail_sMO | 5. 
-
-
-| features | "3 queue_if_no_path pG_init_retries 50" 
-
-
-| flush_on_last_del | 是的。 
-
-
-| 硬件处理程序 | 0 
-
-
-| no_path_retry | 队列 
-
-
-| path_checker | "TUR" 
-
-
-| path_grouping_policy | "Group_by-prio" 
-
-
-| path_selector | " 服务时间 0" 
-
-
-| Polling interval | 5. 
-
-
-| PRIO | ONTAP 
-
-
-| 产品 | lun.* 
-
-
-| Retain Attached Hw_handler | 是的。 
-
-
-| rr_weight | " 统一 " 
-
-
-| user_friendly_names | 否 
-
-
-| 供应商 | NetApp 
-|===
-.示例
-以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]
 ----
-defaults {
-   path_checker      readsector0
-   no_path_retry      fail
-}
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
 
-devices {
-   device {
-      vendor         "NETAPP  "
-      product         "LUN.*"
-      no_path_retry     queue
-      path_checker      tur
-   }
-}
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+黑名单{ wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|lo|fd|m|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss.*"｝
+
+[listing]
 ----
 
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-=== KVM设置
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
 
-您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
 
-
-
-== 已知问题
-
-带有ONTAP的RHEL 7.0版本存在以下已知问题：
-
-[cols="3*"]
+[cols=2*,options="header"]
 |===
-| NetApp 错误 ID | 标题 | Description 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=844417["844417"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=811587["811587"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=803071["803071"^] | 在执行存储故障转移操作的 I/O 期间， Emulex 16G FC （ LPe16002B-M6 ）主机崩溃 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 16G FC Emulex （ LPe16002B-M6 ）主机崩溃。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=820163["820163"^] | 在存储故障转移操作的 I/O 期间观察到 QLogic 主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 QLogic 主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "mailbox cmd timeout occurred ， cmd=0x54 ， MB<0]=0x54 and Firmware dump saved to temp buffer" ，这会导致主机挂起 / 路径故障。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323["799323"^] | 在存储故障转移操作的 I/O 期间观察到 Emulex FCoE （ OCe10102-FX-D ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 10G FCoE 主机（ OCe10102-FX-D ）上出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "DRIVER's buffer pool is empty ， IO useded and SCSI Layer I/O Abort Request Status" （驱动程序的缓冲池为空， IO 繁忙和 SCSI 层 I/O 中止请求状态）消息，这些消息会导致主机挂起 / 路径故障。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=849212["849212"^] | 在存储故障转移操作的 I/O 期间，观察到 Emulex 16G FC （ LPe16002B-M6 ）主机挂起或路径故障 | 在执行存储故障转移操作的 I/O 期间，您可能会发现 Emulex 16G FC （ LPe16002B-M6 ）主机出现主机挂起或路径故障。在这种情况下，您可能会看到以下消息： "RSCN 超时数据和 iotag x1301 超出范围：最大 iotag" 消息，这些消息会导致主机挂起 / 路径故障。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836800["836800"^] | 尽管在安装 RHEL 7.0 操作系统期间登录成功，但 Anacondation 仍会显示 iSCSI 登录失败消息 | 在 iSCSI 多路径 LUN 上安装 root （ / ）时，以太网接口的 IP 地址会在内核命令行中指定，以便在 iSCSI 服务启动之前分配 IP 地址。但是，在 iSCSI 服务启动之前， dracut 无法在启动期间为所有以太网端口分配 IP 地址。这会导致 iSCSI 登录在没有 IP 地址的接口上失败。您将看到 iSCSI 服务多次尝试登录，这将导致操作系统启动时间出现发生原因延迟。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875["836875"^] | 在启动 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统期间，并不总是分配 IP 地址 | 安装 RHEL 7.0 时， anacondation 安装屏幕会显示 iSCSI 登录成功后，对多个目标 IP 的 iSCSI 登录失败。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 RHEL 7.0 操作系统。 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836657["836657"^] | Anaconda/kernel cmd 行中不会添加 bootdev 参数来为 iSCSI 多路径 LUN 上安装的 RHEL 7.0 操作系统设置 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 RHEL 7.0 操作系统期间设置 IPv4 地址。这样可以防止向任何配置为在 RHEL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 
+| Parameter
+| Setting
+| detect_prio | yes
+| dev_loss_tmo | "infinity"
+| failback | immediate
+| fast_io_fail_tmo | 5
+| features | "3 queue_if_no_path pg_init_retries 50"
+| flush_on_last_del | "yes"
+| hardware_handler | "0"
+| no_path_retry | queue
+| path_checker | "tur"
+| path_grouping_policy | "group_by_prio"
+| path_selector | "service-time 0"
+| polling_interval | 5
+| prio | "ontap"
+| product | LUN.*
+| retain_attached_hw_handler | yes
+| rr_weight | "uniform"
+| user_friendly_names | no
+| vendor | NETAPP
 |===
+
+.Example
+
+The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
+
+----
+默认值为{ path_checker_readsector0 no_path_retry失败}
+
+设备{设备{供应商"LUN NetApp "产品"LUN。*" NO_PATE_RETRY队列路径检查程序}
+
+[listing]
+----
+
+=== Configure KVM settings
+
+You can use the recommended settings to configure Kernel-based Virtual Machine (KVM) as well. There are no changes required to configure KVM because the LUN is mapped to the hypervisor.
+
+//ONTAPDOC-2561 5-Dec-2024
+
+== Known issues
+
+The RHEL 7.0 with ONTAP release has the following known issues:
+
+[cols=3*,options="header"]
+|===
+| NetApp Bug ID
+| Title
+| Description
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=844417[844417^] | Emulex 16G FC (LPe16002B-M6) host crashes during I/O with storage failover operations | You might observe a 16G FC Emulex (LPe16002B-M6) host crash during I/O with storage failover operations.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=811587[811587^] | Emulex 16G FC (LPe16002B-M6) host crashes during I/O with storage failover operations | You might observe a 16G FC Emulex (LPe16002B-M6) host crash during I/O with storage failover operations.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=803071[803071^] | Emulex 16G FC (LPe16002B-M6) host crashes during I/O with storage failover operations | You might observe a 16G FC Emulex (LPe16002B-M6) host crash during I/O with storage failover operations.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=820163[820163^] | QLogic host hang or path failures observed during I/O with storage failover operations | You might observe a host hang or path failures on QLogic host during I/O with storage failover operations. In such scenarios, you might see the following message: "Mailbox cmd timeout occurred, cmd=0x54, mb[0]=0x54 and Firmware dump saved to temp buffer" messages which leads to host hung/path failure.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=799323[799323^] | Emulex FCoE (OCe10102-FX-D) host hang or path failures observed during I/O with storage failover operations | You might observe a host hang or path failures on Emulex 10G FCoE host (OCe10102-FX-D) during I/O with storage failover operations. In such scenarios, you might see the following message:  "driver's buffer pool is empty, IO busied and SCSI Layer I/O Abort Request Status" messages which leads to host hung/path failures.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=849212[849212^] | Emulex 16G FC (LPe16002B-M6) host hang or path failures are observed during I/O with storage failover operations | You might observe a host hang or path failures on Emulex 16G FC (LPe16002B-M6) host during I/O with storage failover operations. In such scenarios, you might see the following message:  "RSCN timeout Data and iotag x1301 is out of range: max iotag" messages which leads to host hung/path failures.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836800[836800^] | Anaconda displays an iSCSI login failure message although logins are successful during RHEL 7.0 OS installation | When you install the root(/) on a iSCSI multipath’d LUN, the IP address for the  Ethernet interfaces are specified in the kernel command line so that the IP addresses are assigned before the iSCSI service starts. However, dracut cannot assign IP addresses to all the Ethernet ports during the boot, before the iSCSI service starts. This causes the iSCSI login to fail on interfaces without IP addresses. You will see the iSCSI service attempt to login numerous times,  which will cause a delay in the OS boot time.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836875[836875^] | IP addresses are not always assigned during the boot of a RHEL 7.0 OS installed on an iSCSI multipath'd LUN | When you are installing RHEL 7.0, the anaconda installation screen displays that iSCSI login to multiple target IPs have failed though the iSCSI logins are successful. Anaconda displays following error message: “Node Login Failed” You will observe this error only when you select multiple target IPs for iSCSI login. You can continue the OS installation by clicking the "ok" button. This bug does not hamper either the iSCSI or the RHEL 7.0 OS installation.
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=836657[836657^] | Anaconda does not add bootdev argument in kernel cmd line to set IP address for RHEL 7.0 OS installed on iSCSI multipath'd LUN | Anaconda does not add a bootdev argument in the kernel command line where you set the IPv4 address during the RHEL 7.0 OS installation on an iSCSI multipath'd LUN. This prevents assigning of IP addresses to any of the Ethernet interfaces that were configured to establish iSCSI sessions with the storage subsystem during the RHEL 7.0 boot. Since iSCSI sessions are not established, the root LUN is not discovered when the OS boots and hence the OS boot fails.
+|===
+
+// 2024 SEP 2, ONTAPDOC-2345
+----

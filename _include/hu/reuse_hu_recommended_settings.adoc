@@ -6,10 +6,12 @@
 
 首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-您无需直接向文件中添加任何内容 `multipath.conf`、除非您的设备不需要多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+[listing]
+----
+chkconfig multipathd on
+/etc/init.d/multipathd start
+----
+您无需直接向文件中添加任何内容 `multipath.conf`、除非您的设备不需要多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请在文件中添加以下语法 `multipath.conf`、将<DevId>替换为要排除的设备的全球通用标识符(WWID)字符串：
 
 [listing]
 ----
@@ -27,25 +29,37 @@ blacklist {
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
-360030057024d0730239134810c0cb833
+/lib/udev/scsi_id -gud /dev/sda
 ----
-+
-`sda`是要添加到黑名单中的本地SCSI磁盘。
-
-. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
 [listing]
 ----
-blacklist {
-     wwid   360030057024d0730239134810c0cb833
-     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
-     devnode "^hd[a-z]"
-     devnode "^cciss.*"
-}
+3600a098038314c4a433f5774717a3046
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+360030057024d0730239134810c0cb833
+
+
+
+[listing]
+----
++
+`sda` is the local SCSI disk that you want to add to the blacklist.
+
+. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
+[source,cli]
++
+----
+黑名单{ wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|lo|fd|m|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss.*"｝
+
+[listing]
 ----
 
+Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
+The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+//ONTAPDOC-2578 9-Dec-2024
+//ONTAPDOC-2561 25-Nov-202
+----

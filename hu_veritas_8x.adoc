@@ -22,11 +22,9 @@ summary: 提供有关 Veritas Infoscale 7 系列版本的 ONTAP SAN 主机配置
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
+您可以从下载64-bit.rpm文件格式的NetApp Linux统一主机实用程序软件包link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
-
-如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。
 
 .步骤
 . 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
@@ -40,7 +38,7 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 
 == SAN 工具包
 
-安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和HBA。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
+安装NetApp主机实用程序软件包会自动安装该工具包。此套件提供了 `sanlun`实用程序、可帮助您管理LUN和主机总线适配器(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
 .示例
 在下图中， `sanlun show` 命令将返回 LUN 信息。

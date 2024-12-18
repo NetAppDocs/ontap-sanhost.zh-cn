@@ -2,4 +2,4 @@
 :allow-uri-read: 
 
 
-您可以对ONTAP LUN使用NVMe-oF。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的ALOA多路径；它通过内核NVMe多路径功能来实施。
+NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。

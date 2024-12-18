@@ -16,9 +16,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.10的NVMe-oF主机配置
 
 
 [role="lead"]
-NetApp SAN主机配置在具有非对称命名空间访问(AANA)的Oracle Linux 8.10上支持基于网络结构的NVMe (NVMe-oF)协议。
-
-您可以对ONTAP LUN使用NVMe-oF。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的ALOA多路径；它通过内核NVMe多路径功能来实施。
+NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。
 
 .关于此任务
 您可以在适用于Oracle Linux 8.10的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。
@@ -257,7 +255,6 @@ NOTE: Oracle Linux 10 GA内核中包含的本机内置qla2xxx驱动程序已进�
 `cat /sys/class/fc_host/host*/symbolic_name`
 
 +
-.输出示例
 [listing]
 ----
 QLE2772 FW:v9.15.00 DVR:v10.02.09.100-k
@@ -278,7 +275,7 @@ QLE2772 FW:v9.15.00 DVR:v10.02.09.100-k
 ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、应将参数的值 `lpfc_sg_seg_cnt`从默认值64增加 `lpfc`到256。
 
 
-NOTE: 以下步骤不适用于逻辑NVMe/FC主机。
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
 
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
@@ -292,16 +289,13 @@ cat /etc/modprobe.d/lpfc.conf
 ----
 options lpfc lpfc_sg_seg_cnt=256
 ----
-. 运行 `dracut -f`命令并重新启动主机：
-. 验证是否 `lpfc_sg_seg_cnt`为256：
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----
 cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----
-+
-预期值为256。
-
 
 
 
@@ -445,7 +439,6 @@ NOTE: NetApp建议将选项设置 `ctrl-loss-tmo`为"-1"、以便NVMe/TCP启动�
 +
 .. `cat /sys/class/nvme-subsystem/nvme-subsys*/model`
 +
-.输出示例
 [listing]
 ----
 NetApp ONTAP Controller

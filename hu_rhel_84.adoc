@@ -22,11 +22,9 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 8.4
 
 == 安装 Linux Unified Host Utilities
 
-上提供了 NetApp Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 在 64 位 .rpm 文件中。
+您可以从下载64-bit.rpm文件格式的NetApp Linux统一主机实用程序软件包link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
 
 NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
-
-如果您当前安装的是Linux Unified Host Utilities版本、则应将其升级或删除、然后按照以下步骤安装最新版本。
 
 .步骤
 . 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
@@ -99,10 +97,10 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 === 所有SAN阵列配置
 
-在全SAN阵列(ASA)配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+全SAN阵列(ASA)配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
 
 .示例
-以下示例显示了 ONTAP LUN 的正确输出：
+以下示例显示了ONTAP LUN的正确输出。
 
 [listing]
 ----
@@ -125,7 +123,7 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
-以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
 
 [listing]
 ----
@@ -152,10 +150,12 @@ RHEL 8.4 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和�
 
 首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
 
-`# chkconfig multipathd on`
-`# /etc/init.d/multipathd start`
-
-您无需直接向文件中添加任何内容 `multipath.conf`、除非您的设备不需要多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请在 `multipath.conf`文件中添加以下语法、将<DevId>替换为要排除的设备的WWID字符串：
+[listing]
+----
+# systemctl enable multipathd
+# systemctl start multipathd
+----
+不需要将设备直接添加到文件中 `multipath.conf`、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。您可以通过向文件中添加以下语法来排除不需要的 `multipath.conf`设备、并将<DevId>替换为要排除的设备的WWID字符串：
 
 [listing]
 ----
@@ -166,18 +166,22 @@ blacklist {
         devnode "^cciss.*"
 }
 ----
-以下示例将确定设备的WWID并将其添加到文件中 `multipath.conf`。
+在以下示例中、您将确定设备的WWID并将该设备添加到文件中 `multipath.conf`。
 
 .步骤
 . 确定WWID：
 +
 [listing]
 ----
-# /lib/udev/scsi_id -gud /dev/sda
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
 360030057024d0730239134810c0cb833
 ----
 +
-`sda`是要添加到黑名单中的本地SCSI磁盘。
+`sda`是要将其添加到黑名单中的本地SCSI磁盘。
 
 . 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
@@ -194,7 +198,7 @@ blacklist {
 
 您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
 
-下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
 
 [cols="2*"]
 |===
@@ -275,9 +279,9 @@ devices {
 ----
 
 
-=== KVM设置
+=== 配置KVM设置
 
-您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。配置KVM不需要进行任何更改、因为此LUN已映射到虚拟机管理程序。
 
 
 

@@ -1,0 +1,57 @@
+= 
+:allow-uri-read: 
+
+
+ `multipath.conf`要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件 `touch /etc/multipath.conf`。
+
+首次创建 `multipath.conf`文件时、可能需要使用以下命令启用并启动多路径服务：
+
+[listing]
+----
+# systemctl enable multipathd
+# systemctl start multipathd
+----
+不需要将设备直接添加到文件中 `multipath.conf`、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。您可以通过向文件中添加以下语法来排除不需要的 `multipath.conf`设备、并将<DevId>替换为要排除的设备的WWID字符串：
+
+[listing]
+----
+blacklist {
+        wwid <DevId>
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+在以下示例中、您将确定设备的WWID并将该设备添加到文件中 `multipath.conf`。
+
+.步骤
+. 确定WWID：
++
+[listing]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+[listing]
+----
+360030057024d0730239134810c0cb833
+----
++
+`sda`是要将其添加到黑名单中的本地SCSI磁盘。
+
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
++
+[listing]
+----
+blacklist {
+     wwid   360030057024d0730239134810c0cb833
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
+----
+
+
+您应始终检查 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
+
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在 `multipath.conf`文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。
