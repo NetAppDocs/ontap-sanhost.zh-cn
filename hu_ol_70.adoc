@@ -161,90 +161,128 @@ blacklist {
 [listing]
 ----
 3600a098038314c4a433f5774717a3046
-/lib/udev/scsi_id -gud /dev/sda
 ----
 +
-360030057024d0730239134810c0cb833
+`sda`是要添加到黑名单中的本地SCSI磁盘。
+
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
++
+[source, cli]
+----
+blacklist {
+     wwid   3600a098038314c4a433f5774717a3046
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
+----
 
 
+请始终检查您的 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
+
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+
+[cols="2*"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "3 queue_if_no_path pG_init_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | lun.* 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+.示例
+以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `detect_prio` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]
 ----
-+
-`sda` is the local SCSI disk that you want to add to the blacklist.
-
-. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
-[source,cli]
-+
+defaults {
+ path_checker readsector0
+ detect_prio no
+ }
+devices {
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ path_checker tur
+ detect_prio yes
+ }
+}
 ----
-黑名单{ wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|lo|fd|m|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss.*"｝
 
-[listing]
-----
-
-Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
-
-The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
-
-//ONTAPDOC-2578 9-Dec-2024
-//ONTAPDOC-2561 25-Nov-202
+NOTE: 要配置Oracle Linux 7.0 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_70.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 7.0的。
 
 
-[cols=2*,options="header"]
+
+== 已知问题
+
+带有ONTAP的Oracle Linux 7.0版本存在以下已知问题：
+
+[cols="3*"]
 |===
-| Parameter
-| Setting
-| detect_prio | yes
-| dev_loss_tmo | "infinity"
-| failback | immediate
-| fast_io_fail_tmo | 5
-| features | "3 queue_if_no_path pg_init_retries 50"
-| flush_on_last_del | "yes"
-| hardware_handler | "0"
-| path_checker | "tur"
-| path_grouping_policy | "group_by_prio"
-| path_selector | "service-time 0"
-| polling_interval | 5
-| prio | "ontap"
-| product | LUN.*
-| retain_attached_hw_handler | yes
-| rr_weight | "uniform"
-| user_friendly_names | no
-| vendor | NETAPP
+| NetApp 错误 ID | 标题 | Description 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 ：由于 Emulex 8G （ LPe12002 ）主机上的 OL 7.0 Uek r3U5 测试版出现 "RSCN 超时 " 错误，主机丢失 LUN 的所有路径并挂起 | 您可能会发现，在对 I/O 执行存储故障转移操作期间， Emulex 8G （ LPe12002 ）主机挂起，并且 I/O 中断率较高您可能会发现路径无法恢复，这是由于 RSCN 超时导致的，主机丢失所有路径并挂起。达到此问题描述的概率很高。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 ：在使用 IO 执行存储故障转移操作期间，在 QLogic 8G FC （ QLE2562 ） SAN 主机上观察到高 IO 中断 | 在使用 IO 执行存储故障转移操作期间，您可能会发现 QLogic 8G FC （ QLE2562 ）主机上的 IO 中断较高。中止和设备重置会在主机上表现为 IO 中断。遇到此 IO 中断的可能性很高。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0 ： dracut 无法在 UEKR3U5 alpha 上的 initramfs 中包含 scsi_dh_alua.ko 模块 | 即使在内核命令行中添加参数 "rdloaddriver=SCSI_DH_ALUA" 并创建了 dracut ， SCSI_DH_ALUA 模块也可能无法加载。因此，未按建议为 NetApp LUN 启用 ALUA 。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796["894796"^] | 尽管在安装 OL 7.0 操作系统期间登录成功，但 Anacondation 仍会显示 iSCSI 登录失败消息 | 安装 OL 7.0 时， anacondation 安装屏幕会显示 iSCSI 登录成功后，对多个目标 IP 的 iSCSI 登录失败。AnacondA 显示以下错误消息： "Node Login Failed" 只有在为 iSCSI 登录选择多个目标 IP 时，您才会看到此错误。您可以单击 " 确定 " 按钮继续安装操作系统。此错误不会妨碍安装 iSCSI 或 OL 7.0 操作系统。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 ： Anacondup 不会在内核 cmd 行中添加 bootdev 参数来设置 iSCSI SANboot OS 安装的 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 OL 7.0 操作系统期间设置 IPv4 地址。因此，您不能为任何配置为在 OL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | 在使用 IO 执行存储故障转移操作期间观察到 QLogic 10G FCoE （ QLE8152 ）主机内核崩溃 | 您可能会发现 10G FCoE Qlogic （ QLE8152 ）主机上的 Qlogic 驱动程序模块发生内核崩溃。在使用 IO 执行存储故障转移操作期间发生崩溃。发生此崩溃的可能性较高，从而导致主机上的 IO 中断时间较长。 
 |===
-
-.Example
-
-The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `detect_prio` that are not compatible with ONTAP LUNs.
-If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
-
-----
-默认值{ path_checkerreadsector0 detect_prio no }设备{设备{供应商“NetApp”产品"LUN。*" path_checkertur detect_prio yes }
-
-[listing]
-----
-
-NOTE: To configure Oracle Linux 7.0 Red Hat Enterprise Kernel (RHCK), use the link:hu_rhel_70.html#recommended-settings[recommended settings] for Red Hat Enterprise Linux (RHEL) 7.0.
-
-== Known issues
-
-The Oracle Linux 7.0 with ONTAP release has the following known issues:
-
-[cols=3*,options="header"]
-|===
-| NetApp Bug ID
-| Title
-| Description
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558[901558^] | OL7.0 : Host loses all paths to the lun and hangs due to "RSCN timeout" error on OL 7.0 UEK r3U5 Beta on Emulex 8G(LPe12002) host | You might observe that the Emulex 8G(LPe12002) host hangs and there is a high I/O outage during storage failover operations with I/O. You might observe paths not recovering, which is a result of the RSCN timeout, due to which the host loses all the paths and hangs. Probability of hitting this issue is high.
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557[901557^] | OL 7.0: High IO outage observed on QLogic 8G FC (QLE2562) SAN host during storage failover operations with IO | You might observe high IO outage on QLogic 8G FC (QLE2562) host during storage failover operations with IO. Aborts and Device resets manifests as IO outage on the host. Probability of hitting this IO outage is high.
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766[894766^] |  OL7.0: Dracut fails to include scsi_dh_alua.ko module in initramfs on UEKR3U5 alpha | The scsi_dh_alua module might not load even after adding the parameter "rdloaddriver=scsi_dh_alua" in the kernel command line and creating Dracut. As a result, ALUA is not enabled for NetApp LUNs as recommended.
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894796[894796^] | Anaconda displays an iSCSI login failure message although logins are successful during OL 7.0 OS installation |  When you are installing OL 7.0, the anaconda installation screen displays that iSCSI login to multiple target IPs have failed though the iSCSI logins are successful. Anaconda displays following error message:
- "Node Login Failed"
- You will observe this error only when you select multiple target IPs for iSCSI login.
- You can continue the OS installation by clicking the "ok" button. This bug does not hamper either the iSCSI or the OL 7.0 OS installation.
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771[894771^] | OL7.0 : Anaconda does not add bootdev argument in kernel cmd line to set IP address for iSCSI SANboot OS install | Anaconda does not add a bootdev argument in the kernel command line where you set the IPv4 address during the OL 7.0 OS installation on an iSCSI multipath'd LUN. Owing to this, you cannot assign IP addresses to any of the Ethernet interfaces that were configured to establish iSCSI sessions with the storage subsystem during the OL 7.0 boot. Since iSCSI sessions are not established, the root LUN is not discovered when the OS boots and hence the OS boot fails.
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501[916501^] |	Qlogic 10G FCoE (QLE8152) host kernel crash observed during storage failover operations with IO | You may observe a kernel crash in Qlogic driver module on 10G FCoE Qlogic (QLE8152) host. The crash occurs during storage failover operations with IO. Probability of hitting this crash is high which leads to longer IO outage on the host.
-|===
-
-// 2024 SEP 2, ONTAPDOC-2345
-----

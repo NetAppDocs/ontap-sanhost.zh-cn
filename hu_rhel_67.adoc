@@ -193,78 +193,112 @@ blacklist {
 [listing]
 ----
 3600a098038314c4a433f5774717a3046
-/lib/udev/scsi_id -gud /dev/sda
 ----
 +
-360030057024d0730239134810c0cb833
+`sda`是要添加到黑名单中的本地SCSI磁盘。
 
-
-
-[listing]
-----
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
 +
-`sda` is the local SCSI disk that you want to add to the blacklist.
-
-. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
-[source,cli]
-+
+[source, cli]
 ----
-黑名单{ wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|lo|fd|m|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss.*"｝
-
-[listing]
+blacklist {
+     wwid   3600a098038314c4a433f5774717a3046
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
 ----
 
-Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
 
-The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
+请始终检查您的 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
 
-//ONTAPDOC-2578 9-Dec-2024
-//ONTAPDOC-2561 25-Nov-202
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
 
-[cols=2*,options="header"]
+[cols="2*"]
 |===
-| Parameter
-| Setting
-| detect_prio | yes
-| dev_loss_tmo | "infinity"
-| failback | immediate
-| fast_io_fail_tmo | 5
-| features | "3 queue_if_no_path pg_init_retries 50"
-| flush_on_last_del | "yes"
-| hardware_handler | "0"
-| no_path_retry | queue
-| path_checker | "tur"
-| path_grouping_policy | "group_by_prio"
-| path_selector | "round-robin 0"
-| polling_interval | 5
-| prio | "ontap"
-| product | LUN.*
-| retain_attached_hw_handler | yes
-| rr_weight | "uniform"
-| user_friendly_names | no
-| vendor | NETAPP
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "3 queue_if_no_path pG_init_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 循环 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | lun.* 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
 |===
-
-.Example
-
-The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
-
-----
-默认值为{ path_checker_readsector0 no_path_retry失败}
-
-设备{设备{供应商"LUN NetApp "产品"LUN。*" NO_PATE_RETRY队列路径检查程序}
+.示例
+以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]
 ----
+defaults {
+   path_checker      readsector0
+   no_path_retry      fail
+}
 
-=== Configure KVM settings
-
-You can use the recommended settings to configure Kernel-based Virtual Machine (KVM) as well. There are no changes required to configure KVM because the LUN is mapped to the hypervisor.
-
-//ONTAPDOC-2561 5-Dec-2024
-
-[[known-problems-and-limitations]]
-== Known issues
-
-There are no known issues for the RHEL 6.7 with ONTAP release.
+devices {
+   device {
+      vendor         "NETAPP  "
+      product         "LUN.*"
+      no_path_retry     queue
+      path_checker      tur
+   }
+}
 ----
+
+
+=== 配置KVM设置
+
+您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。配置KVM不需要进行任何更改、因为此LUN已映射到虚拟机管理程序。
+
+
+
+== 已知问题
+
+对于ONTAP版本的RHEL 6.7、没有已知问题。

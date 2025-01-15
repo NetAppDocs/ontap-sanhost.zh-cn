@@ -180,81 +180,113 @@ blacklist {
 [listing]
 ----
 3600a098038314c4a433f5774717a3046
-/lib/udev/scsi_id -gud /dev/sda
 ----
 +
-360030057024d0730239134810c0cb833
+`sda`是要添加到黑名单中的本地SCSI磁盘。
+
+. 添加 `WWID` 到黑名单中 `/etc/multipath.conf`：
++
+[source, cli]
+----
+blacklist {
+     wwid   3600a098038314c4a433f5774717a3046
+     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+     devnode "^hd[a-z]"
+     devnode "^cciss.*"
+}
+----
 
 
+请始终检查您的 `/etc/multipath.conf`文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。
+
+下表显示了 `multipathd`ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则必须通过 `multipath.conf`文件中专门适用于ONTAP LUN的后续条款进行更正。如果不进行此更正、ONTAP LUN可能无法按预期运行。只有在与NetApp和/或操作系统供应商协商后、并且只有在充分了解影响后、才应覆盖这些默认值。
+
+[cols="2*"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | lun.* 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+.示例
+以下示例显示了如何更正被覆盖的默认值。在这种情况下， `multipath.conf` 文件会为 `path_checker` 和 `no_path_retry` 定义与 ONTAP LUN 不兼容的值。如果由于其他 SAN 阵列仍连接到主机而无法删除这些参数，则可以专门针对具有设备实例的 ONTAP LUN 更正这些参数。
 
 [listing]
 ----
-+
-`sda` is the local SCSI disk that you want to add to the blacklist.
-
-. Add the `WWID` to the blacklist stanza in `/etc/multipath.conf`:
-[source,cli]
-+
+defaults {
+ path_checker readsector0
+ no_path_retry fail
+}
+devices {
+ device {
+ vendor "NETAPP "
+ product "LUN.*"
+ no_path_retry queue
+ path_checker tur
+ }
+}
 ----
-黑名单{ wwid 3600a098038314c4a433f5774717a3046 devnode "^(ram|raw|lo|fd|m|dm-|sr|scd|st)[0-9]*" devnode "^hd[a-z]" devnode "^cciss.*"｝
-
-[listing]
-----
-
-Always check your `/etc/multipath.conf` file, especially in the defaults section, for legacy settings that might be overriding default settings.
-
-The following table demonstrates the critical `multipathd` parameters for ONTAP LUNs and the required values. If a host is connected to LUNs from other vendors and any of these parameters are overridden, they must be corrected by later stanzas in the `multipath.conf` file that apply specifically to ONTAP LUNs. Without this correction, the ONTAP LUNs might not work as expected. You should only override these defaults in consultation with NetApp, the OS vendor, or both, and only when the impact is fully understood.
-
-//ONTAPDOC-2578 9-Dec-2024
-//ONTAPDOC-2561 25-Nov-202
 
 
-[cols=2*,options="header"]
+== 已知问题
+
+具有ONTAP版本的SUSE Linux Enterprise Server 12 SP5存在以下已知问题：
+
+[cols="3*"]
 |===
-| Parameter
-| Setting
-| detect_prio | yes
-| dev_loss_tmo | "infinity"
-| failback | immediate
-| fast_io_fail_tmo | 5
-| features | "2 pg_init_retries 50"
-| flush_on_last_del | "yes"
-| hardware_handler | "0"
-| no_path_retry | queue
-| path_checker | "tur"
-| path_grouping_policy | "group_by_prio"
-| path_selector | "service-time 0"
-| polling_interval | 5
-| prio | "ontap"
-| product | LUN.*
-| retain_attached_hw_handler | yes
-| rr_weight | "uniform"
-| user_friendly_names | no
-| vendor | NETAPP
+| NetApp 错误 ID | 标题 | Description 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293["1284293"^] | 存储故障转移操作期间，使用 QLogic QLE2562 8 Gb FC HBA 的 SLES12 SP5 上发生内核中断 | 使用 QLogic QLE2562 光纤通道（ FC ）主机总线适配器（ HBA ）对 SLES12 SP5 内核执行存储故障转移操作期间，发生内核中断。内核中断会导致 SLES12 SP5 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2562 HBA 事件的存储故障转移会影响 "thread_info ： ffff8aedf723c2c0" 模块。通过查找以下字符串在 vmcore 文件中找到此事件： " [thread_info ： ffff8aedf723c2c0]" 。内核中断后，重新启动主机操作系统以使其能够恢复。然后重新启动应用程序。 
 |===
-
-.Example
-
-The following example shows how to correct an overridden default. In this case, the `multipath.conf` file defines values for `path_checker` and `no_path_retry` that are not compatible with ONTAP LUNs. If they cannot be removed because of other SAN arrays still attached to the host, these parameters can be corrected specifically for ONTAP LUNs with a device stanza.
-
-----
-默认值{ path_checkerreadsector0 no_path_retry失败}设备{设备{供应商“NetApp”产品"LUN。*" no_path_retry队列path_checkertur }
-
-[listing]
-----
-
-== Known issues
-
-The SUSE Linux Enterprise Server 12 SP5 with ONTAP release has the following known issues:
-
-[cols=3*,options="header"]
-|===
-| NetApp Bug ID
-| Title
-| Description
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1284293[1284293^] | Kernel disruption occurs on SLES12 SP5 with QLogic QLE2562 8GB FC HBA during storage failover operations | Kernel disruption occurs during storage failover operations on the SLES12 SP5 kernel with a QLogic QLE2562 Fibre Channel (FC) host bus adapter (HBA). The kernel disruption causes SLES12 SP5 to reboot, leading to application disruption. If the kdump mechanism is enabled, the kernel disruption generates a vmcore file located in the /var/crash/ directory. Check the vmcore file to determine the cause of the disruption. A storage failover with a QLogic QLE2562 HBA event affects the "THREAD_INFO: ffff8aedf723c2c0" module. Locate this event in the vmcore file by finding the following string: " [THREAD_INFO: ffff8aedf723c2c0]".
-After the kernel disruption, reboot the host OS to enable it to recover. Then restart the applications.
-|===
-
-// 2024 SEP 2, ONTAPDOC-2345
-----
