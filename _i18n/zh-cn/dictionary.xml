@@ -3440,7 +3440,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="e78866ae0ff845eed770c2b938efee3b" category="paragraph">请始终检查您的<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。</block>
   <block id="0addb4faeee17f16535b967fa12087f4" category="paragraph">以下示例说明了如何更正覆盖的默认值。在这种情况下、文件将<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>为和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block>定义与ONTAP LUN不兼容的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block>。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。</block>
   <block id="1cf74d5a15225e81daff79d7ccb11382" category="admonition">要配置Oracle Linux 8.10 RedHat Enterprise Kernel、请使用<block ref="8fd6ca76e28de543c48473a969597840" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 8.10的。</block>
-  <block id="6bb89cc49fca8628d227dd847602703b" category="paragraph">您还可以使用<block ref="4bba837a8ebd28cc5db475b23d73ca01" category="inline-xref-macro-rx"></block>配置基于内核的虚拟机(KVM)。配置KVM不需要进行任何更改、因为此LUN已映射到虚拟机管理程序。</block>
   <block id="3e1ec4fdd93153b353d57238402daa53" category="paragraph">具有ONTAP版本的Oracle Linux 8.10没有已知问题。</block>
   <block id="fa82877b3beb26d7d7bc882389d60aca" category="paragraph">有关CentOS (Red Hat兼容内核)的已知问题、请参见适用于Red Hat Enterprise Linux (RHEL)的<block ref="9a91dd1025c16135359284037044a8d3" category="inline-link-macro-rx"></block>6.10。</block>
   <block id="38e584f52f25fb096dead8f8866657b0" category="paragraph">有关CentOS (Red Hat兼容内核)的已知问题、请参见<block ref="f736929b1834226891236b2c0b0b218e" category="inline-link-macro-rx"></block>适用于Red Hat Enterprise Linux (RHEL) 6.4的。</block>
@@ -3764,4 +3763,5 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="1e45eb414e878e896ff6c8568d44aaed" category="cell"><block ref="409bdf20edf896ce4497acd46087929e" category="inline-link-macro-rx"></block></block>
   <block id="4ccdcef8fc98cb6452f9ba7aa1df1c0c" category="cell">重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式</block>
   <block id="c6bc802c921069bf472f1e8359672c59" category="cell">重新启动后，映射了 20 个以上 LUN 的 SLES 15 主机可能会进入维护模式。显示以下消息后、维护模式将变为单用户模式：<block ref="3e4fc983295eaca22de2d8651a4d47f0" prefix=" " category="inline-code"></block></block>
+  <block id="a563fbe9dc21252c94fb2aac9ee8aceb" category="paragraph">您无需在Oracle Linux 8.10上为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。</block>
 </blocks>

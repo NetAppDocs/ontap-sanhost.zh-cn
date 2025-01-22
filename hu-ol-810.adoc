@@ -270,7 +270,7 @@ NOTE: 要配置Oracle Linux 8.10 RedHat Enterprise Kernel、请使用link:hu_rhe
 
 == KVM设置
 
-您还可以使用<<recommended_settings_ol_810,建议设置>>配置基于内核的虚拟机(KVM)。配置KVM不需要进行任何更改、因为此LUN已映射到虚拟机管理程序。
+您无需在Oracle Linux 8.10上为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
 
 
 
