@@ -283,13 +283,13 @@ devices {
 ----
 ====
 
-NOTE: 要配置Oracle Linux 9.4 Red Hat Enterprise Kernel (RHEK)、请使用link:hu_rhel_94.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 9.4的。
+NOTE: 要配置Oracle Linux 9.4 Red Hat兼容内核(RHCK)、请使用适用于Red Hat Enterprise Linux (RHEL) 9.4的link:hu_rhel_94.html#recommended-settings["建议设置"]。
 
 
 
-=== 配置KVM设置
+== 配置KVM设置
 
-您还可以使用建议的设置来配置基于内核的虚拟机(KVM)。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+您无需为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
 
 
 

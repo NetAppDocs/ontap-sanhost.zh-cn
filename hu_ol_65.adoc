@@ -252,7 +252,7 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 6.5 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_65.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 6.5的。
+NOTE: 要配置Oracle Linux 6.5 Red Hat兼容内核(RHCK)、请使用适用于Red Hat Enterprise Linux (RHEL) 6.5的link:hu_rhel_65.html#recommended-settings["建议设置"]。
 
 
 
@@ -261,4 +261,4 @@ NOTE: 要配置Oracle Linux 6.5 Red Hat Enterprise Kernel (RHCK)、请使用link
 Oracle Linux 6.5 with ONTAP发行版没有已知问题。
 
 
-NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_65.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.5 。
+NOTE: 有关Oracle Linux RHCK已知问题、请参见link:hu_rhel_65.html#known-problems-and-limitations["已知问题"]适用于RHEL 6.5的。

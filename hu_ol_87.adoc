@@ -274,13 +274,13 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 8.7 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_87.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.7的。
+NOTE: 要配置Oracle Linux 8.7 Red Hat兼容内核(RHCK)、请使用适用于Red Hat Enterprise Linux (RHEL) 8.7的link:hu_rhel_87.html#recommended-settings["建议设置"]。
 
 
 
-== KVM设置
+== 配置KVM设置
 
-您还可以使用建议的设置来配置基于内核的虚拟机(KVM)。由于此LUN已映射到虚拟机管理程序、因此无需进行任何更改即可配置KVM。
+您无需为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
 
 
 

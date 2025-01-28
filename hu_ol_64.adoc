@@ -252,7 +252,7 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 6.4 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_64.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 6.4的。
+NOTE: 要配置Oracle Linux 6.4 Red Hat兼容内核(RHCK)、请使用适用于Red Hat Enterprise Linux (RHEL) 6.4的link:hu_rhel_64.html#recommended-settings["建议设置"]。
 
 
 
@@ -277,4 +277,4 @@ NOTE: 要配置Oracle Linux 6.4 Red Hat Enterprise Kernel (RHCK)、请使用link
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=739909["739909"^] | 使用 UEK2 的 OL6.x 和 OL5.x 主机出现 FC 故障后， dm-multipath 设备上的 SG_IO ioctl 系统调用失败 | 在使用 UEK2 内核的 Oracle Linux 6.x 主机和使用 UEK2 内核的 Oracle Linux 5.x 主机上出现问题。多路径设备上的 SG_* 命令在发生网络结构故障后失败，并显示 EAGAin 错误代码（ errno ），从而使活动路径组中的所有路径都关闭。只有在多路径设备未发生 I/O 时，才会出现此问题。以下是示例： # sg_inq -v /dev/mapper/3600a098041764937303f436c75324370 查询数据库： 12 00 00 24 00 ioctl （ SG_IO v3 ）失败，并显示 OS_err （ errno ） = 11 查询：传递操作系统错误：资源暂时不可用 HDIO_get_ioctl 身份失败： 资源暂时不可用 [11] /dev/mapper/3600a098041764937303f436c75324370 # 上的 SCSI 查询和提取 ATA 信息失败。发生此问题的原因是，在 ioctl（ ）调用期间，如果 DM-Multipath 设备上没有发生 I/O ，则无法激活路径组切换到其他活动组。在以下版本的 kernel-Uek 和 device-mapper-multipath 软件包中发现了此问题： OL6.4 版本： kernel-UEK-2.6.39-400.171.el6uek device-mapper-multipath-0.4.9.-64.1.el6 OL5.9 版本： kernel-UEK-2.6.39-400.17.1.el5uek-device-4.0.5-1.el6 多路径映射程序 
 |===
 
-NOTE: 有关 Oracle Linux （ Red Hat 兼容内核）的已知问题，请参见 link:hu_rhel_64.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux （ RHEL ） 6.4 。
+NOTE: 有关Oracle Linux RHCK已知问题、请参见link:hu_rhel_64.html#known-problems-and-limitations["已知问题"]适用于RHEL 6.4的。

@@ -264,13 +264,13 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 8.10 RedHat Enterprise Kernel、请使用link:hu_rhel_810.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.10的。
+NOTE: 要配置Oracle Linux 8.10 Red Hat兼容内核(RHCK)、请使用link:hu_rhel_810.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.10的。
 
 
 
-== KVM设置
+== 配置KVM设置
 
-您无需在Oracle Linux 8.10上为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
+您无需为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
 
 
 

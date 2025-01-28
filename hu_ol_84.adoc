@@ -277,13 +277,13 @@ devices {
 }
 ----
 
-NOTE: 要配置Oracle Linux 8.4 Red Hat Enterprise Kernel (RHCK)、请使用link:hu_rhel_84.html#recommended-settings["建议设置"]适用于Red Hat Enterprise Linux (RHEL) 8.4的。
+NOTE: 要配置Oracle Linux 8.4 Red Hat兼容内核(RHCK)、请使用适用于Red Hat Enterprise Linux (RHEL) 8.4的link:hu_rhel_84.html#recommended-settings["建议设置"]。
 
 
 
-== KVM设置
+== 配置KVM设置
 
-您也可以使用建议的设置来配置基于内核的虚拟机（ KVM ）。由于 LUN 已映射到虚拟机管理程序，因此配置 KVM 不需要进行任何更改。
+您无需为基于内核的虚拟机配置设置、因为LUN已映射到虚拟机管理程序。
 
 
 
@@ -292,4 +292,4 @@ NOTE: 要配置Oracle Linux 8.4 Red Hat Enterprise Kernel (RHCK)、请使用link
 具有ONTAP版本的Oracle Linux 8.4没有已知问题。
 
 
-NOTE: 有关Oracle Linux (Red Hat兼容内核)的已知问题、请参见link:hu_rhel_84.html#known-problems-and-limitations["已知问题"]相应Red Hat Enterprise Linux发行说明文件中的一节。
+NOTE: 有关Oracle Linux RHCK已知问题、请参见link:hu_rhel_84.html#known-problems-and-limitations["已知问题"]相应RHEL版本文档中的一节。
