@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: hu_sanhost_index.html 
-keywords:  
-summary:  
+keywords: san, host, utility, software, netapp 
+summary: 了解有关SAN Host Utility版本的最新信息、并访问适用于您的主机配置的安装过程。 
 ---
-= 概述
+= 了解SAN Host Utilities
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,13 @@ summary:
 
 
 [role="lead"]
-发现有关SAN主机实用程序版本的最新信息、并访问适用于您的主机配置的安装操作步骤。
+了解有关SAN Host Utility版本的最新信息、并访问适用于您的主机配置的安装过程。
+
+NetApp支持站点上提供了多个SAN Host Utilities软件包。如果SAN主机可用、NetApp建议使用SAN Host Utilities软件。
+
+AIX、HP-UX、Linux和Solaris Host Utilities软件提供了一个命令行工具包。此工具包可帮助您管理ONTAP LUN和主机总线适配器(HBA)。如果您遇到需要帮助的问题、NetApp客户支持还可以使用SAN Host Utilities收集有关您的配置的信息。安装Host Utilities软件包时会自动安装该工具包。
+
+使用Windows主机实用程序可以将Windows主机计算机连接到NetApp存储系统。该软件包括一个安装程序、用于设置所需的Windows注册表和HBA参数。这样、Windows主机便可正确处理ONTAP和E系列平台的存储系统行为。
 
 
-NOTE: 为了在安装后可靠地运行、请使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证主机是否支持完整的基于网络结构的NVMe (包括基于TCP的NVMe和基于光纤通道的NVMe)、iSCSI、FC或FCoE配置。
+NOTE: 为了在安装后可靠地运行、请使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的主机是否支持完整的基于网络结构的NVMe (包括基于TCP的NVMe和基于光纤通道的NVMe)、iSCSI、FC或FCoE配置。

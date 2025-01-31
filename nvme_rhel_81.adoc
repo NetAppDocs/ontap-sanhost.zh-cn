@@ -16,9 +16,9 @@ summary: 介绍如何使用 ONTAP 为 RHEL 8.1 配置 NVMe/FC
 
 
 [role="lead"]
-对于Red Hat Enterprise Linux (RHEL) 8.1、ONTAP 9.6或更高版本支持NVMe/FC。RHEL 8.1主机可以通过相同的FC启动程序适配器端口同时运行NVMe和SCSI流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。
+从ONTAP 9.6开始、Red Hat Enterprise Linux (RHEL) 8.1支持NVMe/FC。RHEL 8.1主机可以通过相同的FC启动程序适配器端口同时运行NVMe和SCSI流量。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 了解最新的受支持配置列表。
+有关最新的受支持配置列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -46,7 +46,7 @@ summary: 介绍如何使用 ONTAP 为 RHEL 8.1 配置 NVMe/FC
 4.18.0-147.el8.x86_64
 ----
 +
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关最新的受支持版本列表。
+有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 . 安装 `nvme-cli-1.8.1-3.el8` 软件包：
 +
@@ -98,7 +98,7 @@ NOTE: 如果主机NQN字符串不匹配、请使用 `vserver modify` 命令更�
 您可以使用以下操作步骤配置Broadcom FC适配器。
 
 .步骤
-. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器的最新列表。
+. 验证您使用的是受支持的适配器。有关受支持适配器的当前列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -205,7 +205,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

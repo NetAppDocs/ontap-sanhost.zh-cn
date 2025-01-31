@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_aix_61_cmd.html 
 keywords: host utilities, aix, powervm, vios, 3.1, 7.2, 7.0, netapp, ontap 
-summary: 您可以使用AIX Host Utilities示例命令参考、使用Host Utilities工具对NetApp存储配置进行端到端验证。 
+summary: '您可以使用"AIX主机实用程序"示例命令参考使用"主机实用程序"工具对NetApp存储配置进行端到端验证。' 
 ---
 = AIX Host Utilities示例命令参考
 :hardbreaks:
@@ -16,7 +16,7 @@ summary: 您可以使用AIX Host Utilities示例命令参考、使用Host Utilit
 
 
 [role="lead"]
-您可以使用AIX Host Utilities示例命令参考、使用Host Utilities工具对NetApp存储配置进行端到端验证。
+您可以使用"AIX主机实用程序"示例命令参考使用"主机实用程序"工具对NetApp存储配置进行端到端验证。
 
 
 

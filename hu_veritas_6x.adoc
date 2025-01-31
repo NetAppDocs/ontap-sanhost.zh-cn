@@ -16,18 +16,18 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 
 
 [role="lead"]
-您可以对采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于RHCK)平台的Veritas Storage Foundation 6系列使用ONTAP SAN主机配置设置。
+您可以对采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于Red Hat兼容内核)平台的Veritas Storage Foundation 6系列使用ONTAP SAN主机配置设置。
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-您可以从下载64-bit.rpm文件格式的NetApp Linux统一主机实用程序软件包link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
+您可以从下载NetApp Linux主机实用程序软件包，其格式为64-bit.rpm文件link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将64位Linux Host Utilities软件包从下载 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -67,8 +67,8 @@ enabled     up      active/non-optimized sdas   13:0:1:0   lif_9      66:192
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 请参见 Veritas 支持门户（产品表，平台查找， HCL 表）以验证 SAN 启动配置可支持性和已知注意事项。
 
@@ -90,7 +90,7 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 == 多路径
 
-您必须验证您的配置是否满足系统要求。有关详细信息，请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 和 Veritas HCL 表。
+您必须验证您的配置是否满足系统要求。有关详细信息、请参见 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]和Veritas HCL表。
 
 .示例
 在以下示例中、 `vxdmpadm`使用命令验证VxDMP多路径是否已连接ONTAP目标阵列。
@@ -167,7 +167,7 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 
 ==== Veritas Multipath 的设置
 
-NetApp 建议使用以下 Veritas VxDMP 可调参数，以便在存储故障转移操作中实现最佳系统配置。
+NetApp建议使用以下Veritas VxDMP可调参数、以便在存储故障转移操作中实现最佳系统配置。
 
 [cols="2*"]
 |===
@@ -257,7 +257,7 @@ NOTE: 有关 Veritas 专用的所有其他设置，请参阅标准 Veritas Infos
 
 == 多路径共存
 
-如果您使用的是包括 Veritas Infoscale ， Linux 原生设备映射程序和 LVM 卷管理器在内的异构多路径环境，请参见《 Veritas 产品管理指南》了解配置设置。
+如果您有一个异构多路径环境、包括Veritas Infoscale、Linux Native Device MapperTM和LVM卷管理器、请参见Veritas产品管理文档了解配置设置。
 
 
 

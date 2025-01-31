@@ -2,6 +2,6 @@
 :allow-uri-read: 
 
 
-如果 Windows 主机具有多条存储系统路径，则必须安装 MPIO 软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。
+如果Windows主机具有多个存储系统路径、则必须安装Microsoft多路径I/O (MPIO)软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。
 
 在 Windows 系统上，任何 MPIO 解决方案的两个主要组件是 DSM 和 Windows MPIO 。在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO 。

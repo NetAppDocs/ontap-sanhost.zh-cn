@@ -22,8 +22,8 @@ summary: 介绍如何将 Citrix XenServer 7.x 与 ONTAP 结合使用
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=91241;&solution=236&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -45,7 +45,7 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 Citrix XenServer 中的多路径支持基于设备映射程序多路径组件。不会自动为呈现给 XenServer 的所有 LUN 创建设备映射器节点，并且只有在存储管理层（ API ）正在使用 LUN 时才会配置设备映射器节点。Citrix XenServer Storage Manager API 插件可自动激活和停用多路径节点。
 
-由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点，可以使用 ` /sbin/mpathutil status` 命令验证 ONTAP LUN 的设置。有关详细信息，请参阅 Citrix XenServer 的标准供应商文档。
+由于与集成多路径管理架构不兼容， Citrix 建议您使用 Citrix XenCenter 应用程序管理存储配置。如果需要手动查询设备映射程序表的状态或列出系统上的活动设备映射程序多路径节点、可以使用 `/sbin/mpathutil status`命令验证ONTAP LUN的设置。有关详细信息，请参阅 Citrix XenServer 的标准供应商文档。
 
 
 

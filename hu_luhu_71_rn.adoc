@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_luhu_71_rn.html 
 keywords: host utilities, linux, 7.1, netapp, ontap, release, notes, linux 
-summary: 《Linux Unified Host Utilities 7.1发行说明》 
+summary: 《Linux Host Utilities 7.1发行说明》 
 ---
-= 《Linux Unified Host Utilities 7.1发行说明》
+= 《Linux Host Utilities 7.1发行说明》
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,7 +18,7 @@ summary: 《Linux Unified Host Utilities 7.1发行说明》
 [role="lead"]
 本发行说明介绍了有关使用ONTAP存储系统配置和管理特定主机的新增功能和增强功能、已知问题和限制以及重要注意事项。
 
-有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+有关Host Utilities支持的操作系统版本和更新的特定信息，请参阅link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
 
 
@@ -47,7 +47,7 @@ NOTE: 本文档中提及的Host Utilities或Linux Host Utilities均指Linux Unif
 
 
 
-NOTE: 在初始版本之后、NetApp将继续与Host Utilities配合使用、以增加对功能的支持。有关支持的功能以及已添加的新功能的最新信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+NOTE: 在初始版本之后、NetApp将继续与Host Utilities配合使用、以增加对功能的支持。有关支持的功能和新增功能link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]的最新信息，请参见。
 
 
 
@@ -66,12 +66,9 @@ Linux Host Utilities 7.1版具有以下已知问题和限制。
 | NetApp 错误 ID | 标题 | Description 
 
 
-| 1457017 | `sanlun`安装问题与`libdevmapper.so`和`libnl.so`库相关的警告消息。这些警告不会影响`sanlun` kit的功能。 | 在SAN主机上执行Linux Unified Host Utilities命令行界面命令"sanlun fcp show adapter -v"时、此命令会失败、并显示一条错误消息、指出无法找到主机总线适配器(HBA)所需的库依赖关系
-位于：
-
-[root@hostname ~]# sanlun fcp show adapter -v
-找不到/usr/lib64/libHABAPI.so库
-确保安装库的软件包已安装并加载
-请参阅NetApp错误在线- link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^]。 
+| 1457017 | `sanlun`安装问题与`libdevmapper.so`和`libnl.so`库相关的警告消息。这些警告不会影响`sanlun` kit的功能。 | 在SAN主机上执行Linux主机实用程序命令行界面命令sanlun fcp show adapter -v"时，该命令失败，并显示一条错误消息，显示找不到主机总线适配器(Host Bus Adapter, HBA)发现所需的库依赖关系：
+`[root@hostname ~]# sanlun fcp show adapter -v
+Unable to locate /usr/lib64/libHBAAPI.so library
+Make sure the package installing the library is installed & loaded`请参阅NetApp错误在线-link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1508554["1508554"^]。 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。

@@ -24,7 +24,7 @@ summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机
 * 在给定主机总线适配器(HBA)的同一主机上同时使用NVMe和SCSI流量、而不使用显式dm-dpath设置、以防止声明NVMe命名空间。
 
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的配置的准确详细信息。
+有关受支持配置的准确详细信息、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -46,7 +46,7 @@ summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机
 
 .步骤
 . 在服务器上安装RHEL 9.1。
-. 安装完成后、验证是否正在运行指定的RHEL 9.1内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关最新的受支持版本列表。
+. 安装完成后，验证您是否正在运行指定的 RHEL 9.1 内核。有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 示例
 
@@ -99,7 +99,7 @@ NOTE: 如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令
 .Broadcom/Emulex
 --
 .步骤
-. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器的最新列表。
+. 验证您使用的是受支持的适配器。有关受支持适配器的当前列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -113,7 +113,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器驱动程序和固件版本的最新列表。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。有关受支持的适配器驱动程序和固件版本的最新列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -230,7 +230,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

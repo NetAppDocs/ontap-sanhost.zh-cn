@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_wuhu_upgrade.html 
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
-summary: Windows Unified Host Utilities 包含一个安装程序，用于设置所需的 Windows 注册表和 HBA 参数，以便 Windows 主机正确处理 NetApp ONTAP 和 E 系列平台的存储系统行为。 
+summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 升级Windows Unified Host Utilities
+= 升级Windows Host Utilities
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -51,7 +51,7 @@ summary: Windows Unified Host Utilities 包含一个安装程序，用于设置�
 
 +
 ** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
-** 多路径用于指定是否安装 MPIO 支持。允许的值为"0"表示否、"1"表示是。
+** 多路径用于指定是否安装Microsoft多路径I/O (MPIO)支持。允许的值为"0"表示否、"1"表示是。
 ** `inst_path` 是安装 Host Utilities 文件的路径。默认路径为 `C ： \Program Files\NetApp\Windows Host Utilities\` 。
 
 

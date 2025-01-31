@@ -18,10 +18,7 @@ summary: 如何使用ONTAP为RHEL 9.5配置NVMe-oF主机
 [role="lead"]
 NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。
 
-
-
-== 关于此任务
-
+.关于此任务
 您可以在适用于Red Hat Enterprise Linux (RHEL) 9.5的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。
 
 * 提供支持：
@@ -29,7 +26,7 @@ NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网�
 ** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
 ** 在同一主机上同时运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
 +
-有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -177,7 +174,7 @@ Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 
 
 +
-有关支持的适配器驱动程序和固件版本的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 . 验证的预期输出是否 `lpfc_enable_fc4_type`设置为 `3`：
 +
@@ -303,7 +300,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

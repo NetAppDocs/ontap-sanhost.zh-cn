@@ -16,7 +16,7 @@ summary: 如何使用ONTAP为AIX配置NVMe/FC主机
 
 
 [role="lead"]
-您可以在使用ONTAP存储作为目标的IBM AIX和VIOS/PowerVM主机上启用基于光纤通道的NVMe (NVMe/FC)。有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+您可以在使用ONTAP存储作为目标的IBM AIX和VIOS/PowerVM主机上启用基于光纤通道的NVMe (NVMe/FC)。有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 以下支持适用于使用ONTAP的AIX主机的NVMe/FC主机配置：
 

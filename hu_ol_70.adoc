@@ -20,16 +20,16 @@ summary: 介绍如何在 ONTAP 中使用 Oracle Linux 7.0
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-NetApp LINUX统一主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^]。
+NetApp LINUX主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-如果您当前已安装Linux Unified Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
+如果您当前已安装Linux Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将32位或64位Linux Host Utilities软件包从下载link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=68625;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -272,7 +272,7 @@ NOTE: 要配置Oracle Linux 7.0 Red Hat兼容内核(RHCK)、请使用适用于Re
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901558["901558"^] | OL7.0 ：由于 Emulex 8G （ LPe12002 ）主机上的 OL 7.0 Uek r3U5 测试版出现 "RSCN 超时 " 错误，主机丢失 LUN 的所有路径并挂起 | 您可能会发现，在对 I/O 执行存储故障转移操作期间， Emulex 8G （ LPe12002 ）主机挂起，并且 I/O 中断率较高您可能会发现路径无法恢复，这是由于 RSCN 超时导致的，主机丢失所有路径并挂起。达到此问题描述的概率很高。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0 ：在使用 IO 执行存储故障转移操作期间，在 QLogic 8G FC （ QLE2562 ） SAN 主机上观察到高 IO 中断 | 在使用 IO 执行存储故障转移操作期间，您可能会发现 QLogic 8G FC （ QLE2562 ）主机上的 IO 中断较高。中止和设备重置会在主机上表现为 IO 中断。遇到此 IO 中断的可能性很高。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=901557["901557"^] | OL 7.0：在对I/O执行存储故障转移操作期间、QLogic 8G FC (QLE2562) SAN主机上观察到大量I/O中断 | 在对I/O执行存储故障转移操作期间、QLogic 8G FC (QLE2562)主机上可能会出现大量I/O中断主机上发生I/O中断时会发生中断和设备重置。发生此I/O中断的可能性很高。 
 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894766["894766"^] | OL7.0 ： dracut 无法在 UEKR3U5 alpha 上的 initramfs 中包含 scsi_dh_alua.ko 模块 | 即使在内核命令行中添加参数 "rdloaddriver=SCSI_DH_ALUA" 并创建了 dracut ， SCSI_DH_ALUA 模块也可能无法加载。因此，未按建议为 NetApp LUN 启用 ALUA 。 
@@ -284,5 +284,5 @@ NOTE: 要配置Oracle Linux 7.0 Red Hat兼容内核(RHCK)、请使用适用于Re
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=894771["894771"^] | OL7.0 ： Anacondup 不会在内核 cmd 行中添加 bootdev 参数来设置 iSCSI SANboot OS 安装的 IP 地址 | Anaconda 不会在内核命令行中添加 bootdev 参数，您可以在 iSCSI 多路径 LUN 上安装 OL 7.0 操作系统期间设置 IPv4 地址。因此，您不能为任何配置为在 OL 7.0 启动期间与存储子系统建立 iSCSI 会话的以太网接口分配 IP 地址。由于未建立 iSCSI 会话，因此在操作系统启动时不会发现根 LUN ，因此操作系统启动失败。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | 在使用 IO 执行存储故障转移操作期间观察到 QLogic 10G FCoE （ QLE8152 ）主机内核崩溃 | 您可能会发现 10G FCoE Qlogic （ QLE8152 ）主机上的 Qlogic 驱动程序模块发生内核崩溃。在使用 IO 执行存储故障转移操作期间发生崩溃。发生此崩溃的可能性较高，从而导致主机上的 IO 中断时间较长。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=916501["916501"^] | 在对I/O执行存储故障转移操作期间观察到QLogic 10G FCoE (QLE8152)主机内核崩溃 | 您可能会在10G FCoE逻辑(QLE8152)主机上的逻辑驱动程序模块中观察到内核崩溃。在对I/O执行存储故障转移操作期间发生崩溃发生此崩溃的可能性较高、这会导致主机上的I/O中断时间较长。 
 |===

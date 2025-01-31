@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: hu_wuhu_72.html 
-keywords: wuhu, 7.2, host utilities, SAN, windows, unified 
-summary: Windows统一主机实用程序包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理NetApp ONTAP 和E系列平台的存储系统行为。 
+keywords: windows, 7.2, host utilities, SAN, windows 
+summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 安装Windows Unified Host Utilities 7.2
+= 安装Windows Host Utilities 7.2
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,9 +14,9 @@ summary: Windows统一主机实用程序包括一个安装程序、用于设置�
 
 
 [role="lead"]
-使用Windows统一主机实用程序(芜湖)、您可以将Windows主机计算机连接到NetApp存储系统。
+使用Windows主机实用程序可以将Windows主机计算机连接到NetApp存储系统。
 
-Windows Unified Host Utilities支持以下版本的Windows：
+Windows Host Utilities支持以下版本的Windows：
 
 * Windows 2022
 * Windows 2019
@@ -25,7 +25,7 @@ Windows Unified Host Utilities支持以下版本的Windows：
 * Windows 2012
 
 
-Windows统一主机实用程序包括一个安装程序、用于设置所需的Windows注册表和主机总线适配器(HBA)参数、以便Windows主机可以正确处理NetApp ONTAP和E系列平台的存储系统行为。
+Windows主机实用程序包括一个安装程序、用于设置所需的Windows注册表和主机总线适配器(HBA)参数、以便Windows主机可以正确处理ONTAP和E系列平台的存储系统行为。
 
 安装Host Utilities软件时、安装程序会设置所需的Windows注册表和HBA参数。
 
@@ -49,16 +49,16 @@ Windows 主机计算机上安装了以下程序和文件。默认目录为 `C �
 
 | `sA_version.exe` | 显示Host Utilities和FC HBA的版本。 
 |===
-主机实用程序支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见 https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
 == 验证主机和存储系统配置
 
-在安装Host Utilities之前、您必须验证Host Utilities版本是否支持主机和存储系统配置、以便正确安装软件。
+在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。
 
 .步骤
-. 在中检查支持的配置 http://mysupport.netapp.com/matrix["NetApp 互操作性表工具"^]。
+. 在中检查支持的配置 http://mysupport.netapp.com/matrix["互操作性表工具"^]。
 . 在中检查相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
 +
 
@@ -98,24 +98,24 @@ CAUTION: 请勿手动更改HBA设置。
 
 == 安装 Host Utilities
 
-安装程序将安装Host Utilities软件包并设置Windows注册表和HBA设置。
+安装程序将安装 Host Utilities 软件包并设置 Windows 注册表和 HBA 设置。
 
-您必须指定在安装 Windows Unified Host Utilities 软件包时是否包括多路径支持。安装程序将提示您输入以下选项。您也可以从 Windows 命令提示符处运行静默（无人参与）安装。
+您必须指定在安装Windows Host Utilities软件包时是否包括多路径支持。安装程序将提示您输入以下选项。您也可以从 Windows 命令提示符处运行静默（无人参与）安装。
 
 .多路径支持
 * 选择 `MPIO` 从Windows主机或虚拟机到存储系统的路径不止一个。
 * 选择 `no MPIO` 仅当您使用存储系统的单个路径时。
 
 
-MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系统不支持多路径 I/O 。对于 Hyper-V 子系统，如果选择多路径支持，则原始（直通）磁盘不会显示在子操作系统中。您可以使用原始磁盘，也可以使用 MPIO ，但不能在子操作系统中同时使用这两者。
+Microsoft多路径I/O (MPIO)选项不适用于Windows XP和Windows Vista系统；这些子操作系统不支持多路径I/O。对于 Hyper-V 子系统，如果选择多路径支持，则原始（直通）磁盘不会显示在子操作系统中。您可以使用原始磁盘，也可以使用 MPIO ，但不能在子操作系统中同时使用这两者。
 
-您可以以交互方式或使用命令行安装主机实用程序。新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照说明以交互方式或从Windows命令行安装Host Utilities。
+您可以以交互方式安装Host Utilities、也可以使用命令行安装Host Utilities。新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照说明以交互方式或从Windows命令行安装Host Utilities。
 
 [role="tabbed-block"]
 ====
 .以交互方式安装
 --
-要以交互方式安装Host Utilities软件包、必须运行Host Utilities安装程序并按照提示进行操作。
+要以交互方式安装 Host Utilities 软件包，您必须运行 Host Utilities 安装程序并按照提示进行操作。
 
 .步骤
 . 从下载可执行文件 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.2/downloads["NetApp 支持站点"^]。
@@ -127,7 +127,7 @@ MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系
 --
 .从命令行安装
 --
-您可以通过在Windows命令提示符处输入相应的命令来执行主机实用程序的静默(无人参与)安装。安装完成后，系统将自动重新启动。
+您可以在Windows命令提示符处输入相应的命令、以静默(无人值守)方式安装Host Utilities。安装完成后，系统将自动重新启动。
 
 .步骤
 . 在Windows命令提示符处输入以下命令：
@@ -137,7 +137,7 @@ MPIO 选项不适用于 Windows XP 和 Windows Vista 系统；这些子操作系
 +
 ** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
 ** 多路径用于指定是否安装 MPIO 支持。允许的值为"0"表示否、"1"表示是。
-** `inst_path` 是安装Host Utilities文件的路径。默认路径为 `C:\Program Files\NetApp\Windows Host Utilities\`。
+** `inst_path` 是安装 Host Utilities 文件的路径。默认路径为 `C ： \Program Files\NetApp\Windows Host Utilities\` 。
 
 
 

@@ -4,7 +4,7 @@ permalink: hu_aix_61.html
 keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
 summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用 
 ---
-= 安装AIX Host Utilities 6.1
+= 安装适用于ONTAP存储的AIX Host Utilities 6.1
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 
 [role="lead"]
-AIX统一主机实用程序可帮助您管理连接到AIX主机的NetApp ONTAP存储。
+AIX Host Utilities可帮助您管理连接到AIX主机的ONTAP存储。
 
 AIX Host Utilities支持以下协议：
 
@@ -27,23 +27,23 @@ AIX Host Utilities支持以下协议：
 
 AIX Host Utilities支持以下环境：
 
-* AIX MPIO (本机操作系统)
+* AIX Microsoft多路径I/O (MPIO)(本机操作系统)
 * PowerVM
 +
 有关PowerVM的详细信息、请参见IBM PowerVM Live Partition Mobility红皮书。
 
 
 
-.您需要的内容
+.开始之前
 * 为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。
 +
-您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623%3B64703%3B&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
+您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证配置。
 
-* 必须为所有FC和FCoE启动程序启用动态跟踪。
+* 为所有FC和FCoE启动程序启用动态跟踪。
 
 
 
-NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^] 在经过压缩的 tar.gz 文件中。在将AIX MPIO与NetApp ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
+NOTE: NetApp AIX主机实用程序软件包在上的压缩版本中 `tar.gz file`可用link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。在将AIX MPIO与ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
 
 .步骤
 . 登录到主机。
@@ -54,7 +54,7 @@ NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.ne
 
 . 转至 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^] 并将包含Host Utilities的压缩文件下载到主机上的目录中。
 . 转到包含下载内容的目录。
-. 解压缩文件并提取SAN工具包软件包。
+. 解压缩文件并提取 SAN 工具包软件包。
 +
 `# tar -xvf ntap_aix_host_utilities_6.1.tar.gz`
 
@@ -65,7 +65,7 @@ NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.ne
 +
 `# installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
 
-. 安装SAN工具包：
+. 安装 SAN 工具包：
 +
 `# installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`
 
@@ -82,7 +82,7 @@ NOTE: 上提供了 NetApp AIX Host Utilities 软件包 link:https://mysupport.ne
 
 == SAN 工具包
 
-AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
+AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在安装Host Utilities软件包时安装。此套件提供了 `sanlun`实用程序、可帮助您管理LUN和主机总线适配器(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
 * 示例 *
 
@@ -106,4 +106,4 @@ data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
 data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
 ----
 
-NOTE: 此工具包适用于所有Host Utilities配置和协议。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。AIX 和 PowerVM/VIOS 操作系统版本支持 SAN 工具包。
+NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、并非所有组件都适用于每个配置。未使用的组件不会影响系统性能。AIX和PowerVM/VIOS OS版本支持SAN工具包

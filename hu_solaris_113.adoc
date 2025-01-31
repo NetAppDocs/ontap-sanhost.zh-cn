@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_solaris_113.html 
 keywords: host utilities, solaris, 113, netapp, ontap 
-summary: 介绍如何安装 Solaris 主机实用程序 
+summary: 介绍如何安装Solaris Host Utilities 
 ---
 = 将Solaris 11.3与ONTAP结合使用
 :hardbreaks:
@@ -70,7 +70,7 @@ summary: 介绍如何安装 Solaris 主机实用程序
 
 
 
-== SAN工具包
+== SAN 工具包
 
 安装NetApp主机实用程序软件包会自动安装该工具包。此套件提供了 `sanlun`实用程序、可帮助您管理LUN和主机总线适配器(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
@@ -91,12 +91,12 @@ data_vserver       /vol/vol2/lun2  /dev/rdsk/c0t600A098038314362705D51465A626475
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 Solaris 主机的启动设备的过程。
 
-您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。请参见 https://docs.netapp.com/us-en/ontap-sanhost/hu_solaris_62.html["安装Solaris Host Utilities"^] 有关在Solaris MPIO环境中SAN启动LUN的详细信息。
+您可以使用 FC 协议并运行 Solaris Host Utilities 将 SAN 启动 LUN 设置为在 Solaris MPxIO 环境中运行。根据卷管理器和文件系统的不同，设置 SAN 启动 LUN 的方法可能会有所不同。有关在Solaris Microsoft多路径I/O (MPIO)环境中通过SAN启动LUN的详细信息、请参见 https://docs.netapp.com/us-en/ontap-sanhost/hu_solaris_62.html["安装Solaris Host Utilities"^]。
 
 
 
@@ -147,7 +147,7 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 == 建议设置
 
-以下是为采用 NetApp ONTAP LUN 的 Solaris 11.3 SPARC 和 x86_64 建议的一些参数设置。这些参数值由 Host Utilities 设置。
+以下是建议用于带有ONTAP LUN的Solaris 11.3 SPARC和x86_64的一些参数设置。这些参数值由 Host Utilities 设置。
 
 [cols="2*"]
 |===
@@ -186,8 +186,8 @@ NOTE: 从 ONTAP 9.8 开始，支持适用于 Solaris 主机的所有 SAN 阵列�
 
 * Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或适用于 SPARC 的 Oracle VM Server ）， Solaris 动态域， Solaris 区域和 Solaris 容器。尽管这些技术基于非常不同的架构，但它们通常被重新命名为 "Oracle 虚拟机 " 。
 * 在某些情况下，可以同时使用多个选项，例如特定 Solaris 逻辑域中的 Solaris 容器。
-* NetApp 通常支持使用这些虚拟化技术，其中 Oracle 支持整体配置，并且上列出了可直接访问 LUN 的任何分区 https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^] 在支持的配置中。其中包括根容器， LDOM IO 域以及使用 NPIV 访问 LUN 的 LDOM 。
-* 仅使用虚拟化存储资源（例如 `vdskk` ）的分区和 / 或虚拟机不需要特定的资格认定，因为它们不能直接访问 NetApp LUN 。只能在中找到直接访问底层 LUN 的分区 /VM ，例如 LDOM IO 域 https://mysupport.netapp.com/matrix/imt.jsp?components=95803;&solution=1&isHWU&src=IMT["NetApp 互操作性表"^]。
+* NetApp通常支持使用这些虚拟化技术、其中Oracle支持整体配置、并且可直接访问LUN的任何分区会在上列出、并 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]采用受支持的配置。其中包括根容器、LLOM I/O域以及使用NPIV访问LUN的LLOM。
+* 仅使用虚拟化存储资源(例如)的分区和/或虚拟机 `vdsk`无需特定的限定条件，因为它们无法直接访问NetApp LUN。只能在中找到直接访问底层LUN的分区/VM，例如LDOM IO域 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
 
 

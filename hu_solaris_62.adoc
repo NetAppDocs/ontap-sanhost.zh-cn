@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_solaris_62.html 
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
-summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用 
+summary: 介绍如何在ONTAP中使用Solaris Host Utilities 6.2 
 ---
-= 安装Solaris Host Utilities 6.2
+= 安装适用于ONTAP存储的Solaris Host Utilities 6.2
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,25 +16,25 @@ summary: 介绍如何将 Linux Unified Host Utilities 7.1 与 ONTAP 结合使用
 
 
 [role="lead"]
-Solaris统一主机实用程序可帮助您管理连接到Solaris主机的NetApp ONTAP存储。
+Solaris Host Utilities可帮助您管理连接到Solaris主机的ONTAP存储。
 
-Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主要的Host Utilities环境包括：
+Solaris Host Utilities 6.2 支持多个 Solaris 环境和多个协议。主 Host Utilities 环境包括：
 
 * 在使用 SPARC 处理器或 X86/64 处理器的系统上，使用光纤通道（ FC ）或 iSCSI 协议的 MPxIO 的原生 操作系统。
 * 在使用SPARC处理器的系统上使用FC或iSCSI协议的VERITAS动态多路径(DMP)，或者在使用x86/64处理器的系统上使用iSCSI协议的VERITAS动态多路径(DMP)。
 
 
-Solaris Unified Host Utilities 6.2仍支持以下版本的Solaris：
+Solaris Host Utilities 6.2仍支持以下版本的Solaris：
 
 * Solaris 11.x系列
 * Solaris 10.x系列
 
 
-.您需要的内容
+.开始之前
 * 为了确保操作可靠、请确认您的整个iSCSI、FC或FCoE配置均受支持。
 
 
-您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 以验证您的配置。
+您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证配置。
 
 
 NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["NetApp 支持站点"^] 以压缩文件格式供处理器使用。您可以从支持站点下载适用于您的环境的 Host Utilities 软件包。
@@ -55,13 +55,16 @@ NOTE: 上提供了 NetApp Solaris Host Utilities 软件包 link:https://mysuppor
 +
 ` # gunzip netapp_solaris host_utilities_6_2_sparc.tar.gz`
 
-. 解压缩文件。您可以使用 `tar xvf` 命令执行此操作。
+. 使用命令解压缩文件 `tar xvf`：
 +
 ` # tar xvf netapp_solaris host_utilities_6_2_sparc.tar`
 
-. 将从 tar 文件提取的软件包添加到主机。您可以使用 `pkgadd` 命令执行此操作。
+. 使用命令将从tar文件提取的软件包添加到主机中 `pkgadd`。
 +
-这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。以下示例使用 `pkgadd` 命令安装 Solaris 安装包：
+这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。
+
++
+以下示例将使用 `pkgadd`命令安装Solaris安装包：
 
 +
 ` # pkgadd -d ./NTAPSANTool.pkg`
@@ -126,4 +129,4 @@ data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A09803830443
 
 ----
 
-NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、某些工具包内容可能适用于一种配置、但不适用于另一种配置。未使用的组件不会影响系统性能。
+NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、并非所有组件都适用于每个配置。未使用的组件不会影响系统性能。AIX和PowerVM/VIOS OS版本支持SAN工具包。

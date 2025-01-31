@@ -16,9 +16,9 @@ summary: 如何使用 ONTAP 为 RHEL 8.3 配置 NVMe/FC 主机
 
 
 [role="lead"]
-对于Red Hat Enterprise Linux (RHEL) 8.3、ONTAP 9.6或更高版本支持NVMe/FC。RHEL 8.3主机通过相同的FC启动程序适配器端口同时运行NVMe和SCSI流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。
+从ONTAP 9.6开始、Red Hat Enterprise Linux (RHEL) 8.3支持NVMe/FC。RHEL 8.3主机通过相同的FC启动程序适配器端口同时运行NVMe和SCSI流量。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 了解最新的受支持配置列表。
+有关最新的受支持配置列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -79,7 +79,7 @@ yum install nvmecli
 4.18.0-240.el8.x86_64
 ----
 +
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关最新的受支持版本列表。
+有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 . 安装NVMe-CLI软件包：
 +
@@ -135,7 +135,7 @@ TIP: 如果主机NQN字符串不匹配、请使用 `vserver modify` 用于更新
 +
 [NOTE]
 ====
-如果您要在同时存在的同一个RHEL 8.3主机上同时运行NVMe和SCSI流量、NetApp建议您分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。您可以通过添加来执行此操作 `enable_foreign` 将设置为/etc/Multipath.conf、如下所示：
+如果要在同一个RHEL 8.3主机上同时运行NVMe和SCSI流量、NetApp建议您分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。您还应将 dm-multipath 中的 ONTAP 命名空间列入黑名单，以防止 dm-multipath 声明这些命名空间设备。为此、您可以将设置添加 `enable_foreign`到/etc/Multipath.conf中、如下所示：
 
 [listing]
 ----
@@ -272,7 +272,7 @@ Device               Vserver            Namespace Path                          
 
 您可以使用以下操作步骤配置Broadcom FC适配器。
 
-有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的适配器的当前列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 .步骤
 . 验证您使用的是受支持的适配器。
@@ -341,7 +341,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
 . 启用 1 MB I/O 大小 _ （可选） _ 。
 +
-对于大小高达 1 MB 的 lpfc 驱动程序问题描述 I/O 请求，需要将 `lpfc_SG_seg_cnt` 参数设置为 256 。
+ `lpfc_sg_seg_cnt`要使lpfc驱动程序发出大小不超过1 MB的I/O请求、需要将参数设置为256。
 
 +
 [listing]

@@ -22,8 +22,8 @@ summary: 您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配
 
 == 虚拟机管理程序SAN启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -45,7 +45,7 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 ESXi提供了一个称为本机多路径插件(NMP)的可扩展多路径模块、用于管理子插件、存储阵列类型插件(Storage Array Type Plugin、SATP)和路径选择插件(Path Selection Plugins、PSP)。默认情况下、这些SATS规则在ESXi中可用。
 
-对于NetApp ONTAP 存储、 `VMW_SATP_ALUA` 默认情况下、插件与一起使用 `VMW_PSP_RR` 作为路径选择策略(PSP)。您可以使用以下命令进行确认：
+对于ONTAP存储、默认情况下会使用"VMW_SATP_ALOA"插件和"VMW_PSP_RR"作为路径选择策略(PSP)。您可以运行以下命令来确认PSP：
 
 [listing]
 ----
@@ -216,7 +216,7 @@ fc.200034800d756a74:210034800d756a74-fc.2018d039ea936319:2016d039ea936319-naa.60
 
 适用于 VMware vSphere 的 ONTAP 工具包括适用于 ONTAP 的 VASA Provider ，它为 VMware vCenter 提供了一个集成点，可用于利用基于 VVol 的存储。部署ONTAP 工具开放虚拟化设备(OVA)时、它会自动注册到vCenter Server并启用VASA Provider。
 
-在使用 vCenter 用户界面创建 VVOL 数据存储库时，它会指导您创建 FlexVol 作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问卷数据存储库中的卷。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE 是一个管理逻辑单元（ ALU ）。VVOL 是辅助逻辑单元（ SLU ）。
+在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE是管理逻辑单元(ALU)。虚拟卷是辅助逻辑单元(SLU)。
 
 使用 VVOL 时， SAN 环境的标准要求和最佳实践适用，包括（但不限于）以下内容：
 
@@ -231,7 +231,7 @@ NOTE: 要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具
 
 NetApp 不建议此时更改任何 VVOL 设置的默认值。
 
-请参见 https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 适用于特定版本的 ONTAP 工具或适用于特定版本的 vSphere 和 ONTAP 的原有 VASA Provider 。
+有关特定版本的ONTAP工具、请参见；有关特定版本的vSphere和ONTAP、请参见 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]旧版VASA Provider。
 
 有关配置和管理vvol的详细信息、请参阅适用于VMware vSphere的ONTAP 工具文档、 link:https://docs.netapp.com/us-en/netapp-solutions/hybrid-cloud/vsphere_ontap_ontap_for_vsphere.html["TR-4597"^]，和 link:https://www.netapp.com/pdf.html?item=/media/13555-tr4400pdf.pdf["TR-4400"^]。
 

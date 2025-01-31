@@ -22,7 +22,7 @@ summary: 使用 ONTAP 为 Oracle Linux 8.1 设置 VME/FC 主机配置，包括�
 
 == 可支持性
 
-适用于Oracle Linux 8.1的ONTAP 9.6或更高版本支持NVMe/FC。Oracle Linux 8.1主机可以通过同一光纤通道(Fibre Channel、FC)启动程序适配器端口同时运行NVMe和SCSI流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。有关最新的受支持配置列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+从ONTAP 9.6开始、Oracle Linux 8.1支持NVMe/FC。Oracle Linux 8.1主机可以通过同一光纤通道(Fibre Channel、FC)启动程序适配器端口同时运行NVMe和SCSI流量。请注意， Broadcom 启动程序可以通过相同的 FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。有关支持的配置的当前列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
@@ -33,7 +33,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 
 * NVMe-CLI 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。
 * 默认情况下， NVMe 多路径不会启用轮循负载平衡。要启用此功能，必须编写 udev 规则。有关在 Oracle Linux 8.1 上启用 NVMe/FC 的章节提供了相关步骤。
-* 在 Oracle Linux 8.1 上，不支持 NVMe/FC ，因此也不支持 NVMe/FC 的 Linux 统一主机实用程序（ Unified Host Utilities ， LUhu ）。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。
+* NVMe/FC不支持sanlun、因此、在Oracle Linux 8.1上、Linux Host Utilities也不支持NVMe/FC。使用原生 NVMe-CLI 中包含的 NetApp 插件中提供的 ONTAP 命令输出。
 * 目前不支持使用NVMe-oF协议启动SAN。
 
 
@@ -42,7 +42,7 @@ NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云�
 == 启用 NVMe/FC
 
 . 在服务器上安装 Oracle Linux 8.1 。
-. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 安装完成后，验证您是否正在运行受支持的 Unbreakable Enterprise 内核。请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -90,7 +90,7 @@ nqn.2014-08.org.nvmexpress:uuid:75953f3b-77fe-4e03-bf3c-09d5a156fbcd
 
 == 为 NVMe/FC 配置 Broadcom FC 适配器
 
-. 验证您使用的是受支持的适配器。有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 验证您使用的是受支持的适配器。有关支持的适配器的当前列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -255,7 +255,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

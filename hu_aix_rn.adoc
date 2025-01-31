@@ -18,16 +18,16 @@ summary: 《AIX Host Utilities 6.1发行说明》
 [role="lead"]
 本发行说明介绍了新功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定AIX主机相关的重要注意事项。
 
-有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=85803;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+有关Host Utilities支持的操作系统版本和更新的特定信息，请参阅link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
 
 
 == 新增功能
 
-AIX Host Utilities的最新版本包含以下新增功能和增强功能：
+AIX Host Utilities版本包含以下新增功能和增强功能：
 
 * AIX Host Utilities 7.0支持AIX主机操作系统上的SCSI UNMAP。借助AIX Host Utilities 7.0、SCSI精简配置可与FC设备的AIX和NetApp LUN无缝配合使用。
-* AIX Host Utilities 6.1增加了对早期版本的AIX主机操作系统中发生的内存故障问题描述的支持。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。MPIO和相关ODM保持不变。
+* AIX Host Utilities 6.1支持在早期版本的AIX主机操作系统中发生的内存故障问题。在AIX Host Utilities 6.1中、只有sanlun二进制文件发生了更改。Microsoft多路径I/O (MPIO)和相关ODM保持不变。
 
 
 
@@ -41,7 +41,7 @@ AIX Host Utilities的最新版本包含以下新增功能和增强功能：
 | 错误 ID | 标题 | Description 
 
 
-| 不适用 | NetApp ONTAP iSCSI LUN的SCSI UNMAP支持 | AIX Host Utilities 7.0仅支持FC设备的SCSI UNMAP功能。此版本不支持对iSCSI设备的SCSI UNMAP。 
+| 不适用 | ONTAP iSCSI LUN的SCSI UNMAP支持 | AIX Host Utilities 7.0仅支持FC设备的SCSI UNMAP功能。此版本不支持对iSCSI设备的SCSI UNMAP。 
 
 
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1069147["1069147"^] | AIX HU Sanlun报告的HBA速度不正确 | 运行`sanlun fcp show adapter–v`命令时、报告sanlun显示不正确的HBA速度的实例。`sanlun fcp show adapter–v`命令可显示HBA卡信息、例如适配器支持的速度和协商的速度。这似乎只是一个报告问题描述。要确定实际速度、请使用`fcstat fcsx`命令。 

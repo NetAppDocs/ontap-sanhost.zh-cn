@@ -20,11 +20,11 @@ summary: 介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVM
 
 以下支持适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置：
 
-* NVMe 和 SCSI 流量均可在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
+* NVMe和SCSI流量可以在同一主机上运行。因此、对于SCSI LUN、您可以为SCSI mpath设备配置dm-path、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
 * 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
 
 
-有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -241,7 +241,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

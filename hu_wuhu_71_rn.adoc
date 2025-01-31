@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: hu_wuhu_71_rn.html 
 keywords: host utilities, linux, 7.1, 7.2, netapp, ontap, release, notes 
-summary: 《Windows Unified Host Utilities发行说明》 
+summary: Windows Host Utilities 发行说明 
 ---
-= 《Windows Unified Host Utilities发行说明》
+= 《Windows Host Utilities发行说明》
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,31 +18,31 @@ summary: 《Windows Unified Host Utilities发行说明》
 [role="lead"]
 本发行说明介绍了一些新增功能和增强功能、当前版本中已修复的问题、已知问题和限制以及与使用ONTAP存储系统配置和管理特定Windows主机相关的重要注意事项。
 
-有关Host Utilities支持的操作系统版本和更新的特定信息、请参见 link:https://mysupport.netapp.com/matrix/imt.jsp?components=65623;64703;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+有关Host Utilities支持的操作系统版本和更新的特定信息，请参阅link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
 
 
 == 新增功能
 
-* Windows Unified Host Utilities 7.2支持NVMe/FC驱动程序参数设置、并可修复新供应商卡的错误。
-* Windows Unified Host Utilities 7.1支持E系列存储系统、支持ONTAP 9及更高版本、并增强了iSCSI超时功能、可加快故障转移速度。
+* Windows Host Utilities 7.2支持NVMe/FC驱动程序参数设置、并为新供应商卡提供了错误修复。
+* Windows Host Utilities 7.1包括对E系列存储系统的支持、对ONTAP 9及更高版本的支持以及增强型iSCSI超时功能、可加快故障转移速度。
 
 
 
 
 == 已知问题和限制
 
-您应了解以下已知问题和限制、这些问题和限制可能会影响特定主机的性能。Windows Unified Host Utilities 7.1版中确定了一些意外的和可能不希望出现的行为、以及避免这些行为的解决方法。
+您应了解以下已知问题和限制、这些问题和限制可能会影响特定主机的性能。Windows Host Utilities 7.1版中确定了一些意外的和可能不希望出现的行为、以及避免这些行为的解决方法。
 
 [cols="30, 30, 20"]
 |===
 | 标题 | Description | 临时解决策 
 
 
-| 运行 `linux_gos_timeout-install.sh` 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本 | 您不再需要运行 `linux_gos_timeout-install.sh` 用于更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时的脚本、因为正在使用默认超时设置。。 `linux_gos_timeout-install.sh` 以前版本的Host Utilities中包含的脚本不再包含在Windows Unified Host Utilities 7.1版中。Windows Unified Host Utilities 7.1使用默认磁盘超时设置。 | 不适用 
+| 运行 `linux_gos_timeout-install.sh` 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本 | 由于使用的是默认超时设置、您无需再运行 `linux_gos_timeout-install.sh`脚本来更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时。 `linux_gos_timeout-install.sh`以前版本的Host Utilities中包含的脚本不再包含在Windows Host Utilities 7.1版中。Windows Host Utilities 7.1使用默认磁盘超时设置。 | 不适用 
 
 
-| 使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接 | 在多路径I/O (MPIO)配置或同时具有IPv4和IPv6端点的多个会话连接(MCS)配置中、某些iSCSI会话可能无法在重新启动Windows主机后重新连接。 | 使用所有IPv4端点或IPv6端点。请勿混合使用IPv4和IPv6。 
+| 使用IPv4和IPv6混合重新启动后、iSCSI会话不会重新连接 | 在同时具有IPv4和IPv6端点的Microsoft多路径I/O (MPIO)配置或每个会话多个连接(MCS)配置中、某些iSCSI会话可能会在重新启动Windows主机后无法重新连接。 | 使用所有IPv4端点或IPv6端点。请勿混合使用IPv4和IPv6。 
 
 
 | iSCSI软件启动不支持每个会话多个连接(MCS) | 将iSCSI软件启动与iSCSI MCS结合使用时、无法保护iSCSI启动前导连接。这可能会导致与启动LUN断开连接、并导致发生原因主机系统中断。 | 对于iSCSI软件启动的主机、Microsoft不支持MCS。使用MPIO作为高可用性解决方案。请注意、不支持混合使用MPIO和MCS。 

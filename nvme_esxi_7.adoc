@@ -31,7 +31,7 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 == 功能
 
-* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 有关支持的 FC 适配器和控制器的列表。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的最新配置和版本列表。
+* ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。有关最新的受支持配置和版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 * 从 ONTAP 9.9.1 P3 开始， ESXi 7.0 Update 3 支持 NVMe/FC 功能。
 * 对于 ESXi 7.0 及更高版本， HPP （高性能插件）是 NVMe 设备的默认插件。
 
@@ -68,7 +68,7 @@ Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
 === 配置 Broadcom/Emulex
 
-. 请参见，检查所需驱动程序 / 固件是否支持此配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 请参阅检查所需驱动程序/固件是否支持此配置link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 . 设置 lpfc 驱动程序参数 `lpfc_enable_FC4_type=3` 以在 `lpfc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 
 
@@ -98,7 +98,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 === 配置 Marvell/QLogic
 
 .步骤
-. 请参见，检查所需驱动程序 / 固件是否支持配置 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 请参阅检查所需驱动程序/固件是否支持配置link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 . 设置 `qlnativefc` driver 参数 `ql2xnvmesupport=1` 以在 `qlnativefc` 驱动程序中启用 NVMe/FC 支持，然后重新启动主机。
 +
 ` # esxcfg-module -s 'ql2xnvmesupport=1' qlnativefc`

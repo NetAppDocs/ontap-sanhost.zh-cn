@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: hu_aix_72.html 
-keywords: host utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
+keywords: Host Utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
 summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合使用 
 ---
 = 将IBM AIX 7.2和/或PowerVM (VIOS 3.1)与ONTAP结合使用
@@ -20,13 +20,13 @@ summary: 介绍如何将 IBM AIX 7.2 和 / 或 PowerVM VIOS 3.1 与 ONTAP 结合
 
 
 
-== 安装AIX/VIOS主机实用程序
+== 安装AIX/VIOS Host Utilities
 
-在将AIX MPIO与NetApp ONTAP 存储结合使用时、必须安装AIX主机实用程序套件。
+在将AIX Microsoft多路径I/O (MPIO)与ONTAP存储结合使用时、必须安装AIX Host Utilities Kit。
 
-您可以从下载包含 Host Utilities 软件包的压缩文件 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。获取文件后、您必须对其进行解压缩、以获取安装Host Utilities所需的两个软件包。
+您可以从下载包含Host Utilities软件包的压缩文件link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。获取文件后，必须对其进行解压缩，以获取安装 Host Utilities 所需的两个软件包。
 
-NetApp AIX Host Utilities 6.1 是最新版本。此版本可解决先前版本中报告的内存泄漏问题描述。有关追加信息，请参见发行说明部分。
+AIX Host Utilities 6.1版解决了先前版本中报告的内存泄漏问题。有关更多信息、请参见link:hu_aix_rn.html["发行说明"]。
 
 .步骤
 . 登录到主机。
@@ -54,7 +54,7 @@ NetApp AIX Host Utilities 6.1 是最新版本。此版本可解决先前版本�
 
 
 
-== SAN工具包
+== SAN 工具包
 
 安装NetApp主机实用程序软件包会自动安装该工具包。此套件提供了 `sanlun`实用程序、可帮助您管理LUN和主机总线适配器(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
@@ -78,8 +78,8 @@ data_vserver      /vol/vol4/lun4    hdisk14     fcs0       FCP       20g    C
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=71102;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX/PowerVM 主机的启动设备的过程。您可以将 SAN 启动 LUN 设置为在运行采用 FC 或 FCoE 协议的 AIX Host Utilities 的 AIX MPIO 环境中运行。在 AIX MPIO 环境中，用于创建 SAN 启动 LUN 并在其上安装新操作系统映像的方法可能会有所不同，具体取决于您使用的协议。
 
@@ -157,7 +157,7 @@ up     primary  path3  fcs1    fc_aix_4     1
 
 == 建议设置
 
-下面是ONTAP LUN的一些建议参数设置。  安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。
+下面是ONTAP LUN的一些建议参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。
 
 [cols="4*"]
 |===
@@ -241,5 +241,5 @@ up     primary  path3  fcs1    fc_aix_4     1
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1414700["1414700"^] | 在存储故障转移期间， AIX 7.2 TL04 的虚拟 iSCSI 磁盘（ VIOS 3.1.1.x ）发生 I/O 中断 | 在通过 VIOS 3.1.1.x 映射的虚拟 iSCSI 磁盘上的 AIX 7.2 TL4 主机上执行存储故障转移操作期间，可能会发生 I/O 中断默认情况下， VIOC 上 vSCSI 适配器的 `rw_timeout` 值为 45 秒。如果在存储故障转移期间发生超过 45 秒的 I/O 延迟，则可能会发生 I/O 故障。要避免这种情况，请参见 BURT 中所述的临时解决策。 | 不适用 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | 在 SFO 故障和直连 I/O 期间发现 VIOS 3.1.1.10 上的 I/O 问题 | 在 VIOS 3.1.1 上，由 16/32 Gb FC 适配器提供支持的 NPIV 客户端磁盘可能会出现 IO 故障。此外， `vfchost` 驱动程序可能会进入停止处理来自客户端的 I/O 请求的状态。应用 IBM APAR IJ22290IBM APAR IJ23222 可修复问题描述 | 不适用 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1307653["1307653"^] | 在SFO故障和直接I/O期间、VIOS 3.1.1.10会发生I/O问题 | 在VIOS 3.1.1上、由16 GB或32 GB FC适配器提供后备支持的NPIV客户端磁盘可能发生I/O故障。此外、 `vfchost`驱动程序可能会停止处理来自客户端的I/O请求。应用IBM APAR IJ22290 IBM APAR IJ23222可解决此问题。 | 不适用 
 |===

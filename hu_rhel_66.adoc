@@ -20,16 +20,16 @@ summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.6
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-NetApp LINUX统一主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^]。
+NetApp LINUX主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-如果您当前已安装Linux Unified Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
+如果您当前已安装Linux Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将32位或64位Linux Host Utilities软件包从下载link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=68653;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -311,7 +311,7 @@ devices {
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=863878["863878"^] | 在存储故障期间， RHEL 6U6 主机发生内核崩溃 | 在存储 / 网络结构期间，您可能会发现 RHEL 6U6 主机上发生内核崩溃。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | 在 RHEL 6U4 中发生存储故障期间， QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞时间高达 300 秒 | 在存储 / 网络结构出现故障期间，您可能会发现 QLogic 16G FC （ QLE2672 ）主机上的 IO 停滞长达 300 秒。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=852674["1076584"^] | 在RHEL 6U4中发生存储故障期间、QLogic 16G FC (QLE2672)主机上的I/O拖延最长达300秒 | 在存储/网络结构出现故障期间、您可能会在QLogic 16G FC (QLE2672)主机上观察到I/O拖延长达300秒。 
 
 
 | link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=795684["795684"^] | RHEL6 U5 multipathd 在模块和存储故障转移故障操作期间错误地对多路径映射进行分组 | 在 LUN 按需移动操作期间，您可能会发现 LUN 上的路径分组不正确，并出现存储故障。在 LUN 移动操作期间，由于存储故障导致设备故障，多路径的路径优先级将发生变化，并且多路径无法重新加载设备表。这会导致路径分组不正确。 

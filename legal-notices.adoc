@@ -8,10 +8,7 @@ summary: 法律声明提供对版权声明、商标、专利等的访问。
 :allow-uri-read: 
 
 
-[role="lead"]
-法律声明提供对版权声明、商标、专利等的访问。
-
-[role="lead"]
+[role="lead lead"]
 法律声明提供对版权声明、商标、专利等的访问。
 
 
@@ -41,14 +38,6 @@ link:https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf["https://
 == 隐私政策
 
 link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.com/company/legal/privacy-policy/"^]
-
-
-
-== 开放源代码
-
-通知文件提供有关 NetApp 软件中使用的第三方版权和许可证的信息。
-
-提供有关本产品中使用的第三方版权和许可证的信息。
 
 * link:./media/Notices-AIX61-2023.pdf["AIX注意事项"^]
 * link:./media/Linux_Unified_Host_Utilities.pdf["Linux注意事项"^]

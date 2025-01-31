@@ -21,11 +21,11 @@ summary: 适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置
 以下支持适用于采用ONTAP的Oracle Linux 8.9的NVMe-oF主机配置：
 
 * 除了NVMe/FC之外、还支持基于TCP的NVMe (NVMe/TCP)。本机 `nvme-cli`软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-* NVMe 和 SCSI 流量均可在同一主机上运行。因此、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
+* NVMe和SCSI流量可以在同一主机上运行。因此、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、而可以使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
 * NVMe-oF 不支持 sanlun 。因此、在Oracle Linux 8.9主机上、不存在针对NVMe-oF的主机实用程序支持。您可以依靠本机 `nvme-cli`软件包中包含的NetApp插件进行所有NVMe-oF传输。
 
 
-有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -182,7 +182,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 0:14.2.0.5
 ----
 +
-有关支持的适配器驱动程序和固件版本的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 . 请验证 `lpfc_enable_fc4_type` 设置为 `3`：
 +
@@ -287,7 +287,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

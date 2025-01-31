@@ -30,7 +30,7 @@ cfgdev 命令会导致：
 +
 ** 用于登录到网络结构的启动程序。
 ** 要检查新设备的系统。
-** 系统，用于创建新设备条目，其中新 LUN 会使用默认 PCM 映射为 MPIO 设备。
+** 用于创建新设备条目的系统、其中新LUN将使用默认PCM映射为Microsoft多路径I/O (MPIO)设备。
 
 
 . 要验证是否已创建 hdisk MPIO 设备，请输入以下命令：
@@ -59,7 +59,7 @@ hdisk4   Available   MPIO NetApp FCP Default PCM Disk
 hdisk5   Available   MPIO NetApp FCP Default PCM Disk
 hdisk6   Available   MPIO NetApp FCP Default PCM Disk
 ----
-. 要获取有关设置的信息，请输入以下命令：
+. 检索有关设置的信息：
 +
 `lsdev -dev hdisk_name -attr`
 
@@ -97,7 +97,7 @@ scsi_id         0xd10001                         SCSI ID                        
 start_timeout   60                               START unit time out value               True
 ww_name         0x500a0984994ae0e0               FC World Wide Name                      False
 ----
-. 如果您的配置不支持 ALUA ，则必须执行 dotpaths 实用程序来设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。输入以下命令，切换到 `OEM_setup_env` 模式以执行 dotpaths ：
+. 如果您的配置不支持ALOA、则需要使用DOotpaths实用程序设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。输入以下命令、切换到 `oem_setup_env`模式以执行DOotpaths：
 +
 `OEM_setup_env`
 
@@ -119,9 +119,9 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 
 
 
-. 如果您的配置不支持 ALUA ，则必须执行 dotpaths 实用程序来设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。
+. 如果您的配置不支持ALOA、则需要使用DOotpaths实用程序设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。
 +
-.. 要设置所有 Data ONTAP LUN 的优先级，请输入：
+.. 要设置所有ONTAP LUN的优先级、请输入：
 +
 `dotpaths`
 

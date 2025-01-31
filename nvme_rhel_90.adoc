@@ -18,7 +18,7 @@ summary: 如何使用ONTAP 为RHEL 9.0配置NVMe-oF主机
 [role="lead"]
 RHEL 9.0支持NVMe-oF (包括NVMe/FC和NVMe/TCP)、并且ONTAP 阵列上运行正常的存储故障转移(Storage Failovers、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVM-oF环境中的ALUA等效项、目前已通过内核NVMe多路径实施。通过此过程、您可以使用RHEL 9.0和ONTAP上的ANA作为目标、使用内核NVMe多路径启用NVMe-oF。
 
-有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -42,7 +42,7 @@ RHEL 9.0支持NVMe-oF (包括NVMe/FC和NVMe/TCP)、并且ONTAP 阵列上运行�
 
 .步骤
 . 在服务器上安装RHEL 9.0。
-. 安装完成后、验证您是否正在运行指定的RHEL 9.0内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 安装完成后，验证您是否正在运行指定的 RHEL 9.0 内核。有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -89,7 +89,7 @@ NOTE: 如果主机NQN字符串不匹配、则应使用`vserver modify`命令更�
 .Broadcom/Emulex
 --
 .步骤
-. 验证您使用的是受支持的适配器。有关支持的适配器的更多详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+. 验证您使用的是受支持的适配器。有关支持的适配器的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -104,7 +104,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。有关支持的适配器驱动程序和固件版本的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^]。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -220,7 +220,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

@@ -20,16 +20,16 @@ summary: 介绍如何将 CentOS 6.6 与 ONTAP 结合使用
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-NetApp LINUX统一主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^]。
+NetApp LINUX主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-如果您当前已安装Linux Unified Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
+如果您当前已安装Linux Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将32位或64位Linux Host Utilities软件包从下载link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=68653;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。

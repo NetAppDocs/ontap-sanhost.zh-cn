@@ -20,16 +20,16 @@ summary: 介绍如何在 ONTAP 中使用 Oracle Linux 7.8
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-NetApp LINUX统一主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["NetApp 互操作性表工具"^]。
+NetApp LINUX主机实用程序软件包以32位和64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。如果您不知道哪个文件适合您的配置、请使用验证您需要哪个文件link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这些实用程序不会更改Linux主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
-如果您当前已安装Linux Unified Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
+如果您当前已安装Linux Host Utilities、则应将其升级到最新版本或将其删除、然后按照以下步骤安装最新版本。
 
 .步骤
-. 从下载 32 位或 64 位 Linux Unified Host Utilities 软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将32位或64位Linux Host Utilities软件包从下载link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -68,8 +68,8 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 
 == SAN 启动
 
-.您需要的内容
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用 link:https://mysupport.netapp.com/matrix/imt.jsp?components=90144;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^] 验证您的操作系统， HBA ， HBA 固件和 HBA 启动 BIOS 以及 ONTAP 版本是否受支持。
+.开始之前
+如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。
@@ -268,14 +268,14 @@ NOTE: 要配置Oracle Linux 7.8 Red Hat兼容内核(RHCK)、请使用适用于Re
 | 1440718 | 如果在未执行SCSI重新扫描的情况下取消映射或映射LUN、可能会导致主机上的数据损坏。 | 如果将"disable_changed_WWIDs"多路径配置参数设置为是、则在WWID发生更改时、它将禁用对路径设备的访问。在将路径的WWID还原到多路径设备的WWID之前、多路径将禁用对路径设备的访问。要了解更多信息，请参阅link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/The_filesystem_corruption_on_iSCSI_LUN_on_the_Oracle_Linux_7["NetApp知识库：Oracle Linux 7上iSCSI LUN上的文件系统损坏"^]。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311575["1311575"^] | 在使用 Qlogic QLE2672 （ 16G ）进行存储故障转移期间，由于读 / 写操作无法通过二级路径切换而观察到 IO 延迟 | 在使用 QLogic QLE2672 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311575["1311575"^] | 使用QLE2672 (16G)执行存储故障转移期间、由于读/写操作无法切换二级路径而观察到I/O延迟 | 在使用 QLogic QLE2672 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311576["1311576"^] | 使用 Emulex LPe16002 （ 16G ）进行存储故障转移期间，由于读 / 写操作无法通过二级路径切换，导致观察到 IO 延迟 | 在使用 Emulex LPe16002 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1311576["1311576"^] | 使用Emulex LPe16002 (16G)进行存储故障转移期间、由于读/写操作无法切换二级路径而观察到I/O延迟 | 在使用 Emulex LPe16002 16G HBA 的 Oracle Linux 7.7 内核（ 5.4.17-2011.0.7.el7uek.x86_6 ）上执行存储故障转移操作期间， I/O 操作可能无法通过二级路径恢复。如果 I/O 进度因存储故障转移期间主路径被阻止而停止，则 I/O 操作可能无法通过二级路径恢复，从而导致 I/O 延迟。只有在存储故障转移交还操作完成后主路径联机后， I/O 操作才会恢复。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246134["1246134"^] | 使用 Emulex LPe16002 （ 16G ）执行存储故障转移期间观察到的 IO 延迟以及报告移至 " 已阻止 " ， " 不存在 " 状态 | 在运行了 Emulex LPe16002B-M6 16G 光纤通道（ FC ）主机总线适配器（ HBA ）的 UEK5U2 内核的 Oracle Linux 7.6 上执行存储故障转移操作期间， I/O 进度可能会因报告被阻止而停止。存储故障转移操作报告从 " 联机 " 状态更改为 " 已阻止 " 状态，从而导致读取和写入操作延迟。成功完成此操作后，报告将无法返回到 " 联机 " 状态并继续保持 " 已阻止 " 状态。 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246134["1246134"^] | 在使用Emulex LPe16002 (16G)进行存储故障转移期间、观察到I/O延迟、并且报告正在变为blocked、not present状态 | 在运行了 Emulex LPe16002B-M6 16G 光纤通道（ FC ）主机总线适配器（ HBA ）的 UEK5U2 内核的 Oracle Linux 7.6 上执行存储故障转移操作期间， I/O 进度可能会因报告被阻止而停止。存储故障转移操作报告从 " 联机 " 状态更改为 " 已阻止 " 状态，从而导致读取和写入操作延迟。成功完成此操作后，报告将无法返回到 " 联机 " 状态并继续保持 " 已阻止 " 状态。 
 
 
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | 在 Qlogic QLE2672 （ 16G ）和 QLE2742 （ 32G ）的存储故障转移期间观察到 IO 延迟，并且 Rport 正在移至 " 已阻止 " ， " 不存在 " 状态 | 在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行 QLogic QLE2672 16G 主机和 QLE2742 32 Gb 光纤通道（ FC ）主机总线适配器（ HBA ），则 IO 进度可能会因端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online 
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1246327["1246327"^] | 在使用QLE2672 (16G)和QLE2742 (32G)进行存储故障转移期间、观察到I/O延迟、并且报告正在移至blocked、not present状态 | 在存储故障转移操作期间， QLogic QLE2672 16G 主机上的 Red Hat Enterprise Linux （ RHEL ） 7.6 上的光纤通道（ FC ）远程端口可能会被阻止。由于逻辑接口在存储节点关闭时会关闭，因此远程端口会将存储节点状态设置为 blocked 。如果同时运行QLogic QLE2672 16G主机和QLE2742 32 Gb光纤通道(FC)主机总线适配器(HBA)、则I/O进度可能会由于端口被阻止而停止。当存储节点恢复到最佳状态时，逻辑接口也会启动，远程端口应联机。但是，远程端口可能仍会被阻止。此阻止状态会将多路径层的 LUN 注册为故障。您可以使用以下命令验证远程端口的状态： # cat /sys/class/fc_remote_ports/rport-*/port_stat 您应看到以下输出： blocked blocked blocked blocked Online 
 |===

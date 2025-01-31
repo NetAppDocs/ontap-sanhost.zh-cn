@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-有关支持的适配器的最新列表，请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的适配器的当前列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 .步骤
 . 验证您使用的是受支持的适配器。
@@ -71,7 +71,7 @@ FCP CMPL: xb 00001f50 Err 0000d9f8
 ----
 . 启用 1 MB I/O 大小 _ （可选） _ 。
 +
-对于大小高达 1 MB 的 lpfc 驱动程序问题描述 I/O 请求，需要将 `lpfc_SG_seg_cnt` 参数设置为 256 。
+ `lpfc_sg_seg_cnt`要使lpfc驱动程序发出大小不超过1 MB的I/O请求、需要将参数设置为256。
 
 +
 [listing]

@@ -41,7 +41,7 @@ summary: 如何使用 ONTAP 为 RHEL 8.4 配置 NVMe-oF 主机
 
 .步骤
 . 在服务器上安装 RHEL 8.4 GA 。
-. 安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 安装完成后，验证您是否正在运行指定的 RHEL 8.4 内核。有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 示例
 
@@ -88,7 +88,7 @@ NOTE: 如果主机 NQN 字符串不匹配，则应使用 `vserver modify` 命令
 +
 [NOTE]
 ====
-如果要在同一主机上同时运行 NVMe 和 SCSI 共存的流量，建议分别对 ONTAP 命名空间使用内核 NVMe 多路径，而对 ONTAP LUN 使用 dm-multipath 。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。为此，可以将 enable_Foreign 设置添加到 ` /etc/multipath.conf` 文件中：
+如果要在同一主机上同时运行NVMe和SCSI共存流量、建议分别对ONTAP 命名空间使用内核NVMe多路径、对ONTAP LUN使用dm-multipath。这意味着， ONTAP 命名空间应从 dm-multipath 中排除，以防止 dm-multipath 声明这些命名空间设备。为此、可以将enable设置添加到文件中 `/etc/multipath.conf`：
 
 [listing]
 ----
@@ -113,7 +113,7 @@ defaults {
 .Broadcom/Emulex
 --
 .步骤
-. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器的最新列表。
+. 验证您使用的是受支持的适配器。有关受支持适配器的当前列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -124,7 +124,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的适配器驱动程序和固件版本的最新列表。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。有关受支持的适配器驱动程序和固件版本的最新列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -224,7 +224,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

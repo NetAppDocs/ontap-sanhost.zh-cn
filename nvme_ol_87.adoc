@@ -24,7 +24,7 @@ summary:
 * 在给定主机总线适配器(HBA)的同一主机上同时使用NVMe和SCSI流量、而不使用显式dm-dpath设置、以防止声明NVMe命名空间。
 
 
-有关支持的配置的其他详细信息、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -112,7 +112,7 @@ NOTE: 如果 `hostnqn` 字符串不匹配、您可以使用 `vserver modify` 用
 +
 [NOTE]
 ====
-如果要在同一个同时存在的Oracle Linux 8.7主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-path。这也意味着、ONTAP 命名空间应在dm-multipath中列入黑名单、以防止dm-multipath声明这些命名空间设备。您可以通过添加来执行此操作 `enable_foreign` 设置为 `/etc/multipath.conf` 文件：
+如果要在同一个Oracle Linux 8.7主机上同时运行NVMe和SCSI流量、NetApp建议分别对ONTAP命名空间使用内核NVMe多路径、并对ONTAP LUN使用dm-Multipath。这也意味着、ONTAP 命名空间应在dm-multipath中列入黑名单、以防止dm-multipath声明这些命名空间设备。您可以通过将设置添加到 `/etc/multipath.conf`文件来执行此 `enable_foreign`操作：
 
 [listing]
 ----
@@ -180,7 +180,7 @@ Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 
 ----
 +
-有关支持的适配器驱动程序和固件版本的最新列表、请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^]。
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 . 请验证 `lpfc_enable_fc4_type` 设置为 `3`：
 +
@@ -288,7 +288,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----

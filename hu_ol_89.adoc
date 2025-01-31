@@ -20,14 +20,14 @@ summary: 介绍如何将Oracle Linux 8.9与ONTAP结合使用
 
 
 
-== 安装 Linux Unified Host Utilities
+== 安装Linux Host Utilities
 
-您可以从下载64-bit.rpm文件格式的NetApp Linux统一主机实用程序软件包link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
+您可以从下载NetApp Linux主机实用程序软件包，其格式为64-bit.rpm文件link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
 
-NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+NetApp强烈建议安装Linux主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
 
 .步骤
-. 从下载 64 位 Linux Unified Host Utilities 软件包 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^] 主机。
+. 将64位Linux Host Utilities软件包从下载 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
 . 安装软件包：
 +
 `rpm -ivh netapp_linux_unified_host_utilitis-7-1.x86_64`
@@ -36,9 +36,9 @@ NetApp强烈建议安装Linux统一主机实用程序、但并非强制要求。
 
 
 
-== SAN工具包
+== SAN 工具包
 
-安装NetApp主机实用程序软件包时会自动安装该工具包。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
+安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
 
 在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
 
@@ -61,8 +61,8 @@ data_vserver            /vol/vol2/lun2   /dev/sde   host15   FCP       80.0g  cD
 
 == SAN 启动
 
-.您需要的内容
-您的配置支持SAN启动。请参见link:https://mysupport.netapp.com/matrix/imt.jsp?components=91863;&solution=1&isHWU&src=IMT["NetApp 互操作性表工具"^]以验证您的操作系统、HBA、HBA固件以及HBA启动BIOS和ONTAP版本是否受支持。
+.开始之前
+您的配置支持SAN启动。请参见link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]以验证您的操作系统、HBA、HBA固件以及HBA启动BIOS和ONTAP版本是否受支持。
 
 .步骤
 . 将 SAN 启动 LUN 映射到主机。

@@ -18,7 +18,7 @@ summary: 如何使用ONTAP 为RHEL 8.5配置NVMe-oF主机
 [role="lead"]
 采用ANA (非对称命名空间访问)的Red Hat Enterprise Linux (RHEL) 8.5支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC和其他传输)。ANA是NVMe-oF环境中的非对称逻辑单元访问(Asymmetric Logical Unit Access、ALUA)等效项、目前已通过内核NVMe多路径实施。在此操作步骤期间、您可以使用RHEL 8.5上的ANA和ONTAP作为目标、使用内核NVMe多路径启用NVMe-oF。
 
-请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表工具"^] 有关支持的配置的准确详细信息。
+有关受支持配置的准确详细信息、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
 
 
@@ -42,7 +42,7 @@ summary: 如何使用ONTAP 为RHEL 8.5配置NVMe-oF主机
 您可以使用以下操作步骤启用内核NVMe多路径。
 
 .步骤
-. 在服务器上安装RHEL 8.5 GA。安装完成后、验证您是否正在运行指定的RHEL 8.5 GA内核。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关最新的受支持版本列表。
+. 在服务器上安装RHEL 8.5 GA。安装完成后、请验证是否正在运行指定的RHEL 8.5 GA内核。有关最新的受支持版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 示例
 
@@ -114,7 +114,7 @@ defaults {
 .Broadcom/Emulex
 --
 .步骤
-. 验证您使用的是受支持的适配器。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器的最新列表。
+. 验证您使用的是受支持的适配器。有关受支持适配器的当前列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -125,7 +125,7 @@ LPe32002-M2
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 Emulex LightPulse LPe32002-M2 2-Port 32Gb Fibre Channel Adapter
 ----
-. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。请参见 link:https://mysupport.netapp.com/matrix/["NetApp 互操作性表"^] 有关支持的适配器驱动程序和固件版本的最新列表。
+. 验证您是否正在使用建议的 Broadcom lpfc 固件和收件箱驱动程序。有关受支持的适配器驱动程序和固件版本的最新列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 +
 [listing]
 ----
@@ -231,7 +231,7 @@ cat /etc/modprobe.d/lpfc.conf
 options lpfc lpfc_sg_seg_cnt=256
 ----
 . 运行 `dracut -f`命令并重新启动主机。
-. 验证的预期值是否 `lpfc_sg_seg_cnt`为256：
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
 [listing]
 ----
