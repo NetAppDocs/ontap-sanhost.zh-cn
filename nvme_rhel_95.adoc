@@ -597,7 +597,7 @@ NOTE: 从RHEL 9.5开始、NVMe/TCP超时的默认设置 `ctrl_loss_tmo`已关闭
 
 == 验证 NVMe-oF
 
-要支持ONTAP LUN正确运行、请验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
+验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
 .步骤
 . 验证是否已启用内核NVMe多路径：

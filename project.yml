@@ -11,11 +11,11 @@ sidebar:
   entries:
   - title: 配置SAN主机和云客户端
     url: "/index.html"
-  - title: 概述
+  - title: 了解SAN主机配置
     url: "/overview.html"
   - title: 安装SAN Host Utilities
     entries:
-    - title: 概述
+    - title: 了解SAN Host Utilities
       url: "/hu_sanhost_index.html"
     - title: AIX Host Utilities
       entries:
@@ -378,6 +378,8 @@ sidebar:
     - title: Windows
       pdf-filename: Windows-FCP
       entries:
+      - title: '2025'
+        url: "/hu-windows-2025.html"
       - title: 2022 年
         url: "/hu_windows_2022.html"
       - title: 2019 年
@@ -510,6 +512,8 @@ sidebar:
         url: "/nvme_ubuntu_2204.html"
     - title: Windows
       entries:
+      - title: '2025'
+        url: "/nvme-windows-2025.html"
       - title: 2022 年
         url: "/nvme_windows_2022.html"
       - title: 2019 年

@@ -403,7 +403,7 @@ NOTE: 从Oracle Linux 9.4开始、NVMe/TCP的默认设置 `ctrl_loss_tmo timeout
 
 == 验证 NVMe-oF
 
-要支持ONTAP LUN正确运行、请验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
+验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
 .步骤
 . 在Oracle Linux 9.4主机上验证以下NVMe/FC设置：

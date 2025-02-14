@@ -2,6 +2,9 @@
 :allow-uri-read: 
 
 
+要在Windows主机上完成NVMe配置、您需要为NVMe设备启用MPIO。
+
+.步骤
 . 安装 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Windows Host Utility Kit 7.1"] 设置FC和NVMe通用的驱动程序参数。
 . 打开 MPIO 属性。
 . 从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。
@@ -9,8 +12,8 @@
 MPIO 可以识别 NVMe 设备，这些设备可在磁盘管理下查看。
 
 . 打开 * 磁盘管理 * 并转到 * 磁盘属性 * 。
-. 从 * MPIO * 选项卡中，单击 * 详细信息 * 。
-. 设置以下 MSDSM 设置：
+. 从*MPIO*选项卡中，选择*Details*。
+. 设置以下Microsoft DSM设置：
 +
 ** PathVerifiedPeriod ： *
 ** PathVerifyEnabled ： * 启用 *
@@ -29,7 +32,4 @@ HKLM\SYSTEM\CurrentControlSet\Services\mpio\Parameters\PathRecoveryInterval DWOR
 HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryInterval  DWORD-> 1
 ----
 . 重新启动主机。
-+
-现在， NVMe 配置已在 Windows 主机上完成。
-
 

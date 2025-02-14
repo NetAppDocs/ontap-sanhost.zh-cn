@@ -4,7 +4,7 @@ permalink: hu_windows_2022.html
 keywords: windows, enterprise 
 summary: 将Windows Server 2022与ONTAP 结合使用 
 ---
-= 将Windows Server 2022与ONTAP 结合使用
+= 将Windows Server 2022与ONTAP结合使用
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,108 +16,123 @@ summary: 将Windows Server 2022与ONTAP 结合使用
 
 
 [role="lead"]
-您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标的Windows服务器2022。
+您可以使用ONTAP SAN主机配置设置来配置Windows Server 2022以使用ONTAP存储运行。
 
 
 
-== 正在启动操作系统
+== 启动Windows操作系统
 
-启动操作系统有两个选项：使用本地启动或 SAN 启动。要进行本地启动，请在本地硬盘（ SSD ， SATA ， RAID 等）上安装操作系统。有关 SAN 启动的信息，请参见以下说明。
+您可以使用本地启动或SAN启动来启动Windows操作系统。如果您的配置支持SAN启动、则NetApp建议使用该启动。
 
+[role="tabbed-block"]
+====
+.本地启动
+--
+通过在本地硬盘(SSD、SATA、RAID等)上安装Windows操作系统来执行本地启动。
 
+--
+.SAN 启动
+--
+如果您选择使用SAN启动、则您的配置必须支持此功能。
 
-=== SAN 启动
+.开始之前
+使用 https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Windows操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
 
-如果您选择使用 SAN 启动，则您的配置必须支持它。您可以使用互操作性表工具验证您的操作系统、HBA、HBA固件以及HBA启动BIOS和ONTAP版本是否受支持。
-
+.步骤
 . 将 SAN 启动 LUN 映射到主机。
++
+请参阅。 link:https://docs.netapp.com/us-en/ontap/san-management/index.html["SAN存储管理"^]
+
 . 验证是否有多个可用路径。
 +
 
 NOTE: 只有在主机操作系统启动并在多个路径上运行后、这些路径才可用。
 
-. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
-. 重新启动主机以验证启动是否成功。
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机以验证启动是否成功
 
 
+--
+====
 
 
 == 安装Windows修补程序
 
-NetApp建议在服务器上安装*最新累积更新*。
+NetApp建议在主机服务器上安装Microsoft更新目录中提供的*最新累积更新*。
 
-
-NOTE: 转至 link:https://www.catalog.update.microsoft.com/Search.aspx?q=update%20%22windows%20server%202022%22["Microsoft Update目录2022"^] 用于获取并安装适用于您的 Windows 版本的所需 Windows 修补程序的网站。
-
-. 从 Microsoft 支持站点下载修补程序。
+.步骤
+. 从下载修补程序link:https://www.catalog.update.microsoft.com/Search.aspx?q=update%20%22windows%20server%202022%22["Microsoft Update目录2022"^]。
 
 
 
-NOTE: 某些修补程序不能直接下载。在这种情况下，您需要向 Microsoft 支持人员请求给定的修补程序。
+NOTE: 对于无法从Microsoft Update目录下载的修补程序、您需要与Microsoft支持联系。
 
 . 按照 Microsoft 提供的说明安装修补程序。
 
 
 
-TIP: 许多修补程序都需要重新启动 Windows 主机，但您可以选择等待重新启动主机，直到安装或升级 Host Utilities 为止。
+TIP: 许多修复程序都需要重新启动Windows主机。您可以选择等待重新启动主机、直到安装或升级Host Utilities。
 
 
 
 == 安装Windows Host Utilities
 
-Windows主机实用程序是一组软件程序、其中包含一些文档、可用于将主机计算机连接到NetApp SAN上的虚拟磁盘(LUN)。NetApp建议下载并安装最新的实用程序套件。有关芜湖配置信息和说明、请参见link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"]、并选择适用于您的Windows Host Utilities版本的安装过程。
+Windows主机实用程序是一组软件程序、其中包含一些文档、可用于将主机计算机连接到NetApp SAN上的虚拟磁盘(LUN)。NetApp建议下载并安装最新的实用程序套件。有关Windows Host Utilities配置信息和说明、请参见link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"]、并选择适用于您的Windows Host Utilities版本的安装过程。
 
 
 
 == 多路径
 
-如果Windows主机具有多个存储系统路径、则必须安装Microsoft多路径I/O (MPIO)软件并设置多路径。如果没有 MPIO 软件，操作系统可能会将每个路径视为一个单独的磁盘，从而可能导致数据损坏。MPIO 软件为操作系统提供一个用于所有路径的磁盘，而设备专用模块（ DSM ）则用于管理路径故障转移。
+如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。如果选择MPIO支持、则Windows Host Utilities将启用Windows Server 2022中包含的MPIO功能。如果您不使用Windows Host Utilities、则需要手动启用多路径。
 
-在 Windows 系统上，任何 MPIO 解决方案的两个主要组件是 DSM 和 Windows MPIO 。在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO 。
+MPIO软件为Windows操作系统提供所有路径的单个磁盘、设备专用模块(DSM)用于管理路径故障转移。在Windows系统上、任何MPIO解决方案中的两个主要组件是DSM和Windows MPIO。
 
 
-NOTE: 如果选择MPIO支持、则Windows Host Utilities将启用Windows Server 2022附带的MPIO功能。
+CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
+
+
+NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
 
 
 
 == SAN 配置
 
+根据您的SAN配置、主机使用全SAN阵列(ASA)或非ASA配置来访问ONTAP LUN。在ASA和非ASA配置中、访问单个ONTAP LUN所需的路径不应超过四个。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。
+
+
+
+=== 全 SAN 阵列配置
+
+ASA配置应包含一组具有单一优先级的主动/优化路径。这意味着路径由控制器提供服务、并在所有活动路径上发送I/O。
+
+以下示例显示了具有主动/优化路径的ONTAP LUN的正确输出。
+
+image::asa.png[具有主动/优化路径的ONTAP LUN的屏幕截图]
+
 
 
 === Non-ASA 配置
 
-对于非 ASA 配置，应存在两组具有不同优先级的路径。
+非ASA配置应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径。这意味着、主动/优化路径由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
-优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。
-
-优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。
-
-
-NOTE: 只有在优化路径不可用时、才会使用非优化路径。
-
-.示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
 
 image::nonasa.png[包含两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的屏幕截图]
 
 
 
-=== 全 SAN 阵列配置
-
-对于全 SAN 阵列（ ASA ）配置，应存在一组具有单个优先级的路径。所有路径均为主动 / 优化路径；也就是说，它们由控制器提供服务，并在所有活动路径上发送 I/O 。
-
-image::asa.png[具有主动/优化路径的ONTAP LUN的屏幕截图]
-
-
-NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个、则可能会在存储故障期间导致路径问题。
-
-
-
 == 建议设置
 
-在使用 FC 的系统上，选择 MPIO 时，需要为 Emulex 和 QLogic FC HBA 设置以下超时值。
+在使用FC的系统上选择MPIO时、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。
 
-对于 Emulex 光纤通道 HBA ：
+[role="tabbed-block"]
+====
+.Emulex FC
+--
+Emulex FC HBA的超时值：
 
 [cols="2*"]
 |===
@@ -129,7 +144,10 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 
 | 节点超时 | 10 
 |===
-对于 QLogic 光纤通道 HBA ：
+--
+.QLogic FC
+--
+QLogic FC HBA的超时值：
 
 [cols="2*"]
 |===
@@ -141,8 +159,10 @@ NOTE: 一个LUN不应需要四个以上的路径。如果路径数超过四个�
 
 | PortDownRetransCount | 10 
 |===
+--
+====
 
-NOTE: Windows主机实用程序会设置这些值。有关详细的建议设置、请参见link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"]、并选择适用于您的Windows Host Utilities版本的安装过程。
+NOTE: 有关建议设置的详细信息，请参阅link:hu_wuhu_hba_settings.html["配置Windows Host Utilities的注册表设置"]。
 
 
 

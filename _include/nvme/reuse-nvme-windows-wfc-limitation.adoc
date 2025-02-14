@@ -1,0 +1,7 @@
+= 
+:allow-uri-read: 
+
+
+NVMe/FC不支持Windows故障转移集群、因为ONTAP目前不支持使用NVMe/FC进行永久性预留。
+
++注：Broadcom为Windows NVMe/FC提供了一个外部驱动程序、它是一个转换SCSI⇄NVMe驱动程序、而不是真正的NVMe/FC驱动程序。翻译开销不一定会影响性能、但它会使NVMe/FC的性能优势无效。因此、与Linux等其他操作系统不同、Windows服务器上的NVMe/FC和FCP性能相同、在这些操作系统中、NVMe/FC性能明显优于FCP。

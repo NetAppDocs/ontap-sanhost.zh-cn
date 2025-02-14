@@ -25,7 +25,7 @@ summary: 使用ONTAP 为Oracle Linux 8.3设置VME/FC主机配置、包括示例
 Oracle Linux 8.3支持基于网络结构的NVMe或NVMe-oF (包括NVMe/FC)、并且在ONTAP 阵列上执行无故障存储故障转移(Storage Failover、SFO)需要非对称命名空间访问(Asymmetric Namespace Access、ANA)。ANA是NVMe-oF环境中的ALUA等效产品、目前已通过内核NVMe多路径实施。通过此过程、您可以使用基于OL 8.3的ANA和ONTAP作为目标、为NVMe-oF启用内核NVMe多路径。
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用此过程中提供的配置设置来配置连接到和link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]的云客户端link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]。
 
 
 

@@ -2,14 +2,11 @@
 :allow-uri-read: 
 
 
-. 从 Microsoft 支持站点下载修补程序。
 
-
-
-NOTE: 某些修补程序不能直接下载。在这种情况下，您需要向 Microsoft 支持人员请求给定的修补程序。
+NOTE: 对于无法从Microsoft Update目录下载的修补程序、您需要与Microsoft支持联系。
 
 . 按照 Microsoft 提供的说明安装修补程序。
 
 
 
-TIP: 许多修补程序都需要重新启动 Windows 主机，但您可以选择等待重新启动主机，直到安装或升级 Host Utilities 为止。
+TIP: 许多修复程序都需要重新启动Windows主机。您可以选择等待重新启动主机、直到安装或升级Host Utilities。

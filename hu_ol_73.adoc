@@ -37,7 +37,7 @@ NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这
 
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用此过程中提供的配置设置来配置连接到和link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]的云客户端link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]。
 
 
 
@@ -76,7 +76,7 @@ data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDO
 . 验证是否有多个可用路径。
 +
 
-NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变为可用。
+NOTE: 主机操作系统启动并在多个路径上运行后、这些路径将变为可用。
 
 . 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
 +
@@ -91,7 +91,7 @@ NOTE: 在主机操作系统启动并运行多个路径后、这些路径将变�
 
 对于 Oracle Linux 7.3 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。Oracle Linux 7.3 是使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译的。
 
-您可以使用 `multipath -ll`命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
+您可以使用 `multipath -ll`命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径。这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
 
 .示例
 以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：

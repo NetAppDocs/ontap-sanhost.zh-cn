@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-按照以下步骤在 Windows 启动程序主机上启用 FC/NVMe ：
+在Windows启动程序主机上启用FC/NVMe。
 
 .步骤
 . 在 Windows 主机上安装 OneCommand Manager 实用程序。
@@ -10,7 +10,6 @@
 +
 ** EnableNVMe = 1
 ** NVMEMode = 0
-** 限制传输大小 =1
 
 
 . 重新启动主机。

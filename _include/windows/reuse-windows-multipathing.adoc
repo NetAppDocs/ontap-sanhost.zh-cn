@@ -1,0 +1,11 @@
+= 
+:allow-uri-read: 
+
+
+MPIO软件为Windows操作系统提供所有路径的单个磁盘、设备专用模块(DSM)用于管理路径故障转移。在Windows系统上、任何MPIO解决方案中的两个主要组件是DSM和Windows MPIO。
+
+
+CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
+
+
+NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。

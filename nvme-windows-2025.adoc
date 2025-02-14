@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_windows_2012r2.html 
+permalink: nvme-windows-2025.html 
 keywords: nvme, windows, enterprise 
-summary: '您可以在运行Windows Server 2012 R2的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。' 
+summary: 适用于采用ONTAP 的Windows Server 2052的NVMe/FC主机配置 
 ---
-= 为ONTAP配置采用NVMe/FC的Windows Server 2012 R2
+= 为Windows Server 2025配置适用于ONTAP的NVMe/FC
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,17 +16,14 @@ summary: '您可以在运行Windows Server 2012 R2的主机上配置基于光纤
 
 
 [role="lead"]
-您可以在运行Windows Server 2012 R2的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。
+您可以在运行Windows Server 2025的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。
 
 .关于此任务
-您可以对适用于Windows 2012 R2的NVMe/FC主机配置使用以下支持。在开始配置过程之前、您还应查看已知限制。
-
-
-NOTE: 您可以使用此过程中提供的配置设置来配置连接到和link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]的云客户端link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]。
+您可以对适用于Windows 2025的NVMe/FC主机配置使用以下支持。在开始配置过程之前、您还应查看已知限制。
 
 * 提供支持：
 +
-从ONTAP 9.7开始、Windows Server 2012 R2支持NVMe/FC。
+从ONTAP 9.10.1开始、Windows Server 2025支持NVMe/FC。
 
 +
 有关支持的FC适配器和控制器的列表，请参见link:https://hwu.netapp.com/Home/Index["Hardware Universe"^]。有关支持的配置和版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
@@ -108,7 +105,7 @@ HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryIn
 
 
 
-== 验证 NVMe/FC
+== 验证NVMe/FC配置
 
 确认已发现NVMe子系统、并且ONTAP命名卷对于NVMe-oF配置正确无误。
 

@@ -67,7 +67,7 @@ Host Utilities支持不同的Windows主机配置、协议和多路径选项。�
 . 检查上相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
 +
 
-NOTE: 。 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将Windows Server 2022与ONTAP 结合使用"] 文档提供了有关的说明 link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["安装Windows修补程序"] 对于Windows Server 2022。请参阅主机配置类别中的Windows文档、查找早期版本的Windows服务器的相关修补程序信息。
+NOTE: 本link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将Windows Server 2022与ONTAP结合使用"]文档提供了有关适用于Windows Server 2022的说明link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["安装Windows修补程序"]。请参见主机配置类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。
 
 . 添加 iSCSI 或 FCP 许可证并启动目标服务。
 +

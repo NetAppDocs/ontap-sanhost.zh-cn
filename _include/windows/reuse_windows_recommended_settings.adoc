@@ -2,9 +2,13 @@
 :allow-uri-read: 
 
 
-在使用 FC 的系统上，选择 MPIO 时，需要为 Emulex 和 QLogic FC HBA 设置以下超时值。
+在使用FC的系统上选择MPIO时、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。
 
-对于 Emulex 光纤通道 HBA ：
+[role="tabbed-block"]
+====
+.Emulex FC
+--
+Emulex FC HBA的超时值：
 
 [cols="2*"]
 |===
@@ -16,7 +20,10 @@
 
 | 节点超时 | 10 
 |===
-对于 QLogic 光纤通道 HBA ：
+--
+.QLogic FC
+--
+QLogic FC HBA的超时值：
 
 [cols="2*"]
 |===
@@ -28,5 +35,7 @@
 
 | PortDownRetransCount | 10 
 |===
+--
+====
 
-NOTE: Windows主机实用程序会设置这些值。有关详细的建议设置、请参见link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"]、并选择适用于您的Windows Host Utilities版本的安装过程。
+NOTE: 有关建议设置的详细信息，请参阅link:hu_wuhu_hba_settings.html["配置Windows Host Utilities的注册表设置"]。

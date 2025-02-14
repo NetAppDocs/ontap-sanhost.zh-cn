@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: nvme_windows_2016.html 
 keywords: nvme, windows, enterprise 
-summary: 适用于采用 ONTAP 的 Windows Server 2016 的 NVMe/FC 主机配置 
+summary: '您可以在运行Windows Server 2016的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。' 
 ---
-= 适用于采用 ONTAP 的 Windows Server 2016 的 NVMe/FC 主机配置
+= 为Windows Server 2016配置适用于ONTAP的NVMe/FC
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,31 +16,36 @@ summary: 适用于采用 ONTAP 的 Windows Server 2016 的 NVMe/FC 主机配置
 
 
 [role="lead"]
-您可以使用ONTAP作为目标在运行Windows Server 2016的主机上配置基于光纤通道的NVMe (NVMe/FC)。
+您可以在运行Windows Server 2016的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。
 
-适用于 Windows Server 2016 的 ONTAP 9.7 或更高版本支持 NVMe/FC 。
-
-请注意， Broadcom 启动程序可以通过相同的 32G FC 适配器端口同时为 NVMe/FC 和 FCP 流量提供服务。对于 FCP 和 FC/NVMe ，请使用 MSDSM 作为 Microsoft 多路径 I/O （ MPIO ）选项。
-
-有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。有关支持的配置和版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+.关于此任务
+您可以对适用于Windows 2016的NVMe/FC主机配置使用以下支持。在开始配置过程之前、您还应查看已知限制。
 
 
-NOTE: 您可以使用本文档中提供的配置设置来配置连接到的云客户端 link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 和 link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]。
+NOTE: 您可以使用此过程中提供的配置设置来配置连接到和link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]的云客户端link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]。
+
+* 提供支持：
++
+从ONTAP 9.7开始、Windows Server 2016支持NVMe/FC。
+
++
+有关支持的FC适配器和控制器的列表，请参见link:https://hwu.netapp.com/Home/Index["Hardware Universe"^]。有关支持的配置和版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+
+* 已知限制：
++
+NVMe/FC不支持Windows故障转移集群、因为ONTAP目前不支持使用NVMe/FC进行永久性预留。
+
++
+
+NOTE: Broadcom为Windows NVMe/FC提供了一个外部驱动程序、该驱动程序是转换式SCSI⇄NVMe驱动程序、而不是真正的NVMe/FC驱动程序。翻译开销不一定会影响性能、但它会使NVMe/FC的性能优势无效。因此、与Linux等其他操作系统不同、Windows服务器上的NVMe/FC和FCP性能相同、在这些操作系统中、NVMe/FC性能明显优于FCP。
 
 
 
-== 已知限制
-
-ONTAP NVMe/FC 不支持 Windows 故障转移集群（ WFC ），因为 ONTAP 当前不支持对 NVMe/FC 进行永久性预留。
 
 
-NOTE: Broadcom 提供的适用于 Windows NVMe/FC 的外部驱动程序并非真正的 NVMe/FC 驱动程序，而是一个转换式 SCSI ⇄ NVMe 驱动程序。这种转换开销不一定会影响性能，但它会抵消 NVMe/FC 的性能优势。因此，在 Windows 服务器上， NVMe/FC 和 FCP 性能是相同的，而在 Linux 等其他操作系统上， NVMe/FC 性能明显优于 FCP 。
+== 启用 NVMe/FC
 
-
-
-== 在 Windows 启动程序主机上启用 NVMe/FC
-
-按照以下步骤在 Windows 启动程序主机上启用 FC/NVMe ：
+在Windows启动程序主机上启用FC/NVMe。
 
 .步骤
 . 在 Windows 主机上安装 OneCommand Manager 实用程序。
@@ -48,7 +53,6 @@ NOTE: Broadcom 提供的适用于 Windows NVMe/FC 的外部驱动程序并非真
 +
 ** EnableNVMe = 1
 ** NVMEMode = 0
-** 限制传输大小 =1
 
 
 . 重新启动主机。
@@ -56,9 +60,11 @@ NOTE: Broadcom 提供的适用于 Windows NVMe/FC 的外部驱动程序并非真
 
 
 
-== 在 Windows 中为 NVMe/FC 配置 Broadcom FC 适配器
+== 配置Broadcom FC适配器
 
-在 Windows 环境中使用适用于 FC/NVMe 的 Broadcom 适配器时，每个主机总线适配器（ HBA ）端口都会关联一个 ` +hostnqn+` 。` +hostnqn+` 的格式如下。
+Broadcom启动程序可通过相同的32 G FC适配器端口同时提供NVMe/FC和FCP流量。对于FCP和FC/NVMe、应使用Microsft设备专用模块(DSM)作为Microsoft多路径I/O (MPIO)选项。
+
+ `+hostnqn+`在Windows环境中、与采用FC/NVMe的Broadcom适配器的每个主机总线适配器(HBA)端口关联。的 `+hostnqn+`格式如下所示：
 
 ....
 nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9765
@@ -66,8 +72,11 @@ nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
 ....
 
 
-=== 在 Windows 主机上为 NVMe 设备启用 MPIO
+=== 为NVMe设备启用MPIO
 
+要在Windows主机上完成NVMe配置、您需要为NVMe设备启用MPIO。
+
+.步骤
 . 安装 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["Windows Host Utility Kit 7.1"] 设置FC和NVMe通用的驱动程序参数。
 . 打开 MPIO 属性。
 . 从 * 发现多路径 * 选项卡中，添加为 NVMe 列出的设备 ID 。
@@ -75,8 +84,8 @@ nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
 MPIO 可以识别 NVMe 设备，这些设备可在磁盘管理下查看。
 
 . 打开 * 磁盘管理 * 并转到 * 磁盘属性 * 。
-. 从 * MPIO * 选项卡中，单击 * 详细信息 * 。
-. 设置以下 MSDSM 设置：
+. 从*MPIO*选项卡中，选择*Details*。
+. 设置以下Microsoft DSM设置：
 +
 ** PathVerifiedPeriod ： *
 ** PathVerifyEnabled ： * 启用 *
@@ -95,26 +104,25 @@ HKLM\SYSTEM\CurrentControlSet\Services\mpio\Parameters\PathRecoveryInterval DWOR
 HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryInterval  DWORD-> 1
 ----
 . 重新启动主机。
-+
-现在， NVMe 配置已在 Windows 主机上完成。
-
 
 
 
 
 == 验证 NVMe/FC
 
-. 验证端口类型是否为 FC+NVMe 。
+确认已发现NVMe子系统、并且ONTAP命名卷对于NVMe-oF配置正确无误。
+
+.步骤
+. 验证“Port Type (端口类型)”是否为 `+FC+NVMe+`：
 +
-现在已启用 NVMe ，您应看到 ` + 端口类型 +` 列为 ` +FC+NVMe+` ，如下所示。
+`listhba`
 
 +
-[listing]
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
 ----
-PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd listhba
-
-Manageable HBA List
-
 Port WWN       : 10:00:00:10:9b:1b:97:65
 Node WWN       : 20:00:00:10:9b:1b:97:65
 Fabric Name    : 10:00:c4:f5:7c:a5:32:e0
@@ -126,7 +134,7 @@ Port Number    : 0
 Mode           : Initiator
 PCI Bus Number : 94
 PCI Function   : 0
-Port Type      : FC+NVMe
+*Port Type*      : *FC+NVMe*
 Model          : LPe32002-M2
 
 Port WWN       : 10:00:00:10:9b:1b:97:66
@@ -143,17 +151,16 @@ PCI Function   : 1
 Port Type      : FC+NVMe
 Model          : LPe32002-M2
 ----
-. 验证是否已发现 NVMe/FC 子系统。
+====
+. 验证是否已发现NVMe/FC子系统：
 +
-` +NVMe-list+` 命令可列出 NVMe/FC 发现的子系统。
-
+** `+nvme-list+`
 +
+.显示示例
+[%collapsible]
+====
 [listing]
 ----
-PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd nvme-list 10:00:00:10:9b:1b:97:65
-
-Discovered NVMe Subsystems for 10:00:00:10:9b:1b:97:65
-
 NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
 Port WWN                :  20:09:d0:39:ea:14:11:04
 Node WWN                :  20:05:d0:39:ea:14:11:04
@@ -175,13 +182,14 @@ Total Capacity          :  Not Available
 Unallocated Capacity    :  Not Available
 Note: At present Namespace Management is not supported by NetApp Arrays.
 ----
+====
+** `nvme-list`
 +
+.显示示例
+[%collapsible]
+====
 [listing]
 ----
-PS C:\Program Files\Emulex\Util\OCManager> .\hbacmd nvme-list 10:00:00:10:9b:1b:97:66
-
-Discovered NVMe Subsystems for 10:00:00:10:9b:1b:97:66
-
 NVMe Qualified Name     :  nqn.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159
 Port WWN                :  20:07:d0:39:ea:14:11:04
 Node WWN                :  20:05:d0:39:ea:14:11:04
@@ -204,17 +212,19 @@ Unallocated Capacity    :  Not Available
 
 Note: At present Namespace Management is not supported by NetApp Arrays.
 ----
-. 验证是否已创建命名空间。
+====
+
+
+. 验证是否已创建这些名称空间：
 +
-` +nve-list-ns+` 命令可列出指定 NVMe 目标的命名空间，其中列出了连接到主机的命名空间。
+`+nvme-list-ns+`
 
 +
+.显示示例
+[%collapsible]
+====
 [listing]
 ----
-PS C:\Program Files\Emulex\Util\OCManager> .\HbaCmd.exe nvme-list-ns 10:00:00:10:9b:1b:97:66 20:08:d0:39:ea:14:11:04 nq
-.1992-08.com.netapp:sn.a3b74c32db2911eab229d039ea141105:subsystem.win_nvme_interop-57-159 0
-
-
 Active Namespaces (attached to controller 0x0141):
 
                                        SCSI           SCSI           SCSI
@@ -230,4 +240,5 @@ Active Namespaces (attached to controller 0x0141):
 0x00000008   \\.\PHYSICALDRIVE16        0               1              7
 
 ----
+====
 

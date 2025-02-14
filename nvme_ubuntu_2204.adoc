@@ -4,7 +4,7 @@ permalink: nvme_ubuntu_2204.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP为Ubuntu 22.04配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP的Ubuntu 22.04的NVMe-oF主机配置
+= 适用于采用ONTAP的Ubuntu 24.04的NVMe-oF主机配置
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

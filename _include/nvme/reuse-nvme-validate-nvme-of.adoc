@@ -2,4 +2,4 @@
 :allow-uri-read: 
 
 
-要支持ONTAP LUN正确运行、请验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
+验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。

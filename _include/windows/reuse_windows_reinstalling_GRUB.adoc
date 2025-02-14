@@ -4,43 +4,52 @@
 
 在使用 Grub 启动加载程序的 Linux 子操作系统上使用 PowerShell 工具包对磁盘运行 `mbralign` 以更正 MBR 对齐后，您必须重新安装 Grub 以确保子操作系统正确启动。
 
-已对虚拟机的 VHD 文件完成 PowerShell 工具包 cmdlet 。本主题仅适用于使用 Grub 启动加载程序和 `SystemRescueCd` 的 Linux 子操作系统。
+.关于此任务
+已对虚拟机的 VHD 文件完成 PowerShell 工具包 cmdlet 。此过程仅适用于使用GRUB启动Loader和的Linux子操作系统 `SystemRescueCd`。
 
+.步骤
 . 为虚拟机挂载正确版本的 Linux 安装 CD 中磁盘 1 的 ISO 映像。
 . 在 Hyper-V Manager 中打开虚拟机的控制台。
-. 如果虚拟机正在运行并在 Grub 屏幕上挂起，请单击显示区域以确保其处于活动状态，然后单击 * Ctrl-Alt-Delete* 工具栏图标以重新启动虚拟机。如果虚拟机未运行，请启动它，然后立即单击显示区域以确保其处于活动状态。
+. 如果VM正在运行并在GRUB屏幕上被冻结，请单击显示区域以确保它处于活动状态，然后选择*Ctrl-Alt-Delete*工具栏图标以重新启动VM。如果虚拟机未运行，请启动它，然后立即单击显示区域以确保其处于活动状态。
 . 一旦看到 VMware BIOS 启动屏幕，请按一次 * Esc * 键。此时将显示启动菜单。
 . 在启动菜单中，选择 * CD-ROM * 。
 . 在 Linux 启动屏幕中，输入： `Linux rescue`
 . 采用 Anaconda/red 配置屏幕的默认值。网络连接是可选的。
 . 输入 `grub` 以启动 Grub
-. 如果此 VM 中只有一个虚拟磁盘，或者存在多个磁盘，但第一个是启动磁盘，请运行以下 Grub 命令：
-
-
+. 如果此VM中只有一个虚拟磁盘、或者如果有多个磁盘且第一个磁盘是启动磁盘、请运行以下GRUB命令：
++
 [listing]
 ----
 root (hd0,0)
 setup (hd0)
 quit
 ----
-如果虚拟机中有多个虚拟磁盘，并且启动磁盘不是第一个磁盘，或者您要通过从未对齐的备份 VHD 启动来修复 Grub ，请输入以下命令以确定启动磁盘：
++
+如果虚拟机中有多个虚拟磁盘、并且启动磁盘不是第一个磁盘、或者您要通过从错位的备份vHD启动来修复GRUB、请输入以下命令以确定启动磁盘：
 
++
 [listing]
 ----
 find /boot/grub/stage1
 ----
++
 然后运行以下命令：
 
++
 [listing]
 ----
 root (boot_disk,0)
 setup (boot_disk)
 quit
 ----
++
 
-NOTE: 请注意，上面的 `boot_disk` 是启动磁盘的实际磁盘标识符的占位符。
+NOTE: 在中 `setup (boot_disk)`， `boot_disk`是引导磁盘的实际磁盘标识符的占位符。
+
+
 
 . 按 * Ctrl-D* 退出。
-
-
++
 Linux 应急功能将关闭，然后重新启动。
+
+

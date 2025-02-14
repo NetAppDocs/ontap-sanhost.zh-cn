@@ -2,7 +2,9 @@
 :allow-uri-read: 
 
 
-在 Windows 环境中使用适用于 FC/NVMe 的 Broadcom 适配器时，每个主机总线适配器（ HBA ）端口都会关联一个 ` +hostnqn+` 。` +hostnqn+` 的格式如下。
+Broadcom启动程序可通过相同的32 G FC适配器端口同时提供NVMe/FC和FCP流量。对于FCP和FC/NVMe、应使用Microsft设备专用模块(DSM)作为Microsoft多路径I/O (MPIO)选项。
+
+ `+hostnqn+`在Windows环境中、与采用FC/NVMe的Broadcom适配器的每个主机总线适配器(HBA)端口关联。的 `+hostnqn+`格式如下所示：
 
 ....
 nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9765
