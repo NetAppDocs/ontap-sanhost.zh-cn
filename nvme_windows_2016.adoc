@@ -48,7 +48,7 @@ NOTE: Broadcom为Windows NVMe/FC提供了一个外部驱动程序、该驱动程
 在Windows启动程序主机上启用FC/NVMe。
 
 .步骤
-. 在 Windows 主机上安装 OneCommand Manager 实用程序。
+. 在Windows主机上安装Emulex HBA Manager实用程序。
 . 在每个 HBA 启动程序端口上，设置以下 HBA 驱动程序参数：
 +
 ** EnableNVMe = 1

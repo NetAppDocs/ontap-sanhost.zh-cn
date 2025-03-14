@@ -415,7 +415,6 @@
   <block id="0522c3e73855540eb2f0017e0bee58f6" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 7.0 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 7.0 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
   <block id="4feea064d1000e2b82e86e44608847d0" category="paragraph">RHEL 7.0 操作系统经过编译，可识别 ONTAP LUN ，并自动为 ASA 和非 ASA 配置正确设置所有配置参数。</block>
   <block id="6b41fb8eea99b0d8d062e30f5b71d616" category="summary">适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置</block>
-  <block id="410517e1f795e6fa809a7ff5630e2bdd" category="list-text">在 Windows 主机上安装 OneCommand Manager 实用程序。</block>
   <block id="7d182740e5fe1d15ec7f97f69178b4a8" category="list-text">在每个 HBA 启动程序端口上，设置以下 HBA 驱动程序参数：</block>
   <block id="1d71ea83cceb2b7470e1c54838adb506" category="list-text">EnableNVMe = 1</block>
   <block id="814e9f528f5fa391cd6774e57a5c651c" category="list-text">NVMEMode = 0</block>
@@ -3728,4 +3727,5 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="446a12d919c8ace091d69571c8964509" category="paragraph">从ONTAP 9.7开始、Windows Server 2022支持NVMe/FC。</block>
   <block id="d26e08171a5072e33fe155b7ad5a5659" category="doc">了解SAN主机配置</block>
   <block id="312351bff07989769097660a56395065" category="sidebar">2025</block>
+  <block id="439a17362d8592514caf19c7e8ec2147" category="list-text">在Windows主机上安装Emulex HBA Manager实用程序。</block>
 </blocks>
