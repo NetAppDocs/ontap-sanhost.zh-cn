@@ -299,6 +299,12 @@ devices {
 
 
 
+== ASM 镜像
+
+自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
+
+
+
 == 已知问题
 
 对于ONTAP版本的RHEL 6.10、没有已知问题。

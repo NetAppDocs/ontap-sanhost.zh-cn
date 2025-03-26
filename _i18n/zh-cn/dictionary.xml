@@ -69,7 +69,6 @@
   <block id="e7565a20fc615772fc73eed9c1b34d4a" category="inline-link-macro">已知问题</block>
   <block id="5dd03e8d039863e563e049be198c3fd3" category="section-title">发行说明</block>
   <block id="f25da2d4ec4aacff4750d97e83acec21" category="section-title">ASM 镜像</block>
-  <block id="446548f2b1301893641e29657fc7fe53" category="inline-link-macro">基于 ONTAP 的 Oracle 数据库</block>
   <block id="c454d997c91275b70f2f0433fad3fe36" category="list-text">转到包含下载内容的目录。</block>
   <block id="88a1748445927988a69d31c53331a565" category="list-text">提取文件。</block>
   <block id="f6e9198a006ec354ae70027fd194c6a2" category="paragraph">`gunzip netapp_solaris host_utilities_6_2N20170913_0304_sparc.tar.gz`</block>
@@ -786,8 +785,6 @@
   <block id="c54b2333e9300746b11b3bf55a67e01e" category="list-text">确保所有必需的启动程序均已登录到所需 SVM 上的目标 LIF 。</block>
   <block id="5bb6886747089341a129f8d3d74d5308" category="admonition">要启用 VASA Provider ，您必须部署适用于 VMware vSphere 的 ONTAP 工具。VASA Provider 将为您管理所有 igroup 设置，因此无需在 VVOL 环境中创建或管理 igroup 。</block>
   <block id="a8958e0b22ed1917f6e4c0c1744d66a7" category="paragraph">NetApp 不建议此时更改任何 VVOL 设置的默认值。</block>
-  <block id="3dffa984dadf9ff0006ee9cebd3b04b9" category="inline-link-macro">TR-4597</block>
-  <block id="7bc192063f45f04afc8d24a8ef003835" category="inline-link-macro">TR-4400</block>
   <block id="2fc5bc49d904cb53f5585cd77321f50e" category="section-title">ATS 锁定</block>
   <block id="4218c50587ec231bafd431433feea5e0" category="paragraph">对于与 VAAI 兼容的存储和升级的 VMFS5 ， ATS 锁定是 * 必填项 * 。要与 ONTAP LUN 实现适当的互操作性和最佳的 VMFS 共享存储 I/O 性能，必须锁定 ATS 。有关启用 ATS 锁定的详细信息，请参见 VMware 文档。</block>
   <block id="f4f70727dc34561dfde1a3c529b6205c" category="cell">设置</block>
@@ -821,7 +818,6 @@
   <block id="32014634f5e91fea92881a76289729e4" category="paragraph">使用以下命令验证 QFullSampleSize</block>
   <block id="bcf5b4c5647c7c3861431c638d411876" category="paragraph">*`esxcli system settings advanced list -option /Disk/QFullSampleSize` *</block>
   <block id="784c795c066fdf3c4713aae58af639ff" category="paragraph">没有已知问题。</block>
-  <block id="c2e11c6f1a87d8cf2bf465e9c2562bdb" category="inline-link-macro">TR-4597 ：采用 ONTAP 的 VMware vSphere</block>
   <block id="52f50d0f0ab285059648c7da67b4b07f" category="inline-link-macro">NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）</block>
   <block id="51a78203e5d6aa30e5bcafd469a2d2be" category="summary">介绍如何将 SUSE Linux Enterprise Server 12 SP5 与 ONTAP 结合使用</block>
   <block id="3622b9af63906c6b9ad79d33b1f46e2e" category="paragraph">对于 SUSE Linux Enterprise Server 12 SP5 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。SUSE Linux Enterprise Server 12 SP5 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。</block>
@@ -1522,7 +1518,6 @@
   <block id="8f4e34dd626d27db6da17b83e4d7f329" category="cell">Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误</block>
   <block id="a387e31363493fb3c0fbdcc0d7458c52" category="list-text">解压缩文件。</block>
   <block id="8fe0dc9943c3dbce8070a7613545cb91" category="paragraph">以下示例将解压缩 SPARC 系统的文件。对于x86－64平台，请使用<block ref="2dea9af09f7e80915b8298deb9ca9b8a" prefix=" " category="inline-code"></block> 软件包。</block>
-  <block id="ec1f030f0caddb932644a46761f74630" category="list-text"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block></block>
   <block id="e0ace13bee28a678ec04ad1b076b4b00" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有igrou设置、因此无需在VVOLs环境中创建或管理iGroup。</block>
   <block id="8b09e18eadcf22c450f1d7d911321716" category="paragraph">要完成安装、您必须使用为您的环境(此处为MPxIO)配置主机参数<block ref="3062dc928daa4d85f6e34b6dea110a00" prefix=" " category="inline-code"></block> 命令：</block>
   <block id="a59067c75792ec364887962f5388c9af" category="list-text">更改x86和SPARC系统的光纤通道和SCSI驱动程序设置</block>
@@ -1560,7 +1555,6 @@
   <block id="5a3b86e99232b3604afe4db20db45884" category="cell">如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误</block>
   <block id="9c72461f3069d27216e1faab60848be8" category="paragraph">运行vSphere 8.x及更高版本并使用虚拟NVMe (vNVME)适配器的Linux VM会遇到I/O错误、因为默认情况下、vNVMe重试操作处于禁用状态。为了避免在所有路径关闭(All Paths Down、APD)或I/O负载繁重期间对运行旧内核的Linux VM造成中断、VMware引入了可调"VSCSIDisableNvmeRetry"以禁用vNVMe重试操作。</block>
   <block id="03d0e633810a3de10e61ce29a7d4abb0" category="cell">检查并更正主机网络结构中的任何网络问题。如果这不起作用、请升级到可修复此问题描述 的修补程序。</block>
-  <block id="dad160104969c39365dd2cd4c98dd300" category="inline-link-macro">TR-4400</block>
   <block id="ec28bcc44a923317b69c457e0afb81a2" category="summary">您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配置ONTAP SAN主机设置。</block>
   <block id="826ec041a0aff526181c163b6a4e0c3d" category="section-title">虚拟机管理程序SAN启动</block>
   <block id="f97e2682b008f063e93b88b3fd21dec5" category="paragraph">虚拟卷(Vvol)是一种VMware对象类型、对应于虚拟机(Virtual Machine、VM)磁盘、其快照和快速克隆。</block>
@@ -1569,7 +1563,6 @@
   <block id="46ec41b6e978af4bf2bcdae563d90ea4" category="list-text">根据需要配置分区和/或VLAN以实现主机连接。</block>
   <block id="3fc902961119186032f704ba3435c6b2" category="list-text">验证所有必需的启动程序是否均已登录到所需SVM上的目标SVM。</block>
   <block id="db234a15624d05512170fa7a780b7283" category="admonition">要启用 VASA Provider ，您必须为 VMware vSphere 部署 ONTAP 工具。VASA Provider将为您管理所有iGroup设置、因此无需在vvol环境中创建或管理iGroup。</block>
-  <block id="6961083e089f23fe2e08fee4e11ce67d" category="paragraph">有关配置和管理vvol的详细信息、请参阅适用于VMware vSphere的ONTAP 工具文档、 <block ref="52e81e11040c41825151f9c7710055f2" category="inline-link-macro-rx"></block>，和 <block ref="bcecf0e9ae9f2444b66065a431138ac6" category="inline-link-macro-rx"></block>。</block>
   <block id="85c20d8ed50da2b685dee6048290bc6b" category="section-title">ATS锁定</block>
   <block id="2a25d8db6ac1adf1bf990599279ec725" category="admonition">-enable<block ref="e855ec75b8d039b41e36e5b06323d66b" prefix=" " category="inline-code"></block> 为映射到VMware vSphere for的所有LUN设置<block ref="c92fdf55401abf777b4eb053ea6c606b" prefix=" " category="inline-code"></block> 工作。有关详细信息、请参见ONTAP 文档。</block>
   <block id="fc762f7b8978e7422da00476297460a4" category="paragraph">您可以使用建议的子操作系统调整手动配置虚拟机。调整更新后，必须重新启动子系统，更新才能生效。</block>
@@ -1657,7 +1650,6 @@
   <block id="e31c4b8d2ef22d8837e50793ada5f2e9" category="cell">默认情况下、AIX操作系统会对NVMe/FC使用全路径关闭(APD)超时值20秒。  但是、ONTAP MetroCluster自动计划外切换(Automatic Undurrated SwitchOver、AUSO)和Tieb破碎 机启动的切换工作流所需时间可能比APD超时窗口要长一些、从而导致I/O错误。</block>
   <block id="9e10b0a5aea11686043890a4e7f7d67d" category="list-text">验证是否有多个可用路径。</block>
   <block id="ddd1090ee13f345d376753ed7188e15e" category="section-title">所有SAN阵列配置</block>
-  <block id="8f9d6e3424d24a4eceeb55656ad594c9" category="paragraph">自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP 上的大多数 ASM 配置都使用外部冗余，这意味着数据保护由外部阵列提供，并且 ASM 不会镜像数据。某些站点使用正常冗余的 ASM 来提供双向镜像，通常在不同站点之间进行镜像。请参见 <block ref="85b4e48fbc653b43bc1d23927e9a43d3" category="inline-link-macro-rx"></block> 了解更多信息。</block>
   <block id="3b8031b77b02d24160100543956f1809" category="list-text">安装软件包：</block>
   <block id="6661a67145b2acf190d629ce621384e0" category="summary">介绍如何将Oracle Linux 8.7与ONTAP结合使用</block>
   <block id="15d47787709114478b06814b72bcf21a" category="paragraph">安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。</block>
@@ -2496,13 +2488,7 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="45e7643ebc2b41741a8515e9d1730a76" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。  但是、如果在NVMe-oF主机上运行Red Hat Enterprise Linux (RHEL) 8.10、则每次执行"NVMe discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
   <block id="23c3f6b1dc0958b81d21563a91eecfa6" category="cell"><block ref="23c3f6b1dc0958b81d21563a91eecfa6" category="inline-link-macro-rx"></block></block>
   <block id="e59f05c9149caf590d63da27c24797cb" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp®SnapMirror主动同步</block>
-  <block id="6fc38196f3941bcd7083730d812df39a" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
-<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
-<block ref="d28f7a65afd9b0a0129dadbafa84555d" category="inline-link-macro-rx"></block></block>
   <block id="2a41c03d949869222b758867aff845ff" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步</block>
-  <block id="c8dc0bfd6733fa8c798fed363e1469e3" category="paragraph"><block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>
-<block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block>
-<block ref="5f61a87054f37a4d758972ec77cfdf5e" category="inline-link-macro-rx"></block></block>
   <block id="33bd005b46fadc3ac5ff4dc797b52e07" category="list-text">如果您具有MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅NetApp错误在线- <block ref="31191f9686b6d08dd8653718c76edbf6" category="inline-link-macro-rx"></block>。</block>
   <block id="4d580b4b5071142b4be038164aad8343" category="cell"><block ref="4d580b4b5071142b4be038164aad8343" category="inline-link-macro-rx"></block></block>
   <block id="0122bdec62d25017bba3ae0743d2526e" category="cell"><block ref="0122bdec62d25017bba3ae0743d2526e" category="inline-link-macro-rx"></block></block>
@@ -3463,11 +3449,9 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="25b99d4336de9de5432a67adf4e9a119" category="paragraph">在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在SAN环境中、会在数据存储库中的每个FlexVol volume卷上创建一个4 MB LUN、以用作PE。SAN PE 是一个管理逻辑单元（ ALU ）； VVOL 是辅助逻辑单元（ SLU ）。</block>
   <block id="9fd13df839c532fabbd320c7d540648d" category="paragraph">NetApp建议此时不要更改任何默认的虚拟卷设置。</block>
   <block id="7a7c9bf21b4ec4b59bb99979083cb87b" category="paragraph">有关特定版本的ONTAP工具、请参见；有关特定版本的vSphere和ONTAP、请参见<block ref="d4eba3849609aea965d9c09098fd43df" category="inline-link-rx"></block>旧版VASA Provider。</block>
-  <block id="3b136cab265e3022a4e349df72f5c8ec" category="paragraph">有关配置和管理vvol的详细信息、请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="fc9815e7b1405959c49ad47e9a23e3a5" category="inline-link-rx"></block>和<block ref="a74613d919ef64732e37564f6282a452" category="inline-link-macro-rx"></block></block>
   <block id="4cec613c4b9f55cfdc3102cabccae03a" category="section-title">验证磁盘IOPS设置</block>
   <block id="f85caa21956b6307f6eb59cdda24b393" category="paragraph">对于ONTAP存储、默认情况下会使用"VMW_SATP_ALOA"插件和"VMW_PSP_RR"作为路径选择策略(PSP)。您可以运行以下命令来确认PSP。</block>
   <block id="f136180ccf441bafce90cc66945e28d5" category="paragraph">在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE是管理逻辑单元(ALU)。虚拟卷是辅助逻辑单元(SLU)。</block>
-  <block id="0f7f8c870f3e2dae376d0af196f8e723" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="ec1f030f0caddb932644a46761f74630" category="inline-link-macro-rx"></block>和<block ref="bcecf0e9ae9f2444b66065a431138ac6" category="inline-link-macro-rx"></block>。</block>
   <block id="f8396d6deec4872026f8255ab97b8282" category="paragraph">ESXi提供了一个称为本机多路径插件(NMP)的可扩展多路径模块、用于管理子插件、存储阵列类型插件(Storage Array Type Plugin、SATP)和路径选择插件(Path Selection Plugins、PSP)。默认情况下、这些SATS规则在ESXi中可用。</block>
   <block id="d44b14edb7148595e8fd7c39e18a1d82" category="paragraph">在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE是管理逻辑单元(ALU)。虚拟卷是辅助逻辑单元(SLU)。</block>
   <block id="18daf84ed810f1c72da54c0484f9c353" category="section-title">安装Windows Host Utilities</block>
@@ -3728,4 +3712,14 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="d26e08171a5072e33fe155b7ad5a5659" category="doc">了解SAN主机配置</block>
   <block id="312351bff07989769097660a56395065" category="sidebar">2025</block>
   <block id="439a17362d8592514caf19c7e8ec2147" category="list-text">在Windows主机上安装Emulex HBA Manager实用程序。</block>
+  <block id="9eaca569c6f5ca3388f5613da3aa008c" category="inline-link-macro">基于ONTAP的Oracle数据库</block>
+  <block id="b47828b7640778a02ca617e91b6361c4" category="paragraph">自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见<block ref="188684da2e037979155870e39852328b" category="inline-link-macro-rx"></block>。</block>
+  <block id="a6389705a0010980a83767268763aa53" category="inline-link-macro">使用工具的虚拟卷(Virtual Volume、ONTAP) 10.</block>
+  <block id="09b616c445ab7efa8240062532e526e4" category="inline-link">采用ONTAP的VMware vSphere</block>
+  <block id="e0628d576935b022b30f705de1a3ada6" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="c45840700e4ab6d55371aa3a3251b306" category="inline-link-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
+  <block id="11b7981a4bc487d4291cc9a0614db625" category="list-text"><block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block></block>
+  <block id="b4b4e6e07c554b9d2d403488c8f67c89" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
+  <block id="fa9300ded0ba1a72e341c019ffef6d03" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档、<block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
+  <block id="18833e14b5b5c7c59e24b7d84a7675c8" category="paragraph"><block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block> <block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block> <block ref="d28f7a65afd9b0a0129dadbafa84555d" category="inline-link-macro-rx"></block></block>
+  <block id="75bf2e375bd6a6c261100e60951c4331" category="paragraph"><block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block> <block ref="3940cdefc46aa67d16ed6a8e41f9c401" category="inline-link-macro-rx"></block> <block ref="5f61a87054f37a4d758972ec77cfdf5e" category="inline-link-macro-rx"></block></block>
 </blocks>

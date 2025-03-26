@@ -320,6 +320,4 @@ link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html[
 
 |===
 .相关信息
-link:https://docs.netapp.com/us-en/netapp-solutions/virtualization/vsphere_ontap_ontap_for_vsphere.html["TR-4597 ：采用 ONTAP 的 VMware vSphere"^]
-link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^]
-link:https://kb.vmware.com/s/article/83370["VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步"^]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["采用ONTAP的VMware vSphere"^] link:https://kb.vmware.com/s/article/2031038["NetApp MetroCluster 支持 VMware vSphere 5.x ， 6.x 和 7.x （ 2031038 ）"^] link:https://kb.vmware.com/s/article/83370["VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步"^]
