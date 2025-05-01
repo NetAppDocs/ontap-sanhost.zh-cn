@@ -1,0 +1,151 @@
+= 
+:allow-uri-read: 
+
+
+要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
+
+.步骤
+. 验证文件是否 `/etc/multipath.conf`存在：
++
+[source, cli]
+----
+ls /etc/multipath.conf
+----
++
+如果此文件不存在、请创建一个空的零字节文件：
+
++
+[source, cli]
+----
+touch /etc/multipath.conf
+----
+. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为主机操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
++
+下表显示了Linux操作系统为ONTAP LUN编译的本机多路径参数设置。
+
++
+.显示参数设置
+[%collapsible]
+====
+[cols="2"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | lun.* 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+====
+. 验证ONTAP LUN的参数设置和路径状态：
++
+[source, cli]
+----
+multipath -ll
+----
++
+默认多路径参数支持ASA、AFF和FAS配置。在这些配置中、一个ONTAP LUN不应需要超过四个路径。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。
+
++
+以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+[listing]
+----
+# multipath -ll
+3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 3:0:7:9    sdco 69:192  active ready running
+  |- 3:0:8:9    sddi 71:0    active ready running
+  |- 14:0:8:9   sdjq 65:320  active ready running
+  `- 14:0:7:9   sdiw 8:256   active ready running
+----
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+
+[listing]
+----
+# multipath -ll
+3600a09803831347657244e527766394e dm-5 NETAPP,LUN C-Mode
+size=80G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 3:0:3:0    sdd  8:48    active ready running
+| |- 3:0:4:0    sdx  65:112  active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 14:0:2:0   sdfk 130:96  active ready running
+  `- 14:0:5:0   sdgz 132:240 active ready running
+----
+--
+====
+

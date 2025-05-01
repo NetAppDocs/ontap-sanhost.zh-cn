@@ -1,0 +1,11 @@
+= 第1步：安装HP-UX Host Utilities
+:allow-uri-read: 
+
+
+
+
+== 第1步：安装HP-UX Host Utilities
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+link:hu_hpux_60.html["安装HP-UX Host Utilities 6.0"](英文)

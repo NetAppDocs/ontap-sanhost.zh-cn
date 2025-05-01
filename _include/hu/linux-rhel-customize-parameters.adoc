@@ -1,0 +1,33 @@
+= 第5步：自定义ONTAP LUN的多路径参数
+:allow-uri-read: 
+
+
+
+
+== 第5步：自定义ONTAP LUN的多路径参数
+
+如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
+
+请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
+
+
+CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
+
+以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
+
+[listing, subs="+quotes"]
+----
+defaults {
+   path_checker      *readsector0*
+   no_path_retry     *fail*
+}
+
+devices {
+   device {
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
+   }
+}
+----
