@@ -55,7 +55,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 
 
 
-== 第2步：确认主机的多路径配置
+== 第3步：确认主机的多路径配置
 
 您可以在RHEL 9.5中使用多路径来管理ONTAP LUN。
 
