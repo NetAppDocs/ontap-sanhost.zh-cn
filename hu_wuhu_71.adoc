@@ -21,7 +21,7 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 [role="lead"]
 使用Windows主机实用程序可以将Windows主机计算机连接到NetApp存储系统。
 
-Windows Host Utilities支持以下版本的Windows：
+Windows Host Utilities支持以下Windows版本：
 
 * Windows 2022
 * Windows 2019
@@ -60,7 +60,7 @@ Host Utilities支持不同的Windows主机配置、协议和多路径选项。�
 
 == 验证主机和存储系统配置
 
-在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。
+在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<<supported-windows-versions-71,支持的Windows版本>>。
 
 .步骤
 . 在中检查支持的配置 http://mysupport.netapp.com/matrix["互操作性表工具"^]。

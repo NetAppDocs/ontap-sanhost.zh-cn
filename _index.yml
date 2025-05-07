@@ -1,6 +1,6 @@
 ---
 indexpage:
-  title: SAN主机和云客户端
+  title: ONTAP SAN主机和云客户端
   summary: 此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。
   keywords: ontap, san, host, rhel, red, hat, linux, sles, suse, esxi, nvme, oracle,
     linux, windows, enterprise, fc, fcp, isci, aix, powervm, vios, centos, citrix,

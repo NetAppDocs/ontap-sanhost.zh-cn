@@ -544,7 +544,6 @@
   <block id="e76ee25d273df2d7635b388feab260ba" category="cell">` \NetAppQCL1\fcconfig.ini`</block>
   <block id="eeca789d03a65dbfd928a28fa9ca3aab" category="cell">` \NetAppQCLI\* 。 *`</block>
   <block id="271e95bb5110c34300c9e4e30ad2991d" category="cell">`sA_version.exe`</block>
-  <block id="700f2514d3d4cc2ed02cb06d8b922b2d" category="paragraph">在安装 Host Utilities 之前，您必须验证 Host Utilities 版本是否支持主机和存储系统配置，以便正确安装软件。</block>
   <block id="29cd26a0b6469ed25fabeac1805eb8a6" category="list-text">添加 iSCSI 或 FCP 许可证并启动目标服务。</block>
   <block id="dafd8a261adaf4e33c8e8c74baa71755" category="list-text">验证布线</block>
   <block id="e7577cd6836843159bd5123f9ac4ec5b" category="list-text">获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。</block>
@@ -1172,7 +1171,6 @@
   <block id="c11de2cda31d67ed47c0182334a7ac91" category="sidebar">sle-15-fcp</block>
   <block id="2f7ca50ec80cb8bec6ae8dd04c29748c" category="sidebar">Windows-FCP</block>
   <block id="c345c92c1db74865c1b5cb8dad478651" category="summary">此内容提供了有关如何配置连接到ONTAP 存储的SAN客户端的特定分发指南。</block>
-  <block id="d1c811acf82829db30f1d8b3e6c940d6" category="doc">SAN主机和云客户端</block>
   <block id="708c2a641aba7d3caf588312e9a41596" category="summary">此内容针对分发提供了有关如何配置连接到Cloud Volumes ONTAP 的云客户端以及连接到内部ONTAP 存储的Amazon FSX for ONTAP 和SAN主机的指南。</block>
   <block id="ab5c1cc33879491a00632f6478216936" category="paragraph">您的SAN主机和ONTAP 存储可以位于内部、云中、也可以同时位于这两者。</block>
   <block id="117bdbda976fe8b3212bc3b6327a0a1b" category="inline-link-macro">Cloud Volumes ONTAP</block>
@@ -1182,7 +1180,6 @@
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">更多资源</block>
   <block id="8f631f7b4d000947dcf86232c51cf147" category="sidebar">全SAN阵列软件配置</block>
   <block id="587c9aa3c6003c9a9fa1fc9c2ceb2eaa" category="sidebar">SAN 管理</block>
-  <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
   <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">概述</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
   <block id="38022ef96e4c7edb41b89fa3a008c3f6" category="inline-link-macro">Windows Host Utility Kit 7.1</block>
@@ -3228,7 +3225,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="550d5f0555aa2a5e59269c14de819e78" category="summary">Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。</block>
   <block id="6896363d719a238fdc4b6d2ef8ef5a78" category="doc">安装Windows Host Utilities 7.1</block>
   <block id="f0ed46888b875cc5c73315cc1272f90b" category="paragraph">使用Windows主机实用程序可以将Windows主机计算机连接到NetApp存储系统。</block>
-  <block id="fd0cfddf11b707411ea1c87986350b1a" category="paragraph">Windows Host Utilities支持以下版本的Windows：</block>
   <block id="0652c88686b5ecfc5bf453239b43dbd5" category="paragraph">Windows主机实用程序包括一个安装程序、用于设置所需的Windows注册表和主机总线适配器(HBA)参数、以便Windows主机可以正确处理ONTAP和E系列平台的存储系统行为。</block>
   <block id="2a1a96da7bfe08f1d385743c49246a17" category="paragraph">Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关最新的受支持配置列表、请参见<block ref="e29293ebfe5b9174e3113da62e6426ca" category="inline-link-rx"></block>。</block>
   <block id="440a0a613ea9d79644732dd469b879c6" category="list-text">在中检查支持的配置<block ref="8202e2d9ff186d084c29140284f981f1" category="inline-link-rx"></block>。</block>
@@ -3653,7 +3649,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="f3f5e5774254d60ece67c2757e73c5fe" category="summary">在RHEL 9.5主机上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
   <block id="bf2e2850028a550db4d4777a6c320006" category="doc">使用ONTAP存储为FCP和iSCSI配置RHEL 9.5</block>
   <block id="9c2f294f2ce9dacd34475fe6a3fa5c52" category="paragraph">"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在Red Hat Enterprise Linux (RHEL) 9.5主机上安装Linux Host Utilities时、您可以使用Host Utilities来帮助管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
-  <block id="dd8d9457c96c61b509341e8fc9c06a5a" category="section-title">第2步：确认主机的多路径配置</block>
   <block id="0f1de05675767624511aae207e8e0251" category="paragraph">您可以在RHEL 9.5中使用多路径来管理ONTAP LUN。</block>
   <block id="df703c7c915219367c5e3f921d60e7af" category="summary">在SUSE Linux Enterprise Server 12上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
   <block id="43d4d647f16dbd3d230e0439558b88db" category="doc">使用ONTAP存储为FCP和iSCSI配置SUSE Linux Enterprise Server 12</block>
@@ -3716,4 +3711,10 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="d29ad9efbcae6053e82420f1cc871c51" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="c45840700e4ab6d55371aa3a3251b306" category="inline-link-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
   <block id="764c3360f3f7d6cb07c2ff1a79f2cf58" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档以及<block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
   <block id="d04eb85f6d5ba5f0fcd2c894dea16fe5" category="paragraph">有关配置和管理vvol的详细信息，请参阅适用于VMware vSphere的ONTAP工具文档、<block ref="11b7981a4bc487d4291cc9a0614db625" category="inline-link-macro-rx"></block>和<block ref="506dc68919d50d1567e18d25faf7ae58" category="inline-link-macro-rx"></block>。</block>
+  <block id="db3880822387ba5ff86b2e765ae8e03d" category="paragraph">Windows Host Utilities支持以下Windows版本：</block>
+  <block id="6338107550646e4da84ebb66cf1e3b7e" category="inline-xref">支持的Windows版本</block>
+  <block id="14aa8f54a503ff6089f17bed95d65cb6" category="paragraph">在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<block ref="e07b0c094759647153725a704df4b0de" category="inline-xref-macro-rx"></block>。</block>
+  <block id="74464dd5db6f61c62453cee626aca30f" category="paragraph">在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<block ref="fa2ff82d2dc57012eed1f266cf01842e" category="inline-xref-macro-rx"></block>。</block>
+  <block id="a85fe49c4f48d905593c7bce3b551763" category="sidebar">ONTAP SAN主机和云客户端</block>
+  <block id="6fbaf2334ca5f8d82bd9bd67bc534670" category="sidebar">配置ONTAP SAN主机和云客户端</block>
 </blocks>
