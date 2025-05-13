@@ -271,28 +271,25 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
 
 
 
-== 启用空间分配
+== NVMe取消分配
 
-ESXi 8.x及更高版本支持空间分配。
+对于ESXi 8.0u2及更高版本以及9.16.1 9.161及更高版本、支持使用NVMe取消分配命令。
 
-启用空间分配后、如果命名空间用尽、则ONTAP会与主机通信、指出没有可用空间可用于写入操作；命名空间将保持联机、并继续为读取操作提供服务。当有更多可用空间可用时、写入操作将恢复。空间分配还允许主机执行 `UNMAP`(有时称为 `TRIM`)操作。通过取消映射操作、主机可以确定不再需要的数据块、因为这些数据块不再包含有效数据。然后、存储系统可以取消分配这些数据块、以便可以在其他位置使用这些空间。
-
-.开始之前
-link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html["在ONTAP存储系统上启用空间分配"^](英文)然后、您应在ESXi主机上执行以下步骤。
+对于NVMe命名容量、始终会启用取消分配支持。取消分配还允许子操作系统对VMFS数据存储库执行"UNMAP "(有时称为"TRIM")操作。通过取消分配操作、主机可以确定不再需要的数据块、因为这些数据块不再包含有效数据。然后、存储系统可以删除这些数据块、以便可以在其他位置使用这些空间。
 
 .步骤
-. 在ESXi主机上、验证DSM是否已禁用：
+. 在ESXi主机上、验证DSM取消分配的设置是否支持TP4040：
 +
 `esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
 
 +
 预期值为0。
 
-. 启用NVMe DSM：
+. 启用DSM取消分配的设置并支持TP4040：
 +
 `esxcfg-advcfg -s 1 /Scsi/NvmeUseDsmTp4040`
 
-. 验证DSM是否已启用：
+. 验证是否已启用通过TP4040支持取消分配DSM的设置：
 +
 `esxcfg-advcfg -g /SCSi/NVmeUseDsmTp4040`
 
@@ -300,6 +297,8 @@ link:https://docs.netapp.com/us-en/ontap/san-admin/enable-space-allocation.html[
 预期值为1。
 
 
+
+有关在VMware vSphere中取消分配NVMe的详细信息、请参阅 https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-storage-8-0/storage-provisioning-and-space-reclamation-in-vsphere/storage-space-reclamation-in-vsphere.html["vSphere中的存储空间回收"^]
 
 
 
