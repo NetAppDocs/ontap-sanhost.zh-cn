@@ -3707,8 +3707,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="6338107550646e4da84ebb66cf1e3b7e" category="inline-xref">支持的Windows版本</block>
   <block id="14aa8f54a503ff6089f17bed95d65cb6" category="paragraph">在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<block ref="e07b0c094759647153725a704df4b0de" category="inline-xref-macro-rx"></block>。</block>
   <block id="74464dd5db6f61c62453cee626aca30f" category="paragraph">在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<block ref="fa2ff82d2dc57012eed1f266cf01842e" category="inline-xref-macro-rx"></block>。</block>
-  <block id="a85fe49c4f48d905593c7bce3b551763" category="sidebar">ONTAP SAN主机和云客户端</block>
-  <block id="6fbaf2334ca5f8d82bd9bd67bc534670" category="sidebar">配置ONTAP SAN主机和云客户端</block>
   <block id="c6c1a6259bdf26d263bd4a9472d66719" category="section-title">NVMe取消分配</block>
   <block id="f384bde747b94f669a3fa94059005a05" category="paragraph">对于ESXi 8.0u2及更高版本以及9.16.1 9.161及更高版本、支持使用NVMe取消分配命令。</block>
   <block id="098d6b2a9e23cc2be9c1426e0cde97a4" category="paragraph">对于NVMe命名容量、始终会启用取消分配支持。取消分配还允许子操作系统对VMFS数据存储库执行"UNMAP "(有时称为"TRIM")操作。通过取消分配操作、主机可以确定不再需要的数据块、因为这些数据块不再包含有效数据。然后、存储系统可以删除这些数据块、以便可以在其他位置使用这些空间。</block>
@@ -3717,4 +3715,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="6026c444a91983a6b5a6dcb031503f89" category="list-text">验证是否已启用通过TP4040支持取消分配DSM的设置：</block>
   <block id="b666f1fcf3d24bdf8d1596c592783e04" category="inline-link">vSphere中的存储空间回收</block>
   <block id="e2b29f49797a2325ae454b80e6aecf4a" category="paragraph">有关在VMware vSphere中取消分配NVMe的详细信息、请参阅<block ref="c446d1e3b484512e9ba1bbe8eab259bf" category="inline-link-rx"></block></block>
+  <block id="e99f28bee3ac5bad6e5414411cd5ffa0" category="sidebar">ONTAP SAN主机实用程序</block>
+  <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
 </blocks>
