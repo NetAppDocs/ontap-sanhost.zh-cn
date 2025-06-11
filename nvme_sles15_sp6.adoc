@@ -250,7 +250,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 .步骤
 . 验证是否 `nvmf-autoconnect.service`已启用：
 +
-`# systemctl status nvmf-autoconnect.service`
+`systemctl status nvmf-autoconnect.service`
 
 +
 .显示示例输出
@@ -273,7 +273,7 @@ systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
 ====
 . 验证是否 `nvmefc-boot-connections.service`已启用：
 +
-`# systemctl status nvmefc-boot-connections.service`
+`systemctl status nvmefc-boot-connections.service`
 
 +
 .显示示例输出
@@ -413,10 +413,10 @@ nvme discover -t tcp -w <host-traddr> -a <traddr>
 .示例输出
 [listing]
 ----
-#nvme discover -t tcp -w 192.168.111.79 -a 192.168.111.66
-#nvme discover -t tcp -w 192.168.111.79 -a 192.168.111.67
-#nvme discover -t tcp -w 192.168.211.79 -a 192.168.211.66
-#nvme discover -t tcp -w 192.168.211.79 -a 192.168.211.67
+nvme discover -t tcp -w 192.168.111.79 -a 192.168.111.66
+nvme discover -t tcp -w 192.168.111.79 -a 192.168.111.67
+nvme discover -t tcp -w 192.168.211.79 -a 192.168.211.66
+nvme discover -t tcp -w 192.168.211.79 -a 192.168.211.67
 ----
 . 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
@@ -428,10 +428,10 @@ nvme connect-all -t tcp -w <host-traddr> -a <traddr>
 .示例输出
 [listing]
 ----
-# nvme connect-all -t tcp -w 192.168.111.79 -a 192.168.111.66
-# nvme connect-all -t tcp -w 192.168.111.79 -a 192.168.111.67
-# nvme connect-all -t tcp -w 192.168.211.79 -a 192.168.211.66
-# nvme connect-all -t tcp -w 192.168.211.79 -a 192.168.211.67
+nvme connect-all -t tcp -w 192.168.111.79 -a 192.168.111.66
+nvme connect-all -t tcp -w 192.168.111.79 -a 192.168.111.67
+nvme connect-all -t tcp -w 192.168.211.79 -a 192.168.211.66
+nvme connect-all -t tcp -w 192.168.211.79 -a 192.168.211.67
 ----
 +
 
@@ -808,7 +808,7 @@ nvme gen-dhchap-key -s optional_secret -l key_length {32|48|64} -m HMAC_function
 +
 [listing]
 ----
-# nvme gen-dhchap-key -m 3 -n nqn.2014-08.org.nvmexpress:uuid:d3ca725a- ac8d-4d88-b46a-174ac235139b
+nvme gen-dhchap-key -m 3 -n nqn.2014-08.org.nvmexpress:uuid:d3ca725a- ac8d-4d88-b46a-174ac235139b
 DHHC-1:03:J2UJQfj9f0pLnpF/ASDJRTyILKJRr5CougGpGdQSysPrLu6RW1fGl5VSjbeDF1n1DEh3nVBe19nQ/LxreSBeH/bx/pU=:
 ----
 . 在ONTAP控制器上、添加主机并指定两个dhchap密钥：
@@ -837,7 +837,7 @@ cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_secret
 =====
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
+cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
 DHHC-1:03:je1nQCmjJLUKD62mpYbzlpuw0OIws86NB96uNO/t3jbvhp7fjyR9bIRjOHg8wQtye1JCFSMkBQH3pTKGdYR1OV9gx00=:
 DHHC-1:03:je1nQCmjJLUKD62mpYbzlpuw0OIws86NB96uNO/t3jbvhp7fjyR9bIRjOHg8wQtye1JCFSMkBQH3pTKGdYR1OV9gx00=:
 DHHC-1:03:je1nQCmjJLUKD62mpYbzlpuw0OIws86NB96uNO/t3jbvhp7fjyR9bIRjOHg8wQtye1JCFSMkBQH3pTKGdYR1OV9gx00=:
@@ -856,7 +856,7 @@ cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_ctrl_secret
 =====
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
+cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
 DHHC-1:03:WorVEV83eYO53kV4Iel5OpphbX5LAphO3F8fgH3913tlrkSGDBJTt3crXeTUB8fCwGbPsEyz6CXxdQJi6kbn4IzmkFU=:
 DHHC-1:03:WorVEV83eYO53kV4Iel5OpphbX5LAphO3F8fgH3913tlrkSGDBJTt3crXeTUB8fCwGbPsEyz6CXxdQJi6kbn4IzmkFU=:
 DHHC-1:03:WorVEV83eYO53kV4Iel5OpphbX5LAphO3F8fgH3913tlrkSGDBJTt3crXeTUB8fCwGbPsEyz6CXxdQJi6kbn4IzmkFU=:
@@ -882,7 +882,7 @@ DHHC-1:03:WorVEV83eYO53kV4Iel5OpphbX5LAphO3F8fgH3913tlrkSGDBJTt3crXeTUB8fCwGbPsE
 =====
 [listing]
 ----
-# cat /etc/nvme/config.json
+cat /etc/nvme/config.json
 [
  {
     "hostnqn":"nqn.2014-08.org.nvmexpress:uuid:12372496-59c4-4d1b-be09-74362c0c1afc",
@@ -944,7 +944,7 @@ NOTE: 在上述示例中， `dhchap_key`对应于， `dhchap_ctrl_key`对应 `dh
 +
 [listing]
 ----
-# nvme connect-all -J /etc/nvme/config.json
+nvme connect-all -J /etc/nvme/config.json
 ----
 +
 .显示示例输出
@@ -972,7 +972,7 @@ traddr=192.168.111.67 is already connected
 +
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_secret
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_secret
 ----
 +
 .示例输出
@@ -984,7 +984,7 @@ DHHC-1:01:NunEWY7AZlXqxITGheByarwZdQvU4ebZg9HOjIr6nOHEkxJg:
 +
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
 .示例输出
@@ -1006,7 +1006,7 @@ DHHC-
 传输层安全(Transport Layer Security、TLS)可为NVMe-oF主机和ONTAP阵列之间的NVMe连接提供安全的端到端加密。从tls.16.1开始、您可以使用ONTAP 9和已配置的预共享密钥(PSK)配置tls.1.3。
 
 .关于此任务
-您可以在SUSE Linux Enterprise Server 15 SP6主机上执行此过程中的步骤、但指定您在ONTAP控制器上执行某个步骤的情况除外。
+您可以在 SUSE Linux Enterprise Server 主机上执行此过程中的步骤，除非它指定您在 ONTAP 控制器上执行某个步骤。
 
 .步骤
 . 检查主机上是否安装了以下ktls-utils、opensl和libopenssl软件包：
@@ -1033,7 +1033,7 @@ libopenssl3-3.1.4-150600.5.7.1.x86_64
 +
 [listing]
 ----
-# cat /etc/tlshd.conf
+cat /etc/tlshd.conf
 ----
 +
 .显示示例输出
@@ -1061,13 +1061,13 @@ nl=0
 +
 [listing]
 ----
-# systemctl enable tlshd
+systemctl enable tlshd
 ----
 . 验证守护进程是否 `tlshd`正在运行：
 +
 [listing]
 ----
-# systemctl status tlshd
+systemctl status tlshd
 ----
 +
 .显示示例输出
@@ -1089,14 +1089,14 @@ Aug 21 15:46:54 RX2530-M4-17-153 tlshd[961]: Built from ktls-utils 0.11-dev on M
 ====
 . 使用生成TLS PSK `nvme gen-tls-key`：
 +
-.. `# cat /etc/nvme/hostnqn`
+.. `cat /etc/nvme/hostnqn`
 +
 .示例输出
 [listing]
 ----
 nqn.2014-08.org.nvmexpress:uuid:e58eca24-faff-11ea-8fee-3a68dd3b5c5f
 ----
-.. `# nvme gen-tls-key --hmac=1 --identity=1 --subsysnqn=nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15`
+.. `nvme gen-tls-key --hmac=1 --identity=1 --subsysnqn=nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15`
 +
 .示例输出
 [listing]
@@ -1105,17 +1105,17 @@ NVMeTLSkey-1:01:dNcby017axByCko8GivzOO9zGlgHDXJCN6KLzvYoA+NpT1uD:
 ----
 
 
-. 在ONTAP控制器上、将TLS PSK添加到ONTAP子系统：
+. 在 ONTAP 阵列上，将 TLS PSK 添加到 ONTAP 子系统：
 +
 [listing]
 ----
-# nvme subsystem host add -vserver sles15_tls -subsystem sles15 -host-nqn nqn.2014-08.org.nvmexpress:uuid:ffa0c815-e28b-4bb1-8d4c-7c6d5e610bfc -tls-configured-psk NVMeTLSkey-1:01:dNcby017axByCko8GivzOO9zGlgHDXJCN6KLzvYoA+NpT1uD:
+vserver nvme subsystem host add -vserver sles15_tls -subsystem sles15 -host-nqn nqn.2014-08.org.nvmexpress:uuid:e58eca24-faff-11ea-8fee-3a68dd3b5c5f -tls-configured-psk NVMeTLSkey-1:01:dNcby017axByCko8GivzOO9zGlgHDXJCN6KLzvYoA+NpT1uD:
 ----
-. 将TLS PSK插入主机内核密钥环：
+. 在 SUSE Linux Enterprise Server 主机上，将 TLS PSK 插入主机内核密钥环：
 +
 [listing]
 ----
-# nvme check-tls-key --identity=1 --subsysnqn=nqn.2014-08.org.nvmexpress:uuid:ffa0c815-e28b-4bb1-8d4c-7c6d5e610bf --keydata=NVMeTLSkey-1:01:dNcby017axByCko8GivzOO9zGlgHDXJCN6KLzvYoA+NpT1uD: --insert
+nvme check-tls-key --identity=1 --subsysnqn =nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15 --keydata=NVMeTLSkey-1:01:dNcby017axByCko8GivzOO9zGlgHDXJCN6KLzvYoA+NpT1uD: --insert
 ----
 +
 .示例输出
@@ -1131,7 +1131,7 @@ NOTE: PSK显示为"NVMe1R01"、因为它使用TLS握手算法中的"Identity v1"
 +
 [listing]
 ----
-# cat /proc/keys | grep NVMe
+cat /proc/keys | grep NVMe
 ----
 +
 .示例输出
@@ -1139,16 +1139,16 @@ NOTE: PSK显示为"NVMe1R01"、因为它使用TLS握手算法中的"Identity v1"
 ----
 22152a7e I--Q---     1 perm 3b010000     0     0 psk       NVMe1R01 nqn.2014-08.org.nvmexpress:uuid:ffa0c815-e28b-4bb1-8d4c-7c6d5e610bfc nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15 UoP9dEfvuCUzzpS0DYxnshKDapZYmvA0/RJJ8JAqmAo=: 32
 ----
-. 使用插入的TLS PSK连接到ONTAP子系统：
+. 在 SUSE Linux Enterprise Server 主机上，使用插入的 TLS PSK 连接到 ONTAP 子系统：
 +
-.. `# nvme connect -t tcp -w 20.20.10.80 -a 20.20.10.14 -n nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15 --tls_key=0x22152a7e --tls`
+.. `nvme connect -t tcp -w 20.20.10.80 -a 20.20.10.14 -n nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:subsystem.sles15 --tls_key=0x22152a7e --tls`
 +
 .示例输出
 [listing]
 ----
 connecting to device: nvme0
 ----
-.. `# nvme list-subsys`
+.. `nvme list-subsys`
 +
 .示例输出
 [listing]
@@ -1163,7 +1163,7 @@ nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.1d59a6b2416b11ef9ed5d039ea50acb3:su
 
 . 添加目标、并验证与指定ONTAP子系统的TLS连接：
 +
-`# nvme subsystem controller show -vserver sles15_tls -subsystem sles15 -instance`
+`nvme subsystem controller show -vserver sles15_tls -subsystem sles15 -instance`
 
 +
 .显示示例输出
@@ -1206,4 +1206,4 @@ Authentication Diffie-Hellman Group: -
 
 == 已知问题
 
-具有ONTAP版本的SUSE Linux Enterprise Server 15 SP6没有已知问题。
+没有已知问题。

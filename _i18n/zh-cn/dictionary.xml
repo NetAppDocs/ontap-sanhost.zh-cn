@@ -2498,7 +2498,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="fc471da28a10b288c7becc2d14173bdb" category="paragraph">不需要将设备直接添加到文件中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。您可以通过向文件中添加以下语法来排除不需要的<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>设备、并将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
   <block id="eaa95f8be0a818bc84d23c1b3fef5725" category="paragraph"><block ref="59b466fd93164953e56bdd1358dc0044" prefix="" category="inline-code"></block>是要将其添加到黑名单中的本地SCSI磁盘。</block>
   <block id="26bbc264025eb640d0a21b5280ca517a" category="paragraph">下表显示了<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>ONTAP LUN的关键参数和所需值。如果主机连接到其他供应商的LUN、并且这些参数中的任何一个被覆盖、则需要在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中通过稍后的具体适用于ONTAP LUN的说明进行更正。如果不执行此操作， ONTAP LUN 可能无法按预期工作。只有在咨询NetApp和/或操作系统供应商并充分了解影响后、才应覆盖这些默认值。</block>
-  <block id="7d3d6c9fc8d341eaa26d83545052db7b" category="paragraph">具有ONTAP版本的SUSE Linux Enterprise Server 15 SP6没有已知问题。</block>
   <block id="ddd05bd427ff935c5fc7e7ee226415f1" category="summary">介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP6配置NVMe/FC。</block>
   <block id="d147fb9f4a20a8d22dfe8c5247b12c27" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP6的NVMe-oF主机配置</block>
   <block id="dbb7e5b9df8e9f022cb88ee582377faf" category="paragraph">以下支持适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP6的NVMe-oF主机配置：</block>
@@ -2527,9 +2526,7 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="604dbd1b7d87647f33f14a4f924b3c93" category="section-title">验证NVMe服务</block>
   <block id="82df088f6ba140ed873ee24f8ff5c346" category="paragraph">从SUSE Linux Enterprise Server 15 SP6开始、<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>NVMe/FC包中包含的和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>会自动启用、以便在系统启动期间启动。系统启动完成后、您应验证是否已启用启动服务。</block>
   <block id="5dc1adc63079845f3cac2caf1db0fa6a" category="list-text">验证是否<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>已启用：</block>
-  <block id="f17577127ab2e84c20f714db959353d3" category="paragraph"><block ref="cee298feeb3e213ee36300180a00bd01" prefix="" category="inline-code"></block></block>
   <block id="a5203704145a9efb5be031a61c0e47e6" category="list-text">验证是否<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>已启用：</block>
-  <block id="3c853373f44c095457102f92b570173c" category="paragraph"><block ref="69c22354a230572f55564f96ca4f0aeb" prefix="" category="inline-code"></block></block>
   <block id="73adc7de0b8ec5250832fc10c3810522" category="paragraph">NVMe/TCP没有自动连接功能。相反、您可以通过手动执行NVMe/TCP或<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>操作来发现NVMe/TCP子系统和命名路径<block ref="b640a0ce465fa2a4150c36b305c1c11b" prefix=" " category="inline-code"></block>。</block>
   <block id="6f6e90e999896f87c906fd2a45c1270c" category="admonition">从SUSE Linux Enterprise Server 15 SP6开始、NVMe/TCP超时的默认设置<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>已关闭。这意味着重试次数没有限制(无限期重试)，使用或<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block>命令(选项<block ref="269889131ee4793a82191b78a2eb60e3" prefix=" " category="inline-code"></block>)时无需手动配置特定的<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>超时持续时间。<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>此外、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。</block>
   <block id="54fa1b935227c60b90bdcd38d49344ef" category="paragraph">使用以下过程验证采用ONTAP的SUSE Linux Enterprise Server 15 SP6的NVMe-oF配置。</block>
@@ -2546,7 +2543,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="0cc817fdf178d998506590bcd7f4435a" category="admonition">在上述示例中，<block ref="b4ccff4fcae86dd694df37690970d401" prefix=" " category="inline-code"></block>对应于，<block ref="7c5692629f37b2fc3b73d10ecb68180e" prefix=" " category="inline-code"></block>对应<block ref="c74aa421e1eeec8a71897cfdbf55b4c4" prefix=" " category="inline-code"></block>于<block ref="b564e1f3e83c3835c800589da9434401" prefix=" " category="inline-code"></block>。</block>
   <block id="cca9751debdb563a025b1255c382b607" category="section-title">配置传输层安全性</block>
   <block id="6ab36115f46bb64da1b6626f47c3d1a8" category="paragraph">传输层安全(Transport Layer Security、TLS)可为NVMe-oF主机和ONTAP阵列之间的NVMe连接提供安全的端到端加密。从tls.16.1开始、您可以使用ONTAP 9和已配置的预共享密钥(PSK)配置tls.1.3。</block>
-  <block id="9a8cd16b2c754986b4de5b4a07f17fd0" category="paragraph">您可以在SUSE Linux Enterprise Server 15 SP6主机上执行此过程中的步骤、但指定您在ONTAP控制器上执行某个步骤的情况除外。</block>
   <block id="3b86ef6861ab37460f14c7cca5f2ecf9" category="list-text">检查主机上是否安装了以下ktls-utils、opensl和libopenssl软件包：</block>
   <block id="94af47577475b9842466b2cda14bffae" category="list-text"><block ref="eba606d0a45a6acc38e99cfc11f79ff4" prefix="" category="inline-code"></block></block>
   <block id="fa09d1fd67990fa52b192b453ee3f411" category="list-text"><block ref="0349a9de91d8d2777180988686f8a790" prefix="" category="inline-code"></block></block>
@@ -2554,17 +2550,9 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="bb29fc4790c7eaf5ae7a9445a08776bf" category="list-text">启用<block ref="67de54fa2975e1afbfa0e5b44910694e" prefix=" " category="inline-code"></block>以在系统启动时启动：</block>
   <block id="edf98b56eb368003a84c3f6e6325bc24" category="list-text">验证守护进程是否<block ref="67de54fa2975e1afbfa0e5b44910694e" prefix=" " category="inline-code"></block>正在运行：</block>
   <block id="cc03b98609648131cf98c136c9325ae6" category="list-text">使用生成TLS PSK<block ref="75260898c7ef0a545e10c9413524db08" prefix=" " category="inline-code"></block>：</block>
-  <block id="b595664b17c23b9c65800f5f2ee6bd60" category="list-text"><block ref="ff083824b5947cb311fd6336234d2f08" prefix="" category="inline-code"></block></block>
-  <block id="329041f78f097df81a7f8ae854150413" category="list-text"><block ref="f31123afb140e56354d20f4296a62a1a" prefix="" category="inline-code"></block></block>
-  <block id="9a188a453d6f7a4139c805197ffad6d7" category="list-text">在ONTAP控制器上、将TLS PSK添加到ONTAP子系统：</block>
-  <block id="3a6a93137906aeb888c944ff8cd57c5a" category="list-text">将TLS PSK插入主机内核密钥环：</block>
   <block id="456655754b0c48b034d1fdf59967c5fb" category="admonition">PSK显示为"NVMe1R01"、因为它使用TLS握手算法中的"Identity v1"。Identity v1是ONTAP唯一支持的版本。</block>
   <block id="ca320bf6c4ad8f767e85d406ee4fde14" category="list-text">验证是否已正确插入TLS PSK：</block>
-  <block id="17a9f150c8c2ab60092808d0908e820b" category="list-text">使用插入的TLS PSK连接到ONTAP子系统：</block>
-  <block id="532c0a0166f57d64080032345311e992" category="list-text"><block ref="352b5cd6e4380372116548b2c6dab1a5" prefix="" category="inline-code"></block></block>
-  <block id="798926c594ff5920496900e82fc4f8ee" category="list-text"><block ref="b77dfffb05a37f29ed729db166995be8" prefix="" category="inline-code"></block></block>
   <block id="8424d580c7f527bd670292899f979c75" category="list-text">添加目标、并验证与指定ONTAP子系统的TLS连接：</block>
-  <block id="750e58d680481d7813150837191657cf" category="paragraph"><block ref="f3772228bbdd61b9e99ef34e7e8724df" prefix="" category="inline-code"></block></block>
   <block id="2ec9c91229d2e2f17a8f17a73a54304b" category="admonition">一个LUN不应需要四个以上的路径。如果路径数超过四个、则可能会在存储故障期间导致路径问题。</block>
   <block id="5825e25cd2548b8d4af651b91652e28d" category="paragraph"><block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件<block ref="307e748c432594fde04ec1d02c6808e4" prefix=" " category="inline-code"></block>。</block>
   <block id="d2151dcee8f5a191a60c2d0cb4823f78" category="list-text">运行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block>命令、然后重新启动主机。</block>
@@ -3522,7 +3510,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="de7c28ff0eb95c7790427d99e464cd7d" category="list-text">验证文件是否<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>退出。如果此文件不存在、请创建一个空的零字节文件：</block>
   <block id="4154b2933e2df9573e5568e1cb8b0708" category="list-text">每次启动主机时、空的<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>主机的文件、因为操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。</block>
   <block id="2dc85993483fece6ce86d25200665755" category="paragraph">下表显示了ONTAP LUN的Linux操作系统本机编译多路径参数设置。</block>
-  <block id="55e68527d8c164dc338b18da64611305" category="admonition">您无需配置基于内核的虚拟机(KVM)设置、因为ONTAP LUN会自动映射到KVM虚拟机管理程序。</block>
   <block id="3e69d2b38cbdad51b5f0a5227c5c242e" category="paragraph">您应该检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件，特别是在默认值部分中，以了解可能覆盖的设置<block ref="3e47c09a7bdcd0377df056ba2567e852" category="inline-xref-macro-rx"></block>。</block>
   <block id="d0cd85ffaeb74cce57bdd7f018a8056d" category="paragraph">例如、如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要通过稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>。否则、ONTAP LUN可能无法按预期运行。</block>
   <block id="7d6ed8198fddc97f7e4e07dc8cb965c1" category="inline-link-macro">了解如何使用Linux Host Utilities工具</block>
@@ -3717,4 +3704,16 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="e2b29f49797a2325ae454b80e6aecf4a" category="paragraph">有关在VMware vSphere中取消分配NVMe的详细信息、请参阅<block ref="c446d1e3b484512e9ba1bbe8eab259bf" category="inline-link-rx"></block></block>
   <block id="e99f28bee3ac5bad6e5414411cd5ffa0" category="sidebar">ONTAP SAN主机实用程序</block>
   <block id="2275d26c218f9babebe06ed5dcc73dab" category="sidebar">配置SAN主机和云客户端</block>
+  <block id="d42d49b663d32823894e50123ab762aa" category="admonition">您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。</block>
+  <block id="6c1237c8a63c9432743995a73de4f2ea" category="paragraph">您可以在 SUSE Linux Enterprise Server 主机上执行此过程中的步骤，除非它指定您在 ONTAP 控制器上执行某个步骤。</block>
+  <block id="a06bd7b24c1effd63b064b3a8b11fac4" category="paragraph"><block ref="43e4de7615f2615407bf61dc8bab917d" prefix="" category="inline-code"></block></block>
+  <block id="9717b15229fcf955162bc44c0245c940" category="paragraph"><block ref="e5fc4f0ee1a350182939ab0bca460c98" prefix="" category="inline-code"></block></block>
+  <block id="762c5561f01f01d3a3d6677f3972abe5" category="list-text"><block ref="1c78bed9e35b03f05a58a1b43589b4b2" prefix="" category="inline-code"></block></block>
+  <block id="3b8094306cbf785ab92adf321ddbe00b" category="list-text"><block ref="e428c84f18e3d18bdc6f7a6ad7049ad8" prefix="" category="inline-code"></block></block>
+  <block id="3fe78ae2313cd2a031d60fd3b1908014" category="list-text">在 ONTAP 阵列上，将 TLS PSK 添加到 ONTAP 子系统：</block>
+  <block id="82230a22c6ecae257dedcf3b1a20f740" category="list-text">在 SUSE Linux Enterprise Server 主机上，将 TLS PSK 插入主机内核密钥环：</block>
+  <block id="3bd434fbafe93a5c609f93354e39f38c" category="list-text">在 SUSE Linux Enterprise Server 主机上，使用插入的 TLS PSK 连接到 ONTAP 子系统：</block>
+  <block id="6f0abeb231f9492f647495d82e71a409" category="list-text"><block ref="784df77e179355f677ae4620639e145e" prefix="" category="inline-code"></block></block>
+  <block id="cd3cfdbbdf68695695503ec99f60b54f" category="list-text"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block></block>
+  <block id="c8ba574e6385bfff25580806e2cfd27d" category="paragraph"><block ref="2c3856aef23f7e774c0fec3948e0a8b5" prefix="" category="inline-code"></block></block>
 </blocks>

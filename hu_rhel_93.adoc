@@ -19,7 +19,7 @@ summary: 在RHEL 9.3主机上安装Linux Host Utilities、以管理使用ONTAP L
 "Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在Red Hat Enterprise Linux (RHEL) 9.3主机上安装Linux Host Utilities时、您可以使用Host Utilities来帮助管理使用ONTAP LUN的FCP和iSCSI协议操作。
 
 
-NOTE: 您无需配置基于内核的虚拟机(KVM)设置、因为ONTAP LUN会自动映射到KVM虚拟机管理程序。
+NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
 
 
 

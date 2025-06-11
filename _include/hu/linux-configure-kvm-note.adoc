@@ -1,0 +1,6 @@
+= 
+:allow-uri-read: 
+
+
+
+NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
