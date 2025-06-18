@@ -3771,4 +3771,22 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="b4da3417a3bbac7760c5f326458d9927" category="sidebar">RHEL 10</block>
   <block id="63da114c28add40c319de84e3a92a8ed" category="sidebar">RHEL-10-FCP</block>
   <block id="43a1437f7f656cd8be7c996c58719e0a" category="sidebar">10.0</block>
+  <block id="282e82c820d3f500a969ebb9a9054584" category="summary">在RHEL 9.6主机上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
+  <block id="f4e7617d1cef5f8ab23add41d40625fb" category="doc">使用ONTAP存储为FCP和iSCSI配置RHEL 9.6</block>
+  <block id="5cecbf0e006813819e7ea0d92ccca8df" category="paragraph">"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在Red Hat Enterprise Linux (RHEL) 9.6主机上安装Linux Host Utilities时、您可以使用Host Utilities来帮助管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
+  <block id="c655b9821bde0a911428a133bb7ef67f" category="paragraph">您可以在RHEL 9.6中使用多路径来管理ONTAP LUN。</block>
+  <block id="6cbcd68038ece1dbafa173add2c90697" category="summary">如何使用ONTAP为RHEL 9.6配置NVMe-oF主机</block>
+  <block id="3dff0e4b77025c9e0739e3b02b3ff268" category="doc">适用于采用ONTAP的RHEL 9.6的NVMe-oF主机配置</block>
+  <block id="fdee72360607bede29fc52844f306e62" category="paragraph">您可以在适用于Red Hat Enterprise Linux (RHEL) 9.6的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。</block>
+  <block id="770bddea589c1a8e5b2541551754b4e4" category="list-text">默认情况下、RHEL 9.6会为NVMe命名空间启用内核NVMe多路径、从而无需显式设置。</block>
+  <block id="e118d7e4742cf0454d407a22991c4f23" category="list-text">从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以在 RHEL 9.6 中使用 NVMe/TCP 的安全带内身份验证。</block>
+  <block id="027d24fe581a1889d6b5752e3886e380" category="list-text">没有可用的新功能。</block>
+  <block id="3b6f23fb41215bfbde13af4b92268902" category="paragraph">使用以下步骤验证最低支持的 RHEL 9.6 软件版本。</block>
+  <block id="61e91ca529ce5516397f8af4ff223ab0" category="list-text">在服务器上安装RHEL 9.6。安装完成后、验证是否正在运行指定的RHEL 9.6内核：</block>
+  <block id="deeefe26777fb24a155fd5e2eac9f23b" category="paragraph">以下示例显示了 nvme-cli 软件包版本：</block>
+  <block id="a33245ebb2f380b62ab218a312110f3a" category="list-text">在RHEL 9.6主机上，检查以下位置的hostnqn字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
+  <block id="844df812cde8ebcaf9f2cc35022248c6" category="paragraph">使用 RHEL 9.6， <block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包会在系统启动时自动启用。系统启动完成后，请验证启动服务是否已启用。</block>
+  <block id="103bbc9741f09ef806d7d9f1ff8e4957" category="paragraph">从 ONTAP 9.12.1 开始，RHEL 9.6 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全带内身份验证。</block>
+  <block id="c76dae5432bc09fa983706505086692e" category="list-text">为RHEL 9.6主机生成dhchap密钥。</block>
+  <block id="eaf2f97729e8d5e4d205672da8afc9a5" category="sidebar">9.6</block>
 </blocks>
