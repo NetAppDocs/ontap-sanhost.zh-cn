@@ -241,10 +241,13 @@ NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
 +
-[listing]
+[source, cli]
 ----
 cat /etc/modprobe.d/lpfc.conf
 ----
++
+您应该会看到类似于以下示例的输出：
+
 +
 [listing]
 ----
@@ -253,7 +256,7 @@ options lpfc lpfc_sg_seg_cnt=256
 . 运行 `dracut -f`命令并重新启动主机。
 . 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
-[listing]
+[source, cli]
 ----
 cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----

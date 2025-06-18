@@ -40,6 +40,27 @@ summary: 如何使用ONTAP为RHEL 9.1配置NVMe-oF主机
 
 
 
+== 启用SAN启动
+
+您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
+
+.开始之前
+使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+
+.步骤
+. 创建 SAN 启动命名空间并将其映射到主机。
++
+请参阅。 https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["配置 NVMe 存储"^]
+
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+
+
+
+
 == 启用内核NVMe多路径
 
 您可以使用以下操作步骤启用内核NVMe多路径。
@@ -220,10 +241,13 @@ NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
 .步骤
 . 将 `lpfc_sg_seg_cnt`参数设置为256：
 +
-[listing]
+[source, cli]
 ----
 cat /etc/modprobe.d/lpfc.conf
 ----
++
+您应该会看到类似于以下示例的输出：
+
 +
 [listing]
 ----
@@ -232,7 +256,7 @@ options lpfc lpfc_sg_seg_cnt=256
 . 运行 `dracut -f`命令并重新启动主机。
 . 验证的值是否 `lpfc_sg_seg_cnt`为256：
 +
-[listing]
+[source, cli]
 ----
 cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 ----

@@ -3716,4 +3716,59 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="6f0abeb231f9492f647495d82e71a409" category="list-text"><block ref="784df77e179355f677ae4620639e145e" prefix="" category="inline-code"></block></block>
   <block id="cd3cfdbbdf68695695503ec99f60b54f" category="list-text"><block ref="f3d48156832e70ac41335c007fa76798" prefix="" category="inline-code"></block></block>
   <block id="c8ba574e6385bfff25580806e2cfd27d" category="paragraph"><block ref="2c3856aef23f7e774c0fec3948e0a8b5" prefix="" category="inline-code"></block></block>
+  <block id="44e9f27b29f987774dffc9a83910b3f1" category="paragraph">您应该会看到类似于以下示例的输出：</block>
+  <block id="104e6af592420ff3d441fd7ec7435c39" category="summary">在RHEL 10主机上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
+  <block id="d7c1825e0f2407a4d10d399ac78c1f95" category="doc">使用ONTAP存储为FCP和iSCSI配置RHEL 10</block>
+  <block id="d7b201e34bf72ed2024522784d92bd59" category="paragraph">"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在Red Hat Enterprise Linux (RHEL) 10主机上安装Linux Host Utilities时、您可以使用Host Utilities来帮助管理使用ONTAP LUN的FCP和iSCSI协议操作。</block>
+  <block id="0171e05f7a58a96089d554991286cd67" category="paragraph">您可以在RHEL 10中使用多路径来管理ONTAP LUN。</block>
+  <block id="236e1a6c16fc596f7520a28ad7a1db03" category="section-title">启用 SAN 工具包</block>
+  <block id="429ffdde936d5759e07807c3b66f38d2" category="summary">如何使用ONTAP为RHEL 10配置NVMe-oF主机</block>
+  <block id="cd64186b2c2cedea7d5dfd05d86304c6" category="doc">适用于采用ONTAP的RHEL 10的NVMe-oF主机配置</block>
+  <block id="c0cd0678856b67d02b2dfc3c9646fac2" category="paragraph">您可以在适用于Red Hat Enterprise Linux (RHEL) 10的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。</block>
+  <block id="bf21bd2f7b624998085c3d69986dbe53" category="list-text">从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以在 RHEL 10 中使用 NVMe/TCP 的安全带内身份验证。</block>
+  <block id="4baea929c29e972312029711f923ecc9" category="list-text">从 RHEL 10 开始，本机 NVMe 多路径始终处于启用状态，并且不支持对 NVMe-oF 的 DM 多路径支持。</block>
+  <block id="705049d3ff516ba95d2f556556788c5a" category="list-text">避免发布<block ref="de5ac85ea45047f4dbeea79d7b729b7d" prefix=" " category="inline-code"></block>命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。</block>
+  <block id="9ce1ac3eb326fa20a6e4cc846d38ef38" category="list-text">创建 SAN 启动命名空间并将其映射到主机。</block>
+  <block id="20cd59705d89627333024680d966bb16" category="inline-link">配置 NVMe 存储</block>
+  <block id="2ae5f54ecc4375d7e4bc5d4417d72e85" category="paragraph">请参阅。<block ref="0cb485556fb9e40c82f55474b807ef26" category="inline-link-rx"></block></block>
+  <block id="80eb2a3788bc043e0e117027749a3b7a" category="list-text">在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。</block>
+  <block id="8796e28d4a4ab01704a45b84e10299f3" category="section-title">步骤 2：验证软件版本</block>
+  <block id="bfa758a2fd039564c81329a71d8a55b8" category="paragraph">使用以下步骤验证最低支持的 RHEL 10 软件版本。</block>
+  <block id="8686219d94060c8bb51e3307818e48c4" category="list-text">在服务器上安装RHEL 10。安装完成后、验证是否正在运行指定的RHEL 10内核：</block>
+  <block id="207b3f28e8aa21d614e81b31699e50bf" category="paragraph">以下示例显示了 RHEL 内核版本：</block>
+  <block id="fb47e45e6131ce8573db817dc34e3ba6" category="paragraph">下面的例子展示了<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包版本：</block>
+  <block id="d14319cd9fe8bb3c15b66611ee50ab63" category="paragraph">下面的例子展示了<block ref="d7deb22e6166f8cce87002f8f100fbe6" prefix=" " category="inline-code"></block>软件包版本：</block>
+  <block id="353615218a31d80048bde6c36a52f6d6" category="list-text">在主机上，检查 hostnqn 字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> ：</block>
+  <block id="49254d029fbf5a05d560c49c65e3682d" category="paragraph">下面的例子展示了<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>版本：</block>
+  <block id="b52c5d0392407a559b20b04250a22a2b" category="section-title">步骤3：配置NVMe/FC</block>
+  <block id="3c4d68a984cfab18b058f7614517f26b" category="list-text">显示模型名称：</block>
+  <block id="61e9eafd114033b79115785b3c135abb" category="paragraph">您应看到以下输出：</block>
+  <block id="d474b8d44546ee3743d50d33e3e43016" category="list-text">显示模型描述：</block>
+  <block id="f5380639862d7f30daa3a708e324d0b8" category="list-text">显示固件版本：</block>
+  <block id="6d7cdce7ef63034f99b2d7060ae672bc" category="paragraph">以下示例显示固件版本：</block>
+  <block id="2e7877df9f97bc43731073c516c35196" category="list-text">显示收件箱驱动程序版本：</block>
+  <block id="5960cabb9dbe62e8e98f3d79f0a1c9e0" category="paragraph">以下示例显示了驱动程序版本：</block>
+  <block id="6b3d7041f640e56620316768e2c2bea9" category="paragraph">以下示例显示端口标识：</block>
+  <block id="dfeb27de594c744f1f1bc3f70af7fe62" category="paragraph">以下示例显示了驱动程序和固件版本：</block>
+  <block id="c0dfb3da16b4c34ba6641ab9c5ced78a" category="section-title">步骤 4：可选，启用 1MB I/O</block>
+  <block id="bb209e859372a1cf79b17e0f3ce4b72d" category="section-title">步骤 5：验证 NVMe 启动服务</block>
+  <block id="1e39429c019f1be4225017909bd3e504" category="paragraph">使用 RHEL 10， <block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>系统启动时会自动启用这些软件包。启动完成后，请验证这些服务是否已启用。</block>
+  <block id="3f6eafce29d3de48f970b9d611381841" category="section-title">步骤 6：配置 NVMe/TCP</block>
+  <block id="dda9e001bef1d21ede41e855ce95f071" category="section-title">步骤 7：验证 NVMe-oF</block>
+  <block id="7ebd106b9b1cfecd3d6fb0451340153e" category="list-text">显示子系统：</block>
+  <block id="924a2d9478a76ff931a7b33da760a8aa" category="list-text">显示策略：</block>
+  <block id="33f7abd10cff2281a91b19ee32201623" category="section-title">步骤 8：设置安全带内身份验证</block>
+  <block id="3f2aed41975c4d98d941e8a7b03bf8e5" category="paragraph">从 ONTAP 9.12.1 开始，RHEL 10 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全带内身份验证。</block>
+  <block id="ffc19e5b6958faf88524a792e1c1635d" category="paragraph">每个主机或控制器必须与一个<block ref="f4ec72363eeda8a3e6391c779684b2be" prefix=" " category="inline-code"></block>密钥来设置安全身份验证。 <block ref="f4ec72363eeda8a3e6391c779684b2be" prefix=" " category="inline-code"></block>密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。</block>
+  <block id="e50800c92fe482bd476da8e2b8778963" category="paragraph">使用 CLI 或配置 JSON 文件设置安全带内身份验证。如果需要为不同的子系统指定不同的dhchap密钥、则必须使用config JSON文件。</block>
+  <block id="d1864d59ca252f6be1b9b7a1114e5ec4" category="list-text">为RHEL 10主机生成dhchap密钥。</block>
+  <block id="0d99f1978c6ac8e224f5b9429539befa" category="paragraph">使用<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block>选项来生成 JSON 文件。有关更多语法选项、请参见NVMe Connect-all手册页。</block>
+  <block id="aeafecb6e5d6ff8d736488ca4255a495" category="list-text">配置 JSON 文件。</block>
+  <block id="abf3e38be1e135b4689023b375f16aed" category="admonition">在以下示例中， <block ref="b4ccff4fcae86dd694df37690970d401" prefix=" " category="inline-code"></block>对应于<block ref="b564e1f3e83c3835c800589da9434401" prefix=" " category="inline-code"></block>和<block ref="7c5692629f37b2fc3b73d10ecb68180e" prefix=" " category="inline-code"></block>对应于<block ref="c74aa421e1eeec8a71897cfdbf55b4c4" prefix=" " category="inline-code"></block> 。</block>
+  <block id="52fa57cb89715461d2004558d3bd3b78" category="list-text">验证每个子系统的相应控制器是否已启用 dhchap 机密。</block>
+  <block id="9b5f1d99b3cc83e8839e8c1c7044f62f" category="paragraph">以下示例显示了 dhchap 密钥：</block>
+  <block id="a8037bee31f3b32217fc0d5b84621e5e" category="section-title">第9步：查看已知问题</block>
+  <block id="b4da3417a3bbac7760c5f326458d9927" category="sidebar">RHEL 10</block>
+  <block id="63da114c28add40c319de84e3a92a8ed" category="sidebar">RHEL-10-FCP</block>
+  <block id="43a1437f7f656cd8be7c996c58719e0a" category="sidebar">10.0</block>
 </blocks>
