@@ -135,10 +135,8 @@ sidebar:
       entries:
       - title: XenServer 8.4.
         url: "/hu_citrix_84.html"
-      - title: 虚拟机管理程序 8.2.
+      - title: 虚拟机管理程序 8.2 (LTSR)
         url: "/hu_citrix_82.html"
-      - title: XenServer 7.
-        url: "/hu_citrix_7x.html"
     - title: ESXi
       entries:
       - title: VMware vSphere 8
