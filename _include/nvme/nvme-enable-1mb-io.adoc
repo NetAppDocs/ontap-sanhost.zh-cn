@@ -1,0 +1,29 @@
+= 
+:allow-uri-read: 
+
+
+您可以为配置了 Broadcom 适配器的 NVMe/FC 启用 1MB 大小的 I/O 请求。ONTAP在识别控制器数据中报告的最大数据传输大小 (MDTS) 为 8。这意味着最大I/O请求大小最多可以为1 MB。要发出 1MB 大小的 I/O 请求，您需要增加 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
+
+
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[listing]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[listing]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+

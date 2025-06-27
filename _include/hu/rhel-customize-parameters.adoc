@@ -6,9 +6,9 @@
 
 == 第5步：自定义ONTAP LUN的多路径参数
 
-您应该检查 `/etc/multipath.conf`文件，特别是在默认值部分中，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
+如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
 
-例如、如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要通过稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
+请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
 
 
 CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。

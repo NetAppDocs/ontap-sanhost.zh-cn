@@ -4,7 +4,7 @@ permalink: nvme_rhel_95.html
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP为RHEL 9.5配置NVMe-oF主机 
 ---
-= 适用于采用ONTAP的RHEL 9.5的NVMe-oF主机配置
+= 使用 ONTAP 存储为 NVMe-oF 配置 RHEL 9.5
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -34,7 +34,6 @@ NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网�
 +
 ** 从ONTAP 9.12.1开始、NVMe-oF引入了对安全带内身份验证的支持。您可以在RHEL 9.5中对NVMe-oF使用安全带内身份验证。
 ** 默认情况下、RHEL 9.5会为NVMe命名空间启用内核NVMe多路径、从而无需显式设置。
-** 支持使用NVMe/FC协议进行SAN启动。
 
 
 * 已知限制：
@@ -54,10 +53,7 @@ NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网�
 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
 
 .步骤
-. 创建 SAN 启动命名空间并将其映射到主机。
-+
-请参阅。 https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["配置 NVMe 存储"^]
-
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 SAN 启动命名空间并将其映射到主机"^](英文)
 . 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。

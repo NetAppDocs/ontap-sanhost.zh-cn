@@ -1,0 +1,195 @@
+= 
+:allow-uri-read: 
+
+
+您可以使用Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。您还需要手动发现 NVMe/TCP 子系统和命名空间。
+
+[role="tabbed-block"]
+====
+.Broadcom/Emulex
+--
+.步骤
+. 验证您使用的适配器型号是否受支持：
++
+.. 显示模型名称：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/modelname
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+LPe36002-M64
+LPe36002-M64
+----
+.. 显示模型描述：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/modeldesc
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
+Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
+----
+
+
+. 确认您使用的是建议的Broadcom `lpfc` 固件和内置驱动程序：
++
+.. 显示固件版本：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/fwrev
+----
++
+以下示例显示固件版本：
+
++
+[listing]
+----
+14.4.317.10, sli-4:6:d
+14.4.317.10, sli-4:6:d
+----
+.. 显示收件箱驱动程序版本：
++
+[source, cli]
+----
+cat /sys/module/lpfc/version`
+----
++
+以下示例显示了驱动程序版本：
+
++
+[listing]
+----
+0:14.4.0.2
+----
+
+
++
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+
+. 验证的预期输出是否 `lpfc_enable_fc4_type`设置为 `3`：
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+----
+. 验证是否可以查看启动程序端口：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/port_name
+----
++
+以下示例显示端口标识：
+
++
+[listing]
+----
+0x100000109bf044b1
+0x100000109bf044b2
+----
+. 验证启动程序端口是否联机：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/port_state
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+Online
+Online
+----
+. 验证NVMe/FC启动程序端口是否已启用且目标端口是否可见：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/nvme_info
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+NVME Initiator Enabled
+XRI Dist lpfc2 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc2 WWPN x100000109bf044b1 WWNN x200000109bf044b1 DID x022a00 *ONLINE*
+NVME RPORT       WWPN x202fd039eaa7dfc8 WWNN x202cd039eaa7dfc8 DID x021310 *TARGET DISCSRVC ONLINE*
+NVME RPORT       WWPN x202dd039eaa7dfc8 WWNN x202cd039eaa7dfc8 DID x020b10 *TARGET DISCSRVC ONLINE*
+
+NVME Statistics
+LS: Xmt 0000000810 Cmpl 0000000810 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000007b098f07 Issue 000000007aee27c4 OutIO ffffffffffe498bd
+        abort 000013b4 noxri 00000000 nondlp 00000058 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 000013b4 Err 00021443
+
+NVME Initiator Enabled
+XRI Dist lpfc3 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc3 WWPN x100000109bf044b2 WWNN x200000109bf044b2 DID x021b00 *ONLINE*
+NVME RPORT       WWPN x2033d039eaa7dfc8 WWNN x202cd039eaa7dfc8 DID x020110 *TARGET DISCSRVC ONLINE*
+NVME RPORT       WWPN x2032d039eaa7dfc8 WWNN x202cd039eaa7dfc8 DID x022910 *TARGET DISCSRVC ONLINE*
+
+NVME Statistics
+LS: Xmt 0000000840 Cmpl 0000000840 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 000000007afd4434 Issue 000000007ae31b83 OutIO ffffffffffe5d74f
+        abort 000014a5 noxri 00000000 nondlp 0000006a qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 000014a5 Err 0002149a
+----
+=====
+
+
+--
+.Marvell/QLogic
+--
+为Marvell/QLogic适配器配置NVMe/FC。
+
+
+NOTE: Rocky Linux 内核中包含的原生内置 qla2xxx 驱动程序具有最新修复。这些修复程序对于ONTAP支持至关重要。
+
+.步骤
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/symbolic_name
+----
++
+以下示例显示了驱动程序和固件版本：
+
++
+[listing]
+----
+QLE2742 FW:v9.14.00 DVR:v10.02.09.200-k
+QLE2742 FW:v9.14.00 DVR:v10.02.09.200-k
+----
+. 请验证 `ql2xnvmeenable` 已设置。这样、Marvell适配器便可用作NVMe/FC启动程序：
++
+[source, cli]
+----
+cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+----
++
+预期输出为1。
+
+
+
+--
+====
