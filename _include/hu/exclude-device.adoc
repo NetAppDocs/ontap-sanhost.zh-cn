@@ -23,7 +23,7 @@
 
 . 将WWID添加到"黑名单"部分：
 +
-[listing]
+[source, cli]
 ----
 blacklist {
 	     wwid   360030057024d0730239134810c0cb833

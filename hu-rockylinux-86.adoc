@@ -225,7 +225,7 @@ size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
 
 . 将WWID添加到"黑名单"部分：
 +
-[listing]
+[source, cli]
 ----
 blacklist {
 	     wwid   360030057024d0730239134810c0cb833

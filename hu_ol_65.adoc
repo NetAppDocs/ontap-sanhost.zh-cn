@@ -37,9 +37,6 @@ NetApp强烈建议安装Linux主机实用程序、但这并不是必需的。这
 
 
 
-NOTE: 您可以使用此过程中提供的配置设置来配置连接到和link:https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/index.html["适用于 ONTAP 的 Amazon FSX"^]的云客户端link:https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]。
-
-
 
 == SAN 工具包
 
