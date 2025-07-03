@@ -167,6 +167,8 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 ====
 .Broadcom/Emulex
 --
+为Broadcom/Emulex适配器配置NVMe/FC。
+
 .步骤
 . 验证您使用的适配器型号是否受支持：
 +

@@ -129,8 +129,7 @@ src_addr=192.168.1.31 *live non-optimized*
 --
 ====
 . 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
-
-
++
 [role="tabbed-block"]
 ====
 .列
@@ -184,3 +183,4 @@ nvme netapp ontapdevices -o json
 =====
 --
 ====
+

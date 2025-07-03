@@ -166,6 +166,8 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 [role="tabbed-block"]
 ====
 .Broadcom/Emulex
+为Broadcom/Emulex适配器配置NVMe/FC。
+
 --
 .步骤
 . 验证您使用的适配器型号是否受支持：
@@ -878,8 +880,7 @@ src_addr=192.168.1.31 *live non-optimized*
 --
 ====
 . 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
-
-
++
 [role="tabbed-block"]
 ====
 .列
@@ -933,6 +934,8 @@ nvme netapp ontapdevices -o json
 =====
 --
 ====
+
+
 
 
 == 步骤 8：设置安全带内身份验证
