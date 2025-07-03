@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu-rockylinux-90.html 
 keywords: host utilities, rocky, linux, 9.0, netapp, ontap, fcp, iscsi 
-summary: 在 Rocky Linux 9.0 主机上安装 Linux Host Utilities 以管理使用 ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
+summary: 在 Rocky Linux 9.0 主机上安装 Linux Host Utilities 以使用 ONTAP LUN 管理 FCP 和 iSCSI 协议操作。 
 ---
 = 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Rocky Linux 9.0
 :hardbreaks:

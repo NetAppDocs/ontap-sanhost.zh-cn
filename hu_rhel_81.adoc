@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_rhel_81.html 
 keywords: host utilities, red hat, rhel, linux, 8.1, netapp, ontap 
-summary: 在RHEL 8.1主机上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。 
+summary: 在 RHEL 8.1 主机上安装 Linux Host Utilities 以管理使用 ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
 ---
 = 为使用ONTAP存储的FCP和iSCSI配置RHEL 8.1
 :hardbreaks:
@@ -162,6 +162,9 @@ multipath -ll
 --
 ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
 
+.显示示例
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -173,6 +176,7 @@ size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
   |- 14:0:3:0  sdar 66:176 active ready running
   `- 17:0:3:0  sdch 69:80  active ready running
 ----
+=====
 --
 .AFF或FAS配置
 --
@@ -180,6 +184,9 @@ AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较�
 
 以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
 
+.显示示例
+[%collapsible]
+=====
 [listing]
 ----
 multipath -ll
@@ -192,6 +199,7 @@ size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
   |- 10:0:1:0  sdc  8:32   active ready running
   `- 16:0:2:0  sdcf 69:48  active ready running
 ----
+=====
 --
 ====
 

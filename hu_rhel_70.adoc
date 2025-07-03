@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_rhel_70.html 
 keywords: host utilities, red hat, rhel, linux, 7.0, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 7.0 
+summary: 在 RHEL 7.0 主机上安装 Linux Host Utilities 以使用 ONTAP LUN 管理 FCP 和 iSCSI 协议操作。 
 ---
 = 使用ONTAP存储为FCP和iSCSI配置RHEL 7.0
 :hardbreaks:
@@ -249,6 +249,9 @@ CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机�
 
 以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
 
+.显示示例
+[%collapsible]
+====
 [listing, subs="+quotes"]
 ----
 defaults {
@@ -265,6 +268,7 @@ devices {
    }
 }
 ----
+====
 
 
 == 第6步：查看已知问题
