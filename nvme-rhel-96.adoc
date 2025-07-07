@@ -27,14 +27,14 @@ NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网�
 ** 在同一主机上同时运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
 ** 默认情况下、RHEL 9.6会为NVMe命名空间启用内核NVMe多路径、从而无需显式设置。
 ** 从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以在 RHEL 9.6 中使用 NVMe/TCP 的安全带内身份验证。
+
+
 +
 有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
-
-
 * 可用功能：
 +
-** 没有可用的新功能。
+** 此版本中没有新功能。
 
 
 * 已知限制：
@@ -418,7 +418,9 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 == 步骤 5：验证 NVMe 启动服务
 
-使用 RHEL 9.6，  `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service` NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时会自动启用这些软件包。启动完成后，请验证这些服务是否已启用。
+使用 RHEL 9.6，  `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service` NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时会自动启用这些软件包。
+
+启动完成后，验证 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`启动服务已启用。
 
 .步骤
 . 验证是否 `nvmf-autoconnect.service`已启用：
@@ -749,6 +751,16 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ====
 
 
+[NOTE]
+====
+从 RHEL 9.4 开始，NVMe/TCP 的设置 `ctrl_loss_tmo timeout`自动设置为“关闭”。因此：
+
+* 重试次数没有限制（无限重试）。
+* 您不需要手动配置特定的 `ctrl_loss_tmo timeout`使用时长 `nvme connect`或者 `nvme connect-all`命令（选项 -l ）。
+* 如果发生路径故障，NVMe/TCP 控制器不会超时，并且会无限期地保持连接。
+
+
+====
 
 
 == 步骤 7：验证 NVMe-oF

@@ -471,9 +471,16 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 ----
 
 
+[NOTE]
+====
+从 RHEL 9.4 开始，NVMe/TCP 的设置 `ctrl_loss_tmo timeout`自动设置为“关闭”。因此：
 
-NOTE: 从RHEL 9.4开始、NVMe/TCP超时的默认设置 `ctrl_loss_tmo`已关闭。这意味着对重试次数没有限制(无限期重试)。因此，在使用或 `nvme connect-all`命令(选项-l)时，无需手动配置特定的 `ctrl_loss_tmo`超时持续时间 `nvme connect`。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
+* 重试次数没有限制（无限重试）。
+* 您不需要手动配置特定的 `ctrl_loss_tmo timeout`使用时长 `nvme connect`或者 `nvme connect-all`命令（选项 -l ）。
+* 如果发生路径故障，NVMe/TCP 控制器不会超时，并且会无限期地保持连接。
 
+
+====
 
 
 == 验证 NVMe-oF

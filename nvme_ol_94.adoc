@@ -32,7 +32,7 @@ NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网�
 
 * 可用功能：
 +
-** 从ONTAP 9.12.1开始、NVMe-oF引入了对安全带内身份验证的支持。您可以在Oracle Linux 9.4中对NVMe-oF使用安全带内身份验证
+** 从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以使用 Oracle Linux 9.4 对 NVMe/TCP 进行安全带内身份验证
 ** 默认情况下、支持为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。
 
 
@@ -397,9 +397,16 @@ nvme connect-all -t tcp -w 192.168.166.4 -a 192.168.166.56
 nvme connect-all -t tcp -w 192.168.165.3 -a 192.168.165.56
 ----
 +
+[NOTE]
+====
+从 Oracle Linux 9.4 开始，NVMe/TCP 的设置 `ctrl_loss_tmo timeout`自动设置为“关闭”。因此：
 
-NOTE: 从Oracle Linux 9.4开始、NVMe/TCP的默认设置 `ctrl_loss_tmo timeout`已关闭、并且对重试次数没有限制(无限期重试)。使用或 `nvme connect-all`命令(选项-l)时，您不必手动配置特定的 `ctrl_loss_tmo timeout`持续时间 `nvme connect`。通过此默认行为、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。
+** 重试次数没有限制（无限重试）。
+** 您不需要手动配置特定的 `ctrl_loss_tmo timeout`使用时长 `nvme connect`或者 `nvme connect-all`命令（选项 -l ）。
+** 如果发生路径故障，NVMe/TCP 控制器不会超时，并且会无限期地保持连接。
 
+
+====
 
 
 
@@ -594,7 +601,7 @@ nvme netapp ontapdevices -o json
 
 == 设置安全带内身份验证
 
-从ONTAP 9.12.1开始、Oracle Linux 9.4主机与ONTAP控制器之间可通过NVMe/TCP和NVMe/FC进行安全带内身份验证。
+从 ONTAP 9.12.1 开始，Oracle Linux 9.4 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全带内身份验证。
 
 要设置安全身份验证、每个主机或控制器都必须与关联 `DH-HMAC-CHAP` 密钥、它是NVMe主机或控制器的NQN与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
 
