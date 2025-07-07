@@ -2400,7 +2400,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="a243e92c34f812e7c56005c42a770271" category="summary">适用于采用ONTAP的Oracle Linux 9.4的NVMe-oF主机配置</block>
   <block id="8d7e003d34318d8e9e26f43a6131a1ff" category="paragraph">对于采用ONTAP存储的Oracle Linux 9.4、NVMe-oF主机配置提供以下支持和功能。在开始配置过程之前、您还应查看已知限制。</block>
   <block id="d5eb631f33b53d79f1963a09eca1f9b9" category="list-text">支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机NVMe-CLI软件包中的NetApp插件可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。</block>
-  <block id="5393f0229b7c28049a490e7e149cce98" category="list-text">在同一主机上同时运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。</block>
   <block id="26b5a656c86d4a0ae9755158f46fbf98" category="list-text">默认情况下、支持为NVMe命名空间启用内核NVMe多路径、因此无需显式设置。</block>
   <block id="0e40927283df7781be68d00b8accefe1" category="paragraph">您可以使用以下过程验证支持的最低Oracle Linux 9.4软件版本。</block>
   <block id="affce6661ee4cdaf7f19934910191c46" category="list-text">在服务器上安装Oracle Linux 9.4 GA。安装完成后、验证您是否正在运行指定的Oracle Linux 9.4 GA内核。</block>
@@ -3442,7 +3441,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="8e628a7900ccbcbe897613470b379397" category="doc">使用 NVMe-oF 为 ONTAP 存储配置 Rocky Linux 8.10</block>
   <block id="85c8cdeb7264230e3576dcdedf0caad5" category="paragraph">Rocky Linux 8.10 主机支持具有非对称命名空间访问 (ANA) 的 NVMe/FC 和 NVMe/TCP 协议。ANA相当于 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 多路径，并使用内核 NVMe 多路径功能实现。</block>
   <block id="c264db98e31638c1a8a87666a604a58e" category="paragraph">您可以将以下支持和功能与 Rocky Linux 8.10 的 NVMe-oF 主机配置一起使用。在开始配置过程之前、您还应查看已知限制。</block>
-  <block id="c9e63917edd2644c65c4c83c5f513014" category="list-text">在同一主机上运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。</block>
   <block id="dcccf8a1b4217ccff67e37945ae5e664" category="list-text">对于 Rocky Linux 8.10 NVMe-oF 主机，内核 NVMe 多路径默认处于禁用状态。因此，您需要手动启用它。</block>
   <block id="46fede53b7d1ee83fe8a87bd6ecb6b28" category="inline-link">Rocky Linux 8.10 发行说明</block>
   <block id="9ddcffe2b5bcdcca37f41378bd6c4381" category="list-text">在 Rocky Linux 8.10 主机上，由于存在未解决的问题，NVMe/TCP 是一项技术预览功能。有关详细信息、请参见<block ref="47fab428b8102b062e87d7a496d804cc" category="inline-link-rx"></block> 。</block>
@@ -3916,13 +3914,10 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="379e2b5ae5b7c7e267439eb94baea215" category="doc">使用 NVMe-oF 配置 Oracle Linux 9.5 以用于 ONTAP 存储</block>
   <block id="ac17418128183e6567213b4eb19b624e" category="paragraph">对于采用ONTAP存储的Oracle Linux 9.5、NVMe-oF主机配置提供以下支持和功能。</block>
   <block id="da28215a221e368b851dc3287e53bf0d" category="list-text">Oracle Linux 9.5 默认为 NVMe 命名空间启用内核内 NVMe 多路径，无需明确设置。</block>
-  <block id="1daee075c9e11e6f5b20b3967c0df0f7" category="list-text">从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以使用 Oracle Linux 9.5 对 NVMe/TCP 进行安全带内身份验证</block>
-  <block id="1406ed1061bd413045768fa60a774f96" category="list-text">避免发布<block ref="de5ac85ea45047f4dbeea79d7b729b7d" prefix=" " category="inline-code"></block>命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。</block>
   <block id="3d8ffc1ce95181376d3df0b672be1eda" category="paragraph">使用以下步骤验证最低支持的 Oracle Linux 9.5 软件版本。</block>
   <block id="db6f9dd7f149e36160f14dc375296df9" category="list-text">在服务器上安装 Oracle Linux 9.5 。安装完成后，验证您正在运行指定的 Oracle Linux 9.5 内核。</block>
   <block id="3d461fcebb59cefcba884f7f4189554c" category="paragraph">以下示例显示了 Oracle Linux 内核版本：</block>
   <block id="1c6fe8f9564a2897108b9a362f664a00" category="list-text">在Oracle Linux 9.5主机上，检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block><block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>以下位置的字符串：</block>
-  <block id="941c3de9b4431dee039cdde689dc10a6" category="paragraph">使用 Broadcom/Emulex FC 或 Marvell/Qlogic FC 适配器配置 NVMe/FC。</block>
   <block id="e18c595831de75294a8d5182a3556728" category="paragraph">以下示例显示了驱动程序和固件版本：</block>
   <block id="414c61d9e5c23d4d8f6cfb11c45d77df" category="paragraph">价值<block ref="c4ca4238a0b923820dcc509a6f75849b" prefix=" " category="inline-code"></block>验证<block ref="a8961a0cb8d5dfd91556db806f0f2cfc" prefix=" " category="inline-code"></block>已设置。</block>
   <block id="41ffb2c5337c2e9742d41439a2a47824" category="section-title">步骤 4：（可选）为 NVMe/FC 启用 1MB I/O</block>
@@ -3949,4 +3944,9 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="73ab7233c5edabec8f510d9bf8812cd1" category="sidebar">Oracle Linux 8</block>
   <block id="1b7514bd57f9cc1b09f9148e93151331" category="sidebar">Oracle Linux 7</block>
   <block id="c60ede747aeb2a1a339beabc79de8ca2" category="sidebar">Oracle Linux 6</block>
+  <block id="6d33793e4362fa404bfbe30d04104eaf" category="list-text">在同一主机上同时运行NVMe和SCSI流量。例如，您可以在 SCSI mpath 设备上为 SCSI LUN 配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。</block>
+  <block id="ae032d5b125754c1697aed6e1d8f7432" category="list-text">从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以将 NVMe/TCP 的安全带内身份验证与 Oracle Linux 9.5 结合使用。</block>
+  <block id="42cbea0085bea3ec5496d092c502217b" category="paragraph">使用 Broadcom/Emulex FC 或 Marvell/Qlogic FC 适配器配置 NVMe/FC。</block>
+  <block id="0f2332cb3d4b010b45d6eb9fbbeab96c" category="list-text">在同一主机上同时运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。</block>
+  <block id="c28f1c588b284418e1f1f45095861195" category="list-text">在同一主机上运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。</block>
 </blocks>

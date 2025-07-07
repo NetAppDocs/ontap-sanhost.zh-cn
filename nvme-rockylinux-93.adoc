@@ -26,7 +26,7 @@ Rocky Linux 9.3 主机支持具有非对称命名空间访问 (ANA) 的 NVMe/FC 
 * 提供支持：
 +
 ** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-** 在同一主机上运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
+** 在同一主机上运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。
 
 
 * 可用功能：
