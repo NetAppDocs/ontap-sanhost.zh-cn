@@ -431,6 +431,79 @@ NOTE: NetApp建议将选项设置 `ctrl-loss-tmo`为"-1"、以便NVMe/TCP启动�
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
 .步骤
+. 验证是否已启用内核NVMe多路径：
++
+[source, cli]
+----
+cat /sys/module/nvme_core/parameters/multipath
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+Y
+----
+. 验证相应ONTAP命名库的适当NVMe-oF设置(例如、型号设置为NetApp ONTAP控制器、负载平衡iopolicy设置为循环)是否正确反映在主机上：
++
+.. 显示子系统：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys*/model
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
+.. 显示策略：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+round-robin
+round-robin
+----
+
+
+. 验证是否已在主机上创建并正确发现命名空间：
++
+[source, cli]
+----
+nvme list
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+Node         SN                   Model
+---------------------------------------------------------
+/dev/nvme4n1 81Ix2BVuekWcAAAAAAAB	NetApp ONTAP Controller
+
+
+Namespace Usage    Format             FW             Rev
+-----------------------------------------------------------
+1                 21.47 GB / 21.47 GB	4 KiB + 0 B   FFFFFFFF
+----
+====
+
+
+.步骤
 . 验证是否已启用内核 NVMe 多路径：
 +
 `cat /sys/module/nvme_core/parameters/multipath`

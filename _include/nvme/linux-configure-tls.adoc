@@ -1,10 +1,6 @@
-= 配置传输层安全性
+= 
 :allow-uri-read: 
 
-
-
-
-== 配置传输层安全性
 
 传输层安全(Transport Layer Security、TLS)可为NVMe-oF主机和ONTAP阵列之间的NVMe连接提供安全的端到端加密。从tls.16.1开始、您可以使用ONTAP 9和已配置的预共享密钥(PSK)配置tls.1.3。
 

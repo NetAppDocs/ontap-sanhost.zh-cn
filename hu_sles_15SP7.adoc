@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_sles_15SP4.html 
-keywords: host utilities, suse linux enterprise server 15 sp4, suse, linux, 15 sp4, netapp, ontap 
-summary: 在 SUSE Linux Enterprise Server 15 SP4 上安装 Linux Host Utilities 以使用 ONTAP LUN 管理 FCP 和 iSCSI 协议操作。 
+permalink: hu_sles_15SP7.html 
+keywords: host utilities, suse linux enterprise server 15 sp7, suse, linux, 15 sp7, netapp, ontap, fcp, iscsi 
+summary: 在SUSE Linux Enterprise Server 15 SP7上安装Linux Host Utilities、以管理使用ONTAP LUN的FCP和iSCSI协议操作。 
 ---
-= 为带有ONTAP存储的FCP和iSCSI配置SUSE Linux Enterprise Server 15 SP4
+= 使用ONTAP存储为FCP和iSCSI配置SUSE Linux Enterprise Server 15 SP7
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 在 SUSE Linux Enterprise Server 15 SP4 上安装 Linux Host Utilities 
 
 
 [role="lead"]
-"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在SUSE Linux Enterprise Server 15 SP4主机上安装Linux Host Utilities时、您可以使用Host Utilities帮助您管理使用ONTAP LUN的FCP和iSCSI协议操作。
+"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在SUSE Linux Enterprise Server 15 SP7主机上安装Linux Host Utilities时、您可以使用Host Utilities帮助您管理使用ONTAP LUN的FCP和iSCSI协议操作。
 
 
 NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
@@ -54,7 +54,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 
 == 第3步：确认主机的多路径配置
 
-您可以将多路径与SUSE Linux Enterprise Server 15 SP4结合使用来管理ONTAP LUN。
+您可以在SUSE Linux Enterprise Server 15 SP7中使用多路径来管理ONTAP LUN。
 
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 

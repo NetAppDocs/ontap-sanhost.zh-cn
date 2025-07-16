@@ -1,0 +1,24 @@
+= 第1步：(可选)启用SAN启动
+:allow-uri-read: 
+
+
+
+
+== 第1步：(可选)启用SAN启动
+
+您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
+
+.开始之前
+使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+
+.步骤
+. 创建 SAN 启动命名空间并将其映射到主机。
++
+请参阅。 https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["配置 NVMe 存储"^]
+
+. 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+

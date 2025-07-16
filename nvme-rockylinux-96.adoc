@@ -16,7 +16,7 @@ summary: 如何使用 ONTAP 为 Rocky Linux 9.6 配置 NVMe-oF 主机
 
 
 [role="lead"]
-NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。
+<stdin> 中未解析的指令 - include::_include/nvme/reuse-nvme-introduction.adoc[]
 
 .关于此任务
 您可以将以下支持和功能与 Rocky Linux 9.6 的 NVMe-oF 主机配置一起使用。在开始配置过程之前、您还应查看已知限制。
@@ -385,34 +385,7 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 == 步骤 4：可选，启用 1MB I/O
 
-ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、应将参数的值 `lpfc_sg_seg_cnt`从默认值64增加 `lpfc`到256。
-
-
-NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
-
-.步骤
-. 将 `lpfc_sg_seg_cnt`参数设置为256：
-+
-[source, cli]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-您应该会看到类似于以下示例的输出：
-
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f`命令并重新启动主机。
-. 验证的值是否 `lpfc_sg_seg_cnt`为256：
-+
-[source, cli]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
+<stdin> 中未解析的指令 - include::_include/nvme/reuse_nvme_enabling_broadcom_1mb_size.adoc[]
 
 
 
@@ -473,7 +446,7 @@ Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-
 
 == 步骤 6：配置 NVMe/TCP
 
-NVMe/TCP协议不支持此 `auto-connect`操作。相反、您可以通过手动执行NVMe/TCP或 `connect-all`操作来发现NVMe/TCP子系统和命名路径 `connect`。
+<stdin> 中未解析的指令 - include::_include/nvme/reuse-nvme-configure-nvme-tcp.adoc[]
 
 .步骤
 . 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
@@ -837,114 +810,6 @@ Namespace Usage    Format             FW             Rev
 -----------------------------------------------------------
 1                 21.47 GB / 21.47 GB	4 KiB + 0 B   FFFFFFFF
 ----
-====
-. 验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态：
-+
-[role="tabbed-block"]
-====
-.NVMe/FC
---
-[source, cli]
-----
-nvme list-subsys /dev/nvme4n5
-----
-.显示示例
-[%collapsible]
-=====
-[listing, subs="+quotes"]
-----
-nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.3a5d31f5502c11ef9f50d039eab6cb6d:subsystem.nvme_1
-               hostnqn=nqn.2014-08.org.nvmexpress:uuid:e6dade64-216d-
-11ec-b7bb-7ed30a5482c3
-iopolicy=round-robin\
-+- nvme1 *fc* traddr=nn-0x2082d039eaa7dfc8:pn-0x2088d039eaa7dfc8,host_traddr=nn-0x20000024ff752e6d:pn-0x21000024ff752e6d *live optimized*
-+- nvme12 *fc* traddr=nn-0x2082d039eaa7dfc8:pn-0x208ad039eaa7dfc8,host_traddr=nn-0x20000024ff752e6d:pn-0x21000024ff752e6d *live non-optimized*
-+- nvme10 *fc* traddr=nn-0x2082d039eaa7dfc8:pn-0x2087d039eaa7dfc8,host_traddr=nn-0x20000024ff752e6c:pn-0x21000024ff752e6c *live non-optimized*
-+- nvme3 *fc* traddr=nn-0x2082d039eaa7dfc8:pn-0x2083d039eaa7dfc8,host_traddr=nn-0x20000024ff752e6c:pn-0x21000024ff752e6c *live optimized*
-----
-=====
---
-.NVMe/TCP
---
-[source, cli]
-----
-nvme list-subsys /dev/nvme1n1
-----
-.显示示例
-[%collapsible]
-=====
-[listing, subs="+quotes"]
-----
-nvme-subsys5 - NQN=nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.nvme_tcp_3
-hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0035-5910-804b-b5c04f444d33
-iopolicy=round-robin
-\
-+- nvme13 *tcp* traddr=192.168.2.25,trsvcid=4420,host_traddr=192.168.2.31,
-src_addr=192.168.2.31 *live optimized*
-+- nvme14 *tcp* traddr=192.168.2.24,trsvcid=4420,host_traddr=192.168.2.31,
-src_addr=192.168.2.31 *live non-optimized*
-+- nvme5 *tcp* traddr=192.168.1.25,trsvcid=4420,host_traddr=192.168.1.31,
-src_addr=192.168.1.31 *live optimized*
-+- nvme6 *tcp* traddr=192.168.1.24,trsvcid=4420,host_traddr=192.168.1.31,
-src_addr=192.168.1.31 *live non-optimized*
-----
-=====
---
-====
-. 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
-+
-[role="tabbed-block"]
-====
-.列
---
-[source, cli]
-----
-nvme netapp ontapdevices -o column
-----
-.显示示例
-[%collapsible]
-=====
-[listing, subs="+quotes"]
-----
-
-Device        Vserver   Namespace Path
------------------------ ------------------------------
-/dev/nvme1n1     linux_tcnvme_iscsi        /vol/tcpnvme_1_0_0/tcpnvme_ns
-
-NSID       UUID                                   Size
-------------------------------------------------------------
-1    5f7f630d-8ea5-407f-a490-484b95b15dd6   21.47GB
-----
-=====
---
-.JSON
---
-[source, cli]
-----
-nvme netapp ontapdevices -o json
-----
-.显示示例
-[%collapsible]
-=====
-[listing, subs="+quotes"]
-----
-{
-  "ONTAPdevices":[
-    {
-      "Device":"/dev/nvme1n1",
-      "Vserver":"linux_tcnvme_iscsi",
-      "Namespace_Path":"/vol/tcpnvme_1_0_0/tcpnvme_ns",
-      "NSID":1,
-      "UUID":"5f7f630d-8ea5-407f-a490-484b95b15dd6",
-      "Size":"21.47GB",
-      "LBA_Data_Size":4096,
-      "Namespace_Size":5242880
-    },
-]
-}
-----
-=====
---
 ====
 
 

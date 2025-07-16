@@ -1,5 +1,0 @@
-= 
-:allow-uri-read: 
-
-
-NVMe/TCP协议不支持此 `auto-connect`操作。相反、您可以通过手动执行NVMe/TCP或 `connect-all`操作来发现NVMe/TCP子系统和命名路径 `connect`。

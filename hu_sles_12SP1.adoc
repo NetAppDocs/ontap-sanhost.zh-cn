@@ -136,7 +136,7 @@ systemctl start multipathd
 | PRIO | ONTAP 
 
 
-| 产品 | lun.* 
+| 产品 | LUN 
 
 
 | Retain Attached Hw_handler | 是的。 
