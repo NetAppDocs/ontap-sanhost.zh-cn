@@ -7,9 +7,9 @@
 [role="tabbed-block"]
 ====
 .Broadcom/Emulex
+--
 为Broadcom/Emulex适配器配置NVMe/FC。
 
---
 .步骤
 . 验证您使用的适配器型号是否受支持：
 +
