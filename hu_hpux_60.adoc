@@ -16,40 +16,35 @@ summary: 介绍如何在ONTAP存储中使用HP-UX Host Utilities 6.0
 
 
 [role="lead"]
-使用NetApp HP-UX Host Utilities可以将HP-UX主机连接到ONTAP存储。
+HP-UX Host Utilities 可帮助您管理连接到 HP-UX 主机的ONTAP存储。 NetApp强烈建议安装 HP-UX Host Utilities，但这不是强制性的。这些实用程序可改善管理并帮助NetApp客户支持收集有关您的配置的信息。
 
-HP-UX Host Utilities支持多种协议和以下环境：
+HP-UX Host Utilities 支持以下环境：
 
 * 本机Microsoft多路径I/O (MPIO)
 * Veritas动态多路径(DMP)
 
 
-
-NOTE: 为了指明所使用的环境、本文档有时会为Veritas DMP环境指定"DMP"、为HP-UX本机环境指定"MPIO"。在某些情况下、您使用的命令可能会因所使用的驱动程序而异。在这些情况下、系统会同时指定环境和驱动程序类型。
-
 .开始之前
-* 为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。
-
-
-您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证配置。
-
-.关于此任务
-上提供了NetApp HP-UX Host Utilities软件包 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.0/downloads["NetApp 支持站点"^] 在压缩文件中。下载文件后、必须在安装之前对其进行解压缩。
+为了可靠运行，使用 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 iSCSI、FC 或 FCoE 配置是否受支持。
 
 .步骤
-. 登录到主机。
+. 登录到您的 HP-UX 主机。
 . 从下载 HP-UX Host Utilities 文件 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` link:https://mysupport.netapp.com/site/["NetApp 支持站点"^] 连接到 HP-UX 主机。
 . 解压 `netapp_hpux_host_utilities_6.0_ia_pa.depot.gz` 文件：
 +
-` # gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz`
-
+[source, cli]
+----
+gunzip netapp_hpux_host_utilities_6.0_ia_pa.depot.gz
+----
 +
 系统会将提取的软件放置在解压缩存储库文件的目录中。
 
 . 安装软件：
 +
-` # swinstall -s /storage_path`
-
+[source, cli]
+----
+swinstall -s /depot_path
+----
 +
 `dept_path` 提供存储库文件的路径和名称。
 
@@ -58,31 +53,14 @@ NOTE: 为了指明所使用的环境、本文档有时会为Veritas DMP环境指
 
 . 验证安装。
 +
-`sanlun 版本`
-
-
-
-
-
-== SAN 工具包
-
-HP-UX Host Utilities是一个NetApp主机软件、可在HP-UX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供了 `sanlun`可帮助您管理LUN和主机总线适配器的实用程序。(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
-
-.示例
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[listing]
+[source, cli]
 ----
-# sanlun lun show all
-
-controller(7mode)/ device host lun
-vserver(Cmode)           lun-pathname                   filename          adapter    protocol   size   mode
-------------------------------------------------------------------------------------------------------------
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c34t0d0  fclp1      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c23t0d0  fclp1      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c12t0d0  fclp0      FCP        150g    C
-sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c81t0d0  fclp0      FCP        150g    C
-
+sanlun version
 ----
 
-NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、并非所有组件都适用于每个配置。未使用的组件不会影响系统性能。AIX和PowerVM/VIOS OS版本支持SAN工具包。
+
+
+
+== 下一步是什么？
+
+link:hu-hpux-sanlun-toolkit.html["了解 SAN 工具包"] 。

@@ -4,7 +4,7 @@ permalink: hu_wuhu_troubleshoot.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 故障排除
+= 使用ONTAP存储配置对 Windows Host Utilities 进行故障排除
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,7 +19,7 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 
 
 [role="lead"]
-您可以使用Windows Host Utilities的常规故障排除技术。请务必查看最新的发行说明以了解已知问题和解决方案。
+使用常规故障排除技术来调查具有ONTAP存储配置的 Windows Host Utilities 可能出现的问题。您还应该检查link:hu-wuhu-release-notes.html["《Windows Host Utilities发行说明》"]了解已知问题和解决方案。
 
 下面列出了您可以针对潜在的互操作性问题调查的不同方面：
 
@@ -28,7 +28,7 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 * 如果iSCSI LUN在重新启动后不可用，请验证目标是否在Microsoft iSCSI启动程序GUI的*永久性 目标*选项卡上列为永久性。
 * 如果使用LUN的应用程序在启动时显示错误、请验证是否已将应用程序配置为依赖iSCSI服务。
 * 对于运行ONTAP的存储控制器的FC路径、请验证FC交换机是否使用目标LIFs的WWPN (而不是节点上物理端口的WWPN)进行分区。
-* 查看 link:hu_wuhu_71_rn.html["发行说明"] 让Windows Host Utilities检查已知问题。发行说明包括一个已知问题和限制列表。
+* 回顾link:hu-wuhu-release-notes.html["发行说明"]用于检查 Windows Host Utilities 的已知问题。发行说明包括已知问题和限制的列表。
 * 查看文档中的故障排除信息 https://docs.netapp.com/us-en/ontap/san-admin/index.html["ONTAP SAN管理"^]。
 * 搜索 https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 最近发现的问题。
 +

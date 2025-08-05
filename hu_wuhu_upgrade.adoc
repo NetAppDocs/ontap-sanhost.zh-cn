@@ -4,7 +4,7 @@ permalink: hu_wuhu_upgrade.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 升级Windows Host Utilities
+= 升级适用于ONTAP存储的 Windows Host Utilities
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,13 +19,13 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 
 
 [role="lead"]
-新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照说明以交互方式或从Windows命令行安装Host Utilities、以便升级安装包。
+您可以按照安装说明以交互方式或使用 Windows 命令行来升级ONTAP存储配置中的 Windows Host Utilities 软件。您需要将新的 Windows Host Utilities 安装软件安装在 Windows 主机可访问的路径上。
 
 [role="tabbed-block"]
 ====
 .以交互方式升级
 --
-要以交互方式升级Host Utilities软件包、必须运行Host Utilities安装程序并按照提示进行操作。
+通过运行 Host Utilities 安装程序并按照提示以交互方式升级 Windows Host Utilities 软件。
 
 .步骤
 . 更改为下载可执行文件的目录。
@@ -40,15 +40,17 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 
 
 --
-.从命令行升级
+.非交互升级
 --
-您可以在Windows命令提示符处输入相应的命令、以静默(无人值守)方式升级新的Host Utilities。
+使用 Windows 命令行执行非交互式 Windows Host Utilities 软件升级。
 
 .步骤
 . 在Windows命令提示符处输入以下命令：
 +
-`msiexec /i installer.msi /quiet multipath= ｛ 0` 1 ｝ [INSTALLDIR=inst_path]
-
+[source, cli]
+----
+msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]
+----
 +
 ** `installer` 是的名称 `.msi` 适用于CPU架构的文件。
 ** 多路径用于指定是否安装Microsoft多路径I/O (MPIO)支持。允许的值为"0"表示否、"1"表示是。

@@ -1,0 +1,160 @@
+---
+sidebar: sidebar 
+permalink: hu-aix-80.html 
+keywords: host utilities, aix, powervm, vios, 3.1, 7.0, netapp, ontap 
+summary: AIX Host Utilities可帮助您管理连接到AIX主机的ONTAP存储。 
+---
+= 为ONTAP存储安装 AIX Host Utilities 8.0
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+AIX Host Utilities 可帮助您管理连接到 AIX 主机的ONTAP存储。  NetApp强烈建议安装 AIX Host Utilities 来改进ONTAP存储管理并协助NetApp支持收集有关您的配置的信息。
+
+AIX Host Utilities 8.0 支持以下传输协议和 AIX 环境：
+
+* FC、FCoE 和 iSCSI
+* AIX 多路径 I/O (MPIO)
+* PowerVM
++
+有关 PowerVM 的信息，请参阅 IBM PowerVM Live Partition Mobility 红皮书。
+
+
+
+.关于此任务
+* 您需要安装带有 AIX MPIO 的 AIX Host Utilities SAN Toolkit 来管理连接到 AIX 主机的ONTAP存储。
+* 当您安装 AIX Host Utilities 时，它们不会更改 AIX 主机上的任何设置。
+
+
+.开始之前
+* 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+* 通过运行 `chdev -l <fscsi_device> -a dyntrk=ye`AIX 主机上的命令。
+
+
+.步骤
+. 登录到您的主机：
++
+[role="tabbed-block"]
+====
+.AIX
+--
+在 AIX 主机上，以 * 根 * 身份登录。
+
+--
+.PowerVM
+--
+在 PowerVM 主机上：
+
+.. 以 *padmin* 身份登录。
+.. 成为 root 用户：
++
+[source, cli]
+----
+oem_setup_env
+----
+
+
+--
+====
+. 转到 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["NetApp 支持站点"^]、并将包含Host Utilities的压缩文件下载到主机上的目录中。
+. 转到包含下载内容的目录。
+. 解压缩文件并解压缩SAN Toolkit软件包：
++
+[source, cli]
+----
+tar -xvf ntap_aix_host_utilities_8.0.tar.gz
+----
++
+这 `ntap_aix_host_utilities_8.0.`解压缩文件时会创建目录。该目录包含以下子目录之一：MPIO、NON_MPIO 或 SAN_Tool_Kit。
+
+. 安装 AIX MPIO：
++
+[source, cli]
+----
+installp -aXYd /var/tmp/ntap_aix_host_utilities_8.0/MPIO NetApp.MPIO_Host_Utilities_Kit
+----
+. 安装 SAN 工具包：
++
+[source, cli]
+----
+installp -aXYd /var/tmp/ntap_aix_host_utilities_8.0/ NetApp.SAN_toolkit
+----
+. 重新启动主机。
+. 验证安装。
++
+[source, cli]
+----
+lslpp -l |grep -i netapp
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+NetApp.MPIO_Host_Utilities_Kit.config
+                             8.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.fcp
+                             8.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.iscsi
+                             8.0.0.0  COMMITTED  NetApp MPIO PCM Host Utilities
+  NetApp.MPIO_Host_Utilities_Kit.pcmodm
+                             8.0.0.0 COMMITTED  NetApp MPIO PCM Host Utilities
+NetApp.SAN_toolkit.sanlun  8.0.0.0 COMMITTED NetApp SAN Toolkit sanlun
+----
+====
+. 确认软件版本为8.0.1f0fc74c：
++
+[source, cli]
+----
+sanlun version
+----
+. 验证 SCSI UNMAP `lbp_enabled`参数已添加到ODM：
++
+[source, cli]
+----
+odmget -q "uniquetype=disk/fcp/NetAppMPIO" PdAt |grep  "lbp_enabled"
+----
++
+.示例输出
+[listing]
+----
+attribute = "lbp_enabled"
+----
++
+[source, cli]
+----
+odmget -q "uniquetype=disk/fcp/NetAppMPIO and attribute=lbp_enabled" PdAt`
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+PdAt:
+        uniquetype = "disk/fcp/NetAppMPIO"
+        attribute = "lbp_enabled"
+        deflt = "true"
+        values = "true,false"
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "s"
+        nls_index = 18
+----
+====
+
+
+
+
+== 下一步是什么？
+
+link:hu-aix-san-toolkit.html["了解 AIX SAN 工具包"] 。

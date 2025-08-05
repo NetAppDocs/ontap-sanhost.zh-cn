@@ -4,7 +4,7 @@ permalink: hu-aix-70.html
 keywords: host utilities, aix, powervm, vios, 3.1, 7.0, netapp, ontap 
 summary: AIX Host Utilities可帮助您管理连接到AIX主机的ONTAP存储。 
 ---
-= 安装AIX Host Utilities 7.0
+= 为ONTAP存储安装 AIX Host Utilities 7.0
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,64 +16,83 @@ summary: AIX Host Utilities可帮助您管理连接到AIX主机的ONTAP存储。
 
 
 [role="lead"]
-AIX Host Utilities可帮助您管理连接到AIX主机的ONTAP存储。
+AIX Host Utilities 可帮助您管理连接到 AIX 主机的ONTAP存储。  NetApp强烈建议安装 AIX Host Utilities 来改进ONTAP存储管理并协助NetApp支持收集有关您的配置的信息。
 
-AIX Host Utilities支持以下协议：
+AIX Host Utilities 7.0 支持以下传输协议和 AIX 环境：
 
-* FC
-* FCoE
-* iSCSI
-
-
-AIX Host Utilities支持以下环境：
-
-* AIX Microsoft多路径I/O (MPIO)(本机操作系统)
+* FC、FCoE 和 iSCSI
+* AIX Microsoft 多路径 I/O (MPIO)
 * PowerVM
 +
-有关PowerVM的详细信息、请参见IBM PowerVM Live Partition Mobility红皮书。
+有关 PowerVM 的信息，请参阅 IBM PowerVM Live Partition Mobility 红皮书。
 
+
+
+.关于此任务
+* 您需要安装带有 AIX MPIO 的 AIX Host Utilities SAN Toolkit 来管理连接到 AIX 主机的ONTAP存储。
+* 当您安装 AIX Host Utilities 时，它们不会更改 AIX 主机上的任何设置。
 
 
 .开始之前
-* 为了确保操作可靠、请验证您的整个iSCSI、FC或FCoE配置是否受支持。
-+
-您可以使用 https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证配置。
+* 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+* 通过运行 `chdev -l <fscsi_device> -a dyntrk=ye`AIX 主机上的命令。
 
-* 必须为所有FC和FCoE启动程序启用动态跟踪。
-
-
-
-NOTE: NetApp AIX主机实用程序软件包在上的压缩版本中 `tar.gz file`可用link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["NetApp 支持站点"^]。在将AIX MPIO与ONTAP存储结合使用时、必须安装AIX Host Utilities套件。
 
 .步骤
 . 登录到主机。
 +
-** 在 AIX 主机上，以 * 根 * 身份登录。
-** 在PowerVM主机上，以*padmin*身份登录，然后输入 `oem_setup_env`命令以成为root用户。
+[role="tabbed-block"]
+====
+.AIX
+--
+在 AIX 主机上，以 * 根 * 身份登录。
+
+--
+.PowerVM
+--
+在 PowerVM 主机上：
+
+.. 以 *padmin* 身份登录。
+.. 成为 root 用户：
++
+[source, cli]
+----
+oem_setup_env
+----
 
 
+--
+====
 . 转到 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.0["NetApp 支持站点"^]、并将包含Host Utilities的压缩文件下载到主机上的目录中。
 . 转到包含下载内容的目录。
 . 解压缩文件并解压缩SAN Toolkit软件包：
 +
-`# tar -xvf ntap_aix_host_utilities_7.0.tar.gz`
-
+[source, cli]
+----
+tar -xvf ntap_aix_host_utilities_7.0.tar.gz
+----
 +
 解压缩文件时将创建以下目录： `ntap_aix_host_utilities_7.0`。此目录包含以下子目录之一：MPIO、NNO_MPIO或SAN_Tool_Kit。
 
 . 安装 AIX MPIO ：
 +
-`# installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/MPIO NetApp.MPIO_Host_Utilities_Kit`
-
+[source, cli]
+----
+installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/MPIO NetApp.MPIO_Host_Utilities_Kit
+----
 . 安装 SAN 工具包：
 +
-`# installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/SAN_Tool_Kit/NetApp.SAN_toolkit`
-
+[source, cli]
+----
+installp -aXYd /var/tmp/ntap_aix_host_utilities_7.0/SAN_Tool_Kit/NetApp.SAN_toolkit
+----
 . 重新启动主机。
 . 验证安装。
 +
-`# lslpp -l |grep -i netapp`
-
+[source, cli]
+----
+lslpp -l |grep -i netapp
+----
 +
 [listing]
 ----
@@ -89,25 +108,31 @@ NetApp.SAN_toolkit.sanlun  7.0.0.0  COMMITTED  NetApp SAN Toolkit sanlun
 ----
 . 确认软件版本：
 +
-`# sanlun version`
-
+[source, cli]
+----
+sanlun version
+----
 +
 [listing]
 ----
 7.0.725.3521
 ----
-.  `lbp_enabled`运行以下命令、验证是否已将SCSI UNMAP参数添加到ODM：
+. 验证 SCSI UNMAP `lbp_enabled`参数添加到ODM：
 +
-`# odmget -q "uniquetype=disk/fcp/NetAppMPIO" PdAt |grep  "lbp_enabled"`
-
+[source, cli]
+----
+odmget -q "uniquetype=disk/fcp/NetAppMPIO" PdAt |grep  "lbp_enabled"
+----
 +
 [listing]
 ----
 attribute = "lbp_enabled"
 ----
 +
-`# odmget -q "uniquetype=disk/fcp/NetAppMPIO and attribute=lbp_enabled" PdAt`
-
+[source, cli]
+----
+odmget -q "uniquetype=disk/fcp/NetAppMPIO and attribute=lbp_enabled" PdAt`
+----
 +
 [listing]
 ----
@@ -126,30 +151,6 @@ PdAt:
 
 
 
-== SAN 工具包
+== 下一步是什么？
 
-AIX Host Utilities是一个NetApp主机软件、可在IBM AIX主机上提供命令行工具包。此工具包会在您安装 NetApp Host Utilities 软件包时安装。此套件提供 `sanlun` 实用程序、可帮助您管理LUN和主机总线适配器(HBA)。。 `sanlun` 命令将返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
-
-* 示例 *
-
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[listing]
-----
-# sanlun lun show all
-----
-*示例输出*
-
-[listing]
-----
-controller(7mode)/ device host lun
-
-vserver(Cmode) lun-pathname filename adapter protocol size mode
-----------------------------------------------------------------
-data_vserver   /vol/vol1/lun1 hdisk0 fcs0    FCP      60g C
-data_vserver   /vol/vol2/lun2 hdisk0 fcs0    FCP      20g C
-data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
-data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
-----
-
-NOTE: 此工具包适用于所有Host Utilities配置和协议。因此、并非所有组件都适用于每个配置。未使用的组件不会影响系统性能。AIX和PowerVM/VIOS OS版本支持SAN工具包
+link:hu-aix-san-toolkit.html["了解 AIX SAN 工具包"] 。

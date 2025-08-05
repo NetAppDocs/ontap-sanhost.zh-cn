@@ -4,7 +4,7 @@ permalink: hu_wuhu_hba_settings.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 配置Windows Host Utilities的注册表设置
+= 使用ONTAP存储配置 Windows Host Utilities 的注册表设置
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -23,7 +23,7 @@ Host Utilities需要特定的注册表和参数设置、才能验证Windows主�
 
 Windows Host Utilities会设置一些参数、这些参数会影响Windows主机对数据延迟或丢失的响应方式。已选择特定值以验证Windows主机是否正确处理诸如将存储系统中的一个控制器故障转移到其配对控制器等事件。
 
-并非所有值都适用于SANtricity存储管理器的设备专用模块(DSM)；但是、如果主机实用程序设置的值与DSM for SANtricity存储管理器设置的值重叠、则不会产生冲突。
+并非所有值都适用于SANtricity Storage Manager的设备特定模块 (DSM)；但是，Host Utilities 设置的值与SANtricity Storage Manager的 DSM 设置的值之间的任何重叠都不会导致冲突。
 
 FC、NVMe/FC和iSCSI HBA还具有一些参数、您必须设置这些参数以确保最佳性能并成功处理存储系统事件。
 
@@ -35,18 +35,124 @@ Windows Host Utilities附带的安装程序会将Windows、FC和NVMe/FC HBA参�
 
 [NOTE]
 ====
-安装Windows Host Utilities 7.2后需要更改LimTransferSize参数值，请参见。<<nvme_parameters,NVMe参数>>
+安装 Windows Host Utilities 7.2 后，您需要更改 LimTransferSize 参数值。看<<nvme_parameter,NVME 参数>> 。
 
-对于Windows Host Utilities 7.2和7.1的所有其他参数和注册表项、除非技术支持指示您更改这些值、否则不应更改这些值。
+对于 Windows Host Utilities 8.0、7.2 或 7.1 的所有其他参数和注册表项，您无需更改值，除非技术支持建议您这样做。
 
+====
+
+
+== Windows Host Utilities 8.0 设置的注册表值
+
+Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您应该了解这些值和操作系统版本。
+
+[role="tabbed-block"]
+====
+.HKLM 值
+--
+以下注册表值由 Windows Host Utilities 安装程序设置。除非另有说明，所有值均为十进制。
+
+
+NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
+
+[cols="20,20,30"]
+|===
+| 注册表项 | 价值 | 设置时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters \DsmMaximumRetryTimeDuringStateTransition | 120 | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet \Services\msdsm\Parameters \DsmMaximumStateTransitionTime | 120 | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"NVMe NetApp ONTAO" | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \IPSecConfigTimeout | 60 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instation_ID \Parameters \LinkDownTime | 10 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \ClusDisk \Parameters\ManagementDisksOnSystemBuses | 1. | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 120 | 未选择 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 30 个 | 始终 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"、"NVMe NetApp ONTAOCON" | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathRecoveryInterval | 30 个 | 当您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathVerifyEnabled | 1. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\PathVerifyEnabled | 1. | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\PathVerifyEnabled | 0 | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services \MPIO\Parameters\PDORemovePeriod | 130 | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\PDORemovePeriod | 130 | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\PDORemovePeriod | 130 | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\RetransCount | 6. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetransyCount | 6. | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\RetransyInterval | 1. | 指定 MPIO 支持时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetransyInterval | 1. | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
+
+
+| HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\RetransyInterval | 1. | 指定 MPIO 支持时 
+
+
+.2+| HKLM\SYSTEM\CurrentControlSet \Services\disk\TimeOutValue | 120 | 未选择 MPIO 支持时 
+
+
+| 60 | 指定 MPIO 支持时 
+
+
+| 未选择 MPIO 支持时 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. 
+|===
+--
+.NVMe参数
+--
+安装 Windows Host Utilities 8.0 时，以下 NVMe Emulex 驱动程序参数会更新：
+
+* EnableNVMe = 1
+* NVMEMode = 0
+
+
+--
 ====
 
 
 == 由Windows Host Utilities 7.2设置的注册表值
 
-Windows Host Utilities安装程序会根据您在安装期间所做的选择自动设置注册表值。您应了解这些注册表值和操作系统版本。
+Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您应该了解这些值和操作系统版本。
 
-以下值由Windows Host Utilities安装程序设置。除非另有说明、否则所有值均为十进制值。
+[#nvme_parameter,role="tabbed-block"]
+====
+.HKLM 值
+--
+以下注册表值由 Windows Host Utilities 安装程序设置。除非另有说明，所有值均为十进制。
 
 
 NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
@@ -119,16 +225,18 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\RetransyInterval | 1. | 指定 MPIO 支持时 
 
 
-| HKLM\SYSTEM\CurrentControlSet\Services \disk\TimeOutValue | 120 | 未选择 MPIO 支持时 
+.2+| HKLM\SYSTEM\CurrentControlSet \Services\disk\TimeOutValue | 120 | 未选择 MPIO 支持时 
+
+
+| 60 | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. | 指定了MPIO支持且服务器为Windows Server 2025、2022、2019、2016或2012 R2时 
 |===
-
-
-=== NVMe参数
-
-安装Windows Host Utilities 7.2时、以下NVMe Emulex驱动程序参数会进行更新：
+--
+.NVMe参数
+--
+安装 Windows Host Utilities 7.2 时，将更新以下 NVMe Emulex 驱动程序参数：
 
 * EnableNVMe = 1
 * NVMEMode = 0
@@ -138,6 +246,8 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 
 
 
+--
+====
 
 
 == 由Windows Host Utilities 7.1设置的注册表值
@@ -238,10 +348,10 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\RetransyInterval | 1. | 指定 MPIO 支持时，除非检测到 Data ONTAP DSM 
 
 
-.2+| HKLM\SYSTEM\CurrentControlSet \Services\disk\TimeOutValue | 120 | 如果未选择 MPIO 支持，除非检测到 Data ONTAP DSM 
+.2+| HKLM\SYSTEM\CurrentControlSet \Services\disk\TimeOutValue | 120 | 未选择 MPIO 支持时 
 
 
-| 60 | 指定 MPIO 支持时，除非检测到 Data ONTAP DSM 
+| 60 | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\UseCustomPathRecoveryInterval | 1. | 服务器为Windows Server 2016、2012 R2、2012、2008 R2或2008时 
@@ -270,7 +380,7 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 | 节点超时 | 10 
 |===
 --
-.未选择MPIO时
+.当未选择 MPIO 时
 --
 |===
 | 属性类型 | 属性值 
@@ -299,7 +409,7 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 | PortDownRetransCount | 10 
 |===
 --
-.未选择MPIO时
+.当未选择 MPIO 时
 --
 |===
 | 属性类型 | 属性值 
@@ -319,33 +429,33 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 
 
 
-=== 了解 Host Utilities 对 FC HBA 驱动程序设置所做的更改
+== 了解 Host Utilities 对 FC HBA 驱动程序设置的更改
 
-在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，系统会检查多个参数，在某些情况下会对这些参数进行修改。
+在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，Windows Host Utilities 会检查几个参数，在某些情况下还会修改这些参数。
 
-如果检测到 MS DSM for Windows MPIO ，则 Host Utilities 会为以下参数设置值：
+如果检测到 MS DSM for Windows MPIO，Windows Host Utilities 将设置以下参数的值：
 
-* LinkTimeOut —定义物理链路关闭后主机端口在恢复 I/O 之前等待的时间长度（以秒为单位）。
-* NodeTimeOut —定义主机端口识别到目标设备连接已关闭之前的时间长度（以秒为单位）。
+* *LinkTimeOut*：定义物理链路断开后主机端口恢复 I/O 之前等待的时间长度（以秒为单位）。
+* *NodeTimeOut*：定义主机端口识别到目标设备的连接断开之前的时间长度（以秒为单位）。
 
 
 在对 HBA 问题进行故障排除时，请检查以确保这些设置具有正确的值。正确的值取决于两个因素：
 
 * HBA 供应商
-* 是否正在使用多路径软件（ MPIO ）
+* 是否正在使用 MPIO 软件。
 
 
-您可以通过运行 Windows Host Utilities 安装程序的修复选项来更正 HBA 设置。
+您可以通过以下方式更正 HBA 设置link:hu_wuhu_repair_remove.html["运行修复选项"]在 Windows Host Utilities 安装程序中。
 
 [role="tabbed-block"]
 ====
 .Emulex HBA驱动程序
 --
-如果您使用的是FC系统、则必须验证Emulex HBA驱动程序设置。HBA 上的每个端口都必须具有这些设置。
+如果您有 FC 系统，请验证 Emulex HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。
 
 .步骤
 . 打开 OnCommand 管理器。
-. 从列表中选择相应的 HBA ，然后单击 * 驱动程序参数 * 选项卡。
+. 从列表中选择适当的 HBA，然后选择“*驱动程序参数*”选项卡。
 +
 此时将显示驱动程序参数。
 
@@ -369,10 +479,10 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 --
 .QLogic HBA驱动程序
 --
-在FC系统上、您必须验证QLogic HBA驱动程序设置。HBA 上的每个端口都必须具有这些设置。
+在 FC 系统上，验证 QLogic HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。
 
 .步骤
-. 打开 QConvergeConsole ，然后单击工具栏上的 * 连接 * 。
+. 打开 QConvergeConsole，然后在工具栏上选择 *连接*。
 +
 此时将显示*连接到主机*对话框。
 
@@ -388,7 +498,7 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 ** 端口关闭重试计数（ portdwnrc ）— 10
 
 
-. 如果您不使用MPIO软件、请验证您是否具有以下驱动程序设置：
+. 如果您没有使用 MPIO 软件，请验证您是否具有以下驱动程序设置：
 +
 ** 链路关闭超时（ linkdwnto ）— 30
 ** 端口关闭重试计数（ portdwnrc ）— 120

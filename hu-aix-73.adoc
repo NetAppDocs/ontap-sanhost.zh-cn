@@ -1,0 +1,339 @@
+---
+sidebar: sidebar 
+permalink: hu-aix-73.html 
+keywords: Host Utilities, aix, powervm, vios, 3.1, 7.2 netapp, ontap 
+summary: 描述如何将 IBM AIX 7.3 和/或 PowerVM VIOS 4.x 与ONTAP结合使用 
+---
+= 使用ONTAP存储为 FCP 和 iSCSI 配置 AIX 7.3/VIOS 4.x
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+AIX Host Utilities 软件为连接到ONTAP存储的 AIX 主机提供管理和诊断工具。在 AIX 7.3/VIOS 4.x 主机上安装 AIX Host Utilities 时，您可以使用 Host Utilities 来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+
+
+
+== 第1步：(可选)启用SAN启动
+
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。如果您的配置不支持 SAN 启动，您可以使用本地启动。
+
+[role="tabbed-block"]
+====
+.SAN 启动
+--
+SAN 启动是将 SAN 连接磁盘（LUN）设置为 AIX/PowerVM 主机的启动设备的过程。您可以设置 SAN 启动 LUN 以在使用 FC 协议并使用 FC 或 FCoE 协议运行 AIX Host Utilities 的 AIX 多路径 I/O (MPIO) 环境中工作。在 AIX MPIO 环境中创建 SAN 启动 LUN 和安装新 OS 映像的方法取决于您使用的协议。
+
+.步骤
+. 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+. 按照供应商文档中有关设置 SAN 启动的最佳实践进行操作。
+
+
+--
+.本地启动
+--
+通过在本地硬盘（例如 SSD、SATA 或 RAID）上安装 AIX OS 来执行本地启动。
+
+--
+====
+
+
+== 第 2 步：安装 AIX 主机实用程序
+
+NetApp强烈建议安装 AIX Host Utilities 来支持ONTAP LUN 管理并协助技术支持收集配置数据。  Host Utilities 中的 MPIO 包为 AIX 和 VIOS 提供 MPIO 支持。
+
+
+NOTE: 安装 AIX Host Utilities 可为您的 AIX 主机提供额外的超时设置。
+
+link:hu-aix-80.html["安装 AIX Host Utilities 8.0"] 。
+
+
+
+== 第3步：确认主机的多路径配置
+
+您可以使用 AIX 和 PowerVM 的多路径来管理ONTAP LUN。
+
+多路径允许您在主机和存储系统之间配置多条网络路径。如果一条路径发生故障，流量仍可通过剩余路径继续传输。  Host Utilities 的 AIX 和 PowerVM 环境使用 AIX 本机多路径解决方案 (MPIO)。
+
+路径控制模块 (PCM) 负责控制 AIX 主机的多条路径。  PCM 是存储供应商提供的代码，用于处理路径管理，在 Host Utilities 安装期间安装并启用。
+
+为确保为您的主机正确配置多路径，请验证您是否已为您的ONTAP LUN 配置NetApp推荐的设置。
+
+.步骤
+. 验证“MPIO NetApp”是否可用。  “MPIO NetApp”在 AIX Host Utilities 安装期间加载，并在您重新启动主机后可用。
++
+[source, cli]
+----
+lsdev -Cc disk
+----
++
+.示例输出
+`hdisk1  Available 00-00-02 MPIO NetApp FCP Default PCM Disk`
+
+. AIX Host Utilities 为ONTAP LUN 加载以下参数设置。
++
+.显示参数设置
+[%collapsible]
+====
+[cols="4*"]
+|===
+| 参数 | environment | AIX 的价值 | 注意 
+
+
+| 算法 | MPIO | 循环 | 由 Host Utilities 设置 
+
+
+| hcheck_cmd | MPIO | 查询 | 由 Host Utilities 设置 
+
+
+| hcheck_interval | MPIO | 30 个 | 由 Host Utilities 设置 
+
+
+| hcheck_mode | MPIO | 非活动 | 由 Host Utilities 设置 
+
+
+| lun_reset_st | MPIO / 非 MPIO | 是的。 | 由 Host Utilities 设置 
+
+
+| max_transfer | MPIO / 非 MPIO | FC LUN ： 0x100000 字节 | 由 Host Utilities 设置 
+
+
+| QFull | MPIO / 非 MPIO | 2 秒延迟 | 由 Host Utilities 设置 
+
+
+| queue_depth | MPIO / 非 MPIO | 64 | 由 Host Utilities 设置 
+
+
+| reserve_policy | MPIO / 非 MPIO | no_reserve | 由 Host Utilities 设置 
+
+
+| re_timeout （磁盘） | MPIO / 非 MPIO | 30 秒 | 使用操作系统默认值 
+
+
+| dyntrk | MPIO / 非 MPIO | 是的。 | 使用操作系统默认值 
+
+
+| FC_err_recov | MPIO / 非 MPIO | fast_fail | 使用操作系统默认值 
+
+
+| q_type | MPIO / 非 MPIO | 简单 | 使用操作系统默认值 
+
+
+| num_cmd_elems | MPIO / 非 MPIO | 对于 AIX 3072 ，对于 VIOS 为 1024 | FC EN1B ， FC EN1C 
+
+
+| num_cmd_elems | MPIO / 非 MPIO | 1024 （用于 AIX ） | FC EN0G 
+|===
+====
+. 配置以下设置以优化 FC 和 iSCSI 的 I/O 操作。
++
+[role="tabbed-block"]
+====
+.FCP
+--
+[cols="4*"]
+|===
+| 参数 | AIX 版本 | AIX OS 默认值 | NetApp建议值 
+
+
+.4+| rw_timeout (磁盘) | AIX 7.3TL3 | NPIV：30秒，vSCSI：45秒 | NPIV：30秒，vSCSI：120秒 
+
+
+| AIX 7.2TL5 | NPIV：30秒，vSCSI：45秒 | NPIV：30秒，vSCSI：120秒 
+
+
+| VIOS 3.1 | 30 秒 | 30 秒 
+
+
+| VIOS 4.1 | 30 秒 | 30 秒 
+|===
+--
+.iSCSI
+--
+[cols="4*"]
+|===
+| 参数 | AIX 版本 | AIX OS 默认值 | NetApp建议值 
+
+
+.5+| rw_timeout (磁盘) | AIX 7.3TL3 | vSCSI：45 秒 | vSCSI：120 秒 
+
+
+| AIX 7.2TL5 | vSCSI：45 秒 | vSCSI：120 秒 
+
+
+| VIOS 3.1 | 120 秒 | 30 秒 
+
+
+| VIOS 4.1 | 120 秒 | 30 秒 
+
+
+| 所有 AIX7.2 和 AIX 7.3 独立版 | 120 秒 | 30 秒 
+
+
+| isw_err_recov (iscsi0) | 所有 AIX7.2 和 AIX 7.3 独立版 | 延迟失败 | 快速失败 
+|===
+--
+====
+. 如果您的存储配置包括MetroCluster或SnapMirror活动同步，请更改默认设置：
++
+[role="tabbed-block"]
+====
+.MetroCluster
+--
+默认情况下，当没有可用的 LUN 路径时，AIX OS 会强制执行较短的 I/O 超时。这可能发生在包含单交换机 SAN 结构的配置中以及经历计划外故障转移的MetroCluster配置中。有关其他信息和建议对默认设置进行更改，请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/What_are_AIX_Host_support_considerations_in_a_MetroCluster_configuration["MetroCluster配置中的 AIX 主机支持注意事项有哪些？"^]。
+
+--
+.SnapMirror主动同步
+--
+从ONTAP 9.11.1 开始，AIX 主机支持SnapMirror主动同步。  AIX 配置中的主集群是“活动”集群。
+
+在 AIX 配置中，故障转移会造成破坏。每次故障转移时，您都需要在主机上执行重新扫描以恢复 I/O 操作。
+
+请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["如何为SnapMirror活动同步配置AIX主机"^]。
+
+--
+====
+. 验证参数设置以及是否为ONTAP LUN 列出了多个路径：
++
+[source, cli]
+----
+lsmpio
+----
++
+在以下AFF或FAS系统示例中，列出了NetApp的 PCM。
+
++
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+# lsmpio -l hdisk1
+name    path_id  status   path_status  parent  connection
+
+hdisk1  0        Enabled  Non          fscsi6  203200a098ba7afe,5b000000000000
+hdisk1  1        Enabled  Non          fscsi8  203100a098ba7afe,5b000000000000
+hdisk1  2        Enabled  Sel,Opt      fscsi6  203000a098ba7afe,5b000000000000
+hdisk1  3        Enabled  Sel,Opt      fscsi8  203800a098ba7afe,5b000000000000
+#
+lsattr -El hdisk1
+*PCM             PCM/friend/NetAppDefaultPCM Path Control Module*                     False
+PR_key_value    0x6d0000000002              Persistant Reserve Key Value            True
+algorithm       round_robin                 Algorithm                               True
+clr_q           no                          Device CLEARS its Queue on error        True
+dist_err_pcnt   0                           Distributed Error Sample Time           True
+dist_tw_width   50                          Distributed Error Sample Time           True
+hcheck_cmd      inquiry                     Health Check Command                    True
+hcheck_interval 30                          Health Check Interval                   True
+hcheck_mode     nonactive                   Health Check Mode                       True
+location                                    Location Label                          True
+lun_id          0x5b000000000000            Logical Unit Number ID                  False
+lun_reset_spt   yes                         LUN Level Reset                         True
+max_transfer    0x100000                    Maximum TRANSFER Size                   True
+node_name       0x204800a098ba7afe          FC Node Name                            False
+pvid            none                        Physical volume identifier              False
+q_err           yes                         Use QERR bit                            True
+q_type          simple                      Queuing TYPE                            True
+qfull_dly       2                           Delay in seconds for SCSI TASK SET FULL True
+queue_depth     64                          Queue DEPTH                             True
+reassign_to     120                         REASSIGN time out value                 True
+reserve_policy  PR_shared                   Reserve Policy                          True
+rw_timeout      30                          READ/WRITE time out value               True
+scsi_id         0xec409                     SCSI ID                                 False
+start_timeout   60                          START unit time out value               True
+timeout_policy  fail_path                   Active/Passive Disk Path Control Module True
+ww_name         0x203200a098ba7afe          FC World Wide Name                      False
+----
+====
+. 验证ONTAP LUN 的路径状态：
++
+[source, cli]
+----
+sanlun lun show
+----
++
+以下示例输出显示ASA、 AFF或FAS配置中ONTAP LUN 的正确路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置优化了到给定 LUN 的所有路径，使其保持活动状态（“主要”）。通过同时通过所有路径提供 I/O 操作，可以提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------ ------- ------ ------- --------- ----------
+host   vserver  AIX                      AIX MPIO
+path   path     MPIO   host    vserver     path
+state  type     path   adapter LIF       priority
+------ ------- ------ ------- --------- ----------
+up     primary  path0  fcs0    fc_aix_1     1
+up     primary  path1  fcs0    fc_aix_2     1
+up     primary  path2  fcs1    fc_aix_3     1
+up     primary  path3  fcs1    fc_aix_4     1
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示具有两个主动/优化（“主”）路径和两个主动/非优化（“次”）路径的ONTAP LUN 的正确输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------- ---------- ------ ------- ---------- ----------
+host    vserver    AIX                        AIX MPIO
+path    path       MPIO   host    vserver         path
+state   type       path   adapter LIF         priority
+------- ---------- ------ ------- ---------- ----------
+up      secondary  path0  fcs0    fc_aix_1        1
+up      primary    path1  fcs0    fc_aix_2        1
+up      primary    path2  fcs1    fc_aix_3        1
+up      secondary  path3  fcs1    fc_aix_4        1
+----
+=====
+--
+====
+
+
+
+
+== 步骤 4：查看已知问题
+
+没有已知问题。
+
+
+
+== 下一步是什么？
+
+link:hu-aix-command-reference.html["了解如何使用 AIX Host Utilities 工具"] 。

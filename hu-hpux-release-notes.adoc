@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: hu-hpux-release-notes.html 
+keywords: host utilities, hpux, 6.0, netapp, ontap, release, notes 
+summary: 《HPUX Host Utilities 6.0发行说明》 
+---
+= HP-UX 主机实用程序发行说明
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+发行说明介绍了与使用ONTAP存储系统配置和管理特定 HP-UX 主机有关的新功能和增强功能、已修复的问题、已知问题、限制和重要注意事项。
+
+
+
+== HP-UX Host Utilities 6.0 中的新增功能
+
+没有新功能和增强功能。
+
+HP-UX Host Utilities 6.0 支持以下 HP-UX 操作系统版本：
+
+* HP-UX 11iv2.
+* HP-UX 11iv3.
+
+
+
+
+== 已知问题和限制
+
+没有已知问题或限制。

@@ -1,0 +1,12 @@
+= 第 2 步：安装 AIX 主机实用程序
+:allow-uri-read: 
+
+
+
+
+== 第 2 步：安装 AIX 主机实用程序
+
+NetApp强烈建议安装 AIX Host Utilities 来支持ONTAP LUN 管理并协助技术支持收集配置数据。  Host Utilities 中的 MPIO 包为 AIX 和 VIOS 提供 MPIO 支持。
+
+
+NOTE: 安装 AIX Host Utilities 可为您的 AIX 主机提供额外的超时设置。

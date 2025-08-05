@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: hu-hpux-sanlun-toolkit.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: 介绍如何在ONTAP存储中使用HP-UX Host Utilities 6.0 
+---
+= 了解适用于ONTAP存储的 SAN 工具包
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+HP-UX Host Utilities 是一款NetApp主机软件，可在 HP-UX 主机上提供命令行工具包。安装NetApp Host Utilities 包时也会安装该工具包。该套件提供 `sanlun`实用程序，可帮助您管理ONTAP LUN 和主机总线适配器。这 `sanlun`命令返回有关映射到主机的 LUN、多路径的信息以及创建启动器组所需的信息。
+
+在以下示例中， `sanlun lun show`命令返回ONTAP LUN 信息。
+
+[listing]
+----
+# sanlun lun show all
+
+controller(7mode)/ device host lun
+vserver(Cmode)           lun-pathname                   filename          adapter    protocol   size   mode
+------------------------------------------------------------------------------------------------------------
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c34t0d0  fclp1      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c23t0d0  fclp1      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c12t0d0  fclp0      FCP        150g    C
+sanboot_unix         /vol/hpux_boot/boot_hpux_lun      /dev/rdsk/c81t0d0  fclp0      FCP        150g    C
+
+----
+[NOTE]
+====
+此 SAN 工具包适用于所有 Host Utilities 配置和协议。因此，并非所有组件都适用于每种配置。未使用的组件不会影响您的系统性能。
+
+SAN Toolkit 在 AIX 和 PowerVM/VIOS OS 版本上受支持。
+
+====
+
+
+== 下一步是什么？
+
+link:hu_hpux_60_cmd.html["了解如何使用 HP-UX Host Utilities 工具"] 。

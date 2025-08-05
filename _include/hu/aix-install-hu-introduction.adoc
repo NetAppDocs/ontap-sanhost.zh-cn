@@ -1,0 +1,5 @@
+= 
+:allow-uri-read: 
+
+
+AIX Host Utilities 可帮助您管理连接到 AIX 主机的ONTAP存储。  NetApp强烈建议安装 AIX Host Utilities 来改进ONTAP存储管理并协助NetApp支持收集有关您的配置的信息。

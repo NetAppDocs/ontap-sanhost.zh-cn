@@ -1,0 +1,7 @@
+= 
+:allow-uri-read: 
+
+
+安装Host Utilities软件时、安装程序会设置所需的Windows注册表和HBA参数。
+
+Windows 主机计算机上安装了以下程序和文件。默认目录为 `C ： \Program Files\NetApp\Windows Host Utilities` 。

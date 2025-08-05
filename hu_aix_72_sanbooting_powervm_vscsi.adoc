@@ -4,7 +4,7 @@ permalink: hu_aix_72_sanbooting_powervm_vscsi.html
 keywords: host utilities, aix, powervm, 7.2 netapp, ontap, luns, configure, discover, configuring, discovering 
 summary: 介绍如何使用 PowerVM vSCSI 发现和配置 LUN 
 ---
-= （ PowerVM vSCSI ）发现和配置 LUN
+= 使用 PowerVM vSCSI 发现和配置ONTAP LUN
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,16 +16,18 @@ summary: 介绍如何使用 PowerVM vSCSI 发现和配置 LUN
 
 
 [role="lead"]
-使用 PowerVM vSCSI 和 VIO 服务器时，必须使用 padmin 登录名以及相应的命令来配置和发现 LUN 。
+当您使用 PowerVM vSCSI 和 VIO 服务器时，您必须使用 padmin 登录和适当的 padmin 命令来配置和发现 LUN。
 
 .步骤
 . 以 padmin 身份登录到主机。
-. 在 AIX 主机上，输入以下命令以发现新创建的 LUN ：
+. 在 AIX 主机上，发现新创建的 LUN：
 +
-`cfgdev`
-
+[source, cli]
+----
+cfgdev
+----
 +
-cfgdev 命令会导致：
+这 `cfgdev`命令导致：
 
 +
 ** 用于登录到网络结构的启动程序。
@@ -33,10 +35,12 @@ cfgdev 命令会导致：
 ** 用于创建新设备条目的系统、其中新LUN将使用默认PCM映射为Microsoft多路径I/O (MPIO)设备。
 
 
-. 要验证是否已创建 hdisk MPIO 设备，请输入以下命令：
+. 验证 hdisk MPIO 设备是否已创建：
 +
-`lsdev -type disk`
-
+[source, cli]
+----
+lsdev -type disk
+----
 +
 LUN 在主机上显示为磁盘。这些磁盘的使用方式与在主机上使用本地磁盘的方式相同。
 
@@ -47,6 +51,9 @@ LUN 在主机上显示为磁盘。这些磁盘的使用方式与在主机上使�
  `lsdev -type disk`命令将生成以下类型的输出。以下示例中的输出将被截断。
 
 +
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 vioserver$ lsdev -type disk NetApp
@@ -59,14 +66,20 @@ hdisk4   Available   MPIO NetApp FCP Default PCM Disk
 hdisk5   Available   MPIO NetApp FCP Default PCM Disk
 hdisk6   Available   MPIO NetApp FCP Default PCM Disk
 ----
+====
 . 检索有关设置的信息：
 +
-`lsdev -dev hdisk_name -attr`
-
+[source, cli]
+----
+lsdev -dev hdisk_name -attr
+----
 +
 `lsdev -dev hdisk_name -attr` 命令可生成以下输出：
 
 +
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 vioserver$ lsdev -dev hdisk2 -attr
@@ -97,38 +110,49 @@ scsi_id         0xd10001                         SCSI ID                        
 start_timeout   60                               START unit time out value               True
 ww_name         0x500a0984994ae0e0               FC World Wide Name                      False
 ----
+====
 . 如果您的配置不支持ALOA、则需要使用DOotpaths实用程序设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。输入以下命令、切换到 `oem_setup_env`模式以执行DOotpaths：
 +
-`OEM_setup_env`
-
+[source, cli]
+----
+oem_setup_env
+----
 +
 当您进入 `OEM_setup_env` 模式时，命令行提示符将从美元符号变为井号，您将保持在 `OEM_setup_env` 模式，直到输入 exit 等命令将其暂停为止。
 
 +
 .示例
-`` # vioserver$ OEM_setup_env`
+`# vioserver$ oem_setup_env`
 
 . 如果您的配置支持 ALUA ，则可以使用它来设置路径优先级。验证是否已启用 ALUA ：
 +
-`lun igroup show -instance igroup_name`
-
+[source, cli]
+----
+lun igroup show -instance igroup_name
+----
 +
 .. 如果未启用 ALUA ，请启用它：
 +
-`igroup set igroup_name ALUA yes`
-
+[source, cli]
+----
+igroup set igroup_name alua yes
+----
 
 
 . 如果您的配置不支持ALOA、则需要使用DOotpaths实用程序设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用 ALUA ，请勿使用 dotpaths 实用程序。
 +
 .. 要设置所有ONTAP LUN的优先级、请输入：
 +
-`dotpaths`
-
+[source, cli]
+----
+dotpaths
+----
 .. 要设置一组特定磁盘的优先级，请输入：
 +
-`dotpaths [-hv] [hdiskN ...]`
-
+[source, cli]
+----
+dotpaths [-hqv] [hdiskN ...]
+----
 +
 使用 ` -v` 选项启用详细模式并显示所有优先级。使用 ` -q` 选项查询所有或单个磁盘优先级。
 
@@ -136,6 +160,9 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 以下是使用 dotpaths 实用程序的示例：
 
 +
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 vioserver# dotpaths -v
@@ -147,17 +174,22 @@ hdisk2 (path 3): Unoptimized path - Current priority of 1 is correct
 Path priority set and/or verified for 22 disks, 86 total paths.
 vioserver#
 ----
+====
 
 
 . 要验证主机是否已发现 LUN ，请输入以下命令：
 +
-` # sanlun lun show -p`
+[source, cli]
+----
+sanlun lun show -p
+----
++
+以下示例显示了 `sanlun lun show -p`直接连接配置的命令。它还包括 `sanlun lun show -d hdisk9 -v`命令显示有关hdisk9的信息。此命令的输出已被截断。
 
 +
-.示例
-此示例显示了直连配置的 `sanlun lun show -p` 命令的典型输出。它还包括 `sanlun lun show -d hdisk9 -v` 命令，用于显示有关 hdisk9 的信息。此命令的输出已被截断。
-
-+
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 sanlun lun show -p
@@ -193,7 +225,11 @@ up        secondary   path13 fcs1    4a              1
 up        primary     path14 fcs1    4b              1
 up        primary     path15 fcs1    4a              1
 ----
+====
 +
+.显示示例输出
+[%collapsible]
+====
 [listing]
 ----
 sanlun lun show -vd hdisk10
@@ -210,4 +246,5 @@ GPFS_p520_FC         /vol/GPFS_p520_FC_FlexVol_2/GPFS_p520_FC_LUN_2_4 hdisk10   
            Vserver volume name: GPFS_p520_FC_FlexVol_2  MSID::0x00000000000000000000000080000420
          Vserver snapshot name:
 ----
+====
 

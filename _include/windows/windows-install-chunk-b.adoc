@@ -1,0 +1,29 @@
+= 步骤 2：配置 FC HBA 和交换机
+:allow-uri-read: 
+
+
+. 启动目标服务。
+. 验证布线。
++
+请参阅 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^]了解详细的布线和配置信息。
+
+
+
+
+
+== 步骤 2：配置 FC HBA 和交换机
+
+安装并配置一个或多个受支持的FC主机总线适配器(HBA)、以便与存储系统建立FC连接。
+
+Windows Host Utilities安装程序可设置所需的FC HBA设置。
+
+
+CAUTION: 您应该只允许 Windows Host Utilities 安装程序设置 HBA 参数。这可确保 Windows 主机能够正确处理ONTAP平台的存储系统行为。
+
+.步骤
+. 按照HBA供应商提供的说明安装一个或多个受支持的FC HBA。
+. 获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。
+. https://docs.netapp.com/us-en/ontap/san-management/index.html["将 HBA 连接到 FC 交换机或直接连接到存储系统"^] 。
+. https://docs.netapp.com/us-en/ontap/san-config/fibre-channel-fcoe-zoning-concept.html["根据 FC 交换机文档在 FC 交换机上创建区域"^] 。
+. 对于ONTAP，按 WWPN 对交换机进行区域划分。请务必使用逻辑接口 (LIF) 的 WWPN，而不是存储控制器上的物理端口的 WWPN。请参阅 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^]了解更多信息。
+

@@ -1,0 +1,227 @@
+= 
+:allow-uri-read: 
+
+
+. 验证使用ONTAP LUN 的 zpools 是否支持 4 KB 对齐的 I/O：
++
+.. 验证您的 Solaris 主机是否安装了最新的支持存储库更新 (SRU)：
++
+[source, cli]
+----
+pkg info entire`
+----
+.. 验证ONTAP LUN 是否具有 `ostype`作为“Solaris”，与 LUN 大小无关：
++
+[source, cli]
+----
+lun show -vserver` <vsersver_name>
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+chat-a800-31-33-35-37::*> lun show -vserver solaris_fcp -path /vol/sol_195_zpool_vol_9/lun -fields ostype
+vserver     path                         ostype
+----------- ---------------------------- -------
+solaris_fcp /vol/sol_195_zpool_vol_9/lun solaris
+----
+====
+
+
+. 验证ONTAP LUN 的输出：
++
+[source, cli]
+----
+sanlun lun show
+----
++
+对于ASA、 AFF或FAS配置，您应该会看到与以下示例类似的输出：
+
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+root@sparc-s7-55-148:~# sanlun lun show -pv
+
+                    ONTAP Path: Solaris_148_siteA:/vol/Triage/lun
+                           LUN: 0
+                      LUN Size: 20g
+                   Host Device: /dev/rdsk/c0t600A098038314B32685D573064776172d0s2
+                          Mode: C
+            Multipath Provider: Sun Microsystems
+              Multipath Policy: Native
+----
+====
+. 验证ONTAP LUN 的路径状态：
++
+[source, cli]
+----
+mpathadm show lu <LUN>`
+----
++
+以下示例输出显示ASA、 AFF或FAS配置中ONTAP LUN 的正确路径状态。输出中每个 LUN 的“访问状态”都会显示路径优先级。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+root@sparc-s7-55-82:~# mpathadm show lu /dev/rdsk/c0t600A098038313953495D58674777794Bd0s2
+Logical Unit:  /dev/rdsk/c0t600A098038313953495D58674777794Bd0s2
+        mpath-support:  libmpscsi_vhci.so
+        Vendor:  NETAPP
+        Product:  LUN C-Mode
+        Revision:  9171
+        Name Type:  unknown type
+        Name:  600a098038313953495d58674777794b
+        Asymmetric:  yes
+        Current Load Balance:  round-robin
+        Logical Unit Group ID:  NA
+        Auto Failback:  on
+        Auto Probing:  NA
+
+        Paths:
+                Initiator Port Name:  100000109bd30070
+                Target Port Name:  20b9d039ea593393
+                Logical Unit Number:  0
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+                Initiator Port Name:  100000109bd30070
+                Target Port Name:  20b8d039ea593393
+                Logical Unit Number:  0
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+                Initiator Port Name:  100000109bd3006f
+                Target Port Name:  20b3d039ea593393
+                Logical Unit Number:  0
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+                Initiator Port Name:  100000109bd3006f
+                Target Port Name:  20b4d039ea593393
+                Logical Unit Number:  0
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+        Target Port Groups:
+                ID:  1003
+                Explicit Failover:  no
+                Access State:  *active optimized*
+                Target Ports:
+                        Name:  20b9d039ea593393
+                        Relative ID:  8
+
+                        Name:  20b4d039ea593393
+                        Relative ID:  3
+
+                ID:  1002
+                Explicit Failover:  no
+                Access State:  *active optimized*
+                Target Ports:
+                        Name:  20b8d039ea593393
+                        Relative ID:  7
+
+                        Name:  20b3d039ea593393
+                        Relative ID:  2
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+root@chatsol-54-195:~# mpathadm show lu /dev/rdsk/c0t600A0980383044376C3F4E694E506E44d0s2
+Logical Unit:  /dev/rdsk/c0t600A0980383044376C3F4E694E506E44d0s2
+        mpath-support:  libmpscsi_vhci.so
+        Vendor:  NETAPP
+        Product:  LUN C-Mode
+        Revision:  9171
+        Name Type:  unknown type
+        Name:  600a0980383044376c3f4e694e506e44
+        Asymmetric:  yes
+        Current Load Balance:  round-robin
+        Logical Unit Group ID:  NA
+        Auto Failback:  on
+        Auto Probing:  NA
+
+        Paths:
+
+                Initiator Port Name:  100000109b56c5fb
+                Target Port Name:  205200a098ba7afe
+                Logical Unit Number:  1
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+                Initiator Port Name:  100000109b56c5fb
+                Target Port Name:  205000a098ba7afe
+                Logical Unit Number:  1
+                Override Path:  NA
+                Path State:  OK
+                Demoted:  yes
+                Disabled:  no
+
+                Initiator Port Name:  100000109b56c5fa
+                Target Port Name:  204f00a098ba7afe
+                Logical Unit Number:  1
+                Override Path:  NA
+                Path State:  OK
+                Demoted:  yes
+                Disabled:  no
+
+                Initiator Port Name:  100000109b56c5fa
+                Target Port Name:  205100a098ba7afe
+                Logical Unit Number:  1
+                Override Path:  NA
+                Path State:  OK
+                Disabled:  no
+
+        Target Port Groups:
+                ID:  1001
+                Explicit Failover:  no
+                Access State:  *active not optimized*
+                Target Ports:
+                        Name:  205200a098ba7afe
+                        Relative ID:  8
+
+                        Name:  205100a098ba7afe
+                        Relative ID:  7
+
+                ID:  1000
+                Explicit Failover:  no
+                Access State:  *active optimized*
+                Target Ports:
+                        Name:  205000a098ba7afe
+                        Relative ID:  6
+
+                        Name:  204f00a098ba7afe
+                        Relative ID:  5
+----
+=====
+--
+====
+

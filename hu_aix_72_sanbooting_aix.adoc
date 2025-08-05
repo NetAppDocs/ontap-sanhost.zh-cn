@@ -23,10 +23,12 @@ NOTE: 以下步骤不适用于运行 PowerVM 环境的主机。
 
 .步骤
 . 以 root 身份登录到主机。
-. 在 AIX 主机上，输入以下命令以发现新创建的 LUN ：
+. 在 AIX 主机上，发现新创建的 LUN：
 +
-`cfgmgr`
-
+[source, cli]
+----
+cfgmgr
+----
 +
 `cfgmgr` 命令有助于实现以下功能：
 
@@ -38,8 +40,10 @@ NOTE: 以下步骤不适用于运行 PowerVM 环境的主机。
 
 . 显示所有AIX磁盘、包括NetApp LUN：
 +
-`lsdev -CC disk`
-
+[source, cli]
+----
+lsdev -Cc disk
+----
 +
 LUN 在主机上显示为磁盘。这些磁盘的使用方式与在主机上使用本地磁盘的方式相同。如果在 Host Utilities 中安装了主机设置 ODM 文件，则这些 LUN 将显示为 NetApp FCP 磁盘。
 
@@ -66,8 +70,10 @@ hdisk5 Available 04-08-02  MPIO NetApp FCP Default PCM Disk
 ====
 . 检索有关设置的信息：
 +
-`lsattr -EL hdisk_name`
-
+[source, cli]
+----
+lsattr -El hdisk_name
+----
 +
 .显示示例输出
 [%collapsible]
@@ -104,25 +110,33 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 ====
 . 如果您的配置支持 ALUA ，则可以使用它来设置路径优先级。验证是否已启用 ALUA ：
 +
-`lun igroup show -instance igroup_name`
-
+[source, cli]
+----
+lun igroup show -instance igroup_name
+----
 +
 .. 如果未启用 ALUA ，请启用它：
 +
-`igroup set igroup_name ALUA yes`
-
+[source, cli]
+----
+igroup set igroup_name alua yes
+----
 
 
 . 如果您的配置不支持ALOA、则需要使用DOotpaths实用程序设置路径优先级。dotpaths 实用程序会在您安装 Host Utilities 时安装。如果已启用ALOA、请勿使用DOotpaths实用程序。
 +
 .. 设置所有ONTAP LUN的优先级：
 +
-`dotpaths`
-
+[source, cli]
+----
+dotpaths
+----
 .. 为一组特定磁盘设置优先级：
 +
-`dotpaths [-hv] [hdiskN ...]`
-
+[source, cli]
+----
+dotpaths [-hqv] [hdiskN ...]
+----
 +
 使用 `-v`选项启用详细模式并显示所有优先级。使用 `-q`选项查询所有或单个磁盘优先级。
 
@@ -130,8 +144,10 @@ ww_name         0x500a0984994ae0e0               FC World Wide Name             
 
 . 验证主机是否已发现LUN：
 +
-` # sanlun lun show`
-
+[source, cli]
+----
+sanlun lun show
+----
 +
 以下示例显示了Microsoft多路径I/O (MPIO)多路径环境中命令的典型输出 `sanlun lun show`：
 

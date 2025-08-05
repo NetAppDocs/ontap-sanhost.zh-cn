@@ -1,0 +1,29 @@
+= 步骤 3：安装 Windows 主机实用程序
+:allow-uri-read: 
+
+
+
+
+== 步骤 3：安装 Windows 主机实用程序
+
+安装程序安装 Windows Host Utilities 包并设置 Windows 注册表和 HBA 设置。
+
+.关于此任务
+您可以选择在安装 Windows Host Utilities 软件包时包含多路径支持。安装程序会提示您选择以下选项：
+
+* 选择 `MPIO` 从Windows主机或虚拟机到存储系统的路径不止一个。
+* 选择 `no MPIO`仅当您使用存储系统的单一路径时。
+
+
+您还可以使用 Windows 命令行提示符选择多路径支持。
+
+对于 Hyper-V 客户机，如果您选择多路径支持，则原始（直通）磁盘不会出现在客户机操作系统中。您可以使用原始磁盘或 MPIO，但不能在来宾操作系统中同时使用它们。
+
+
+CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
+
+
+NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
+
+.步骤
+您可以交互方式或使用 Windows 命令行安装主机实用程序。新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。

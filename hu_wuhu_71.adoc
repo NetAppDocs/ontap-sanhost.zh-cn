@@ -4,7 +4,7 @@ permalink: hu_wuhu_71.html
 keywords: windows, host, utilities, 7.1, hba, fibre, channel, SANtricity, netapp, san, host, e-series, platform 
 summary: Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。 
 ---
-= 安装Windows Host Utilities 7.1
+= 为ONTAP存储安装 Windows Host Utilities 7.1
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -32,7 +32,7 @@ Windows Host Utilities支持以下Windows版本：
 
 Windows主机实用程序包括一个安装程序、用于设置所需的Windows注册表和主机总线适配器(HBA)参数、以便Windows主机可以正确处理ONTAP和E系列平台的存储系统行为。
 
-安装Host Utilities软件时、安装程序会设置所需的Windows注册表和主机总线适配器(HBA)参数。
+安装Host Utilities软件时、安装程序会设置所需的Windows注册表和HBA参数。
 
 Windows 主机计算机上安装了以下程序和文件。默认目录为 `C ： \Program Files\NetApp\Windows Host Utilities` 。
 
@@ -58,70 +58,79 @@ Host Utilities支持不同的Windows主机配置、协议和多路径选项。�
 
 
 
-== 验证主机和存储系统配置
+== 步骤 1：验证主机和存储系统配置
 
 在安装适用于的Windows Host Utilities之前，请验证您的主机和存储系统配置是否受支持<<supported-windows-versions-71,支持的Windows版本>>。
 
 .步骤
 . 在中检查支持的配置 http://mysupport.netapp.com/matrix["互操作性表工具"^]。
-. 检查上相应主机所需的修补程序 link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
+. 检查 Windows Server 主机版本所需的修补程序link:https://docs.netapp.com/us-en/ontap-sanhost/index.html["SAN主机Windows文档"]。
++
+例如，link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["为ONTAP存储配置 Windows Server 2022"]文档提供了为 Windows Server 2022 安装 Windows 修补程序的说明。
+
+. link:https://docs.netapp.com/us-en/ontap/san-admin/verify-license-fc-iscsi-task.html["添加 iSCSI 或 FCP 许可证"^] 。
 +
 
-NOTE: 本link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html["将Windows Server 2022与ONTAP结合使用"]文档提供了有关适用于Windows Server 2022的说明link:https://docs.netapp.com/us-en/ontap-sanhost/hu_windows_2022.html#installing-windows-hotfixes["安装Windows修补程序"]。请参见主机配置类别中的Windows文档、以查找早期版本的Windows服务器的相关修补程序信息。
+NOTE: 在使用SANtricity Storage Manager 的E 系列存储系统上，FC 和 iSCSI 协议不需要许可证。
 
-. 添加 iSCSI 或 FCP 许可证并启动目标服务。
+. 启动目标服务。
+. 验证布线。
 +
-
-NOTE: 在使用SANtricity存储管理器的E系列存储系统上、FC和iSCSI协议不需要许可证。
-
-. 验证布线
-+
-请参见 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^] 适用于您的ONTAP或版本的文档 https://docs.netapp.com/us-en/e-series/install-hw-cabling/index.html["E系列硬件布线"^] 有关布线和配置的详细信息。
+请参阅 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^]了解详细的布线和配置信息。
 
 
 
 
 
-== 配置 FC HBA 和交换机
+== 步骤 2：配置 FC HBA 和交换机
 
-安装并配置一个或多个受支持的FC主机总线适配器(HBA)、以便通过FC连接到存储系统。
+安装并配置一个或多个受支持的FC主机总线适配器(HBA)、以便与存储系统建立FC连接。
 
 Windows Host Utilities安装程序可设置所需的FC HBA设置。
 
 
-NOTE: 请勿手动更改HBA设置。
+CAUTION: 您应该只允许 Windows Host Utilities 安装程序设置 HBA 参数。这可确保 Windows 主机能够正确处理ONTAP平台的存储系统行为。
 
 .步骤
 . 按照HBA供应商提供的说明安装一个或多个受支持的FC HBA。
 . 获取受支持的 HBA 驱动程序和管理实用程序，并按照 HBA 供应商提供的说明进行安装。
-. 将HBA连接到FC交换机或直接连接到存储系统。
-. 根据FC交换机文档在FC交换机上创建分区。
-. 对于ONTAP、按全球通用端口名称(WWPN)对交换机进行分区。请务必使用 LIF 的 WWPN ，而不是存储控制器上物理端口的 WWPN 。请参见 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^] 有关详细信息，请参见相关文档。
+. https://docs.netapp.com/us-en/ontap/san-management/index.html["将 HBA 连接到 FC 交换机或直接连接到存储系统"^] 。
+. https://docs.netapp.com/us-en/ontap/san-config/fibre-channel-fcoe-zoning-concept.html["根据 FC 交换机文档在 FC 交换机上创建区域"^] 。
+. 对于ONTAP，按 WWPN 对交换机进行区域划分。请务必使用逻辑接口 (LIF) 的 WWPN，而不是存储控制器上的物理端口的 WWPN。请参阅 https://docs.netapp.com/us-en/ontap/san-config/index.html["SAN 配置参考"^]了解更多信息。
 
 
 
 
-== 安装 Host Utilities
+== 步骤 3：安装 Windows 主机实用程序
 
-安装程序将安装 Host Utilities 软件包并设置 Windows 注册表和 HBA 设置。
+安装程序安装 Windows Host Utilities 包并设置 Windows 注册表和 HBA 设置。
 
-您必须指定在安装Windows Host Utilities软件包时是否包括多路径支持。安装程序将提示您选择以下选项。您也可以从 Windows 命令提示符处运行静默（无人参与）安装。
+.关于此任务
+您可以选择在安装 Windows Host Utilities 软件包时包含多路径支持。安装程序会提示您选择以下选项：
 
-.多路径支持
 * 选择 `MPIO` 从Windows主机或虚拟机到存储系统的路径不止一个。
-* 选择 `no MPIO` 仅当您使用存储系统的单个路径时。
+* 选择 `no MPIO`仅当您使用存储系统的单一路径时。
 
 
-Microsoft多路径I/O (MPIO)选项不适用于Windows XP和Windows Vista系统；这些子操作系统不支持多路径I/O。对于 Hyper-V 子系统，如果选择多路径支持，则原始（直通）磁盘不会显示在子操作系统中。您可以使用原始磁盘，也可以使用 MPIO ，但不能在子操作系统中同时使用这两者。
+您还可以使用 Windows 命令行提示符选择多路径支持。
 
-您可以以交互方式安装Host Utilities、也可以使用命令行安装Host Utilities。新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。按照说明以交互方式或从Windows命令行安装Host Utilities。
+对于 Hyper-V 客户机，如果您选择多路径支持，则原始（直通）磁盘不会出现在客户机操作系统中。您可以使用原始磁盘或 MPIO，但不能在来宾操作系统中同时使用它们。
+
+
+CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
+
+
+NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
+
+.步骤
+您可以交互方式或使用 Windows 命令行安装主机实用程序。新的 Host Utilities 安装包必须位于 Windows 主机可访问的路径中。
 
 [role="tabbed-block"]
 ====
 .以交互方式安装
 --
 .步骤
-要以交互方式安装 Host Utilities 软件包，您必须运行 Host Utilities 安装程序并按照提示进行操作。
+通过运行 Host Utilities 安装程序并按照提示以交互方式安装 Host Utilities 软件包。
 
 .步骤
 . 从下载可执行文件 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
@@ -131,15 +140,17 @@ Microsoft多路径I/O (MPIO)选项不适用于Windows XP和Windows Vista系统�
 
 
 --
-.从命令行安装
+.非交互安装
 --
-您可以通过在 Windows 命令提示符处输入相应的命令来执行 Host Utilities 的静默（无人参与）安装。安装完成后，系统将自动重新启动。
+使用 Windows 命令行执行 Host Utilities 的非交互式安装。安装完成后系统自动重启。
 
 .步骤
 . 在 Windows 命令提示符处输入以下命令：
 +
-`msiexec /i installer.msi /quiet multipath= ｛ 0` 1 ｝ [INSTALLDIR=inst_path]
-
+[source, cli]
+----
+msiexec /i installer.msi /quiet MULTIPATHING= {0 | 1} [INSTALLDIR=inst_path]
+----
 +
 ** `installer` 是的名称 `.msi` CPU架构的文件
 ** 多路径用于指定是否安装 MPIO 支持。允许值为"0"表示否、"1"表示是
@@ -153,3 +164,8 @@ NOTE: 要查看用于日志记录和其他功能的标准Microsoft安装程序(M
 
 --
 ====
+
+
+== 下一步是什么？
+
+link:hu_wuhu_hba_settings.html["配置 Windows Host Utilities 的注册表设置"] 。

@@ -1,0 +1,97 @@
+= 
+:allow-uri-read: 
+
+
+. 如果您的存储配置包括MetroCluster、Oracle Solaris 虚拟化或SnapMirror活动同步，请更改默认设置：
++
+[role="tabbed-block"]
+====
+.MetroCluster
+--
+默认情况下，如果到 LUN 的所有路径都丢失，Solaris OS 将在 *20 秒* 后无法执行 I/O 操作。这是由 `fcp_offline_delay`范围。默认值为 `fcp_offline_delay`适用于标准ONTAP集群。但是，在MetroCluster配置中，您必须增加 `fcp_offline_delay`至 *120 秒*，以确保 I/O 在操作期间不会过早超时，包括计划外的故障转移。
+
+有关MetroCluster默认设置的其他信息和建议更改，请参阅知识库文章 https://kb.netapp.com/onprem/ontap/metrocluster/Solaris_host_support_considerations_in_a_MetroCluster_configuration["MetroCluster 配置中的 Solaris 主机支持注意事项"^]。
+
+--
+.Oracle Solaris虚拟化
+--
+** Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或 Oracle VM Server for SPARC）、Solaris 动态域、Solaris 区域和 Solaris 容器。这些技术也被称为“Oracle虚拟机”。
+** 您可以一起使用多个选项，例如，特定 Solaris 逻辑域内的 Solaris 容器。
+** NetApp支持使用 Solaris 虚拟化技术，其中整体配置由 Oracle 支持，并且任何可直接访问 LUN 的分区都列在link:https://imt.netapp.com/matrix/#welcome["IMT"]在受支持的配置中。这包括根容器、LDOM I/O 域和使用 NPIV 访问 LUN 的 LDOM。
+** 仅使用虚拟化存储资源的分区或虚拟机，例如 `vdsk`，不需要特定资格，因为他们无法直接访问ONTAP LUN。您只需验证对底层 LUN 具有直接访问权限的分区或虚拟机（例如 LDOM I/O 域）是否列在link:https://imt.netapp.com/matrix/#welcome["IMT"^]。
+
+
+.步骤
+当 LUN 用作 LDOM 内的虚拟磁盘设备时，LUN 的源会被虚拟化屏蔽，并且 LDOM 无法正确检测块大小。为了防止出现此问题：
+
+.. 为 LDOM OS 修补_Oracle Bug 15824910_
+.. 创建一个 `vdc.conf`将虚拟磁盘的块大小设置为 `4096`。有关详细信息，请参阅 Oracle DOC：2157669.1。
+.. 验证补丁安装以确保已正确配置推荐的设置：
++
+... 创建 zpool：
++
+[source, cli]
+----
+zpool create zpool_name disk_list
+----
+... 运行 `zdb -C` 并验证*ashift,的值是否为 `12`。
++
+如果 *ashift* 的值不是 `12`，重新运行 `zdb -C11`，并验证是否安装了正确的补丁并重新检查 `vdc.conf`。
+
++
+直到 *ashift* 显示值 `12`。
+
+
+
+
+
+
+NOTE: 针对多个 Solaris 版本上的 Oracle 错误 15824910 提供了补丁。如果您需要帮助确定最佳内核补丁，请联系 Oracle。
+
+--
+.SnapMirror主动同步
+--
+从ONTAP 9.9.1 开始，Solaris 主机支持SnapMirror主动同步设置配置。要验证在SnapMirror主动同步环境中发生计划外站点故障转移切换时 Solaris 客户端应用程序是否不会中断，必须配置 `scsi-vhci-failover-override`Solaris 主机上的设置。此设置覆盖故障转移模块 `f_tpgs`阻止执行检测到矛盾的代码路径。
+
+.步骤
+.. 创建配置文件 `/etc/driver/drv/scsi_vhci.conf`对于连接到主机的NetApp存储类型，其条目类似于以下示例：
++
+[listing]
+----
+scsi-vhci-failover-override =
+"NETAPP  LUN","f_tpgs"
+----
+.. 验证覆盖参数是否已成功应用：
++
+[source, cli]
+----
+devprop
+----
++
+[source, cli]
+----
+mdb
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+root@host-A:~# devprop -v -n /scsi_vhci scsi-vhci-failover-override      scsi-vhci-failover-override=NETAPP  LUN + f_tpgs
+root@host-A:~# echo "*scsi_vhci_dip::print -x struct dev_info devi_child | ::list struct dev_info devi_sibling| ::print struct dev_info devi_mdi_client| ::print mdi_client_t ct_vprivate| ::print struct scsi_vhci_lun svl_lun_wwn svl_fops_name"| mdb -k
+----
+[listing]
+----
+svl_lun_wwn = 0xa002a1c8960 "600a098038313477543f524539787938"
+svl_fops_name = 0xa00298d69e0 "conf f_tpgs"
+----
+=====
+
+
+
+NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl_fops_name`。有关追加信息和建议的默认设置更改、请参阅NetApp知识库文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/Solaris_Host_support_recommended_settings_in_SnapMirror_Business_Continuity_(SM-BC)_configuration["Solaris主机支持SnapMirror主动同步配置中的建议设置"^]。
+
+--
+====
+

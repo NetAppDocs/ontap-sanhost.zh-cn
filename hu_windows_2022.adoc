@@ -80,7 +80,7 @@ TIP: 许多修复程序都需要重新启动Windows主机。您可以选择等�
 
 == 安装Windows Host Utilities
 
-Windows主机实用程序是一组软件程序、其中包含一些文档、可用于将主机计算机连接到NetApp SAN上的虚拟磁盘(LUN)。NetApp建议下载并安装最新的实用程序套件。有关Windows Host Utilities配置信息和说明、请参见link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities文档"]、并选择适用于您的Windows Host Utilities版本的安装过程。
+Windows Host Utilities 是一组带有文档的软件程序，可让您将主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。 NetApp建议下载并安装最新的实用程序工具包。有关 Windows Host Utilities 配置信息和说明，请参阅link:https://docs.netapp.com/us-en/ontap-sanhost/hu-wuhu-release-notes.html["Windows Host Utilities文档"]并选择适合您的 Windows Host Utilities 版本的安装程序。
 
 
 
@@ -93,9 +93,13 @@ MPIO软件为Windows操作系统提供所有路径的单个磁盘、设备专用
 
 CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
 
+[NOTE]
+====
+* 对于 Windows Host Utilities 8.0，当您选择 MPIO 支持时，MPIO 功能会自动启用。
+* 在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO。
 
-NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
 
+====
 
 
 == SAN 配置

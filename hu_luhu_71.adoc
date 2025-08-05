@@ -4,7 +4,7 @@ permalink: hu_luhu_71.html
 keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
 summary: 介绍如何在ONTAP中使用Linux主机实用程序7.1 
 ---
-= 安装Linux Host Utilities 7.1
+= 为ONTAP存储安装 Linux Host Utilities 7.1
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,9 +16,9 @@ summary: 介绍如何在ONTAP中使用Linux主机实用程序7.1
 
 
 [role="lead"]
-"Linux Host Utilities (Linux主机实用程序)"可帮助您管理连接到Linux主机的ONTAP存储。NetApp强烈建议安装Linux主机实用程序、但并非强制要求。这些实用程序不会更改 Linux 主机上的任何设置。这些实用程序可改进管理并帮助 NetApp 客户支持收集有关您的配置的信息。
+Linux Host Utilities 可帮助您管理连接到 Linux 主机的ONTAP存储。 NetApp强烈建议安装 Linux Host Utilities，但这不是强制性的。这些实用程序可改善管理并帮助NetApp客户支持收集有关您的配置的信息。
 
-支持以下Linux分发版：
+Linux Host Utilities 7.1 支持以下分发类型：
 
 * Red Hat Enterprise Linux
 * SUSE Linux Enterprise Server
@@ -27,16 +27,17 @@ summary: 介绍如何在ONTAP中使用Linux主机实用程序7.1
 * Citrix XenServer
 
 
+
+NOTE: Linux Host Utilities软件不支持基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)主机协议。
+
+.关于此任务
+当您安装 Linux 主机实用程序时，它不会更改 Linux 主机上的任何设置。
+
 .开始之前
-NetApp LINUX主机实用程序软件包以32位或64位.rpm文件的形式在上提供link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]。
-
-* 为了确保操作可靠，您必须验证您的整个 iSCSI ， FC 或 FCoE 配置是否受支持。
+* 为了可靠运行，使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 iSCSI、FC 或 FCoE 配置是否受支持。
+* 安装供应商支持站点上提供的主机总线适配器 (HBA) 管理包。管理软件可实现 `sanlun`命令来收集有关 FC HBA 的信息，例如其 WWPN。
 +
-您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证配置。
-
-* 您必须安装供应商支持站点上提供的主机总线适配器(HBA)管理软件包。
-+
-通过管理软件、SAN Toolkit命令可以收集有关FC HBA的信息、例如其WWPN。要使 `sanlun fcp show adapter`命令正常运行、请验证是否已正确安装以下软件包：
+请参阅供应商文档来验证以下软件包是否正确安装。这些软件包需要支持 `sanlun fcp show adapter`命令：
 
 +
 ** Marvell QLogic HBA—QConvergeConsole CLI
@@ -44,14 +45,11 @@ NetApp LINUX主机实用程序软件包以32位或64位.rpm文件的形式在上
 ** Marvell Brocade HBA—Brocade命令实用程序CLI
 
 
-* 每个Linux分发版都可用的RPM软件包"libhbaapi"和"libhbalinux"应安装在主机操作系统上。
+* 在 Linux 主机操作系统上安装适用于每个 Linux 发行版的 RPM“libhbaapi”和“libhbalinux”包。
 
-
-
-NOTE: Linux Host Utilities软件不支持基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)主机协议。
 
 .步骤
-. 如果您当前安装的是Linux Host Utilities版本、请使用以下命令将其删除：
+. 如果您当前安装了某个版本的 Linux Host Utilities，请将其删除：
 +
 [source, cli]
 ----
@@ -61,12 +59,15 @@ rpm -e netapp_linux_unified_host_utilities-7-1
 对于早期版本的Linux Host Utilities、请转到安装主机实用程序软件的目录、然后输入uninstall命令以删除已安装的软件包。
 
 . 将32位或64位Linux Host Utilities软件包从下载link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]到主机。
-. 转到软件包下载到的目录，然后使用以下命令进行安装：
+. 进入下载软件包的目录并安装：
 +
 [source, cli]
 ----
 rpm -ivh netapp_linux_unified_host_utilities-7-1.x86_xx.rpm
 ----
++
+您应该会看到类似于以下示例的输出：
+
 +
 [listing]
 ----
@@ -82,6 +83,9 @@ Updating / installing...
 sanlun version
 ----
 +
+您应该会看到类似于以下示例的输出：
+
++
 [listing]
 ----
 sanlun version 7.1.386.1644
@@ -90,41 +94,11 @@ sanlun version 7.1.386.1644
 
 
 
-== Linux内核的建议驱动程序设置
+== 下一步是什么？
 
+* Linux内核的建议驱动程序设置
++
 如果您配置的FC环境使用Linux内核捆绑的本机收件箱驱动程序、则可以使用这些驱动程序的默认值。
 
+* link:hu-luhu-sanlun-utility.html["了解“三仑”实用程序"] 。
 
-
-== SAN 工具包
-
-Linux Host Utilities是NetApp主机软件、可在Linux主机上提供命令行工具包。
-
-安装 NetApp Host Utilities 软件包时，工具包会自动安装。此套件提供 `sanlun` 实用程序，可帮助您管理 LUN 和 HBA 。`sanlun` 命令可返回有关映射到主机的 LUN 的信息，多路径以及创建启动程序组所需的信息。
-
-.示例
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[source, cli]
-----
-# sanlun lun show all
-----
-示例输出：
-
-[listing]
-----
-controller(7mode/E-Series)/            device     host               lun
-vserver(cDOT/FlashRay)   lun-pathname  filename   adapter  protocol  size    Product
-------------------------------------------------------------------------------------
-data_vserver          /vol/vol1/lun1   /dev/sdb   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol1/lun1   /dev/sdc   host15   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sdd   host16   FCP       120.0g  cDOT
-data_vserver          /vol/vol2/lun2   /dev/sde   host15   FCP       120.0g  cDOT
-----
-[NOTE]
-====
-* 此工具包在 Host Utilities 的所有配置和协议中通用。因此，其中某些内容适用于一种配置，而不适用于另一种配置。未使用的组件不会影响系统性能。
-* Citrix XenServer、Oracle VM和Red Hat Enterprise Virtualization Hypervisor"不支持SAN工具包"。
-
-
-====

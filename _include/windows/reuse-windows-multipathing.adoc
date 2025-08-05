@@ -7,5 +7,10 @@ MPIO软件为Windows操作系统提供所有路径的单个磁盘、设备专用
 
 CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
 
+[NOTE]
+====
+* 对于 Windows Host Utilities 8.0，当您选择 MPIO 支持时，MPIO 功能会自动启用。
+* 在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO。
 
-NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
+
+====

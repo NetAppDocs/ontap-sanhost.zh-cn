@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: hu-aix-san-toolkit.html 
+keywords: san, toolkit, command, line, AIX, hot, utilities 
+summary: AIX Host Utilities 主机软件在您的 IBM AIX 主机上提供了命令行工具包。 
+---
+= 了解适用于ONTAP存储的 AIX SAN 工具包
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+AIX Host Utilities 是一款NetApp主机软件，可在 IBM AIX 主机上提供命令行工具包。安装NetApp Host Utilities 包时也会安装 SAN 工具包。该工具包提供了 `sanlun`实用程序，可帮助您管理ONTAP LUN 和主机总线适配器 (HBA)。这 `sanlun`命令返回有关映射到主机的ONTAP LUN、多路径以及创建启动器组所需信息的信息。
+
+以下示例输出显示了返回的ONTAP LUN 信息 `sanlun lun show`命令：
+
+[listing]
+----
+controller(7mode)/ device host lun
+
+vserver(Cmode) lun-pathname filename adapter protocol size mode
+----------------------------------------------------------------
+data_vserver   /vol/vol1/lun1 hdisk0 fcs0    FCP      60g C
+data_vserver   /vol/vol2/lun2 hdisk0 fcs0    FCP      20g C
+data_vserver   /vol/vol3/lun3 hdisk11 fcs0   FCP      20g C
+data_vserver   /vol/vol4/lun4 hdisk14 fcs0   FCP      20g C
+----
+
+NOTE: SAN Toolkit 适用于所有 AIX 主机配置和传输协议。因此，并非所有组件都适用于每种配置。未使用的组件不会影响您的系统性能。  SAN Toolkit 在 AIX 和 PowerVM/VIOS OS 版本上受支持。
+
+
+
+== 下一步是什么？
+
+link:hu-aix-command-reference.html["了解如何使用 AIX Host Utilities 工具"] 。

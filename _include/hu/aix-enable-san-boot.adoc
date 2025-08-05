@@ -1,0 +1,28 @@
+= 第1步：(可选)启用SAN启动
+:allow-uri-read: 
+
+
+
+
+== 第1步：(可选)启用SAN启动
+
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。如果您的配置不支持 SAN 启动，您可以使用本地启动。
+
+[role="tabbed-block"]
+====
+.SAN 启动
+--
+SAN 启动是将 SAN 连接磁盘（LUN）设置为 AIX/PowerVM 主机的启动设备的过程。您可以设置 SAN 启动 LUN 以在使用 FC 协议并使用 FC 或 FCoE 协议运行 AIX Host Utilities 的 AIX 多路径 I/O (MPIO) 环境中工作。在 AIX MPIO 环境中创建 SAN 启动 LUN 和安装新 OS 映像的方法取决于您使用的协议。
+
+.步骤
+. 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+. 按照供应商文档中有关设置 SAN 启动的最佳实践进行操作。
+
+
+--
+.本地启动
+--
+通过在本地硬盘（例如 SSD、SATA 或 RAID）上安装 AIX OS 来执行本地启动。
+
+--
+====

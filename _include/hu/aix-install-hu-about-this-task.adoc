@@ -1,0 +1,13 @@
+= 
+:allow-uri-read: 
+
+
+.关于此任务
+* 您需要安装带有 AIX MPIO 的 AIX Host Utilities SAN Toolkit 来管理连接到 AIX 主机的ONTAP存储。
+* 当您安装 AIX Host Utilities 时，它们不会更改 AIX 主机上的任何设置。
+
+
+.开始之前
+* 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+* 通过运行 `chdev -l <fscsi_device> -a dyntrk=ye`AIX 主机上的命令。
+

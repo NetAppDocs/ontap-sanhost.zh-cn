@@ -1,0 +1,179 @@
+---
+sidebar: sidebar 
+permalink: hu-solaris-80.html 
+keywords: host utilities, unified, oracle, linux, 7.1, netapp, ontap 
+summary: 介绍如何将 Solaris Host Utilities 8.0 与ONTAP结合使用 
+---
+= 为ONTAP存储安装 Solaris Host Utilities 8.0
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Solaris Host Utilities 可帮助您管理连接到 Solaris 主机的ONTAP存储并协助技术支持收集配置数据。
+
+Solaris Host Utilities 支持以下 Solaris 环境和传输协议。这些是主要支持的环境：
+
+* 在使用 SPARC 或 x86/64 处理器的系统上，本机操作系统具有 Oracle Solaris I/O 多路径 (MPxIO) 和 FC 或 iSCSI 协议。
+* 在使用 SPARC 处理器的系统上，Veritas Dynamic Multipathing (DMP) 与 FC 或 iSCSI 协议结合使用。
+
+
+Solaris Host Utilities 8.0 支持 Solaris 11.4 系列。
+
+.开始之前
+验证您的 iSCSI、FC 或 FCoE 配置是否受支持。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的配置。
+
+.步骤
+. 以 root 身份登录到您的主机。
+. 从下载包含 Host Utilities 的压缩文件的副本 link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.2/downloads["NetApp 支持站点"^] 到主机上的目录。
++
+[role="tabbed-block"]
+====
+.SPARC CPU
+--
+[source, cli]
+----
+netapp_solaris_host_utilities_8_0_sparc.tar.gz
+----
+--
+.x86/x64 CPU
+--
+[source, cli]
+----
+netapp_solaris_host_utilities_8_0_amd.tar.gz
+----
+--
+====
+. 转到主机上包含下载内容的目录。
+. 使用以下方式解压缩文件 `gunzip`命令，然后使用提取文件 `tar -xvf`：
++
+[source, cli]
+----
+gunzip netapp_solaris_host_utilities_8_0_sparc.tar.gz
+----
++
+[source, cli]
+----
+tar -xvf netapp_solaris_host_utilities_8_0_sparc.tar
+----
+. 将从 tar 文件中提取的软件包添加到您的主机：
++
+[source, cli]
+----
+pkgadd
+----
++
+这些软件包将添加到 ` /opt/NTAP/SANToolkit/bin` 目录中。
+
++
+以下示例将使用 `pkgadd`命令安装Solaris安装包：
+
++
+[source, cli]
+----
+pkgadd -d ./NTAPSANTool.pkg
+----
+. 使用以下命令到安装路径确认工具包已成功安装：
++
+[source, cli]
+----
+pkgchk
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+# pkgchk -l -p /opt/NTAP/SANToolkit
+
+Pathname: /opt/NTAP/SANToolkit
+Type: directory
+Expected mode: 0755
+Expected owner: root
+Expected group: sys
+Referenced by the following packages: NTAPSANTool
+Current status: installed
+
+# ls -alR /opt/NTAP/SANToolkit
+/opt/NTAP/SANToolkit:
+total 1038
+drwxr-xr-x   3 root     sys            4 Mar  7 13:11 .
+drwxr-xr-x   3 root     sys            3 Mar  7 13:11 ..
+drwxr-xr-x   2 root     sys            6 Mar 17 18:32 bin
+-r-xr-xr-x   1 root     sys       432666 Dec 31 13:23 NOTICES.PDF
+
+/opt/NTAP/SANToolkit/bin:
+total 3350
+drwxr-xr-x   2 root     sys            6 Mar 17 18:32 .
+drwxr-xr-x   3 root     sys            4 Mar  7 13:11 ..
+-r-xr-xr-x   1 root     sys      1297000 Feb  7 22:22 host_config
+-r-xr-xr-x   1 root     root         996 Mar 17 18:32 san_version
+-r-xr-xr-x   1 root     sys       309700 Feb  7 22:22 sanlun
+-r-xr-xr-x   1 root     sys          677 Feb  7 22:22 vidpid.dat
+
+# cd /usr/share/man/man1; ls -al host_config.1 sanlun.1
+-r-xr-xr-x   1 root     sys        12266 Feb  7 22:22 host_config.1
+-r-xr-xr-x   1 root     sys         9044 Feb  7 22:22 sanlun.1
+----
+====
+. 使用以下方式配置“MPxIO”或“Veritas DMP”环境的主机参数 `/opt/NTAP/SANToolkit/bin/host_config`使用命令参考中的多路径堆栈命令：
++
+`/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp|iscsi|mixed -multipath mpxio|dmp|non [-noalua] [-mcc 60|90|120]`
+
++
+[cols="2*"]
+|===
+| 例如，如果您的设置是... | 使用命令... 
+
+
+| 具有多路径的 FCP 作为 MPxIO | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath mpxio`有关SnapMirror主动同步配置更改的信息，请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/Solaris_Host_support_recommended_settings_in_SnapMirror_active_sync_formerly_SM_BC_configuration["Solaris 主机支持SnapMirror主动同步（以前称为 SM-BC）配置中的推荐设置"^]。 
+
+
+| 使用多路径作为 DMP 的 FCP | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath dmp` 
+
+
+| MetroCluster上的 FCP 采用多路径作为 MPxIO，并且“所有路径均关闭”值设置为 120 秒。  （这是MetroCluster配置的推荐设置）。 | `#/opt/NTAP/SANToolkit/bin/host_config -setup -protocol fcp -multipath mpxio -mcc 120`有关详细信息，请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/Solaris_host_support_considerations_in_a_MetroCluster_configuration["MetroCluster 配置中的 Solaris 主机支持注意事项"^]。 
+|===
+. 重新启动主机。
++
+主机实用程序为ONTAP LUN 加载以下NetApp推荐的超时参数设置。
+
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+#prtconf -v |grep NETAPP
+   value='NETAPP  LUN' +
+   physical-block-size:4096,
+   retries-busy:30,
+   retries-reset:30,
+   retries-notready:300,
+   retries-timeout:10,
+   throttle-max:64,
+   throttle-min:8,
+   disksort:false,
+   cache-nonvolatile:true'
+----
+====
+. 验证主机实用程序安装：
++
+[source, cli]
+----
+sanlun version
+----
+
+
+
+
+== 下一步是什么？
+
+link:hu-solaris-san-toolkit.html["了解 SAN 工具包"] 。

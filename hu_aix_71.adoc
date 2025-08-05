@@ -4,7 +4,7 @@ permalink: hu_aix_71.html
 keywords: host utilities, aix, 7.1 netapp, ontap 
 summary: 介绍如何将 IBM AIX 7.1 与 ONTAP 结合使用 
 ---
-= 将IBM AIX 7.1与ONTAP结合使用
+= 使用ONTAP存储为 FCP 和 iSCSI 配置 AIX 7.1
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,146 +16,61 @@ summary: 介绍如何将 IBM AIX 7.1 与 ONTAP 结合使用
 
 
 [role="lead"]
-您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的IBM AIX 7.1配置为目标。
+AIX Host Utilities 软件为连接到ONTAP存储的 AIX 主机提供管理和诊断工具。在 AIX 7.1 主机上安装 AIX Host Utilities 时，您可以使用 Host Utilities 来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
 
 
 
-== 安装AIX Host Utilities
+== 第1步：(可选)启用SAN启动
 
-在将AIX Microsoft多路径I/O (MPIO)与ONTAP存储结合使用时、必须安装AIX Host Utilities Kit。
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。如果您的配置不支持 SAN 启动，您可以使用本地启动。
 
-您可以从下载包含Host Utilities软件包的压缩文件link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/6.1/downloads["NetApp 支持站点"^]。下载文件后、您需要解压缩该文件、以获取安装Host Utilities所需的两个软件包。
+[role="tabbed-block"]
+====
+.SAN 启动
+--
+SAN 启动是将 SAN 连接磁盘（LUN）设置为 AIX/PowerVM 主机的启动设备的过程。您可以设置 SAN 启动 LUN 以在使用 FC 协议并使用 FC 或 FCoE 协议运行 AIX Host Utilities 的 AIX 多路径 I/O (MPIO) 环境中工作。在 AIX MPIO 环境中创建 SAN 启动 LUN 和安装新 OS 映像的方法取决于您使用的协议。
 
 .步骤
-. 登录到主机。
+. 使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 AIX OS、协议和ONTAP版本是否支持 SAN 启动。
+. 按照供应商文档中有关设置 SAN 启动的最佳实践进行操作。
+
+
+--
+.本地启动
+--
+通过在本地硬盘（例如 SSD、SATA 或 RAID）上安装 AIX OS 来执行本地启动。
+
+--
+====
+
+
+== 第 2 步：安装 AIX 主机实用程序
+
+NetApp强烈建议安装 AIX Host Utilities 来支持ONTAP LUN 管理并协助技术支持收集配置数据。  Host Utilities 中的 MPIO 包为 AIX 和 VIOS 提供 MPIO 支持。
+
+
+NOTE: 安装 AIX Host Utilities 可为您的 AIX 主机提供额外的超时设置。
+
+link:hu_aix_61.html["安装 AIX Host Utilities 6.1"] 。
+
+
+
+== 第3步：确认主机的多路径配置
+
+您可以使用 AIX 7.1 主机的多路径来管理ONTAP LUN。
+
+多路径允许您在主机和存储系统之间配置多条网络路径。如果一条路径发生故障，流量仍可通过剩余路径继续传输。  Host Utilities 的 AIX 和 PowerVM 环境使用 AIX 本机多路径解决方案 (MPIO)。
+
+路径控制模块 (PCM) 负责控制 AIX 主机的多条路径。  PCM 是存储供应商提供的代码，用于处理路径管理，在 Host Utilities 安装期间安装并启用。
+
+为确保为您的主机正确配置多路径，请验证您是否已为您的ONTAP LUN 配置NetApp推荐的设置。
+
+.步骤
+. AIX Host Utilities 为ONTAP LUN 加载以下参数设置。
 +
-** 在 AIX 主机上，以 * 根 * 身份登录。
-
-
-. 从 NetApp 支持站点将包含 Host Utilities 的压缩文件副本下载到主机上的目录中。
-. 转到包含下载内容的目录。
-. 解压缩文件并提取 SAN 工具包软件包。
-+
-`tar -xvf ntap_aix_host_utilities_6.1.tar.tgz`
-
-+
-解压缩文件时会创建以下目录： `ntap_aix_host_utilities_6.1` 。此目录将包含以下子目录之一： MPIO ， non_MPIO 或 SAN_Tool_Kit
-
-. 安装 AIX MPIO ：
-+
-`installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/MPIO NetApp.MPIO_Host_Utilities_Kit`
-
-. 安装 SAN 工具包： `installp -aXYd /var/tmp/ntap_aix_host_utilities_6.1/SAN_Tool_Kit NetApp.SAN_toolkit`
-. 重新启动主机。
-
-
-
-
-== SAN 工具包
-
-安装NetApp主机实用程序软件包会自动安装该工具包。此套件提供了 `sanlun`实用程序、可帮助您管理LUN和主机总线适配器(HBA)。命令将 `sanlun`返回有关映射到主机的LUN的信息、多路径以及创建启动程序组所需的信息。
-
-.示例
-在以下示例中， `sanlun lun show` 命令将返回 LUN 信息。
-
-[listing]
-----
-#sanlun lun show
-
-controller(7mode)/                  device      host       lun
-vserver(Cmode)    lun-pathname     filename    adapter   protocol   size   mode
---------------------------------------------------------------------------------
-data_vserver      /vol/vol1/lun1    hdisk0      fcs0       FCP       60g    C
-data_vserver      /vol/vol2/lun2    hdisk0      fcs0       FCP       20g    C
-data_vserver      /vol/vol3/lun3    hdisk11     fcs0       FCP       20g    C
-data_vserver      /vol/vol4/lun4    hdisk14     fcs0       FCP       20g    C
-
-----
-
-
-== SAN 启动
-
-.开始之前
-如果您决定使用 SAN 启动，则配置必须支持它。您可以使用link:https://imt.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的操作系统、HBA、HBA固件、HBA启动BIOS以及ONTAP版本是否受支持。
-
-SAN 启动是将 SAN 连接的磁盘（ LUN ）设置为 AIX 主机的启动设备的过程。您可以将 SAN 启动 LUN 设置为在运行采用 FC 或 FCoE 协议的 AIX Host Utilities 的 AIX MPIO 环境中运行。在 AIX MPIO 环境中，用于创建 SAN 启动 LUN 并在其上安装新操作系统映像的方法可能会有所不同，具体取决于您使用的协议。
-
-
-
-== 多路径
-
-多路径允许您在主机和存储系统之间配置多个网络路径。如果一个路径发生故障，则流量将继续在其余路径上传输。Host Utilities 的 AIX 环境使用 AIX 原生多路径解决方案， MPIO 。
-
-对于 AIX ，路径控制模块（ PCM ）负责控制多个路径。PCM是存储供应商提供的代码、用于处理路径管理。在 Host Utilities 安装过程中会安装并启用此功能。
-
-
-
-=== 非ASA配置
-
-对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径。这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。
-
-.示例
-以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。
-
-[listing]
-----
-# sanlun lun show -p |grep -p hdisk78
-                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
-                           LUN: 37
-                      LUN Size: 15g
-                   Host Device: hdisk78
-                          Mode: C
-            Multipath Provider: AIX Native
-        Multipathing Algorithm: round_robin
-------- ---------- ------ ------- ---------- ----------
-host    vserver    AIX                        AIX MPIO
-path    path       MPIO   host    vserver         path
-state   type       path   adapter LIF         priority
-------- ---------- ------ ------- ---------- ----------
-up      secondary  path0  fcs0    fc_aix_1        1
-up      primary    path1  fcs0    fc_aix_2        1
-up      primary    path2  fcs1    fc_aix_3        1
-up      secondary  path3  fcs1    fc_aix_4        1
-
-----
-
-
-=== 所有SAN阵列配置
-
-全SAN阵列(ASA)配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
-
-.示例
-以下示例显示了ONTAP LUN的正确输出。
-
-
-NOTE: 从适用于 AIX 主机的 ONTAP 9.8 开始，支持所有 SAN 阵列（ ASA ）配置。
-
-[listing]
-----
-# sanlun lun show -p |grep -p hdisk78
-                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
-                           LUN: 37
-                      LUN Size: 15g
-                   Host Device: hdisk78
-                          Mode: C
-            Multipath Provider: AIX Native
-        Multipathing Algorithm: round_robin
------- ------- ------ ------- --------- ----------
-host   vserver  AIX                      AIX MPIO
-path   path     MPIO   host    vserver     path
-state  type     path   adapter LIF       priority
------- ------- ------ ------- --------- ----------
-up     primary  path0  fcs0    fc_aix_1     1
-up     primary  path1  fcs0    fc_aix_2     1
-up     primary  path2  fcs1    fc_aix_3     1
-up     primary  path3  fcs1    fc_aix_4     1
-----
-
-
-== 建议设置
-
-NetApp建议对ONTAP LUN使用以下参数设置。安装 ONTAP 主机实用程序套件后，系统会自动设置 NetApp LUN 的关键参数。
-
+.显示参数设置
+[%collapsible]
+====
 [cols="4*"]
 |===
 | 参数 | environment | AIX 的价值 | 注意 
@@ -205,24 +120,109 @@ NetApp建议对ONTAP LUN使用以下参数设置。安装 ONTAP 主机实用程�
 
 | num_cmd_elems | MPIO / 非 MPIO | 500 （用于 AIX ）（独立 / 物理） 200 （用于 VIOC ） | FC EN0G 
 |===
+====
+. 如果您的存储配置包括MetroCluster或SnapMirror活动同步，请更改默认设置：
++
+[role="tabbed-block"]
+====
+.MetroCluster
+--
+默认情况下，当没有可用的 LUN 路径时，AIX OS 会强制执行较短的 I/O 超时。这可能发生在包含单交换机 SAN 结构的配置中以及经历计划外故障转移的MetroCluster配置中。有关其他信息和建议对默认设置进行更改，请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/What_are_AIX_Host_support_considerations_in_a_MetroCluster_configuration["MetroCluster配置中的 AIX 主机支持注意事项有哪些？"^]。
+
+--
+.SnapMirror主动同步
+--
+从ONTAP 9.11.1 开始，AIX 主机支持SnapMirror主动同步。  AIX 配置中的主集群是“活动”集群。
+
+在 AIX 配置中，故障转移会造成破坏。每次故障转移时，您都需要在主机上执行重新扫描以恢复 I/O 操作。
+
+请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["如何为SnapMirror活动同步配置AIX主机"^]。
+
+--
+====
+. 验证ONTAP LUN 的路径状态：
++
+[source, cli]
+----
+sanlun lun show
+----
++
+以下示例输出显示ASA、 AFF或FAS配置中ONTAP LUN 的正确路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置优化了到给定 LUN 的所有路径，使其保持活动状态（“主要”）。通过同时通过所有路径提供 I/O 操作，可以提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------ ------- ------ ------- --------- ----------
+host   vserver  AIX                      AIX MPIO
+path   path     MPIO   host    vserver     path
+state  type     path   adapter LIF       priority
+------ ------- ------ ------- --------- ----------
+up     primary  path0  fcs0    fc_aix_1     1
+up     primary  path1  fcs0    fc_aix_2     1
+up     primary  path2  fcs1    fc_aix_3     1
+up     primary  path3  fcs1    fc_aix_4     1
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示具有两个主动/优化（“主”）路径和两个主动/非优化（“次”）路径的ONTAP LUN 的正确输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# sanlun lun show -p |grep -p hdisk78
+                    ONTAP Path: vs_aix_clus:/vol/chataix_205p2_vol_en_1_7/jfs_205p2_lun_en
+                           LUN: 37
+                      LUN Size: 15g
+                   Host Device: hdisk78
+                          Mode: C
+            Multipath Provider: AIX Native
+        Multipathing Algorithm: round_robin
+------- ---------- ------ ------- ---------- ----------
+host    vserver    AIX                        AIX MPIO
+path    path       MPIO   host    vserver         path
+state   type       path   adapter LIF         priority
+------- ---------- ------ ------- ---------- ----------
+up      secondary  path0  fcs0    fc_aix_1        1
+up      primary    path1  fcs0    fc_aix_2        1
+up      primary    path2  fcs1    fc_aix_3        1
+up      secondary  path3  fcs1    fc_aix_4        1
+----
+=====
+--
+====
 
 
-== MetroCluster 的建议设置
-
-默认情况下、如果没有LUN的可用路径、则AIX操作系统会强制执行较短的I/O超时。在包括单交换机 SAN 网络结构和发生计划外故障转移的 MetroCluster 配置在内的配置中可能会发生这种情况。有关追加信息 以及对默认设置的建议更改、请参见 link:https://kb.netapp.com/app/answers/answer_view/a_id/1001318["NetApp KB1001318"^]
 
 
+== 步骤 4：查看已知问题
 
-== AIX支持SnapMirror主动同步
-
-从ONTAP 9.11.1开始、SnapMirror主动同步支持AIX。在AIX配置中、主集群是"活动"集群。
-
-在AIX配置中、故障转移会造成中断。每次故障转移时、您都需要在主机上执行重新扫描、才能恢复I/O操作。
-
-要配置适用于SM-BC的AIX、请参阅知识库文章 link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapMirror/How_to_configure_an_AIX_host_for_SnapMirror_Business_Continuity_(SM-BC)["如何为SnapMirror活动同步配置AIX主机"^]。
+带有ONTAP存储版本的 AIX 7.1 没有已知问题。
 
 
 
-== 已知问题
+== 下一步是什么？
 
-没有已知问题。
+link:hu-aix-command-reference.html["了解如何使用 AIX Host Utilities 工具"] 。
