@@ -1,0 +1,35 @@
+= 步骤 3：（可选）从多路径中排除设备
+:allow-uri-read: 
+
+
+
+
+== 步骤 3：（可选）从多路径中排除设备
+
+如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
+
+.步骤
+. 确定WWID：
++
+[source, cli]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+"sa"是要添加到黑名单中的本地SCSI磁盘。
+
++
+例如，WWID为 `360030057024d0730239134810c0cb833`。
+
+. 将WWID添加到"黑名单"部分：
++
+[source, cli]
+----
+blacklist {
+	     wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+

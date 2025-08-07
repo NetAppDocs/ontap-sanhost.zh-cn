@@ -52,3 +52,9 @@ Windows Host Utilities 7.1 包括对 E 系列存储系统、 ONTAP 9 软件和�
 | 运行 `linux_gos_timeout-install.sh` 运行Red Hat Enterprise Linux或SUSE Linux Enterprise Server的Hyper-V子系统不再需要脚本 | 7.1 | 由于使用的是默认超时设置、您无需再运行 `linux_gos_timeout-install.sh`脚本来更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时。 `linux_gos_timeout-install.sh`以前版本的Host Utilities中包含的脚本不再包含在Windows Host Utilities 7.1版中。Windows Host Utilities 7.1使用默认磁盘超时设置。 | 不适用 
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。
+
+
+
+== 下一步
+
+link:hu-wuhu-80.html["了解如何安装 Windows Host Utilities"]

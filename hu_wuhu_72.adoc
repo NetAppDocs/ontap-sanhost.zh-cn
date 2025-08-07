@@ -127,7 +127,6 @@ NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
 --
 通过运行 Host Utilities 安装程序并按照提示以交互方式安装 Host Utilities 软件包。
 
-.步骤
 . 从下载可执行文件 https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.2/downloads["NetApp 支持站点"^]。
 . 更改为下载可执行文件的目录。
 . 运行 `netapp_windows_host_utilities_7.2_x64` 归档并按照屏幕上的说明进行操作。
@@ -139,7 +138,6 @@ NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
 --
 使用 Windows 命令行执行 Host Utilities 的非交互式安装。安装完成后系统自动重启。
 
-.步骤
 . 在Windows命令提示符处输入以下命令：
 +
 [source, cli]

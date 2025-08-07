@@ -189,7 +189,6 @@
   <block id="de4b2454229cdcf5a156dbdf82d30b67" category="list-text">在 Oracle Linux L 7.8 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="aec81109cc90f6dcce296e00814fd999" category="paragraph">在上述示例中，两个命名空间映射到 Oracle Linux 7.8 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。</block>
   <block id="b2d91944503b473fe8f36b2e57bc92ad" category="summary">将 Windows Server 2012 R2 与 ONTAP 结合使用</block>
-  <block id="d39909bec744e2f2c23d014243c69d33" category="section-title">SAN 启动</block>
   <block id="880b9ba9933b6e3ce087d9412e66470b" category="inline-link-macro">Microsoft Update Catalog 2012 R2</block>
   <block id="5a3b43f9090be87b411af7ac82adcb38" category="list-text">按照 Microsoft 提供的说明安装修补程序。</block>
   <block id="4f27a34799ad8580f67b93c57e242ad0" category="section-title">SAN 配置</block>
@@ -961,7 +960,6 @@
   <block id="95a3009a54be763a347295539b3b924d" category="cell">。<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令应返回与给定子系统关联的唯一NVMe控制器列表。在RHEL 9.1中、将显示<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block> 命令将返回属于给定子系统的所有命名空间的NVMe控制器及其相应的ANA状态。但是、ANA状态是每个命名空间的属性、因此、如果您列出了给定命名空间的子系统命令语法、则最好显示具有路径状态的唯一NVMe控制器条目。</block>
   <block id="54bb88571442321a8544c55cb834deb7" category="cell">RHEL 8.7 NVMe-oF主机会创建重复的永久性发现控制器</block>
   <block id="c66549c6038d3ebbf4c13fa9699ba9c4" category="cell">在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是、如果您在NVMe-oF主机上运行ONTAP 9.10.1和Red Hat Enterprise Linux (RHEL) 8.7、则每次执行"nvme discover -p"时都会创建一个重复的PDC。这会导致不必要地使用主机和目标上的资源。</block>
-  <block id="2938598ecd7ea37f885251173aa43089" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下、将显示<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> 文件定义的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 与ONTAP LUN不兼容的LUN。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。</block>
   <block id="2fefce185e7d7498c7e3da22bac84294" category="cell">1508554</block>
   <block id="11613812ad376f15dc5ee5a9f425cea1" category="cell">要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项</block>
   <block id="58cc994c670841fa2f2ecd4302d45e03" category="cell">RHEL 9.0 NVMe-oF主机会创建重复的永久性发现控制器</block>
@@ -1691,21 +1689,9 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="4bd5bd4d2b1b5b4d45d52aa3025e20d9" category="paragraph">您可以为Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。</block>
   <block id="5d672db52f749787478547eba4ca55f3" category="section-title">创建永久性发现控制器</block>
   <block id="d3e220182499e43aeadc8bda16bcb3db" category="paragraph">在以下示例中、将生成一个随机dhchap密钥、其中HMAC设置为3 (SHA-512)。</block>
-  <block id="4ac1d0cb33ca920ad318b5108ad35c83" category="summary">介绍如何将Ubuntu 20.04与ONTAP结合使用</block>
-  <block id="884709522224b2e2f9861c09fe418c9f" category="doc">将Ubuntu 20.04与ONTAP结合使用</block>
-  <block id="c47bdeb8aa6e7dfdadec0c481e4a21ce" category="paragraph">您可以使用ONTAP SAN主机配置设置将ONTAP配置为目标Ubuntu 20.04。</block>
-  <block id="17ce72ad1f5e6eaa8a603ac974a06f2d" category="paragraph">对于Ubuntu 20.04、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。Ubuntu 20.04包含识别和正确管理ONTAP LUN所需的所有设置。</block>
-  <block id="cb22bc47f0f8e662ab604bbcbf236866" category="paragraph">对Ubuntu 20.04操作系统进行编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="47310b4ac9536318d7bb35ce155bbc39" category="paragraph">对于Ubuntu 20.04 ONTAP版本、没有已知问题。</block>
   <block id="3d945423f8e9496c429a5d8c65b4604f" category="sidebar">Ubuntu</block>
   <block id="4ecf3c9493d36f3a582a25b68e645741" category="sidebar">Ubuntu FCP</block>
   <block id="7cd95c816f8a04ff858a857e3e5a484d" category="sidebar">20.04.</block>
-  <block id="61b07fd83e5960959693b88b1afdfcbe" category="summary">介绍如何将Ubuntu 22.04与ONTAP结合使用</block>
-  <block id="d2142f1d82ab3f8920c5e47446631d4b" category="doc">将Ubuntu 22.04与ONTAP结合使用</block>
-  <block id="4fbbd56106aac3814f8ddd0f05db140b" category="paragraph">您可以使用ONTAP SAN主机配置设置将目标ONTAP配置为Ubuntu 22.04。</block>
-  <block id="aa9b36be0bfd178660104314442edd58" category="paragraph">对于Ubuntu 22.04、<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> 文件必须存在、但您不需要对文件进行特定更改。Ubuntu 22.04包含识别和正确管理ONTAP LUN所需的所有设置。</block>
-  <block id="918af3e81e1488cf1519a1f43482b774" category="paragraph">Ubuntu 22.04操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。您可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="268d764f10521ffc4e0f9dfd03765bd6" category="paragraph">对于Ubuntu 22.04 ONTAP版本、没有已知问题。</block>
   <block id="78550e91fbb2b5810210b43b287b7c4e" category="summary">如何使用ONTAP为Ubuntu 22.04配置NVMe-oF主机</block>
   <block id="c6846e0213409c96ad77f710fa307642" category="paragraph">采用非对称命名空间访问(AANA)的Ubuntu 22.04支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FC环境中的ALUA多路径功能、并可通过内核NVMe多路径实施。</block>
   <block id="71251761db71d74ce129581af51deea0" category="paragraph">对于采用ONTAP的Ubuntu 22.04的NVMe-oF主机配置、可获得以下支持：</block>
@@ -1968,20 +1954,12 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="5825e25cd2548b8d4af651b91652e28d" category="paragraph"><block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>要启动多路径守护进程、必须存在该文件。如果此文件不存在、您可以使用命令创建一个空的零字节文件<block ref="307e748c432594fde04ec1d02c6808e4" prefix=" " category="inline-code"></block>。</block>
   <block id="d2151dcee8f5a191a60c2d0cb4823f78" category="list-text">运行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block>命令、然后重新启动主机。</block>
   <block id="318233b2432e2f51f31d04b8c0f7cbef" category="paragraph">您应始终检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。</block>
-  <block id="3ae9aaf85db63ed41ae37b1878de94b3" category="summary">介绍如何将Ubuntu 24.04与ONTAP结合使用</block>
-  <block id="5ec14b83feffb359d4444b755e719320" category="doc">将Ubuntu 24.04与ONTAP结合使用</block>
-  <block id="defdbb12ef0ae2d46274d8fe5aa59d06" category="paragraph">您可以使用ONTAP SAN主机配置设置将目标ONTAP配置为Ubuntu 24.04。</block>
-  <block id="1797c6fe21b28b6b8987ee970844bade" category="paragraph">如果您决定使用 SAN 启动，则配置必须支持它。</block>
-  <block id="be7b845c6ae84ed80593911a7b992a7f" category="paragraph">对于Ubuntu 24.04、该<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件必须存在、但您无需更改该文件、因为Ubuntu 24.04使用识别和正确管理ONTAP LUN所需的设置进行编译。</block>
   <block id="8b40b4ef41e0aa8d3e61056f1c3f19a0" category="paragraph">对于全SAN阵列(ASA)和非ASA配置、您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block>命令验证ONTAP LUN的设置、如以下示例所示。</block>
   <block id="4a69ba1535a62f4e118b39597d1edde0" category="section-title">ASA配置</block>
   <block id="a8b4b0587b094d82b6d3386124d9175b" category="paragraph">在ASA配置中、指向给定LUN的所有路径均处于活动状态并已进行优化。这样可以同时通过所有路径提供I/O操作、从而提高性能。</block>
   <block id="9fa498aba33ec7d79f732c26e2efc9d9" category="paragraph">以下示例显示了映射到ASA用户身份的ONTAP LUN的正确输出：</block>
   <block id="f340ac01fe767e25be9ddb4fa3e6d0a5" category="paragraph">对于非ASA配置、应具有两组具有不同优先级的路径。优先级较高的路径为主动/优化路径、这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
   <block id="41f471e5d42c21f9230c41ea515c384c" category="paragraph">以下示例显示了映射到非ASA用户身份且具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的正确输出：</block>
-  <block id="17e7cd74d1e06a3b09cc2ed56b832ac3" category="paragraph">Ubuntu 24.04操作系统经过编译、可识别ONTAP LUN、并自动为ASA和非ASA配置正确设置所有配置参数。此外、您还可以使用以下建议设置进一步优化主机配置的性能。</block>
-  <block id="8df9c3964d22bd888b14a649ed45d753" category="paragraph">以下示例显示了如何更正被覆盖的默认值。在这种情况下、文件将<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>为和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block>定义与ONTAP LUN不兼容的值<block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block>。如果由于其他SAN阵列仍连接到主机而无法将其删除、则可以专门针对具有设备实例的ONTAP LUN更正这些参数。</block>
-  <block id="4058762f4387b98428e1dd8ec8288b95" category="paragraph">对于Ubuntu 24.04 ONTAP版本、没有已知问题。</block>
   <block id="353cc9a5b9b1899de18cfe6696d32fff" category="list-text">运行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block>命令并重新启动主机。</block>
   <block id="7ed1d546734f7bd4b0ef96e269498a07" category="summary">如何使用ONTAP为Ubuntu 24.04配置NVMe-oF主机</block>
   <block id="60996b6ae2fc149121c64d77e545be4d" category="doc">适用于采用ONTAP的Ubuntu 24.04的NVMe-oF主机配置</block>
@@ -2017,7 +1995,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="198ef744f24c6814a980b52a8b628dbd" category="paragraph">使用ONTAP版本的Ubuntu 24.04的NVMe-oF主机配置没有已知问题。</block>
   <block id="cd5fcfe02b1d4f040fde5ba738d7572a" category="sidebar">24.04</block>
   <block id="4d2491544460a0c7af79b0ca7492e6fd" category="paragraph">您应始终检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件、尤其是在默认部分中、以了解可能会覆盖默认设置的原有设置。</block>
-  <block id="d7b408d96809ae22d6292a5e84814c2a" category="admonition">一个LUN不应需要四个以上的路径。超过四个路径可能会在存储故障期间导致路径问题。</block>
   <block id="ec1fba1237506df59a6228cbfc26fd26" category="admonition">一个LUN不应需要四个以上的路径。在存储故障期间，超过八个路径可能会出现发生原因路径问题。</block>
   <block id="d7eeafe16e993a6db0f390553a4f2af4" category="paragraph">NVMe/TCP协议不支持此<block ref="c73910bff7459eb78b9c2d1e7c0e3ed7" prefix=" " category="inline-code"></block>操作。相反、您可以通过手动执行NVMe/TCP或<block ref="d2cdac60ef2245cec13c7ecfb5c3b376" prefix=" " category="inline-code"></block>操作来发现NVMe/TCP子系统和命名路径<block ref="b640a0ce465fa2a4150c36b305c1c11b" prefix=" " category="inline-code"></block>。</block>
   <block id="15090de1ea1067de344502d808b5a4bd" category="summary">介绍如何将Oracle Linux 8.10与ONTAP结合使用</block>
@@ -2429,10 +2406,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="b25ec790b4cbb02c184ec7d8479f9e72" category="summary">介绍如何在ONTAP中使用Solaris Host Utilities 6.2</block>
   <block id="22ee06c1124036b790e8e12bab28c94a" category="doc">安装适用于ONTAP存储的Solaris Host Utilities 6.2</block>
   <block id="12ce99988bb774881369b300029d0c1f" category="paragraph">以下示例将使用<block ref="5187972b2183e07957bec1dbaf34d29c" prefix=" " category="inline-code"></block>命令安装Solaris安装包：</block>
-  <block id="97f9e9274f6dc3116e102b9f9e29e4cf" category="admonition">NetApp Linux主机实用程序软件包不适用于Ubuntu 20.04操作系统。</block>
-  <block id="36a3f8c9356af2833dfeecba1c622a0c" category="admonition">NetApp Linux主机实用程序软件包不适用于Ubuntu 22.04操作系统。</block>
-  <block id="ed15c03c842cb2a2695650adf5e123c7" category="admonition">NetApp Linux主机实用程序软件包不适用于Ubuntu 24.04操作系统。</block>
-  <block id="a21ffa856fbd1843f5375291ecd10dd9" category="paragraph">使用<block ref="d663e2c355c00396895dd4c79ec8b92b" category="inline-link-macro-rx"></block>验证您的操作系统、HBA、HBA固件、HBA启动BIOS和ONTAP版本是否受支持。</block>
   <block id="15d9fd1ff3011117296f7ee36d231ebd" category="paragraph">您可以对采用FC、FCoE和iSCSI协议的Red Hat Enterprise Linux和Oracle Linux (基于Red Hat兼容内核)平台的Veritas Storage Foundation 6系列使用ONTAP SAN主机配置设置。</block>
   <block id="fd1139296e6463001441b6b2bcf07035" category="paragraph">您必须验证您的配置是否满足系统要求。有关详细信息、请参见<block ref="d4eba3849609aea965d9c09098fd43df" category="inline-link-rx"></block>和Veritas HCL表。</block>
   <block id="ebd757716a60a98a115db0a8540bc8d2" category="paragraph">NetApp建议使用以下Veritas VxDMP可调参数、以便在存储故障转移操作中实现最佳系统配置。</block>
@@ -3843,11 +3816,8 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="c96052047f6e2280e6b7aa1f7a351896" category="cell">使用命令...</block>
   <block id="060c7613df3b0d7fd1bf71f18ab099cb" category="cell">具有多路径的 FCP 作为 MPxIO</block>
   <block id="ad577776d81734f3f29e6764dbcc4520" category="inline-link-macro">Solaris 主机支持SnapMirror主动同步（以前称为 SM-BC）配置中的推荐设置</block>
-  <block id="29cf82657b8be502ce36ea12f289a417" category="cell"><block ref="c463d73ec1f40f47a93931626b8fc677" prefix="" category="inline-code"></block>有关SnapMirror主动同步配置更改的信息，请参阅知识库文章<block ref="7c741ba5f1f526ee70c650413daefc0a" category="inline-link-macro-rx"></block>。</block>
   <block id="b823fb4d79c4390b2c148c74a9b89103" category="cell">使用多路径作为 DMP 的 FCP</block>
-  <block id="93632c49f604d0b310c0babdc34326c2" category="cell"><block ref="06faf6d1b783c18c94681d6c1f16428a" prefix="" category="inline-code"></block></block>
   <block id="4e7c844ed51a666f84ad8bcf2e71d65a" category="cell">MetroCluster上的 FCP 采用多路径作为 MPxIO，并且“所有路径均关闭”值设置为 120 秒。  （这是MetroCluster配置的推荐设置）。</block>
-  <block id="b07019d4f94787b75c1485b9c2611aaf" category="cell"><block ref="5f101970758620c2992abbe36bba041b" prefix="" category="inline-code"></block>有关详细信息，请参阅知识库文章<block ref="4063ba8be1734fe40e57f28ec9d72b76" category="inline-link-macro-rx"></block>。</block>
   <block id="3b73fde0526aa5735452da53c395dc38" category="paragraph">主机实用程序为ONTAP LUN 加载以下NetApp推荐的超时参数设置。</block>
   <block id="64349882c1f787c3b5516b9e9f8ad791" category="list-text">验证主机实用程序安装：</block>
   <block id="19b0b1ffb2094b2504c5f1a5a6ed4383" category="doc">使用 Solaris Host Utilities 命令验证ONTAP存储配置</block>
@@ -3944,8 +3914,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="1f7fcca8d7ffda3b845b35eb5e1b2d7a" category="paragraph">您可以使用 Solaris 11.3 的多路径来管理ONTAP LUN。</block>
   <block id="da81eb6295b00861bab1b50a7fe94dc9" category="paragraph">多路径使您能够在主机和存储系统之间配置多条网络路径。如果一条路径发生故障，流量仍可通过其余路径继续传输。</block>
   <block id="e1428e77099ea286a233c882eef3c5d5" category="paragraph">适用于带有ONTAP存储的 FCP 和 iSCSI 的 Solaris 11.3 版本存在以下已知问题：</block>
-  <block id="aefa1c67bd56ed8b8ae7b71c91fabd7a" category="inline-link-macro">了解如何使用 Solaris Host Utilities 6.2 工具</block>
-  <block id="76ae943ec9d0c473e0ca68d35b9662ce" category="paragraph"><block ref="00c35a1e192164e9fc4b8a6af4d2db02" category="inline-link-macro-rx"></block> 。</block>
   <block id="54db225106fc02ccdb6fa2058389400c" category="paragraph">Solaris Host Utilities 支持多种 Solaris 环境和多种传输协议。以下是主要的 Solaris Host Utilities 环境：</block>
   <block id="bc6f3dc142b02ac42cfba1de410cd59f" category="list-text">使用 SPARC 处理器或 x86/64 处理器的系统上的带有 MPxIO 和光纤通道 (FC) 或 iSCSI 协议的本机操作系统。</block>
   <block id="d9c6d7a6adf54489dc3d1c65712f561e" category="paragraph">Solaris Host Utilities 6.2 支持以下 Solaris 系列：</block>
@@ -4056,4 +4024,30 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="d4609abcc5de600b2cd5aa87443c612c" category="sidebar">安装 Windows Host Utilities 8.0</block>
   <block id="390e5244f8ae0a5b4cdd721ad6036cb9" category="sidebar">配置 Windows 主机实用程序的设置</block>
   <block id="89a348be490d3be0bdc23d43fb585c56" category="sidebar">7.3/4.x</block>
+  <block id="f72cfd397ddcffbe2327665e83f6e4fd" category="doc">步骤 3：（可选）从多路径中排除设备</block>
+  <block id="2767a9a2ad485daf64375577843d3ba2" category="doc">步骤 4：自定义ONTAP LUN 的多路径参数</block>
+  <block id="6b22e7ac9e8b2c938a9f3cfefc2acf42" category="paragraph">Linux Host Utilities 软件包不支持 Ubuntu 操作系统。</block>
+  <block id="541fef17acfcdb9ddcecc5eea7c2d771" category="inline-link-macro">了解如何安装 AIX Host Utilities</block>
+  <block id="4943444f1b42627e453b1e0c8a2cd150" category="paragraph"><block ref="4943444f1b42627e453b1e0c8a2cd150" category="inline-link-macro-rx"></block></block>
+  <block id="3f9444261a484426c9ae23c5b9b82e8d" category="inline-link-macro">了解如何安装 HP-UX Host Utilities</block>
+  <block id="e79831ce53ed0916ad57668b90bc9a1b" category="paragraph"><block ref="e79831ce53ed0916ad57668b90bc9a1b" category="inline-link-macro-rx"></block></block>
+  <block id="e9930ee9972a09b2fa1b31e4f5fbe66f" category="inline-link-macro">了解如何安装 Linux 主机实用程序</block>
+  <block id="e96921eeb66d57c1e2d154eb9ab78984" category="paragraph"><block ref="e96921eeb66d57c1e2d154eb9ab78984" category="inline-link-macro-rx"></block></block>
+  <block id="1d60707d2fd2532f7783d3c34fe248ce" category="paragraph">有关SnapMirror主动同步配置更改的信息，请参阅知识库文章<block ref="7c741ba5f1f526ee70c650413daefc0a" category="inline-link-macro-rx"></block>。</block>
+  <block id="a947e38c0699762b6b117c5faa8af149" category="paragraph">有关更多信息，请参阅知识库文章<block ref="4063ba8be1734fe40e57f28ec9d72b76" category="inline-link-macro-rx"></block> 。</block>
+  <block id="5904ba8db5ff841e6a7d13a462291c66" category="inline-link-macro">了解如何安装 Solaris Host Utilities</block>
+  <block id="2a620c94e95b2a7a9b0a5187427a9dc9" category="paragraph"><block ref="2a620c94e95b2a7a9b0a5187427a9dc9" category="inline-link-macro-rx"></block></block>
+  <block id="f98d44b09f5d0cc59433485eb0048243" category="inline-link-macro">了解如何安装 Windows Host Utilities</block>
+  <block id="cc30e60c3bfc777355fb5c1a9f21201f" category="paragraph"><block ref="cc30e60c3bfc777355fb5c1a9f21201f" category="inline-link-macro-rx"></block></block>
+  <block id="eb9e9eaeca9a2fe6f091f95c60ceeda4" category="summary">配置 Ubuntu 20.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 操作的特定参数和设置。</block>
+  <block id="2eea900ee581f5726b661093cf8ad505" category="doc">使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 20.04</block>
+  <block id="dd8d9457c96c61b509341e8fc9c06a5a" category="section-title">步骤 2：确认主机的多路径配置</block>
+  <block id="86068021aef836dc1f6f1acf0c458729" category="paragraph">您可以使用 Ubuntu 20.04 的多路径来管理ONTAP LUN。</block>
+  <block id="e5c9aae3aa070feffc71ad22ae694781" category="section-title">步骤 5：查看已知问题</block>
+  <block id="00958a9c412688342677cda75697e733" category="summary">配置 Ubuntu 22.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 操作的特定参数和设置。</block>
+  <block id="ff819e4a2fe4a976a60235e7548a85fb" category="doc">使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 22.04</block>
+  <block id="0ec9e84225e24bae7e1764e1ec2d5208" category="paragraph">您可以使用 Ubuntu 22.04 的多路径来管理ONTAP LUN。</block>
+  <block id="7ffbdb03ebbe3dde997db38f057eaa6f" category="doc">使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 24.04</block>
+  <block id="907d5397191da1f1ee4679d077fb0523" category="paragraph">配置 Ubuntu 24.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 操作的特定参数和设置。</block>
+  <block id="7346a23f776ee48b909f292127a35cfd" category="paragraph">您可以使用 Ubuntu 24.04 的多路径来管理ONTAP LUN。</block>
 </blocks>

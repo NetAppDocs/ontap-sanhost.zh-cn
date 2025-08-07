@@ -50,3 +50,9 @@ FC驱动程序绑定已从更改为 `ssd(4D)` to `sd(4D)`。移动中的配置 `
 * FCP常规：显示与特定主机无关的FC和主机总线适配器(HBA)错误。
 * FCP—Solaris
 
+
+
+
+== 下一步
+
+link:hu-solaris-80.html["了解如何安装 Solaris Host Utilities"]
