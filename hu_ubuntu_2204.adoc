@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_ubuntu_2204.html 
 keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu 
-summary: 配置 Ubuntu 22.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 操作的特定参数和设置。 
+summary: 在 Ubuntu 24.04 主机上安装 Linux Host Utilities 以使用ONTAP LUN 管理 FCP 和 iSCSI 协议操作。 
 ---
 = 使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 22.04
 :toc: macro
@@ -19,15 +19,11 @@ summary: 配置 Ubuntu 22.04 以实现多路径，并使用ONTAP存储的 FCP �
 
 
 [role="lead"]
-配置 Ubuntu 22.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 操作的特定参数和设置。
+Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 22.04 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
 
-[NOTE]
-====
-Linux Host Utilities 软件包不支持 Ubuntu 操作系统。
 
-您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
+NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
 
-====
 
 
 == 第1步：(可选)启用SAN启动
@@ -48,7 +44,18 @@ Linux Host Utilities 软件包不支持 Ubuntu 操作系统。
 
 
 
-== 步骤 2：确认主机的多路径配置
+== 第2步：安装Linux Host Utilities
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+link:hu-luhu-80.html["安装 Linux Host Utilities 8.0"] 。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
+
+
+
+== 第3步：确认主机的多路径配置
 
 您可以使用 Ubuntu 22.04 的多路径来管理ONTAP LUN。
 
@@ -202,7 +209,7 @@ size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
 
 
 
-== 步骤 3：（可选）从多路径中排除设备
+== 第4步：(可选)从多路径中排除设备
 
 如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
 
@@ -234,7 +241,7 @@ blacklist {
 
 
 
-== 步骤 4：自定义ONTAP LUN 的多路径参数
+== 第5步：自定义ONTAP LUN的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
 
@@ -267,6 +274,17 @@ devices {
 ====
 
 
-== 步骤 5：查看已知问题
+== 第6步：查看已知问题
 
 没有已知问题。
+
+
+
+== 下一步是什么？
+
+* link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
+* 了解ASM镜像。
++
+自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
+
+

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_citrix_84.html 
 keywords: host utilities, citrix, XenServer, 8 series, netapp, ontap, san, boot 
-summary: 介绍如何将 Citrix XenServer 8.4 与 ONTAP 结合使用 
+summary: 配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。 
 ---
 = 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 8.4
 :hardbreaks:
@@ -16,8 +16,13 @@ summary: 介绍如何将 Citrix XenServer 8.4 与 ONTAP 结合使用
 
 
 [role="lead"]
-"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在 Citrix Xenserver 8.4 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 帮助您管理 ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。
 
+[NOTE]
+====
+Linux Host Utilities 软件包不支持 Citrix Hypervisor 操作系统。
+
+====
 
 
 == 第1步：(可选)启用SAN启动
@@ -38,20 +43,9 @@ summary: 介绍如何将 Citrix XenServer 8.4 与 ONTAP 结合使用
 
 
 
-== 第2步：安装Linux Host Utilities
+== 步骤 2：确认主机的多路径配置
 
-NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
-
-link:hu_luhu_71.html["安装Linux Host Utilities 7.1"](英文)
-
-
-NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
-
-
-
-== 第3步：确认主机的多路径配置
-
-您可以使用 Citrix Xenserver 8.4 的多路径来管理 ONTAP LUN。
+您可以使用 Citrix Hypervisor 8.4 的多路径来管理ONTAP LUN。
 
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 
@@ -197,7 +191,7 @@ size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_han
 
 
 
-== 第4步：(可选)从多路径中排除设备
+== 步骤 3：（可选）从多路径中排除设备
 
 如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
 
@@ -229,7 +223,7 @@ blacklist {
 
 
 
-== 第5步：自定义ONTAP LUN的多路径参数
+== 步骤 4：自定义ONTAP LUN 的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
 
@@ -240,6 +234,9 @@ CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机�
 
 以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
 
+.显示示例
+[%collapsible]
+====
 [listing, subs="+quotes"]
 ----
 defaults {
@@ -256,19 +253,9 @@ devices {
    }
 }
 ----
+====
 
 
-== 第6步：查看已知问题
+== 步骤 5：查看已知问题
 
 没有已知问题。
-
-
-
-== 下一步是什么？
-
-* link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
-* 了解ASM镜像。
-+
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
-
-

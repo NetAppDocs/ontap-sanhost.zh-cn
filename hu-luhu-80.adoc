@@ -55,7 +55,7 @@ rpm -e netapp_linux_unified_host_utilities-8-0
 +
 对于早期版本的Linux Host Utilities、请转到安装主机实用程序软件的目录、然后输入uninstall命令以删除已安装的软件包。
 
-. NetApp Linux Host Utilities 软件包可在NetApp支持站点上以 64 位 .rpm 文件的形式获取。从link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/7.1/downloads["NetApp 支持站点"^]给你的主人。
+. NetApp Linux Host Utilities 软件包可在NetApp支持站点上以 64 位 .rpm 文件的形式获取。从link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/8.0/downloads["NetApp 支持站点"^]给你的主人。
 . 进入下载软件包的目录并安装：
 +
 [source, cli]

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: hu_centos_74.html 
 keywords: host utilities, centos, linux, 7.4, netapp, ontap 
-summary: 介绍如何在 ONTAP 中使用 CentOS 7.4 
+summary: 在 CentOS 7.4 主机上安装 Linux Host Utilities 以管理使用ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
 ---
 = 为 ONTAP 存储配置 CentOS 7.4 的 FCP 和 iSCSI
 :hardbreaks:
