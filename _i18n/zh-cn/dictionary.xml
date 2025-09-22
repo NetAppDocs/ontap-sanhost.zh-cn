@@ -1101,19 +1101,14 @@
   <block id="0ca827b324b67329c1c236782d79cacc" category="list-text">打开Windows *程序和功能*(Windows Server 2012 R2、Windows Server 2016、Windows Server 2019和Windows 2022)。</block>
   <block id="b3d12894d56e85cc742cb855ce388cdf" category="list-text">选择*更改*。</block>
   <block id="26f9e6294b1a61ed4692d275ee8885e0" category="list-text">根据需要选择*修复*或*删除*。</block>
-  <block id="555c94ad53e123ccc406674df5fbc0ba" category="paragraph">Windows Host Utilities会设置一些参数、这些参数会影响Windows主机对数据延迟或丢失的响应方式。已选择特定值以验证Windows主机是否正确处理诸如将存储系统中的一个控制器故障转移到其配对控制器等事件。</block>
-  <block id="5db0ac001d15414764c966da33036c9d" category="paragraph">FC、NVMe/FC和iSCSI HBA还具有一些参数、您必须设置这些参数以确保最佳性能并成功处理存储系统事件。</block>
-  <block id="fb08e9e706df430eb21a77dc77a7e2cf" category="paragraph">您必须手动设置iSCSI HBA参数。</block>
   <block id="c372bc249b31090fc161de15de7b7603" category="admonition">HKLM是的缩写<block ref="86565cb5d05fc56046ceb32627a70264" prefix=" " category="inline-code"></block>。</block>
   <block id="6393c224d437438785810287f79cf4dc" category="cell">HKLM\SYSTEM\CurrentControlSet \Services\msdsm\Parameters \DsmMaximumStateTransitionTime</block>
   <block id="507442ae6083cce9fd165274005cd952" category="cell">HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList</block>
-  <block id="4032e28156cfb67550271f983690ac63" category="cell">"NetApp LUN"、"NetApp LUN C-模式"NVMe NetApp ONTAO"</block>
   <block id="2a10dce2db92496db6490d59d8a30023" category="cell">HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \IPSecConfigTimeout</block>
   <block id="547dcf1ccffce27bb75b008ae19d2cad" category="cell">HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instation_ID \Parameters \LinkDownTime</block>
   <block id="1f1ffa8ff21ddd6861b7c27dc7135597" category="cell">HKLM\SYSTEM\CurrentControlSet\Services \ClusDisk \Parameters\ManagementDisksOnSystemBuses</block>
   <block id="3f2bc56be3f6b729d16e1597fa8b4941" category="cell">HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime</block>
   <block id="86d63918f540a0e97186b88a4bd8db36" category="cell">HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList</block>
-  <block id="da30944c1d57c7273e8b0e5b8e7de029" category="cell">"NetApp LUN"、"NetApp LUN C-模式"、"NVMe NetApp ONTAOCON"</block>
   <block id="011d6126050fa9b098fd5f8b3202e725" category="cell">HKLM\SYSTEM\CurrentControlSet\Services \vnetapp\Parameters\PathVerifyEnabled</block>
   <block id="0cb41c0c0339d303dbc72093df6e7bc2" category="cell">HKLM\SYSTEM\CurrentControlSet\Services \MPIO\Parameters\PDORemovePeriod</block>
   <block id="d157c38b633d15d34a4e43ef4ea3b75e" category="cell">HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\PDORemovePeriod</block>
@@ -1122,8 +1117,6 @@
   <block id="dd0c0b55cec9c97153981c22e267be6d" category="cell">HKLM\SYSTEM\CurrentControlSet\Services\msdsm \Parameters\RetransyInterval</block>
   <block id="2faabf4d68e773f3251eae7f2305fe39" category="cell">HKLM\SYSTEM\CurrentControlSet\Services\vnetapp \Parameters\RetransyInterval</block>
   <block id="c5a575f6523964e8855617a1937db583" category="section-title">NVMe参数</block>
-  <block id="ed248deb33450195d58919cecd0cf8cd" category="paragraph">对于Emulex FC HBA、安装程序会设置以下参数：</block>
-  <block id="9e4350dab47d06fcefddc77af0b6f8d1" category="open-title">选择MPIO时</block>
   <block id="f1ce082f6baf3c653cdd07d94a942859" category="list-text">如果无法解决此问题、请联系NetApp技术支持以获得帮助。</block>
   <block id="4a99bdb63932aafd9744169779509cbd" category="list-text">如果您使用的是MPIO软件、请验证您是否具有以下驱动程序设置：</block>
   <block id="51cf8280ca9efd5addc2361e7896683a" category="paragraph">此时将显示*连接到主机*对话框。</block>
@@ -1656,10 +1649,8 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="39a8fcfc2fec9eb3c35083b0b8a2cae4" category="list-text">搜索<block ref="04daf00c3b5bc166fd02128d9bfd3254" category="inline-link-rx"></block> 最近发现的问题。</block>
   <block id="9273ec471c4dd705bc01abe70b167469" category="list-text">在“高级搜索”下的“错误类型”字段中，选择*iSCSI - Windows*，然后选择*GO。您应重复搜索错误类型* fcp -windows*。</block>
   <block id="1a959178e792ae0c668c4f3a0bd45c65" category="list-text">收集有关系统的信息。</block>
-  <block id="ef127e2524262f219434d09112047ee0" category="paragraph">Host Utilities需要特定的注册表和参数设置、才能验证Windows主机是否正确处理存储系统行为。</block>
   <block id="40bb1ea4c1bbc484f41a531e80ddb519" category="admonition"><block ref="c6d731b2e6e90d0e19df48cb3d9d7498" prefix="" category="inline-code"></block> 是的缩写<block ref="86565cb5d05fc56046ceb32627a70264" prefix=" " category="inline-code"></block>。</block>
   <block id="a624f3024f6945790c5f3a01e38649bf" category="paragraph">请参见<block ref="cc2304a59b5feaeebd0c5646fd22caf0" category="inline-link-rx"></block> 有关注册表参数的详细信息。</block>
-  <block id="d7b45eaf5a2c22cb7c622ea9675a6f32" category="paragraph">在使用FC的系统上、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。</block>
   <block id="b182eae32a0022889eab1f98a5ba3a49" category="admonition">根据程序的不同，这些参数的名称可能会略有不同。
 例如、在QLogic QConvergeConsole程序中、参数显示为<block ref="b554d47c6702123b3a28a3e04ed39621" prefix=" " category="inline-code"></block>。
 Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category="inline-code"></block> file将此参数显示为<block ref="08a7801aadb2d395506d0735d17dcf62" prefix=" " category="inline-code"></block> 或<block ref="e29ad18354768c222941f5de52fd92c9" prefix=" " category="inline-code"></block>、具体取决于是否指定MPIO。但是，所有这些名称都引用相同的 HBA 参数。请参见<block ref="6d63c8366c015331075fa86de38975e8" category="inline-link-rx"></block> 或<block ref="4399df604c07a452cc084d95811dafae" category="inline-link-rx"></block> 以了解有关超时参数的更多信息。</block>
@@ -2417,11 +2408,8 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="1078de040a8679207e1783a9da9e836c" category="cell">由于使用的是默认超时设置、您无需再运行<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block>脚本来更改Red Hat Enterprise Linux 5、Red Hat Enterprise Linux 6或SUSE Linux Enterprise Server 11 Hyper-V子系统上的磁盘超时。<block ref="1582eea6c0c614d1d444d6dfe1f82f4f" prefix=" " category="inline-code"></block>以前版本的Host Utilities中包含的脚本不再包含在Windows Host Utilities 7.1版中。Windows Host Utilities 7.1使用默认磁盘超时设置。</block>
   <block id="2c1c2305f2baefceb44e8e1b31927d88" category="doc">安装Windows Host Utilities 7.2</block>
   <block id="b31a86b1dca7dfa1a67b27d591387cdb" category="paragraph">Host Utilities支持不同的Windows主机配置、协议和多路径选项。有关详细信息，请参见<block ref="e29293ebfe5b9174e3113da62e6426ca" category="inline-link-rx"></block>。</block>
-  <block id="a1b5fc21b8f72dca8d1203383f6fcf00" category="paragraph">Windows Host Utilities附带的安装程序会将Windows、FC和NVMe/FC HBA参数设置为支持的值。</block>
-  <block id="c6aa64a3d9475fd563f6e8ab36eafc09" category="paragraph">根据您在运行安装程序时是否指定Microsoft多路径I/O (MPIO)支持、安装程序会设置不同的值。</block>
   <block id="3160be9723d9dc9c210d8c8b48bd0bcf" category="section-title">由Windows Host Utilities 7.2设置的注册表值</block>
   <block id="4da5f705a95e0ed235573a4eb64fce01" category="section-title">由Windows Host Utilities 7.1设置的注册表值</block>
-  <block id="cc28ccfb40f63eafdf4c15d20d5ee4bc" category="paragraph">Windows Host Utilities安装程序会根据您在安装期间所做的选择自动设置注册表值。您应了解这些注册表值，即操作系统版本。</block>
   <block id="125e0f5615cef4db790518b2fd3b4491" category="paragraph">以下值由Windows Host Utilities安装程序设置。除非另有说明、否则所有值均为十进制值。</block>
   <block id="10ce28246e5d07ff8493b9244d2b2aca" category="list-text">选择*Windows NetApp主机实用程序*。</block>
   <block id="044af269e446bb1cbed59c4821cfa418" category="list-text">修复Windows Host Utilities：</block>
@@ -2610,7 +2598,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="fa5c369c0560373ede3332d2508c4819" category="paragraph">安装Windows Host Utilities 7.2时、LimTransferSize参数会自动设置为"1"。安装后、您需要手动将LimTransferSize值更改为"0"并重新启动服务器。</block>
   <block id="70cefc9a608dc188dd16deb1397a1529" category="cell">指定了MPIO支持且您的服务器为Windows Server 2016、2012 R2、2012、2008 R2或2008时、除非检测到Data ONTAP DSM</block>
   <block id="28c4a2aff9dab89964d88a9594119baa" category="cell">服务器为Windows Server 2016、2012 R2、2012、2008 R2或2008时</block>
-  <block id="88db364807adcc50e3c03e4e7c2eb386" category="paragraph">对于QLogic FC HBA、安装程序会设置以下参数：</block>
   <block id="b76b67fa1e708efcaa2d6a257e3dc3a5" category="summary">适用于采用ONTAP 的Windows Server 2052的NVMe/FC主机配置</block>
   <block id="e240b4a9acf4df1925780394d9f14be9" category="doc">为Windows Server 2025配置适用于ONTAP的NVMe/FC</block>
   <block id="1332a2397f4fcbb21e78a6e3c713af4b" category="paragraph">您可以在运行Windows Server 2025的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。</block>
@@ -3906,32 +3893,23 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="50b0de549390e9fd0aff72d2cc76922d" category="paragraph">通过运行 Host Utilities 安装程序并按照提示以交互方式安装 Host Utilities 软件包。</block>
   <block id="d539640f2a8ad84ff2b6b210b3c82a8b" category="doc">为ONTAP存储安装 Windows Host Utilities 7.2</block>
   <block id="62113ee23a34404b1f086b7ed1df786b" category="doc">使用ONTAP存储配置 Windows Host Utilities 的注册表设置</block>
-  <block id="4d1f74f34674eef0c5bdd0068e40ee04" category="paragraph">并非所有值都适用于SANtricity Storage Manager的设备特定模块 (DSM)；但是，Host Utilities 设置的值与SANtricity Storage Manager的 DSM 设置的值之间的任何重叠都不会导致冲突。</block>
   <block id="80fecb40ffb39e22d2139bf9886132bc" category="inline-xref">NVME 参数</block>
   <block id="40bd27b40d44b862091d49e4f0538774" category="paragraph">安装 Windows Host Utilities 7.2 后，您需要更改 LimTransferSize 参数值。看<block ref="f34264ec923664aedfb2a9ccd6257931" category="inline-xref-macro-rx"></block> 。</block>
   <block id="05371652e7984167bbb3f85201a5b89b" category="paragraph">对于 Windows Host Utilities 8.0、7.2 或 7.1 的所有其他参数和注册表项，您无需更改值，除非技术支持建议您这样做。</block>
   <block id="3552ff32d73200dbe48fb217ccbdfe65" category="section-title">Windows Host Utilities 8.0 设置的注册表值</block>
-  <block id="ec995b0ce5d8e95aabbe85d2749a66ea" category="paragraph">Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您应该了解这些值和操作系统版本。</block>
   <block id="a254beadccf36a8b85672cf8419d64d8" category="open-title">HKLM 值</block>
-  <block id="919cb244d228a3f71854b3231f8cff0c" category="paragraph">以下注册表值由 Windows Host Utilities 安装程序设置。除非另有说明，所有值均为十进制。</block>
   <block id="071b3c301587fc461b5b5db6056fea64" category="cell">当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时</block>
   <block id="213770055804b675ffe14467be7be594" category="cell">当您的服务器是 Windows Server 2025、2022、2019 或 2016 时</block>
   <block id="ef7643028f04a4cac8da8e05df5237b1" category="cell">当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时</block>
-  <block id="4be4845df45475c63e7fef3544b5e46d" category="paragraph">安装 Windows Host Utilities 8.0 时，以下 NVMe Emulex 驱动程序参数会更新：</block>
   <block id="408cf458ebdd52832b74587ec65fee92" category="paragraph">安装 Windows Host Utilities 7.2 时，将更新以下 NVMe Emulex 驱动程序参数：</block>
-  <block id="53ece88e8d0752adafe41f998a3f679e" category="open-title">当未选择 MPIO 时</block>
   <block id="20aac534719ebb4b8d33960d910552ae" category="section-title">了解 Host Utilities 对 FC HBA 驱动程序设置的更改</block>
-  <block id="903900c64c64e66749538a5ee0627e74" category="paragraph">在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，Windows Host Utilities 会检查几个参数，在某些情况下还会修改这些参数。</block>
-  <block id="00c6b6db42cf4f18229789d1bbfc4392" category="paragraph">如果检测到 MS DSM for Windows MPIO，Windows Host Utilities 将设置以下参数的值：</block>
   <block id="290855c6daac5448d222f3c661f749fb" category="list-text">*LinkTimeOut*：定义物理链路断开后主机端口恢复 I/O 之前等待的时间长度（以秒为单位）。</block>
   <block id="9e02085844efecca4159003505f0e34a" category="list-text">*NodeTimeOut*：定义主机端口识别到目标设备的连接断开之前的时间长度（以秒为单位）。</block>
   <block id="31544e277536e777e9c3f798fd5e0913" category="list-text">是否正在使用 MPIO 软件。</block>
   <block id="62c6d5921cc25fa2fecef7c94356c189" category="inline-link-macro">运行修复选项</block>
   <block id="7eaaf936e50fb533dab6ae4ba3b589bc" category="paragraph">您可以通过以下方式更正 HBA 设置<block ref="262b15737127f72127997ad6784b0e26" category="inline-link-macro-rx"></block>在 Windows Host Utilities 安装程序中。</block>
-  <block id="b43c94ea962672d4a5f84fbdbc6b42a8" category="paragraph">如果您有 FC 系统，请验证 Emulex HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。</block>
   <block id="623dcbddc542817cdcdf36e9ce6846ce" category="list-text">从列表中选择适当的 HBA，然后选择“*驱动程序参数*”选项卡。</block>
   <block id="713471818764991427fe06a02c382d7c" category="list-text">如果您不使用 MPIO 软件，请确保您具有以下驱动程序设置：</block>
-  <block id="de1f703ddcd801c8b7ae8fb7d88721b9" category="paragraph">在 FC 系统上，验证 QLogic HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。</block>
   <block id="d36746d8149fbda72e2e4e6b5a18add7" category="list-text">打开 QConvergeConsole，然后在工具栏上选择 *连接*。</block>
   <block id="de65582b3d66343f81547ddec20392d3" category="list-text">如果您没有使用 MPIO 软件，请验证您是否具有以下驱动程序设置：</block>
   <block id="4986650d14b24086d20a38215ecb279e" category="doc">修复并删除适用于ONTAP存储的 Windows Host Utilities</block>
@@ -4052,4 +4030,25 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="3d4de8befb0eddb7be95b9eb899bcd21" category="summary">在 Ubuntu 24.04 主机上安装 Linux Host Utilities 以使用ONTAP LUN 管理 FCP 和 iSCSI 协议操作。</block>
   <block id="faed4c9c8188f7390b773fb64e42fc29" category="paragraph">Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 22.04 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
   <block id="3b2ad8d11d49615d3cb062774e116630" category="paragraph">Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 24.04 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="876d8d634dabd3b4faa05168e2953c68" category="paragraph">Windows Host Utilities 需要某些注册表和参数设置来验证 Windows 主机是否正确处理存储系统行为。</block>
+  <block id="3187b1de6020504a9ef2201371f4ddfb" category="paragraph">Windows 主机实用程序设置影响 Windows 主机如何响应数据延迟或丢失的参数值。这些值验证 Windows 主机是否正确处理事件，例如存储系统中的一个控制器到其伙伴控制器的故障转移。</block>
+  <block id="5761ec5c04ac77cb295ddef5c5adf39f" category="paragraph">某些值不适用于SANtricity Storage Manager的设备特定模块 (DSM)。  Windows Host Utilities 与SANtricity Storage Manager的 DSM 设置的值之间的重叠不会导致冲突。</block>
+  <block id="1c45b11e7112ae3015b6528aac98db47" category="paragraph">您还需要设置 FC、NVMe/FC 和 iSCSI HBA 参数以优化性能并成功处理存储系统事件。</block>
+  <block id="ac299bbbaa386f926bfeffd61f3f329a" category="paragraph">Windows Host Utilities 安装程序将 Windows、FC 和 NVMe/FC HBA 参数设置为支持的值。您需要手动设置iSCSI HBA参数。</block>
+  <block id="0600911da7c2ed3e4c75b35a8383464b" category="paragraph">当您在安装过程中指定 Microsoft 多路径 I/O (MPIO) 支持时，安装程序会设置不同的值。</block>
+  <block id="1289e36ad9af025f92a68eeb71942e45" category="paragraph">Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您需要检查这些值和操作系统版本。</block>
+  <block id="05ca7c309c201d00d9edda26c29f1814" category="paragraph">Windows Host Utilities 安装程序设置以下注册表值。除非另有说明，所有值均为十进制。</block>
+  <block id="9315284a762c1471b85be43158649395" category="cell">“NETAPP LUN”、“NETAPP LUN C 模式” “NVMe NetApp ONTAP Con”</block>
+  <block id="f43fc70fd90855c7e4c4c9cba7d7f1fd" category="cell">“NETAPP LUN”、“NETAPP LUN C 模式”、“NVMe NetApp ONTAP Con”</block>
+  <block id="65d5481255e5037a619c921fafb15def" category="paragraph">Windows Host Utilities 8.0 在安装过程中更新以下 NVMe Emulex 驱动程序参数：</block>
+  <block id="ab51b6ada28fc394eb4698434eaf6668" category="paragraph">Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值。您需要检查这些注册表值和操作系统版本。</block>
+  <block id="619778ebb1defb58b2f571d8beed6661" category="paragraph">Windows Host Utilities 安装程序为使用 FC 的系统上的 Emulex 和 QLogic FC HBA 设置所需的超时值。</block>
+  <block id="ca146b673983ec595aae317e1a1e764a" category="paragraph">安装程序为 Emulex FC HBA 设置以下参数：</block>
+  <block id="187c9ec598092d65351eaf4f361d83f7" category="open-title">当您选择 MPIO 时</block>
+  <block id="17f9a8611eed107aecf0406db4a2b59d" category="open-title">当您不选择 MPIO</block>
+  <block id="d915a9fedab871eb41a22f16bfb69c64" category="paragraph">安装程序为 QLogic FC HBA 设置以下参数：</block>
+  <block id="2ff89f8cd6f01614cdfc9aff8ff7a2a4" category="paragraph">在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，Windows Host Utilities 会检查多个参数，在某些情况下还会修改这些参数。</block>
+  <block id="30fe8c509bd758431e60f7f83e9085f0" category="paragraph">如果检测到 MS DSM for Windows MPIO，Windows Host Utilities 将设置以下参数的值：</block>
+  <block id="d7ffc66640801d3b23e6403b53045607" category="paragraph">验证 FC 系统上的 Emulex HBA 驱动程序设置。HBA 上的每个端口都必须存在这些设置。</block>
+  <block id="0aa9ab84e08417b1d87c1a5606b6b1b4" category="paragraph">验证 FC 系统上的 QLogic HBA 驱动程序设置。HBA 上的每个端口都必须存在这些设置。</block>
 </blocks>

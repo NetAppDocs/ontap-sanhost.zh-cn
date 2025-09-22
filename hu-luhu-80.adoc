@@ -23,7 +23,7 @@ Linux Host Utilities 8.0 支持以下分发类型：
 * Red Hat Enterprise Linux
 * SUSE Linux Enterprise Server
 * Oracle Linux
-* Oracle VM
+* Ubuntu
 
 
 

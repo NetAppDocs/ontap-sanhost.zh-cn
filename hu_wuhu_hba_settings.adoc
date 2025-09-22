@@ -19,19 +19,17 @@ summary: Windows Host Utilities包括一个安装程序、用于设置所需的W
 
 
 [role="lead"]
-Host Utilities需要特定的注册表和参数设置、才能验证Windows主机是否正确处理存储系统行为。
+Windows Host Utilities 需要某些注册表和参数设置来验证 Windows 主机是否正确处理存储系统行为。
 
-Windows Host Utilities会设置一些参数、这些参数会影响Windows主机对数据延迟或丢失的响应方式。已选择特定值以验证Windows主机是否正确处理诸如将存储系统中的一个控制器故障转移到其配对控制器等事件。
+Windows 主机实用程序设置影响 Windows 主机如何响应数据延迟或丢失的参数值。这些值验证 Windows 主机是否正确处理事件，例如存储系统中的一个控制器到其伙伴控制器的故障转移。
 
-并非所有值都适用于SANtricity Storage Manager的设备特定模块 (DSM)；但是，Host Utilities 设置的值与SANtricity Storage Manager的 DSM 设置的值之间的任何重叠都不会导致冲突。
+某些值不适用于SANtricity Storage Manager的设备特定模块 (DSM)。  Windows Host Utilities 与SANtricity Storage Manager的 DSM 设置的值之间的重叠不会导致冲突。
 
-FC、NVMe/FC和iSCSI HBA还具有一些参数、您必须设置这些参数以确保最佳性能并成功处理存储系统事件。
+您还需要设置 FC、NVMe/FC 和 iSCSI HBA 参数以优化性能并成功处理存储系统事件。
 
-Windows Host Utilities附带的安装程序会将Windows、FC和NVMe/FC HBA参数设置为支持的值。
+Windows Host Utilities 安装程序将 Windows、FC 和 NVMe/FC HBA 参数设置为支持的值。您需要手动设置iSCSI HBA参数。
 
-您必须手动设置iSCSI HBA参数。
-
-根据您在运行安装程序时是否指定Microsoft多路径I/O (MPIO)支持、安装程序会设置不同的值。
+当您在安装过程中指定 Microsoft 多路径 I/O (MPIO) 支持时，安装程序会设置不同的值。
 
 [NOTE]
 ====
@@ -44,13 +42,13 @@ Windows Host Utilities附带的安装程序会将Windows、FC和NVMe/FC HBA参�
 
 == Windows Host Utilities 8.0 设置的注册表值
 
-Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您应该了解这些值和操作系统版本。
+Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您需要检查这些值和操作系统版本。
 
 [role="tabbed-block"]
 ====
 .HKLM 值
 --
-以下注册表值由 Windows Host Utilities 安装程序设置。除非另有说明，所有值均为十进制。
+Windows Host Utilities 安装程序设置以下注册表值。除非另有说明，所有值均为十进制。
 
 
 NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
@@ -66,7 +64,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet \Services\msdsm\Parameters \DsmMaximumStateTransitionTime | 120 | 当指定 MPIO 支持且您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
 
 
-| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"NVMe NetApp ONTAO" | 指定 MPIO 支持时 
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | “NETAPP LUN”、“NETAPP LUN C 模式” “NVMe NetApp ONTAP Con” | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \IPSecConfigTimeout | 60 | 始终 
@@ -84,7 +82,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 30 个 | 始终 
 
 
-| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"、"NVMe NetApp ONTAOCON" | 指定 MPIO 支持时 
+| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | “NETAPP LUN”、“NETAPP LUN C 模式”、“NVMe NetApp ONTAP Con” | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathRecoveryInterval | 30 个 | 当您的服务器是 Windows Server 2025、2022、2019 或 2016 时 
@@ -134,7 +132,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 --
 .NVMe参数
 --
-安装 Windows Host Utilities 8.0 时，以下 NVMe Emulex 驱动程序参数会更新：
+Windows Host Utilities 8.0 在安装过程中更新以下 NVMe Emulex 驱动程序参数：
 
 * EnableNVMe = 1
 * NVMEMode = 0
@@ -146,13 +144,13 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 
 == 由Windows Host Utilities 7.2设置的注册表值
 
-Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您应该了解这些值和操作系统版本。
+Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值和 NVMe 参数。您需要检查这些值和操作系统版本。
 
 [#nvme_parameter,role="tabbed-block"]
 ====
 .HKLM 值
 --
-以下注册表值由 Windows Host Utilities 安装程序设置。除非另有说明，所有值均为十进制。
+Windows Host Utilities 安装程序设置以下注册表值。除非另有说明，所有值均为十进制。
 
 
 NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
@@ -168,7 +166,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet \Services\msdsm\Parameters \DsmMaximumStateTransitionTime | 120 | 指定了MPIO支持且服务器为Windows Server 2025、2022、2019、2016或2012 R2时 
 
 
-| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"NVMe NetApp ONTAO" | 指定 MPIO 支持时 
+| HKLM\SYSTEM\CurrentControlSet\Services \msdsm\Parameters\DsmSupportedDeviceList | “NETAPP LUN”、“NETAPP LUN C 模式” “NVMe NetApp ONTAP Con” | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \IPSecConfigTimeout | 60 | 始终 
@@ -186,7 +184,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 | HKLM\SYSTEM\CurrentControlSet\Control \Class\｛iscsi_driver_GUID｝\ instance_ID \Parameters \MaxRequestHoldTime | 30 个 | 始终 
 
 
-| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | "NetApp LUN"、"NetApp LUN C-模式"、"NVMe NetApp ONTAOCON" | 指定 MPIO 支持时 
+| HKLM\SYSTEM\CurrentControlSet\Control \MPDEV\MPIOSupportedDeviceList | “NETAPP LUN”、“NETAPP LUN C 模式”、“NVMe NetApp ONTAP Con” | 指定 MPIO 支持时 
 
 
 | HKLM\SYSTEM\CurrentControlSet\Services\MPIO \Parameters\PathRecoveryInterval | 30 个 | 服务器为Windows Server 2025、2022、2019、2016或2012 R2时 
@@ -252,7 +250,7 @@ NOTE: HKLM是的缩写 `HKEY_LOCAL_MACHINE`。
 
 == 由Windows Host Utilities 7.1设置的注册表值
 
-Windows Host Utilities安装程序会根据您在安装期间所做的选择自动设置注册表值。您应了解这些注册表值，即操作系统版本。
+Windows Host Utilities 安装程序会根据您在安装过程中所做的选择自动设置注册表值。您需要检查这些注册表值和操作系统版本。
 
 以下值由Windows Host Utilities安装程序设置。除非另有说明、否则所有值均为十进制值。
 
@@ -362,13 +360,13 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 
 == Windows Host Utilities 设置的 FC HBA 值
 
-在使用FC的系统上、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。
+Windows Host Utilities 安装程序为使用 FC 的系统上的 Emulex 和 QLogic FC HBA 设置所需的超时值。
 
-对于Emulex FC HBA、安装程序会设置以下参数：
+安装程序为 Emulex FC HBA 设置以下参数：
 
 [role="tabbed-block"]
 ====
-.选择MPIO时
+.当您选择 MPIO 时
 --
 |===
 | 属性类型 | 属性值 
@@ -380,7 +378,7 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 | 节点超时 | 10 
 |===
 --
-.当未选择 MPIO 时
+.当您不选择 MPIO
 --
 |===
 | 属性类型 | 属性值 
@@ -393,11 +391,11 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 |===
 --
 ====
-对于QLogic FC HBA、安装程序会设置以下参数：
+安装程序为 QLogic FC HBA 设置以下参数：
 
 [role="tabbed-block"]
 ====
-.选择MPIO时
+.当您选择 MPIO 时
 --
 |===
 | 属性类型 | 属性值 
@@ -409,7 +407,7 @@ NOTE: `HKLM` 是的缩写 `HKEY_LOCAL_MACHINE`。
 | PortDownRetransCount | 10 
 |===
 --
-.当未选择 MPIO 时
+.当您不选择 MPIO
 --
 |===
 | 属性类型 | 属性值 
@@ -431,7 +429,7 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 
 == 了解 Host Utilities 对 FC HBA 驱动程序设置的更改
 
-在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，Windows Host Utilities 会检查几个参数，在某些情况下还会修改这些参数。
+在 FC 系统上安装所需的 Emulex 或 QLogic HBA 驱动程序期间，Windows Host Utilities 会检查多个参数，在某些情况下还会修改这些参数。
 
 如果检测到 MS DSM for Windows MPIO，Windows Host Utilities 将设置以下参数的值：
 
@@ -451,7 +449,7 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 ====
 .Emulex HBA驱动程序
 --
-如果您有 FC 系统，请验证 Emulex HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。
+验证 FC 系统上的 Emulex HBA 驱动程序设置。HBA 上的每个端口都必须存在这些设置。
 
 .步骤
 . 打开 OnCommand 管理器。
@@ -479,7 +477,7 @@ Host Utilities `fcconfig.ini` file将此参数显示为 `LinkDownTimeOut` 或 `M
 --
 .QLogic HBA驱动程序
 --
-在 FC 系统上，验证 QLogic HBA 驱动程序设置。  HBA 上的每个端口都必须存在这些设置。
+验证 FC 系统上的 QLogic HBA 驱动程序设置。HBA 上的每个端口都必须存在这些设置。
 
 .步骤
 . 打开 QConvergeConsole，然后在工具栏上选择 *连接*。
