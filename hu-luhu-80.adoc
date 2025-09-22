@@ -20,7 +20,7 @@ Linux Host Utilities 可帮助您管理连接到 Linux 主机的ONTAP存储。 N
 
 Linux Host Utilities 8.0 支持以下分发类型：
 
-* Red Hat Enterprise Linux
+* Red Hat Enterprise Linux (RHEL)
 * SUSE Linux Enterprise Server
 * Oracle Linux
 * Ubuntu
@@ -48,24 +48,45 @@ NOTE: Linux Host Utilities软件不支持基于光纤通道的NVMe (NVMe/FC)和�
 .步骤
 . 如果您当前安装了某个版本的 Linux Host Utilities，请将其删除：
 +
+[role="tabbed-block"]
+====
+.Linux 主机
+--
+从 RHEL、SUSE Linux Enterprise Server 或 Oracle Linux 主机中删除 Linux Host Utilities：
+
 [source, cli]
 ----
-rpm -e netapp_linux_unified_host_utilities-8-0
+rpm -e netapp_linux_unified_host_utilities-x-x
 ----
+--
+.Ubuntu
+--
+从 Ubuntu 主机中删除 Linux 主机实用程序：
+
+[source, cli]
+----
+sudo apt remove netapp_linux_unified_host_utilities-x-x
+----
+--
+====
 +
 对于早期版本的Linux Host Utilities、请转到安装主机实用程序软件的目录、然后输入uninstall命令以删除已安装的软件包。
 
 . NetApp Linux Host Utilities 软件包可在NetApp支持站点上以 64 位 .rpm 文件的形式获取。从link:https://mysupport.netapp.com/site/products/all/details/hostutilities/downloads-tab/download/61343/8.0/downloads["NetApp 支持站点"^]给你的主人。
 . 进入下载软件包的目录并安装：
 +
+[role="tabbed-block"]
+====
+.Linux 主机
+--
+在 RHEL、SUSE Linux Enterprise Server 或 Oracle Linux 主机上安装 Linux Host Utilities 8.0：
+
 [source, cli]
 ----
 rpm -ivh netapp_linux_unified_host_utilities-8-0.x86_xx.rpm
 ----
-+
 您应该会看到类似于以下示例的输出：
 
-+
 [listing]
 ----
 rpm -ivh netapp_linux_unified_host_utilities-8-0.x86_64.rpm
@@ -75,15 +96,24 @@ Updating / installing...
    1:netapp_linux_unified_host_utiliti################################# [100%]
 
 ----
+--
+.Ubuntu
+--
+.. 在 Ubuntu 主机上安装 Linux Host Utilities 8.0：
 +
-[NOTE]
-====
-如果您使用的是 Ubuntu 主机操作系统，则需要手动将其链接到 HBA 库：
-
+[source, cli]
+----
+sudo apt install /<path_to_file>/netapp_linux_unified_host_utilities-8-0.x86_xx.deb
+----
+.. 手动将 Ubuntu 操作系统链接到 HBA 库：
++
 [source, cli]
 ----
 cp /opt/QLogic_Corporation/QConvergeConsoleCLI/lib64/libHBAAPI.so.2.0.2 /usr/lib64/libHBAAPI.so
 ----
+
+
+--
 ====
 . 验证安装。
 +
