@@ -16,7 +16,7 @@ summary: 适用于采用ONTAP的Oracle Linux 8.10的NVMe-oF主机配置
 
 
 [role="lead"]
-NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。
+Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
 .关于此任务
 您可以在适用于Oracle Linux 8.10的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。
@@ -272,7 +272,7 @@ QLE2772 FW:v9.15.00 DVR:v10.02.09.100-k
 
 === 启用 1 MB I/O 大小（可选）
 
-ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、应将参数的值 `lpfc_sg_seg_cnt`从默认值64增加 `lpfc`到256。
+ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
 
 
 NOTE: 这些步骤不适用于逻辑NVMe/FC主机。

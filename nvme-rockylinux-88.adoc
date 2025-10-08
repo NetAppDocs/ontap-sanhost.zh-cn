@@ -4,7 +4,7 @@ permalink: nvme-rockylinux-88.html
 keywords: nvme, linux, rocky linux, enterprise 
 summary: 如何使用 ONTAP 为 Rocky Linux 8.8 配置 NVMe-oF 主机 
 ---
-= 使用 NVMe-oF 为 ONTAP 存储配置 Rocky Linux 8.8
+= 使用ONTAP存储为 NVMe-oF 配置 Rocky Linux 8.8
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,61 +16,47 @@ summary: 如何使用 ONTAP 为 Rocky Linux 8.8 配置 NVMe-oF 主机
 
 
 [role="lead"]
-Rocky Linux 8.8 主机支持具有非对称命名空间访问 (ANA) 的 NVMe/FC 和 NVMe/TCP 协议。ANA相当于 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 多路径，并使用内核 NVMe 多路径功能实现。
+Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+了解如何为 Rocky Linux 8.8 配置 NVMe over Fabrics (NVMe-oF) 主机。有关更多支持和功能信息，请参阅link:hu-nvme-index.html["NVME-oF 概述"^]。
 
-.关于此任务
-您可以将以下支持和功能与 Rocky Linux 8.8 的 NVMe-oF 主机配置一起使用。在开始配置过程之前、您还应查看已知限制。
+*带有 Rocky Linux 8.8 的 NVMe-oF 具有以下已知限制：*
 
-* 提供支持：
-+
-** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-** 在同一主机上运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。
-
-
-* 已知限制：
-+
-** 对于 Rocky Linux 8.8 NVMe-oF 主机，内核 NVMe 多路径默认处于禁用状态。因此，您需要手动启用它。
-** 在 Rocky Linux 8.8 主机上，由于存在未解决的问题，NVMe/TCP 是一项技术预览功能。有关详细信息、请参见 https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html-single/8.8_release_notes/index#technology-preview_file-systems-and-storage["Rocky Linux 8.8 发行说明"^] 。
-** 目前不支持使用NVMe-oF协议启动SAN。
-
-
+* 目前不支持使用 NVMe-oF 协议的 SAN 启动。
+* Rocky Linux 8.8 中的 NVMe-oF 主机默认禁用内核 NVMe 多路径；您必须手动启用它。
+* 由于已知问题，NVMe/TCP 可作为技术预览使用。
 
 
 
 
 == 第1步：(可选)启用SAN启动
 
-您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
-
-.开始之前
-使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 Linux 操作系统、主机总线适配器 (HBA)、HBA 固件、HBA 启动 BIOS 和ONTAP版本是否支持 SAN 启动。
 
 .步骤
-. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 SAN 启动命名空间并将其映射到主机"^](英文)
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 NVMe 命名空间并将其映射到主机"^] 。
 . 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
 
-. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+. 重新启动主机并验证操作系统是否已启动并正在运行。
 
 
 
 
-== 步骤 2：验证软件版本
+== 步骤 2：验证软件版本和 NVMe 配置
 
-使用以下步骤验证最低支持的 Rocky Linux 8.8 软件版本。
+检查您的系统是否满足软件要求并验证 NVMe 包安装和主机配置。
 
 .步骤
-. 在服务器上安装 Rocky Linux 8.8。安装完成后，验证您是否正在运行指定的 Rocky Linux 8.8 内核：
+. 在服务器上安装 Rocky Linux 8.8。安装完成后，验证您正在运行所需的 Rocky Linux 8.8 内核：
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-以下示例显示了 Rocky Linux 内核版本：
+Rocky Linux 内核版本示例：
 
 +
 [listing]
@@ -153,13 +139,13 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 
 
 
-== 步骤3：配置NVMe/FC
+== 步骤 3：配置 NVMe/FC 和 NVMe/TCP
 
-您可以使用Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。您还需要手动发现 NVMe/TCP 子系统和命名空间。
+使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
 
 [role="tabbed-block"]
 ====
-.Broadcom/Emulex
+.FC——Broadcom/Emulex
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
@@ -207,7 +193,7 @@ Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 cat /sys/class/scsi_host/host*/fwrev
 ----
 +
-以下示例显示固件版本：
+该命令返回固件版本：
 
 +
 [listing]
@@ -312,12 +298,9 @@ FCP CMPL: xb 000014a5 Err 0002149a
 
 
 --
-.Marvell/QLogic
+.FC——Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
-
-
-NOTE: Rocky Linux 内核中包含的原生内置 qla2xxx 驱动程序具有最新修复。这些修复程序对于ONTAP支持至关重要。
 
 .步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
@@ -347,45 +330,12 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-====
-
-
-== 步骤 4：可选，启用 1MB I/O
-
-您可以为配置了 Broadcom 适配器的 NVMe/FC 启用 1MB 大小的 I/O 请求。ONTAP在识别控制器数据中报告的最大数据传输大小 (MDTS) 为 8。这意味着最大I/O请求大小最多可以为1 MB。要发出 1MB 大小的 I/O 请求，您需要增加 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
-
-
-NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+.TCP
+--
+NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
 
 .步骤
-. 将 `lpfc_sg_seg_cnt`参数设置为256：
-+
-[listing]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f`命令并重新启动主机。
-. 验证的值是否 `lpfc_sg_seg_cnt`为256：
-+
-[listing]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
-
-
-
-== 步骤 5：配置 NVMe/TCP
-
-NVMe/TCP 协议不支持自动连接操作。您可以通过手动执行 NVMe/TCP connect 或 connect-all 操作来发现 NVMe/TCP 子系统和命名空间。
-
-.步骤
-. 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
+. 检查启动器端口是否可以跨支持的 NVMe/TCP LIF 获取发现日志页面数据：
 +
 [listing]
 ----
@@ -394,7 +344,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.24
@@ -620,7 +570,7 @@ traddr:  192.168.1.24
 eflags:  none
 sectype: none
 ----
-====
+=====
 . 验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据：
 +
 [listing]
@@ -630,7 +580,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.24
@@ -638,7 +588,7 @@ nvme discover -t tcp -w 192.168.2.31 -a 192.168.2.24
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.25
 nvme discover -t tcp -w 192.168.2.31 -a 192.168.2.25
 ----
-====
+=====
 . 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
 [listing]
@@ -648,7 +598,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme	connect-all	-t	tcp	-w	192.168.1.31	-a	192.168.1.24
@@ -656,12 +606,44 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.24
 nvme	connect-all	-t	tcp	-w	192.168.1.31	-a	192.168.1.25
 nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ----
+=====
+
+
+--
 ====
 
 
+== 步骤 4：（可选）为 NVMe/FC 启用 1MB I/O
+
+您可以为配置了 Broadcom 适配器的 NVMe/FC 启用 1MB 大小的 I/O 请求。ONTAP在识别控制器数据中报告的最大数据传输大小 (MDTS) 为 8。这意味着最大I/O请求大小最多可以为1 MB。要发出 1MB 大小的 I/O 请求，您需要增加 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
 
 
-== 步骤 6：验证 NVMe-oF
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[listing]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[listing]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== 步骤 5：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
@@ -847,14 +829,14 @@ nvme netapp ontapdevices -o json
 
 
 
-== 第7步：查看已知问题
+== 第6步：查看已知问题
 
-带有ONTAP存储版本的 Rocky Linux 8.8 的 NVMe-oF 主机配置存在以下已知问题：
+这些是已知问题：
 
 [cols="20,40,40"]
 |===
 | NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"] | Rocky Linux 8.8 NVMe-oF 主机创建重复的持久发现控制器 | 在基于网络结构的NVMe (NVMe-oF)主机上、您可以使用"nvme discover -p"命令创建永久性发现控制器(POC)。使用此命令时、每个启动程序-目标组合只应创建一个PDC。但是，如果您在 NVMe-oF 主机上运行 Rocky Linux 8.8，则每次执行“nvme discover -p”时都会创建重复的 PDC。这会导致不必要地使用主机和目标上的资源。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"] | Rocky Linux 8.8 NVMe-oF 主机创建重复的持久发现控制器 | 在 NVMe-oF 主机上，您可以使用“nvme discover -p”命令创建持久发现控制器 (PDC)。使用此命令时，每个启动器-目标组合只能创建一个 PDC。但是，如果您在 NVMe-oF 主机上运行 Rocky Linux 8.8，则每次执行“nvme discover -p”时都会创建重复的 PDC。这会导致主机和目标上资源的不必要使用。 
 |===

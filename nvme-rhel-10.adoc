@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_rhel_10.html 
+permalink: nvme-rhel-10.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 如何使用ONTAP为RHEL 10配置NVMe-oF主机 
+summary: 如何使用ONTAP为 RHEL 10.0 配置 NVMe-oF 主机 
 ---
-= 适用于采用ONTAP的RHEL 10的NVMe-oF主机配置
+= 使用ONTAP存储为 NVMe-oF 配置 RHEL 10.0
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,66 +16,46 @@ summary: 如何使用ONTAP为RHEL 10配置NVMe-oF主机
 
 
 [role="lead"]
-NetApp SAN主机配置支持采用非对称命名空间访问(AANA)的基于网络结构的NVMe (NVMe-oF)协议。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的非对称逻辑单元访问(AMUA)多路径功能。ANA是使用内核NVMe多路径功能实施的。
+Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-.关于此任务
-您可以在适用于Red Hat Enterprise Linux (RHEL) 10的NVMe-oF主机配置中使用以下支持和功能。在开始配置过程之前、您还应查看已知限制。
+了解如何为 RHEL 10.0 配置 NVMe over Fabrics (NVMe-oF) 主机。有关更多支持和功能信息，请参阅link:hu-nvme-index.html["NVME-oF 概述"^]。
 
-* 提供支持：
-+
-** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-** 在同一主机上同时运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。
-** 从 ONTAP 9.12.1 开始，引入了对 NVMe/TCP 的安全带内身份验证的支持。您可以在 RHEL 10 中使用 NVMe/TCP 的安全带内身份验证。
+*RHEL 10.0 的 NVMe-oF 具有以下已知限制：*
 
-
-+
-有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
-
-* 可用功能：
-+
-** 从 RHEL 10 开始，本机 NVMe 多路径始终处于启用状态，并且不支持对 NVMe-oF 的 DM 多路径支持。
-
-
-* 已知限制：
-+
-** 避免发布 `nvme disconnect-all`命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。
-
-
+* 不支持对 NVMe-oF 的 DM 多路径支持。
+* 避免发布 `nvme disconnect-all`命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。
 
 
 
 
 == 第1步：(可选)启用SAN启动
 
-您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
-
-.开始之前
-使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 Linux 操作系统、主机总线适配器 (HBA)、HBA 固件、HBA 启动 BIOS 和ONTAP版本是否支持 SAN 启动。
 
 .步骤
-. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 SAN 启动命名空间并将其映射到主机"^](英文)
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 NVMe 命名空间并将其映射到主机"^] 。
 . 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
 
-. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+. 重新启动主机并验证操作系统是否已启动并正在运行。
 
 
 
 
-== 步骤 2：验证软件版本
+== 步骤 2：验证软件版本和 NVMe 配置
 
-使用以下步骤验证最低支持的 RHEL 10 软件版本。
+检查您的系统是否满足软件要求并验证 NVMe 包安装和主机配置。
 
 .步骤
-. 在服务器上安装RHEL 10。安装完成后、验证是否正在运行指定的RHEL 10内核：
+. 在服务器上安装 RHEL 10.0。安装完成后，验证您是否正在运行所需的 RHEL 10.0 内核：
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-以下示例显示了 RHEL 内核版本：
+RHEL 内核版本示例：
 
 +
 [listing]
@@ -150,21 +130,20 @@ vs_ nvme_194_rhel10
 4 entries were displayed.
 ----
 ====
-+
-
-NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更新的命令 `hostnqn` 要匹配的相应ONTAP 阵列子系统上的字符串 `hostnqn` 字符串自 `/etc/nvme/hostnqn` 在主机上。
 
 
 
+NOTE: 如果 `hostnqn`字符串不匹配，请使用 `vserver modify`命令来更新 `hostnqn`相应ONTAP存储系统子系统上的字符串以匹配 `hostnqn`字符串来自 `/etc/nvme/hostnqn`在主机上。
 
 
-== 步骤3：配置NVMe/FC
 
-您可以使用Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。对于配置有Broadcom适配器的NVMe/FC、可以启用大小为1 MB的I/O请求。
+== 步骤 3：配置 NVMe/FC 和 NVMe/TCP
+
+使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
 
 [role="tabbed-block"]
 ====
-.Broadcom/Emulex
+.FC——Broadcom/Emulex
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
@@ -193,7 +172,7 @@ LPe36002-M64
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-您应该会看到类似于以下示例的输出：
+您应该看到类似于以下示例的输出：
 
 +
 [listing]
@@ -212,7 +191,7 @@ Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 cat /sys/class/scsi_host/host*/fwrev
 ----
 +
-以下示例显示固件版本：
+该命令返回固件版本：
 
 +
 [listing]
@@ -239,7 +218,7 @@ cat /sys/module/lpfc/version
 +
 有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
 
-. 验证的预期输出是否 `lpfc_enable_fc4_type`设置为 `3`：
+. 请验证 `lpfc_enable_fc4_type` 设置为 `3`：
 +
 [source, cli]
 ----
@@ -252,13 +231,12 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-以下示例显示端口标识：
+您应该看到类似以下内容的输出：
 
 +
 [listing]
 ----
-0x2100f4c7aa0cd7c2
-0x2100f4c7aa0cd7c3
+0x100000109b1c1205
 ----
 . 验证启动程序端口是否联机：
 +
@@ -317,12 +295,12 @@ FCP CMPL: xb 000014a5 Err 0002149a
 
 
 --
-.Marvell/QLogic
+.FC——Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
 .步骤
-. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
+. 验证您使用的适配器驱动程序和固件版本是否受支持：
 +
 [source, cli]
 ----
@@ -349,103 +327,12 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-====
-
-
-== 步骤 4：可选，启用 1MB I/O
-
-ONTAP会在"识别 控制器"数据中报告MDTS (MAX Data传输大小)为8。这意味着最大I/O请求大小最多可以为1 MB。要向Broadcom NVMe/FC主机发出大小为1 MB的I/O请求、应将参数的值 `lpfc_sg_seg_cnt`从默认值64增加 `lpfc`到256。
-
-
-NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+.TCP
+--
+NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
 
 .步骤
-. 将 `lpfc_sg_seg_cnt`参数设置为256：
-+
-[source, cli]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-您应该会看到类似于以下示例的输出：
-
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f`命令并重新启动主机。
-. 验证的值是否 `lpfc_sg_seg_cnt`为256：
-+
-[source, cli]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
-
-
-
-== 步骤 5：验证 NVMe 启动服务
-
-使用 RHEL 10，  `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service` NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时会自动启用这些软件包。
-
-启动完成后，验证 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`启动服务已启用。
-
-.步骤
-. 验证是否 `nvmf-autoconnect.service`已启用：
-+
-[source, cli]
-----
-systemctl status nvmf-autoconnect.service
-----
-+
-.显示示例输出
-[%collapsible]
-====
-[listing]
-----
-nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
-     Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: disabled)
-     Active: inactive (dead)
-
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
-Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
-----
-====
-. 验证是否 `nvmefc-boot-connections.service`已启用：
-+
-[source, cli]
-----
-systemctl status nvmefc-boot-connections.service
-----
-+
-.显示示例输出
-[%collapsible]
-====
-[listing]
-----
-nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
-     Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
-     Active: inactive (dead) since Tue 2025-06-10 01:08:36 EDT; 2h 59min ago
-   Main PID: 7090 (code=exited, status=0/SUCCESS)
-        CPU: 30ms
-
-Jun 10 01:08:36 localhost systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
-Jun 10 01:08:36 localhost systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
-Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
-----
-====
-
-
-
-
-== 步骤 6：配置 NVMe/TCP
-
-NVMe/TCP协议不支持此 `auto-connect`操作。相反、您可以通过手动执行NVMe/TCP或 `connect-all`操作来发现NVMe/TCP子系统和命名路径 `connect`。
-
-.步骤
-. 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
+. 检查启动器端口是否可以跨支持的 NVMe/TCP LIF 获取发现日志页面数据：
 +
 [source, cli]
 ----
@@ -454,7 +341,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.20
@@ -549,8 +436,8 @@ traddr:  192.168.20.20
 eflags:  none
 sectype: none
 ----
-====
-. 验证其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：
+=====
+. 验证其他 NVMe/TCP 启动器-目标 LIF 组合是否可以成功检索发现日志页面数据：
 +
 [source, cli]
 ----
@@ -559,7 +446,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.20
@@ -567,7 +454,7 @@ nvme discover -t tcp -w 192.168.21.1 -a 192.168.21.20
 nvme discover -t tcp -w 192.168.20.1 -a 192.168.20.21
 nvme discover -t tcp -w 192.168.21.1 -a 192.168.21.21
 ----
-====
+=====
 . 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
 [source, cli]
@@ -577,7 +464,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme	connect-all	-t	tcp	-w	192.168.20.1	-a	192.168.20.20
@@ -585,7 +472,7 @@ nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.20
 nvme	connect-all	-t	tcp	-w	192.168.20.1	-a	192.168.20.21
 nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.21
 ----
-====
+=====
 
 
 [NOTE]
@@ -598,9 +485,99 @@ nvme	connect-all	-t	tcp	-w	192.168.21.1	-a	192.168.21.21
 
 
 ====
+--
+====
 
 
-== 步骤 7：验证 NVMe-oF
+== 步骤 4：（可选）为 NVMe/FC 启用 1MB I/O
+
+ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
+
+
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[source, cli]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== 步骤 5：验证 NVMe 启动服务
+
+这 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时，软件包会自动启用。
+
+启动完成后，验证 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`启动服务已启用。
+
+.步骤
+. 验证是否 `nvmf-autoconnect.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmf-autoconnect.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: disabled)
+     Active: inactive (dead)
+
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
+Jun 10 04:06:26 SR630-13-201.lab.eng.btc.netapp.in systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
+----
+====
+. 验证是否 `nvmefc-boot-connections.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmefc-boot-connections.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
+     Active: inactive (dead) since Tue 2025-06-10 01:08:36 EDT; 2h 59min ago
+   Main PID: 7090 (code=exited, status=0/SUCCESS)
+        CPU: 30ms
+
+Jun 10 01:08:36 localhost systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
+Jun 10 01:08:36 localhost systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
+Jun 10 01:08:36 localhost systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
+----
+====
+
+
+
+
+== 步骤 6：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
@@ -781,9 +758,9 @@ nvme netapp ontapdevices -o json
 
 
 
-== 步骤 8：设置安全带内身份验证
+== 步骤 7：设置安全带内身份验证
 
-从 ONTAP 9.12.1 开始，RHEL 10 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全带内身份验证。
+从ONTAP 9.12.1 开始，RHEL 10.0 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全带内身份验证。
 
 每个主机或控制器必须与一个 `DH-HMAC-CHAP`密钥来设置安全身份验证。  `DH-HMAC-CHAP`密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
 
@@ -802,9 +779,9 @@ nvme netapp ontapdevices -o json
 ----
 cat /etc/nvme/hostnqn
 ----
-. 为RHEL 10主机生成dhchap密钥。
+. 为 RHEL 10.0 主机生成 dhchap 密钥。
 +
-以下输出说明了 `gen-dhchap-key`命令参数：
+以下输出描述了 `gen-dhchap-key`命令参数：
 
 +
 [listing]
@@ -893,11 +870,11 @@ DHHC- 1:03:7zf8I9gaRcDWH3tCH5vLGaoyjzPIvwNWusBfKdpJa+hia
 
 
 --
-.JSON 文件
+.JSON
 --
-如果ONTAP控制器配置中有多个NVMe子系统、则可以将文件与命令结合 `nvme connect-all`使用 `/etc/nvme/config.json`。
+当ONTAP控制器上有多个 NVMe 子系统可用时，您可以使用 `/etc/nvme/config.json`文件与 `nvme connect-all`命令。
 
-使用 `-o`选项来生成 JSON 文件。有关更多语法选项、请参见NVMe Connect-all手册页。
+使用 `-o`选项来生成 JSON 文件。有关更多语法选项，请参阅 NVMe connect-all 手册页。
 
 .步骤
 . 配置 JSON 文件。
@@ -1001,7 +978,7 @@ aKDKJQ2o53pX3wYM9xdv5DtKNNhJInZ7X8wU2RQpQIngc=:
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
-您应该会看到类似于以下示例的输出：
+您应该看到类似于以下示例的输出：
 
 +
 [listing]
@@ -1017,6 +994,6 @@ mzEKUbcWu26I33b93bil2WR09XDho/ld3L45J+0FeCsStBEAfhYgkQU=:
 ====
 
 
-== 第9步：查看已知问题
+== 第8步：查看已知问题
 
 没有已知问题。

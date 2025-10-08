@@ -4,7 +4,7 @@ permalink: nvme-rockylinux-93.html
 keywords: nvme, linux, rocky linux, enterprise 
 summary: 如何使用 ONTAP 为 Rocky Linux 9.3 配置 NVMe-oF 主机 
 ---
-= 使用 NVMe-oF 为 ONTAP 存储配置 Rocky Linux 9.3
+= 使用ONTAP存储为 NVMe-oF 配置 Rocky Linux 9.3
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,64 +16,45 @@ summary: 如何使用 ONTAP 为 Rocky Linux 9.3 配置 NVMe-oF 主机
 
 
 [role="lead"]
-Rocky Linux 9.3 主机支持具有非对称命名空间访问 (ANA) 的 NVMe/FC 和 NVMe/TCP 协议。ANA相当于 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 多路径，并使用内核 NVMe 多路径功能实现。
+Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+了解如何为 Rocky Linux 9.3 配置 NVMe over Fabrics (NVMe-oF) 主机。有关更多支持和功能信息，请参阅link:hu-nvme-index.html["NVME-oF 概述"^]。
 
-.关于此任务
-您可以将以下支持和功能与 Rocky Linux 9.3 的 NVMe-oF 主机配置一起使用。在开始配置过程之前、您还应查看已知限制。
+*带有 Rocky Linux 9.3 的 NVMe-oF 具有以下已知限制：*
 
-* 提供支持：
-+
-** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-** 在同一主机上运行NVMe和SCSI流量。例如，您可以为 SCSI LUN 上的 SCSI mpath 设备配置 dm-multipath，并使用 NVMe multipath 在主机上配置 NVMe-oF 命名空间设备。
-
-
-* 可用功能：
-+
-** Rocky Linux 9.3 默认为 NVMe 命名空间启用内核 NVMe 多路径，无需明确设置。
-
-
-* 已知限制：
-+
-** 目前不支持使用NVMe-oF协议启动SAN。
-
-
+* 目前不支持使用 NVMe-oF 协议的 SAN 启动。
 
 
 
 
 == 第1步：(可选)启用SAN启动
 
-您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
-
-.开始之前
-使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 Linux 操作系统、主机总线适配器 (HBA)、HBA 固件、HBA 启动 BIOS 和ONTAP版本是否支持 SAN 启动。
 
 .步骤
-. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 SAN 启动命名空间并将其映射到主机"^](英文)
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 NVMe 命名空间并将其映射到主机"^] 。
 . 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
 
-. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+. 重新启动主机并验证操作系统是否已启动并正在运行。
 
 
 
 
-== 步骤 2：验证软件版本
+== 步骤 2：验证软件版本和 NVMe 配置
 
-使用以下步骤验证最低支持的 Rocky Linux 9.3 软件版本。
+检查您的系统是否满足软件要求并验证 NVMe 包安装和主机配置。
 
 .步骤
-. 在服务器上安装 Rocky Linux 9.3。安装完成后，验证您运行的是指定的 Rocky Linux 9.3 内核：
+. 在服务器上安装 Rocky Linux 9.3。安装完成后，验证您是否正在运行所需的 Rocky Linux 9.3 内核：
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-以下示例显示了 Rocky Linux 内核版本：
+Rocky Linux 内核版本示例：
 
 +
 [listing]
@@ -156,13 +137,13 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 
 
 
-== 步骤3：配置NVMe/FC
+== 步骤 3：配置 NVMe/FC 和 NVMe/TCP
 
-您可以使用Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。您还需要手动发现 NVMe/TCP 子系统和命名空间。
+使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
 
 [role="tabbed-block"]
 ====
-.Broadcom/Emulex
+.FC——Broadcom/Emulex
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
@@ -210,7 +191,7 @@ Emulex LightPulse LPe36002-M64 2-Port 64Gb Fibre Channel Adapter
 cat /sys/class/scsi_host/host*/fwrev
 ----
 +
-以下示例显示固件版本：
+该命令返回固件版本：
 
 +
 [listing]
@@ -315,12 +296,9 @@ FCP CMPL: xb 000014a5 Err 0002149a
 
 
 --
-.Marvell/QLogic
+.FC——Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
-
-
-NOTE: Rocky Linux 内核中包含的原生内置 qla2xxx 驱动程序具有最新修复。这些修复程序对于ONTAP支持至关重要。
 
 .步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
@@ -350,45 +328,12 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-====
-
-
-== 步骤 4：可选，启用 1MB I/O
-
-您可以为配置了 Broadcom 适配器的 NVMe/FC 启用 1MB 大小的 I/O 请求。ONTAP在识别控制器数据中报告的最大数据传输大小 (MDTS) 为 8。这意味着最大I/O请求大小最多可以为1 MB。要发出 1MB 大小的 I/O 请求，您需要增加 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
-
-
-NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+.TCP
+--
+NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
 
 .步骤
-. 将 `lpfc_sg_seg_cnt`参数设置为256：
-+
-[listing]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f`命令并重新启动主机。
-. 验证的值是否 `lpfc_sg_seg_cnt`为256：
-+
-[listing]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
-
-
-
-== 步骤 5：配置 NVMe/TCP
-
-NVMe/TCP 协议不支持自动连接操作。您可以通过手动执行 NVMe/TCP connect 或 connect-all 操作来发现 NVMe/TCP 子系统和命名空间。
-
-.步骤
-. 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
+. 检查启动器端口是否可以跨支持的 NVMe/TCP LIF 获取发现日志页面数据：
 +
 [listing]
 ----
@@ -397,7 +342,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.24
@@ -623,7 +568,7 @@ traddr:  192.168.1.24
 eflags:  none
 sectype: none
 ----
-====
+=====
 . 验证其他NVMe/TCP启动程序-目标LIF组合是否能够成功提取发现日志页面数据：
 +
 [listing]
@@ -633,7 +578,7 @@ nvme discover -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.24
@@ -641,7 +586,7 @@ nvme discover -t tcp -w 192.168.2.31 -a 192.168.2.24
 nvme discover -t tcp -w 192.168.1.31 -a 192.168.1.25
 nvme discover -t tcp -w 192.168.2.31 -a 192.168.2.25
 ----
-====
+=====
 . 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
 [listing]
@@ -651,7 +596,7 @@ nvme connect-all -t tcp -w host-traddr -a traddr
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme	connect-all	-t	tcp	-w	192.168.1.31	-a	192.168.1.24
@@ -659,12 +604,44 @@ nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.24
 nvme	connect-all	-t	tcp	-w	192.168.1.31	-a	192.168.1.25
 nvme	connect-all	-t	tcp	-w	192.168.2.31	-a	192.168.2.25
 ----
+=====
+
+
+--
 ====
 
 
+== 步骤 4：（可选）为 NVMe/FC 启用 1MB I/O
+
+您可以为配置了 Broadcom 适配器的 NVMe/FC 启用 1MB 大小的 I/O 请求。ONTAP在识别控制器数据中报告的最大数据传输大小 (MDTS) 为 8。这意味着最大I/O请求大小最多可以为1 MB。要发出 1MB 大小的 I/O 请求，您需要增加 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
 
 
-== 步骤 6：验证 NVMe-oF
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[listing]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[listing]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== 步骤 5：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
@@ -848,6 +825,231 @@ nvme netapp ontapdevices -o json
 ====
 
 
+
+
+== 步骤 6：设置安全带内身份验证
+
+从 ONTAP 9.12.1 开始，主机和 ONTAP 控制器之间通过 NVMe/TCP 和 NVMe/FC 支持安全带内身份验证。
+
+要设置安全身份验证、每个主机或控制器都必须与关联 `DH-HMAC-CHAP` 密钥、它是NVMe主机或控制器的NQN与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
+
+您可以使用命令行界面或Config JSON文件设置安全带内身份验证。如果需要为不同的子系统指定不同的dhchap密钥、则必须使用config JSON文件。
+
+[role="tabbed-block"]
+====
+.命令行界面
+--
+使用命令行界面设置安全带内身份验证。
+
+.步骤
+. 获取主机NQN：
++
+[listing]
+----
+cat /etc/nvme/hostnqn
+----
+. 为主机生成 dhchap 密钥。
++
+以下输出说明了 `gen-dhchap-key`命令参数：
+
++
+[listing]
+----
+nvme gen-dhchap-key -s optional_secret -l key_length {32|48|64} -m HMAC_function {0|1|2|3} -n host_nqn
+•	-s secret key in hexadecimal characters to be used to initialize the host key
+•	-l length of the resulting key in bytes
+•	-m HMAC function to use for key transformation
+0 = none, 1- SHA-256, 2 = SHA-384, 3=SHA-512
+•	-n host NQN to use for key transformation
+----
++
+在以下示例中、将生成一个随机dhchap密钥、其中HMAC设置为3 (SHA-512)。
+
++
+[listing]
+----
+nvme gen-dhchap-key -m 3 -n nqn.2014-08.org.nvmexpress:uuid:e6dade64-216d-11ec-b7bb-7ed30a5482c3
+DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
+----
+. 在ONTAP控制器上、添加主机并指定两个dhchap密钥：
++
+[listing]
+----
+vserver nvme subsystem host add -vserver <svm_name> -subsystem <subsystem> -host-nqn <host_nqn> -dhchap-host-secret <authentication_host_secret> -dhchap-controller-secret <authentication_controller_secret> -dhchap-hash-function {sha-256|sha-512} -dhchap-group {none|2048-bit|3072-bit|4096-bit|6144-bit|8192-bit}
+----
+. 主机支持两种类型的身份验证方法：单向和双向。在主机上、连接到ONTAP控制器并根据所选身份验证方法指定dhchap密钥：
++
+[listing]
+----
+nvme connect -t tcp -w <host-traddr> -a <tr-addr> -n <host_nqn> -S <authentication_host_secret> -C <authentication_controller_secret>
+----
+. 验证 `nvme connect authentication` 命令、验证主机和控制器dhchap密钥：
++
+.. 验证主机dhchap密钥：
++
+[listing]
+----
+cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_secret
+----
++
+.显示单向配置的示例输出
+[%collapsible]
+=====
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
+DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
+DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
+DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
+DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
+----
+=====
+.. 验证控制器dhchap密钥：
++
+[listing]
+----
+cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_ctrl_secret
+----
++
+.显示双向配置的示例输出
+[%collapsible]
+=====
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
+DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
+DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
+DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
+DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
+----
+=====
+
+
+
+
+--
+.JSON 文件
+--
+如果ONTAP控制器配置中有多个NVMe子系统、则可以将文件与命令结合 `nvme connect-all`使用 `/etc/nvme/config.json`。
+
+使用 `-o`选项来生成 JSON 文件。有关更多语法选项、请参见NVMe Connect-all手册页。
+
+.步骤
+. 配置 JSON 文件：
++
+
+NOTE: 在以下示例中，  `dhchap_key`对应于 `dhchap_secret`和 `dhchap_ctrl_key`对应于 `dhchap_ctrl_secret` 。
+
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+cat /etc/nvme/config.json
+[
+{
+  "hostnqn":"nqn.2014-08.org.nvmexpress:uuid:9796c1ec-0d34-11eb-b6b2-3a68dd3bab57",
+  "hostid":"b033cd4fd6db4724adb48655bfb55448",
+  "dhchap_key":"DHHC-1:01:zGlgmRyWbplWfUCPMuaP3mAypX0+GHuSczx5vX4Yod9lMPim:"
+},
+{
+  "hostnqn":"nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0035-5910-804b-b5c04f444d33",
+  "subsystems":[
+       {
+          "nqn":"nqn.1992-08.com.netapp:sn.0f4ba1e74eb611ef9f50d039eab6cb6d:subsystem.bidir_DHCP",
+          "ports":[
+              {
+                  "transport":"tcp",
+                   "traddr":" 192.168.1.24 ",
+                  "host_traddr":" 192.168.1.31 ",
+                  "trsvcid":"4420",
+                  "dhchap_ctrl_key":"DHHC-1:03:L52ymUoR32zYvnqZFe5OHhMg4gxD79jIyxSShHansXpVN+WiXE222aVc651JxGZlQCI863iVOz5dNWvgb+14F4B4bTQ=:"
+              },
+              {
+                  "transport":"tcp",
+                  "traddr":" 192.168.1.24 ",
+                  "host_traddr":" 192.168.1.31",
+                  "trsvcid":"4420",
+                  "dhchap_ctrl_key":"DHHC-1:03:L52ymUoR32zYvnqZFe5OHhMg4gxD79jIyxSShHansXpVN+WiXE222aVc651JxGZlQCI863iVOz5dNWvgb+14F4B4bTQ=:"
+              },
+              {
+                  "transport":"tcp",
+                 "traddr":" 192.168.1.24 ",
+                  "host_traddr":" 192.168.1.31",
+                  "trsvcid":"4420",
+                  "dhchap_ctrl_key":"DHHC-1:03:L52ymUoR32zYvnqZFe5OHhMg4gxD79jIyxSShHansXpVN+WiXE222aVc651JxGZlQCI863iVOz5dNWvgb+14F4B4bTQ=:"
+              },
+              {
+                  "transport":"tcp",
+                  "traddr":" 192.168.1.24 ",
+                   "host_traddr":" 192.168.1.31",
+                  "trsvcid":"4420",
+                  "dhchap_ctrl_key":"DHHC-1:03:L52ymUoR32zYvnqZFe5OHhMg4gxD79jIyxSShHansXpVN+WiXE222aVc651JxGZlQCI863iVOz5dNWvgb+14F4B4bTQ=:"
+              }
+          ]
+      }
+  ]
+}
+]
+----
+=====
+. 使用config JSON文件连接到ONTAP控制器：
++
+[listing]
+----
+nvme connect-all -J /etc/nvme/config.json
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.24 is already connected
+traddr=192.168.1.25 is already connected
+traddr=192.168.1.25 is already connected
+traddr=192.168.1.25 is already connected
+traddr=192.168.1.25 is already connected
+traddr=192.168.1.25 is already connected
+traddr=192.168.1.25 is already connected
+----
+=====
+. 验证是否已为每个子系统的相应控制器启用dhchap密码：
++
+.. 验证主机dhchap密钥：
++
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_secret
+----
++
+[listing]
+----
+DHHC-1:01:zGlgmRyWbplWfUCPMuaP3mAypX0+GHuSczx5vX4Yod9lMPim:
+----
+.. 验证控制器dhchap密钥：
++
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
+----
++
+[listing]
+----
+DHHC-1:03:L52ymUoR32zYvnqZFe5OHhMg4gxD79jIyxSShHansXpVN+WiXE222aVc651JxGZlQCI863iVOz5dNWvgb+14F4B4bTQ=:
+----
+
+
+
+
+--
+====
 
 
 == 第7步：查看已知问题
