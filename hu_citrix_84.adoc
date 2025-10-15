@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: hu_citrix_84.html 
-keywords: host utilities, citrix, XenServer, 8 series, netapp, ontap, san, boot 
-summary: 配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。 
+keywords: host utilities, citrix, Xenserver, 8 series, netapp, ontap, san, boot 
+summary: 配置 Citrix Xenserver 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。 
 ---
 = 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 8.4
 :hardbreaks:
@@ -16,11 +16,11 @@ summary: 配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数
 
 
 [role="lead"]
-配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。
+配置 Citrix Xenserver 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。
 
 [NOTE]
 ====
-Linux Host Utilities 软件包不支持 Citrix Hypervisor 操作系统。
+Linux Host Utilities 软件包不支持 Citrix Xenserver 操作系统。
 
 ====
 
@@ -45,7 +45,7 @@ Linux Host Utilities 软件包不支持 Citrix Hypervisor 操作系统。
 
 == 步骤 2：确认主机的多路径配置
 
-您可以使用 Citrix Hypervisor 8.4 的多路径来管理ONTAP LUN。
+您可以使用 Citrix Xenserver 8.4 的多路径来管理ONTAP LUN。
 
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 

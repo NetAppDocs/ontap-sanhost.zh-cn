@@ -29,7 +29,7 @@ summary: 此内容针对分发提供了有关如何配置连接到Cloud Volumes 
 
 NOTE: 在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。
 
-例如、您可以将内部ONTAP存储配置为连接到内部SAN主机或SAN云客户端。您还可以配置在云环境(例如)上运行的存储服务 link:https://docs.netapp.com/us-en/bluexp-cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^] 或 link:https://docs.netapp.com/us-en/bluexp-fsx-ontap/index.html["适用于 NetApp ONTAP 的 Amazon FSX"^] 连接到内部SAN主机或SAN云客户端。
+例如，您可以配置本地ONTAP存储以连接到本地 SAN 主机或 SAN 云客户端。您还可以配置在云环境中运行的存储服务，例如link:https://docs.netapp.com/us-en/cloud-volumes-ontap/index.html["Cloud Volumes ONTAP"^]或者link:https://docs.netapp.com/us-en/storage-management-fsx-ontap/index.html["适用于 NetApp ONTAP 的 Amazon FSX"^]连接到本地 SAN 主机或 SAN 云客户端。
 
 .相关信息
 * link:https://docs.netapp.com/us-en/ontap/san-config/index.html["ONTAP SAN配置参考"^]

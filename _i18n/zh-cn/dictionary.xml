@@ -1519,7 +1519,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="e764fe6b8f8825a307a87cedbef45678" category="sidebar">22.04.</block>
   <block id="829d28d8727a4d458f1c35bda30f5ad7" category="sidebar">NVMeoF Ubuntu</block>
   <block id="4d82a1ec1af02725042c8c785564ee7a" category="inline-link-macro">适用于 NetApp ONTAP 的 Amazon FSX</block>
-  <block id="cbd5bf3ac18c40540e157027878d3965" category="paragraph">例如、您可以将内部ONTAP存储配置为连接到内部SAN主机或SAN云客户端。您还可以配置在云环境(例如)上运行的存储服务 <block ref="54a9edfbbcc641d603aea65a27251f05" category="inline-link-macro-rx"></block> 或 <block ref="32496c00ec9be403fcfaf96fbaeed4b1" category="inline-link-macro-rx"></block> 连接到内部SAN主机或SAN云客户端。</block>
   <block id="99fc62da3c4063c517d61da1e5cb3ea3" category="summary">如何使用ONTAP为RHEL 9.4配置NVMe-oF主机</block>
   <block id="b68de8f1f938e0330acdf64c63b08b9a" category="sidebar">9.4.</block>
   <block id="b6758eb9c7ac57209dfad7db602a24d4" category="inline-link-macro">如何为SnapMirror活动同步配置AIX主机</block>
@@ -2667,8 +2666,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="0825e58b251b6f1e1956c9f982c69b3d" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Hypervisor 8.2</block>
   <block id="3e2e1ae5727d07e3ee9163e73df8e73f" category="paragraph">您可以使用 Citrix Hypervisor 8.2 的多路径来管理 ONTAP LUN。</block>
   <block id="6d9eef6a4c2617ee0a8dfdc9ae7a468a" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 8.4</block>
-  <block id="7ef93303f99987d3f82b96411ca41f0f" category="sidebar">XenServer 8.4.</block>
-  <block id="c4bb680e83ce918749e1d4853b0073d1" category="sidebar">虚拟机管理程序 8.2 (LTSR)</block>
   <block id="73dbe2792e643c8d49d1c396963179b8" category="inline-link-macro">创建 SAN 启动 LUN 并将其映射到主机</block>
   <block id="23f9932633d90fac9929676a3d96b73c" category="list-text"><block ref="d3b050efbc8875625662ab7a3bc1d82e" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="55e68527d8c164dc338b18da64611305" category="admonition">您无需配置基于内核的虚拟机(KVM)设置、因为ONTAP LUN会自动映射到KVM虚拟机管理程序。</block>
@@ -3108,22 +3105,13 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="3fe0f7d7cd9a25242a7b121f3cc4ba8a" category="paragraph">您可以在SUSE Linux Enterprise Server 15 SP7中使用多路径来管理ONTAP LUN。</block>
   <block id="2109e80434ca7c6e1b69cbc2e5974556" category="summary">介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP7配置NVMe/FC。</block>
   <block id="656e0f0943759cd8053f13523268bf98" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP7的NVMe-oF主机配置</block>
-  <block id="a260df2c274288385d82b55968f53b84" category="paragraph">您可以将以下支持和功能与 SUSE Linux Enterprise Server 15 SP7 (SLES15 SP7) 的 NVMe-oF 主机配置一起使用。在开始配置过程之前、您还应查看已知限制。</block>
   <block id="5393f0229b7c28049a490e7e149cce98" category="list-text">在同一主机上同时运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。</block>
   <block id="77b17c4b304e4bc88274ebbde24c1c87" category="list-text">支持使用NVMe/FC协议进行SAN启动。</block>
-  <block id="aa4dc57afbcb40684a5fdb0dd0c53e49" category="list-text">从ONTAP 9.12.1 开始，引入了对 NVMe/TCP 和 NVMe/FC 的安全带内身份验证支持。您可以在 SLES15 SP7 中使用 NVMe/TCP 和 NVMe/FC 的安全带内身份验证。</block>
   <block id="bc16fe46d91584e82782504c4c1c10d9" category="list-text">支持使用唯一发现 NQN 的持久发现控制器 (PDC)。</block>
   <block id="c7d62b8831e26ca324eef03e565f77fb" category="list-text">NVMe/TCP 的 TLS 1.3 加密支持。</block>
-  <block id="4e301fd9374a22a48fdb4c33b2297fd4" category="list-text">NetApp <block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> SLES15 SP7 主机上不提供对 NVMe-oF 的主机实用程序支持。而是可以依赖本机软件包中的NetApp插件<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>进行所有NVMe-oF传输。</block>
   <block id="027d24fe581a1889d6b5752e3886e380" category="list-text">没有可用的新功能。</block>
-  <block id="6084e38c00232a21ee1233c5ca70b927" category="paragraph">使用以下步骤验证最低支持的 SLES15 SP7 软件版本。</block>
-  <block id="991655482ba880c83b447bbd0d3a18db" category="list-text">在服务器上安装 SLES15 SP7。安装完成后，验证您是否正在运行指定的 SLES15 SP7 内核：</block>
-  <block id="23aa1a5f62f90e6896afa10f805ed9ca" category="paragraph">以下示例显示了 SLES 内核版本：</block>
   <block id="3939f5ab0e1b02b11f96cac181c4e774" category="paragraph">下面的例子展示了<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>版本：</block>
-  <block id="c31865eb0d6c686b54a6bc6a1da51ac8" category="paragraph">使用 SLES 15 SP7， <block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block> NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包将在系统启动时自动启用。系统启动完成后，请验证启动服务是否已启用。</block>
-  <block id="94628a030db9a09f8b90bd4725085b40" category="admonition">从 SLES 15 SP6 开始，NVMe/TCP 的默认设置<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>超时已关闭。这意味着重试次数没有限制（无限重试），并且您无需手动配置特定的<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>使用时的超时持续时间<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>或者<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block>命令（选项<block ref="269889131ee4793a82191b78a2eb60e3" prefix=" " category="inline-code"></block> ）。此外、NVMe/TCP控制器在发生路径故障时不会发生超时、并会无限期保持连接。</block>
   <block id="b9f923eff2af1f090cf2b63082e1eb11" category="section-title">步骤 8：创建持久发现控制器</block>
-  <block id="3b0141777552d60cadbd3ce34dd905d3" category="paragraph">从ONTAP 9.11.1 开始，您可以为 SLES 15 SP7 主机创建持久发现控制器 (PDC)。要自动检测NVMe子系统添加或删除操作以及对发现日志页面数据的更改、需要PDC。</block>
   <block id="e30836f8afa231851eba05f11afb521a" category="section-title">步骤 9：设置安全带内身份验证</block>
   <block id="c273b14698c5a90f8016a97113ae1527" category="section-title">步骤 10：配置传输层安全性</block>
   <block id="7e0ddf13eb92d7061cb3708e71d99050" category="list-text">检查您是否具有以下内容<block ref="464213eb09b43407b3c3aa2efea57161" prefix=" " category="inline-code"></block> ， <block ref="50955d4b2031271f8fda1764c1a66ac3" prefix=" " category="inline-code"></block> ， 和<block ref="e585c6c1eda4439a86d95239513976b0" prefix=" " category="inline-code"></block>主机上安装的软件包：</block>
@@ -3641,8 +3629,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="49cc988afc6b092ce6281b15b9a60972" category="summary">在 CentOS 8.5 主机上安装 Linux Host Utilities 以管理使用ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
   <block id="3c7efd424a20046d29e4da88c0d5c486" category="summary">配置 Citrix Hypervisor 8.2 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。</block>
   <block id="1f5a17864fe735a3a834371ab2c3043e" category="paragraph">Linux Host Utilities 软件包不支持 Citrix Hypervisor 操作系统。</block>
-  <block id="de920f5dd498ae73930aaae6ead146f6" category="summary">配置 Citrix Hypervisor 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。</block>
-  <block id="936b4d22e2607b9ac84f06791fe03923" category="paragraph">您可以使用 Citrix Hypervisor 8.4 的多路径来管理ONTAP LUN。</block>
   <block id="56eaee8dcecb52bd60025f4df180e2f4" category="summary">在 HP-UX 11i v3 主机上安装 Linux Host Utilities 以使用ONTAP LUN 管理 FCP 和 iSCSI 协议操作。</block>
   <block id="bb53e7efc63e8dc547146d694f3c97c1" category="summary">配置 Ubuntu 20.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 协议操作的特定参数和设置。</block>
   <block id="3d4de8befb0eddb7be95b9eb899bcd21" category="summary">在 Ubuntu 24.04 主机上安装 Linux Host Utilities 以使用ONTAP LUN 管理 FCP 和 iSCSI 协议操作。</block>
@@ -3971,4 +3957,20 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="bdd85bb9fb61697998b63578c3818344" category="paragraph">NVMe/TCP协议不支持自动连接操作。您必须手动执行 NVMe/TCP 连接或连接所有操作才能发现 NVMe/TCP 子系统和命名空间。</block>
   <block id="3832446aa2ef6619ecfdb886641a60fe" category="list-text">验证其他 NVMe/TCP 启动器-目标 LIF 组合是否可以成功获取发现日志页面数据：</block>
   <block id="0adc0ccfa62ac1a4fb645ca5d3f148ff" category="sidebar">了解如何配置 NVMe-oF 主机</block>
+  <block id="1c79280a42a5cd3a48fa9fefe62fd0a5" category="summary">配置 Citrix Xenserver 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。</block>
+  <block id="e3570aecc41d92af1fdf504fc5bd3927" category="paragraph">Linux Host Utilities 软件包不支持 Citrix Xenserver 操作系统。</block>
+  <block id="405ee507e1b0e20ba609f39dc449664e" category="paragraph">您可以使用 Citrix Xenserver 8.4 的多路径来管理ONTAP LUN。</block>
+  <block id="6777a33e557c747716d7b5c89c08e209" category="paragraph">SUSE Linux Enterprise Server 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。</block>
+  <block id="f880ac448e6e50a8b2acd73367cb84c3" category="paragraph">您可以将以下支持和功能与 SUSE Linux Enterprise Server 15 SP7 的 NVMe-oF 主机配置一起使用。在开始配置过程之前，您还应该查看已知的限制。</block>
+  <block id="b6d788f4a78e973bb3a39cc6a41dbadf" category="list-text">从ONTAP 9.12.1 开始，引入了对 NVMe/TCP 和 NVMe/FC 安全带内身份验证的支持。您可以使用 SUSE Linux Enterprise Server 15 SP7 对 NVMe/TCP 和 NVMe/FC 进行安全带内身份验证。</block>
+  <block id="615aa8cdcc32761b028c3f8a323a6cc7" category="list-text">NetApp<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> SUSE Linux Enterprise Server15 SP7 主机上的 NVMe-oF 不支持主机实用程序。相反，您可以依赖本机中包含的NetApp插件<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>适用于所有 NVMe-oF 传输的包。</block>
+  <block id="fee6faa142e2688b32958e9fc0ffffff" category="paragraph">使用以下步骤验证最低支持的 SUSE Linux Enterprise Server 15 SP7 软件版本。</block>
+  <block id="74c00bdffd78cb1619b356f1edc0d233" category="list-text">在服务器上安装SUSE Linux Enterprise Server15 SP7。安装完成后，验证您是否正在运行指定的 SUSE Linux Enterprise Server 15 SP7 内核：</block>
+  <block id="eafcc54cd223c39abcd1b9a23194d53a" category="paragraph">以下示例显示了 SUSE Linux Enterprise Server 内核版本：</block>
+  <block id="dc7b768a8d751d88715186e7e9481815" category="paragraph">使用 SUSE Linux Enterprise Server 15 SP7，<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包将在系统启动时自动启用。系统启动完成后，验证启动服务是否已启用。</block>
+  <block id="b423ded7031f915c1eef46f79773bbff" category="admonition">从 SUSE Linux Enterprise Server 15 SP6 开始，NVMe/TCP 的默认设置<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>超时已关闭。这意味着重试次数没有限制（无限重试），并且您不需要手动配置特定的<block ref="5d036703249af8ebf4d92499bcc10b3c" prefix=" " category="inline-code"></block>使用时的超时持续时间<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>或者<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block>命令（选项<block ref="269889131ee4793a82191b78a2eb60e3" prefix=" " category="inline-code"></block>）。此外，NVMe/TCP 控制器在发生路径故障时不会超时，并会无限期地保持连接。</block>
+  <block id="b523b3776ea6194b27cd840c1deb284c" category="paragraph">从ONTAP 9.11.1 开始，您可以为 SUSE Linux Enterprise Server 15 SP7 主机创建持久发现控制器 (PDC)。需要 PDC 来自动检测 NVMe 子系统的添加或删除操作以及发现日志页面数据的更改。</block>
+  <block id="813cc633e0459359ed043e6d76025c2c" category="paragraph">例如，您可以配置本地ONTAP存储以连接到本地 SAN 主机或 SAN 云客户端。您还可以配置在云环境中运行的存储服务，例如<block ref="cdfecfe4eb59bc17d075f2da08aa8dad" category="inline-link-macro-rx"></block>或者<block ref="8ad7a6b53b9076e00c14225601db07c4" category="inline-link-macro-rx"></block>连接到本地 SAN 主机或 SAN 云客户端。</block>
+  <block id="9831e45ea03c86b202350b5eb137e309" category="sidebar">Xenserver 8.4</block>
+  <block id="df472899f555ad076c9b90f4bd508f91" category="sidebar">虚拟机管理程序 8.2</block>
 </blocks>
