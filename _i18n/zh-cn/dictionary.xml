@@ -182,13 +182,10 @@
   <block id="fd58025e044ac8cc0f93e71ed39a3720" category="list-text">在服务器上安装 Oracle Linux 7.8 。</block>
   <block id="de4b2454229cdcf5a156dbdf82d30b67" category="list-text">在 Oracle Linux L 7.8 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="aec81109cc90f6dcce296e00814fd999" category="paragraph">在上述示例中，两个命名空间映射到 Oracle Linux 7.8 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。</block>
-  <block id="b2d91944503b473fe8f36b2e57bc92ad" category="summary">将 Windows Server 2012 R2 与 ONTAP 结合使用</block>
   <block id="880b9ba9933b6e3ce087d9412e66470b" category="inline-link-macro">Microsoft Update Catalog 2012 R2</block>
   <block id="5a3b43f9090be87b411af7ac82adcb38" category="list-text">按照 Microsoft 提供的说明安装修补程序。</block>
   <block id="4f27a34799ad8580f67b93c57e242ad0" category="section-title">SAN 配置</block>
-  <block id="4bab92c0679e684c0db0cc740cd47758" category="section-title">Non-ASA 配置</block>
   <block id="7a0a3a29c4e371b5125adb49cae3a738" category="section-title">全 SAN 阵列配置</block>
-  <block id="c9bbd6792eac761da84ef7d035e5b41c" category="section-title">Hyper-V VHD 需要对齐才能获得最佳性能</block>
   <block id="270748dbbd5a9031b10d44f9f16973cf" category="admonition">默认情况下， Windows Server 2016 创建的分区应对齐。</block>
   <block id="1104f990ade81e5b4d644288a54cf49a" category="admonition">对于在 VHD 上使用 Grub 启动加载程序的 Linux 虚拟机，您需要在运行 PowerShell 工具包后更新启动配置。</block>
   <block id="b9ef2c298abb1a6d04513bf9fee94dda" category="paragraph">在使用 Grub 启动加载程序的 Linux 子操作系统上使用 PowerShell 工具包对磁盘运行 `mbralign` 以更正 MBR 对齐后，您必须重新安装 Grub 以确保子操作系统正确启动。</block>
@@ -263,7 +260,6 @@
   <block id="fee03d4bfd315e17cc06c4801b57dbb9" category="list-text">要设置一组特定磁盘的优先级，请输入：</block>
   <block id="8f6489cc32f6141446bbbf6eba20b321" category="paragraph">使用 ` -v` 选项启用详细模式并显示所有优先级。使用 ` -q` 选项查询所有或单个磁盘优先级。</block>
   <block id="2a894c946342eacded4eef5c9a7b96b9" category="list-text">要验证主机是否已发现 LUN ，请输入以下命令：</block>
-  <block id="6b83d866c4dfa9b95b03b5a6ede846f7" category="summary">将 Windows Server 2019 与 ONTAP 结合使用</block>
   <block id="51da3f0f90428027f2a496d366e696eb" category="inline-link-macro">Microsoft Update Catalog 2019</block>
   <block id="f87d076eb7d3558e4df3a472ec88d6f2" category="summary">介绍如何在 ONTAP 中使用 Red Hat Enterprise Linux 6.6</block>
   <block id="aaa84a008bcbd7b13ea49132c73d1afa" category="paragraph">对于 Red Hat Enterprise Linux （ RHEL ） 6.6 ， /etc/multipath.conf 文件必须存在，但您不需要对该文件进行特定更改。RHEL 6.6 使用识别和正确管理 ONTAP LUN 所需的所有设置进行编译。要启用 ALUA 处理程序，请执行以下步骤：</block>
@@ -612,7 +608,6 @@
   <block id="4aab3393d576bcf2907352ae44a0a440" category="list-text">升级 NVMe-CLI 软件包。原生 NVMe-CLI 软件包包含 NVMe/FC 自动连接脚本，用于为 NVMe 多路径启用轮循负载平衡的 ONTAP udev 规则以及用于 ONTAP 命名空间的 NetApp 插件。</block>
   <block id="f66be2d78c31b4dcc20cc20c3d56d86f" category="list-text">在 Oracle Linux 8.2 主机上，检查 /etc/nve/hostnqn 上的主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配。</block>
   <block id="8c14192b8816f047aeb8cd691b0dcee5" category="paragraph">在上述示例中，两个命名空间映射到 Oracle Linux 8.2 ANA 主机。这些 LIF 可通过四个目标 LIF 进行查看：两个本地节点 LIF 和两个其他配对节点 / 远程节点 LIF 。此设置会将主机上每个命名空间的两个 ANA 优化路径和两个 ANA 不可访问路径显示为。</block>
-  <block id="8eee884db44f521f0d19cac36bf258cc" category="summary">将 Windows Server 2016 与 ONTAP 结合使用</block>
   <block id="f5cba97c30a47867e3649fd136cca68c" category="inline-link-macro">Microsoft Update Catalog 2016</block>
   <block id="9f48bd68eb80a61379f6dd65620bec8c" category="summary">介绍如何使用 ONTAP 为 SUSE Linux Enterprise Server 15 SP2 配置 NVMe/FC</block>
   <block id="b7c80370e68c20a6d2b05ca2d022abbe" category="doc">适用于采用 ONTAP 的 SUSE Linux Enterprise Server 15 SP2 的 NVMe/FC 主机配置</block>
@@ -844,7 +839,6 @@
   <block id="cf79be42f6c9a2f2225f202bfec080c2" category="sidebar">15 SP4</block>
   <block id="8da61845fa1ac07e5d54097fe9d2a4cb" category="summary">介绍如何使用ONTAP 为SUSE Linux Enterprise Server 15 SP4配置NVMe/FC</block>
   <block id="806707e47ee8fe684a6d5e5b0898539a" category="sidebar">NVMeF OL</block>
-  <block id="29b512fbc4379581cd2fd8694ca529c4" category="summary">将Windows Server 2022与ONTAP 结合使用</block>
   <block id="8d1d5b8defd8dab28a7e51c7b4ff5d33" category="inline-link-macro">Microsoft Update目录2022</block>
   <block id="3a824154b16ed7dab899bf000b80eeee" category="sidebar">2022 年</block>
   <block id="452d8ca267c17453aeeac8e238531175" category="sidebar">OL-FCP</block>
@@ -1359,7 +1353,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="d0e316336a8b1aa9192fa5b84596d3cd" category="paragraph">您可以使用ONTAP SAN主机配置设置将CentOS 6.8配置为ONTAP作为目标。</block>
   <block id="1e1aabe902ce49322df6aba455576bfc" category="paragraph">您可以使用ONTAP SAN主机配置设置将使用ONTAP的Red Hat Enterprise Linux 6.5配置为目标。</block>
   <block id="1e63f8c03568b214efdd000b3c1ebab0" category="paragraph">您可以使用ONTAP SAN主机配置设置将CentOS 6.4配置为目标并使用ONTAP。</block>
-  <block id="ce6daf5739712167ff9559d54d5b84d1" category="paragraph">具有ONTAP版本的Windows Server 2016没有已知问题。</block>
   <block id="708aa4255b7e46bb95ff47e221b37a0f" category="paragraph">您可以使用ONTAP SAN主机配置设置将CentOS 6.6配置为目标、并使用ONTAP。</block>
   <block id="8cf5a4e1d8829324666d40a8ffd9c07e" category="paragraph">您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 6.6配置为目标。</block>
   <block id="475c59981753e28a3bbd2b2786d32646" category="paragraph">Oracle Linux 6.6 ONTAP版本没有已知问题。</block>
@@ -1376,7 +1369,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="92ecdf60dd5c6225e905e0a3eea885da" category="paragraph">您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 6.4配置为目标。</block>
   <block id="0938dfec19dd45c8a6f64aa8b0b1eda4" category="paragraph">具有ONTAP版本的Oracle Linux 6.4存在以下已知问题：</block>
   <block id="3998e195af175a67287a554b2d04b426" category="paragraph">Veritas Infoscale 7 for Linux with ONTAP版本没有已知问题。</block>
-  <block id="9a54de79abf75dfa58e891711132c192" category="paragraph">运行ONTAP版本的Windows Server 2019没有已知问题。</block>
   <block id="001844af86b0a1f099720e6aed9988f7" category="paragraph">您可以使用ONTAP SAN主机配置设置将Red Hat Enterprise Linux 6.8配置为目标ONTAP。</block>
   <block id="c5041d07d38095b8620f889d70dea95d" category="paragraph">对于采用ONTAP版本的VMware vSphere 7.x、没有已知问题。</block>
   <block id="6963533acedb1b8942f9674f67500cd3" category="paragraph">您可以使用ONTAP SAN主机配置设置将以ONTAP为目标的Oracle Linux 6.8配置为目标。</block>
@@ -1390,12 +1382,10 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="a69f90991b7861bf298029c85947f926" category="paragraph">具有ONTAP版本的Oracle Linux 6.9存在以下已知问题：</block>
   <block id="95ee459b709d0e4cae7ea12ed33763f9" category="paragraph">具有ONTAP版本的SUSE Linux Enterprise Server 15 SP4没有已知问题。</block>
   <block id="1bc24cef68b137efe0e69c2b269dd7da" category="paragraph">Veritas Infoscale 8 for Linux with ONTAP版本没有已知问题。</block>
-  <block id="7145b773c01d1ea2262969c3644747a0" category="paragraph">运行ONTAP版本的Windows Server 2022没有已知问题。</block>
   <block id="3d8d5b2f05311b66754ca058971f7e2e" category="paragraph">具有ONTAP版本的SUSE Linux Enterprise Server 15 SP5没有已知问题。</block>
   <block id="30b87f3af4543974205ca57666930631" category="paragraph">Veritas Storage Foundation 6 for Linux with ONTAP版本没有已知问题。</block>
   <block id="ee0e00ac8a597d343ecf7da72dd6effd" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置以ONTAP为目标的Oracle Linux 6.10。</block>
   <block id="c7512b0badc93efcac520b6d3264ca72" category="paragraph">具有ONTAP版本的Oracle Linux 6.10没有已知问题。</block>
-  <block id="8a95c3a52d7c4637ec5bd95d7e964b9a" category="paragraph">运行ONTAP版本的Windows Server 2012 R2没有已知问题。</block>
   <block id="289d4a224c51f2aeb418b081093d4d1e" category="sidebar">Solaris Host Utilities</block>
   <block id="11bc52330473c77af7c9af92d91670d8" category="doc">适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP4的NVMe-oF主机配置</block>
   <block id="1e0824a41921c35ae75109745c612112" category="paragraph">具有非对称命名空间访问(AANA)的SUSE Linux Enterprise Server (SLES) 15 SP4支持基于网络结构的NVMe (NVMe-oF)、包括基于光纤通道的NVMe (NVMe/FC)和其他传输。在NVMe-oF环境中、ANA相当于iSCSI和FCP环境中的AUA多路径功能、并通过内核NVMe多路径实施。</block>
@@ -1448,9 +1438,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="8cfe2b11255c36622bc84e4bd2dfb53c" category="list-text">执行<block ref="eb2bf21d337d5754274973a21f351bbd" prefix=" " category="inline-code"></block> 命令、然后重新启动主机。</block>
   <block id="9688ec84efd5b1cb7c885e598b6ebf4a" category="list-text">重新启动后、验证是否已启用详细日志记录：</block>
   <block id="86891fa05c8b78ad9621085c8abc1fb4" category="paragraph">您可以使用生成JSON文件<block ref="b2ed43620b7fff2689035f1e99c24ded" prefix=" " category="inline-code"></block> 选项有关更多语法选项、请参见NVMe Connect-all手册页。</block>
-  <block id="0ecfee1e5b63a34e0c870ad349ab2d79" category="section-title">安装Windows修补程序</block>
-  <block id="f00aa3de5284bd6ffc1c6eb440a68428" category="inline-link-macro">Windows Host Utilities文档</block>
-  <block id="6f49a4f8a77775eb655aad7d40795d50" category="section-title">使用PowerShell工具包更正MBR对齐后、重新安装适用于Linux子系统的GRUB</block>
   <block id="3a891098b79eaa53ca214516fa78a5e6" category="summary">如何使用ONTAP为RHEL 9.1配置NVMe-oF主机</block>
   <block id="5464d39105cc61c77c01f61a6c049eae" category="summary">如何使用ONTAP为RHEL 9.2配置NVMe-oF主机</block>
   <block id="13aa98a5d20992675bbf7111d4bcf7cc" category="cell">NetApp Linux主机实用程序命令行界面需要具有其他库软件包依赖关系、才能支持Emulex主机总线适配器(HBA)适配器发现</block>
@@ -1611,7 +1598,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="9eb91e4550c86ff0aa1e87339af6ac4a" category="paragraph">不需要将设备直接添加到文件中<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>、除非您的设备不希望多路径管理、或者您的现有设置会覆盖默认值。要排除不需要的设备、请向文件中添加以下语法<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>、将&lt;DevId&gt;替换为要排除的设备的WWID字符串：</block>
   <block id="26abbb90105e84ce5c3470d46cb09443" category="paragraph">在以下示例中、<block ref="59b466fd93164953e56bdd1358dc0044" prefix=" " category="inline-code"></block>是要添加到黑名单中的本地SCSI磁盘。</block>
   <block id="48a57465c9050da3e456de11a1bce0f0" category="list-text">重新启动主机以验证启动是否成功。</block>
-  <block id="f7de5451f0d12f9de62cf0d59c9695f2" category="admonition">只有在主机操作系统启动并在多个路径上运行后、这些路径才可用。</block>
   <block id="2ba8ced675fff51092484e241860c46e" category="paragraph"><block ref="273d5cd3ecc9b9ccde8aa81942ced2f2" prefix=" " category="inline-code"></block>命令将生成以下类型的输出。以下示例中的输出将被截断。</block>
   <block id="1f9090c13a627840d3e8110654671ecd" category="cell">完成SUSE Linux Enterprise Server 15S P2操作系统安装后、从SAN启动iSCSI无法使用静态IP配置启动</block>
   <block id="74fe7cde6e68f9607ef6c16f62916dd8" category="paragraph">使用静态IP配置完成SUSE Linux Enterprise Server 15 SP2操作系统安装后、iSCSI SAN启动的LUN无法启动。每次使用静态 IP 配置时都会发生启动失败。这会导致服务器拒绝继续启动过程，并显示以下错误消息：</block>
@@ -2183,7 +2169,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="f136180ccf441bafce90cc66945e28d5" category="paragraph">在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE是管理逻辑单元(ALU)。虚拟卷是辅助逻辑单元(SLU)。</block>
   <block id="f8396d6deec4872026f8255ab97b8282" category="paragraph">ESXi提供了一个称为本机多路径插件(NMP)的可扩展多路径模块、用于管理子插件、存储阵列类型插件(Storage Array Type Plugin、SATP)和路径选择插件(Path Selection Plugins、PSP)。默认情况下、这些SATS规则在ESXi中可用。</block>
   <block id="d44b14edb7148595e8fd7c39e18a1d82" category="paragraph">在使用vCenter UI创建VVOLs数据存储库时、系统会指导您创建FlexVol作为数据存储库的备份存储。ESXi主机可使用协议端点(PE)访问VVOLs数据存储库中的VVOLs。在 SAN 环境中，会在数据存储库中的每个 FlexVol 上创建一个 4 MB 的 LUN ，以用作 PE 。SAN PE是管理逻辑单元(ALU)。虚拟卷是辅助逻辑单元(SLU)。</block>
-  <block id="18daf84ed810f1c72da54c0484f9c353" category="section-title">安装Windows Host Utilities</block>
   <block id="550d5f0555aa2a5e59269c14de819e78" category="summary">Windows Host Utilities包括一个安装程序、用于设置所需的Windows注册表和HBA参数、以便Windows主机正确处理ONTAP和E系列平台的存储系统行为。</block>
   <block id="6896363d719a238fdc4b6d2ef8ef5a78" category="doc">安装Windows Host Utilities 7.1</block>
   <block id="f0ed46888b875cc5c73315cc1272f90b" category="paragraph">使用Windows主机实用程序可以将Windows主机计算机连接到NetApp存储系统。</block>
@@ -2296,23 +2281,16 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="12019871b1c1fb86c8b96a14a8a0d87b" category="list-text"><block ref="df729424b829987d85e6e4181d0da2e5" prefix="" category="inline-code"></block></block>
   <block id="e9caa2fbbe110ef69dc016bc16c3a49d" category="list-text">验证是否已创建这些名称空间：</block>
   <block id="ecf0c848ba2569e96b551762e31fb53a" category="paragraph"><block ref="a24d9720998709cd16e0a6013010df1b" prefix="" category="inline-code"></block></block>
-  <block id="c27f42ef1dd62f55beb26309bacd2581" category="paragraph">MPIO软件为Windows操作系统提供所有路径的单个磁盘、设备专用模块(DSM)用于管理路径故障转移。在Windows系统上、任何MPIO解决方案中的两个主要组件是DSM和Windows MPIO。</block>
   <block id="9eb01e2d5f78a1ebcc6f4f019384dbf4" category="admonition">如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。</block>
   <block id="198983b35ee46ea062d1cabf85f522db" category="admonition">在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。</block>
-  <block id="ebafa948e488222fb51d74d762de66f4" category="paragraph">您可以使用本地启动或SAN启动来启动Windows操作系统。如果您的配置支持SAN启动、则NetApp建议使用该启动。</block>
   <block id="9ce2fcadde50a0f6f02b767f526a925d" category="open-title">本地启动</block>
-  <block id="df98c9f379a2c7043a362f477e6bc3ec" category="paragraph">通过在本地硬盘(SSD、SATA、RAID等)上安装Windows操作系统来执行本地启动。</block>
   <block id="5c715b8fde529251e535a7b4e48f84c2" category="open-title">SAN 启动</block>
   <block id="58d0fc761c647663983ac6b7e586281c" category="paragraph">如果您选择使用SAN启动、则您的配置必须支持此功能。</block>
   <block id="47d17b750a3f193d9db742ef86494b1e" category="paragraph">使用<block ref="b77f230f2effb14751e6164ceee6da3f" category="inline-link-rx"></block>验证您的Windows操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。</block>
-  <block id="3097ad2af11c180c3e0a96a78dfe1685" category="inline-link-macro">SAN存储管理</block>
-  <block id="5fa27798a398e981850ac8db94c48efa" category="paragraph">请参阅。 <block ref="331abebe4c201790e2378608c644cbb6" category="inline-link-macro-rx"></block></block>
-  <block id="a68eb6fa2edcdc8960e83492a4af4541" category="list-text">重新启动主机以验证启动是否成功</block>
   <block id="ba5e9a5307d838817264d934e6080263" category="paragraph">根据您的SAN配置、主机使用全SAN阵列(ASA)或非ASA配置来访问ONTAP LUN。在ASA和非ASA配置中、访问单个ONTAP LUN所需的路径不应超过四个。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。</block>
   <block id="df71bac0ba76ff83dcf7e26b1350fe50" category="paragraph">ASA配置应包含一组具有单一优先级的主动/优化路径。这意味着路径由控制器提供服务、并在所有活动路径上发送I/O。</block>
   <block id="6a25c5df0849f9286646dc1c4746bc77" category="paragraph">以下示例显示了具有主动/优化路径的ONTAP LUN的正确输出。</block>
   <block id="7e7bd9d92ebb121bcce736b10711ab8c" category="admonition">对于无法从Microsoft Update目录下载的修补程序、您需要与Microsoft支持联系。</block>
-  <block id="4c2bfdf61e2e24a49c061c9666b96e1b" category="admonition">许多修复程序都需要重新启动Windows主机。您可以选择等待重新启动主机、直到安装或升级Host Utilities。</block>
   <block id="9bd687f53bb8eba834ecb54f33ebf261" category="paragraph">如果磁盘分区的数据块边界与底层LUN的块边界不对齐、则存储系统通常必须为每个操作系统块读取或写入完成两次块读取或写入。错位导致的额外块读取和写入可能会导致严重的性能问题。</block>
   <block id="2ff9b2398c78131af0b1d1523781ef19" category="paragraph">主引导记录定义的每个分区的起始扇区的位置会导致错位。</block>
   <block id="6b56b79977ded504f44030c7aacf202c" category="paragraph">使用<block ref="4e1e27349c8a128a19e874bcbd0666b6" prefix=" " category="inline-code"></block>ONTAP PowerShell工具包中的cmdlet检查分区是否与底层LUN对齐。如果分区对齐不正确、请使用<block ref="1c425220dcb59c3825f2baed3229bb55" prefix=" " category="inline-code"></block>cmdlet创建一个正确对齐的新的vHD文件。此 cmdlet 会将所有分区复制到新文件中。原始 VHD 文件不会被修改或删除。复制数据时，必须关闭虚拟机。</block>
@@ -2333,30 +2311,16 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="68bccc9f47a1d689c835812de6c7a435" category="admonition">在中<block ref="7b530ba82b70d4821bf776b3f3fb778a" prefix=" " category="inline-code"></block>，<block ref="cd096f9e86c0ef0d9e34df35a959627c" prefix=" " category="inline-code"></block>是引导磁盘的实际磁盘标识符的占位符。</block>
   <block id="6b1a062ab30f453c4d8f30042bd36a0d" category="summary">您可以使用ONTAP SAN主机配置设置来配置Windows Server 2025、以便使用ONTAP存储运行。</block>
   <block id="6cbabda8de389ba6ce8a60e0359b51b7" category="doc">为Windows Server 2025配置ONTAP存储</block>
-  <block id="24c9734089a30c666463d52a352e3326" category="section-title">启动Windows操作系统</block>
   <block id="d211c3930b27be56feb1a5044f105d64" category="paragraph">NetApp建议在主机服务器上安装Microsoft更新目录中提供的*最新累积更新*。</block>
   <block id="c6e9e839e8304cacb5378299e7f6ca42" category="inline-link-macro">Microsoft Update目录2025</block>
   <block id="68e5c8d1251c633565ba668446a95b32" category="list-text">从下载修补程序<block ref="86167046a85b88d4b396a82107daadba" category="inline-link-macro-rx"></block>。</block>
-  <block id="bcf622355381554644b7b19355170fb1" category="paragraph">如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。</block>
   <block id="4be31bb14f28cd1a1a92b994b241b6e3" category="paragraph">运行ONTAP版本的Windows Server 2025没有已知问题。</block>
   <block id="769a40f63534a31b2b123052ac1da6ad" category="list-text">验证<block ref="76b66d5f379b691153dc22425201f6ae" prefix=" " category="inline-code"></block>命令的输出以确保设置完整。您可以使用<block ref="3d80983fc82ff72fd51e5d1f7e90c56d" prefix=" " category="inline-code"></block>命令验证ONTAP LUN的设置。应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径。这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
   <block id="47e930d345db593756a39027df077a51" category="paragraph">对于非 ASA 配置，应存在两组具有不同优先级的路径。优先级较高的路径为主动/优化路径。这意味着它们由聚合所在的控制器提供服务。优先级较低的路径处于活动状态、但未进行优化、因为它们是从其他控制器提供的。只有在优化路径不可用时、才会使用非优化路径。</block>
-  <block id="fc50f2493bad30bed7c038ecd3810f93" category="doc">将Windows Server 2012 R2与ONTAP结合使用</block>
-  <block id="90e0eb50d77220c88968e61e6c89e567" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置Windows Server 2012 R2、以便使用ONTAP存储运行。</block>
   <block id="d7b8955c7b96bef9985fd48649d70251" category="list-text">从下载修补程序<block ref="c91fa8395bb99838be8ab4e7b48666cc" category="inline-link-macro-rx"></block>。</block>
-  <block id="0a2cdf45f16c5bcac7186ac07812cdce" category="paragraph">如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。选择MPIO支持后、Windows Host Utilities将启用Windows Server 2012 R2中包含的MPIO功能。如果您不使用Windows Host Utilities、则需要手动启用多路径。</block>
-  <block id="31c93f15c528366dfc58055f875a34cd" category="doc">将Windows Server 2016与ONTAP结合使用</block>
-  <block id="3d01866452cd64359121ccc794a6e0ca" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置Windows Server 2016、以便使用ONTAP存储运行。</block>
   <block id="d933dd46766685abc25b001848a8b8a5" category="list-text">从下载修补程序<block ref="6e6b75f4256049ee1dbc008868e8aa3a" category="inline-link-macro-rx"></block>。</block>
-  <block id="43490c570a858087e3c2378b85a7dbea" category="paragraph">如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。选择MPIO支持后、Windows Host Utilities将启用Windows Server 2016中包含的MPIO功能。如果您不使用Windows Host Utilities、则需要手动启用多路径。</block>
-  <block id="4224c766e662726e9cf96dddea9f4e7a" category="doc">将Windows Server 2019与ONTAP结合使用</block>
-  <block id="7736a65c91a62ba2a8b7aadb3cf461da" category="paragraph">您可以使用ONTAP SAN主机配置设置为Windows Server 2019配置ONTAP、以便使用ONTAP存储运行。</block>
   <block id="35fec4b95b75bf64df4556334d921ef8" category="list-text">从下载修补程序<block ref="145f31fd192f816eb74b3bac6d3cac60" category="inline-link-macro-rx"></block>。</block>
-  <block id="c94dd2d695431882dfa7ae6e19a7febb" category="paragraph">如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。选择MPIO支持后、Windows Host Utilities将启用Windows Server 2019中包含的MPIO功能。如果您不使用Windows Host Utilities、则需要手动启用多路径。</block>
-  <block id="a1c2de0c15edd5b78acba06a44bdcd8a" category="doc">将Windows Server 2022与ONTAP结合使用</block>
-  <block id="2dee01b5959243269004d022056184d2" category="paragraph">您可以使用ONTAP SAN主机配置设置来配置Windows Server 2022以使用ONTAP存储运行。</block>
   <block id="c770fe286b0fbfc90b0ed457920cd83d" category="list-text">从下载修补程序<block ref="47dfbc363030c19b6fccb995dd42bb8c" category="inline-link-macro-rx"></block>。</block>
-  <block id="fa9f943956ba22db15d970418ff02172" category="paragraph">如果Windows主机具有多个存储系统路径、则需要安装Microsoft多路径I/O (MPIO)软件并启用多路径。如果选择MPIO支持、则Windows Host Utilities将启用Windows Server 2022中包含的MPIO功能。如果您不使用Windows Host Utilities、则需要手动启用多路径。</block>
   <block id="8abc082f978aa2a27e65e7507ac905d7" category="paragraph">Windows Host Utilities支持以下Windows版本：</block>
   <block id="989db21aea1c122bc4034e50ecb6887c" category="list-text">Windows 2025</block>
   <block id="e1fb3bc85942df243da9db83c85073bd" category="cell">指定了MPIO支持且服务器为Windows Server 2025、2022、2019、2016或2012 R2时</block>
@@ -2365,7 +2329,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="fa5c369c0560373ede3332d2508c4819" category="paragraph">安装Windows Host Utilities 7.2时、LimTransferSize参数会自动设置为"1"。安装后、您需要手动将LimTransferSize值更改为"0"并重新启动服务器。</block>
   <block id="70cefc9a608dc188dd16deb1397a1529" category="cell">指定了MPIO支持且您的服务器为Windows Server 2016、2012 R2、2012、2008 R2或2008时、除非检测到Data ONTAP DSM</block>
   <block id="28c4a2aff9dab89964d88a9594119baa" category="cell">服务器为Windows Server 2016、2012 R2、2012、2008 R2或2008时</block>
-  <block id="b76b67fa1e708efcaa2d6a257e3dc3a5" category="summary">适用于采用ONTAP 的Windows Server 2052的NVMe/FC主机配置</block>
   <block id="e240b4a9acf4df1925780394d9f14be9" category="doc">为Windows Server 2025配置适用于ONTAP的NVMe/FC</block>
   <block id="1332a2397f4fcbb21e78a6e3c713af4b" category="paragraph">您可以在运行Windows Server 2025的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。</block>
   <block id="936aa4aa59385428bc622db0d7601422" category="paragraph">您可以对适用于Windows 2025的NVMe/FC主机配置使用以下支持。在开始配置过程之前、您还应查看已知限制。</block>
@@ -3206,9 +3169,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="60ea83a256e34e4aed94c91d597adaf5" category="list-text">验证ONTAP LUN 的路径状态：</block>
   <block id="75071f879ade2dc0f45d0e1a051102ee" category="paragraph">以下示例输出显示ASA、 AFF或FAS配置中ONTAP LUN 的正确路径状态。输出中每个 LUN 的“访问状态”都会显示路径优先级。</block>
   <block id="d9f2520a8186ee208856208082340e74" category="list-text"><block ref="6bbc6d6d1be9b0c8545cc554c24cac69" category="inline-link-macro-rx"></block> 。</block>
-  <block id="f85ab5a5f387d0879002bd231c5c7e16" category="list-text">对于 Windows Host Utilities 8.0，当您选择 MPIO 支持时，MPIO 功能会自动启用。</block>
-  <block id="90c832268551abb0310d76e67c8084da" category="list-text">在 Hyper-V 虚拟机中运行的 Windows XP 或 Windows Vista 不支持 MPIO。</block>
-  <block id="1450c50761af7763fd8f676e9158f0ac" category="paragraph">Windows Host Utilities 是一组带有文档的软件程序，可让您将主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。 NetApp建议下载并安装最新的实用程序工具包。有关 Windows Host Utilities 配置信息和说明，请参阅<block ref="c433ee028385f6593bee6209817254f2" category="inline-link-macro-rx"></block>并选择适合您的 Windows Host Utilities 版本的安装程序。</block>
   <block id="b3b8083d2b1fb45bfd886fd71df23ad5" category="doc">步骤 2：配置 FC HBA 和交换机</block>
   <block id="6cd11e019fdc747b81fff93600ba2a9f" category="list-text">启动目标服务。</block>
   <block id="443ff4f3c9c7a278f2558cfbf8620de1" category="paragraph">请参阅<block ref="357ba997d0a8a18a99ca5e02e5517da8" category="inline-link-rx"></block>了解详细的布线和配置信息。</block>
@@ -3973,4 +3933,37 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="813cc633e0459359ed043e6d76025c2c" category="paragraph">例如，您可以配置本地ONTAP存储以连接到本地 SAN 主机或 SAN 云客户端。您还可以配置在云环境中运行的存储服务，例如<block ref="cdfecfe4eb59bc17d075f2da08aa8dad" category="inline-link-macro-rx"></block>或者<block ref="8ad7a6b53b9076e00c14225601db07c4" category="inline-link-macro-rx"></block>连接到本地 SAN 主机或 SAN 云客户端。</block>
   <block id="9831e45ea03c86b202350b5eb137e309" category="sidebar">Xenserver 8.4</block>
   <block id="df472899f555ad076c9b90f4bd508f91" category="sidebar">虚拟机管理程序 8.2</block>
+  <block id="acf2ddfd48a6a24bda067d6e04e94f29" category="doc">步骤 4：确认主机的多路径配置</block>
+  <block id="7aeddcaacf2b32401e7a3259c54bb6c0" category="paragraph">如果您的 Windows 主机有多个到存储系统的路径，请安装 Microsoft Multipath I/O (MPIO) 软件并启用多路径。</block>
+  <block id="4fa0afdc437793b73c9f3c23cdd3ebdd" category="paragraph">在 Windows 系统中，MPIO 解决方案的两个主要组件是设备专用模块 (DSM) 和 Windows MPIO。  MPIO 向 Windows 操作系统提供单个磁盘用于所有路径，而 DSM 管理路径故障转移。</block>
+  <block id="7b08d528e06e07ceac5779127d12b299" category="list-text">安装 MPIO 软件并启用多路径功能。</block>
+  <block id="ed1b2b5a128a4696bca9e41fc59d5595" category="paragraph">根据您的 SAN 配置，主机使用ASA、 AFF或FAS配置来访问ONTAP LUN。这些配置不应该需要超过四条路径来访问单个ONTAP LUN。存储故障时，超过四条路径都可能导致问题。</block>
+  <block id="83116fea88b383257fbc4e32a107435f" category="paragraph">以下示例输出显示了ASA、 AFF或FAS配置的ONTAP LUN 的正确设置。</block>
+  <block id="9fd90abc366dc82707cd08614fb03cc1" category="paragraph">ASA配置应包含一组具有单一优先级的活动/优化路径。控制器负责维护路径，并在所有活动路径上发送 I/O。</block>
+  <block id="2668d75d00d2b0c89fc0268c581eea9a" category="paragraph">AFF或FAS配置应有两组优先级不同的路径。优先级较高的路径是活动/优化路径，由聚合所在的控制器提供服务。优先级较低的路径由不同的控制器提供服务。它们处于活动状态，但未经优化，仅在没有优化路径时使用。</block>
+  <block id="778265cdd82e615c65e819202c4f1a45" category="paragraph">您可以使用本地启动或 SAN 启动来启动 Windows 操作系统。  NetApp建议使用SAN启动来简化部署并提高可扩展性。</block>
+  <block id="da42b168559eb3f7c8663fcad45f08cb" category="list-text"><block ref="6cdc790cf038e6e4c1fc6fe01e6057a7" category="inline-link-macro-rx"></block>。</block>
+  <block id="9c3530e2722834048b2844c3d51c3f9d" category="paragraph">通过将 Windows 操作系统安装到本地硬盘（例如 SSD、SATA 或 RAID）上来执行本地启动。</block>
+  <block id="732f2da8f62b9da0ea923952084874de" category="inline-link-macro">了解 Window Host Utilities 的注册表设置</block>
+  <block id="adb6b5051a1f8d77d4d01917e922a3e4" category="paragraph"><block ref="c1331b771adf93ff52db3f4f543e95b0" category="inline-link-macro-rx"></block>。</block>
+  <block id="418566369566c44bb7140916a64786a1" category="admonition">许多热修复程序需要重启Windows主机。您可以等到安装或升级主机实用程序之后再重启主机。</block>
+  <block id="a280834ebf64082d80348b8606fd1022" category="paragraph">Windows 主机实用程序是一套软件程序及其文档，可让您将主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。  NetApp建议下载并安装最新的 Windows 主机实用程序，以支持ONTAP LUN 管理并帮助技术支持人员收集配置数据。</block>
+  <block id="0dbfca139f278e370070260ca86e7bea" category="paragraph">有关 Windows 主机实用程序配置和安装信息，请参阅<block ref="0030a0ca2c8a5e3c1ffa16a150ed65f9" category="inline-link-macro-rx"></block>请查阅文档并选择适合您 Windows 主机实用程序版本的安装步骤。</block>
+  <block id="a3a87f35eaec11e7cfdeaa926efcea3e" category="doc">配置 Windows Server 2025 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
+  <block id="be19d16101f490dcf123445eaace114d" category="paragraph">Windows 主机实用程序是一套软件程序及其文档，可让您将 Windows 主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。在 Windows Server 2025 主机上安装 Windows 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。。</block>
+  <block id="198324955fafd67306806495fdc17bc3" category="section-title">步骤二：安装Windows热修复程序</block>
+  <block id="6ddbd1366aa70807a114ac035548f288" category="summary">在 Windows Server 2012 R2 主机上安装 Windows Host Utilities，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="0fa7328b9e38e8818cb96154139fd901" category="doc">配置 Windows Server 2012 R2 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
+  <block id="7bbebb794883f3e8c294ae39c947f4cf" category="paragraph">Windows 主机实用程序使您可以将 Windows 主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。在 Windows Server 2012 R2 主机上安装 Windows 主机实用程序，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="89f19d3dd385006b8601930fa1399926" category="section-title">第五步：回顾已知问题</block>
+  <block id="92d20a0d51c7098b77c72ced4b00e41d" category="summary">在 Windows Server 2016 主机上安装 Windows Host Utilities，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="88f5aab84286b3491813ff2276ca51e6" category="doc">配置 Windows Server 2016 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
+  <block id="db696da43111f12e0818032113690889" category="paragraph">Windows 主机实用程序使您可以将 Windows 主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。在 Windows Server 2016 主机上安装 Windows 主机实用程序，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="18a7214adf6ce65fd475ed97300158d3" category="summary">在 Windows Server 2019 主机上安装 Windows Host Utilities，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="7bd8ad6a6c99f7cf940ca82947d37315" category="doc">配置 Windows Server 2019 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
+  <block id="3f96a445aa0fb948c50d9ff384c62d6d" category="paragraph">Windows 主机实用程序使您可以将 Windows 主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。在 Windows Server 2019 主机上安装 Windows 主机实用程序，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="67205e91e6dec7087076a981693046ea" category="summary">在 Windows Server 2022 主机上安装 Windows Host Utilities，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="c837c9f198826f442b66f894573d645a" category="doc">配置 Windows Server 2022 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
+  <block id="5ace3cca365ccbdb8f0e3d9f7ad3cbc4" category="paragraph">Windows 主机实用程序使您可以将 Windows 主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。在 Windows Server 2022 主机上安装 Windows 主机实用程序，以帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="389fe84231bcd8fc6a6af990aeeab91b" category="summary">适用于 Windows Server 2025 和ONTAP的 NVMe/FC 主机配置。</block>
 </blocks>

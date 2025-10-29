@@ -1,0 +1,11 @@
+= 步骤 3：安装 Windows 主机实用程序
+:allow-uri-read: 
+
+
+
+
+== 步骤 3：安装 Windows 主机实用程序
+
+Windows 主机实用程序是一套软件程序及其文档，可让您将主机连接到NetApp SAN 上的虚拟磁盘 (LUN)。  NetApp建议下载并安装最新的 Windows 主机实用程序，以支持ONTAP LUN 管理并帮助技术支持人员收集配置数据。
+
+有关 Windows 主机实用程序配置和安装信息，请参阅link:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_71_rn.html["Windows Host Utilities"]请查阅文档并选择适合您 Windows 主机实用程序版本的安装步骤。

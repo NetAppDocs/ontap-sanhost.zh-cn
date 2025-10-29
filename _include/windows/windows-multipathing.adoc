@@ -1,0 +1,81 @@
+= 步骤 4：确认主机的多路径配置
+:allow-uri-read: 
+
+
+
+
+== 步骤 4：确认主机的多路径配置
+
+如果您的 Windows 主机有多个到存储系统的路径，请安装 Microsoft Multipath I/O (MPIO) 软件并启用多路径。
+
+在 Windows 系统中，MPIO 解决方案的两个主要组件是设备专用模块 (DSM) 和 Windows MPIO。  MPIO 向 Windows 操作系统提供单个磁盘用于所有路径，而 DSM 管理路径故障转移。
+
+
+CAUTION: 如果不安装MPIO软件、则Windows操作系统可能会将每个路径视为一个单独的磁盘。这可能会导致数据损坏。
+
+
+NOTE: 在Hyper-V虚拟机中运行的Windows XP或Windows Vista不支持MPIO。
+
+.步骤
+. 安装 MPIO 软件并启用多路径功能。
+. 在使用FC的系统上选择MPIO时、Host Utilities安装程序会为Emulex和QLogic FC HBA设置所需的超时值。
++
+[role="tabbed-block"]
+====
+.Emulex FC
+--
+Emulex FC HBA的超时值：
+
+[cols="2*"]
+|===
+| 属性类型 | 属性值 
+
+
+| LinkTimeOut | 1. 
+
+
+| 节点超时 | 10 
+|===
+--
+.QLogic FC
+--
+QLogic FC HBA的超时值：
+
+[cols="2*"]
+|===
+| 属性类型 | 属性值 
+
+
+| LinkDownTimeOut | 1. 
+
+
+| PortDownRetransCount | 10 
+|===
+--
+====
+. 验证ONTAP LUN 的路径状态：
++
+根据您的 SAN 配置，主机使用ASA、 AFF或FAS配置来访问ONTAP LUN。这些配置不应该需要超过四条路径来访问单个ONTAP LUN。存储故障时，超过四条路径都可能导致问题。
+
++
+以下示例输出显示了ASA、 AFF或FAS配置的ONTAP LUN 的正确设置。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置应包含一组具有单一优先级的活动/优化路径。控制器负责维护路径，并在所有活动路径上发送 I/O。
+
+image::asa.png[具有主动/优化路径的ONTAP LUN的屏幕截图]
+
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应有两组优先级不同的路径。优先级较高的路径是活动/优化路径，由聚合所在的控制器提供服务。优先级较低的路径由不同的控制器提供服务。它们处于活动状态，但未经优化，仅在没有优化路径时使用。
+
+image::nonasa.png[包含两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的屏幕截图]
+
+--
+====
+
