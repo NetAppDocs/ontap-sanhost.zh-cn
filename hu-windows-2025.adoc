@@ -34,7 +34,7 @@ Windows 主机实用程序是一套软件程序及其文档，可让您将 Windo
 使用 https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Windows操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
 
 .步骤
-. link:https://docs.netapp.com/us-en/ontap/san-management/index.html["创建 SAN 启动 LUN 并将其映射到主机"^]。
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["创建 SAN 启动 LUN 并将其映射到主机"^](英文)
 . 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。

@@ -1,0 +1,331 @@
+---
+sidebar: sidebar 
+permalink: hu-rhel-8x.html 
+keywords: host utilities, red hat, rhel, linux, 8.10, 8.9, 8.8, 8.7, 8.6, 8.5, 8.4, 8.3, 8.2, 8.1, 8.0, netapp, ontap, rhel 
+summary: 在 RHEL 8.x 主机上安装 Linux 主机实用程序，以管理与ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
+---
+= 配置 RHEL 8.x 以支持 FCP 和 iSCSI 以及ONTAP存储
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Red Hat Enterprise Linux (RHEL) 8.x 主机上安装 Linux 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+
+
+NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
+
+
+
+== 第1步：(可选)启用SAN启动
+
+您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
+
+.开始之前
+使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+
+.步骤
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["创建 SAN 启动 LUN 并将其映射到主机"^](英文)
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+
+
+
+
+== 第2步：安装Linux Host Utilities
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+link:hu-luhu-80.html["安装 Linux Host Utilities 8.0"] 。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
+
+
+
+== 第3步：确认主机的多路径配置
+
+您可以使用 RHEL 8.x 的多路径功能来管理ONTAP LUN。
+
+要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
+
+.步骤
+. 验证文件是否 `/etc/multipath.conf`退出。如果此文件不存在、请创建一个空的零字节文件：
++
+[source, cli]
+----
+touch /etc/multipath.conf
+----
+. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
++
+下表显示了ONTAP LUN的Linux操作系统本机编译多路径参数设置。
+
++
+.显示参数设置
+[%collapsible]
+====
+[cols="2"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | LUN 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+====
+. 验证ONTAP LUN的参数设置和路径状态：
++
+[source, cli]
+----
+multipath -ll
+----
++
+默认多路径参数支持ASA、AFF和FAS配置。在这些配置中、一个ONTAP LUN不应需要超过四个路径。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。
+
++
+以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a098038314c4a433f577471797958 dm-2 NETAPP,LUN C-Mode
+size=180G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 14:0:0:0  sdc  8:32   active ready running
+  |- 17:0:0:0  sdas 66:192 active ready running
+  |- 14:0:3:0  sdar 66:176 active ready running
+  `- 17:0:3:0  sdch 69:80  active ready running
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
+size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 16:0:3:0  sdcg 69:64  active ready running
+| `- 10:0:0:0  sdb  8:16   active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 10:0:1:0  sdc  8:32   active ready running
+  `- 16:0:2:0  sdcf 69:48  active ready running
+----
+=====
+--
+====
+
+
+
+
+== 第4步：(可选)从多路径中排除设备
+
+如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
+
+.步骤
+. 确定WWID：
++
+[source, cli]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+"sa"是要添加到黑名单中的本地SCSI磁盘。
+
++
+例如，WWID为 `360030057024d0730239134810c0cb833`。
+
+. 将WWID添加到"黑名单"部分：
++
+[source, cli]
+----
+blacklist {
+	     wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+
+
+
+
+== 第5步：自定义ONTAP LUN的多路径参数
+
+如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
+
+请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
+
+
+CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
+
+以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
+
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+defaults {
+   path_checker      *readsector0*
+   no_path_retry     *fail*
+}
+
+devices {
+   device {
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
+   }
+}
+----
+====
+
+
+== 第6步：查看已知问题
+
+RHEL 8.x 与ONTAP存储存在以下已知问题。
+
+[role="tabbed-block"]
+====
+.8.1
+--
+[cols="3*"]
+|===
+| NetApp 错误 ID | 标题 | Description 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275843["1275843"^] | 在存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 可能会发生内核中断 | 在使用 QLogic QLE2672 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。 QLogic QLE2672 HBA 事件的存储故障转移会影响 "kmem_cache_alloc+131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1275838["1275838"^] | 在存储故障转移操作期间，使用 QLogic QLE2742 32 Gb FC HBA 的 Red Hat Enterprise Linux 8.1 会发生内核中断 | 在使用 QLogic QLE2742 光纤通道（ FC ）主机总线适配器（ HBA ）的 Red Hat Enterprise Linux 8.1 内核上执行存储故障转移操作期间，发生内核中断。内核中断会导致 Red Hat Enterprise Linux 8.1 重新启动，从而导致应用程序中断。如果启用了 kdump 机制，则内核中断会生成位于 /var/crash/ 目录中的 vmcore 文件。您可以检查 vmcore 文件以确定中断的发生原因。发生 QLogic QLE2742 HBA 事件的存储故障转移会影响 "kmem_cache_alloc +131" 模块。您可以通过查找以下字符串在 vmcore 文件中查找此事件： " [Exception RIP ： kmem_cache_alloc +131]" 内核中断后，重新启动主机操作系统并恢复操作系统。然后重新启动应用程序。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1266250["1266250"^] | 在 iSCSI SAN LUN 上安装 Red Hat Enterprise Linux 8.1 期间，登录到多个路径失败 | 在 iSCSI SAN LUN 多路径设备上安装 Red Hat Enterprise Linux 8.1 期间，无法登录到多个路径。无法在多路径 iSCSI 设备上安装，并且 SAN 启动设备上未启用多路径服务。 
+|===
+--
+.8.0
+--
+[cols="3*"]
+|===
+| NetApp 错误 ID | 标题 | Description 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1238719["1238719"^] | 存储故障转移操作期间，使用 QLogic QLE2672 16 Gb FC 的 RHEL8 上的内核中断 | 在使用 QLogic QLE2672 主机总线适配器（ HBA ）的 Red Hat Enterprise Linux （ RHEL ） 8 内核上执行存储故障转移操作期间，可能会发生内核中断。内核中断会导致操作系统重新启动。重新启动会导致应用程序中断，如果配置了 kdump ，则会在 /var/crash/directory 下生成 vmcore 文件。使用 vmcore 文件确定故障的发生原因。在这种情况下，中断发生在 "kmem_cache_alloc +160" 模块中。它会使用以下字符串记录在 vmcore 文件中： "[ 异常 RIP ： kmem_cache_alloc+160]" 。重新启动主机操作系统以恢复操作系统，然后重新启动应用程序。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1226783["1226783"^] | 如果在所有光纤通道（ FC ）主机总线适配器（ HBA ）上映射了 204 个以上的 SCSI 设备，则 RHEL8 操作系统将启动至 " 紧急模式 " | 如果在操作系统重新启动过程中将主机映射到 204 个以上的 SCSI 设备， RHEL8 操作系统将无法启动到 " 正常模式 " 并进入 " 紧急模式 " 。这会导致大多数主机服务变得不可用。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1230882["1230882"^] | 在 RHEL8 安装期间，无法在 iSCSI 多路径设备上创建分区。 | 在 RHEL 8 安装期间，磁盘选择中未列出 iSCSI SAN LUN 多路径设备。因此， SAN 启动设备上未启用多路径服务。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1235998["12359998"^] | rescan-scsi-bus.sh -a 命令扫描的设备不超过 328 个 | 如果 Red Hat Enterprise Linux 8 主机映射的 SCSI 设备超过 328 个，则主机操作系统命令 rescan-scsi-bus.sh -a 仅会扫描 328 个设备。主机不会发现任何剩余的映射设备。 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231087["1231087"^] | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb FC 的 RHEL8 上的远程端口传输到阻止状态 | 在存储故障转移操作期间，使用 Emulex LPe16002 16 Gb 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 
+
+
+| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1231098["1231098"^] | 在存储故障转移操作期间，使用 Emulex LPe32002 32 Gb FC 的 RHEL8 上的远程端口传输到 Blocked 状态 | 在存储故障转移操作期间，使用 Emulex LPe32002 32 GB 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。 
+|===
+--
+====
+
+
+== 下一步是什么？
+
+* link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
+* 了解ASM镜像。
++
+自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
+
+
