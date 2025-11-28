@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: nvme-rockylinux-supported-features.html 
+keywords: nvme, linux, rocky linux, red hat, enterprise 
+summary: 了解 Rocky Linux 对ONTAP 的支持和功能 
+---
+= 了解 Rocky Linux 对ONTAP 的支持和功能
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Rocky Linux 的版本而异。
+
+[cols="50,25,25"]
+|===
+| 功能 | Rocky Linux 主机版本 | ONTAP 版本 
+
+
+| RHEL 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。  a| 
+9.3 或更高版本
+| 9.12.1 或更高版本 
+
+
+| NVMe/TCP 使用原生命名空间提供命名空间 `nvme-cli`包裹  a| 
+8.2 或更高版本
+| 9.10.1 或更高版本 
+
+
+| NVMe/TCP 是一项完全受支持的企业级功能  a| 
+9.0 或更高版本
+| 9.10.1 或更高版本 
+
+
+| 同一主机上支持 NVMe 和 SCSI 流量，NVMe-oF 命名空间使用 NVMe 多路径，SCSI LUN 使用 dm 多路径。  a| 
+8.2 或更高版本
+| 9.4 或更高版本 
+|===
+无论系统设置中运行的ONTAP版本如何， ONTAP支持以下 SAN 主机功能。
+
+[cols="75,25"]
+|===
+| 功能 | Rocky Linux 主机版本 
+
+
+| 默认情况下启用原生 NVMe 多路径。  a| 
+10.0 或更高版本
+
+
+
+| SAN 启动已通过 NVMe/FC 协议启用  a| 
+9.4 或更高版本
+
+
+
+| 这 `nvme-cli`该软件包包含自动连接脚本，无需第三方脚本。  a| 
+8.2 或更高版本
+
+
+
+| 原生 udev 规则 `nvme-cli`该软件包为 NVMe 多路径提供轮询负载均衡  a| 
+8.2 或更高版本
+
+|===
+
+NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+
+.相关信息
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"]
