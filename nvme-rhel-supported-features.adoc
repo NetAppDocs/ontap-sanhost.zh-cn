@@ -89,4 +89,4 @@ NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.net
 | 8系列 | link:nvme-rhel-8x.html["为 RHEL 8x 配置 NVMe"] 
 |===
 .相关信息
-link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"]
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"^]

@@ -18,7 +18,7 @@ summary: 如何使用 ONTAP 为 Rocky Linux 8.7 配置 NVMe-oF 主机
 [role="lead"]
 Rocky Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-了解如何为 Rocky Linux 8.7 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rockylinux-overview.html["Rocky Linux ONTAP支持和功能"]。
+了解如何为 Rocky Linux 8.7 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rockylinux-supported-features.html["Rocky Linux ONTAP支持和功能"]。
 
 *带有 Rocky Linux 8.7 的 NVMe-oF 具有以下已知限制：*
 
