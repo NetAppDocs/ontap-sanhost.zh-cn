@@ -20,8 +20,10 @@ Proxmox VE 9.0 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP �
 
 了解如何为 Proxmox VE 9.0 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-proxmox-supported-features.html["ONTAP支持和功能"^]。
 
+NVMe-oF 与 Proxmox VE 9.0 存在以下已知限制：
 
-NOTE: Proxmox VE 9.0 不支持 NVMe-FC 的 SAN 启动配置。
+* 不支持 NVMe-FC 的 SAN 启动配置。
+
 
 
 

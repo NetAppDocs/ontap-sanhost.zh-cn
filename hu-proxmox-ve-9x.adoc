@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
-permalink: hu-proxmox-9x.html 
-keywords: proxmox 9.0, netapp, ontap, iscsi, fcp 
+permalink: hu-proxmox-ve-9x.html 
+keywords: proxmox, VE, 9.0, netapp, ontap, iscsi, fcp 
 summary: 在 Proxmox VE 9.0 主机上安装 Linux 主机实用程序，以管理与ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
 ---
 = 配置 Proxmox VE 9.0 以支持 FCP 和 iSCSI 以及ONTAP存储
@@ -18,13 +18,12 @@ summary: 在 Proxmox VE 9.0 主机上安装 Linux 主机实用程序，以管理
 [role="lead"]
 配置 Proxmox VE 9.0 以实现多路径，并为 FCP 和 iSCSI 协议操作与ONTAP存储进行特定参数和设置。
 
-[NOTE]
-====
+FCP 和 iSCSI 与 Proxmox VE 9.0 存在以下已知限制：
+
 * Linux 主机实用程序不支持 Proxmox VE 9.0 操作系统。
-* Proxmox VE 9.0 不支持 SAN 启动配置。
+* 不支持 SAN 启动配置。
 
 
-====
 
 
 == 步骤 1：确认主机的多路径配置
