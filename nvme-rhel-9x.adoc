@@ -866,7 +866,6 @@ nvme netapp ontapdevices -o json
 --
 使用命令行界面设置安全带内身份验证。
 
-.步骤
 . 获取主机NQN：
 +
 [source, cli]
@@ -961,7 +960,6 @@ DHHC-1:03:wSpuuKbBHTzC0W9JZxMBsYd9JFV8Si9aDh22k2BR/4m852vH7KGlrJeMpzhmyjDWOo0PJJ
 
 使用 `-o`选项来生成 JSON 文件。有关更多语法选项，请参阅 NVMe connect-all 手册页。
 
-.步骤
 . 配置 JSON 文件。
 +
 
@@ -1101,5 +1099,5 @@ DHHC-1:03:wSpuuKbBHTzC0W9JZxMBsYd9JFV8Si9aDh22k2BR/4m852vH7KGlrJeMpzhmyjDWOo0PJJ
 | 1503468 | 在 RHEL 9.1 中， `nvme list-subsys`该命令返回给定子系统的重复 NVMe 控制器列表 | 这 `nvme list-subsys`命令返回给定子系统的 NVMe 控制器列表。在 RHEL 9.1 中，此命令显示子系统中所有命名空间的控制器及其 ANA 状态。由于 ANA 状态是每个命名空间的属性，因此该命令应显示具有每个命名空间的路径状态的唯一控制器条目。 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | RHEL 9.0 NVMe-oF 主机创建重复的持久发现控制器 (PDC) | 在 NVMe-oF 主机上，您可以使用“nvme discover -p”命令创建 PDC。使用此命令时，每个启动器-目标组合只能创建一个 PDC。但是，如果您在 NVMe-oF 主机上运行ONTAP 9.10.1 和 RHEL 9.0，则每次执行“nvme discover -p”时都会创建重复的 PDC。这会导致主机和目标上资源的不必要使用。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | RHEL 9.0 NVMe-oF 主机创建重复的持久发现控制器 (PDC) | 在 NVMe-oF 主机上，您可以使用  `nvme discover -p` 命令创建 PDC。使用此命令时，每个发起方-目标组合只能创建一个 PDC。但是，如果您在 NVMe-oF 主机上运行ONTAP 9.10.1 和 RHEL 9.0，则每次执行  `nvme discover -p`  时都会创建一个重复的 PDC。这会导致主机和目标设备上资源的不必要消耗。 
 |===

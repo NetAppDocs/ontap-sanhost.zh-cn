@@ -455,7 +455,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
-== 步骤 5：验证 NVMe-oF
+== 步骤 5：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
