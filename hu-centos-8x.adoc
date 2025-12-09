@@ -150,7 +150,7 @@ chkconfig multipathd on
 multipath -ll
 ----
 +
-默认多路径参数支持ASA、AFF和FAS配置。在这些配置中、一个ONTAP LUN不应需要超过四个路径。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。
+默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
 
 +
 以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。

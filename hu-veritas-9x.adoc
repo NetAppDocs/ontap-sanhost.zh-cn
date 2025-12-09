@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_veritas_6x.html 
-keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, multipathing, iscsi 
-summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导 
+permalink: hu-veritas-9x.html 
+keywords: host utilities, veritas, infoscale, 9, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
+summary: 使用 Veritas Infoscale 9 for RHEL 和 Oracle Linux 主机的 Linux 主机实用程序，帮助您管理ONTAP LUN 的 FC、FCoE 和 iSCSI 协议操作。 
 ---
-= 配置 Veritas Infoscale 6 以支持 FC、FCoE 和 iSCSI 以及ONTAP存储
+= 配置 Veritas Infoscale 9 以支持 FC、FCoE 和 iSCSI 以及ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 
 
 [role="lead"]
-Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。使用 Veritas Infoscale 6 for Oracle Linux (基于 Red Hat 兼容内核)、Red Hat Enterprise Linux (RHEL) 和 SUSE Linux Enterprise Server 主机上的 Linux 主机实用程序，以支持使用ONTAP LUN 管理 FC、FCoE 和 iSCSI 协议操作。
+Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。使用 Veritas Infoscale 9 的 Linux 主机实用程序，支持 Oracle Linux（基于 Red Hat 兼容内核）、Red Hat Enterprise Linux (RHEL) 和 SUSE Linux Enterprise Server 主机，以支持使用ONTAP LUN 管理 FC、FCoE 和 iSCSI 协议操作。
 
 
 
@@ -51,7 +51,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 
 == 步骤 3：确认主机上的 Veritas 动态多路径配置
 
-使用 Veritas 动态多路径 (VxDMP) 和 Veritas Infoscale 6 来管理ONTAP LUN。
+使用 Veritas 动态多路径 (VxDMP) 和 Veritas Infoscale 9 来管理ONTAP LUN。
 
 为确保 VxDMP 已正确配置到您的主机上，您需要验证 VxDMP 配置，并检查阵列支持库 (ASL) 和阵列策略模块 (APM) 配置。NetApp存储系统的 ASL 和 APM 软件包是在 Veritas 软件安装过程中安装的。
 
@@ -59,7 +59,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 NOTE: 对于异构多路径环境，包括 Veritas Infoscale、Linux Native Device Mapper 和 LVM 卷管理器，请参阅 Veritas 产品管理文档以了解配置设置。
 
 .开始之前
-请确保您的配置满足系统要求。参见 link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^] 以及 Veritas HCL 矩阵。
+请确保您的配置符合系统要求。参见 link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^] 以及 Veritas HCL 矩阵。
 
 .步骤
 . 确认ONTAP目标阵列已连接到 VxDMP 多路径：
@@ -74,14 +74,15 @@ vxdmpadm
 ====
 [listing]
 ----
-# vxdmpadm listenclosure
-ENCLR_NAME   ENCLR_TYPE  ENCLR_SNO     STATUS      ARRAY_TYPE    LUN_COUNT    FIRMWARE
-=====================================================================================
-sfrac0       SFRAC       804Xw$PqE52h  CONNECTED   ALUA          43           9800
+#vxdmpadm listenclosure
+ENCLR_NAME        ENCLR_TYPE     ENCLR_SNO      STATUS       ARRAY_TYPE     LUN_COUNT    FIRMWARE
+===================================================================================================
+info_asa0         Info_ASA       81KDT+YTg35P         CONNECTED    ALUA       20         9161
+infoscal1         Infoscal       81Ocq?Z7hPzC         CONNECTED    ALUA       23         9181
 # vxdmpadm getdmpnode
 NAME       STATE    ENCLR-TYPE  PATHS  ENBL  DSBL ENCLR-NAME
 ===================================================================
-sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
+infoscal1_22         ENABLED      Infoscal     4      4     0     infoscal1
 ----
 ====
 . 检查 ASL 和 APM 软件包的配置。NetApp建议您使用 Veritas 支持门户网站上列出的最新受支持软件包。
@@ -91,14 +92,15 @@ sfrac0_47  ENABLED  SFRAC       4      4     0    sfrac0
 ====
 [listing]
 ----
-# vxdmpadm list dmpnode dmpnodename=sfrac0_47 | grep asl
-asl        = libvxnetapp.so
+#  vxdmpadm list dmpnode dmpnodename=infoscal1_22 | grep asl
+asl             = libvxnetapp.so
+
 # vxddladm listversion |grep libvxnetapp.so
 libvxnetapp.so                  vm-8.0.0-rev-1   8.0
 
 # rpm -qa |grep VRTSaslapm
-VRTSaslapm-x.x.x.0000-RHEL8.X86_64
-vxddladm listsupport libname=libvxnetapp.so
+VRTSaslapm-9.0.3-RHEL9.x86_64
+#vxddladm listsupport libname=libvxnetapp.so
 ATTR_NAME   ATTR_VALUE
 =========================================
 LIBNAME     libvxnetapp.so
@@ -196,20 +198,6 @@ node.session.timeo.replacement_timeout = 120
 ----
 --
 ====
-. 设置 RHEL 8 和 9 系列主机的主机“udev rport”值，以支持 Veritas Infoscale 环境在存储故障转移场景中的运行。
-+
-通过创建文件来配置“udev rport”值 `/etc/udev/rules.d/40-rport.rules` 文件内容如下：
-
-+
-[listing]
-----
-# cat /etc/udev/rules.d/40-rport.rules
-KERNEL=="rport-*", SUBSYSTEM=="fc_remote_ports", ACTION=="add", RUN+=/bin/sh -c 'echo 20 > /sys/class/fc_remote_ports/%k/fast_io_fail_tmo;echo 864000 >/sys/class/fc_remote_ports/%k/dev_loss_tmo'"
-----
-+
-
-NOTE: 有关 Veritas 的所有其他特定设置，请参阅 Veritas Infoscale 标准产品文档。
-
 . 验证ONTAP LUN的参数设置和路径状态：
 +
 在AFF、 FAS或ASA配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，超过四条路径都可能导致问题。
@@ -229,13 +217,13 @@ ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。�
 =====
 [listing]
 ----
-# vxdmpadm getsubpaths dmpnodename-sfrac0_47
-NAME  STATE[A]   PATH-TYPE[M]   CTLR-NAME   ENCLR-TYPE  ENCLR-NAME  ATTRS  PRIORITY
+# vxdmpadm getsubpaths dmpnodename=infoscal1_21
+NAME   STATE[A]    PATH-TYPE[M] CTLR-NAME  ENCLR-TYPE  ENCLR-NAME   ATTRS  PRIORITY
 ===================================================================================
-sdas  ENABLED (A)    Active/Optimized c13   SFRAC       sfrac0     -      -
-sdb   ENABLED(A) Active/Optimized     c14   SFRAC       sfrac0     -      -
-sdcj  ENABLED(A)  Active/Optimized     c14   SFRAC       sfrac0     -      -
-sdea  ENABLED (A)    Active/Optimized c14   SFRAC       sfrac0     -
+sdby   ENABLED(A)  Active/Optimized  c1    Infoscal    infoscal1    -      -
+sddx   ENABLED(A)  Active/Optimized  c2    Infoscal    infoscal1    -      -
+sdfe   ENABLED(A)  Active/Optimized  c1    Infoscal    infoscal1    -      -
+sdfo   ENABLED(A)  Active/Optimized  c2    Infoscal    infoscal1    -      -
 ----
 =====
 --

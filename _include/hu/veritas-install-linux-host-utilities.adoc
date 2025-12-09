@@ -1,0 +1,12 @@
+= 第2步：安装Linux Host Utilities
+:allow-uri-read: 
+
+
+
+
+== 第2步：安装Linux Host Utilities
+
+NetApp强烈推荐 link:hu-luhu-release-notes.html["安装 Linux 主机实用程序"] 支持ONTAP LUN 管理，并协助技术支持收集配置数据。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。

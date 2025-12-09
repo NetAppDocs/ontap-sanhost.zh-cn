@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu_veritas_6x.html 
-keywords: host utilities, veritas, infoscale, 6.x, netapp, ontap, san, lun, multipathing, iscsi 
-summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导 
+permalink: hu-veritas-8x.html 
+keywords: host utilities, veritas, infoscale, 8, netapp, ontap, sanhost, iscsi, red, hat linux, oracle, linux 
+summary: 使用 Veritas Infoscale 8 for RHEL 和 Oracle Linux 主机的 Linux 主机实用程序来帮助您管理ONTAP LUN 的 FC、FCoE 和 iSCSI 协议操作。 
 ---
-= 配置 Veritas Infoscale 6 以支持 FC、FCoE 和 iSCSI 以及ONTAP存储
+= 配置 Veritas Infoscale 8 以支持 FC、FCoE 和 iSCSI 以及ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置
 
 
 [role="lead"]
-Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。使用 Veritas Infoscale 6 for Oracle Linux (基于 Red Hat 兼容内核)、Red Hat Enterprise Linux (RHEL) 和 SUSE Linux Enterprise Server 主机上的 Linux 主机实用程序，以支持使用ONTAP LUN 管理 FC、FCoE 和 iSCSI 协议操作。
+Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。使用 Veritas Infoscale 8 for Oracle Linux（基于 Red Hat 兼容内核）、Red Hat Enterprise Linux (RHEL) 和 SUSE Linux Enterprise Server 主机上的 Linux 主机实用程序，以支持使用ONTAP LUN 管理 FC、FCoE 和 iSCSI 协议操作。
 
 
 
@@ -51,7 +51,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 
 == 步骤 3：确认主机上的 Veritas 动态多路径配置
 
-使用 Veritas 动态多路径 (VxDMP) 和 Veritas Infoscale 6 来管理ONTAP LUN。
+使用 Veritas 动态多路径 (VxDMP) 和 Veritas Infoscale 8 来管理ONTAP LUN。
 
 为确保 VxDMP 已正确配置到您的主机上，您需要验证 VxDMP 配置，并检查阵列支持库 (ASL) 和阵列策略模块 (APM) 配置。NetApp存储系统的 ASL 和 APM 软件包是在 Veritas 软件安装过程中安装的。
 
