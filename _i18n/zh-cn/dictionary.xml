@@ -3341,4 +3341,5 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="92520caa5da5fd65237a96731d101aee" category="list-text">验证主机上是否正确显示了相应ONTAP命名空间的 NVMe-oF 设置（例如，型号设置为NetApp ONTAP Controller，负载均衡 iopolicy 设置为 round-robin）：</block>
   <block id="bf4dbd3d81297258bdb9391343d3d393" category="cell">原生 udev 规则<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 该软件包为 NVMe 多路径提供队列深度负载均衡</block>
   <block id="b62ae28652ddc6a2c9bb15373668f0d0" category="paragraph">9.6 或更高版本</block>
+  <block id="3bf7b9cd443b3cb0c9b741f8a4deb9dc" category="paragraph">RHEL 10.0 将 NVMe-oF 的默认 iopolicy 设置为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>。如果您使用的是 RHEL 10.0 并且想要更改 iopolicy，请执行以下操作：<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>修改 udev 规则文件如下：</block>
 </blocks>
