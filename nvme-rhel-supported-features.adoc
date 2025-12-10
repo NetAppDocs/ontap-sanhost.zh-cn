@@ -67,6 +67,11 @@ summary: 了解ONTAP对 RHEL 主机的支持和功能
 | 原生 udev 规则 `nvme-cli`该软件包为 NVMe 多路径提供轮询负载均衡  a| 
 8.2 或更高版本
 
+
+
+| 原生 udev 规则 `nvme-cli` 该软件包为 NVMe 多路径提供队列深度负载均衡  a| 
+9.6 或更高版本
+
 |===
 
 NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
