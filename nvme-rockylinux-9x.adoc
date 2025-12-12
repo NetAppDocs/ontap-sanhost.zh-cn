@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme-rockylinux-96.html 
+permalink: nvme-rockylinux-9x.html 
 keywords: nvme, rocky, red hat, enterprise 
-summary: 如何使用 ONTAP 为 Rocky Linux 9.6 配置 NVMe-oF 主机 
+summary: 如何为 Rocky Linux 9.x 配置 NVMe-oF 主机和ONTAP 
 ---
-= 使用 ONTAP 存储为 NVMe-oF 配置 Rocky Linux 9.6
+= 配置 Rocky Linux 9.x 以支持 NVMe-oF 和ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,11 +18,11 @@ summary: 如何使用 ONTAP 为 Rocky Linux 9.6 配置 NVMe-oF 主机
 [role="lead"]
 Rocky Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-了解如何为 Rocky Linux 9.6 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rockylinux-supported-features.html["Rocky Linux ONTAP支持和功能"]。
+了解如何为 Rocky Linux 9.x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rockylinux-supported-features.html["Rocky Linux ONTAP支持和功能"]。
 
-*带有 Rocky Linux 9.6 的 NVMe-oF 具有以下已知限制：*
+NVMe-oF 与 Rocky Linux 9.x 存在以下已知限制：
 
-* 避免发布 `nvme disconnect-all`命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。
+* 这 `nvme disconnect-all`该命令会断开根文件系统和数据文件系统，可能会导致系统不稳定。请勿在通过 NVMe-TCP 或 NVMe-FC 命名空间从 SAN 启动的系统上执行此操作。
 
 
 
@@ -42,12 +42,12 @@ Rocky Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 N
 
 
 
-== 步骤 2：验证软件版本和 NVMe 配置
+== 步骤 2：安装 Rocky Linux 和 NVMe 软件并验证您的配置
 
-要为 NVMe-oF 配置主机，您应该安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
+要为 NVMe-oF 配置主机，您需要安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
 
 .步骤
-. 在服务器上安装 Rocky Linux 9.6。安装完成后，验证您是否正在运行所需的 Rocky Linux 9.6 内核：
+. 在服务器上安装 Rocky Linux 9.x。安装完成后，请确认您运行的是所需的 Rocky Linux 9.x 内核：
 +
 [source, cli]
 ----
@@ -103,7 +103,7 @@ cat /etc/nvme/hostnqn
 ----
 nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-b9c04f425633
 ----
-. 验证是否已 `hostnqn` 字符串与匹配 `hostnqn` ONTAP 阵列上对应子系统的字符串：
+. 在ONTAP系统中，验证以下信息： `hostnqn`字符串匹配 `hostnqn`ONTAP数组中对应子系统的字符串：
 +
 [source, cli]
 ----
@@ -143,11 +143,10 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 
 [role="tabbed-block"]
 ====
-.FC——Broadcom/Emulex
+.NVMe/FC - 博通/Emulex
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
-.步骤
 . 验证您使用的适配器型号是否受支持：
 +
 .. 显示模型名称：
@@ -326,11 +325,10 @@ FCP CMPL: xb 000035cc Err 000fcfc0
 
 
 --
-.FC——Marvell/QLogic
+.NVMe/FC - Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
-.步骤
 . 验证您使用的适配器驱动程序和固件版本是否受支持：
 +
 [source, cli]
@@ -358,11 +356,10 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-.TCP
+.NVMe/TCP
 --
 NVMe/TCP协议不支持自动连接操作。您必须手动执行 NVMe/TCP 连接或连接所有操作才能发现 NVMe/TCP 子系统和命名空间。
 
-.步骤
 . 检查启动器端口是否可以跨支持的 NVMe/TCP LIF 获取发现日志页面数据：
 +
 [source, cli]
@@ -928,7 +925,7 @@ nvme netapp ontapdevices -o json
 
 == 步骤 7：设置安全带内身份验证
 
-从 ONTAP 9.12.1 开始，Rocky Linux 9.6 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全带内身份验证。
+Rocky Linux 9x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。
 
 每个主机或控制器必须与一个 `DH-HMAC-CHAP`密钥来设置安全身份验证。  `DH-HMAC-CHAP`密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
 
@@ -947,7 +944,7 @@ nvme netapp ontapdevices -o json
 ----
 cat /etc/nvme/hostnqn
 ----
-. 为 Rocky Linux 9.6 主机生成 dhchap 密钥。
+. 为 Rocky Linux 9.x 主机生成 dhchap 密钥。
 +
 以下输出描述了 `gen-dhchap-key`命令参数：
 

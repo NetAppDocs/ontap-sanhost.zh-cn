@@ -6,11 +6,10 @@
 
 [role="tabbed-block"]
 ====
-.FC——Broadcom/Emulex
+.NVMe/FC - 博通/Emulex
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
-.步骤
 . 验证您使用的适配器型号是否受支持：
 +
 .. 显示模型名称：
@@ -159,11 +158,10 @@ FCP CMPL: xb 000014a5 Err 0002149a
 
 
 --
-.FC——Marvell/QLogic
+.NVMe/FC - Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
-.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [source, cli]
@@ -191,11 +189,10 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-.TCP
+.NVMe/TCP
 --
 NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
 
-.步骤
 . 检查启动器端口是否可以跨支持的 NVMe/TCP LIF 获取发现日志页面数据：
 +
 [listing]

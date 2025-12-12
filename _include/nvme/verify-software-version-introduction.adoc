@@ -2,4 +2,4 @@
 :allow-uri-read: 
 
 
-要为 NVMe-oF 配置主机，您应该安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
+要为 NVMe-oF 配置主机，您需要安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
