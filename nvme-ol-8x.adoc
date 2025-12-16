@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: nvme-ol-8x.html 
-keywords: nvme, oracle linux, 8x, host configuration 
-summary: 适用于 Oracle Linux 8x 和ONTAP的 NVMe-oF 主机配置 
+keywords: nvme, oracle linux, 8.x, host configuration 
+summary: 适用于 Oracle Linux 8.x 和ONTAP的 NVMe-oF 主机配置 
 ---
-= 配置 Oracle Linux 8x 和 NVMe-oF 用于ONTAP存储
+= 配置 Oracle Linux 8.x 和 NVMe-oF 以用于ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,12 +18,12 @@ summary: 适用于 Oracle Linux 8x 和ONTAP的 NVMe-oF 主机配置
 [role="lead"]
 Oracle Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-了解如何为 Oracle Linux 8x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-ol-supported-features.html["Oracle Linux ONTAP支持和功能"]。
+了解如何为 Oracle Linux 8.x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-ol-supported-features.html["Oracle Linux ONTAP支持和功能"]。
 
-NVMe-oF 与 Oracle Linux 8x 存在以下已知限制：
+NVMe-oF 与 Oracle Linux 8.x 存在以下已知限制：
 
 * 不支持使用 NVMe-oF 协议进行 SAN 启动。
-* NetApp sanlun 主机实用程序不支持 Oracle Linux 8x 主机上的 NVMe-oF。相反，您可以依赖本机中包含的NetApp插件 `nvme-cli`适用于所有 NVMe-oF 传输的包。
+* NetApp sanlun 主机实用程序不支持 Oracle Linux 8.x 主机上的 NVMe-oF。相反，您可以依赖本机中包含的NetApp插件 `nvme-cli`适用于所有 NVMe-oF 传输的包。
 * 对于 Oracle Linux 8.2 及更早版本，nvme-cli 软件包中不提供原生 NVMe/FC 自动连接脚本。使用 HBA 供应商提供的外部自动连接脚本。
 * 对于 Oracle Linux 8.2 及更早版本，默认情况下不会为 NVMe 多路径启用轮询负载均衡。要启用此功能，请转到以下步骤。<<udev-rule,编写 udev 规则>> 。
 
@@ -32,10 +32,10 @@ NVMe-oF 与 Oracle Linux 8x 存在以下已知限制：
 
 == 步骤 1：安装 Oracle Linux 和 NVMe 软件并验证您的配置
 
-使用以下步骤验证支持的最低 Oracle Linux 8x 软件版本。
+使用以下步骤验证支持的最低 Oracle Linux 8.x 软件版本。
 
 .步骤
-. 在服务器上安装Oracle Linux 8x。安装完成后，请确认您运行的是指定的 Oracle Linux 8x 内核。
+. 在服务器上安装Oracle Linux 8.x。安装完成后，请确认您运行的是指定的 Oracle Linux 8.x 内核。
 +
 [source, cli]
 ----
@@ -71,7 +71,7 @@ cat /lib/udev/rules.d/71-nvme-iopolicy-netapp-ONTAP.rules
 Enable round-robin for NetApp ONTAP
 ACTION=="add", SUBSYSTEMS=="nvme-subsystem", ATTRS{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
 ----
-. 在 Oracle Linux 8x 主机上，检查 `hostnqn`字符串 `/etc/nvme/hostnqn`：
+. 在 Oracle Linux 8.x 主机上，检查 `hostnqn`字符串 `/etc/nvme/hostnqn`：
 +
 [source, cli]
 ----
@@ -710,5 +710,5 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 | NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | Oracle Linux 8x NVMe-oF 主机创建重复的持久发现控制器 (PDC) | 在 NVMe-oF 主机上，您可以使用  `nvme discover -p`  命令创建 PDC。使用此命令时，每个发起方-目标组合只能创建一个 PDC。 However, if you are running Oracle Linux 8x with an NVMe-oF host, a duplicate PDC is created each time `nvme discover -p` is executed. 这会导致主机和目标设备上资源的不必要消耗。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1479047["1479047"^] | Oracle Linux 8.x NVMe-oF 主机创建重复的持久发现控制器 (PDC) | 在 NVMe-oF 主机上，您可以使用  `nvme discover -p` 命令创建 PDC。使用此命令时，每个发起方-目标组合只能创建一个 PDC。However, if you are running Oracle Linux 8.x with an NVMe-oF host, a duplicate PDC is created each time `nvme discover -p` is executed.这会导致主机和目标设备上资源的不必要消耗。 
 |===

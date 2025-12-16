@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-rhel-10.html 
-keywords: host utilities, red hat, rhel, linux, 10, netapp, ontap, rhel 
-summary: 在 RHEL 10 主机上安装 Linux 主机实用程序，以管理与ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
+permalink: hu-proxmox-ve-8x.html 
+keywords: host utilities, proxmox, linux, 8.x, netapp, ontap 
+summary: 在 Proxmox VE 8.x 主机上安装 Linux 主机实用程序，以管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
 ---
-= 使用ONTAP存储为 FCP 和 iSCSI 配置 RHEL 10
+= 配置 Proxmox VE 8.x 以支持 FCP 和 iSCSI 以及ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,45 +16,19 @@ summary: 在 RHEL 10 主机上安装 Linux 主机实用程序，以管理与ONTA
 
 
 [role="lead"]
-Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Red Hat Enterprise Linux (RHEL) 10 主机上安装 Linux 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+配置 Proxmox VE 8.x 以实现多路径，并为与ONTAP存储的 FCP 和 iSCSI 协议操作设置特定的参数和设置。
 
+FCP 和 iSCSI 与 Proxmox VE 8.x 存在以下已知限制：
 
-NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
-
-
-
-== 第1步：(可选)启用SAN启动
-
-您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
-
-.开始之前
-使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
-
-.步骤
-. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["创建 SAN 启动 LUN 并将其映射到主机"^](英文)
-. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
-+
-有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
-
-. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+* Linux 主机实用程序不支持 Proxmox VE 8.x 操作系统。
+* 不支持 SAN 启动配置。
 
 
 
 
-== 第2步：安装Linux Host Utilities
+== 步骤 1：确认主机的多路径配置
 
-NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
-
-link:hu-luhu-80.html["安装 Linux Host Utilities 8.0"] 。
-
-
-NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
-
-
-
-== 第3步：确认主机的多路径配置
-
-您可以使用 RHEL 10 的多路径功能来管理ONTAP LUN。
+您可以使用 Proxmox VE 8.x 的多路径功能来管理ONTAP LUN。
 
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 
@@ -104,10 +78,10 @@ systemctl start multipathd
 | features | "2 pG_INIT_retries 50" 
 
 
-| flush_on_last_del | 是的。 
+| flush_on_last_del | “总是” 
 
 
-| 硬件处理程序 | 0 
+| 硬件处理程序 | “1” 
 
 
 | no_path_retry | 队列 
@@ -143,6 +117,30 @@ systemctl start multipathd
 | 供应商 | NetApp 
 |===
 ====
+. （可选）覆盖默认值 `find_multipaths`用于确保 multipathd 正确发现和管理ONTAP LUN 的参数：
++
+--
+.. 放 `find_multipaths`在默认值部分设置为“否” `/etc/multipath.conf` ：
++
+[source, cli]
+----
+defaults {
+    find_multipaths "no"
+}
+----
+.. 重新加载多路径服务：
++
+[source, cli]
+----
+systemctl reload multipathd
+----
+
+
+--
++
+
+NOTE: 默认情况下，Proxmox OS 原生多路径配置集 `find_multipaths`设置为“*严格*”，并带有空零字节 `/etc/multipath.conf`每次启动主机时都会运行配置文件。这可以防止主机发现新出现的ONTAP LUN 作为多路径设备，这意味着它们不会自动出现在多路径控制之下。每次重启后，现有的ONTAP LUN 仍保持被发现状态并处于多路径控制之下。
+
 . 验证ONTAP LUN的参数设置和路径状态：
 +
 [source, cli]
@@ -150,7 +148,7 @@ systemctl start multipathd
 multipath -ll
 ----
 +
-默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
+默认多路径参数支持ASA、AFF和FAS配置。在这些配置中、一个ONTAP LUN不应需要超过四个路径。如果路径数超过四个、则可能会在存储故障期间导致路径出现问题。
 
 +
 以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
@@ -162,27 +160,35 @@ multipath -ll
 --
 ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
 
+.显示示例
+[%collapsible]
+=====
 [listing]
 ----
-# multipath -ll
-3600a098038314e535a24584e4b496252 dm-32 NETAPP,LUN C-Mode
-size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+multipath -ll
+3600a098038315071592b59713261566d dm-38 NETAPP,LUN C-Mode
+size=100G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 `-+- policy='service-time 0' prio=50 status=active
-  |- 11:0:0:41 sdan 66:112  active ready running
-  |- 11:0:1:41 sdcb 68:240  active ready running
-  |- 14:0:2:41 sdfd 129:240 active ready running
-  `- 14:0:0:41 sddp 71:112  active ready running
+  |- 8:0:0:7 sdbv 68:144 active ready running
+  |- 9:0:0:7 sdbx 68:176 active ready running
+  |- 6:0:0:7 sdbr 68:80  active ready running
+  `- 7:0:0:7 sdbt 68:112 active ready running
+
 ----
+=====
 --
 .AFF或FAS配置
 --
 AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
 
-以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+以下示例显示了具有两条活动/优化路径和两条活动/非优化路径的ONTAP LUN 的输出：
 
+.显示示例
+[%collapsible]
+=====
 [listing]
 ----
-# multipath -ll
+multipath -ll
 3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
 size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
@@ -192,13 +198,14 @@ size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
   |- 10:0:1:0  sdc  8:32   active ready running
   `- 16:0:2:0  sdcf 69:48  active ready running
 ----
+=====
 --
 ====
 
 
 
 
-== 第4步：(可选)从多路径中排除设备
+== 步骤 2：（可选）从多路径中排除设备
 
 如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
 
@@ -230,7 +237,7 @@ blacklist {
 
 
 
-== 第5步：自定义ONTAP LUN的多路径参数
+== 步骤 3：自定义ONTAP LUN 的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
 
@@ -263,17 +270,6 @@ devices {
 ====
 
 
-== 第6步：查看已知问题
+== 步骤 4：查看已知问题
 
 没有已知问题。
-
-
-
-== 下一步是什么？
-
-* link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
-* 了解ASM镜像。
-+
-自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
-
-

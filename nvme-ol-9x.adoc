@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: nvme-ol-9x.html 
-keywords: nvme, oracle linux, 9x, host configuration 
-summary: 适用于 Oracle Linux 9x 和ONTAP的 NVMe-oF 主机配置 
+keywords: nvme, oracle linux, 9.x, host configuration 
+summary: 适用于 Oracle Linux 9.x 和ONTAP的 NVMe-oF 主机配置 
 ---
-= 配置 Oracle Linux 9x 和 NVMe-oF 以用于ONTAP存储
+= 配置 Oracle Linux 9.x 和 NVMe-oF 以用于ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,9 +18,9 @@ summary: 适用于 Oracle Linux 9x 和ONTAP的 NVMe-oF 主机配置
 [role="lead"]
 Oracle Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-了解如何为 Oracle Linux 9x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-ol-supported-features.html["Oracle Linux ONTAP支持和功能"]。
+了解如何为 Oracle Linux 9.x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-ol-supported-features.html["Oracle Linux ONTAP支持和功能"]。
 
-NVMe-oF 与 Oracle Linux 9x 存在以下已知限制：
+NVMe-oF 与 Oracle Linux 9.x 存在以下已知限制：
 
 * 不支持使用 NVMe-oF 协议进行 SAN 启动。
 * 这 `nvme disconnect-all`该命令会断开根文件系统和数据文件系统，可能会导致系统不稳定。请勿在通过 NVMe-TCP 或 NVMe-FC 命名空间从 SAN 启动的系统上执行此操作。
@@ -45,10 +45,10 @@ NVMe-oF 与 Oracle Linux 9x 存在以下已知限制：
 
 == 步骤 2：安装 Oracle Linux 和 NVMe 软件并验证配置
 
-使用以下步骤验证支持的最低 Oracle Linux 9x 软件版本。
+使用以下步骤验证支持的最低 Oracle Linux 9.x 软件版本。
 
 .步骤
-. 在服务器上安装Oracle Linux 9x。安装完成后，请确认您运行的是指定的 Oracle Linux 9x 内核。
+. 在服务器上安装Oracle Linux 9.x。安装完成后，请确认您运行的是指定的 Oracle Linux 9.x 内核。
 +
 [source, cli]
 ----
@@ -90,7 +90,7 @@ rpm -qa|grep libnvme
 ----
 libnvme-1.9-3.el9.x86_64
 ----
-. 在 Oracle Linux 9x 主机上，检查 `hostnqn`字符串 `/etc/nvme/hostnqn`：
+. 在 Oracle Linux 9.x 主机上，检查 `hostnqn`字符串 `/etc/nvme/hostnqn`：
 +
 [source, cli]
 ----
@@ -763,7 +763,7 @@ nvme netapp ontapdevices -o json
 
 == 步骤 7：设置安全带内身份验证
 
-Oracle Linux 9x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。
+Oracle Linux 9.x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。
 
 每个主机或控制器都必须与一个 DH-HMAC-CHAP 密钥关联，才能建立安全身份验证。 DH-HMAC-CHAP 密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。为了验证对等方的身份，NVMe 主机或控制器必须识别与对等方关联的密钥。
 

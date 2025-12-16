@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: hu-rockylinux-10.html 
-keywords: host utilities, rocky, linux, 10, netapp, ontap 
-summary: 在 Rocky Linux 10 主机上安装 Linux Host Utilities 以使用 ONTAP LUN 管理 FCP 和 iSCSI 协议操作。 
+permalink: hu-rockylinux-10x.html 
+keywords: host utilities, rocky, linux, 10.x, netapp, ontap 
+summary: 在 Rocky Linux 10.x 主机上安装 Linux 主机实用程序，以管理与ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
 ---
-= 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Rocky Linux 10
+= 配置 Rocky Linux 10.x 以支持 FCP 和 iSCSI 以及ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -16,7 +16,7 @@ summary: 在 Rocky Linux 10 主机上安装 Linux Host Utilities 以使用 ONTAP
 
 
 [role="lead"]
-"Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在 Rocky Linux 10 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 来帮助您管理 ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Rocky Linux 10.x 主机上安装 Linux 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
 
 
 NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
@@ -54,7 +54,7 @@ NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时�
 
 == 第3步：确认主机的多路径配置
 
-您可以使用 Rocky Linux 10 的多路径来管理 ONTAP LUN。
+您可以使用 Rocky Linux 10.x 的多路径功能来管理ONTAP LUN。
 
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 

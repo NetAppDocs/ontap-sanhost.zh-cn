@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: nvme-rhel-10x.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
-summary: 如何为 RHEL 10x 配置 NVMe-oF 主机（使用ONTAP） 
+summary: 如何为 RHEL 10.x 配置 NVMe-oF 主机（使用ONTAP） 
 ---
-= 配置 RHEL 10x 以使用 NVMe-oF 和ONTAP存储
+= 配置 RHEL 10.x 以使用 NVMe-oF 和ONTAP存储
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
@@ -18,9 +18,9 @@ summary: 如何为 RHEL 10x 配置 NVMe-oF 主机（使用ONTAP）
 [role="lead"]
 Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-了解如何为 RHEL 10x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rhel-supported-features.html["RHEL ONTAP支持和功能"]。
+了解如何为 RHEL 10.x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-rhel-supported-features.html["RHEL ONTAP支持和功能"]。
 
-NVMe-oF 与 RHEL 10x 存在以下已知限制：
+NVMe-oF 与 RHEL 10.x 存在以下已知限制：
 
 * 这 `nvme disconnect-all`该命令会断开根文件系统和数据文件系统，可能会导致系统不稳定。请勿在通过 NVMe-TCP 或 NVMe-FC 命名空间从 SAN 启动的系统上执行此操作。
 
@@ -47,7 +47,7 @@ NVMe-oF 与 RHEL 10x 存在以下已知限制：
 要为 NVMe-oF 配置主机，您需要安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
 
 .步骤
-. 在服务器上安装 RHEL 10x。安装完成后，请确认您运行的是所需的 RHEL 10x 内核：
+. 在服务器上安装 RHEL 10.x。安装完成后，请确认您运行的是所需的 RHEL 10.x 内核：
 +
 [source, cli]
 ----
@@ -808,7 +808,7 @@ nvme netapp ontapdevices -o json
 
 == 步骤 8：设置安全带内身份验证
 
-支持通过 NVMe/TCP 在 RHEL 10x 主机和ONTAP控制器之间进行安全的带内身份验证。
+支持通过 NVMe/TCP 在 RHEL 10.x 主机和ONTAP控制器之间进行安全的带内身份验证。
 
 每个主机或控制器必须与一个 `DH-HMAC-CHAP`密钥来设置安全身份验证。  `DH-HMAC-CHAP`密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
 
@@ -826,7 +826,7 @@ nvme netapp ontapdevices -o json
 ----
 cat /etc/nvme/hostnqn
 ----
-. 为 RHEL 10x 主机生成 dhchap 密钥。
+. 为 RHEL 10.x 主机生成 dhchap 密钥。
 +
 以下输出描述了 `gen-dhchap-key`命令参数：
 
