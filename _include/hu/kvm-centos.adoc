@@ -1,0 +1,9 @@
+= 
+:allow-uri-read: 
+
+
+* 了解 CentOS Linux 虚拟化 (KVM)
++
+CentOS Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。
+
+

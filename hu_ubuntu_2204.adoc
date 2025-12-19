@@ -22,9 +22,6 @@ summary: 在 Ubuntu 24.04 主机上安装 Linux Host Utilities 以使用ONTAP LU
 Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 22.04 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。
 
 
-NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
-
-
 
 == 第1步：(可选)启用SAN启动
 
@@ -283,8 +280,12 @@ devices {
 == 下一步是什么？
 
 * link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
-* 了解ASM镜像。
+* 了解 ASM 镜像
 +
 自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
+
+* 了解 Ubuntu Linux 虚拟化 (KVM)
++
+Ubuntu Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。
 
 

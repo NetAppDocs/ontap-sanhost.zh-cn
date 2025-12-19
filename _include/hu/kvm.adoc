@@ -1,0 +1,9 @@
+= 
+:allow-uri-read: 
+
+
+* 了解 Oracle Linux KVM 和虚拟化
++
+Oracle Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。您可以使用 Oracle Linux Virtualization Manager 管理和支持多个 Oracle Linux KVM 主机，该管理器基于开源 oVirt 项目构建。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。
+
+
