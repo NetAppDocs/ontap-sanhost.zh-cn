@@ -3203,7 +3203,6 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="63eb478005d7986c9bac6b45cbcc9449" category="summary">适用于 Oracle Linux 9.x 和ONTAP的 NVMe-oF 主机配置</block>
   <block id="7879597f78ceca93363e3a27f21ebe00" category="doc">配置 Oracle Linux 9.x 和 NVMe-oF 以用于ONTAP存储</block>
   <block id="095844b56178a284b78a75795108d8af" category="paragraph">了解如何为 Oracle Linux 9.x 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 <block ref="340e41b773bf3515fe22a98049376f83" category="inline-link-macro-rx"></block>。</block>
-  <block id="5acbb00e494e9fe009ff76a65bf2f1ba" category="paragraph">NVMe-oF 与 Oracle Linux 9.x 存在以下已知限制：</block>
   <block id="4c344c877a57df13c19fd1fd8b66490b" category="paragraph">使用以下步骤验证支持的最低 Oracle Linux 9.x 软件版本。</block>
   <block id="9c912bfe11518dfe915fe7e20a0c6fd8" category="list-text">在服务器上安装Oracle Linux 9.x。安装完成后，请确认您运行的是指定的 Oracle Linux 9.x 内核。</block>
   <block id="96ee188719f0576170b9005da5ece8a9" category="list-text">在 Oracle Linux 9.x 主机上，检查<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>：</block>
@@ -3282,4 +3281,10 @@ Host Utilities<block ref="a49e6041666308abe45789ecfadd593e" prefix=" " category=
   <block id="6a0599385b13d0b4c36d7d2b71c14d0f" category="paragraph">Ubuntu Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。</block>
   <block id="a5c716013078dd15638d6d9cf1466975" category="list-text">了解 Oracle Linux KVM 和虚拟化</block>
   <block id="b3e018ca1c4737bdf435a321f361476b" category="paragraph">Oracle Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。您可以使用 Oracle Linux Virtualization Manager 管理和支持多个 Oracle Linux KVM 主机，该管理器基于开源 oVirt 项目构建。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。</block>
+  <block id="96839076af527faadb578a71a5e32033" category="paragraph">NVMe-oF 与 Oracle Linux 9.x 存在以下已知限制：</block>
+  <block id="01d327bb6410ed7ce1a3a75754002849" category="paragraph">主机上的 Oracle Linux 9.x 将 NVMe-oF 的默认 iopolicy 设置为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>。从 Oracle Linux 9.6 开始，您可以将 iopolicy 更改为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> 通过修改 udev 规则文件。</block>
+  <block id="b9908e7dd449843af949631c92e15e09" category="list-text">找到设置NetApp ONTAP控制器 iopolicy 的那行代码。</block>
+  <block id="87a7f5650d1515a9aa05f05e2e75e27c" category="paragraph">以下示例展示了一条示例规则：</block>
+  <block id="84acde248a4e307a6672632785153fc4" category="admonition">新的 iopolicy 会自动应用于匹配的NetApp ONTAP控制器设备。无需重启。</block>
+  <block id="ddc6816922e578aec32d98387b3216d0" category="paragraph">您应该能看到 iopolicy 的值设置，例如：</block>
 </blocks>
