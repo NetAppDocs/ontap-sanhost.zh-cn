@@ -19,9 +19,6 @@ summary: 在 SUSE Linux Enterprise Server 12 SP4 上安装 Linux Host Utilities 
 "Linux Host Utilities (Linux主机实用程序)"软件为连接到ONTAP存储的Linux主机提供管理和诊断工具。在SUSE Linux Enterprise Server 12 SP4主机上安装Linux Host Utilities时、您可以使用Host Utilities帮助您管理使用ONTAP LUN的FCP和iSCSI协议操作。
 
 
-NOTE: 您不需要手动配置基于内核的虚拟机 (KVM) 设置，因为 ONTAP LUN 会自动映射到虚拟机管理程序。
-
-
 
 == 第1步：(可选)启用SAN启动
 
