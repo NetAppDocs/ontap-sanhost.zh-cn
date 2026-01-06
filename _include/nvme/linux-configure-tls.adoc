@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-传输层安全(Transport Layer Security、TLS)可为NVMe-oF主机和ONTAP阵列之间的NVMe连接提供安全的端到端加密。从tls.16.1开始、您可以使用ONTAP 9和已配置的预共享密钥(PSK)配置tls.1.3。
+传输层安全协议 (TLS) 为 NVMe-oF 主机和ONTAP阵列之间的 NVMe 连接提供安全的端到端加密。您可以使用 CLI 和已配置的预共享密钥 (PSK) 配置 TLS 1.3。
 
-.关于此任务
-您可以在 SUSE Linux Enterprise Server 主机上执行此过程中的步骤，除非它指定您在 ONTAP 控制器上执行某个步骤。
+
+NOTE: 除特别说明需要在ONTAP控制器上执行的步骤外，请在 SUSE Linux Enterprise Server 主机上执行以下步骤。

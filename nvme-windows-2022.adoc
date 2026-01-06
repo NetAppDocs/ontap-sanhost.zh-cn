@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_windows_2022.html 
+permalink: nvme-windows-2022.html 
 keywords: nvme, windows, enterprise 
 summary: '您可以在运行Windows Server 2022的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。' 
 ---

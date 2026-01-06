@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: nvme_sles15_sp7.html 
-keywords: nvme, linux, suse, sles, 15, SP7, server, enterprise 
-summary: 介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP7配置NVMe/FC。 
+permalink: nvme-sles15-spx.html 
+keywords: nvme, linux, suse, sles, SUSE Linux Enterprise Server, 15, SPx, server, enterprise 
+summary: 描述如何为 SUSE Linux Enterprise Server 15 SPx 和ONTAP配置 NVMe/FC。 
 ---
-= 适用于采用ONTAP的SUSE Linux Enterprise Server 15 SP7的NVMe-oF主机配置
+= 配置 SUSE Linux Enterprise Server 15 SPx 以支持 NVMe-oF 和ONTAP存储
 :toc: macro
 :hardbreaks:
 :toclevels: 1
@@ -19,73 +19,47 @@ summary: 介绍如何为采用ONTAP的SUSE Linux Enterprise Server 15 SP7配置N
 
 
 [role="lead"]
-SUSE Linux Enterprise Server 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
+SUSE Linux Enterprise Server 15 SPx 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
 
-.关于此任务
-您可以将以下支持和功能与 SUSE Linux Enterprise Server 15 SP7 的 NVMe-oF 主机配置一起使用。在开始配置过程之前，您还应该查看已知的限制。
+了解如何为 SUSE Linux Enterprise Server 15 SPx 配置 NVMe over Fabrics (NVMe-oF) 主机。如需更多支持和功能信息，请参阅 link:nvme-sles-supported-features.html["ONTAP支持和功能"]。
 
-* 提供支持：
-+
-** 支持基于TCP的NVMe (NVMe/TCP)以及基于光纤通道的NVMe (NVMe/FC)。本机软件包中的NetApp插件 `nvme-cli`可显示NVMe/FC和NVMe/TCP命名库的ONTAP详细信息。
-** 在同一主机上同时运行NVMe和SCSI流量。例如、您可以为SCSI LUN的SCSI mpath设备配置dm-Multipath、并使用NVMe多路径在主机上配置NVMe-oF命名空间设备。
-** 支持使用NVMe/FC协议进行SAN启动。
-** 从ONTAP 9.12.1 开始，引入了对 NVMe/TCP 和 NVMe/FC 安全带内身份验证的支持。您可以使用 SUSE Linux Enterprise Server 15 SP7 对 NVMe/TCP 和 NVMe/FC 进行安全带内身份验证。
-** 支持使用唯一发现 NQN 的持久发现控制器 (PDC)。
-** NVMe/TCP 的 TLS 1.3 加密支持。
-** NetApp `sanlun` SUSE Linux Enterprise Server15 SP7 主机上的 NVMe-oF 不支持主机实用程序。相反，您可以依赖本机中包含的NetApp插件 `nvme-cli`适用于所有 NVMe-oF 传输的包。
-+
-有关支持的配置的更多详细信息，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+使用 SUSE Linux Enterprise Server 15 SPx 的 NVMe-oF 存在以下已知限制：
 
-
-
-* 可用功能：
-+
-** 没有可用的新功能。
-
-
-* 已知限制
-+
-** 避免发布 `nvme disconnect-all`命令，因为它会断开根文件系统和数据文件系统的连接，并可能导致系统不稳定。
-
-
+* 这 `nvme disconnect-all`该命令会断开根文件系统和数据文件系统，可能会导致系统不稳定。请勿在通过 NVMe-TCP 或 NVMe-FC 命名空间从 SAN 启动的系统上执行此操作。
+* NetApp sanlun 主机实用程序不支持 NVMe-oF。或者，您可以依赖原生产品中包含的NetApp插件。 `nvme-cli` 适用于所有 NVMe-oF 传输的软件包。
+* 对于 SUSE Linux Enterprise Server 15 SP6 及更早版本，不支持使用 NVMe-oF 协议进行 SAN 启动。
 
 
 
 
 == 第1步：(可选)启用SAN启动
 
-您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
-
-.开始之前
-使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 Linux 操作系统、主机总线适配器 (HBA)、HBA 固件、HBA 启动 BIOS 和ONTAP版本是否支持 SAN 启动。
 
 .步骤
-. 创建 SAN 启动命名空间并将其映射到主机。
-+
-请参阅。 https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["配置 NVMe 存储"^]
-
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 NVMe 命名空间并将其映射到主机"^] 。
 . 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
 +
 有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
 
-. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+. 重新启动主机并验证操作系统是否已启动并正在运行。
 
 
 
 
-== 步骤 2：验证软件版本
+== 步骤 2：安装 SUSE Linux Enterprise Server 和 NVMe 软件，并验证您的配置
 
-使用以下步骤验证最低支持的 SUSE Linux Enterprise Server 15 SP7 软件版本。
+要为 NVMe-oF 配置主机，您需要安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。
 
 .步骤
-. 在服务器上安装SUSE Linux Enterprise Server15 SP7。安装完成后，验证您是否正在运行指定的 SUSE Linux Enterprise Server 15 SP7 内核：
+. 在服务器上安装 SUSE Linux Enterprise Server 15 SPx。安装完成后，请确认您运行的是指定的 SUSE Linux Enterprise Server 15 SPx 内核：
 +
 [source, cli]
 ----
 uname -r
 ----
 +
-以下示例显示了 SUSE Linux Enterprise Server 内核版本：
+Rocky Linux 内核版本示例：
 
 +
 [listing]
@@ -134,7 +108,7 @@ cat /etc/nvme/hostnqn
 ----
 nqn.2014-08.org.nvmexpress:uuid:f6517cae-3133-11e8-bbff-7ed30aef123f
 ----
-. 验证是否已 `hostnqn` 字符串与匹配 `hostnqn` ONTAP 阵列上对应子系统的字符串：
+. 在ONTAP系统中，验证以下信息： `hostnqn`字符串匹配 `hostnqn`ONTAP数组中对应子系统的字符串：
 +
 [source, cli]
 ----
@@ -168,17 +142,16 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 
 
 
-== 步骤3：配置NVMe/FC
+== 步骤 3：配置 NVMe/FC 和 NVMe/TCP
 
-您可以使用Broadcom/Emulex FC或Marvell/Qlogic FC适配器配置NVMe/FC。您还需要手动发现 NVMe/TCP 子系统和命名空间。
+使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
 
 [role="tabbed-block"]
 ====
-.Broadcom/Emulex
+.NVMe/FC - 博通/Emulex
 --
 为Broadcom/Emulex FC适配器配置NVMe/FC。
 
-.步骤
 . 验证您使用的适配器型号是否受支持：
 +
 .. 显示模型名称：
@@ -203,7 +176,7 @@ LPe36002-M64
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-您应该会看到类似于以下示例的输出：
+您应看到以下输出：
 
 +
 [listing]
@@ -262,7 +235,7 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-以下示例显示端口标识：
+您应该看到类似以下内容的输出：
 
 +
 [listing]
@@ -335,11 +308,10 @@ FCP CMPL: xb 0000018a Err 000005ca
 
 
 --
-.Marvell/QLogic
+.NVMe/FC - Marvell/QLogic
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
-.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [source, cli]
@@ -367,102 +339,10 @@ cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
 
 
 --
-====
+.NVMe/TCP
+--
+NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
 
-
-== 步骤 4：可选，启用 1MB I/O
-
-ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
-
-
-NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
-
-.步骤
-. 将 `lpfc_sg_seg_cnt`参数设置为256：
-+
-[source, cli]
-----
-cat /etc/modprobe.d/lpfc.conf
-----
-+
-您应该会看到类似于以下示例的输出：
-
-+
-[listing]
-----
-options lpfc lpfc_sg_seg_cnt=256
-----
-. 运行 `dracut -f`命令并重新启动主机。
-. 验证的值是否 `lpfc_sg_seg_cnt`为256：
-+
-[source, cli]
-----
-cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
-----
-
-
-
-
-== 步骤 5：验证 NVMe 启动服务
-
-使用 SUSE Linux Enterprise Server 15 SP7， `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`NVMe/FC 中包含的启动服务 `nvme-cli`软件包将在系统启动时自动启用。系统启动完成后，验证启动服务是否已启用。
-
-.步骤
-. 验证是否 `nvmf-autoconnect.service`已启用：
-+
-[source, cli]
-----
-systemctl status nvmf-autoconnect.service
-----
-+
-.显示示例输出
-[%collapsible]
-====
-[listing]
-----
-nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
-  Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: enabled)
-  Active: inactive (dead) since Fri 2025-07-04 23:56:38 IST; 4 days ago
-  Main PID: 12208 (code=exited, status=0/SUCCESS)
-    CPU: 62ms
-
-Jul 04 23:56:26 localhost systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
-Jul 04 23:56:38 localhost systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
-Jul 04 23:56:38 localhost systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
-----
-====
-. 验证是否 `nvmefc-boot-connections.service`已启用：
-+
-[source, cli]
-----
-systemctl status nvmefc-boot-connections.service
-----
-+
-.显示示例输出
-[%collapsible]
-====
-[listing]
-----
-nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
-    Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
-    Active: inactive (dead) since Mon 2025-07-07 19:52:30 IST; 1 day 4h ago
-  Main PID: 2945 (code=exited, status=0/SUCCESS)
-      CPU: 14ms
-
-Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
-Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
-Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
-----
-====
-
-
-
-
-== 步骤 6：配置 NVMe/TCP
-
-NVMe/TCP协议不支持此 `auto-connect`操作。相反、您可以通过手动执行NVMe/TCP或 `connect-all`操作来发现NVMe/TCP子系统和命名路径 `connect`。
-
-.步骤
 . 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
 +
 [listing]
@@ -472,10 +352,11 @@ nvme discover -t tcp -w <host-traddr> -a <traddr>
 +
 .显示示例输出
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.111.80 -a 192.168.111.70
+
 Discovery Log Number of Records 8, Generation counter 42
 =====Discovery Log Entry 0======
 trtype:  tcp
@@ -567,7 +448,7 @@ eflags:  none
 sectype: none
 localhost:~ #
 ----
-====
+=====
 . 验证所有其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：
 +
 [listing]
@@ -577,7 +458,7 @@ nvme discover -t tcp -w <host-traddr> -a <traddr>
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme discover -t tcp -w 192.168.111.80 -a 192.168.111.66
@@ -585,7 +466,7 @@ nvme discover -t tcp -w 192.168.111.80 -a 192.168.111.67
 nvme discover -t tcp -w 192.168.211.80 -a 192.168.211.66
 nvme discover -t tcp -w 192.168.211.80 -a 192.168.211.67
 ----
-====
+=====
 . 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
 +
 [listing]
@@ -595,7 +476,7 @@ nvme connect-all -t tcp -w <host-traddr> -a <traddr>
 +
 .显示示例
 [%collapsible]
-====
+=====
 [listing, subs="+quotes"]
 ----
 nvme	connect-all	-t	tcp	-w	192.168.111.80	-a	192.168.111.66
@@ -603,15 +484,173 @@ nvme	connect-all	-t	tcp	-w	192.168.111.80	-a	192.168.111.67
 nvme	connect-all	-t	tcp	-w	192.168.211.80	-a	192.168.211.66
 nvme	connect-all	-t	tcp	-w	192.168.211.80	-a	192.168.211.67
 ----
+=====
+
+
+[NOTE]
+====
+从 SUSE Linux Enterprise Server 15 SP6 开始，NVMe/TCP 的设置发生了变化。 `ctrl_loss_tmo timeout` 自动设置为“关闭”。因此：
+
+* 重试次数没有限制（无限重试）。
+* 您不需要手动配置特定的 `ctrl_loss_tmo timeout`使用时长 `nvme connect`或者 `nvme connect-all`命令（选项 -l ）。
+* 如果发生路径故障，NVMe/TCP 控制器不会超时，并且会无限期地保持连接。
+
+
+====
+--
+====
+
+
+== 步骤 4：（可选）修改 udev 规则中的 iopolicy
+
+从 SUSE Linux Enterprise Server 15 SP6 开始，NVMe-oF 的默认 iopolicy 设置为 `round-robin`。如果您想更改 iopolicy 为 `queue-depth`修改 udev 规则文件如下：
+
+.步骤
+. 使用 root 权限在文本编辑器中打开 udev 规则文件：
++
+[source, cli]
+----
+/usr/lib/udev/rules.d/71-nvmf-netapp.rules
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+vi /usr/lib/udev/rules.d/71-nvmf-netapp.rules
+----
+. 找到为NetApp ONTAP控制器设置 iopolicy 的行，如下例所示：
++
+[listing]
+----
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{subsystype}=="nvm", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
+----
+. 修改规则，以便 `round-robin`变成 `queue-depth`：
++
+[source, cli]
+----
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{subsystype}=="nvm", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="queue-depth"
+----
+. 重新加载udev规则并应用更改：
++
+[source, cli]
+----
+udevadm control --reload
+udevadm trigger --subsystem-match=nvme-subsystem
+----
+. 请检查子系统的当前 I/O 策略。例如，替换<子系统> `nvme-subsys0` 。
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/<subsystem>/iopolicy
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+queue-depth.
+----
+
+
+
+NOTE: 新的 iopolicy 会自动应用于匹配的NetApp ONTAP控制器设备。您无需重启。
+
+
+
+== 步骤 5：可选，启用 NVMe/FC 的 1MB I/O。
+
+ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
+
+
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[source, cli]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== 步骤 6：验证 NVMe 启动服务
+
+这 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时，软件包会自动启用。
+
+启动完成后，验证 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`启动服务已启用。
+
+.步骤
+. 验证是否 `nvmf-autoconnect.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmf-autoconnect.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
+  Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: enabled)
+  Active: inactive (dead) since Fri 2025-07-04 23:56:38 IST; 4 days ago
+  Main PID: 12208 (code=exited, status=0/SUCCESS)
+    CPU: 62ms
+
+Jul 04 23:56:26 localhost systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
+Jul 04 23:56:38 localhost systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
+Jul 04 23:56:38 localhost systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
+----
+====
+. 验证是否 `nvmefc-boot-connections.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmefc-boot-connections.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
+    Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
+    Active: inactive (dead) since Mon 2025-07-07 19:52:30 IST; 1 day 4h ago
+  Main PID: 2945 (code=exited, status=0/SUCCESS)
+      CPU: 14ms
+
+Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
+Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
+Jul 07 19:52:30 HP-DL360-14-168 systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
+----
 ====
 
 
 
-NOTE: 从 SUSE Linux Enterprise Server 15 SP6 开始，NVMe/TCP 的默认设置 `ctrl-loss-tmo`超时已关闭。这意味着重试次数没有限制（无限重试），并且您不需要手动配置特定的 `ctrl-loss-tmo`使用时的超时持续时间 `nvme connect`或者 `nvme connect-all`命令（选项 `-l`）。此外，NVMe/TCP 控制器在发生路径故障时不会超时，并会无限期地保持连接。
 
-
-
-== 步骤 7：验证 NVMe-oF
+== 步骤 7：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
@@ -630,7 +669,7 @@ cat /sys/module/nvme_core/parameters/multipath
 ----
 Y
 ----
-. 验证相应ONTAP命名库的适当NVMe-oF设置(例如、型号设置为NetApp ONTAP控制器、负载平衡iopolicy设置为循环)是否正确反映在主机上：
+. 验证相应的ONTAP命名空间的 NVMe-oF 设置（例如，将型号设置为NetApp ONTAP Controller，并将负载均衡 iopolicy 设置为 queue-depth）是否正确反映在主机上：
 +
 .. 显示子系统：
 +
@@ -659,8 +698,8 @@ cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
 +
 [listing]
 ----
-round-robin
-round-robin
+queue-depth
+queue-depth
 ----
 
 
@@ -786,7 +825,7 @@ nvme netapp ontapdevices -o json
 
 == 步骤 8：创建持久发现控制器
 
-从ONTAP 9.11.1 开始，您可以为 SUSE Linux Enterprise Server 15 SP7 主机创建持久发现控制器 (PDC)。需要 PDC 来自动检测 NVMe 子系统的添加或删除操作以及发现日志页面数据的更改。
+您可以为 SUSE Linux Enterprise Server 15 SPx 主机创建持久发现控制器 (PDC)。需要 PDC 来自动检测 NVMe 子系统的添加或删除操作以及发现日志页面数据的更改。
 
 .步骤
 . 验证发现日志页面数据是否可用、并且可以通过启动程序端口和目标LIF组合进行检索：
@@ -942,11 +981,11 @@ Transport Service Identifier: 8009
 
 == 步骤 9：设置安全带内身份验证
 
-从 ONTAP 9.12.1 开始，主机和 ONTAP 控制器之间通过 NVMe/TCP 和 NVMe/FC 支持安全带内身份验证。
+支持通过 NVMe/TCP 在 SUSE Linux Enterprise Server 15 SPx 主机和ONTAP控制器之间进行安全的带内身份验证。
 
-要设置安全身份验证、每个主机或控制器都必须与关联 `DH-HMAC-CHAP` 密钥、它是NVMe主机或控制器的NQN与管理员配置的身份验证密钥的组合。要对其对等方进行身份验证、NVMe主机或控制器必须识别与对等方关联的密钥。
+每个主机或控制器都必须与一个 `DH-HMAC-CHAP` 设置安全认证的关键。DH-HMAC-CHAP 密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。为了验证对等方的身份，NVMe 主机或控制器必须识别与对等方关联的密钥。
 
-您可以使用命令行界面或Config JSON文件设置安全带内身份验证。如果需要为不同的子系统指定不同的dhchap密钥、则必须使用config JSON文件。
+使用 CLI 或配置 JSON 文件设置安全带内身份验证。如果需要为不同的子系统指定不同的dhchap密钥、则必须使用config JSON文件。
 
 [role="tabbed-block"]
 ====
@@ -954,7 +993,6 @@ Transport Service Identifier: 8009
 --
 使用命令行界面设置安全带内身份验证。
 
-.步骤
 . 获取主机NQN：
 +
 [source, cli]
@@ -1010,7 +1048,7 @@ cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_secret
 =====
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
+cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
 DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
 DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
 DHHC-1:01:iM63E6cX7G5SOKKOju8gmzM53qywsy+C/YwtzxhIt9ZRz+ky:
@@ -1029,7 +1067,7 @@ cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_ctrl_secret
 =====
 [listing]
 ----
-# cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
+cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
 DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
 DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
 DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxukqvYedA55Bw3wtz6sJNpR4=:
@@ -1041,13 +1079,12 @@ DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxuk
 
 
 --
-.JSON 文件
+.JSON
 --
 如果ONTAP控制器配置中有多个NVMe子系统、则可以将文件与命令结合 `nvme connect-all`使用 `/etc/nvme/config.json`。
 
-要生成JSON文件、可以使用 `-o`选项。有关更多语法选项、请参见NVMe Connect-all手册页。
+使用 `-o`选项来生成 JSON 文件。有关更多语法选项，请参阅 NVMe connect-all 手册页。
 
-.步骤
 . 配置 JSON 文件：
 +
 .显示示例输出
@@ -1055,7 +1092,7 @@ DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxuk
 =====
 [listing]
 ----
-# cat /etc/nvme/config.json
+cat /etc/nvme/config.json
 [
  {
     "hostnqn":"nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0035-5910-804b-b2c04f444d33",
@@ -1102,7 +1139,7 @@ DHHC-1:03:1CFivw9ccz58gAcOUJrM7Vs98hd2ZHSr+iw+Amg6xZPl5D2Yk+HDTZiUAg1iGgxTYqnxuk
 =====
 +
 
-NOTE: 在上述示例中， `dhchap_key`对应于， `dhchap_ctrl_key`对应 `dhchap_ctrl_secret`于 `dhchap_secret`。
+NOTE: 在以下示例中，  `dhchap_key`对应于 `dhchap_secret`和 `dhchap_ctrl_key`对应于 `dhchap_ctrl_secret` 。
 
 . 使用config JSON文件连接到ONTAP控制器：
 +
@@ -1139,7 +1176,7 @@ traddr=192.168.111.70 is already connected
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_secret
 ----
 +
-您应看到以下输出：
+以下示例显示了 dhchap 密钥：
 
 +
 [listing]
@@ -1153,7 +1190,7 @@ DHHC-1:01:i4i789R11sMuHLCY27RVI8XloC/GzjRwyhxip5hmIELsHrBq:
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
-您应看到以下输出：
+您应该看到类似于以下示例的输出：
 
 +
 [listing]
@@ -1170,10 +1207,10 @@ DHHC-1:03:jqgYcJSKp73+XqAf2X6twr9ngBpr2n0MGWbmZIZq4PieKZCoilKGef8lAvhYS0PNK7T+04
 
 == 步骤 10：配置传输层安全性
 
-传输层安全(Transport Layer Security、TLS)可为NVMe-oF主机和ONTAP阵列之间的NVMe连接提供安全的端到端加密。从tls.16.1开始、您可以使用ONTAP 9和已配置的预共享密钥(PSK)配置tls.1.3。
+传输层安全协议 (TLS) 为 NVMe-oF 主机和ONTAP阵列之间的 NVMe 连接提供安全的端到端加密。您可以使用 CLI 和已配置的预共享密钥 (PSK) 配置 TLS 1.3。
 
-.关于此任务
-您可以在 SUSE Linux Enterprise Server 主机上执行此过程中的步骤，除非它指定您在 ONTAP 控制器上执行某个步骤。
+
+NOTE: 除特别说明需要在ONTAP控制器上执行的步骤外，请在 SUSE Linux Enterprise Server 主机上执行以下步骤。
 
 .步骤
 . 检查您是否具有以下内容 `ktls-utils` ，  `openssl` ， 和 `libopenssl`主机上安装的软件包：

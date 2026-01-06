@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_ubuntu_2404.html 
+permalink: nvme-ubuntu-2404.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP为Ubuntu 24.04配置NVMe-oF主机 
 ---
@@ -109,7 +109,6 @@ NOTE: 如果 `hostnqn`字符串不匹配、请使用 `vserver modify`命令更�
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
-.步骤
 . 确认您使用的是受支持的适配器型号：
 +
 .. `cat /sys/class/scsi_host/host*/modelname`
@@ -218,7 +217,6 @@ Ubuntu 24.04 GA内核中包含的本机内置qla2xxx驱动程序具有最新的�
 
 为Marvell/QLogic适配器配置NVMe/FC。
 
-.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]

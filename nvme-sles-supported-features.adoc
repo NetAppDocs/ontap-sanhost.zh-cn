@@ -1,0 +1,86 @@
+---
+sidebar: sidebar 
+permalink: nvme-sles-supported-features.html 
+keywords: nvme, linux, sles, SUSE Linux Enterprise Server, enterprise 
+summary: 了解 SUSE Linux Enterprise Server 对ONTAP 的支持和功能 
+---
+= 了解 SUSE Linux Enterprise Server 对ONTAP 的支持和功能
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 SUSE Linux Enterprise Server 的版本而异。
+
+[cols="50,25,25"]
+|===
+| 功能 | SUSE Linux Enterprise Server 主机版本 | ONTAP 版本 
+
+
+| NVMe/TCP 支持传输层安全协议 (TLS) 1.3 加密。  a| 
+15 SP6 或更高版本
+| 9.16.1 或更高版本 
+
+
+| RHEL 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。  a| 
+15 SP4 或更高版本
+| 9.12.1 或更高版本 
+
+
+| 持久发现控制器 (PDC) 使用唯一的发现 NQN 提供支持  a| 
+15 SP4 或更高版本
+| 9.11.1 或更高版本 
+
+
+| NVMe/TCP 使用原生命名空间提供命名空间 `nvme-cli`包裹  a| 
+15 SP4 或更高版本
+| 9.10.1 或更高版本 
+
+
+| 同一主机上支持 NVMe 和 SCSI 流量，NVMe-oF 命名空间使用 NVMe 多路径，SCSI LUN 使用 dm 多路径。  a| 
+15 SP1 或更高版本
+| 9.4 或更高版本 
+|===
+无论系统设置中运行的ONTAP版本如何， ONTAP支持以下 SAN 主机功能。
+
+[cols="75,25"]
+|===
+| 功能 | SUSE Linux Enterprise Server 主机版本 
+
+
+| SAN 启动已通过 NVMe/FC 协议启用  a| 
+15 SP7 或更高版本
+
+
+
+| 默认情况下启用原生 NVMe 多路径。  a| 
+15 SP1 或更高版本
+
+
+
+| 这 `nvme-cli`该软件包包含自动连接脚本，无需第三方脚本。  a| 
+15 SP1 或更高版本
+
+|===
+
+NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+
+
+
+== 下一步
+
+[cols="50,50"]
+|===
+| 如果您的 SUSE Linux Enterprise Server 版本是…… | 了解…… 
+
+
+| 15 SPx 系列 | link:nvme-sles15-spx.html["为 SUSE Linux Enterprise Server 15 SPx 配置 NVMe"] 
+|===
+.相关信息
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"^]

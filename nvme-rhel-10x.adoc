@@ -644,7 +644,7 @@ Oct 12 19:40:33 localhost systemd[1]: Finished nvmefc-boot-connections.service -
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
 
 .步骤
-. 验证主机上是否正确显示了相应ONTAP命名空间的 NVMe-oF 设置（例如，型号设置为NetApp ONTAP Controller，负载均衡 iopolicy 设置为 round-robin）：
+. 验证主机上是否正确显示了相应ONTAP命名空间的 NVMe-oF 设置（例如，将型号设置为NetApp ONTAP Controller，并将负载均衡 iopolicy 设置为 queue-depth）：
 +
 .. 显示子系统：
 +

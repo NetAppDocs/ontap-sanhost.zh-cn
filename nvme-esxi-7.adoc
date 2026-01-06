@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_esxi_7.html 
+permalink: nvme-esxi-7.html 
 keywords: nvme, esxi, ontap, nvme/fc, hypervisor 
 summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF 
 ---

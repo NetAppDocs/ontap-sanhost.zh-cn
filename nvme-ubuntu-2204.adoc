@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_ubuntu_2204.html 
+permalink: nvme-ubuntu-2204.html 
 keywords: nvme, linux, rhel, red hat, enterprise 
 summary: 如何使用ONTAP为Ubuntu 22.04配置NVMe-oF主机 
 ---
@@ -120,7 +120,6 @@ NOTE: 如果 `hostnqn` 字符串不匹配、请使用 `vserver modify` 用于更
 ====
 .Broadcom/Emulex
 --
-.步骤
 . 验证您使用的是支持的适配器型号。
 +
 [listing]
@@ -221,7 +220,6 @@ FCP CMPL: xb 00000000 Err 00000000
 --
 Ubuntu 22.04 GA内核中包含的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。
 
-.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [listing]

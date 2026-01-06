@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: nvme_windows_2016.html 
+permalink: nvme-windows-2016.html 
 keywords: nvme, windows, enterprise 
 summary: '您可以在运行Windows Server 2016的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。' 
 ---
