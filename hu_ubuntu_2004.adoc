@@ -5,17 +5,14 @@ keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu
 summary: 配置 Ubuntu 20.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 协议操作的特定参数和设置。 
 ---
 = 使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 20.04
-:toc: macro
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
-:toc: 
 :toclevels: 1
 :nofooter: 
 :icons: font
 :linkattrs: 
 :imagesdir: ./media/
-:toc-position: content
 
 
 [role="lead"]
