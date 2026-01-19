@@ -83,8 +83,8 @@ sidebar:
           url: "/hu_wuhu_72.html"
         - title: 安装Windows Host Utilities 7.1
           url: "/hu_wuhu_71.html"
-      - title: 配置 Windows 主机实用程序的设置
-        url: "/hu_wuhu_hba_settings.html"
+      - title: 检查 Windows 主机实用程序配置
+        url: "/hu-wuhu-configuration.html"
       - title: 升级Windows Host Utilities
         url: "/hu_wuhu_upgrade.html"
       - title: 修复并删除Windows Host Utilities
