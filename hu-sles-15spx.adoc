@@ -274,29 +274,6 @@ SUSE Linux Enterprise Server 15 SPx 与ONTAP存储存在以下已知问题。
 
 [role="tabbed-block"]
 ====
-.15 SP2
---
-[cols="1,3,3"]
-|===
-| NetApp 错误 ID | 标题 | Description 
-
-
-| link:https://mysupport.netapp.com/NOW/cgi-bin/bol?Type=Detail&Display=1308744["1308744"^] | 完成SUSE Linux Enterprise Server 15S P2操作系统安装后、从SAN启动iSCSI无法使用静态IP配置启动  a| 
-使用静态IP配置完成SUSE Linux Enterprise Server 15 SP2操作系统安装后、iSCSI SAN启动的LUN无法启动。每次使用静态 IP 配置时都会发生启动失败。这会导致服务器拒绝继续启动过程，并显示以下错误消息：
-
-[listing]
-----
-dracut-cmdline[241]: warning: Empty autoconf values default to dhcp
-
-dracut: FATAL: FATAL: For argument ip=eth4:static, setting client-ip does not make sense for dhcp
-
-dracut: Refusing to continue
-
-reboot: System halted
-
-----
-|===
---
 .15 SP1
 --
 [cols="3"]

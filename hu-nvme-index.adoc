@@ -4,7 +4,7 @@ permalink: hu-nvme-index.html
 keywords: nvme, san, host, aix, linux, vsphere, windows 
 summary: '您可以为某些SAN主机配置基于网络结构的NVMe (NVMe-oF)协议。' 
 ---
-= 了解如何使用 NVMe-OF 配置ONTAP SAN 主机
+= 了解如何使用 NVMe-oF 配置 ONTAP SAN 主机
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

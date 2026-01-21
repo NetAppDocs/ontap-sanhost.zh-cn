@@ -234,8 +234,6 @@
   <block id="bf5a222f8e3d9f399a1266b069eb4993" category="cell">在存储故障转移操作期间，使用 Emulex LPe32002 32 Gb FC 的 RHEL8 上的远程端口传输到 Blocked 状态</block>
   <block id="d68e531e9b1b70b7033496b5b71eda91" category="cell">在存储故障转移操作期间，使用 Emulex LPe32002 32 GB 光纤通道（ FC ）的 RHEL8 上的远程端口传输到阻止状态。当存储节点恢复到最佳状态时， LIF 也会启动，并且远程端口状态应显示为联机。有时，远程端口状态可能会继续显示为 " 已阻止 " 或 " 不存在 " 。此状态可能会导致多路径层的 LUN 路径出现 " 故障 " 。</block>
   <block id="51a4a26e6b1bdae133374d340c097526" category="paragraph">以下示例显示了具有两个主动 / 优化路径和两个主动 / 非优化路径的 ONTAP LUN 的正确输出。</block>
-  <block id="2844e304c2e162332243113572206ac6" category="inline-link-macro">1308744</block>
-  <block id="939827454c3bb8453033ba1bd60c555e" category="cell"><block ref="c8bdc7961e7fb79cc7e51cf734b247fb" category="inline-link-macro-rx"></block></block>
   <block id="bea05db7b205cebd49d85c581b86c97e" category="summary">提供有关 Veritas Infoscale 6 系列版本的 ONTAP SAN 主机配置设置的指导</block>
   <block id="d350f9964b658ccb5399ae6c7b4e75b4" category="paragraph">Windows 主机计算机上安装了以下程序和文件。默认目录为 `C ： \Program Files\NetApp\Windows Host Utilities` 。</block>
   <block id="95c50c7cc68e399ac5540898dfd06820" category="cell">计划</block>
@@ -397,7 +395,6 @@
   <block id="fdcd362ac5f5f9817e70642dd2a48bfd" category="sidebar">Oracle Linux</block>
   <block id="d6422a625045167156b3c0d85ca23ebf" category="sidebar">8.1</block>
   <block id="8b6f93f33bce541c7f50f8aff637e2e1" category="sidebar">RHEL</block>
-  <block id="1b1e6d45b618db5397c656f0df1d4b85" category="sidebar">15 SP2</block>
   <block id="7ceb3cac51dbf44c807f7e83fabc5016" category="sidebar">15 SP1</block>
   <block id="ea6b2efbdd4255a9f1b3bbc6399b58f4" category="sidebar">2019 年</block>
   <block id="95192c98732387165bf8e396c0f2dad2" category="sidebar">2016 年</block>
@@ -971,8 +968,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="f3478c814fd82f33620059d2d7656ea9" category="list-text">确定WWID：</block>
   <block id="48a57465c9050da3e456de11a1bce0f0" category="list-text">重新启动主机以验证启动是否成功。</block>
   <block id="2ba8ced675fff51092484e241860c46e" category="paragraph"><block ref="273d5cd3ecc9b9ccde8aa81942ced2f2" prefix=" " category="inline-code"></block>命令将生成以下类型的输出。以下示例中的输出将被截断。</block>
-  <block id="1f9090c13a627840d3e8110654671ecd" category="cell">完成SUSE Linux Enterprise Server 15S P2操作系统安装后、从SAN启动iSCSI无法使用静态IP配置启动</block>
-  <block id="74fe7cde6e68f9607ef6c16f62916dd8" category="paragraph">使用静态IP配置完成SUSE Linux Enterprise Server 15 SP2操作系统安装后、iSCSI SAN启动的LUN无法启动。每次使用静态 IP 配置时都会发生启动失败。这会导致服务器拒绝继续启动过程，并显示以下错误消息：</block>
   <block id="adcc6b5e38256f637746539b3d3cb7b3" category="paragraph">Ubuntu 22.04 GA内核中包含的本机内置qla2xxx驱动程序具有最新的上游修复程序。这些修复程序对于ONTAP支持至关重要。</block>
   <block id="896c6d73b474c57fd4a882830cd2a6de" category="sidebar">SUSE Linux Enterprise Server 15</block>
   <block id="587b796170a9abac4701cd8aa1bb38cb" category="listing-title">示例输出</block>
@@ -1898,7 +1893,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="c66e8f141f367b0a5a1d201cc49ccc72" category="paragraph">ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block>的价值<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数从默认值 64 更改为 256。</block>
   <block id="cfa5b6e557299c1ae7c635f08785f365" category="paragraph">Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。</block>
   <block id="e8584093909cb01d1e4390beaad82a5f" category="paragraph">这<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>系统启动时，软件包会自动启用。</block>
-  <block id="660bcc8bfdb485b79b7dede726eb2358" category="doc">了解如何使用 NVMe-OF 配置ONTAP SAN 主机</block>
   <block id="be1e5922c13f8cd92deb77a78a07375f" category="paragraph">您可以配置受支持的 SAN 主机以使用 NVMe over Fabrics (NVMe-oF) 协议并以ONTAP作为存储目标。 NVMe-oF包括光纤通道上的NVMe（NVMe/FC）和TCP上的NVMe（NVMe/TCP）。根据您的主机操作系统和ONTAP版本，您可以在主机上配置和验证 NVMe/FC 或 NVMe/TCP 协议，或两者。</block>
   <block id="b0e0bd8207ba62457f58c3e06f3f7bec" category="section-title">ONTAP支持和功能</block>
   <block id="3b2a75ebc087c7f3c4fa9ac0e2a92ebe" category="cell">ONTAP 版本</block>
@@ -2404,4 +2398,5 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="79c482cb23c057c0d600ecd3434dbb27" category="section-title">常见的“nvme-cli”错误及解决方法</block>
   <block id="c481530fd3180128cebd4b0d3be77c0f" category="paragraph">如果问题仍然存在，请收集以下文件和命令输出并联系我们。 <block ref="39332fc74dd50b9d9a8e9919506502c0" category="inline-link-macro-rx"></block> 以便进一步分诊：</block>
   <block id="0669c03dc492faf8d7b9fc2bd8512b73" category="sidebar">早期主机实用程序版本</block>
+  <block id="2444d67396b745a440cfa96bf55da9c6" category="doc">了解如何使用 NVMe-oF 配置 ONTAP SAN 主机</block>
 </blocks>
