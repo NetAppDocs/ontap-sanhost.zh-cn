@@ -69,12 +69,12 @@ touch /etc/multipath.conf
 +
 [source, cli]
 ----
-chkconfig multipathd on
+systemctl enable multipathd
 ----
 +
 [source, cli]
 ----
-/etc/init.d/multipathd start
+systemctl start multipathd
 ----
 . 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
 +

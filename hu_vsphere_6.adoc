@@ -62,14 +62,7 @@ system        tpgs_on         VMW_PSP_MRU       NetApp E-Series arrays with ALUA
 system        tpgs_on          MW_PSP_RR 	      NetApp arrays with ALUA support
 
 ----
-
-
-=== 所有SAN阵列配置
-
-全SAN阵列(ASA)配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
-
-.示例
-以下示例显示了ONTAP LUN的正确输出。
+<stdin> 中存在未解析的指令 - include::_include/hu/reuse_hu_asa_configuration.adoc[]
 
 *`esxcli storage nmp device list -d naa.600a098038304759563f4e7837574653` *
 

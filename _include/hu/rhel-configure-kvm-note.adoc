@@ -1,6 +1,0 @@
-= 
-:allow-uri-read: 
-
-
-
-NOTE: 您无需配置基于内核的虚拟机(KVM)设置、因为ONTAP LUN会自动映射到KVM虚拟机管理程序。
