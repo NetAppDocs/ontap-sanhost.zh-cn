@@ -54,6 +54,11 @@ summary: 了解ONTAP对 RHEL 主机的支持和功能
 
 
 
+| 原生 udev 规则 `nvme-cli` 该软件包为 NVMe 多路径提供队列深度负载均衡  a| 
+9.6 或更高版本
+
+
+
 | SAN 启动已通过 NVMe/FC 协议启用  a| 
 9.4 或更高版本
 
@@ -67,11 +72,6 @@ summary: 了解ONTAP对 RHEL 主机的支持和功能
 | 原生 udev 规则 `nvme-cli`该软件包为 NVMe 多路径提供轮询负载均衡  a| 
 8.2 或更高版本
 
-
-
-| 原生 udev 规则 `nvme-cli` 该软件包为 NVMe 多路径提供队列深度负载均衡  a| 
-9.6 或更高版本
-
 |===
 
 NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
@@ -82,7 +82,7 @@ NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.net
 
 [cols="50,50"]
 |===
-| 如果您的 RHEL 版本是…… | 了解…… 
+| 如果您的 RHEL 版本是... | 了解... 
 
 
 | 10系列 | link:nvme-rhel-10x.html["为 RHEL 10.x 配置 NVMe"] 

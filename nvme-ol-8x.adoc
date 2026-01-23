@@ -148,6 +148,7 @@ systemctl restart multipathd
 --
 为Broadcom/Emulex适配器配置NVMe/FC。
 
+.步骤
 . 确认您使用的是受支持的适配器型号：
 +
 .. 显示模型名称：
@@ -297,6 +298,7 @@ FCP CMPL: xb 00000016 Err 00000016
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
+.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [source, cli]

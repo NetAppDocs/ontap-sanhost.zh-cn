@@ -23,13 +23,13 @@ summary: 了解 Proxmox 主机对ONTAP 的支持和功能
 | ONTAP功能 | Proxmox主机版本 | ONTAP 版本 
 
 
-| 使用原生功能提供 NVMe/FC 和 NVMe/TCP 命名空间的ONTAP详细信息 `nvme-cli`包裹。  a| 
-8.0
+| NVMe/TCP 是一项完全受支持的企业级功能  a| 
+9.0
 | 9.10.1 或更高版本 
 
 
-| NVMe/TCP 是一项完全受支持的企业级功能  a| 
-9.0
+| 使用原生功能提供 NVMe/FC 和 NVMe/TCP 命名空间的ONTAP详细信息 `nvme-cli`包裹。  a| 
+8.0
 | 9.10.1 或更高版本 
 
 
@@ -44,11 +44,6 @@ summary: 了解 Proxmox 主机对ONTAP 的支持和功能
 | 功能 | Proxmox主机版本 
 
 
-| 默认情况下启用原生 NVMe 多路径。  a| 
-8.0
-
-
-
 | 这 `nvme-cli`该软件包包含自动连接脚本，无需第三方脚本。  a| 
 9.0
 
@@ -56,6 +51,11 @@ summary: 了解 Proxmox 主机对ONTAP 的支持和功能
 
 | 原生 udev 规则 `nvme-cli`该软件包为 NVMe 多路径提供轮询负载均衡  a| 
 9.0
+
+
+
+| 默认情况下启用原生 NVMe 多路径。  a| 
+8.0
 
 |===
 
