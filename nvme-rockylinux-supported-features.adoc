@@ -64,7 +64,7 @@ summary: 了解 Rocky Linux 对ONTAP 的支持和功能
 
 
 
-| 原生 udev 规则 `nvme-cli`该软件包为 NVMe 多路径提供轮询负载均衡  a| 
+| 本机 udev 规则在  `nvme-cli` 包中为 NVMe 多路径提供循环负载平衡  a| 
 8.2 或更高版本
 
 |===

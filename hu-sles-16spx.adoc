@@ -36,7 +36,16 @@ Linux 主机实用程序软件为连接到 ONTAP 存储的 Linux 主机提供管
 . 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
 
 
-未解析指令在 <stdin> - include::_include/hu/install-linux-host-utilities.adoc[]
+
+
+== 第2步：安装Linux Host Utilities
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+link:hu_luhu_71.html["安装Linux Host Utilities 7.1"]。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
 
 
 

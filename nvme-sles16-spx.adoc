@@ -1029,7 +1029,6 @@ Transport Service Identifier: 8009
 --
 使用命令行界面设置安全带内身份验证。
 
-.步骤
 . 获取主机NQN：
 +
 [source, cli]
@@ -1122,7 +1121,6 @@ DHHC-1:03:ohdxI1yIS8gBLwIOubcwl57rXcozYuRgBsoWaBvxEvpDlQHn/7dQ4JjFGwmhgwdJWmVori
 
 使用 `-o`选项来生成 JSON 文件。有关更多语法选项，请参阅 NVMe connect-all 手册页。
 
-.步骤
 . 配置 JSON 文件：
 +
 .显示示例输出

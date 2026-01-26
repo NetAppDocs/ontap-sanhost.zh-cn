@@ -774,7 +774,6 @@ Rocky Linux 10.x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带
 --
 使用命令行界面设置安全带内身份验证。
 
-.步骤
 . 获取主机NQN：
 +
 [source, cli]

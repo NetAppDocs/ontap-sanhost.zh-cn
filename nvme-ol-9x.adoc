@@ -304,6 +304,7 @@ FCP CMPL: xb 00000008 Err 0000000c
 --
 为Marvell/QLogic适配器配置NVMe/FC。
 
+.步骤
 . 验证您是否正在运行受支持的适配器驱动程序和固件版本：
 +
 [source, cli]
@@ -822,6 +823,7 @@ Oracle Linux 9.x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带
 
 每个主机或控制器都必须与一个 DH-HMAC-CHAP 密钥关联，才能建立安全身份验证。 DH-HMAC-CHAP 密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。为了验证对等方的身份，NVMe 主机或控制器必须识别与对等方关联的密钥。
 
+.步骤
 使用 CLI 或配置 JSON 文件设置安全的带内身份验证。如果需要为不同的子系统指定不同的 dhchap 密钥，请使用 config JSON 文件。
 
 [role="tabbed-block"]
@@ -830,7 +832,6 @@ Oracle Linux 9.x 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带
 --
 使用命令行界面设置安全带内身份验证。
 
-.步骤
 . 获取主机NQN：
 +
 [source, cli]
@@ -923,7 +924,6 @@ DHHC-1:03:frpLlTrnOYtcWDxPzq4ccxU1UrH2FjV7hYw5s2XEDB+lo+TjMsOwHR\/NFtM0nBBidx+gd
 
 使用 `-o`选项来生成 JSON 文件。有关更多语法选项、请参见NVMe Connect-all手册页。
 
-.步骤
 . 配置 JSON 文件：
 +
 .显示示例
