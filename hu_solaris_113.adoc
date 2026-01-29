@@ -61,8 +61,6 @@ link:hu_solaris_62.html["安装 Solaris Host Utilities 6.2"] 。
 
 多路径使您能够在主机和存储系统之间配置多条网络路径。如果一条路径发生故障，流量仍可通过其余路径继续传输。
 
-为确保为您的主机正确配置多路径和建议的超时参数，请验证您是否使用了NetApp为ONTAP LUN 推荐的设置。
-
 .步骤
 . Solaris Host Utilities 加载NetApp针对 SPARC 和 x86_64 处理器推荐的参数设置。
 +
@@ -195,7 +193,7 @@ NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl
 ====
 . 验证使用ONTAP LUN 的 zpools 是否支持 4 KB 对齐的 I/O：
 +
-.. 验证您的 Solaris 主机是否安装了最新的支持存储库更新 (SRU)：
+.. 确认您的 Solaris 主机已安装最新的支持存储库更新 (SRU)：
 +
 [source, cli]
 ----

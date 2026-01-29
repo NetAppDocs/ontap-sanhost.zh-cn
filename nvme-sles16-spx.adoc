@@ -235,7 +235,7 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-您应该看到类似以下内容的输出：
+此时应显示类似于以下内容的输出：
 
 +
 [listing]
@@ -1226,7 +1226,7 @@ DHHC-1:01:wkwAKk8r9Ip7qECKt7V5aIo/7Y1CH7DWkUfLfMxmseg39DFb:
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
-您应该看到类似于以下示例的输出：
+您应该会看到类似于以下示例的输出：
 
 +
 [listing]

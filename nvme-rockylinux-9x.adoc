@@ -172,7 +172,7 @@ LPe36002-M64
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-您应该看到类似于以下示例的输出：
+您应该会看到类似于以下示例的输出：
 
 +
 [listing]
@@ -1147,7 +1147,7 @@ DHHC-1:01:CNxTYq73T9vJk0JpOfDBZrhDCqpWBN4XVZI5WxwPgDUieHAi:
 cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
 ----
 +
-您应该看到类似于以下示例的输出：
+您应该会看到类似于以下示例的输出：
 
 +
 [listing]

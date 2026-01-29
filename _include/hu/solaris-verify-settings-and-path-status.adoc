@@ -4,7 +4,7 @@
 
 . 验证使用ONTAP LUN 的 zpools 是否支持 4 KB 对齐的 I/O：
 +
-.. 验证您的 Solaris 主机是否安装了最新的支持存储库更新 (SRU)：
+.. 确认您的 Solaris 主机已安装最新的支持存储库更新 (SRU)：
 +
 [source, cli]
 ----

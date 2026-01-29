@@ -1450,7 +1450,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="4e7edc1b273739c4e0cf624559752cf7" category="list-text">验证覆盖参数是否已成功应用：</block>
   <block id="91d4ed290eac3ea33698717e6417a540" category="example-title">显示示例</block>
   <block id="284801613cd78ddeda293c26f3fd32a1" category="list-text">验证使用ONTAP LUN 的 zpools 是否支持 4 KB 对齐的 I/O：</block>
-  <block id="f395cf214153c772fe5507e459520762" category="list-text">验证您的 Solaris 主机是否安装了最新的支持存储库更新 (SRU)：</block>
   <block id="edf9178dbbb459e80d1d207d18d48f2f" category="list-text">验证ONTAP LUN 是否具有<block ref="0d6ab6a77645c5e5eca594cd0178560d" prefix=" " category="inline-code"></block>作为“Solaris”，与 LUN 大小无关：</block>
   <block id="cae4163ed010ee60715200c59515dc8a" category="list-text">验证ONTAP LUN 的输出：</block>
   <block id="7adfb96a556399d6e181729ca47b7ce2" category="paragraph">对于ASA、 AFF或FAS配置，您应该会看到与以下示例类似的输出：</block>
@@ -1597,7 +1596,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="ee9cbd2f41fd41a7e2588a51ae1e1754" category="paragraph"><block ref="b257be9060a2c1f3e6322dd3d3fefe13" category="inline-link-macro-rx"></block> 。</block>
   <block id="6d63013ee22aae73bdd25723fab1c18d" category="paragraph">您可以使用 Solaris 11.4 的多路径来管理ONTAP LUN。</block>
   <block id="164773fb7eaf808b1c70f9b259f9f700" category="paragraph">多路径使您能够在主机和存储系统之间配置多条网络路径。如果一条路径发生故障，流量仍可通过其余路径继续传输。对于 Solaris 11.4 和 SPARC 系统，Oracle Solaris I/O 多路径 (MPxIO) 默认启用。</block>
-  <block id="55db8ab811ff4549089fb2e1b08b6772" category="paragraph">为确保为您的主机正确配置多路径和建议的超时参数，请验证您是否使用了NetApp为ONTAP LUN 推荐的设置。</block>
   <block id="2f6a6946081c522c311ad3411e8140c6" category="list-text">如果您的主机配置了 FC，请验证<block ref="ab59b9330e3576612c9d0cd036f54f6b" prefix=" " category="inline-code"></block>设置为<block ref="595ef2e626ebf085d7dc3c69011c027b" prefix=" " category="inline-code"></block>。</block>
   <block id="9f51b880a7e72dcf25ea35b72d41810b" category="list-text">Solaris Host Utilities 加载NetApp针对 SPARC 和 x86_64 处理器推荐的参数设置。</block>
   <block id="e3d6c5163a9e55ef95d36acb9813af8a" category="cell">磁盘排序</block>
@@ -1900,8 +1898,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="7b38cd7357c50824c462a690ab2c7e64" category="paragraph">RHEL 内核版本示例：</block>
   <block id="7ca0b86a69f6feef87cf7c24a1422e47" category="admonition">如果<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串不匹配，请使用<block ref="f7aa1d6bd51ada390168cd39c4c09b91" prefix=" " category="inline-code"></block>命令来更新<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>相应ONTAP存储系统子系统上的字符串以匹配<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串来自<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>在主机上。</block>
   <block id="0846f796a67ab827e48866ee9d867e7e" category="section-title">步骤 3：配置 NVMe/FC 和 NVMe/TCP</block>
-  <block id="3a3389ef589dfce02feb77c9c8bf0726" category="paragraph">您应该看到类似于以下示例的输出：</block>
-  <block id="97f9a8bc058f969713afc7e49ff602ef" category="paragraph">您应该看到类似以下内容的输出：</block>
   <block id="b6af11b3c0a8b80fb9689c4535f30828" category="list-text">验证您使用的适配器驱动程序和固件版本是否受支持：</block>
   <block id="ecf2f5d54ee701fadaed20b14f41130d" category="paragraph">以下示例显示了驱动程序和固件版本：</block>
   <block id="d6d1236e99f0a7666fc4dd786441dfb0" category="list-text">验证其他 NVMe/TCP 启动器-目标 LIF 组合是否可以成功检索发现日志页面数据：</block>
@@ -2124,7 +2120,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="10a05c794bb693baf37296bc7742537e" category="example-title">展示 ASL 和 APM 配置示例</block>
   <block id="324dba7e543516b17ebc8c6ea5a0d680" category="list-text">为了在存储故障转移操作中获得最佳系统配置，请确认您已设置以下 Veritas VxDMP 可调参数：</block>
   <block id="f9881710eadb37ca910a4e0909ba6e35" category="list-text">将DMP可调参数设置为在线：</block>
-  <block id="38ddb6c41ccf214f71e9283fe7300f1b" category="list-text">请确认可调参数设置正确：</block>
   <block id="5622e8954310cf14c8453091c6741ea4" category="paragraph">以下示例显示了 SAN 主机上有效的 VxDMP 可调参数。</block>
   <block id="1d2df76115fa1f235d9567ef1d6832fa" category="list-text">配置协议超时值：</block>
   <block id="c982f804d02e2d7e937f125d2cac1024" category="open-title">FC/FCoE</block>
@@ -2425,4 +2420,25 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="2f2f70e91ff2172f6a78bf052b441f39" category="paragraph"><block ref="806369b10c4f480029bde19415f580b3" category="inline-link-macro-rx"></block>。</block>
   <block id="ae3361bffdcc882805368ae077d6fcaf" category="cell">本机 udev 规则在<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>包中为 NVMe 多路径提供队列深度负载平衡</block>
   <block id="a30e163e966b967193e35b02c3ab5b4b" category="cell">本机 udev 规则在 <block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 包中为 NVMe 多路径提供循环负载平衡</block>
+  <block id="857fdbce46a79b2923f0c113869f92fd" category="paragraph">要确保为您的主机正确配置多路径，请在您的主机上设置 <block ref="90272dda245ae1fb3cf197e91a8689dc" prefix=" " category="inline-code"></block> 参数，并确认 iSCSI 服务正在运行并连接到 iSCSI 目标。</block>
+  <block id="db69f2e21d32b6494100c9cdb558a83c" category="list-text">验证是否已安装 iSCSI 启动程序包 (iscsi-initiator-utils)：</block>
+  <block id="a954e7655cd30fb519546c3bddd798c0" category="list-text">验证位于 <block ref="22565a44e8f73044eb2029acbb069639" prefix=" " category="inline-code"></block> 文件中的 iSCSI 启动程序节点名称：</block>
+  <block id="df97c673d70c90c6b63b61f2eaf4e2fe" category="list-text">配置位于 <block ref="104f48adc29dc1e1d7c9bbe7b5dd3f8d" prefix=" " category="inline-code"></block> 文件中的 iSCSI 会话超时参数：</block>
+  <block id="ff0698bf56c1c8f5b893561edc6c6a14" category="paragraph">iSCSI<block ref="12cec018fb6c5d12b22cf69774a8c847" prefix=" " category="inline-code"></block> 参数控制 iSCSI 层在其上的任何命令失败之前应等待超时路径或会话自行重新建立多长时间。您应在 iSCSI 配置文件中将 <block ref="12cec018fb6c5d12b22cf69774a8c847" prefix=" " category="inline-code"></block> 的值设置为 5。</block>
+  <block id="f1e20222799b2bd3cf76a542a2fe0ac3" category="list-text">启用 iSCSI 服务：</block>
+  <block id="526d2f8b5bd4c2e1f94481a550f7f736" category="list-text">启动 iSCSI 服务：</block>
+  <block id="5ca5039f3f4884d2bcc8a02564fe6f74" category="list-text">验证 iSCSI 服务是否正在运行：</block>
+  <block id="2cfaa468af4e9de7ba9933d9e0081572" category="list-text">发现 iSCSI 目标：</block>
+  <block id="40db24297aca48f0e246d3f2422d9592" category="example-title">显示示例</block>
+  <block id="2ff2f43d0dcaddf633e1da2869068dae" category="list-text">登录到目标：</block>
+  <block id="c735ea84bca1744486ccba502fb36b71" category="list-text">将 iSCSI 设置为在主机启动时自动登录：</block>
+  <block id="3569a099b651e0fb38aef5fe85a63c97" category="list-text">验证 iSCSI 会话：</block>
+  <block id="1a8b056a6d0893efafd2cf81bf3e08ff" category="list-text">确认您的 Solaris 主机已安装最新的支持存储库更新 (SRU)：</block>
+  <block id="89db609d4e43d3c1d8586be7ef84f8df" category="section-title">步骤 4：确认主机的 iSCSI 配置</block>
+  <block id="d4a1d1d4994064894346d939622598a0" category="section-title">第 5 步：（可选）将设备排除在多路径之外</block>
+  <block id="388aa30cbe0482688d6d91a540c54d60" category="section-title">步骤 6：自定义 ONTAP LUN 的多路径参数</block>
+  <block id="7aa8a009723869e0077d1b9c7c2f290b" category="section-title">第 7 步：查看已知问题</block>
+  <block id="23c1ea572e54e8ef99ba3854342287ef" category="list-text">验证可调设置是否正确：</block>
+  <block id="d2d78408224a25c9a69b27120ff6ebf8" category="section-title">步骤 3：确认主机的 iSCSI 配置</block>
+  <block id="420d2bbbb8503cb3e78d6abcb08fb101" category="paragraph">此时应显示类似于以下内容的输出：</block>
 </blocks>

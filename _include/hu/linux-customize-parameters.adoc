@@ -1,10 +1,6 @@
-= 第5步：自定义ONTAP LUN的多路径参数
+= 
 :allow-uri-read: 
 
-
-
-
-== 第5步：自定义ONTAP LUN的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
 

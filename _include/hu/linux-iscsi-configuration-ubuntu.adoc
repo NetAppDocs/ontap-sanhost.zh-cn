@@ -1,0 +1,133 @@
+= 
+:allow-uri-read: 
+
+
+要确保为您的主机正确配置多路径，请在您的主机上设置  `timeout` 参数，并确认 iSCSI 服务正在运行并连接到 iSCSI 目标。
+
+.步骤
+. 验证是否已安装 iSCSI 启动程序包 (iscsi-initiator-utils)：
++
+[source, cli]
+----
+$apt list |grep open-iscsi
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+open-iscsi/noble-updates,noble-updates,now 2.1.9-3ubuntu5.4 amd64
+----
+. 验证位于  `/etc/iscsi/initiatorname.iscsi` 文件中的 iSCSI 启动程序节点名称：
++
+[source, cli]
+----
+InitiatorName=iqn.YYYY-MM.com.<vendor>:<host_name>
+----
+. 配置位于  `/etc/iscsi/iscsid.conf` 文件中的 iSCSI 会话超时参数：
++
+[source, cli]
+----
+node.session.timeo.replacement_timeout = 5
+----
++
+iSCSI `replacement_timeout` 参数控制 iSCSI 层在其上的任何命令失败之前应等待超时路径或会话自行重新建立多长时间。您应在 iSCSI 配置文件中将  `replacement_timeout` 的值设置为 5。
+
+. 启用 iSCSI 服务：
++
+[source, cli]
+----
+$systemctl enable iscsid
+----
+. 启动 iSCSI 服务：
++
+[source, cli]
+----
+$systemctl start iscsid
+----
+. 验证 iSCSI 服务是否正在运行：
++
+[source, cli]
+----
+$systemctl status iscsid
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+●iscsid.service - iSCSI initiator daemon (iscsid)
+     Loaded: loaded (/usr/lib/systemd/system/iscsid.service; enabled; preset: disabled)
+     Active: active (running) since Mon 2026-01-12 12:53:18 IST; 2 days ago
+TriggeredBy: ● iscsid.socket
+       Docs: man:iscsid(8)
+   Main PID: 1127419 (iscsid)
+      Tasks: 2 (limit: 76557)
+     Memory: 4.3M (peak: 8.8M)
+        CPU: 1.657s
+     CGroup: /system.slice/iscsid.service
+             ├─1127418 /usr/sbin/iscsid
+             └─1127419 /usr/sbin/iscsid
+----
+====
+. 发现 iSCSI 目标：
++
+[source, cli]
+----
+$iscsiadm --mode discovery --op update --type sendtargets --portal <target_IP>
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode discovery --op update --type sendtargets --portal  192.168.100.197
+192.168.100.197:3260,1046 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
+192.168.200.199:3260,1049 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
+192.168.100.199:3260,1048 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
+192.168.200.197:3260,1047 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
+----
+====
+. 登录到目标：
++
+[source, cli]
+----
+$iscsiadm --mode node -l all
+----
+. 将 iSCSI 设置为在主机启动时自动登录：
++
+[source, cli]
+----
+$iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v automatic
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 -p 192.168.100.197:3260 -o update -n node.startup -v automatic
+----
+. 验证 iSCSI 会话：
++
+[source, cli]
+----
+$iscsiadm --mode session
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode session
+tcp: [1] 192.168.200.197:3260,1047 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
+tcp: [2] 192.168.100.197:3260,1046 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
+tcp: [3] 192.168.100.199:3260,1048 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
+tcp: [4] 192.168.200.199:3260,1049 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
+----
+====
+

@@ -168,7 +168,7 @@ SN1700E2P
 cat /sys/class/scsi_host/host*/modeldesc
 ----
 +
-您应该看到类似于以下示例的输出：
+您应该会看到类似于以下示例的输出：
 
 +
 [listing]
@@ -227,7 +227,7 @@ cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
 cat /sys/class/fc_host/host*/port_name
 ----
 +
-您应该看到类似以下内容的输出：
+此时应显示类似于以下内容的输出：
 
 +
 [listing]
@@ -1012,7 +1012,7 @@ DHHC-1:01:2G7lsg9PMO00h1Wf1g4QtP0XT11kREz0qVuLm2xvZdbaWR/g:
 cat /sys/class/nvme-subsystem/nvme- subsys4/nvme4/dhchap_ctrl_secret
 ----
 +
-您应该看到类似于以下示例的输出：
+您应该会看到类似于以下示例的输出：
 
 +
 [listing]
