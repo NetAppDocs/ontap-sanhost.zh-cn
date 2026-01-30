@@ -2041,8 +2041,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="fc35bf5b5ac3f79b1fa6a280a58f05d4" category="summary">了解 Rocky Linux 对ONTAP 的支持和功能</block>
   <block id="d4c250eac77deea13f8e9d9293a5aad2" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Rocky Linux 的版本而异。</block>
   <block id="3127b50785e82cd676744d9673a7bb86" category="cell">Rocky Linux 主机版本</block>
-  <block id="e01b830a5cda09eafed964519b00a13a" category="doc">步骤 2：（可选）从多路径中排除设备</block>
-  <block id="904cc9711392ab11f24202a7482e210d" category="doc">步骤 3：自定义ONTAP LUN 的多路径参数</block>
   <block id="2589c63c17df176e198728a79c3e5212" category="cell">“总是”</block>
   <block id="2f7bb230c70819aeb10b45a709bcf48f" category="cell">“1”</block>
   <block id="e937998e5a3fcf2887fa0312475809ad" category="list-text">（可选）覆盖默认值<block ref="19b30dc119e514235b739e076be9b3cc" prefix=" " category="inline-code"></block>用于确保 multipathd 正确发现和管理ONTAP LUN 的参数：</block>
@@ -2420,7 +2418,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="2f2f70e91ff2172f6a78bf052b441f39" category="paragraph"><block ref="806369b10c4f480029bde19415f580b3" category="inline-link-macro-rx"></block>。</block>
   <block id="ae3361bffdcc882805368ae077d6fcaf" category="cell">本机 udev 规则在<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>包中为 NVMe 多路径提供队列深度负载平衡</block>
   <block id="a30e163e966b967193e35b02c3ab5b4b" category="cell">本机 udev 规则在 <block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block> 包中为 NVMe 多路径提供循环负载平衡</block>
-  <block id="857fdbce46a79b2923f0c113869f92fd" category="paragraph">要确保为您的主机正确配置多路径，请在您的主机上设置 <block ref="90272dda245ae1fb3cf197e91a8689dc" prefix=" " category="inline-code"></block> 参数，并确认 iSCSI 服务正在运行并连接到 iSCSI 目标。</block>
   <block id="db69f2e21d32b6494100c9cdb558a83c" category="list-text">验证是否已安装 iSCSI 启动程序包 (iscsi-initiator-utils)：</block>
   <block id="a954e7655cd30fb519546c3bddd798c0" category="list-text">验证位于 <block ref="22565a44e8f73044eb2029acbb069639" prefix=" " category="inline-code"></block> 文件中的 iSCSI 启动程序节点名称：</block>
   <block id="df97c673d70c90c6b63b61f2eaf4e2fe" category="list-text">配置位于 <block ref="104f48adc29dc1e1d7c9bbe7b5dd3f8d" prefix=" " category="inline-code"></block> 文件中的 iSCSI 会话超时参数：</block>
@@ -2441,4 +2438,16 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="23c1ea572e54e8ef99ba3854342287ef" category="list-text">验证可调设置是否正确：</block>
   <block id="d2d78408224a25c9a69b27120ff6ebf8" category="section-title">步骤 3：确认主机的 iSCSI 配置</block>
   <block id="420d2bbbb8503cb3e78d6abcb08fb101" category="paragraph">此时应显示类似于以下内容的输出：</block>
+  <block id="1f2ff205b2373f4d3dc9e67a56302cb2" category="paragraph">请确保为主机正确配置 iSCSI。</block>
+  <block id="c62246672e9db0a470a1737f3981fd84" category="paragraph">在 iSCSI 主机上执行以下步骤。</block>
+  <block id="a4e78cb06e95b1e477ba950ed0d21899" category="list-text">验证是否已安装 iSCSI 启动程序包 (open-iscsi)：</block>
+  <block id="e9d889d6733c29a8b543d1e4184ea561" category="summary">在 HPE VME 8.0.x 主机上安装 Linux Host Utilities，以管理使用 ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="32675cf731ec4c101dccd8c9fe7afc05" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 HPE VME 8.0.x</block>
+  <block id="f028e1c625f97738b44527c47b37e4c1" category="paragraph">Linux Host Utilities 软件为连接到 ONTAP 存储的 Linux 主机提供管理和诊断工具。在 HPE VME 8.0.x 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 帮助您管理 ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
+  <block id="97408cde90bab4eb19f4acc146087555" category="section-title">步骤 1：安装 Linux Host Utilities</block>
+  <block id="2705574efbf0f795ad465bd636d7a681" category="paragraph">您可以将多路径与 HPE VME 8.0.x 一起使用来管理 ONTAP LUN。</block>
+  <block id="958c6534e2a2911611cea8e9b8bd686b" category="list-text">在 ONTAP LUN 上配置 HPE VME 数据存储，然后配置虚拟机。有关详细信息，请参见供应商 HPE 文档。</block>
+  <block id="32b0b2fb94c023fc633bfa7c0caf801f" category="section-title">步骤 2：确认主机的 iSCSI 配置</block>
+  <block id="961c1419cfe8060ce390b232d6e264c5" category="sidebar">HPE VME</block>
+  <block id="c956a158e93a32e225bfb772f4b64394" category="sidebar">HPE VME 8.0.x</block>
 </blocks>

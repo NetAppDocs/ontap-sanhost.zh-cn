@@ -205,7 +205,10 @@ size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
 
 == 步骤 4：确认主机的 iSCSI 配置
 
-要确保为您的主机正确配置多路径，请在您的主机上设置  `timeout` 参数，并确认 iSCSI 服务正在运行并连接到 iSCSI 目标。
+请确保为主机正确配置 iSCSI。
+
+.关于此任务
+在 iSCSI 主机上执行以下步骤。
 
 .步骤
 . 验证是否已安装 iSCSI 启动程序包 (iscsi-initiator-utils)：
