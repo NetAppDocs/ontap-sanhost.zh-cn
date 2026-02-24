@@ -1,0 +1,1033 @@
+---
+sidebar: sidebar 
+permalink: nvme-ol-10x.html 
+keywords: nvme, oracle linux, 10, host configuration 
+summary: 适用于 Oracle Linux 10 和 ONTAP 的 NVMe-oF 主机配置 
+---
+= 配置 Oracle Linux 10.x 和 NVMe-oF 以用于 ONTAP 存储
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Oracle Linux 主机支持基于光纤通道的 NVMe (NVMe/FC) 和基于 TCP 的 NVMe (NVMe/TCP) 协议，并支持非对称命名空间访问 (ANA)。ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。
+
+了解如何为 Oracle Linux 10.x 配置 NVMe over Fabrics (NVMe-oF) 主机。有关更多支持和功能信息，请参阅 link:nvme-ol-supported-features.html["Oracle Linux ONTAP支持和功能"]。
+
+NVMe-oF 与 Oracle Linux 10.x 存在以下已知限制：
+
+* 这 `nvme disconnect-all`该命令会断开根文件系统和数据文件系统，可能会导致系统不稳定。请勿在通过 NVMe-TCP 或 NVMe-FC 命名空间从 SAN 启动的系统上执行此操作。
+
+
+
+
+== 第1步：(可选)启用SAN启动
+
+您可以配置主机以使用 SAN 启动来简化部署并提高可扩展性。使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的 Linux 操作系统、主机总线适配器 (HBA)、HBA 固件、HBA 启动 BIOS 和ONTAP版本是否支持 SAN 启动。
+
+.步骤
+. https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["创建 NVMe 命名空间并将其映射到主机"^] 。
+. 在服务器 BIOS 中为 SAN 启动命名空间映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动并正在运行。
+
+
+
+
+== 步骤 2：安装 Oracle Linux 和 NVMe 软件并验证配置
+
+使用以下步骤验证支持的最低 Oracle Linux 10.x 软件版本。
+
+.步骤
+. 在服务器上安装 Oracle Linux 10.x。安装完成后，请确认您运行的是指定的 Oracle Linux 10.x 内核。
++
+[source, cli]
+----
+uname -r
+----
++
+Oracle Linux 内核版本示例：
+
++
+[listing]
+----
+6.12.0-100.28.2.el10uek.x86_64
+----
+. 安装 `NVMe-CLI` 软件包：
++
+[source, cli]
+----
+rpm -qa|grep nvme-cli
+----
++
+下面的例子展示了 `nvme-cli`软件包版本：
+
++
+[listing]
+----
+nvme-cli-2.13-2.0.1.el10.x86_64
+----
+. 安装 `libnvme` 软件包：
++
+[source, cli]
+----
+rpm -qa|grep libnvme
+----
++
+下面的例子展示了 `libnvme`软件包版本：
+
++
+[listing]
+----
+libnvme-1.13-1.el10.x86_64
+----
+. 在 Oracle Linux 10.x 主机上，检查 `hostnqn` 字符串位于 `/etc/nvme/hostnqn`：
++
+[source, cli]
+----
+cat /etc/nvme/hostnqn
+----
++
+下面的例子展示了 `hostnqn`版本：
+
++
+[listing]
+----
+nqn.2014-08.org.nvmexpress:uuid:8397cecc-30f0-11e8-850f-7ed30aef0cc7
+----
+. 在ONTAP系统中，验证以下信息： `hostnqn`字符串匹配 `hostnqn`ONTAP存储系统中相应子系统的字符串：
++
+[source, cli]
+----
+vserver nvme subsystem host show -vserver vs_coexistence_emulex
+----
++
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+Vserver Subsystem Priority  Host NQN
+------- --------- --------
+-------------------------------------------------------------------vs_coexistence_emulex
+nvme1
+regular   nqn.2014-08.org.nvmexpress:uuid:8397cecc-30f0-11e8-850f-7ed30aef0cc7
+nvme2
+regular    nqn.2014-08.org.nvmexpress:uuid:8397cecc-30f0-11e8-850f-7ed30aef0cc7
+
+----
+====
++
+
+NOTE: 如果 `hostnqn`字符串不匹配、您可以使用 `vserver modify`命令更新 `hostnqn`相应ONTAP阵列子系统上的字符串、使其与主机上的字符串 `/etc/nvme/hostnqn`匹配 `hostnqn`。
+
+
+
+
+
+== 步骤 3：配置 NVMe/FC 和 NVMe/TCP
+
+使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
+
+[role="tabbed-block"]
+====
+.NVMe/FC - 博通/Emulex
+--
+为Broadcom/Emulex适配器配置NVMe/FC。
+
+.步骤
+. 确认您使用的是受支持的适配器型号：
++
+.. 显示模型名称：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/modelname
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+LPe36002-M64-D
+LPe36002-M64-D
+----
+.. 显示模型描述：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/modeldesc
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+Emulex LPe36002-M64-D 2-Port 64Gb Fibre Channel Adapter
+Emulex LPe36002-M64-D 2-Port 64Gb Fibre Channel Adapter
+----
+
+
+. 确认您使用的是建议的Broadcom `lpfc` 固件和内置驱动程序：
++
+.. 显示固件版本：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/fwrev
+----
++
+以下示例显示固件版本：
+
++
+[listing]
+----
+14.4.393.25, sli-4:6:d
+14.4.393.25, sli-4:6:d
+----
+.. 显示收件箱驱动程序版本：
++
+[source, cli]
+----
+cat /sys/module/lpfc/version
+----
++
+以下示例显示了驱动程序版本：
+
++
+[listing]
+----
+0:14.4.0.2
+----
++
+有关支持的适配器驱动程序和固件版本的最新列表，请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
+
+
+
+. 请验证 `lpfc_enable_fc4_type` 设置为 `3`：
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_enable_fc4_type
+----
+. 验证是否可以查看启动程序端口：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/<port_name>
+----
++
+以下示例显示端口标识：
+
++
+[listing]
+----
+0x100000620b3c089c
+0x100000620b3c089d
+----
+. 验证启动程序端口是否联机：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/port_state
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+Online
+Online
+----
+. 验证NVMe/FC启动程序端口是否已启用且目标端口是否可见：
++
+[source, cli]
+----
+cat /sys/class/scsi_host/host*/nvme_info
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+NVME Initiator Enabled
+XRI Dist lpfc0 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc0 WWPN x100000620b3c089c WWNN x200000620b3c089c DID x081300 *ONLINE*
+NVME RPORT       WWPN x2001d039eab0dadc WWNN x2000d039eab0dadc DID x080107 *TARGET DISCSRVC ONLINE*
+NVME RPORT       WWPN x2221d039eab0dadc WWNN x2220d039eab0dadc DID x080105 *TARGET DISCSRVC ONLINE*
+
+
+NVME Statistics
+LS: Xmt 000000713b Cmpl 000000713b Abort 00000001
+LS XMIT: Err 00000000  CMPL: xb 00000001 Err 00000001
+Total FCP Cmpl 00000000a513b8bb Issue 00000000a4f2485c OutIO ffffffffffde8fa1
+        abort 00006935 noxri 000004f0 nondlp 0002e119 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 0000693d Err 0009cb89
+
+
+NVME Initiator Enabled
+XRI Dist lpfc1 Total 6144 IO 5894 ELS 250
+NVME LPORT lpfc1 WWPN x100000620b3c089d WWNN x200000620b3c089d DID x081900 *ONLINE*
+NVME RPORT       WWPN x2002d039eab0dadc WWNN x2000d039eab0dadc DID x080207 *TARGET DISCSRVC ONLINE*
+NVME RPORT       WWPN x2222d039eab0dadc WWNN x2220d039eab0dadc DID x080205 *TARGET DISCSRVC ONLINE*
+
+
+NVME Statistics
+LS: Xmt 0000007171 Cmpl 0000007171 Abort 00000000
+LS XMIT: Err 00000000  CMPL: xb 00000000 Err 00000000
+Total FCP Cmpl 00000000a509cecc Issue 00000000a4e7ed6c OutIO ffffffffffde1ea0
+        abort 000069c5 noxri 00000406 nondlp 000301e6 qdepth 00000000 wqerr 00000000 err 00000000
+FCP CMPL: xb 000069d6 Err 0009cbcds
+----
+=====
+
+
+--
+.NVMe/FC - Marvell/QLogic
+--
+为Marvell/QLogic适配器配置NVMe/FC。
+
+.步骤
+. 验证您是否正在运行受支持的适配器驱动程序和固件版本：
++
+[source, cli]
+----
+cat /sys/class/fc_host/host*/symbolic_name
+----
++
+以下示例显示了驱动程序和固件版本：
+
++
+[listing]
+----
+QLE2772 FW:v9.15.03 DVR:v10.02.09.300-k
+----
+. 请验证 `ql2xnvmeenable` 已设置。这样、Marvell适配器便可用作NVMe/FC启动程序：
++
+[source, cli]
+----
+cat /sys/module/qla2xxx/parameters/ql2xnvmeenable
+----
++
+预期输出为1。
+
+
+
+--
+.NVMe/TCP
+--
+NVMe/TCP 协议不支持自动连接操作。相反，您可以通过执行 NVMe/TCP 来发现 NVMe/TCP 子系统和命名空间 `connect`或者 `connect-all`手动操作。
+
+.步骤
+. 验证启动程序端口是否可以通过受支持的NVMe/TCP LIF提取发现日志页面数据：
++
+[source, cli]
+----
+nvme discover -t tcp -w host-traddr -a traddr
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme discover -t tcp -w 192.168.41.7 -a 192.168.41.10
+=====Discovery Log Entry 0======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  8
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:discovery
+traddr:  192.168.31.99
+eflags:  *explicit discovery connections*, *duplicate discovery information*
+sectype: none
+=====Discovery Log Entry 1======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  6
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:discovery
+traddr:  192.168.30.99
+eflags:  *explicit discovery connections*, *duplicate discovery information*
+sectype: none
+=====Discovery Log Entry 2======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  7
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:discovery
+traddr:  192.168.31.98
+eflags:  *explicit discovery connections*, *duplicate discovery information*
+sectype: none
+=====Discovery Log Entry 3======
+trtype:  tcp
+adrfam:  ipv4
+subtype: *current discovery subsystem*
+treq:    not specified
+portid:  5
+trsvcid: 8009
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:discovery
+traddr:  192.168.30.98
+eflags:  *explicit discovery connections*, *duplicate discovery information*
+sectype: none
+=====Discovery Log Entry 4======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  8
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:subsystem.subsys_kvm
+traddr:  192.168.31.99
+eflags:  none
+sectype: none
+=====Discovery Log Entry 5======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  6
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:subsystem.subsys_kvm
+traddr:  192.168.30.99
+eflags:  none
+sectype: none
+=====Discovery Log Entry 6======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  7
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:subsystem.subsys_kvm
+traddr:  192.168.31.98
+eflags:  none
+sectype: none
+=====Discovery Log Entry 7======
+trtype:  tcp
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  5
+trsvcid: 4420
+subnqn:  nqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:subsystem.subsys_kvm
+traddr:  192.168.30.98
+eflags:  none
+sectype: none
+----
+=====
+. 验证其他NVMe/TCP启动程序-目标LIF组合是否可以成功提取发现日志页面数据：
++
+[source, cli]
+----
+nvme discover -t tcp -w host-traddr -a traddr
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme discover -t tcp -w 192.168.41.7 -a 192.168.41.10
+nvme discover -t tcp -w 192.168.41.7 -a 192.168.41.11
+nvme discover -t tcp -w 192.168.48.7 -a 192.168.48.10
+nvme discover -t tcp -w 192.168.48.7 -a 192.168.48.11
+----
+=====
+. 运行 `nvme connect-all` 在节点中所有受支持的NVMe/TCP启动程序-目标SIP上运行命令：
++
+[source, cli]
+----
+nvme connect-all -t tcp -w host-traddr -a traddr
+----
++
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme connect-all -t tcp -w 192.168.41.7 -a 192.168.41.10
+nvme connect-all -t tcp -w 192.168.41.7 -a 192.168.41.11
+nvme connect-all -t tcp -w 192.168.48.7 -a 192.168.48.10
+nvme connect-all -t tcp -w 192.168.48.7 -a 192.168.48.11
+----
+=====
+
+
+[NOTE]
+====
+从 Oracle Linux 9.4 开始，NVMe/TCP 的设置 `ctrl_loss_tmo timeout`自动设置为“关闭”。因此：
+
+* 重试次数没有限制（无限重试）。
+* 您不需要手动配置特定的 `ctrl_loss_tmo timeout`使用时长 `nvme connect`或者 `nvme connect-all`命令（选项 -l ）。
+* 如果发生路径故障，NVMe/TCP 控制器不会超时，并且会无限期地保持连接。
+
+
+====
+--
+====
+
+
+== 步骤 4：（可选）修改 udev 规则中的 iopolicy
+
+Oracle Linux 10.x 主机将 NVMe-oF 的默认 iopolicy 设置为 `queue-depth`。您可以通过修改 udev 规则文件将 iopolicy 更改为 `round-robin`。
+
+.步骤
+. 使用 root 权限在文本编辑器中打开 udev 规则文件：
++
+[source, cli]
+----
+/usr/lib/udev/rules.d/71-nvmf-netapp.rules
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+vi /usr/lib/udev/rules.d/71-nvmf-netapp.rules
+----
+. 找到设置NetApp ONTAP控制器 iopolicy 的那行代码。
++
+以下示例展示了一条示例规则：
+
++
+[listing]
+----
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{subsystype}=="nvm", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="queue-depth"
+----
+. 修改此规则，使  `queue-depth` 变为  `round-robin`：
++
+[source, cli]
+----
+ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{subsystype}=="nvm", ATTR{model}=="NetApp ONTAP Controller", ATTR{iopolicy}="round-robin"
+----
+. 重新加载udev规则并应用更改：
++
+[source, cli]
+----
+udevadm control --reload
+udevadm trigger --subsystem-match=nvme-subsystem
+----
+. 请检查子系统的当前 I/O 策略。例如，替换<子系统> `nvme-subsys0` 。
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/<subsystem>/iopolicy
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+round-robin.
+----
+
+
+
+NOTE: 新的 iopolicy 会自动应用于匹配的NetApp ONTAP控制器设备。无需重启。
+
+
+
+== 步骤 5：可选，启用 NVMe/FC 的 1MB I/O。
+
+ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
+
+
+NOTE: 这些步骤不适用于逻辑NVMe/FC主机。
+
+.步骤
+. 将 `lpfc_sg_seg_cnt`参数设置为256：
++
+[source, cli]
+----
+cat /etc/modprobe.d/lpfc.conf
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+options lpfc lpfc_sg_seg_cnt=256
+----
+. 运行 `dracut -f`命令并重新启动主机。
+. 验证的值是否 `lpfc_sg_seg_cnt`为256：
++
+[source, cli]
+----
+cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
+----
+
+
+
+
+== 步骤 6：验证 NVMe 启动服务
+
+这 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`NVMe/FC 中包含的启动服务 `nvme-cli`系统启动时，软件包会自动启用。
+
+启动完成后，验证 `nvmefc-boot-connections.service`和 `nvmf-autoconnect.service`启动服务已启用。
+
+.步骤
+. 验证是否 `nvmf-autoconnect.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmf-autoconnect.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmf-autoconnect.service - Connect NVMe-oF subsystems automatically during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmf-autoconnect.service; enabled; preset: disabled)
+     Active: inactive (dead) since Tue 2026-02-02 09:48:11 EDT; 1 week 0 days ago
+   Main PID: 2620 (code=exited, status=0/SUCCESS)
+        CPU: 19ms
+
+Feb 02 09:48:11 sr630-13-169 systemd[1]: Starting Connect NVMe-oF subsystems automatically during boot...
+Feb 02 09:48:11 sr630-13-169 systemd[1]: nvmf-autoconnect.service: Deactivated successfully.
+Feb 02 09:48:11 sr630-13-169 systemd[1]: Finished Connect NVMe-oF subsystems automatically during boot.
+----
+====
+. 验证是否 `nvmefc-boot-connections.service`已启用：
++
+[source, cli]
+----
+systemctl status nvmefc-boot-connections.service
+----
++
+.显示示例输出
+[%collapsible]
+====
+[listing]
+----
+nvmefc-boot-connections.service - Auto-connect to subsystems on FC-NVME devices found during boot
+     Loaded: loaded (/usr/lib/systemd/system/nvmefc-boot-connections.service; enabled; preset: enabled)
+     Active: inactive (dead) since Tue 2026-02-02 09:47:07 EDT; 1 week 0 days ago2
+   Main PID: 1651 (code=exited, status=0/SUCCESS)
+        CPU: 14ms
+
+Feb 02 09:47:07 sr630-13-169 systemd[1]: Starting Auto-connect to subsystems on FC-NVME devices found during boot...
+Feb 02 09:47:07 sr630-13-169 systemd[1]: nvmefc-boot-connections.service: Deactivated successfully.
+Feb 02 09:47:07 sr630-13-169 systemd[1]: Finished Auto-connect to subsystems on FC-NVME devices found during boot.
+----
+====
+
+
+
+
+== 步骤 7：验证多路径配置
+
+验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
+
+.步骤
+. 验证是否已启用内核NVMe多路径：
++
+[source, cli]
+----
+cat /sys/module/nvme_core/parameters/multipath
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+Y
+----
+. 验证相应的ONTAP命名空间的 NVMe-oF 设置（例如，将型号设置为NetApp ONTAP Controller，并将负载均衡 iopolicy 设置为 queue-depth）是否正确反映在主机上：
++
+.. 显示子系统：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys*/model
+----
++
+您应看到以下输出：
+
++
+[listing]
+----
+NetApp ONTAP Controller
+NetApp ONTAP Controller
+----
+.. 显示策略：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys*/iopolicy
+----
++
+您应该能看到 iopolicy 的值设置，例如：
+
++
+[listing]
+----
+queue-depth
+queue-depth
+----
+
+
+. 验证是否已在主机上创建并正确发现命名空间：
++
+[source, cli]
+----
+nvme list
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+Node            Generic         SN                   Model                    Namespace  Usage                      Format         FW Rev
+--------------- --------------- -------------------- ------------------------ ---------- -------------------------- -------------  --------
+/dev/nvme10n1   /dev/ng10n1     81NQfNZTUE14AAAAAAAN NetApp ONTAP Controller   0x1          0.00   B /  21.47  GB   4 KiB +  0 B   9.18.1
+/dev/nvme10n2   /dev/ng10n2     81NQfNZTUE14AAAAAAAN NetApp ONTAP Controller   0x2          0.00   B /  21.47  GB   4 KiB +  0 B   9.18.1
+/dev/nvme12n1   /dev/ng12n1     81NQfNZTUE14AAAAAAAb NetApp ONTAP Controller   0x1          0.00   B /  21.47  GB   4 KiB +  0 B   9.18.1
+----
+====
+. 验证每个路径的控制器状态是否为活动状态且是否具有正确的ANA状态：
++
+[source, cli]
+----
+nvme list-subsys /dev/<controller_ID>
+----
++
+
+NOTE: 从 ONTAP 9.16.1 开始，NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径。
+
++
+[role="tabbed-block"]
+====
+.NVMe/FC
+--
+以下示例输出显示了托管在双节点 ONTAP 控制器上的命名空间，该命名空间适用于具有 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统。
+
+.显示 AFF、FAS 和 ASA 示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+ nvme-subsys114 - NQN=nqn.1992-08.com.netapp:sn.9e30b9760a4911f08c87d039eab67a95:subsystem.sles_161_27
+                 hostnqn=nqn.2014-08.org.nvmexpress:uuid:f6517cae-3133-11e8-bbff-7ed30aef123f iopolicy=round-robin\
++- nvme114 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2360d039ea359e4a,host_traddr=nn-0x20000090fae0ec88:pn-0x10000090fae0ec88 *live optimized*
++- nvme115 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2362d039ea359e4a,host_traddr=nn-0x20000090fae0ec88:pn-0x10000090fae0ec88 *live non-optimized*
++- nvme116 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2361d039ea359e4a,host_traddr=nn-0x20000090fae0ec89:pn-0x10000090fae0ec89 *live optimized*
++- nvme117 *fc* traddr=nn-0x234ed039ea359e4a:pn-0x2363d039ea359e4a,host_traddr=nn-0x20000090fae0ec89:pn-0x10000090fae0ec89 *live non-optimized*
+----
+=====
+.显示 ASA r2 示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys96 - NQN=nqn.1992-08.om.netapp:sn.b351b2b6777b11f0b3c2d039ea5cfc91:subsystem.nvme24
+                hostnqn=nqn.2014-08.org.nvmexpress:uuid:d3b581b4-c975-11e6-8425-0894ef31a074
+\
+ +- nvme203 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2015d039ea5cfc90,host_traddr=nn-0x200000109bdacc76:pn-0x100000109bdacc76 *live optimized*
+ +- nvme25 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2014d039ea5cfc90,host_traddr=nn-0x200000109bdacc75:pn-0x100000109bdacc75 *live optimized*
+ +- nvme30 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2012d039ea5cfc90,host_traddr=nn-0x200000109bdacc75:pn-0x100000109bdacc75 *live optimized*
+ +- nvme32 *fc* traddr=nn-0x2011d039ea5cfc90:pn-0x2013d039ea5cfc90,host_traddr=nn-0x200000109bdacc76:pn-0x100000109bdacc76 *live optimized*
+----
+=====
+--
+.NVMe/TCP
+--
+以下示例输出显示了托管在双节点 ONTAP 控制器上的命名空间，适用于具有 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统。
+
+.显示 AFF、FAS 和 ASA 示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys9 - NQN=nqn.1992-08.com.netapp:sn.9927e165694211f0b4f4d039eab31e9d:subsystem.nvme10
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0035-5910-804b-b7c04f444d33
+\
+ +- nvme105 *tcp* traddr=192.168.39.10,trsvcid=4420,host_traddr=192.168.39.20,src_addr=192.168.39.20 *live optimized*
+ +- nvme153 *tcp* traddr=192.168.39.11,trsvcid=4420,host_traddr=192.168.39.20,src_addr=192.168.39.20 *live non-optimized*
+ +- nvme57 *tcp* traddr=192.168.38.11,trsvcid=4420,host_traddr=192.168.38.20,src_addr=192.168.38.20 *live non-optimized*
+ +- nvme9 *tcp* traddr=192.168.38.10,trsvcid=4420,host_traddr=192.168.38.20,src_addr=192.168.38.20 *live optimized*
+----
+=====
+.显示 ASA r2 示例输出
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+nvme-subsys4 - NQN=nqn.1992-08.com.netapp:sn.17e32b6e8c7f11f09545d039eac03c33:subsystem.Bidirectional_DHCP_1_0
+               hostnqn=nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0054-5110-8039-c3c04f523034
+\                                                                                                                                                                               +- nvme4 *tcp* traddr=192.168.20.28,trsvcid=4420,host_traddr=192.168.20.21,src_addr=192.168.20.21 *live optimized*
++- nvme5 *tcp* traddr=192.168.20.29,trsvcid=4420,host_traddr=192.168.20.21,src_addr=192.168.20.21 *live optimized*
++- nvme6 *tcp* traddr=192.168.21.28,trsvcid=4420,host_traddr=192.168.21.21,src_addr=192.168.21.21 *live optimized*
++- nvme7 *tcp* traddr=192.168.21.29,trsvcid=4420,host_traddr=192.168.21.21,src_addr=192.168.21.21 *live optimized*
+----
+=====
+--
+====
+. 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
++
+[role="tabbed-block"]
+====
+.列
+--
+[source, cli]
+----
+nvme netapp ontapdevices -o column
+----
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+Device           Vserver                  Namespace Path         NSID  UUID                                   Size
+---------------- ----------------------- ----------------------- ----- -------------------------------------- --------
+/dev/nvme1n1     vs_sanboot sanboot_169   /vol/nvme169/ns169      1    58443dbc-a472-45da-a5ef-3dd27c19d04b   171.80GB
+----
+=====
+--
+.JSON
+--
+[source, cli]
+----
+nvme netapp ontapdevices -o json
+----
+.显示示例
+[%collapsible]
+=====
+[listing, subs="+quotes"]
+----
+{
+  "ONTAPdevices":[
+    {
+      "Device":"/dev/nvme11n1",
+      "Vserver":"vs_sanboot", "Subsystem":"sanboot_169",
+      "Namespace_Path": "/vol/nvme169/ns169",
+      "NSID":1,
+      "UUID":" 58443dbc-a472-45da-a5ef-3dd27c19d04b",
+      "LBA_Size":4096,
+      "Namespace_Size": 171798691840,
+      "UsedBytes": 6016638976,
+      "Version":"9.18.1"
+        }
+  ]
+}
+----
+=====
+--
+====
+
+
+
+
+== 步骤 8：设置安全带内身份验证
+
+Oracle Linux 10.x 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全的带内身份验证。
+
+每个主机或控制器都必须与一个 DH-HMAC-CHAP 密钥关联，才能建立安全身份验证。 DH-HMAC-CHAP 密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。为了验证对等方的身份，NVMe 主机或控制器必须识别与对等方关联的密钥。
+
+.步骤
+使用 CLI 或配置 JSON 文件设置安全的带内身份验证。如果需要为不同的子系统指定不同的 dhchap 密钥，请使用 config JSON 文件。
+
+[role="tabbed-block"]
+====
+.命令行界面
+--
+使用命令行界面设置安全带内身份验证。
+
+. 获取主机NQN：
++
+[source, cli]
+----
+cat /etc/nvme/hostnqn
+----
+. 为 Linux 主机生成 dhchap 密钥。
++
+以下输出描述了 `gen-dhchap-key`命令参数：
+
++
+[listing]
+----
+nvme gen-dhchap-key -s optional_secret -l key_length {32|48|64} -m HMAC_function {0|1|2|3} -n host_nqn
+•	-s secret key in hexadecimal characters to be used to initialize the host key
+•	-l length of the resulting key in bytes
+•	-m HMAC function to use for key transformation
+0 = none, 1- SHA-256, 2 = SHA-384, 3=SHA-512
+•	-n host NQN to use for key transformation
+----
++
+在以下示例中、将生成一个随机dhchap密钥、其中HMAC设置为3 (SHA-512)。
+
++
+[listing]
+----
+# nvme gen-dhchap-key -m 3 -n nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-c4c04f425633
+DHHC-1:03:xhAfbAD5IVLZDxiVbmFEOA5JZ3F/ERqTXhHzZQJKgkYkTbPI9dhRyVtr4dBD+SGiAJO3by4FbnVtov1Lmk+86+nNc6k=:
+----
+. 在ONTAP控制器上、添加主机并指定两个dhchap密钥：
++
+[source, cli]
+----
+vserver nvme subsystem host add -vserver <svm_name> -subsystem <subsystem> -host-nqn <host_nqn> -dhchap-host-secret <authentication_host_secret> -dhchap-controller-secret <authentication_controller_secret> -dhchap-hash-function {sha-256|sha-512} -dhchap-group {none|2048-bit|3072-bit|4096-bit|6144-bit|8192-bit}
+----
+. 主机支持两种类型的身份验证方法：单向和双向。在主机上、连接到ONTAP控制器并根据所选身份验证方法指定dhchap密钥：
++
+[source, cli]
+----
+nvme connect -t tcp -w <host-traddr> -a <tr-addr> -n <host_nqn> -S <authentication_host_secret> -C <authentication_controller_secret>
+----
+. 验证 `nvme connect authentication` 命令、验证主机和控制器dhchap密钥：
++
+.. 验证主机dhchap密钥：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_secret
+----
++
+.显示单向配置的示例输出
+[%collapsible]
+=====
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys1/nvme*/dhchap_secret
+DHHC-1:03:Y5VkkESgmtTGNdX842qemNpFK6BXYVwwnqErgt3IQKP5Fbjje\/JSBOjG5Ea3NBLRfuiAuUSDUto6eY\/GwKoRp6AwGkw=:
+DHHC-1:03:Y5VkkESgmtTGNdX842qemNpFK6BXYVwwnqErgt3IQKP5Fbjje\/JSBOjG5Ea3NBLRfuiAuUSDUto6eY\/GwKoRp6AwGkw=:
+DHHC-1:03:Y5VkkESgmtTGNdX842qemNpFK6BXYVwwnqErgt3IQKP5Fbjje\/JSBOjG5Ea3NBLRfuiAuUSDUto6eY\/GwKoRp6AwGkw=:
+DHHC-1:03:Y5VkkESgmtTGNdX842qemNpFK6BXYVwwnqErgt3IQKP5Fbjje\/JSBOjG5Ea3NBLRfuiAuUSDUto6eY\/GwKoRp6AwGkw=:
+----
+=====
+.. 验证控制器dhchap密钥：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/<nvme-subsysX>/nvme*/dhchap_ctrl_secret
+----
++
+.显示双向配置的示例输出
+[%collapsible]
+=====
+[listing]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys6/nvme*/dhchap_ctrl_secret
+DHHC-1:03:frpLlTrnOYtcWDxPzq4ccxU1UrH2FjV7hYw5s2XEDB+lo+TjMsOwHR\/NFtM0nBBidx+gdoyUcC5s6hOOtTLDGcz0Kbs=:
+DHHC-1:03:frpLlTrnOYtcWDxPzq4ccxU1UrH2FjV7hYw5s2XEDB+lo+TjMsOwHR\/NFtM0nBBidx+gdoyUcC5s6hOOtTLDGcz0Kbs=:
+DHHC-1:03:frpLlTrnOYtcWDxPzq4ccxU1UrH2FjV7hYw5s2XEDB+lo+TjMsOwHR\/NFtM0nBBidx+gdoyUcC5s6hOOtTLDGcz0Kbs=:
+DHHC-1:03:frpLlTrnOYtcWDxPzq4ccxU1UrH2FjV7hYw5s2XEDB+lo+TjMsOwHR\/NFtM0nBBidx+gdoyUcC5s6hOOtTLDGcz0Kbs=:
+----
+=====
+
+
+
+
+--
+.JSON
+--
+如果ONTAP控制器配置中有多个NVMe子系统、则可以将文件与命令结合 `nvme connect-all`使用 `/etc/nvme/config.json`。
+
+使用 `-o`选项来生成 JSON 文件。有关更多语法选项、请参见NVMe Connect-all手册页。
+
+. 配置 JSON 文件：
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+[
+  {
+    "hostnqn":"nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0056-5410-8048-c4c04f425633",
+    "hostid":"4c4c4544-0056-5410-8048-c4c04f425633",
+    "dhchap_key":"DHHC-1:01:nFg06gV0FNpXqoiLOF0L+swULQpZU/PjU9v/McDeJHjTZFlF:",
+    "subsystems":[
+      {
+        "nqn":"nqn.1992-08.com.netapp:sn.09035a8d8c8011f0ac0fd039eabac370:subsystem.subsys",
+        "ports":[
+          {
+            "transport":"tcp",
+            "traddr":"192.168.30.69",
+            "host_traddr":"192.168.41.7",
+            "trsvcid":"4420",
+            "dhchap_ctrl_key":"DHHC-1:03:n3F8d+bvxKW/s+lEhqXaOohI2sxrQ9iLutzduuFq49JgdjjaFtTpDSO9kQl/bvZj+Bo3rdHh3xPXeP6a4xyhcRyqdds=:"
+          }
+        ]
+      }
+    ]
+  }
+]
+----
+=====
++
+
+NOTE: 在上述示例中， `dhchap_key`对应于， `dhchap_ctrl_key`对应 `dhchap_ctrl_secret`于 `dhchap_secret`。
+
+. 使用config JSON文件连接到ONTAP控制器：
++
+[source, cli]
+----
+nvme connect-all -J /etc/nvme/config.json
+----
+. 验证是否已为每个子系统的相应控制器启用dhchap密码：
++
+.. 验证主机dhchap密钥：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_secret
+----
++
+以下示例显示了 dhchap 密钥：
+
++
+[listing]
+----
+DHHC-1:01:nFg06gV0FNpXqoiLOF0L+swULQpZU/PjU9v/McDeJHjTZFlF:
+----
+.. 验证控制器dhchap密钥：
++
+[source, cli]
+----
+cat /sys/class/nvme-subsystem/nvme-subsys0/nvme0/dhchap_ctrl_secret
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+DHHC-1:03:n3F8d+bvxKW/s+lEhqXaOohI2sxrQ9iLutzduuFq49JgdjjaFtTpDSO9kQl/bvZj+Bo3rdHh3xPXeP6a4xyhcRyqdds=:
+----
+
+
+
+
+--
+====
+
+
+== 第9步：查看已知问题
+
+没有已知问题。

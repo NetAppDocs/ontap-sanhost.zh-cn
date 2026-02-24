@@ -411,7 +411,7 @@ devices {
 
 没有已知问题。
 
-有关 CentOS Red Hat 兼容内核的已知问题，请参阅 link:hu-rhel-8x.html#known-problems-and-limitations["已知问题"] 适用于 Red Hat Enterprise Linux (RHEL) 8.x 系列。
+有关 CentOS Red Hat 兼容内核的已知问题，请参阅 link:hu-rhel-8x.html#step-7-review-the-known-issues["已知问题"] Red Hat Enterprise Linux (RHEL) 8.x 系列。
 
 
 

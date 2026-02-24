@@ -144,7 +144,7 @@ Cmpl 00000000000000a8 Outstanding 0000000000000001
 
 == 何时联系技术支持
 
-如果问题仍然存在，请收集以下文件和命令输出并联系我们。 link:mysupport.netapp.com["NetApp 支持"^] 以便进一步分诊：
+如果您仍然遇到问题，请收集以下文件和命令输出，并联系 link:https://mysupport.netapp.com["NetApp 支持"^] 以进行进一步的分类：
 
 [source, cli]
 ----

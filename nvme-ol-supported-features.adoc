@@ -23,6 +23,11 @@ summary: 了解ONTAP对 Oracle Linux 主机的支持和功能。
 | 功能 | Oracle Linux 主机版本 | ONTAP 版本 
 
 
+| 从 Oracle Linux 9.6 开始，nvme 支持"queue-depth"i/o 策略，并且默认启用该选项。  a| 
+9.6 或更高版本
+| 9.10.1 或更高版本 
+
+
 | Oracle Linux 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。  a| 
 9.4 或更高版本
 | 9.12.1 或更高版本 
@@ -88,6 +93,9 @@ NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.net
 | 如果您的 Oracle Linux 版本是…… | 了解…… 
 
 
+| 10系列 | link:nvme-ol-10x.html["为 Oracle Linux 10 配置 NVMe"] 
+
+
 | 9系列 | link:nvme-ol-9x.html["为 Oracle Linux 9.x 配置 NVMe"] 
 
 
@@ -97,4 +105,4 @@ NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.net
 | 7系列 | link:nvme-ol-7x.html["为 Oracle Linux 7.x 配置 NVMe"] 
 |===
 .相关信息
-link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"^]
+link:https://docs.netapp.com/us-en/ontap/san-admin/start-nvme-fc-service-svm-task.html["了解如何管理 NVMe 协议"^] link:https://docs.netapp.com/us-en/asa-r2/index.html["了解 ASA R2"^]
