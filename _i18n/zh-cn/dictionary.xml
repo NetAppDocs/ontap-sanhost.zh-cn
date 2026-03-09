@@ -518,7 +518,6 @@
   <block id="c7c7e4d1fc8a47f946a88914900694c3" category="list-text">HP-UX 11iv2.</block>
   <block id="4feac8845db3a6b1f4e4ead570b6b3ad" category="list-text">HP-UX 11iv3.</block>
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">发行说明</block>
-  <block id="cf5f238fca8b6e155078aa41c175743a" category="sidebar">9.0</block>
   <block id="fc42d5b62a406fecb7a634ca014f42c2" category="paragraph">从7.0U3c开始、默认情况下会加载所需的NVMe/TCP模块。有关配置网络和NVMe/TCP适配器的信息、请参见VMware vSphere文档。</block>
   <block id="209ae9abdc2efd05e90e3a97a8913a9b" category="section-title">验证NVMe/TCP</block>
   <block id="e4dbb8bc2f2492f010d3f33dd68f00c8" category="list-text">验证NVMe/TCP适配器的状态。</block>
@@ -2468,4 +2467,9 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="22429905973644b59fef5bc5f1de5cc0" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Oracle Linux 10.x</block>
   <block id="c095933cd33553034e8d119262dd097b" category="paragraph">Linux Host Utilities 软件为连接到 ONTAP 存储的 Linux 主机提供管理和诊断工具。在 Oracle Linux 10.x 主机上安装 Linux Host Utilities 时，您可以使用 Host Utilities 帮助您通过 ONTAP LUN 管理 FCP 和 iSCSI 协议操作。</block>
   <block id="53b0cb8dd1f208321bcde1fc420505d1" category="paragraph">您可以在 Oracle Linux 10.x 中使用多路径来管理 ONTAP LUN。</block>
+  <block id="6a2b4410790513f6bead3be5a1c5f033" category="paragraph">8.0 或更高版本</block>
+  <block id="de99ebfc9b67fc827d4b885ffe66df51" category="section-title">步骤 3：（可选）修改 udev 规则中的 iopolicy</block>
+  <block id="6c3cb6f0244406645b054fde3485555c" category="paragraph">从 Proxmox VE 9.0 开始，NVMe-oF 的默认 iopolicy 设置为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>。如果要将 iopolicy 更改为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>（也可作为可配置选项使用），请按如下所示修改 udev 规则文件：</block>
+  <block id="3261e25ecb6c10cb23753dafcc11d3f3" category="list-text">修改规则，使 <block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> 更改为 <block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>，如以下示例中所示：</block>
+  <block id="306924ca750fad388254a44133cf90dd" category="list-text">验证子系统的当前 iopolicy。将 &lt;subsystem&gt; 替换为子系统的名称，例如 nvme-subsys0。</block>
 </blocks>

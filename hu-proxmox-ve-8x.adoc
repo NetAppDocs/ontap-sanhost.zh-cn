@@ -189,8 +189,7 @@ AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较�
 [listing]
 ----
 multipath -ll
-3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode
-size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+3600a0980383149764b5d567257516273 dm-0 NETAPP,LUN C-Mode size=150G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
 | |- 16:0:3:0  sdcg 69:64  active ready running
 | `- 10:0:0:0  sdb  8:16   active ready running
@@ -292,11 +291,11 @@ $iscsiadm --mode discovery --op update --type sendtargets --portal <target_IP>
 ====
 [listing]
 ----
-iscsiadm --mode discovery --op update --type sendtargets --portal  192.168.100.197
-192.168.100.197:3260,1046 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
-192.168.200.199:3260,1049 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
-192.168.100.199:3260,1048 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
-192.168.200.197:3260,1047 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8
+iscsiadm --mode discovery --op update --type sendtargets --portal 192.168.166.70
+192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.165.71:3260,1045 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.165.70:3260,1044 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.166.71:3260,1043 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
 ----
 ====
 . 登录到目标：
@@ -312,12 +311,12 @@ $iscsiadm --mode node -l all
 $iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v automatic
 ----
 +
-您应该会看到类似于以下示例的输出：
+将  `<target_name>` 替换为主机启动时要自动登录的目标名称。将  `<ip:port>` 替换为目标的 IP 地址和端口号。例如：
 
 +
-[listing]
+[source, cli]
 ----
-iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 -p 192.168.100.197:3260 -o update -n node.startup -v automatic
+iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 -p 192.168.166.70:3260 -o update -n node.startup -v automatic
 ----
 . 验证 iSCSI 会话：
 +
@@ -332,10 +331,10 @@ $iscsiadm --mode session
 [listing]
 ----
 iscsiadm --mode session
-tcp: [1] 192.168.200.197:3260,1047 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
-tcp: [2] 192.168.100.197:3260,1046 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
-tcp: [3] 192.168.100.199:3260,1048 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
-tcp: [4] 192.168.200.199:3260,1049 iqn.1992-08.com.netapp:sn.7cd154a7d35411f0a25ed039eaa95f59:vs.8 (non-flash)
+tcp: [1] 192.168.166.71:3260,1043 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [2] 192.168.165.71:3260,1045 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [3] 192.168.165.70:3260,1044 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [4] 192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
 ----
 ====
 
