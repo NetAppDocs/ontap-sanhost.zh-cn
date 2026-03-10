@@ -83,7 +83,7 @@ cat /etc/nvme/hostnqn
 +
 [listing]
 ----
-nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
+nqn.2014-08.org.nvmexpress:uuid:edd3XXXX-00f7-XXXX-a9dc-4d8XXXXd969a
 ----
 . 在ONTAP系统中，验证以下信息： `hostnqn`字符串匹配 `hostnqn`ONTAP存储系统中相应子系统的字符串：
 +
@@ -101,13 +101,13 @@ Vserver Subsystem Priority  Host NQN
 ------- --------- --------  ------------------------------------------------
 vs_coexistence_LPE36002
         nvme
-                  regular   nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
+                  regular   nqn.2014-08.org.nvmexpress:uuid:edd3XXXX-00f7-XXXX-a9dc-4d8XXXXd969a
         nvme1
-                  regular   nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
+                  regular   nqn.2014-08.org.nvmexpress:uuid:edd3XXXX-00f7-XXXX-a9dc-4d8XXXXd969a
         nvme2
-                  regular   nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
+                  regular   nqn.2014-08.org.nvmexpress:uuid:edd3XXXX-00f7-XXXX-a9dc-4d8XXXXd969a
         nvme3
-                  regular   nqn.2014-08.org.nvmexpress:uuid:edd38060-00f7-47aa-a9dc-4d8ae0cd969a
+                  regular   nqn.2014-08.org.nvmexpress:uuid:edd3XXXX-00f7-XXXX-a9dc-4d8XXXXd969a
 4 entries were displayed.
 ----
 ====

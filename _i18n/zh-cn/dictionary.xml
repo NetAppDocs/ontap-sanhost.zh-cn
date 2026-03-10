@@ -2367,10 +2367,7 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="1533ee126fd8f11e227dc3d689526f3c" category="paragraph">从 SUSE Linux Enterprise Server 16 开始，NVMe-oF 的默认 iopolicy 设置为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>。如果要将 iopolicy 更改为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>，请按如下所示修改 udev 规则文件：</block>
   <block id="f40fa917da76ec269347142ecd26f205" category="list-text">修改此规则，使 <block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> 变为 <block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>：</block>
   <block id="922b0cabd672f72127f63daffda5daa8" category="admonition">从 ONTAP 9.16.1 开始，NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径。</block>
-  <block id="729803330c2c3ddc5602fa6a32ed6680" category="paragraph">以下示例输出显示了在双节点 ONTAP 控制器上托管的命名空间，适用于 AFF、FAS 和 ASA 系统以及具有 NVMe/FC 的 ASA r2 系统。</block>
-  <block id="457f54f6cefd10b25a3bedd3ee0e4fa3" category="example-title">显示 AFF、FAS 和 ASA 示例输出</block>
   <block id="166d9b02aa39fa880a105b2a6f0e64cc" category="example-title">显示 ASA r2 示例输出</block>
-  <block id="4cbc3c8523dd8f70db284b7defb44454" category="paragraph">以下示例输出显示了托管在 AFF、FAS 和 ASA 系统以及 ASA r2 系统的双节点 ONTAP 控制器上使用 NVMe/TCP 的命名空间。</block>
   <block id="3f52de62927af66bbbcbf9a67e36d63c" category="paragraph">您可以为 SUSE Linux Enterprise Server 16 主机创建永久发现控制器 (PDC)。需要 PDC 才能自动检测 NVMe 子系统添加或删除操作以及对发现日志页面数据的更改。</block>
   <block id="3c8457e76486b7070b5f16df832bfb55" category="paragraph">在 SUSE Linux Enterprise Server 16 主机和 ONTAP 控制器之间，支持通过 NVMe/TCP 进行安全的带内身份验证。</block>
   <block id="60940bf76e8a6f461e5cdf574e9a3897" category="sidebar">SLES-16-FCP</block>
@@ -2472,4 +2469,12 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="6c3cb6f0244406645b054fde3485555c" category="paragraph">从 Proxmox VE 9.0 开始，NVMe-oF 的默认 iopolicy 设置为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>。如果要将 iopolicy 更改为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>（也可作为可配置选项使用），请按如下所示修改 udev 规则文件：</block>
   <block id="3261e25ecb6c10cb23753dafcc11d3f3" category="list-text">修改规则，使 <block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> 更改为 <block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>，如以下示例中所示：</block>
   <block id="306924ca750fad388254a44133cf90dd" category="list-text">验证子系统的当前 iopolicy。将 &lt;subsystem&gt; 替换为子系统的名称，例如 nvme-subsys0。</block>
+  <block id="98f6aa52f5f7e63bbceb451a95606fbb" category="paragraph">以下示例输出显示了使用 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统在双节点 ONTAP 控制器上托管的命名空间。</block>
+  <block id="838016fd6dff5a15cdfcd8e43e228f64" category="example-title">显示 AFF、FAS 或 ASA 的示例输出</block>
+  <block id="bf9b5fcabbc1d24364d06d41207e081e" category="example-title">显示 ASA r2 的输出示例</block>
+  <block id="09dd888e7ce0f1463d7e4491d5442bc3" category="paragraph">以下示例输出显示了使用 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统在双节点 ONTAP 控制器上托管的命名空间。</block>
+  <block id="6038c845b6f070b1ef3421bdad6c09a0" category="example-title">显示 AFF、FAS 或 ASA 示例输出</block>
+  <block id="508e93b6f899f26c01374d86f06060a5" category="list-text">从内核密钥环导出 TLS PSK。这可确保密钥在主机重新启动期间保持不变：</block>
+  <block id="1b569e78f049cfc0d5612ae09602f392" category="paragraph">以下示例输出显示了使用 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
+  <block id="6d984a3ecdb3a900adb251dd0b78d708" category="paragraph">以下示例输出显示了使用 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
 </blocks>
