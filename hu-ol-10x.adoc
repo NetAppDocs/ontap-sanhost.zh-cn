@@ -223,7 +223,7 @@ rpm -qa | grep iscsi-initiator-utils
 +
 [listing]
 ----
-iscsi-initiator-utils-6.2.1.11-0.git4b3e853.el9.x86_64
+iscsi-initiator-utils-6.2.1.11-0.git4b3e853.0.1.el10.x86_64
 ----
 . 验证位于  `/etc/iscsi/initiatorname.iscsi` 文件中的 iSCSI 启动程序节点名称：
 +
@@ -315,7 +315,7 @@ $iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v
 将  `<target_name>` 替换为主机启动时要自动登录的目标名称。将  `<ip:port>` 替换为目标的 IP 地址和端口号。例如：
 
 +
-[source, cli]
+[listing]
 ----
 iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.064a9b19b3ee11f09dcad039eabac370:vs.23 -p 192.168.30.87:3260 -o update -n node.startup -v automatic
 ----

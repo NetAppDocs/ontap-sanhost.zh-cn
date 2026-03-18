@@ -2417,7 +2417,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="026e7910f8597707ea78ced9009402b0" category="paragraph">Oracle Linux 10.x 主机将 NVMe-oF 的默认 iopolicy 设置为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>。您可以通过修改 udev 规则文件将 iopolicy 更改为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>。</block>
   <block id="93653ae68b7f62e4baef589277623491" category="paragraph">以下示例输出显示了托管在双节点 ONTAP 控制器上的命名空间，该命名空间适用于具有 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统。</block>
   <block id="6f412196079d9e58544081f4700ce25f" category="paragraph">以下示例输出显示了托管在双节点 ONTAP 控制器上的命名空间，适用于具有 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统。</block>
-  <block id="74ef0cdc12fc9f4e8b83d1a035e4f577" category="paragraph">Oracle Linux 10.x 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
   <block id="8ae4d61c82b1c9b58e4acbd1373806b2" category="cell">从 Oracle Linux 9.6 开始，nvme 支持"queue-depth"i/o 策略，并且默认启用该选项。</block>
   <block id="d3c49c5822283d264df05a1fd8b0870e" category="inline-link-macro">为 Oracle Linux 10 配置 NVMe</block>
   <block id="7d3306fa564ca0cc7f3c887e0359e138" category="cell"><block ref="7d3306fa564ca0cc7f3c887e0359e138" category="inline-link-macro-rx"></block></block>
@@ -2477,4 +2476,5 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="508e93b6f899f26c01374d86f06060a5" category="list-text">从内核密钥环导出 TLS PSK。这可确保密钥在主机重新启动期间保持不变：</block>
   <block id="1b569e78f049cfc0d5612ae09602f392" category="paragraph">以下示例输出显示了使用 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
   <block id="6d984a3ecdb3a900adb251dd0b78d708" category="paragraph">以下示例输出显示了使用 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
+  <block id="8e9aa976f7a8a387e926c6bbb8588831" category="paragraph">Oracle Linux 10.x 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
 </blocks>
