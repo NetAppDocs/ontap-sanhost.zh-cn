@@ -2477,4 +2477,5 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="1b569e78f049cfc0d5612ae09602f392" category="paragraph">以下示例输出显示了使用 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
   <block id="6d984a3ecdb3a900adb251dd0b78d708" category="paragraph">以下示例输出显示了使用 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
   <block id="8e9aa976f7a8a387e926c6bbb8588831" category="paragraph">Oracle Linux 10.x 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
+  <block id="e7f67da4e95cce9c0568e2b8ad82a925" category="paragraph">Rocky Linux 是一个与 RHEL 兼容的发行版，没有单独的 Linux Host Utilities 包。使用相应 RHEL 版本的 Linux Host Utilities 包。</block>
 </blocks>

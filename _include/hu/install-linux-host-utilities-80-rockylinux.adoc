@@ -1,0 +1,12 @@
+= 
+:allow-uri-read: 
+
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+Rocky Linux 是一个与 RHEL 兼容的发行版，没有单独的 Linux Host Utilities 包。使用相应 RHEL 版本的 Linux Host Utilities 包。
+
+link:hu-luhu-80.html["安装 Linux Host Utilities 8.0"] 。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
