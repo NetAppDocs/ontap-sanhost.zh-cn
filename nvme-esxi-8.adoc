@@ -311,11 +311,11 @@ tcp.vmnic2:34:80:0d:30:ca:e0-tcp.192.168.100.167:4420-uuid.f4f14337c3ad4a639edf0
 | NetApp 错误 ID | 标题 | Description 
 
 
-| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654,"^] | 在ONTAP 9.9.1中使用NVMe/FC协议时、ONTAP 节点不运行 | ONTAP 9.9.1支持NVMe"中止"命令。当ONTAP 收到"中止"命令以中止正在等待其配对命令的NVMe融合命令时、会发生ONTAP 节点中断。只有使用NVMe融合命令(例如ESX)和光纤通道(FC)传输的主机才会发现问题描述。 
+| link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1420654["1420654,"^] | 当 NVMe/FC 协议与 ONTAP 版本 9.9.1 一起使用时，ONTAP 节点不可操作 | ONTAP 9.9.1 引入了对 NVMe "abort" 命令的支持。当 ONTAP 收到 "abort" 命令以中止正在等待其伙伴命令的 NVMe 融合命令时，会发生 ONTAP 节点中断。此问题仅在使用 NVMe 融合命令（例如 ESX）和光纤通道 (FC) 传输的主机上出现。 
 
 
-| 1543660 | 如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误  a| 
-运行vSphere 8.x及更高版本并使用虚拟NVMe (vNVME)适配器的Linux VM会遇到I/O错误、因为默认情况下、vNVMe重试操作处于禁用状态。为了避免在所有路径关闭(All Paths Down、APD)或I/O负载繁重期间对运行旧内核的Linux VM造成中断、VMware引入了可调"VSCSIDisableNvmeRetry"以禁用vNVMe重试操作。
+| link:https://jira.ngage.netapp.com/browse/CONTAPEXT-1126["CONTAPEXT-1126"^] | 如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误  a| 
+运行 vSphere 8.x 及更高版本并使用虚拟 NVMe (vNVME) 适配器的 Linux VM 会遇到 I/O 错误，因为默认情况下会禁用 vNVMe 重试操作。为了避免在所有路径关闭 (APD) 或繁重 I/O 负载期间运行较旧内核的 Linux VM 上发生中断，VMware 引入了可调节的 "VSCSIDisableNvmeRetry" 来禁用 vNVMe 重试操作。
 
 |===
 .相关信息

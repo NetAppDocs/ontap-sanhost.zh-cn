@@ -669,8 +669,6 @@
   <block id="c3bd18851ce712c62533ac8c331b71d8" category="inline-link-macro">1420654,</block>
   <block id="7fa79b2d844dd78eb5ebb9aa901e8f14" category="cell"><block ref="7fa79b2d844dd78eb5ebb9aa901e8f14" category="inline-link-macro-rx"></block></block>
   <block id="6c5ab2230ea5f786135c35ed670ce6d6" category="cell">在ONTAP 9.9.1中使用NVMe/FC协议时、ONTAP 节点不运行</block>
-  <block id="85dcf040cfea5e44024dcdee365ef36f" category="cell">ONTAP 9.9.1支持NVMe"中止"命令。当ONTAP 收到"中止"命令以中止正在等待其配对命令的NVMe融合命令时、会发生ONTAP 节点中断。只有使用NVMe融合命令(例如ESX)和光纤通道(FC)传输的主机才会发现问题描述。</block>
-  <block id="fe73a89d7c677ea4abb2a996360023fa" category="cell">1543660</block>
   <block id="5a3b86e99232b3604afe4db20db45884" category="cell">如果使用vNVMe适配器的Linux VM遇到较长的All Paths Down (APD)窗口、则会发生I/O错误</block>
   <block id="9c72461f3069d27216e1faab60848be8" category="paragraph">运行vSphere 8.x及更高版本并使用虚拟NVMe (vNVME)适配器的Linux VM会遇到I/O错误、因为默认情况下、vNVMe重试操作处于禁用状态。为了避免在所有路径关闭(All Paths Down、APD)或I/O负载繁重期间对运行旧内核的Linux VM造成中断、VMware引入了可调"VSCSIDisableNvmeRetry"以禁用vNVMe重试操作。</block>
   <block id="03d0e633810a3de10e61ce29a7d4abb0" category="cell">检查并更正主机网络结构中的任何网络问题。如果这不起作用、请升级到可修复此问题描述 的修补程序。</block>
@@ -905,7 +903,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="bc2c3049c0f4d679fb14b74cd64723c8" category="cell"><block ref="bc2c3049c0f4d679fb14b74cd64723c8" category="inline-link-macro-rx"></block></block>
   <block id="c96b4702a07478185cc851585d0055b6" category="inline-link-macro">采用NetApp SnapMirror的NetApp ONTAP与VMware vSphere城域存储集群(VMSC)进行活动同步</block>
   <block id="8b3f58063486fce853bcbb473e73c56f" category="list-text"><block ref="8b3f58063486fce853bcbb473e73c56f" category="inline-link-macro-rx"></block></block>
-  <block id="23c3f6b1dc0958b81d21563a91eecfa6" category="cell"><block ref="23c3f6b1dc0958b81d21563a91eecfa6" category="inline-link-macro-rx"></block></block>
   <block id="e59f05c9149caf590d63da27c24797cb" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp®SnapMirror主动同步</block>
   <block id="2a41c03d949869222b758867aff845ff" category="inline-link-macro">VMware vSphere 6.x和7.x支持NetApp SnapMirror活动同步</block>
   <block id="33bd005b46fadc3ac5ff4dc797b52e07" category="list-text">如果您具有MetroCluster配置、NetApp建议更改支持MetroCluster计划外切换事件的AIX NVMe/FC默认APD (所有路径关闭)时间、以避免AIX操作系统强制执行较短的I/O超时。有关追加信息以及建议的默认设置更改、请参阅NetApp错误在线- <block ref="31191f9686b6d08dd8653718c76edbf6" category="inline-link-macro-rx"></block>。</block>
@@ -2478,4 +2475,9 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="6d984a3ecdb3a900adb251dd0b78d708" category="paragraph">以下示例输出显示了使用 NVMe/TCP 的 AFF、FAS、ASA 或 ASA r2 系统的双节点 ONTAP 控制器上托管的命名空间。</block>
   <block id="8e9aa976f7a8a387e926c6bbb8588831" category="paragraph">Oracle Linux 10.x 主机和 ONTAP 控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
   <block id="e7f67da4e95cce9c0568e2b8ad82a925" category="paragraph">Rocky Linux 是一个与 RHEL 兼容的发行版，没有单独的 Linux Host Utilities 包。使用相应 RHEL 版本的 Linux Host Utilities 包。</block>
+  <block id="f2797f4fff71e1241dbd27de578e26fe" category="inline-link-macro">CONTAPEXT-1126</block>
+  <block id="3bf0e426a8bb195e45d195cbc0249dfa" category="cell"><block ref="3bf0e426a8bb195e45d195cbc0249dfa" category="inline-link-macro-rx"></block></block>
+  <block id="63c3f0dce3adfd21858e4906af8b540e" category="cell">当 NVMe/FC 协议与 ONTAP 版本 9.9.1 一起使用时，ONTAP 节点不可操作</block>
+  <block id="75fe6ffd14185a732fe5c93e3655894f" category="cell">ONTAP 9.9.1 引入了对 NVMe "abort" 命令的支持。当 ONTAP 收到 "abort" 命令以中止正在等待其伙伴命令的 NVMe 融合命令时，会发生 ONTAP 节点中断。此问题仅在使用 NVMe 融合命令（例如 ESX）和光纤通道 (FC) 传输的主机上出现。</block>
+  <block id="8f0a705220613d95434cdb5a4fcab23b" category="paragraph">运行 vSphere 8.x 及更高版本并使用虚拟 NVMe (vNVME) 适配器的 Linux VM 会遇到 I/O 错误，因为默认情况下会禁用 vNVMe 重试操作。为了避免在所有路径关闭 (APD) 或繁重 I/O 负载期间运行较旧内核的 Linux VM 上发生中断，VMware 引入了可调节的 "VSCSIDisableNvmeRetry" 来禁用 vNVMe 重试操作。</block>
 </blocks>
