@@ -1962,7 +1962,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="d286d12da4f4e6576e98c97eb597f043" category="example-title">展示 NVMe/FC 示例</block>
   <block id="7b25b7a93bbe178f0d420e334d6ad6f8" category="example-title">展示 NVMe/TCP 示例</block>
   <block id="9b477ce27ea88f4f85280e9cdee7c154" category="section-title">步骤 4：（可选）修改 udev 规则中的 iopolicy</block>
-  <block id="b563c88e9abe33f9ebe5ffe91fca2101" category="paragraph">RHEL 9.6 将 NVMe-oF 的默认 iopolicy 设置为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>。如果您使用的是 RHEL 9.6 并且想要更改 iopolicy，请执行以下操作：<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>修改 udev 规则文件如下：</block>
   <block id="ac81318c5111726b893fa8dcdc177d9f" category="list-text">重新加载udev规则并应用更改：</block>
   <block id="44d5823b8f69c86c4a41c13b72067d2e" category="list-text">请检查子系统的当前 I/O 策略。例如，替换&lt;子系统&gt;<block ref="621b1b464ec30e8b168fcad04cefe44c" prefix=" " category="inline-code"></block> 。</block>
   <block id="02e6f562a82adc38b8762b8d4fc3c8c2" category="section-title">步骤 5：可选，启用 NVMe/FC 的 1MB I/O。</block>
@@ -2105,7 +2104,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="97a0ff99a93f7485dcb82a548fcca4a0" category="admonition">新的 iopolicy 会自动应用于匹配的NetApp ONTAP控制器设备。您无需重启。</block>
   <block id="92520caa5da5fd65237a96731d101aee" category="list-text">验证主机上是否正确显示了相应ONTAP命名空间的 NVMe-oF 设置（例如，型号设置为NetApp ONTAP Controller，负载均衡 iopolicy 设置为 round-robin）：</block>
   <block id="b62ae28652ddc6a2c9bb15373668f0d0" category="paragraph">9.6 或更高版本</block>
-  <block id="3bf7b9cd443b3cb0c9b741f8a4deb9dc" category="paragraph">RHEL 10.0 将 NVMe-oF 的默认 iopolicy 设置为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>。如果您使用的是 RHEL 10.0 并且想要更改 iopolicy，请执行以下操作：<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>修改 udev 规则文件如下：</block>
   <block id="13c16c386fd131bec830d461d648a36c" category="list-text">在ONTAP系统中，验证以下信息：<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串匹配<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>ONTAP数组中对应子系统的字符串：</block>
   <block id="8a95ca1b414fded33fc04e8dce1b674e" category="paragraph">要为 NVMe-oF 配置主机，您需要安装主机和 NVMe 软件包，启用多路径，并验证主机 NQN 配置。</block>
   <block id="03dbf806a820b94b8130fac6331ce194" category="summary">如何为 Rocky Linux 10.x 配置带有ONTAP存储的 NVMe-oF 主机</block>
@@ -2480,4 +2478,16 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="63c3f0dce3adfd21858e4906af8b540e" category="cell">当 NVMe/FC 协议与 ONTAP 版本 9.9.1 一起使用时，ONTAP 节点不可操作</block>
   <block id="75fe6ffd14185a732fe5c93e3655894f" category="cell">ONTAP 9.9.1 引入了对 NVMe "abort" 命令的支持。当 ONTAP 收到 "abort" 命令以中止正在等待其伙伴命令的 NVMe 融合命令时，会发生 ONTAP 节点中断。此问题仅在使用 NVMe 融合命令（例如 ESX）和光纤通道 (FC) 传输的主机上出现。</block>
   <block id="8f0a705220613d95434cdb5a4fcab23b" category="paragraph">运行 vSphere 8.x 及更高版本并使用虚拟 NVMe (vNVME) 适配器的 Linux VM 会遇到 I/O 错误，因为默认情况下会禁用 vNVMe 重试操作。为了避免在所有路径关闭 (APD) 或繁重 I/O 负载期间运行较旧内核的 Linux VM 上发生中断，VMware 引入了可调节的 "VSCSIDisableNvmeRetry" 来禁用 vNVMe 重试操作。</block>
+  <block id="f4e65c6a7acad92f689e43c9eec48742" category="list-title">RHEL 10.x 版本的 iopolicy 更改</block>
+  <block id="439f9f6575b13433a06a0706d7693a1a" category="list-text">从 RHEL 10.1 开始，默认 iopolicy 为 queue-depth。</block>
+  <block id="fd7719d49078cb118a29c8a86504fdf9" category="list-text">在 RHEL 10.0 中，round-robin 是默认的 iopolicy，但 queue-depth 是可配置的选项。</block>
+  <block id="f28c692e063dee2ca7081bc028b1d7c5" category="paragraph">如果使用 RHEL 10.0 并希望将 iopolicy 更改为 queue-depth，请修改 udev rules 文件，如下所示：</block>
+  <block id="729803330c2c3ddc5602fa6a32ed6680" category="paragraph">以下示例输出显示了在双节点 ONTAP 控制器上托管的命名空间，适用于 AFF、FAS 和 ASA 系统以及具有 NVMe/FC 的 ASA r2 系统。</block>
+  <block id="457f54f6cefd10b25a3bedd3ee0e4fa3" category="example-title">显示 AFF、FAS 和 ASA 示例输出</block>
+  <block id="4cbc3c8523dd8f70db284b7defb44454" category="paragraph">以下示例输出显示了托管在 AFF、FAS 和 ASA 系统以及 ASA r2 系统的双节点 ONTAP 控制器上使用 NVMe/TCP 的命名空间。</block>
+  <block id="152a219de178a3ca66329209f7ce7693" category="list-title">RHEL 9.x 版本的 iopolicy 更改</block>
+  <block id="d50e8e44ca2747cb58745bf834bda611" category="list-text">从 RHEL 9.7 开始，默认 iopolicy 为 queue-depth。</block>
+  <block id="46a4bf76409792ef5635ae3fa7be3eca" category="list-text">在 RHEL 9.6 中，round-robin 是默认的 iopolicy，但 queue-depth 可作为可配置选项使用。</block>
+  <block id="b57931aaf40ed5847b49ce94e37ba2f9" category="list-text">在 RHEL 9.6 之前，循环是唯一受支持的 NVMe-oF iopolicy。</block>
+  <block id="199f707ebb9eba2ff990f4e6b8a03a49" category="paragraph">如果使用 RHEL 9.6 并希望将 iopolicy 更改为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>，请按如下所示修改 udev 规则文件：</block>
 </blocks>
