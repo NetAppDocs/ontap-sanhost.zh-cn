@@ -2490,4 +2490,18 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="46a4bf76409792ef5635ae3fa7be3eca" category="list-text">在 RHEL 9.6 中，round-robin 是默认的 iopolicy，但 queue-depth 可作为可配置选项使用。</block>
   <block id="b57931aaf40ed5847b49ce94e37ba2f9" category="list-text">在 RHEL 9.6 之前，循环是唯一受支持的 NVMe-oF iopolicy。</block>
   <block id="199f707ebb9eba2ff990f4e6b8a03a49" category="paragraph">如果使用 RHEL 9.6 并希望将 iopolicy 更改为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>，请按如下所示修改 udev 规则文件：</block>
+  <block id="88694bea2b4bb7ab31183cf89c0abc9a" category="open-title">Oracle Linux 主机</block>
+  <block id="d62485a7a064d77caa624ec7d9c16f56" category="paragraph">要确保为主机正确配置多路径，请验证是否已定义<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>，以及是否为 ONTAP LUN 配置了 NetApp 建议的设置。</block>
+  <block id="8f398c60279f151c939d64302e2a552a" category="paragraph">*ASA 配置*</block>
+  <block id="00f6a93cbdaeca9a5c16456b45e56a06" category="paragraph">*AFF 或 FAS 配置*</block>
+  <block id="4a801556fd7b17fe7fc88987832eab59" category="open-title">OLVM - ONTAP 高可用性</block>
+  <block id="7ac9ef2526e3dbe23e271314793c2500" category="paragraph">在 Oracle Linux Virtualization Manager (OLVM) 中，VDSM 守护程序控制虚拟机管理程序上的默认多路径参数。请勿直接编辑 <block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>。而是使用多路径插入文件覆盖默认值。</block>
+  <block id="f0b27027e6b67d9f11bb9a63118f7820" category="paragraph">对于 ONTAP 高可用性 (HA) 配置，NetApp 建议使用以下插入文件来覆盖<block ref="f92718f463480c9c4b4291e7fd4ef19e" prefix=" " category="inline-code"></block>和<block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block>。所有其他多路径参数应与 Oracle Linux 主机参数设置表中的设置匹配。</block>
+  <block id="2325a00c850562a31b6e1174103fdf34" category="list-text">创建 drop-in 文件：</block>
+  <block id="6af920fd32adf77980a7d950b4a43b42" category="list-text">重新加载多路径后台程序：</block>
+  <block id="8cd5bca10d68fe455b4aafcd2984b1ec" category="list-text">验证更新的多路径配置：</block>
+  <block id="c131839a59f1dece3cf8f40a9f418f28" category="open-title">OLVM - ONTAP SnapMirror 活动同步</block>
+  <block id="9ac038eaf430fd52f4f8187e511c2c64" category="paragraph">当 OLVM 主机使用 ONTAP SnapMirror active sync 时，应调整 sanlock 和多路径超时参数，以确保在存储故障转移事件期间主机和 VM 行为正确。默认 OLVM 超时值可能会在计划外站点故障转移期间导致意外的高可用性 VM 故障转移，因为租约续订窗口可能在多路径恢复完成之前到期。</block>
+  <block id="48456488fd8e1ab35d02545499c661fe" category="inline-link">Oracle Linux Virtualization Manager - ONTAP SnapMirror Active Sync 的 Sanlock 设置</block>
+  <block id="d586abe993be4482cf9a1c2a026a70c7" category="paragraph">按照 NetApp 知识库文章<block ref="5895161fcfd751cbe73c1e86aa55f0d8" category="inline-link-rx"></block>中的配置步骤更新 sanlock 和多路径超时值，以便在存储故障转移事件期间，租约续订窗口足以完成多路径恢复。</block>
 </blocks>

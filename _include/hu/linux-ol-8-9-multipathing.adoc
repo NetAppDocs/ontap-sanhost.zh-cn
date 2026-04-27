@@ -1,0 +1,208 @@
+= 
+:allow-uri-read: 
+
+
+[role="tabbed-block"]
+====
+.Oracle Linux 主机
+--
+要确保为主机正确配置多路径，请验证是否已定义 `/etc/multipath.conf`，以及是否为 ONTAP LUN 配置了 NetApp 建议的设置。
+
+.步骤
+. 确认  `/etc/multipath.conf` 文件是否存在。如果文件不存在，则创建一个空的零字节文件：
++
+[source, cli]
+----
+touch /etc/multipath.conf
+----
+. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
++
+下表显示了Linux操作系统为ONTAP LUN编译的本机多路径参数设置。
+
++
+.显示参数设置
+[#multipath-parameter-settings%collapsible]
+=====
+[cols="2"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | LUN 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+=====
+. 验证ONTAP LUN的参数设置和路径状态：
++
+[source, cli]
+----
+multipath -ll
+----
++
+默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
+
++
+以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
+
++
+*ASA 配置*
+
++
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a098038303634722b4d59646c4436 dm-28 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:7:6   sdbz 68:208  active ready running
+  |- 11:0:11:6  sddn 71:80   active ready running
+  |- 11:0:15:6  sdfb 129:208 active ready running
+  |- 12:0:1:6   sdgp 132:80  active ready running
+----
+=====
++
+*AFF 或 FAS 配置*
+
++
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
++
+以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+
++
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+multipath -ll
+3600a0980383036347ffb4d59646c4436 dm-28 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 16:0:6:35 sdwb  69:624  active ready running
+| |- 16:0:5:35 sdun  66:752  active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 15:0:0:35 sdaj  66:48   active ready running
+  |- 15:0:1:35 sdbx  68:176  active ready running
+----
+=====
+
+
+--
+.OLVM - ONTAP 高可用性
+--
+在 Oracle Linux Virtualization Manager (OLVM) 中，VDSM 守护程序控制虚拟机管理程序上的默认多路径参数。请勿直接编辑  `/etc/multipath.conf`。而是使用多路径插入文件覆盖默认值。
+
+对于 ONTAP 高可用性 (HA) 配置，NetApp 建议使用以下插入文件来覆盖 `dev_loss_tmo`和 `no_path_retry`。所有其他多路径参数应与 Oracle Linux 主机参数设置表中的设置匹配。
+
+.步骤
+. 创建 drop-in 文件：
++
+[source, cli]
+----
+cat <<'EOF' > /etc/multipath/conf.d/ontap-ha-mpath-netapp.conf
+# Finite multipath retry window aligned with sanlock io_timeout
+# default sanlock:io_timeout=10s, polling_interval=5s => no_path_retry = (8*10)/5 = 16
+
+devices {
+  device {
+    vendor "NETAPP"
+    product "LUN"
+    no_path_retry 16
+    dev_loss_tmo "infinity"
+  }
+}
+EOF
+----
+. 重新加载多路径后台程序：
++
+[source, cli]
+----
+systemctl reload multipathd
+----
+. 验证更新的多路径配置：
++
+[source, cli]
+----
+multipathd -k"show config"
+----
+
+
+--
+.OLVM - ONTAP SnapMirror 活动同步
+--
+在 Oracle Linux Virtualization Manager (OLVM) 中，VDSM 守护程序控制虚拟机管理程序上的默认多路径参数。请勿直接编辑  `/etc/multipath.conf`。而是使用多路径插入文件覆盖默认值。
+
+当 OLVM 主机使用 ONTAP SnapMirror active sync 时，应调整 sanlock 和多路径超时参数，以确保在存储故障转移事件期间主机和 VM 行为正确。默认 OLVM 超时值可能会在计划外站点故障转移期间导致意外的高可用性 VM 故障转移，因为租约续订窗口可能在多路径恢复完成之前到期。
+
+按照 NetApp 知识库文章 https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/Oracle_Linux_Virtualization_Manager_-_Sanlock_Settings_for_ONTAP_SnapMirror_Active_Sync["Oracle Linux Virtualization Manager - ONTAP SnapMirror Active Sync 的 Sanlock 设置"]中的配置步骤更新 sanlock 和多路径超时值，以便在存储故障转移事件期间，租约续订窗口足以完成多路径恢复。
+
+--
+====
