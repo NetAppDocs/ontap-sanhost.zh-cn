@@ -131,11 +131,11 @@ link:hu_aix_61.html["安装 AIX Host Utilities 6.1"] 。
 --
 .SnapMirror主动同步
 --
-从ONTAP 9.11.1 开始，AIX 主机支持SnapMirror主动同步。  AIX 配置中的主集群是“活动”集群。
+AIX 主机支持 SnapMirror 活动同步。支持行为因 ONTAP 版本而异：
 
-在 AIX 配置中，故障转移会造成破坏。每次故障转移时，您都需要在主机上执行重新扫描以恢复 I/O 操作。
+** 从 ONTAP 9.19.1 开始，SnapMirror 主动同步在主动/主动配置中受支持，支持无中断 SnapMirror 主动同步操作。请参阅知识库文章 link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/SnapMirror_active_sync_support_for_AIX%3A_behavior_by_ONTAP_release_and_migration_guidance["SnapMirror 主动同步对 AIX 的支持：按 ONTAP 版本的行为和迁移指南"^]。
+** 对于 ONTAP 9.11.1 到 9.18.1，SnapMirror 主动同步在主动/待机配置中受支持。请参阅知识库文章 link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["如何在 ONTAP 9.11.1 到 9.18.1 中为 SnapMirror 活动同步配置 AIX 主机"^]。
 
-请参阅知识库文章link:https://kb.netapp.com/on-prem/ontap/DP/SnapMirror/SnapMirror-KBs/How_to_configure_AIX_Host_for_SnapMirror_active_sync_in_ONTAP["如何为SnapMirror活动同步配置AIX主机"^]。
 
 --
 ====
