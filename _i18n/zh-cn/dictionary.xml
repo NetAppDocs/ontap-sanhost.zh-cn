@@ -1199,7 +1199,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="411779633a68ad8ff4bb5f0b84de0e3d" category="doc">第1步：安装HP-UX Host Utilities</block>
   <block id="7a5a6ee53a3c56e370cff4e4cb600d3a" category="paragraph">NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。</block>
   <block id="5d17e83279fd5189b40ec31e6e0efc6c" category="inline-link-macro">安装HP-UX Host Utilities 6.0</block>
-  <block id="7b3d6a6184bc8044fb4eaa2361a0c137" category="paragraph"><block ref="a1822c628e463c7a9fa61c1a4713b4ef" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="cd30444b7075100f9dce64caf41ba2b7" category="doc">第2步：安装Linux Host Utilities</block>
   <block id="a9764a4b476a4ae40670f2b10ab9b4aa" category="admonition">安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。</block>
   <block id="0f8e25d5af08d115d6410aa42fa8c1e8" category="doc">第5步：自定义ONTAP LUN的多路径参数</block>
@@ -2505,4 +2504,5 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="510d8f08b1bcd3d37f5f38838ba87607" category="list-text">从 ONTAP 9.19.1 开始，SnapMirror 主动同步在主动/主动配置中受支持，支持无中断 SnapMirror 主动同步操作。请参阅知识库文章 <block ref="689132335b86d0a731403daf22970080" category="inline-link-macro-rx"></block>。</block>
   <block id="58d09565b9d76aa8df134a3c88f349ef" category="inline-link-macro">如何在 ONTAP 9.11.1 到 9.18.1 中为 SnapMirror 活动同步配置 AIX 主机</block>
   <block id="edef79d6486b82062ad7b8f2b46174e2" category="list-text">对于 ONTAP 9.11.1 到 9.18.1，SnapMirror 主动同步在主动/待机配置中受支持。请参阅知识库文章 <block ref="170dab56a652357d4fe24ca37b0b9eea" category="inline-link-macro-rx"></block>。</block>
+  <block id="d260773137ad0fe3e74f84c49c4bb99c" category="paragraph"><block ref="d91927ac11d01a60b7823e550f2dd7fb" category="inline-link-macro-rx"></block>.</block>
 </blocks>
