@@ -551,7 +551,6 @@
   <block id="bb80358d422ec918cde74cab08e90d5c" category="admonition">在云环境中、主机通常称为客户端。此内容中的所有主机特定信息也包括适用场景 云客户端。</block>
   <block id="30f60d67f457bb040dffde52197a54da" category="paragraph-title">相关信息</block>
   <block id="4c865e0cb70fa33868e69a5e88daad47" category="cell">1479047</block>
-  <block id="0929df0c2d7b307ae019137c488669a8" category="cell">1503468</block>
   <block id="2fefce185e7d7498c7e3da22bac84294" category="cell">1508554</block>
   <block id="11613812ad376f15dc5ee5a9f425cea1" category="cell">要支持Emulex HBA适配器发现、NetApp Linux Host Utilities CLI需要其他库软件包依赖项</block>
   <block id="796d3a90e43ce105cbf37298c5065f7e" category="sidebar">9.1</block>
@@ -1044,7 +1043,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="53aa5d6687de6e1ac7fc2fd3ae4ab539" category="doc">安装Linux Host Utilities 7.1</block>
   <block id="d895168ecaf0f9622aa5a6fc78ac6433" category="admonition">Linux Host Utilities软件不支持基于光纤通道的NVMe (NVMe/FC)和基于TCP的NVMe (NVMe/TCP)主机协议。</block>
   <block id="17f8692005ca3aae6a8d4543ddd9c587" category="paragraph">对于早期版本的Linux Host Utilities、请转到安装主机实用程序软件的目录、然后输入uninstall命令以删除已安装的软件包。</block>
-  <block id="a8ef8037d8bc65ce5c031566c94c1bdf" category="cell">在RHEL 9.1中、NetApp Linux SAN主机实用程序命令行界面<block ref="621925cc88c3305079fc7287b11ebf60" prefix=" " category="inline-code"></block>会失败、因为找不到支持HBA发现的库软件包依赖关系。</block>
   <block id="97cd8ca681a54160b844883a804a9d15" category="cell">在RHEL 9.2中、NetApp Linux SAN主机实用程序命令行界面<block ref="621925cc88c3305079fc7287b11ebf60" prefix=" " category="inline-code"></block>会失败、因为找不到支持HBA发现的库软件包依赖关系。</block>
   <block id="202b2328413819343791c425b58e837e" category="cell">在RHEL 9.x中、NetApp Linux SAN主机实用程序命令行界面<block ref="621925cc88c3305079fc7287b11ebf60" prefix=" " category="inline-code"></block>会失败、因为找不到支持Emulex主机总线适配器(HBA)发现的库软件包依赖项。</block>
   <block id="61cdaad7945ab6e6f6569fdfe83fa2e4" category="summary">了解有关SAN Host Utility版本的最新信息、并访问适用于您的主机配置的安装过程。</block>
@@ -1864,8 +1862,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="3d8c2f20c69104516adf8f11842395df" category="paragraph">为了在同一主机上运行 NVMe 和 SCSI 流量， NetApp建议对ONTAP命名空间使用内核 NVMe 多路径，对ONTAP LUN 使用 dm-multipath。为了防止 dm-multipath 声明ONTAP命名空间设备，请通过添加<block ref="cb2f8f6f16be615751b5bbd73928d197" prefix=" " category="inline-code"></block>设置为<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件：</block>
   <block id="5728fbd1a5c8ae099d988e87299f3dd9" category="paragraph">这些是已知问题：</block>
   <block id="ac783620bd79a6f903c67f639a9962f6" category="section-title">步骤 5：验证多路径配置</block>
-  <block id="3ac8a887d7c6b1750dee1f66e33d2041" category="cell">RHEL 9.0 NVMe-oF 主机创建重复的持久发现控制器 (PDC)</block>
-  <block id="3ac93f7cf1853dfbc16c8472fc66d07d" category="cell">这<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block>命令返回给定子系统的 NVMe 控制器列表。在 RHEL 9.1 中，此命令显示子系统中所有命名空间的控制器及其 ANA 状态。由于 ANA 状态是每个命名空间的属性，因此该命令应显示具有每个命名空间的路径状态的唯一控制器条目。</block>
   <block id="ece25d4c541fbae683416549d3f4ac05" category="list-text">使用 root 权限在文本编辑器中打开 udev 规则文件：</block>
   <block id="1cdf0be14ba09adc81c1095b08aa7aa2" category="list-text">修改规则，以便<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>变成<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>：</block>
   <block id="47b12d977e58e4eab7ccd70d2694af53" category="paragraph">Rocky Linux 内核版本示例：</block>
@@ -1934,7 +1930,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="9943f66abf8246a952197a36b6ebae0a" category="doc">配置 RHEL 9.x 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
   <block id="853337aa29013a97f96870e7d2f10f1e" category="paragraph">Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Red Hat Enterprise Linux (RHEL) 9.x 主机上安装 Linux 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
   <block id="7bf7f9c71ffb97fd94ef9cfdd36ff7df" category="paragraph">您可以使用 RHEL 9.x 的多路径功能来管理ONTAP LUN。</block>
-  <block id="072f2e7d6b820c2e2398ab458c0f3a82" category="paragraph">RHEL 9.x 与ONTAP存储存在以下已知问题。</block>
   <block id="cd243542bc9904c72b230932ea74f5f9" category="doc">配置 Rocky Linux 8.x 以支持 FCP 和 iSCSI 以及ONTAP存储</block>
   <block id="12a24a78e2e6166f7b0523bf7d3e9aa7" category="paragraph">Linux Host Utilities 软件为连接到ONTAP存储的 Linux 主机提供管理和诊断工具。在 Rocky Linux 8.x 主机上安装 Linux 主机实用程序后，您可以使用主机实用程序来帮助您管理ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
   <block id="90fd31bfd08c82d921d995f40f9f7d08" category="paragraph">您可以使用 Rocky Linux 8.x 的多路径功能来管理ONTAP LUN。</block>
@@ -1962,7 +1957,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="02e6f562a82adc38b8762b8d4fc3c8c2" category="section-title">步骤 5：可选，启用 NVMe/FC 的 1MB I/O。</block>
   <block id="e6b3c2c8d823bf042f0e8e9e02dabf14" category="section-title">步骤 6：验证 NVMe 启动服务</block>
   <block id="378f49529e98279285d9a2eb0d2b3e5e" category="section-title">步骤 7：验证多路径配置</block>
-  <block id="817977d49e0479a834f082c774ea3949" category="cell">在 RHEL 9.1 中，<block ref="f3d48156832e70ac41335c007fa76798" prefix=" " category="inline-code"></block>该命令返回给定子系统的重复 NVMe 控制器列表</block>
   <block id="f12463db66bb26df5aae5e1aa393205f" category="summary">了解ONTAP对 RHEL 主机的支持和功能</block>
   <block id="d4063c82026eda59b5c15cca38aa9b92" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 RHEL 的版本而异。</block>
   <block id="21021ea0e52be8e9c599f4dff41e5be0" category="cell">功能</block>
@@ -2051,7 +2045,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="e52f83ac7ca8ca1b48908231ec897be1" category="paragraph">9.5 或更高版本</block>
   <block id="92893b8c5051dff6e69f93181e523d01" category="cell">如果您的 Oracle Linux 版本是……</block>
   <block id="e6c9ea0372e1bc5ee9ce19cebcf71eaf" category="cell">7系列</block>
-  <block id="28b031394cea76c997a81517dfc279f9" category="cell">在 NVMe-oF 主机上，您可以使用 <block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block> 命令创建 PDC。使用此命令时，每个发起方-目标组合只能创建一个 PDC。但是，如果您在 NVMe-oF 主机上运行ONTAP 9.10.1 和 RHEL 9.0，则每次执行 <block ref="70c9b2fe3469aa88746a29ccc6fe9d7a" prefix=" " category="inline-code"></block>  时都会创建一个重复的 PDC。这会导致主机和目标设备上资源的不必要消耗。</block>
   <block id="38247dd9f4f50ed3b751d728ecd0c52c" category="sidebar">NVMeoF OL</block>
   <block id="8cf639f80087b38e9251e80ba60c10c4" category="paragraph">默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。</block>
   <block id="97a99753b959b6770bb6efa96e4103e1" category="list-text">请参阅 Veritas 支持门户（产品矩阵、平台查找和 HCL 矩阵）以验证 SAN 启动配置支持和已知问题。</block>
@@ -2505,5 +2498,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="58d09565b9d76aa8df134a3c88f349ef" category="inline-link-macro">如何在 ONTAP 9.11.1 到 9.18.1 中为 SnapMirror 活动同步配置 AIX 主机</block>
   <block id="edef79d6486b82062ad7b8f2b46174e2" category="list-text">对于 ONTAP 9.11.1 到 9.18.1，SnapMirror 主动同步在主动/待机配置中受支持。请参阅知识库文章 <block ref="170dab56a652357d4fe24ca37b0b9eea" category="inline-link-macro-rx"></block>。</block>
   <block id="d260773137ad0fe3e74f84c49c4bb99c" category="paragraph"><block ref="d91927ac11d01a60b7823e550f2dd7fb" category="inline-link-macro-rx"></block>.</block>
-  <block id="bdc9e3765d603a5091aec17191bf38ed" category="admonition">AIX 要求在启用 MPIO 之前，SAN 启动磁盘只能看到一条路径。安装或迁移 AIX 启动磁盘通常需要临时限制主机的 FC 分区，以包含单个 FC 启动器和单个 FC 目标。安装主机实用程序（包括 PCM 包）后，您可以重新启动操作系统以完全启用 MPIO。此时，将额外的 FC 启动器和 FC 目标添加到区域。然后，运行<block ref="cec798dce2562ead48807f1d57e501c6" prefix=" " category="inline-code"></block>和<block ref="a693727332d96028bddba10ff4667b0a" prefix=" " category="inline-code"></block>以更新启动配置以包括所有可用路径。</block>
+  <block id="895369022e2ee0b381f97a38ee89b758" category="admonition">AIX 要求在启用 MPIO 之前，SAN 启动磁盘只能看到一条路径。安装或迁移 AIX 启动磁盘通常需要临时限制主机的 FC 分区，使其仅包含单个 FC 启动器和单个 FC 目标。安装主机实用程序（包括 PCM 软件包）后，您可以重新启动操作系统以完全启用 MPIO。此时，将额外的 FC 启动器和 FC 目标添加到区域。然后，运行<block ref="cec798dce2562ead48807f1d57e501c6" prefix=" " category="inline-code"></block> 和<block ref="a693727332d96028bddba10ff4667b0a" prefix=" " category="inline-code"></block> 以更新启动配置，使其包含所有可用路径。</block>
+  <block id="d475935aee712cb287d615a6e4a26bc1" category="paragraph">以下示例显示了<block ref="d7deb22e6166f8cce87002f8f100fbe6" prefix=" " category="inline-code"></block>程序包版本：</block>
 </blocks>
