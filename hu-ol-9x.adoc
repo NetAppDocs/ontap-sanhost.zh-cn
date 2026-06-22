@@ -465,15 +465,8 @@ devices {
 
 == 第 7 步：查看已知问题
 
-Oracle Linux 9.3、9.2、9.1 和 9.0 与ONTAP存储存在以下已知问题：
+没有已知问题。
 
-[cols="20,40,40"]
-|===
-| NetApp 错误 ID | 标题 | Description 
-
-
-| https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1508554["1508554"^] | 带有Emulex HBA的SAN LUN实用程序需要库软件包中的符号链接 | 在 SAN 主机上执行 Linux 主机实用程序 CLI 命令“sanlun fcp show adapter -v”时，命令执行失败，并显示错误消息，指出找不到主机总线适配器 (HBA) 发现所需的库依赖项：---- [root@hostname ~]# sanlun fcp show adapter -v 无法找到 /usr/lib64/libHBAAPI.so 库 请确保已安装并加载安装该库的软件包 ---- 
-|===
 
 
 == 下一步是什么？
