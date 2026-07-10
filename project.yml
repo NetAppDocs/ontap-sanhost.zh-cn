@@ -93,7 +93,7 @@ sidebar:
         url: "/hu_wuhu_troubleshoot.html"
   - title: 使用FCP和iSCSI配置主机
     entries:
-    - title: 概述
+    - title: 了解如何使用 FCP 和 iSCSI 配置主机
       url: "/hu_fcp_scsi_index.html"
     - title: AIX 和 PowerVM/VIOS
       entries:
@@ -214,7 +214,7 @@ sidebar:
         url: "/hu_windows_2012r2.html"
   - title: 使用NVMe-oF配置主机
     entries:
-    - title: 了解如何配置 NVMe-oF 主机
+    - title: 了解如何使用 NVMe-oF 配置主机
       url: "/hu-nvme-index.html"
     - title: AIX
       url: "/nvme-aix.html"

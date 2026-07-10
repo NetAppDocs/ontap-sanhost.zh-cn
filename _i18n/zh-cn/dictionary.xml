@@ -540,7 +540,6 @@
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">更多资源</block>
   <block id="8f631f7b4d000947dcf86232c51cf147" category="sidebar">全SAN阵列软件配置</block>
   <block id="587c9aa3c6003c9a9fa1fc9c2ceb2eaa" category="sidebar">SAN 管理</block>
-  <block id="3b878279a04dc47d60932cb294d96259" category="sidebar">概述</block>
   <block id="1a0d3890b0eb9dc0c7e3f33e1b9f1865" category="sidebar">NVMeoF RHEL</block>
   <block id="38022ef96e4c7edb41b89fa3a008c3f6" category="inline-link-macro">Windows Host Utility Kit 7.1</block>
   <block id="0165fb41a35ddb937948f77394256403" category="inline-link-macro">SAN主机Windows文档</block>
@@ -917,7 +916,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="fd4b7aa4410ba62613ac655e982dfa85" category="cell">如果在SnapMirror活动同步配置中的隔离主集群上发生自动计划外故障转移(AUFO)事件、则会发生此问题描述。在 HP-UX 主机上恢复 I/O 可能需要 120 秒以上的时间，但这可能不会发生原因任何 I/O 中断或错误消息。此问题描述会导致双事件故障，因为主集群和二级集群之间的连接断开，并且主集群和调解器之间的连接也断开。与其他 AINFO 事件不同，此事件被视为罕见事件。</block>
   <block id="e0838e6ee58912186f2b21f886daa80d" category="image-alt">具有主动/优化路径的ONTAP LUN的屏幕截图</block>
   <block id="d485a78eda6522675d5ac87291b0f93b" category="image-alt">包含两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的屏幕截图</block>
-  <block id="c562be7af2a3a19ec7e17ebb8a3eeb49" category="paragraph">您可以将某些SAN主机配置为使用ONTAP作为目标的FCP或iSCSI。首先安装相关的操作系统主机实用程序软件包、其中包括SAN工具包。然后、验证NetApp ONTAP LUN的多路径设置。</block>
   <block id="efc0d0203167a4accd82de64fa1b2a96" category="paragraph">您可以在运行ESXi 7.x和ONTAP 的启动程序主机上将基于网络结构的NVMe (NVMe-oF)配置为目标。</block>
   <block id="0815968d94c1d10c54227de24659397e" category="example-title">显示示例输出</block>
   <block id="6015ee0c3c4dbc37f534783a65239e72" category="example-title">显示示例</block>
@@ -1838,12 +1836,9 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="c66e8f141f367b0a5a1d201cc49ccc72" category="paragraph">ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加<block ref="0de495b1d3c13e53ae08556231d825b9" prefix=" " category="inline-code"></block>的价值<block ref="63a7cb7a86eb0c84641936943496afaf" prefix=" " category="inline-code"></block>参数从默认值 64 更改为 256。</block>
   <block id="cfa5b6e557299c1ae7c635f08785f365" category="paragraph">Red Hat Enterpirse Linux (RHEL) 主机支持具有非对称命名空间访问 (ANA) 的 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP) 协议。  ANA 提供与 iSCSI 和 FCP 环境中的非对称逻辑单元访问 (ALUA) 等效的多路径功能。</block>
   <block id="e8584093909cb01d1e4390beaad82a5f" category="paragraph">这<block ref="0578ea8f8272d56d0053a8f2cddaf7f4" prefix=" " category="inline-code"></block>和<block ref="fbbb90e94554669f250473b3b15ddd4e" prefix=" " category="inline-code"></block>NVMe/FC 中包含的启动服务<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>系统启动时，软件包会自动启用。</block>
-  <block id="be1e5922c13f8cd92deb77a78a07375f" category="paragraph">您可以配置受支持的 SAN 主机以使用 NVMe over Fabrics (NVMe-oF) 协议并以ONTAP作为存储目标。 NVMe-oF包括光纤通道上的NVMe（NVMe/FC）和TCP上的NVMe（NVMe/TCP）。根据您的主机操作系统和ONTAP版本，您可以在主机上配置和验证 NVMe/FC 或 NVMe/TCP 协议，或两者。</block>
   <block id="b0e0bd8207ba62457f58c3e06f3f7bec" category="section-title">ONTAP支持和功能</block>
   <block id="3b2a75ebc087c7f3c4fa9ac0e2a92ebe" category="cell">ONTAP 版本</block>
   <block id="d66d64f553dfd862f68036b9e5fcaaa1" category="admonition">有关受支持配置的详细信息，请参阅<block ref="303ffee46fa5d607063d9b04cfb6d8cb" category="inline-link-macro-rx"></block>。</block>
-  <block id="a711f567596d88e746e95770f343d065" category="inline-link-macro">NetApp知识库：了解 NVMe-oF</block>
-  <block id="b225a8d62c5126b34eef960debf4a7d2" category="list-text"><block ref="3ca35c6105331fc07b327260aeca73b4" category="inline-link-macro-rx"></block> 。</block>
   <block id="7b38cd7357c50824c462a690ab2c7e64" category="paragraph">RHEL 内核版本示例：</block>
   <block id="7ca0b86a69f6feef87cf7c24a1422e47" category="admonition">如果<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串不匹配，请使用<block ref="f7aa1d6bd51ada390168cd39c4c09b91" prefix=" " category="inline-code"></block>命令来更新<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>相应ONTAP存储系统子系统上的字符串以匹配<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>字符串来自<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block>在主机上。</block>
   <block id="0846f796a67ab827e48866ee9d867e7e" category="section-title">步骤 3：配置 NVMe/FC 和 NVMe/TCP</block>
@@ -1866,7 +1861,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="0fe3920489a515504bc99fd4bc2a0cfa" category="paragraph">下面的例子展示了<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>价值：</block>
   <block id="bdd85bb9fb61697998b63578c3818344" category="paragraph">NVMe/TCP协议不支持自动连接操作。您必须手动执行 NVMe/TCP 连接或连接所有操作才能发现 NVMe/TCP 子系统和命名空间。</block>
   <block id="3832446aa2ef6619ecfdb886641a60fe" category="list-text">验证其他 NVMe/TCP 启动器-目标 LIF 组合是否可以成功获取发现日志页面数据：</block>
-  <block id="0adc0ccfa62ac1a4fb645ca5d3f148ff" category="sidebar">了解如何配置 NVMe-oF 主机</block>
   <block id="1c79280a42a5cd3a48fa9fefe62fd0a5" category="summary">配置 Citrix Xenserver 8.4 以实现多路径，并使用特定参数和设置来针对ONTAP存储的 FCP 和 iSCSI 协议操作。</block>
   <block id="e3570aecc41d92af1fdf504fc5bd3927" category="paragraph">Linux Host Utilities 软件包不支持 Citrix Xenserver 操作系统。</block>
   <block id="405ee507e1b0e20ba609f39dc449664e" category="paragraph">您可以使用 Citrix Xenserver 8.4 的多路径来管理ONTAP LUN。</block>
@@ -2496,4 +2490,19 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="895369022e2ee0b381f97a38ee89b758" category="admonition">AIX 要求在启用 MPIO 之前，SAN 启动磁盘只能看到一条路径。安装或迁移 AIX 启动磁盘通常需要临时限制主机的 FC 分区，使其仅包含单个 FC 启动器和单个 FC 目标。安装主机实用程序（包括 PCM 软件包）后，您可以重新启动操作系统以完全启用 MPIO。此时，将额外的 FC 启动器和 FC 目标添加到区域。然后，运行<block ref="cec798dce2562ead48807f1d57e501c6" prefix=" " category="inline-code"></block> 和<block ref="a693727332d96028bddba10ff4667b0a" prefix=" " category="inline-code"></block> 以更新启动配置，使其包含所有可用路径。</block>
   <block id="d475935aee712cb287d615a6e4a26bc1" category="paragraph">以下示例显示了<block ref="d7deb22e6166f8cce87002f8f100fbe6" prefix=" " category="inline-code"></block>程序包版本：</block>
   <block id="a31e7639425bf11c737e817792079192" category="admonition">从 ONTAP 9.16.1 开始，NVMe/FV 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径。</block>
+  <block id="4de30eb95ca1be58be49ba22cf5473b6" category="paragraph">您可以将支持的 SAN 主机配置为使用 NVMe over Fabrics (NVMe-oF) 协议，并将 ONTAP 作为存储目标。NVMe-oF 包括 NVMe over Fibre Channel (NVMe/FC) 和 NVMe over TCP (NVMe/TCP)。根据主机操作系统 (OS) 和 ONTAP 版本，您可以在主机操作系统上配置和验证 NVMe/FC 或 NVMe/TCP 协议，或同时配置和验证两者。</block>
+  <block id="7f62b6154d733a7947851f13f2d6bd38" category="inline-link">了解 NVMe 配置</block>
+  <block id="e3dfc2e9bc6b78cf280e7b9a8c0a2c82" category="list-text"><block ref="e3dfc2e9bc6b78cf280e7b9a8c0a2c82" category="inline-link-rx"></block></block>
+  <block id="67427880ab2eb83e274fe8038d19444b" category="inline-link-macro">TR-4684：使用 NVMe-oF 实施和配置现代 SAN</block>
+  <block id="d719beeb5ec2736d269213fab9543e6d" category="list-text"><block ref="d719beeb5ec2736d269213fab9543e6d" category="inline-link-macro-rx"></block></block>
+  <block id="62346842706e07b5f8a495f9d5a29786" category="doc">了解如何使用 FCP 和 iSCSI 配置 ONTAP SAN 主机</block>
+  <block id="652d4e06f41967c8271b197844a17b43" category="paragraph">您可以将 ONTAP 作为目标，为 FCP 和 iSCSI 配置某些 SAN 主机操作系统 (OS)。如果您的主机操作系统受 SAN Host Utilities 软件支持，则首先安装相关的 OS 主机实用程序包，其中包括 SAN 工具包。然后，对于所有主机操作系统类型，您可以为 ONTAP LUN 配置多路径设置。</block>
+  <block id="e5c3ef473ca597687810ac04980dbc09" category="inline-link-macro">了解有关管理 FC 协议的信息</block>
+  <block id="adccc3872d204f20472ffd2b8d48d724" category="list-text"><block ref="adccc3872d204f20472ffd2b8d48d724" category="inline-link-macro-rx"></block></block>
+  <block id="0a54a0e6c910bafcbccdb383956c319e" category="inline-link-macro">了解有关管理 iSCSI 协议的信息</block>
+  <block id="04e625d95c878abcd1f2dbf6d04098c7" category="list-text"><block ref="04e625d95c878abcd1f2dbf6d04098c7" category="inline-link-macro-rx"></block></block>
+  <block id="0c9b400a67ecf2fde04784839ca8b593" category="inline-link">了解有关配置 SAN 存储的信息</block>
+  <block id="6b9dd1af850387c3bbb1a8645b455f48" category="list-text"><block ref="6b9dd1af850387c3bbb1a8645b455f48" category="inline-link-rx"></block></block>
+  <block id="5ea4a4d083b9b7faa4d73ebd6193eec3" category="sidebar">了解如何使用 FCP 和 iSCSI 配置主机</block>
+  <block id="46fa0acef0abce2c8d85781039d9ca0e" category="sidebar">了解如何使用 NVMe-oF 配置主机</block>
 </blocks>
