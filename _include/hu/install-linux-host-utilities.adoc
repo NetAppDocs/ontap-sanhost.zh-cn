@@ -4,6 +4,7 @@
 
 
 
+[[step-2-install-the-linux-host-utilities]]
 == 第2步：安装Linux Host Utilities
 
 NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。

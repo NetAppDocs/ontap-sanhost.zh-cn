@@ -20,6 +20,7 @@ summary: 介绍如何将 Linux 主机实用程序与ONTAP存储配合使用
 
 
 
+[[list-all-host-initiators-mapped-to-host]]
 == 列出映射到主机的所有主机启动程序
 
 您可以检索映射到主机的所有主机启动程序的列表。
@@ -70,6 +71,7 @@ OS device name:    /sys/class/scsi_host/host16
 ====
 
 
+[[list-all-luns-mapped-to-host]]
 == 列出映射到主机的所有 LUN
 
 您可以检索映射到主机的所有LUN的列表。
@@ -110,6 +112,7 @@ active      up        secondary  sdan   16:0:6:0     lif_28      66:112
 ====
 
 
+[[list-all-luns-mapped-to-host-from-a-given-svm]]
 == 列出从给定 SVM 映射到主机的所有 LUN
 
 您可以从特定Storage VM (SVM)检索映射到主机的所有LUN的列表。
@@ -150,6 +153,7 @@ active      up        secondary  sdfl    16:0:6:0     lif_16g_4       130:112
 ====
 
 
+[[list-all-attributes-of-a-given-lun-mapped-to-host]]
 == 列出映射到主机的给定 LUN 的所有属性
 
 您可以检索映射到主机的指定LUN的所有属性的列表。
@@ -190,6 +194,7 @@ active      up        secondary  sdfl    16:0:6:0     lif_16g_4         130:112
 ====
 
 
+[[list-the-ontap-svm-identity-from-which-a-given-lun-is-mapped-to-host]]
 == 列出将给定 LUN 映射到主机的 ONTAP SVM 标识
 
 您可以检索特定ONTAP映射到历史记录的LUN SVM标识的列表。
@@ -221,6 +226,7 @@ vs_sanboot                    /vol/sanboot_169/lun           /dev/sdfm       hos
 ====
 
 
+[[list-ontap-lun-attributes-by-host-device-filename]]
 == 按主机设备文件名列出ONTAP LUN属性
 
 您可以按主机设备文件名检索ONTAP LUN属性列表。
@@ -243,6 +249,7 @@ vs_sanboot                 /vol/sanboot_169/lun    /dev/sdce     host15     FCP 
 ====
 
 
+[[list-all-svm-target-lif-wwpns-attached-to-host]]
 == 列出连接到主机的所有 SVM 目标 LIF WWPN
 
 您可以检索连接到主机的所有SVM目标LIF WWPN的列表。
@@ -267,6 +274,7 @@ vs_169_16gEmu                 202cd039ea1308e5   /vol/VOL_8g_169_2_5/lun        
 ====
 
 
+[[list-ontap-luns-seen-on-host-by-a-given-svm-target-lif-wwpn]]
 == 列出给定 SVM 目标 LIF WWPN 在主机上看到的 ONTAP LUN
 
 您可以检索指定SVM目标LIF WWPN在主机上发现的ONTAP LUN的列表。

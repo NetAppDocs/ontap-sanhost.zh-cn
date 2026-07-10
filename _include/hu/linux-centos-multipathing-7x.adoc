@@ -30,6 +30,7 @@ chkconfig multipathd on
 .显示参数设置
 [%collapsible]
 ====
+[[multipath-parameter-settings]]
 [cols="2"]
 |===
 | 参数 | 正在设置 ... 

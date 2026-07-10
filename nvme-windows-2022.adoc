@@ -40,6 +40,7 @@ NOTE: Broadcom为Windows NVMe/FC提供了一个外部驱动程序、该驱动程
 
 
 
+[[enable-nvmefc]]
 == 启用 NVMe/FC
 
 在Windows启动程序主机上启用FC/NVMe。
@@ -57,6 +58,7 @@ NOTE: Broadcom为Windows NVMe/FC提供了一个外部驱动程序、该驱动程
 
 
 
+[[configure-the-broadcom-fc-adapter]]
 == 配置Broadcom FC适配器
 
 Broadcom启动程序可通过相同的32 G FC适配器端口同时提供NVMe/FC和FCP流量。对于FCP和FC/NVMe、应使用Microsft设备专用模块(DSM)作为Microsoft多路径I/O (MPIO)选项。
@@ -69,6 +71,7 @@ nqn.2017-01.com.broadcom:ecd:nvmf:fc:100000109b1b9766
 ....
 
 
+[[enable-mpio-for-nvme-devices]]
 === 为NVMe设备启用MPIO
 
 要在Windows主机上完成NVMe配置、您需要为NVMe设备启用MPIO。
@@ -105,6 +108,7 @@ HKLM\SYSTEM\CurrentControlSet\Services\mpio \Parameters\ UseCustomPathRecoveryIn
 
 
 
+[[validate-nvmefc]]
 == 验证 NVMe/FC
 
 确认已发现NVMe子系统、并且ONTAP命名卷对于NVMe-oF配置正确无误。

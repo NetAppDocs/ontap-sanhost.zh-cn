@@ -30,6 +30,7 @@ NVMe-oF 与 Oracle Linux 8.x 存在以下已知限制：
 
 
 
+[[step-1-install-oracle-linux-and-nvme-software-and-verify-your-configuration]]
 == 步骤 1：安装 Oracle Linux 和 NVMe 软件并验证您的配置
 
 使用以下步骤验证支持的最低 Oracle Linux 8.x 软件版本。
@@ -138,6 +139,7 @@ systemctl restart multipathd
 
 
 
+[[step-2-configure-nvmefc-and-nvmetcp]]
 == 步骤 2：配置 NVMe/FC 和 NVMe/TCP
 
 使用 Broadcom/Emulex 或 Marvell/QLogic 适配器配置 NVMe/FC，或使用手动发现和连接操作配置 NVMe/TCP。
@@ -451,6 +453,7 @@ NetApp建议设置 `ctrl-loss-tmo option`到 `-1`这样，当路径丢失时，N
 ====
 
 
+[[step-3-optionally-enable-1mb-io-for-nvmefc]]
 == 步骤 3：可选，启用 NVMe/FC 的 1MB I/O。
 
 ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
@@ -484,6 +487,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
+[[step-4-verify-the-multipathing-configuration]]
 == 步骤 4：验证多路径配置
 
 验证内核NVMe多路径状态、ANA状态和ONTAP命名空间是否适用于NVMe-oF配置。
@@ -670,6 +674,7 @@ nvme netapp ontapdevices -o json
 
 
 
+[[step-5-optionally-enable-1mb-io-size]]
 == 步骤 5：可选，启用 1MB I/O 大小
 
 ONTAP在识别控制器数据中报告最大数据传输大小 (MDTS) 为 8。这意味着最大 I/O 请求大小可达 1MB。要向 Broadcom NVMe/FC 主机发出 1MB 大小的 I/O 请求，您应该增加 `lpfc`的价值 `lpfc_sg_seg_cnt`参数从默认值 64 更改为 256。
@@ -703,6 +708,7 @@ cat /sys/module/lpfc/parameters/lpfc_sg_seg_cnt
 
 
 
+[[step-6-review-the-known-issues]]
 == 第6步：查看已知问题
 
 这些是已知问题：

@@ -27,6 +27,7 @@ Linux Host Utilities 软件包不支持 Ubuntu 操作系统。
 ====
 
 
+[[step-1-optionally-enable-san-booting]]
 == 第1步：(可选)启用SAN启动
 
 您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
@@ -45,6 +46,7 @@ Linux Host Utilities 软件包不支持 Ubuntu 操作系统。
 
 
 
+[[step-2-confirm-the-multipath-configuration-for-your-host]]
 == 步骤 2：确认主机的多路径配置
 
 您可以使用 Ubuntu 20.04 的多路径来管理ONTAP LUN。
@@ -77,6 +79,7 @@ systemctl start multipathd
 .显示参数设置
 [%collapsible]
 ====
+[[multipath-parameter-settings]]
 [cols="2"]
 |===
 | 参数 | 正在设置 ... 
@@ -199,6 +202,7 @@ size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp
 
 
 
+[[step-3-confirm-the-iscsi-configuration-for-your-host]]
 == 步骤 3：确认主机的 iSCSI 配置
 
 请确保为主机正确配置 iSCSI。
@@ -336,6 +340,7 @@ tcp: [4] 192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624
 
 
 
+[[step-4-optionally-exclude-a-device-from-multipathing]]
 == 第4步：(可选)从多路径中排除设备
 
 如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
@@ -368,6 +373,7 @@ blacklist {
 
 
 
+[[step-5-customize-multipath-parameters-for-ontap-luns]]
 == 第5步：自定义ONTAP LUN的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
@@ -401,12 +407,14 @@ devices {
 ====
 
 
+[[step-6-review-the-known-issues]]
 == 第6步：查看已知问题
 
 没有已知问题。
 
 
 
+[[whats-next]]
 == 下一步是什么？
 
 * 了解 Ubuntu Linux 虚拟化 (KVM)

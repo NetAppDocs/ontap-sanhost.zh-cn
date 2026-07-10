@@ -26,6 +26,7 @@ FCP 和 iSCSI 与 Proxmox VE 9.x 存在以下已知限制：
 
 
 
+[[step-1-confirm-the-multipath-configuration-for-your-host]]
 == 步骤 1：确认主机的多路径配置
 
 您可以使用 Proxmox VE 9.x 的多路径功能来管理ONTAP LUN。
@@ -58,6 +59,7 @@ systemctl start multipathd
 .显示参数设置
 [%collapsible]
 ====
+[[multipath-parameter-settings]]
 [cols="2"]
 |===
 | 参数 | 正在设置 ... 
@@ -204,6 +206,7 @@ multipath -ll
 
 
 
+[[step-2-confirm-the-iscsi-configuration-for-your-host]]
 == 步骤 2：确认主机的 iSCSI 配置
 
 请确保为主机正确配置 iSCSI。
@@ -346,6 +349,7 @@ tcp: [4] 192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624
 
 
 
+[[step-3-optionally-exclude-a-device-from-multipathing]]
 == 步骤 3：（可选）从多路径中排除设备
 
 如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
@@ -378,6 +382,7 @@ blacklist {
 
 
 
+[[step-4-customize-multipath-parameters-for-ontap-luns]]
 == 步骤 4：自定义ONTAP LUN 的多路径参数
 
 如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
@@ -411,6 +416,7 @@ devices {
 ====
 
 
+[[step-5-review-the-known-issues]]
 == 步骤 5：查看已知问题
 
 没有已知问题。

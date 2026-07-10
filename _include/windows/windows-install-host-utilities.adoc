@@ -4,6 +4,7 @@
 
 
 
+[[step-3-install-the-windows-host-utilities]]
 == 步骤 3：安装 Windows 主机实用程序
 
 安装程序安装 Windows Host Utilities 包并设置 Windows 注册表和 HBA 设置。

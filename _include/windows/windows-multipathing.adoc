@@ -4,6 +4,7 @@
 
 
 
+[[step-4-confirm-the-multipath-configuration-for-your-host]]
 == 步骤 4：确认主机的多路径配置
 
 如果您的 Windows 主机有多个到存储系统的路径，请安装 Microsoft Multipath I/O (MPIO) 软件并启用多路径。

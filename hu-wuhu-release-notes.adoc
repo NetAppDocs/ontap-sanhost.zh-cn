@@ -22,24 +22,28 @@ summary: Windows Host Utilities 发行说明
 
 
 
+[[whats-new-in-windows-host-utilities-8-0]]
 == Windows Host Utilities 8.0 中的新功能
 
 Windows Host Utilities 8.0 包含针对 NVMe/FC 驱动程序的附加参数设置。当您安装 Windows Host Utilities 8.0 时，这些参数会自动加载。
 
 
 
+[[whats-new-in-windows-host-utilities-7-2]]
 == Windows Host Utilities 7.2 中的新功能
 
 Windows Host Utilities 7.2支持NVMe/FC驱动程序参数设置、并为新供应商卡提供了错误修复。
 
 
 
+[[whats-new-in-windows-host-utilities-7-1]]
 == Windows Host Utilities 7.1 中的新功能
 
 Windows Host Utilities 7.1 包括对 E 系列存储系统、 ONTAP 9 软件和增强型 iSCSI 超时的支持，以实现更快的故障转移。
 
 
 
+[[known-issues-and-limitations]]
 == 已知问题和限制
 
 您应该注意以下已知问题和限制，它们可能会影响特定主机的性能。
@@ -55,6 +59,7 @@ link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^]
 
 
 
+[[whats-next]]
 == 下一步
 
 link:hu-wuhu-80.html["了解如何安装 Windows Host Utilities"]

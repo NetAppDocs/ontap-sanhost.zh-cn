@@ -4,6 +4,7 @@
 
 
 
+[[step-2-install-the-solaris-host-utilities]]
 == 步骤 2：安装 Solaris 主机实用程序
 
 NetApp强烈建议安装 Solaris Host Utilities 来支持ONTAP LUN 管理并协助技术支持收集配置数据。

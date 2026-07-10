@@ -20,6 +20,7 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 
 
+[[supportability]]
 == 可支持性
 
 * 从ONTAP 9.7开始、VMware vSphere版本增加了对基于光纤通道的NVMe (NVMe/FC)的支持。
@@ -29,6 +30,7 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 
 
+[[features]]
 == 功能
 
 * ESXi 启动程序主机可以通过相同的适配器端口同时运行 NVMe/FC 和 FCP 流量。有关支持的FC适配器和控制器的列表、请参见 link:https://hwu.netapp.com/Home/Index["Hardware Universe"^] 。有关最新的受支持配置和版本列表、请参见link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
@@ -38,6 +40,7 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 
 
+[[known-limitations]]
 == 已知限制
 
 不支持以下配置：
@@ -48,6 +51,7 @@ summary: 介绍如何使用 ONTAP 为 ESXi 7.x 配置 NVMe-oF
 
 
 
+[[enable-nvmefc]]
 == 启用 NVMe/FC
 
 . 检查 ESXi 主机 NQN 字符串，并验证它是否与 ONTAP 阵列上相应子系统的主机 NQN 字符串匹配：
@@ -66,6 +70,7 @@ Host NQN: nqn.2014-08.com.vmware:nvme:nvme-esx
 
 
 
+[[configure-broadcomemulex]]
 === 配置 Broadcom/Emulex
 
 . 请参阅检查所需驱动程序/固件是否支持此配置link:https://mysupport.netapp.com/matrix/["互操作性表工具"^]。
@@ -95,6 +100,7 @@ vmhba65   lpfc     link-up     fc.200000109b954570:100000109b954570             
 ----
 
 
+[[configure-marvellqlogic]]
 === 配置 Marvell/QLogic
 
 .步骤
@@ -129,6 +135,7 @@ vmhba65   qlnativefc  link-up     fc.20000024ff1817af:21000024ff1817af          
 
 
 
+[[validate-nvmefc]]
 == 验证 NVMe/FC
 
 . 验证 NVMe/FC 适配器是否列在 ESXi 主机上：
@@ -207,12 +214,14 @@ fc.200034800d6d7268:210034800d6d7268-fc.201700a098dfe3d1:201900a098dfe3d1-uuid.5
 
 
 
+[[configure-nvmetcp]]
 == 配置 NVMe/TCP
 
 从7.0U3c开始、默认情况下会加载所需的NVMe/TCP模块。有关配置网络和NVMe/TCP适配器的信息、请参见VMware vSphere文档。
 
 
 
+[[validate-nvmetcp]]
 == 验证NVMe/TCP
 
 .步骤
@@ -269,6 +278,7 @@ tcp.vmnic3:34:80:Od:30:ca:el-tcp.unknown-uuid.400bf333abf74ab8b96dc18ffadc3f99
 
 
 
+[[known-issues]]
 == 已知问题
 
 使用ONTAP的ESXi 7.x的NVMe-oF主机配置存在以下已知问题：

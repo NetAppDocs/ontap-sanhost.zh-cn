@@ -36,6 +36,7 @@ NOTE: SAN Toolkit 适用于所有 AIX 主机配置和传输协议。因此，并
 
 
 
+[[whats-next]]
 == 下一步是什么？
 
 link:hu-aix-command-reference.html["了解如何使用 AIX Host Utilities 工具"] 。
