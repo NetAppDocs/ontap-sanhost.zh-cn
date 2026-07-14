@@ -591,12 +591,12 @@ nvme-subsys0 - NQN=nqn.1992-08.com.netapp:sn.9b7d42b764ff11efb8fed039eabac370:su
 ----
 =====
 --
-.. 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
-
-
 ====
-
-
+. 验证NetApp插件是否为每个ONTAP 命名空间设备显示正确的值：
++
+[role="tabbed-block"]
+====
+.列
 --
 [source, cli]
 ----
@@ -604,14 +604,14 @@ nvme netapp ontapdevices -o column
 ----
 .显示示例输出
 [%collapsible]
-====
+=====
 [listing]
 ----
 Device        Vserver        Namespace Path          NSID UUID                                   Size
 ------------- -------------  ----------------------- ---- -------------------------------------- ---------
 /dev/nvme0n1   vs_211_tcp    /vol/tcpvol1/ns1        1    1cc7bc78-8d7b-4d8e-a3c4-750f9461a6e9   21.47GB
 ----
-====
+=====
 --
 .JSON
 --
@@ -621,7 +621,7 @@ nvme netapp ontapdevices -o json
 ----
 .显示示例输出
 [%collapsible]
-====
+=====
 [listing]
 ----
 {
@@ -641,12 +641,14 @@ nvme netapp ontapdevices -o json
 }
 
 ----
-====
+=====
 --
-[]
 ====
+
+
+
+
+[[step-5-review-the-known-issues]]
 == 步骤 5：查看已知问题
 
 使用ONTAP版本的Ubuntu 24.04的NVMe-oF主机配置没有已知问题。
-
-====
