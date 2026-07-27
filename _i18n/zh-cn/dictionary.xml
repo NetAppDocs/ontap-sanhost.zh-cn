@@ -1277,7 +1277,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="a8037bee31f3b32217fc0d5b84621e5e" category="section-title">第9步：查看已知问题</block>
   <block id="63da114c28add40c319de84e3a92a8ed" category="sidebar">RHEL-10-FCP</block>
   <block id="deeefe26777fb24a155fd5e2eac9f23b" category="paragraph">以下示例显示了 nvme-cli 软件包版本：</block>
-  <block id="c90e2c8eff8de67c2e01d748085394db" category="list-text">验证<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件存在。如果此文件不存在、请创建一个空的零字节文件：</block>
   <block id="0825e58b251b6f1e1956c9f982c69b3d" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Hypervisor 8.2</block>
   <block id="3e2e1ae5727d07e3ee9163e73df8e73f" category="paragraph">您可以使用 Citrix Hypervisor 8.2 的多路径来管理 ONTAP LUN。</block>
   <block id="6d9eef6a4c2617ee0a8dfdc9ae7a468a" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 8.4</block>
@@ -2505,4 +2504,14 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="9d32a296d3ce5f696e1fdfdc2b0f8b87" category="paragraph">Linux 主机实用程序可帮助您管理连接到 Linux 主机的 ONTAP 存储。NetApp 强烈建议安装 Linux 主机实用程序，但这不是强制性的。Linux 主机实用程序可改善管理，并协助 NetApp 客户支持收集有关您的配置的信息。</block>
   <block id="83e24aa706fccba3ff4d736e0e31bf85" category="paragraph">安装 Linux Host Utilities 时，它不会更改主机上的任何设置或行为。</block>
   <block id="80fd4adc269a85ce0df8e3b446ebf481" category="admonition">Linux Host Utilities 对 libHBAAPI.so 库具有安装依赖关系。即使主机仅用于 iSCSI 配置，您也需要安装上面列出的软件包之一。或者，您可以使用操作系统级别的工具进行 LUN 和路径管理。</block>
+  <block id="89cc2e448bfab3f72775bf63ba95f6b8" category="list-text">找到<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件。</block>
+  <block id="513d74565406362adb850ab938385fc9" category="paragraph">如果引用<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件没有 NetApp 设备特定的配置参数，请使用以下自定义<block ref="0b8ece90a839a9e06f383ca447a43d0a" prefix=" " category="inline-code"></block>文件添加这些参数。您可以在以下位置找到此文件<block ref="71fe0386f98c519539991005b0431114" prefix=" " category="inline-code"></block>：</block>
+  <block id="80dd859408a5d6f4e1fea887232fcb9c" category="admonition">请勿对<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件进行更改，因为文件内容可能会在系统更新期间被覆盖。</block>
+  <block id="c5e54d2baa8f8726a2bbb9cdb54d7b44" category="example-title">显示文件内容</block>
+  <block id="f4aa89dafa47fb5f4397eee1e0199259" category="list-text">首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：</block>
+  <block id="fe5d74c01808272a8ae4f42e470a8f41" category="list-text">每次启动主机时，该<block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block>文件都会自动加载 NetApp 建议的主机多路径参数作为默认设置。</block>
+  <block id="4910f42f8999e3188ed5ea407ad26bb1" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改<block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block>文件中专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
+  <block id="8757940486b32d54f9db8c7c7fbdf152" category="paragraph">以下示例显示了如何纠正被覆盖的默认值。在此示例中，<block ref="5a59351c0331c505f5bdd7a46cf5ccfa" prefix=" " category="inline-code"></block> 文件定义了与 ONTAP LUN 不兼容的 <block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和 <block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 的值，并且由于 ONTAP 存储阵列仍连接到主机，因此您无法删除这些参数。相反，您可以通过向 <block ref="5a59351c0331c505f5bdd7a46cf5ccfa" prefix=" " category="inline-code"></block> 文件中添加专门适用于 ONTAP LUN 的 device 节来纠正 <block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和 <block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 的值。</block>
+  <block id="f6f07e5c0717a6396faf7acd7ecc939f" category="paragraph">如果需要，您可以将不需要的设备的 WWID 添加到 <block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block> 文件的"blacklist"节中，从而将设备排除在多路径之外。</block>
+  <block id="1914277d8e1f7ba7385caa315a500eb5" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
 </blocks>

@@ -5,13 +5,59 @@
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 
 .步骤
-. 验证 `/etc/multipath.conf`文件存在。如果此文件不存在、请创建一个空的零字节文件：
+. 找到 `/etc/multipath.conf`文件。
 +
+如果引用 `/etc/multipath.conf`文件没有 NetApp 设备特定的配置参数，请使用以下自定义 `.conf drop-in`文件添加这些参数。您可以在以下位置找到此文件 `/etc/multipath/conf.d/`：
+
++
+
+NOTE: 请勿对 `/etc/multipath.conf`文件进行更改，因为文件内容可能会在系统更新期间被覆盖。
+
++
+.显示文件内容
+[%collapsible]
+====
 [source, cli]
 ----
-touch /etc/multipath.conf
+$sudo tee -a /etc/multipath/conf.d/custom.conf >/dev/null <<'EOF'
+
+defaults {
+    polling_interval 5
+}
+
+blacklist {
+    wwid <Insert_LUN_wwid_string>
+    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+    devnode "^hd[a-z]"
+    devnode "^cciss.*"
+}
+
+devices {
+    device {
+    vendor "NETAPP"
+    product "LUN.*"
+    user_friendly_names no
+    path_checker "tur"
+    prio "ontap"
+    detect_prio yes
+    path_grouping_policy "group_by_prio"
+    path_selector "service-time 0"
+    failback immediate
+    fast_io_fail_tmo 5
+    dev_loss_tmo infinity
+    no_path_retry queue
+    features "3 queue_if_no_path pg_init_retries 50"
+    flush_on_last_del yes
+    hardware_handler "0"
+    retain_attached_hw_handler yes
+    rr_weight uniform
+  }
+}
+
+EOF
 ----
-. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
+====
+. 首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：
 +
 [source, cli]
 ----
@@ -22,7 +68,7 @@ systemctl enable multipathd
 ----
 systemctl start multipathd
 ----
-. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为主机操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
+. 每次启动主机时，该 `/etc/multipath/conf.d/custom.conf`文件都会自动加载 NetApp 建议的主机多路径参数作为默认设置。
 +
 下表显示了Linux操作系统为ONTAP LUN编译的本机多路径参数设置。
 
@@ -94,7 +140,7 @@ systemctl start multipathd
 +
 [source, cli]
 ----
-/sbin/mpathutil list
+/sbin/mpathutil status
 ----
 +
 默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。

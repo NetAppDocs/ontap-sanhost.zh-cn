@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改 `/etc/multipath/conf.d/custom.conf`文件中专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。
+
+
+CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
+
+以下示例显示了如何纠正被覆盖的默认值。在此示例中， `custom.conf drop-in` 文件定义了与 ONTAP LUN 不兼容的  `path_checker` 和  `no_path_retry` 的值，并且由于 ONTAP 存储阵列仍连接到主机，因此您无法删除这些参数。相反，您可以通过向  `custom.conf drop-in` 文件中添加专门适用于 ONTAP LUN 的 device 节来纠正  `path_checker` 和  `no_path_retry` 的值。
+
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+defaults {
+   path_checker      *readsector0*
+   no_path_retry     *fail*
+}
+
+devices {
+   device {
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
+   }
+}
+----
+====

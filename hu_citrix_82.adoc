@@ -52,13 +52,59 @@ Linux Host Utilities 软件包不支持 Citrix Hypervisor 操作系统。
 要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
 
 .步骤
-. 验证 `/etc/multipath.conf`文件存在。如果此文件不存在、请创建一个空的零字节文件：
+. 找到 `/etc/multipath.conf`文件。
 +
+如果引用 `/etc/multipath.conf`文件没有 NetApp 设备特定的配置参数，请使用以下自定义 `.conf drop-in`文件添加这些参数。您可以在以下位置找到此文件 `/etc/multipath/conf.d/`：
+
++
+
+NOTE: 请勿对 `/etc/multipath.conf`文件进行更改，因为文件内容可能会在系统更新期间被覆盖。
+
++
+.显示文件内容
+[%collapsible]
+====
 [source, cli]
 ----
-touch /etc/multipath.conf
+$sudo tee -a /etc/multipath/conf.d/custom.conf >/dev/null <<'EOF'
+
+defaults {
+    polling_interval 5
+}
+
+blacklist {
+    wwid <Insert_LUN_wwid_string>
+    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+    devnode "^hd[a-z]"
+    devnode "^cciss.*"
+}
+
+devices {
+    device {
+    vendor "NETAPP"
+    product "LUN.*"
+    user_friendly_names no
+    path_checker "tur"
+    prio "ontap"
+    detect_prio yes
+    path_grouping_policy "group_by_prio"
+    path_selector "service-time 0"
+    failback immediate
+    fast_io_fail_tmo 5
+    dev_loss_tmo infinity
+    no_path_retry queue
+    features "3 queue_if_no_path pg_init_retries 50"
+    flush_on_last_del yes
+    hardware_handler "0"
+    retain_attached_hw_handler yes
+    rr_weight uniform
+  }
+}
+
+EOF
 ----
-. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
+====
+. 首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：
 +
 [source, cli]
 ----
@@ -69,7 +115,7 @@ systemctl enable multipathd
 ----
 systemctl start multipathd
 ----
-. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为主机操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
+. 每次启动主机时，该 `/etc/multipath/conf.d/custom.conf`文件都会自动加载 NetApp 建议的主机多路径参数作为默认设置。
 +
 下表显示了Linux操作系统为ONTAP LUN编译的本机多路径参数设置。
 
@@ -141,7 +187,7 @@ systemctl start multipathd
 +
 [source, cli]
 ----
-/sbin/mpathutil list
+/sbin/mpathutil status
 ----
 +
 默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
@@ -205,7 +251,7 @@ size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_han
 [[step-3-optionally-exclude-a-device-from-multipathing]]
 == 步骤 3：（可选）从多路径中排除设备
 
-如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
+如果需要，您可以将不需要的设备的 WWID 添加到  `/etc/multipath/conf.d/custom.conf` 文件的"blacklist"节中，从而将设备排除在多路径之外。
 
 .步骤
 . 确定WWID：
@@ -225,7 +271,7 @@ size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_han
 [source, cli]
 ----
 blacklist {
-	     wwid   360030057024d0730239134810c0cb833
+        wwid   360030057024d0730239134810c0cb833
         devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
         devnode "^hd[a-z]"
         devnode "^cciss.*"
@@ -238,14 +284,12 @@ blacklist {
 [[step-4-customize-multipath-parameters-for-ontap-luns]]
 == 步骤 4：自定义ONTAP LUN 的多路径参数
 
-如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
-
-请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
+如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改 `/etc/multipath/conf.d/custom.conf`文件中专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。
 
 
 CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
 
-以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
+以下示例显示了如何纠正被覆盖的默认值。在此示例中， `custom.conf drop-in` 文件定义了与 ONTAP LUN 不兼容的  `path_checker` 和  `no_path_retry` 的值，并且由于 ONTAP 存储阵列仍连接到主机，因此您无法删除这些参数。相反，您可以通过向  `custom.conf drop-in` 文件中添加专门适用于 ONTAP LUN 的 device 节来纠正  `path_checker` 和  `no_path_retry` 的值。
 
 .显示示例
 [%collapsible]

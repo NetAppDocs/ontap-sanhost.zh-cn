@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
+如果需要，您可以将不需要的设备的 WWID 添加到  `/etc/multipath/conf.d/custom.conf` 文件的"blacklist"节中，从而将设备排除在多路径之外。
 
 .步骤
 . 确定WWID：
