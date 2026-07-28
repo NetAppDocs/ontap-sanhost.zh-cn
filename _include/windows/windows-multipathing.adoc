@@ -62,21 +62,82 @@ QLogic FC HBA的超时值：
 以下示例输出显示了ASA、 AFF或FAS配置的ONTAP LUN 的正确设置。
 
 +
+
+NOTE: 建议的 MPIO 策略为带子集的轮询。
+
++
 [role="tabbed-block"]
 ====
 .ASA配置
 --
 ASA配置应包含一组具有单一优先级的活动/优化路径。控制器负责维护路径，并在所有活动路径上发送 I/O。
 
+.显示CLI示例
+[%collapsible]
+=====
+[listing]
+----
+MPIO Disk13: 04 Paths, Round Robin with Subset, Symmetric Access
+    Controlling DSM: Microsoft DSM
+    SN: 600A09803831397A545D586E362D2F54
+    Supported Load Balance Policies: FOO RR RRWS LQD WP LB
+
+    Path ID          State              SCSI Address      Weight
+    -------------------------------------------------------------
+    0000000077060001 Active/Optimized   006|000|001|013   0
+      TPG_State : Active/Optimized  , TPG_Id: 1001, : 4
+
+    0000000077060000 Active/Optimized   006|000|000|013   0
+      TPG_State : Active/Optimized  , TPG_Id: 1000, : 2
+
+    0000000077050001 Active/Optimized   005|000|001|013   0
+      TPG_State : Active/Optimized  , TPG_Id: 1001, : 3
+
+    0000000077050000 Active/Optimized   005|000|000|013   0
+      TPG_State : Active/Optimized  , TPG_Id: 1000, : 1
+----
+=====
+.显示UI示例
+[%collapsible]
+=====
 image::asa.png[具有主动/优化路径的ONTAP LUN的屏幕截图]
 
+=====
 --
 .AFF或FAS配置
 --
 AFF或FAS配置应有两组优先级不同的路径。优先级较高的路径是活动/优化路径，由聚合所在的控制器提供服务。优先级较低的路径由不同的控制器提供服务。它们处于活动状态，但未经优化，仅在没有优化路径时使用。
 
+.显示CLI示例
+[%collapsible]
+=====
+[listing]
+----
+MPIO Disk0: 04 Paths, Round Robin with Subset, Implicit Only
+    Controlling DSM: Microsoft DSM
+    SN: 600A0980383136724D5D546931437933
+    Supported Load Balance Policies: FOO RRWS LQD WP LB
+    Path ID          State              SCSI Address      Weight
+    -------------------------------------------------------------
+    0000000077010001 Active/Optimized   001|000|001|000   0
+      TPG_State : Active/Optimized  , TPG_Id: 1000, : 2
+
+    0000000077010000 Active/Unoptimized 001|000|000|000   0
+      TPG_State : Active/Unoptimized, TPG_Id: 1001, : 4
+
+    0000000077000001 Active/Unoptimized 000|000|001|000   0
+      TPG_State : Active/Unoptimized, TPG_Id: 1001, : 3
+
+    0000000077000000 Active/Optimized   000|000|000|000   0
+      TPG_State : Active/Optimized  , TPG_Id: 1000, : 1
+----
+=====
+.显示UI示例
+[%collapsible]
+=====
 image::nonasa.png[包含两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的屏幕截图]
 
+=====
 --
 ====
 

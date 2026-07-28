@@ -2,7 +2,7 @@
 :allow-uri-read: 
 
 
-如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置 `multipath.conf`。否则、ONTAP LUN可能无法按预期运行。
+如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改现有节点或在 `multipath.conf`文件中添加专门应用于 ONTAP LUN 的新节点来更正这些设置。您需要在文件中向下滚动，查看适用于您的主机的更改。如果不更正参数，ONTAP LUN 可能无法按预期工作。
 
 请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
 

@@ -1196,7 +1196,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="cd30444b7075100f9dce64caf41ba2b7" category="doc">第2步：安装Linux Host Utilities</block>
   <block id="a9764a4b476a4ae40670f2b10ab9b4aa" category="admonition">安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。</block>
   <block id="0f8e25d5af08d115d6410aa42fa8c1e8" category="doc">第5步：自定义ONTAP LUN的多路径参数</block>
-  <block id="3fe581ad5b991799c1f61a8549c04d3a" category="paragraph">如果您的主机连接到其他供应商的LUN、并且任何多路径参数设置被覆盖、则您需要稍后在文件中添加专门适用于ONTAP LUN的zas来更正这些设置<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>。否则、ONTAP LUN可能无法按预期运行。</block>
   <block id="cd06b268016cd4adbdc3379f2f104161" category="inline-xref">多路径参数的默认设置</block>
   <block id="fb2d54d11853b77ae1f714a3ac9623d4" category="paragraph">请检查<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件，特别是默认值部分中的设置，以了解可能覆盖的设置<block ref="3e47c09a7bdcd0377df056ba2567e852" category="inline-xref-macro-rx"></block>。</block>
   <block id="950fee65be63d69982c008736e2579a4" category="admonition">您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。</block>
@@ -2508,10 +2507,13 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="513d74565406362adb850ab938385fc9" category="paragraph">如果引用<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件没有 NetApp 设备特定的配置参数，请使用以下自定义<block ref="0b8ece90a839a9e06f383ca447a43d0a" prefix=" " category="inline-code"></block>文件添加这些参数。您可以在以下位置找到此文件<block ref="71fe0386f98c519539991005b0431114" prefix=" " category="inline-code"></block>：</block>
   <block id="80dd859408a5d6f4e1fea887232fcb9c" category="admonition">请勿对<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>文件进行更改，因为文件内容可能会在系统更新期间被覆盖。</block>
   <block id="c5e54d2baa8f8726a2bbb9cdb54d7b44" category="example-title">显示文件内容</block>
-  <block id="f4aa89dafa47fb5f4397eee1e0199259" category="list-text">首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：</block>
   <block id="fe5d74c01808272a8ae4f42e470a8f41" category="list-text">每次启动主机时，该<block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block>文件都会自动加载 NetApp 建议的主机多路径参数作为默认设置。</block>
-  <block id="4910f42f8999e3188ed5ea407ad26bb1" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改<block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block>文件中专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
   <block id="8757940486b32d54f9db8c7c7fbdf152" category="paragraph">以下示例显示了如何纠正被覆盖的默认值。在此示例中，<block ref="5a59351c0331c505f5bdd7a46cf5ccfa" prefix=" " category="inline-code"></block> 文件定义了与 ONTAP LUN 不兼容的 <block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和 <block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 的值，并且由于 ONTAP 存储阵列仍连接到主机，因此您无法删除这些参数。相反，您可以通过向 <block ref="5a59351c0331c505f5bdd7a46cf5ccfa" prefix=" " category="inline-code"></block> 文件中添加专门适用于 ONTAP LUN 的 device 节来纠正 <block ref="3b07c0a70dc66d6564dcdf2f5ab1ed63" prefix=" " category="inline-code"></block> 和 <block ref="9434de34302b4f40887a7277cf35a8fc" prefix=" " category="inline-code"></block> 的值。</block>
   <block id="f6f07e5c0717a6396faf7acd7ecc939f" category="paragraph">如果需要，您可以将不需要的设备的 WWID 添加到 <block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block> 文件的"blacklist"节中，从而将设备排除在多路径之外。</block>
-  <block id="1914277d8e1f7ba7385caa315a500eb5" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加专门应用于 ONTAP LUN 的节来更正这些设置。您可以在文件中向下滚动以添加这些节。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
+  <block id="ea569ff3bb61f79534f9c5695e9f2ba5" category="list-text">首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：</block>
+  <block id="56571ab49f1dbbf252bb35616e87d98c" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改现有节点或在<block ref="75e4fe3614f22a29e01e641985631179" prefix=" " category="inline-code"></block>文件中添加专门应用于 ONTAP LUN 的新节点来更正这些设置。您需要在文件中向下滚动，查看适用于您的主机的更改。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
+  <block id="59b5348a7567441239c202a92900a372" category="paragraph">如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改现有节点或在<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block>文件中添加专门应用于 ONTAP LUN 的新节点来更正这些设置。您需要在文件中向下滚动，查看适用于您的主机的更改。如果不更正参数，ONTAP LUN 可能无法按预期工作。</block>
+  <block id="ff77ba7bf94da41f58968cd6238bef1b" category="admonition">建议的 MPIO 策略为带子集的轮询。</block>
+  <block id="93499fb92b162d002d9b600c8e5d0fc9" category="example-title">显示CLI示例</block>
+  <block id="ba15363da34b1cb74efc52c7595d9fcc" category="example-title">显示UI示例</block>
 </blocks>
