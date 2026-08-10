@@ -1,10 +1,6 @@
-= 下一步是什么？
+= 
 :allow-uri-read: 
 
 
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-aix-san-toolkit.html["了解 AIX SAN 工具包"] 。

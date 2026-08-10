@@ -1,10 +1,6 @@
-= 下一步是什么？
+= 
 :allow-uri-read: 
 
 
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-solaris-command-reference.html["了解如何使用 Solaris Host Utilities 工具"] 。

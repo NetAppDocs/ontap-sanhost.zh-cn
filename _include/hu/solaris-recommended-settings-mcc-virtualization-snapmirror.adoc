@@ -17,7 +17,7 @@
 --
 ** Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或 Oracle VM Server for SPARC）、Solaris 动态域、Solaris 区域和 Solaris 容器。这些技术也被称为“Oracle虚拟机”。
 ** 您可以一起使用多个选项，例如，特定 Solaris 逻辑域内的 Solaris 容器。
-** NetApp支持使用 Solaris 虚拟化技术，其中整体配置由 Oracle 支持，并且任何可直接访问 LUN 的分区都列在link:https://imt.netapp.com/matrix/#welcome["IMT"]在受支持的配置中。这包括根容器、LDOM I/O 域和使用 NPIV 访问 LUN 的 LDOM。
+** NetApp 支持使用 Solaris 虚拟化技术，其中 Oracle 支持整体配置，并且在受支持的配置中，可直接访问 LUN 的任何分区均列于 link:https://imt.netapp.com/matrix/#welcome["IMT"^] 中。这包括根容器、LDOM I/O 域以及使用 NPIV 访问 LUN 的 LDOM。
 ** 仅使用虚拟化存储资源的分区或虚拟机，例如 `vdsk`，不需要特定资格，因为他们无法直接访问ONTAP LUN。您只需验证对底层 LUN 具有直接访问权限的分区或虚拟机（例如 LDOM I/O 域）是否列在link:https://imt.netapp.com/matrix/#welcome["IMT"^]。
 
 

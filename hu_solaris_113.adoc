@@ -117,7 +117,7 @@ link:hu_solaris_62.html["安装 Solaris Host Utilities 6.2"] 。
 --
 ** Solaris 虚拟化选项包括 Solaris 逻辑域（也称为 LDOM 或 Oracle VM Server for SPARC）、Solaris 动态域、Solaris 区域和 Solaris 容器。这些技术也被称为“Oracle虚拟机”。
 ** 您可以一起使用多个选项，例如，特定 Solaris 逻辑域内的 Solaris 容器。
-** NetApp支持使用 Solaris 虚拟化技术，其中整体配置由 Oracle 支持，并且任何可直接访问 LUN 的分区都列在link:https://imt.netapp.com/matrix/#welcome["IMT"]在受支持的配置中。这包括根容器、LDOM I/O 域和使用 NPIV 访问 LUN 的 LDOM。
+** NetApp 支持使用 Solaris 虚拟化技术，其中 Oracle 支持整体配置，并且在受支持的配置中，可直接访问 LUN 的任何分区均列于 link:https://imt.netapp.com/matrix/#welcome["IMT"^] 中。这包括根容器、LDOM I/O 域以及使用 NPIV 访问 LUN 的 LDOM。
 ** 仅使用虚拟化存储资源的分区或虚拟机，例如 `vdsk`，不需要特定资格，因为他们无法直接访问ONTAP LUN。您只需验证对底层 LUN 具有直接访问权限的分区或虚拟机（例如 LDOM I/O 域）是否列在link:https://imt.netapp.com/matrix/#welcome["IMT"^]。
 
 
@@ -200,7 +200,7 @@ NOTE: 之后 `scsi-vhci-failover-override` 已应用、 `conf` 已添加到 `svl
 +
 [source, cli]
 ----
-pkg info entire`
+pkg info entire
 ----
 .. 验证ONTAP LUN 是否具有 `ostype`作为“Solaris”，与 LUN 大小无关：
 +
@@ -252,7 +252,7 @@ root@sparc-s7-55-148:~# sanlun lun show -pv
 +
 [source, cli]
 ----
-mpathadm show lu <LUN>`
+mpathadm show lu <LUN>
 ----
 +
 以下示例输出显示ASA、 AFF或FAS配置中ONTAP LUN 的正确路径状态。输出中每个 LUN 的“访问状态”都会显示路径优先级。
@@ -435,9 +435,5 @@ Logical Unit:  /dev/rdsk/c0t600A0980383044376C3F4E694E506E44d0s2
 
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/1368957["1368957"^] | Solaris 11.x "cfgadm -c configure"导致端到端Emulex配置出现I/O错误 | 正在运行 `cfgadm -c configure` 在Emulex上、端到端配置会导致I/O错误。此问题已在ONTAP 9.5P17、9.6P14、9.7P13和9.8P2中修复 | 不适用 
 |===
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-solaris-command-reference.html["了解如何使用 Solaris Host Utilities 工具"] 。

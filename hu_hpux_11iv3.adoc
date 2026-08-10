@@ -178,9 +178,5 @@ up       secondary  /dev/dsk/c42t4d5   fcd1    hpux_4     1
 
 | 1306354 | HP-UX LVM创建会发送块大小超过1 MB的I/O | 在 ONTAP 全 SAN 阵列中强制实施 1 MB 的 SCSI 最大传输长度。要在连接到 ONTAP 全 SAN 阵列时限制 HP-UX 主机的最大传输长度，需要将 HP-UX SCSI 子系统允许的最大 I/O 大小设置为 1 MB 。有关详细信息，请参见 HP-UX 供应商文档。 | 不适用 
 |===
-
-
-[[whats-next]]
-== 下一步
-
+.下一步
 link:hu_hpux_60_cmd.html["了解如何使用 HP-UX Host Utilities 工具"] 。

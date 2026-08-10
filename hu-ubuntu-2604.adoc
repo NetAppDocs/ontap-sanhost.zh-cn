@@ -417,11 +417,7 @@ devices {
 
 没有已知问题。
 
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 * link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
 * 了解 ASM 镜像
 +

@@ -161,9 +161,5 @@ NOTE: 要查看用于日志记录和其他功能的标准Microsoft安装程序(M
 
 --
 ====
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-wuhu-configuration.html["了解ONTAP存储的 Windows 主机实用程序配置"]

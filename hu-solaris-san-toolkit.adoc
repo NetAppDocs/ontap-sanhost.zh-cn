@@ -39,9 +39,5 @@ data_vserver                     /vol/vol3/lun4     /dev/rdsk/c0t600A09803830443
 
 NOTE: 该工具包适用于所有主机实用程序配置和协议。因此，并非所有组件都适用于每种配置。未使用的组件不会影响您的系统性能。
 
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-solaris-command-reference.html["了解如何使用 Solaris Host Utilities 工具"] 。

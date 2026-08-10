@@ -23,9 +23,9 @@ summary: '您可以在运行ESXi 8.x和ONTAP 的启动程序主机上将基于�
 [[supportability]]
 == 可支持性
 
-* 从NVMe.161开始、所有新创建的ONTAP 9命名空间都会默认启用空间分配。
-* 从ONTAP 9.9.1 P3开始、ESXi 8及更高版本支持NVMe/FC协议。
-* 从ONTAP 9.10.1开始、ONTAP 支持NVMe/TCP协议。
+* 从 ONTAP 9.16.1 开始，默认情况下，所有新创建的 NVMe 命名空间都已启用空间分配。
+* 从 ONTAP 9.9.1 P3 开始，ESXi 8 支持 NVMe/FC 协议。
+* 从 ONTAP 9.10.1 开始，ONTAP 支持 NVMe/TCP 协议。
 
 
 

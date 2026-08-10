@@ -57,9 +57,5 @@ Windows Host Utilities 7.1 包括对 E 系列存储系统、 ONTAP 9 软件和�
 |===
 link:https://mysupport.netapp.com/site/bugs-online/product["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。
 
-
-
-[[whats-next]]
-== 下一步
-
+.下一步
 link:hu-wuhu-80.html["了解如何安装 Windows Host Utilities"]

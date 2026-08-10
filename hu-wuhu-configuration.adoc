@@ -35,7 +35,7 @@ Windows 主机也需要某些 FC、NVMe/FC 和 iSCSI HBA 参数才能成功处�
 
 [NOTE]
 ====
-安装 Windows Host Utilities 7.2 后，您需要更改 LimTransferSize 参数值。看<<nvme_parameter,NVME 参数>> 。
+安装 Windows Host Utilities 7.2 后，需要更改 LimTransferSize 参数值。请参阅 <<nvme-parameter,NVME 参数>>。
 
 对于 Windows Host Utilities 8.0、7.2 或 7.1 的所有其他参数和注册表项，您无需更改值，除非技术支持建议您这样做。
 
@@ -162,7 +162,7 @@ Windows Host Utilities 8.0 在安装过程中会更新以下 NVMe Emulex 驱动�
 
 Windows 主机实用程序安装程序会根据您在安装过程中所做的选择，自动设置 Windows 注册表值以及 iSCSI 和 NVMe HBA 参数。请核对这些数值和操作系统版本。
 
-[#nvme_parameter,role="tabbed-block"]
+[#nvme-parameter,role="tabbed-block"]
 ====
 .Windows 注册表值
 --
@@ -467,7 +467,7 @@ NOTE: 根据程序的不同，参数名称可能会略有不同。例如，在 Q
 在排查 HBA 问题时，请检查这些设置是否具有正确的值。正确值取决于两个因素：
 
 * HBA 供应商
-* 是否正在使用 MPIO 软件。
+* 是否使用MPIO软件
 
 
 您可以通过以下方式更正 HBA 设置link:hu_wuhu_repair_remove.html["运行修复选项"]在 Windows Host Utilities 安装程序中。

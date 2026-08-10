@@ -226,9 +226,5 @@ image::nonasa.png[包含两个主动/优化路径和两个主动/非优化路径
 
 没有已知问题。
 
-
-
-[[whats-next]]
-== 下一步是什么？
-
+.下一步
 link:hu-wuhu-configuration.html["了解ONTAP存储的 Windows 主机实用程序配置"]

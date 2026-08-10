@@ -47,15 +47,11 @@ Solaris Host Utilities 发行说明介绍了与使用ONTAP存储系统配置和�
 | link:https://mysupport.netapp.com/site/bugs-online/product/HOSTUTILITIES/BURT/1385189["1385189"^] | Solaris 11.4 | HUK 6.2中需要更改Solaris 11.4 FC驱动程序绑定 | Solaris 11.4和HUK建议：
 FC驱动程序绑定已从更改为 `ssd(4D)` to `sd(4D)`。移动中的配置 `ssd.conf` to `sd.conf` 如Oracle中所述(文档ID 2595926.1)。在新安装的Solaris 11.4系统和从11.3或更低版本升级的系统中，此行为会有所不同。 
 |===
-+link:https://mysupport.netapp.com/site/["NetApp Bug Online"^]提供大多数已知问题的完整信息，包括可能的建议解决方法。您可能想要使用的一些关键字组合和错误类型包括：
+link:https://mysupport.netapp.com/site/["NetApp Bug Online"^] 提供有关大多数已知问题的完整信息、包括可能的建议解决方法。您可能需要使用的一些关键字组合和错误类型包括：
 
 * FCP常规：显示与特定主机无关的FC和主机总线适配器(HBA)错误。
 * FCP—Solaris
 
 
-
-
-[[whats-next]]
-== 下一步
-
+.下一步
 link:hu-solaris-80.html["了解如何安装 Solaris Host Utilities"]
