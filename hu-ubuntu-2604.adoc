@@ -1,0 +1,434 @@
+---
+sidebar: sidebar 
+permalink: hu-ubuntu-2604.html 
+keywords: host utilities, linux, ubuntu, 26.04, netapp, ontap, fcp, iscsi 
+summary: 在 Ubuntu 26.04 主机上安装 Linux Host Utilities，以管理使用 ONTAP LUN 的 FCP 和 iSCSI 协议操作。 
+---
+= 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Ubuntu 26.04
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Linux Host Utilities 软件为连接到 ONTAP 存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 26.04 主机上安装 Linux Host Utilities 后，您可以使用 Host Utilities 帮助管理 ONTAP LUN 的 FCP 和 iSCSI 协议操作。
+
+
+
+[[step-1-optionally-enable-san-booting]]
+== 第1步：(可选)启用SAN启动
+
+您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
+
+.开始之前
+使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+
+.步骤
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["创建 SAN 启动 LUN 并将其映射到主机"^](英文)
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+
+
+
+
+[[step-2-install-the-linux-host-utilities]]
+== 第2步：安装Linux Host Utilities
+
+NetApp强烈建议安装Linux主机实用程序、以支持ONTAP LUN管理并协助技术支持收集配置数据。
+
+link:hu-luhu-80.html["安装 Linux Host Utilities 8.0"] 。
+
+
+NOTE: 安装Linux Host Utilities不会更改Linux主机上的任何主机超时设置。
+
+
+
+[[step-3-confirm-the-multipath-configuration-for-your-host]]
+== 第3步：确认主机的多路径配置
+
+您可以使用 Ubuntu 26.04 的多路径来管理 ONTAP LUN。
+
+要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
+
+.步骤
+. 验证文件是否 `/etc/multipath.conf`退出。如果此文件不存在、请创建一个空的零字节文件：
++
+[source, cli]
+----
+touch /etc/multipath.conf
+----
+. 首次创建文件时 `multipath.conf`、您可能需要启用并启动多路径服务以加载建议的设置：
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. 每次启动主机时、空的 `/etc/multipath.conf`零字节文件都会自动加载NetApp建议的主机多路径参数作为默认设置。您无需更改 `/etc/multipath.conf`主机的文件、因为操作系统使用可正确识别和管理ONTAP LUN的多路径参数进行编译。
++
+下表显示了ONTAP LUN的Linux操作系统本机编译多路径参数设置。
+
++
+.显示参数设置
+[%collapsible]
+====
+[[multipath-parameter-settings]]
+[cols="2"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "2 pG_INIT_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | LUN 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+====
+. 验证ONTAP LUN的参数设置和路径状态：
++
+[source, cli]
+----
+multipath -ll
+----
++
+默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
+
++
+以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# multipath -ll
+3600a098038314559533f524d6c652f62 dm-24 NETAPP,LUN C-Mode
+size=10G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 11:0:1:13 sdm  8:192  active ready running
+  |- 11:0:3:13 sdah 66:16  active ready running
+  |- 12:0:1:13 sdbc 67:96  active ready running
+  `- 12:0:3:13 sdbx 68:176 active ready running
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF或FAS配置应具有两组优先级较高和较低的路径。优先级较高的主动/优化路径由聚合所在的控制器提供。优先级较低的路径处于活动状态、但未进行优化、因为它们由其他控制器提供服务。只有在优化路径不可用时、才会使用非优化路径。
+
+以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+# multipath -ll
+3600a098038314837352453694b542f4a dm-0 NETAPP,LUN C-Mode
+size=160G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+| |- 14:0:3:0 sdbk 67:224 active ready running
+| `- 15:0:2:0 sdbl 67:240 active ready running
+`-+- policy='service-time 0' prio=10 status=enabled
+  |- 14:0:0:0 sda  8:0    active ready running
+  `- 15:0:1:0 sdv  65:80  active ready running
+----
+=====
+--
+====
+
+
+
+
+[[step-4-confirm-the-iscsi-configuration-for-your-host]]
+== 步骤 4：确认主机的 iSCSI 配置
+
+请确保为主机正确配置 iSCSI。
+
+.关于此任务
+在 iSCSI 主机上执行以下步骤。
+
+.步骤
+. 验证是否已安装 iSCSI 启动程序包 (open-iscsi)：
++
+[source, cli]
+----
+$apt list |grep open-iscsi
+----
++
+您应该会看到类似于以下示例的输出：
+
++
+[listing]
+----
+open-iscsi/noble-updates,noble-updates,now 2.1.9-3ubuntu5.4 amd64
+----
+. 验证位于  `/etc/iscsi/initiatorname.iscsi` 文件中的 iSCSI 启动程序节点名称：
++
+[source, cli]
+----
+InitiatorName=iqn.YYYY-MM.com.<vendor>:<host_name>
+----
+. 配置位于  `/etc/iscsi/iscsid.conf` 文件中的 iSCSI 会话超时参数：
++
+[source, cli]
+----
+node.session.timeo.replacement_timeout = 5
+----
++
+iSCSI `replacement_timeout` 参数控制 iSCSI 层在其上的任何命令失败之前应等待超时路径或会话自行重新建立多长时间。您应在 iSCSI 配置文件中将  `replacement_timeout` 的值设置为 5。
+
+. 启用 iSCSI 服务：
++
+[source, cli]
+----
+$systemctl enable iscsid
+----
+. 启动 iSCSI 服务：
++
+[source, cli]
+----
+$systemctl start iscsid
+----
+. 验证 iSCSI 服务是否正在运行：
++
+[source, cli]
+----
+$systemctl status iscsid
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+●iscsid.service - iSCSI initiator daemon (iscsid)
+     Loaded: loaded (/usr/lib/systemd/system/iscsid.service; enabled; preset: disabled)
+     Active: active (running) since Mon 2026-01-12 12:53:18 IST; 2 days ago
+TriggeredBy: ● iscsid.socket
+       Docs: man:iscsid(8)
+   Main PID: 1127419 (iscsid)
+      Tasks: 2 (limit: 76557)
+     Memory: 4.3M (peak: 8.8M)
+        CPU: 1.657s
+     CGroup: /system.slice/iscsid.service
+             ├─1127418 /usr/sbin/iscsid
+             └─1127419 /usr/sbin/iscsid
+----
+====
+. 发现 iSCSI 目标：
++
+[source, cli]
+----
+$iscsiadm --mode discovery --op update --type sendtargets --portal <target_IP>
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode discovery --op update --type sendtargets --portal 192.168.166.70
+192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.165.71:3260,1045 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.165.70:3260,1044 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+192.168.166.71:3260,1043 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5
+----
+====
+. 登录到目标：
++
+[source, cli]
+----
+$iscsiadm --mode node -l all
+----
+. 将 iSCSI 设置为在主机启动时自动登录：
++
+[source, cli]
+----
+$iscsiadm --mode node -T <target_name> -p <ip:port> -o update -n node.startup -v automatic
+----
++
+将  `<target_name>` 替换为主机启动时要自动登录的目标名称。将  `<ip:port>` 替换为目标的 IP 地址和端口号。例如：
+
++
+[source, cli]
+----
+iscsiadm --mode node -T iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 -p 192.168.166.70:3260 -o update -n node.startup -v automatic
+----
+. 验证 iSCSI 会话：
++
+[source, cli]
+----
+$iscsiadm --mode session
+----
++
+.显示示例
+[%collapsible]
+====
+[listing]
+----
+iscsiadm --mode session
+tcp: [1] 192.168.166.71:3260,1043 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [2] 192.168.165.71:3260,1045 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [3] 192.168.165.70:3260,1044 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+tcp: [4] 192.168.166.70:3260,1042 iqn.1992-08.com.netapp:sn.c770be5d934811f0b624d039eac809ba:vs.5 (non-flash)
+----
+====
+
+
+
+
+[[step-5-optionally-exclude-a-device-from-multipathing]]
+== 第 5 步：（可选）将设备排除在多路径之外
+
+如果需要、您可以将不需要的设备的WWID添加到文件的"黑名单"部分、从而将该设备从多路径中排除 `multipath.conf`。
+
+.步骤
+. 确定WWID：
++
+[source, cli]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+"sa"是要添加到黑名单中的本地SCSI磁盘。
+
++
+例如，WWID为 `360030057024d0730239134810c0cb833`。
+
+. 将WWID添加到"黑名单"部分：
++
+[source, cli]
+----
+blacklist {
+        wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+
+
+
+
+[[step-6-customize-multipath-parameters-for-ontap-luns]]
+== 步骤 6：自定义 ONTAP LUN 的多路径参数
+
+如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改现有节点或在 `multipath.conf`文件中添加专门应用于 ONTAP LUN 的新节点来更正这些设置。您需要在文件中向下滚动，查看适用于您的主机的更改。如果不更正参数，ONTAP LUN 可能无法按预期工作。
+
+请检查 `/etc/multipath.conf`文件，特别是默认值部分中的设置，以了解可能覆盖的设置<<multipath-parameter-settings,多路径参数的默认设置>>。
+
+
+CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
+
+以下示例显示了如何更正被覆盖的默认值。在此示例中、 `multipath.conf`文件为和定义了与 `no_path_retry`ONTAP LUN不兼容的值 `path_checker`、您无法删除这些参数、因为ONTAP存储阵列仍连接到主机。而是通过向专门应用于ONTAP LUN的文件添加设备段来 `multipath.conf`更正和 `no_path_retry`的值 `path_checker`。
+
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+defaults {
+   path_checker      *readsector0*
+   no_path_retry     *fail*
+}
+
+devices {
+   device {
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
+   }
+}
+----
+====
+
+
+[[step-7-review-the-known-issues]]
+== 第 7 步：查看已知问题
+
+没有已知问题。
+
+
+
+[[whats-next]]
+== 下一步是什么？
+
+* link:hu-luhu-command-reference.html["了解如何使用Linux Host Utilities工具"] 。
+* 了解 ASM 镜像
++
+自动存储管理(Automatic Storage Management、ASM)镜像可能需要更改Linux多路径设置、以使ASM能够识别问题并切换到备用故障组。ONTAP上的大多数ASM配置都使用外部冗余、这意味着数据保护由外部阵列提供、ASM不会镜像数据。某些站点使用具有正常冗余的ASM来提供双向镜像、通常在不同站点之间进行镜像。有关详细信息、请参见link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["基于ONTAP的Oracle数据库"^]。
+
+* 了解 Ubuntu Linux 虚拟化 (KVM)
++
+Ubuntu Linux 可以作为 KVM 主机。这样，您就可以使用基于 Linux 内核的虚拟机 (KVM) 技术在单个物理服务器上运行多个虚拟机。KVM 主机不需要对ONTAP LUN 进行显式主机配置设置。
+
+
