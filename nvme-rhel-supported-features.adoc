@@ -16,11 +16,16 @@ summary: 了解ONTAP对 RHEL 主机的支持和功能
 
 
 [role="lead"]
-使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 RHEL 的版本而异。
+基于 NVMe over Fabrics (NVMe-oF) 的主机配置所支持的功能因 ONTAP 和 RHEL 版本而异。
 
 [cols="50,25,25"]
 |===
 | 功能 | RHEL 主机版本 | ONTAP 版本 
+
+
+| NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径  a| 
+9.0 或更高版本
+| 9.16.1 或更高版本 
 
 
 | RHEL 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。  a| 

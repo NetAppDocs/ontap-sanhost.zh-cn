@@ -16,11 +16,32 @@ summary: 了解 ONTAP 对 Ubuntu 主机的支持和功能
 
 
 [role="lead"]
+NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 Ubuntu 版本而异。
+
+[cols="50,25,25"]
+|===
+| 功能 | Ubuntu 主机版本 | ONTAP 版本 
+
+
+| NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径  a| 
+26.04 或更高版本
+| 9.16.1 或更高版本 
+
+
+| NVMe/TCP 是一项完全受支持的企业级功能  a| 
+22.04 或更高版本
+| 9.10.1 或更高版本 
+|===
 无论系统设置中运行的ONTAP版本如何， ONTAP支持以下 SAN 主机功能。
 
 [cols="75,25"]
 |===
 | 功能 | Ubuntu 主机版本 
+
+
+| NVMe-oF 的默认 iopolicy 设置为 queue-depth  a| 
+26.04 或更高版本
+
 
 
 | 原生软件包中的 NetApp 插件会显示 NVMe/FC 命名空间的 ONTAP 详细信息。  a| 
@@ -48,6 +69,9 @@ NOTE: 有关受支持配置的详细信息，请参阅link:https://mysupport.net
 [cols="50,50"]
 |===
 | 如果您的 Ubuntu 版本是.. | 了解…… 
+
+
+| 26.04 | link:nvme-ubuntu-2604.html["为 Ubuntu 26.04 配置 NVMe"] 
 
 
 | 24.04 | link:nvme-ubuntu-2404.html["为 Ubuntu 24.04 配置 NVMe"] 

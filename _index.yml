@@ -14,9 +14,9 @@ indexpage:
       url: "/overview.html"
     - title: "《AIX Host Utilities发行说明》"
       url: "/hu-aix-release-notes.html"
-    - title: HP-UX Host Utilities发行说明
+    - title: HP-UX 主机实用程序发行说明
       url: "/hu-hpux-release-notes.html"
-    - title: "《Linux Host Utilities发行说明》"
+    - title: Linux 主机实用程序发行说明
       url: "/hu-luhu-release-notes.html"
     - title: Solaris 主机实用程序发行说明
       url: "/hu-solaris-release-notes.html"

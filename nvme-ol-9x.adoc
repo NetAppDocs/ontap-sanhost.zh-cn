@@ -98,12 +98,12 @@ libnvme-1.13-1.el9.x86_64
 cat /etc/nvme/hostnqn
 ----
 +
-下面的例子展示了 `hostnqn`版本：
+下面的例子展示了 `hostnqn`价值：
 
 +
 [listing]
 ----
-nqn.2014-08.org.nvmexpress:uuid:8397cecc-30f0-11e8-850f-7ed30aef0cc7
+nqn.2014-08.org.nvmexpress:uuid:8397xxxx-30f0-xxxx-850f-7ed3xxxf0cc7
 ----
 . 在ONTAP系统中，验证以下信息： `hostnqn`字符串匹配 `hostnqn`ONTAP存储系统中相应子系统的字符串：
 +
@@ -534,7 +534,7 @@ ACTION=="add", SUBSYSTEM=="nvme-subsystem", ATTR{subsystype}=="nvm", ATTR{model}
 udevadm control --reload
 udevadm trigger --subsystem-match=nvme-subsystem
 ----
-. 请检查子系统的当前 I/O 策略。例如，替换<子系统> `nvme-subsys0` 。
+. 验证子系统的当前 iopolicy：
 +
 [source, cli]
 ----

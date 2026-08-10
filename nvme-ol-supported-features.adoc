@@ -16,11 +16,16 @@ summary: 了解ONTAP对 Oracle Linux 主机的支持和功能。
 
 
 [role="lead"]
-使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Oracle Linux 的版本而异。
+NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 Oracle Linux 版本而异。
 
 [cols="50,25,25"]
 |===
 | 功能 | Oracle Linux 主机版本 | ONTAP 版本 
+
+
+| NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径  a| 
+9.0 或更高版本
+| 9.16.1 或更高版本 
 
 
 | 从 Oracle Linux 9.6 开始，nvme 支持"queue-depth"i/o 策略，并且默认启用该选项。  a| 

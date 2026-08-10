@@ -745,9 +745,6 @@
   <block id="30d85838b9488ee908d075559c8978cd" category="doc">将VMware vSphere 8.x与ONTAP结合使用</block>
   <block id="8d19958f3e338523c5e956fbddc3c9af" category="doc">将VMware vSphere 6.5和6.7与ONTAP结合使用</block>
   <block id="40db5019ed68654f4eb2cf21ec5021db" category="doc">将VMware vSphere 7.x与ONTAP结合使用</block>
-  <block id="8a4e695bd23e65bc1993b3356eeb2277" category="sidebar">《AIX Host Utilities发行说明》</block>
-  <block id="360baa7584a9f61d637775beeeeab041" category="sidebar">HP-UX Host Utilities发行说明</block>
-  <block id="e8496e75812b6bc1fac8161323e4bf5f" category="sidebar">《Linux Host Utilities发行说明》</block>
   <block id="83610226a06939c868c973094aaa036c" category="sidebar">安装和配置SAN主机</block>
   <block id="984f04c55cb7e3836103c5de001d1b73" category="sidebar">安装SAN Host Utilities</block>
   <block id="75fe51013726f2bbc2f27fa11e729441" category="sidebar">使用FCP和iSCSI配置主机</block>
@@ -1252,7 +1249,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="fb47e45e6131ce8573db817dc34e3ba6" category="paragraph">下面的例子展示了<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>软件包版本：</block>
   <block id="d14319cd9fe8bb3c15b66611ee50ab63" category="paragraph">下面的例子展示了<block ref="d7deb22e6166f8cce87002f8f100fbe6" prefix=" " category="inline-code"></block>软件包版本：</block>
   <block id="353615218a31d80048bde6c36a52f6d6" category="list-text">在主机上，检查 hostnqn 字符串<block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> ：</block>
-  <block id="49254d029fbf5a05d560c49c65e3682d" category="paragraph">下面的例子展示了<block ref="24039a6c469b55da1dae1ff1197f8079" prefix=" " category="inline-code"></block>版本：</block>
   <block id="3c4d68a984cfab18b058f7614517f26b" category="list-text">显示模型名称：</block>
   <block id="61e9eafd114033b79115785b3c135abb" category="paragraph">您应看到以下输出：</block>
   <block id="d474b8d44546ee3743d50d33e3e43016" category="list-text">显示模型描述：</block>
@@ -1939,12 +1935,10 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="7b25b7a93bbe178f0d420e334d6ad6f8" category="example-title">展示 NVMe/TCP 示例</block>
   <block id="9b477ce27ea88f4f85280e9cdee7c154" category="section-title">步骤 4：（可选）修改 udev 规则中的 iopolicy</block>
   <block id="ac81318c5111726b893fa8dcdc177d9f" category="list-text">重新加载udev规则并应用更改：</block>
-  <block id="44d5823b8f69c86c4a41c13b72067d2e" category="list-text">请检查子系统的当前 I/O 策略。例如，替换&lt;子系统&gt;<block ref="621b1b464ec30e8b168fcad04cefe44c" prefix=" " category="inline-code"></block> 。</block>
   <block id="02e6f562a82adc38b8762b8d4fc3c8c2" category="section-title">步骤 5：可选，启用 NVMe/FC 的 1MB I/O。</block>
   <block id="e6b3c2c8d823bf042f0e8e9e02dabf14" category="section-title">步骤 6：验证 NVMe 启动服务</block>
   <block id="378f49529e98279285d9a2eb0d2b3e5e" category="section-title">步骤 7：验证多路径配置</block>
   <block id="f12463db66bb26df5aae5e1aa393205f" category="summary">了解ONTAP对 RHEL 主机的支持和功能</block>
-  <block id="d4063c82026eda59b5c15cca38aa9b92" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 RHEL 的版本而异。</block>
   <block id="21021ea0e52be8e9c599f4dff41e5be0" category="cell">功能</block>
   <block id="6f22b33e80795a1f6ae056be55236d14" category="cell">RHEL 主机版本</block>
   <block id="a7a75f073b67f15aafda088b8cefbc56" category="cell">RHEL 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
@@ -1970,7 +1964,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="ea103ce11fa3acd9ff613573f07e83a8" category="paragraph"><block ref="ea103ce11fa3acd9ff613573f07e83a8" category="inline-link-macro-rx"></block></block>
   <block id="46df6d1dcf1bfe1d293e698a53cb025f" category="inline-link-macro">Rocky Linux ONTAP支持和功能</block>
   <block id="fc35bf5b5ac3f79b1fa6a280a58f05d4" category="summary">了解 Rocky Linux 对ONTAP 的支持和功能</block>
-  <block id="d4c250eac77deea13f8e9d9293a5aad2" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Rocky Linux 的版本而异。</block>
   <block id="3127b50785e82cd676744d9673a7bb86" category="cell">Rocky Linux 主机版本</block>
   <block id="2589c63c17df176e198728a79c3e5212" category="cell">“总是”</block>
   <block id="2f7bb230c70819aeb10b45a709bcf48f" category="cell">“1”</block>
@@ -1980,7 +1973,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="e357b4342a0f3c9f0335b0a8236f0f56" category="admonition">默认情况下，Proxmox OS 原生多路径配置集<block ref="19b30dc119e514235b739e076be9b3cc" prefix=" " category="inline-code"></block>设置为“*严格*”，并带有空零字节<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>每次启动主机时都会运行配置文件。这可以防止主机发现新出现的ONTAP LUN 作为多路径设备，这意味着它们不会自动出现在多路径控制之下。每次重启后，现有的ONTAP LUN 仍保持被发现状态并处于多路径控制之下。</block>
   <block id="d916cdb52453f1297e01a7f2fb93f68b" category="paragraph">以下示例显示了具有两条活动/优化路径和两条活动/非优化路径的ONTAP LUN 的输出：</block>
   <block id="62f90d2b36f26e75648f8fbc863d2103" category="summary">了解 Proxmox 主机对ONTAP 的支持和功能</block>
-  <block id="2b32731d6a5ce83c7ab86fa39ec46a48" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Proxmox 的版本而异。</block>
   <block id="0a0891df749e36f8a1da70eeb7191ff8" category="cell">ONTAP功能</block>
   <block id="458078e18e047c43a6e6db3e150f66f5" category="cell">Proxmox主机版本</block>
   <block id="56884779bcdf2531adce3644feb5d5ad" category="cell">使用原生功能提供 NVMe/FC 和 NVMe/TCP 命名空间的ONTAP详细信息<block ref="e1667929105bf030b9f367fc21f8d216" prefix=" " category="inline-code"></block>包裹。</block>
@@ -2021,7 +2013,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="cbce5c9568a686f91b2dfcf39622b287" category="paragraph">每个主机或控制器都必须与一个 DH-HMAC-CHAP 密钥关联，才能建立安全身份验证。 DH-HMAC-CHAP 密钥是 NVMe 主机或控制器的 NQN 与管理员配置的身份验证密钥的组合。为了验证对等方的身份，NVMe 主机或控制器必须识别与对等方关联的密钥。</block>
   <block id="e908710b4eae6cf350cddad694d8c508" category="paragraph">使用 CLI 或配置 JSON 文件设置安全的带内身份验证。如果需要为不同的子系统指定不同的 dhchap 密钥，请使用 config JSON 文件。</block>
   <block id="aadd5dd4ef730bc8b1907b50349be5cb" category="summary">了解ONTAP对 Oracle Linux 主机的支持和功能。</block>
-  <block id="5e793bc1edf7896fc852345e5935bc81" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Oracle Linux 的版本而异。</block>
   <block id="ca76f3f0a3ed2332a646952650c1cf27" category="cell">Oracle Linux 主机版本</block>
   <block id="fb4c2f51a68601e973070c8a2d8e5711" category="cell">Oracle Linux 主机和ONTAP控制器之间通过 NVMe/TCP 支持安全的带内身份验证。</block>
   <block id="5af23e17fcc3aa14068c40f0b48ba010" category="paragraph">7.7 或更高版本</block>
@@ -2244,7 +2235,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="1da01cb3100d9bb388efb9e186262255" category="admonition">除特别说明需要在ONTAP控制器上执行的步骤外，请在 SUSE Linux Enterprise Server 主机上执行以下步骤。</block>
   <block id="a057c529e976cb9f30353b3692c8e99b" category="list-text">验证主机上是否正确显示了相应ONTAP命名空间的 NVMe-oF 设置（例如，将型号设置为NetApp ONTAP Controller，并将负载均衡 iopolicy 设置为 queue-depth）：</block>
   <block id="64ccbcb7ba85078e4aa581abf43277d6" category="summary">了解 SUSE Linux Enterprise Server 对ONTAP 的支持和功能</block>
-  <block id="cf476c720a8f9dc9299ad07fa1d69acb" category="paragraph">使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 SUSE Linux Enterprise Server 的版本而异。</block>
   <block id="3479c5cdc0aaf6372342ed77cae0fc6b" category="cell">SUSE Linux Enterprise Server 主机版本</block>
   <block id="4b5813f3f046cb084dc505581155b3c7" category="cell">NVMe/TCP 支持传输层安全协议 (TLS) 1.3 加密。</block>
   <block id="55a1f114e0c7d755d2afcf382d5dee5f" category="paragraph">15 SP6 或更高版本</block>
@@ -2318,7 +2308,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="be0724c20eae9509bfecb55613ead45c" category="paragraph">您可以与 SUSE Linux Enterprise Server 16 一起使用多路径来管理 ONTAP LUN。</block>
   <block id="40b573003d21aeb3dbe3d1c46c3c87af" category="cell">如果您的 RHEL 版本是...</block>
   <block id="8637f659452959aafbb4798db09998d6" category="cell">了解...</block>
-  <block id="06314aebedd665e513cf3a7e6c66f84b" category="cell">NVMe/TCP 报告 ASA r2 系统的所有优化路径</block>
   <block id="c74d97b01eae257e44aa9d5bade97baf" category="paragraph">16</block>
   <block id="7ffe1b34523b105b2ec68027b4d78799" category="cell">如果您的 SUSE Linux Enterprise Server 版本为...</block>
   <block id="4563b4da24891c746834232492d8a6e9" category="inline-link-macro">为 SUSE Linux Enterprise Server 16 配置 NVMe</block>
@@ -2434,7 +2423,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="de99ebfc9b67fc827d4b885ffe66df51" category="section-title">步骤 3：（可选）修改 udev 规则中的 iopolicy</block>
   <block id="6c3cb6f0244406645b054fde3485555c" category="paragraph">从 Proxmox VE 9.0 开始，NVMe-oF 的默认 iopolicy 设置为<block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block>。如果要将 iopolicy 更改为<block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>（也可作为可配置选项使用），请按如下所示修改 udev 规则文件：</block>
   <block id="3261e25ecb6c10cb23753dafcc11d3f3" category="list-text">修改规则，使 <block ref="f63d19812a9885e12a84d9c2748b701f" prefix=" " category="inline-code"></block> 更改为 <block ref="7b6d85eaafedeee6d733437bf856da7e" prefix=" " category="inline-code"></block>，如以下示例中所示：</block>
-  <block id="306924ca750fad388254a44133cf90dd" category="list-text">验证子系统的当前 iopolicy。将 &lt;subsystem&gt; 替换为子系统的名称，例如 nvme-subsys0。</block>
   <block id="98f6aa52f5f7e63bbceb451a95606fbb" category="paragraph">以下示例输出显示了使用 NVMe/FC 的 AFF、FAS、ASA 或 ASA r2 系统在双节点 ONTAP 控制器上托管的命名空间。</block>
   <block id="838016fd6dff5a15cdfcd8e43e228f64" category="example-title">显示 AFF、FAS 或 ASA 的示例输出</block>
   <block id="bf9b5fcabbc1d24364d06d41207e081e" category="example-title">显示 ASA r2 的输出示例</block>
@@ -2450,10 +2438,7 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="63c3f0dce3adfd21858e4906af8b540e" category="cell">当 NVMe/FC 协议与 ONTAP 版本 9.9.1 一起使用时，ONTAP 节点不可操作</block>
   <block id="75fe6ffd14185a732fe5c93e3655894f" category="cell">ONTAP 9.9.1 引入了对 NVMe "abort" 命令的支持。当 ONTAP 收到 "abort" 命令以中止正在等待其伙伴命令的 NVMe 融合命令时，会发生 ONTAP 节点中断。此问题仅在使用 NVMe 融合命令（例如 ESX）和光纤通道 (FC) 传输的主机上出现。</block>
   <block id="8f0a705220613d95434cdb5a4fcab23b" category="paragraph">运行 vSphere 8.x 及更高版本并使用虚拟 NVMe (vNVME) 适配器的 Linux VM 会遇到 I/O 错误，因为默认情况下会禁用 vNVMe 重试操作。为了避免在所有路径关闭 (APD) 或繁重 I/O 负载期间运行较旧内核的 Linux VM 上发生中断，VMware 引入了可调节的 "VSCSIDisableNvmeRetry" 来禁用 vNVMe 重试操作。</block>
-  <block id="f4e65c6a7acad92f689e43c9eec48742" category="list-title">RHEL 10.x 版本的 iopolicy 更改</block>
   <block id="439f9f6575b13433a06a0706d7693a1a" category="list-text">从 RHEL 10.1 开始，默认 iopolicy 为 queue-depth。</block>
-  <block id="fd7719d49078cb118a29c8a86504fdf9" category="list-text">在 RHEL 10.0 中，round-robin 是默认的 iopolicy，但 queue-depth 是可配置的选项。</block>
-  <block id="f28c692e063dee2ca7081bc028b1d7c5" category="paragraph">如果使用 RHEL 10.0 并希望将 iopolicy 更改为 queue-depth，请修改 udev rules 文件，如下所示：</block>
   <block id="729803330c2c3ddc5602fa6a32ed6680" category="paragraph">以下示例输出显示了在双节点 ONTAP 控制器上托管的命名空间，适用于 AFF、FAS 和 ASA 系统以及具有 NVMe/FC 的 ASA r2 系统。</block>
   <block id="457f54f6cefd10b25a3bedd3ee0e4fa3" category="example-title">显示 AFF、FAS 和 ASA 示例输出</block>
   <block id="4cbc3c8523dd8f70db284b7defb44454" category="paragraph">以下示例输出显示了托管在 AFF、FAS 和 ASA 系统以及 ASA r2 系统的双节点 ONTAP 控制器上使用 NVMe/TCP 的命名空间。</block>
@@ -2521,4 +2506,31 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="488a9fd122ccd8a3550ceee0ebaee2d4" category="paragraph">Linux Host Utilities 软件为连接到 ONTAP 存储的 Linux 主机提供管理和诊断工具。在 Ubuntu 26.04 主机上安装 Linux Host Utilities 后，您可以使用 Host Utilities 帮助管理 ONTAP LUN 的 FCP 和 iSCSI 协议操作。</block>
   <block id="418d880dfd6db1f0486f40a57a8c26ed" category="paragraph">您可以使用 Ubuntu 26.04 的多路径来管理 ONTAP LUN。</block>
   <block id="7f61a1ef5c19b945998122fe336af401" category="sidebar">26.04</block>
+  <block id="e7aa4fd55ab7603b35f7969a6fcab20b" category="list-text">验证子系统的当前 iopolicy：</block>
+  <block id="7fdeebee493b9a3e417668ecac67c728" category="paragraph">NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 Oracle Linux 版本而异。</block>
+  <block id="b4979b8a9257fbc55c7cf680ad6bbf80" category="cell">NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径</block>
+  <block id="11b1dc19c767a0b45a9e30a60b2b5afc" category="paragraph">基于 NVMe over Fabrics (NVMe-oF) 的主机配置所支持的功能因您的 ONTAP 和 Proxmox 版本而异。</block>
+  <block id="25aca67f3cb7f286630b231a00c56019" category="paragraph">在 RHEL 10.0 中，默认的 iopolicy 为 round-robin，但 queue-depth 可作为可配置选项使用。如果使用的是 RHEL 10.0，则可以通过修改 udev 规则文件将 iopolicy 更改为 queue-depth。</block>
+  <block id="60b443dae63268022d6d8cb29a7515ea" category="paragraph">基于 NVMe over Fabrics (NVMe-oF) 的主机配置所支持的功能因 ONTAP 和 RHEL 版本而异。</block>
+  <block id="c5b4acb51d8f8e0f3d63059f404108e9" category="paragraph">NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 Rocky Linux 版本而异。</block>
+  <block id="f5d5b6b76188147e08fc97838c63aedb" category="paragraph">NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 SUSE Linux Enterprise Server 版本而异。</block>
+  <block id="a51fa2ba34acedf17303d054b76e428a" category="summary">如何使用 ONTAP 为 Ubuntu 26.04 配置 NVMe-oF 主机</block>
+  <block id="8fa0482546afb346040f4dbb39661276" category="doc">配置 Ubuntu 26.04 以使用 NVMe-oF 和 ONTAP 存储</block>
+  <block id="9caf2fb1bf5982cc741a5c2f794f853b" category="paragraph">Ubuntu 26.04 和非对称命名空间访问 (ANA) 支持 NVMe over Fabrics (NVMe-oF)，包括 NVMe over Fibre Channel (NVMe/FC) 和其他传输。在 NVMe-oF 环境中，ANA 相当于 iSCSI 和 FC 环境中的 ALUA 多路径，并使用内核内 NVMe 多路径实现。</block>
+  <block id="e8d64590f6be9f2c9ff88387a4abf120" category="paragraph">了解如何为 Ubuntu 26.04 配置 NVMe over Fabrics (NVMe-oF) 主机。有关更多支持和功能信息，请参阅 <block ref="2596c465ddd6c92fd8b161574a0cd8ba" category="inline-link-macro-rx"></block>。</block>
+  <block id="97ffae754cf814e6985756c1168c9a10" category="paragraph">搭载 Ubuntu 26.04 的 NVMe-oF 存在以下已知限制：</block>
+  <block id="a46f34eff3c172bc38532f4cf3c4811f" category="list-text">目前，Ubuntu 26.04 with ONTAP 不支持使用 NVMe-oF 协议的 SAN 启动。</block>
+  <block id="bf8b1fce81489d764be3d568743fdf83" category="list-text">在服务器上安装 Ubuntu 26.04。安装完成后，确认您正在运行指定的 Ubuntu 26.04 内核：</block>
+  <block id="ffadfa505e58f1ebeb4334eca156a444" category="list-text">在 Ubuntu 26.04 主机上，检查 <block ref="7c33f184451a7567af5a5fb5f2bc7ae1" prefix=" " category="inline-code"></block> 处的 hostnqn 字符串：</block>
+  <block id="8593527c6876ffc101e2719a307460da" category="open-title">NVMeFC - Broadcom/Emulex</block>
+  <block id="6fc67125255813aefa86f32cf03690d7" category="admonition">NVMe/TCP 的 ctrl_loss_tmo 超时默认设置已关闭。这意味着重试次数没有限制（无限期重试），在使用<block ref="9058603c510faa501774cf55475bb088" prefix=" " category="inline-code"></block>或<block ref="90eeda0f5788d7d78c0f198b124712a3" prefix=" " category="inline-code"></block>命令时无需手动配置特定的 ctrl_loss_tmo 超时持续时间（选项 -l）。采用此默认行为，NVMe/TCP 控制器在发生路径故障时不会遇到超时，并保持无限期连接。</block>
+  <block id="4cfdf8b595448e666801f57090310d89" category="paragraph">从 Ubuntu 26.04 开始，NVMe-oF 的默认 iopolicy 设置为 queue-depth。您可以通过修改 udev 规则将 iopolicy 更改为 round-robin。</block>
+  <block id="a5d96de75a58472d649446a14603e93c" category="list-text">修改规则，使队列深度变为循环：</block>
+  <block id="411bc5073b166037282a0e3f0baec62e" category="section-title">步骤 6：验证多路径配置</block>
+  <block id="2ea88a411245c2900b718e27f1abb86d" category="paragraph">对于带有 ONTAP 版本的 Ubuntu 26.04 的 NVMe-oF 主机配置，没有已知问题。</block>
+  <block id="670b11ff0cf7a92ff726ef7719f50975" category="paragraph">NVMe over Fabrics (NVMe-oF) 支持的主机配置功能因您的 ONTAP 和 Ubuntu 版本而异。</block>
+  <block id="b6f1ce68e66757960f053cc99fd4aef6" category="paragraph">26.04 或更高版本</block>
+  <block id="b74c1a6422fd773c6a4cf77ef14675ae" category="cell">NVMe-oF 的默认 iopolicy 设置为 queue-depth</block>
+  <block id="86c05a1fbdedf558f48b1ce3a99d9fe8" category="inline-link-macro">为 Ubuntu 26.04 配置 NVMe</block>
+  <block id="20f16eb182c0a9b085c8193d16ef0fb3" category="cell"><block ref="20f16eb182c0a9b085c8193d16ef0fb3" category="inline-link-macro-rx"></block></block>
 </blocks>

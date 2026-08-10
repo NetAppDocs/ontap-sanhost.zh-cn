@@ -16,11 +16,16 @@ summary: 了解 Proxmox 主机对ONTAP 的支持和功能
 
 
 [role="lead"]
-使用 NVMe over Fabrics (NVMe-oF) 进行主机配置所支持的功能因ONTAP和 Proxmox 的版本而异。
+基于 NVMe over Fabrics (NVMe-oF) 的主机配置所支持的功能因您的 ONTAP 和 Proxmox 版本而异。
 
 [cols="30,20,20"]
 |===
 | ONTAP功能 | Proxmox主机版本 | ONTAP 版本 
+
+
+| NVMe/FC 和 NVMe/TCP 报告 ASA r2 系统上的所有优化路径  a| 
+9.0 或更高版本
+| 9.16.1 或更高版本 
 
 
 | NVMe/TCP 是一项完全受支持的企业级功能  a| 
