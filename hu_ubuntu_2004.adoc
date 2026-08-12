@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: hu_ubuntu_2004.html 
-keywords: host utilities, red hat, rhel, linux, 20.04, netapp, ontap, ubuntu 
+keywords: host utilities, linux, 20.04, netapp, ontap, ubuntu 
 summary: 配置 Ubuntu 20.04 以实现多路径，并使用ONTAP存储的 FCP 和 iSCSI 协议操作的特定参数和设置。 
 ---
 = 使用ONTAP存储为 FCP 和 iSCSI 配置 Ubuntu 20.04

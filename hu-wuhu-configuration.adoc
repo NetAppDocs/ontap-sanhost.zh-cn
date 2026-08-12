@@ -35,7 +35,7 @@ Windows 主机也需要某些 FC、NVMe/FC 和 iSCSI HBA 参数才能成功处�
 
 [NOTE]
 ====
-安装 Windows Host Utilities 7.2 后，需要更改 LimTransferSize 参数值。请参阅 <<nvme-parameter,NVME 参数>>。
+安装 Windows Host Utilities 7.2 后，需要更改 LimTransferSize 参数值。请参阅 <<parameter-72,NVME 参数>>。
 
 对于 Windows Host Utilities 8.0、7.2 或 7.1 的所有其他参数和注册表项，您无需更改值，除非技术支持建议您这样做。
 
@@ -160,9 +160,9 @@ Windows Host Utilities 8.0 在安装过程中会更新以下 NVMe Emulex 驱动�
 [[review-the-configuration-settings-for-windows-host-utilities-7-2]]
 == 检查 Windows Host Utilities 7.2 的配置设置
 
-Windows 主机实用程序安装程序会根据您在安装过程中所做的选择，自动设置 Windows 注册表值以及 iSCSI 和 NVMe HBA 参数。请核对这些数值和操作系统版本。
+[[parameter-72]]Windows Host Utilities 安装程序会根据您在安装过程中所做的选择，自动设置 Windows 注册表值以及 iSCSI 和 NVMe HBA 参数。查看这些值和操作系统版本。
 
-[#nvme-parameter,role="tabbed-block"]
+[role="tabbed-block"]
 ====
 .Windows 注册表值
 --
