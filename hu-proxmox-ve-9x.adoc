@@ -227,7 +227,7 @@ $apt list |grep open-iscsi
 +
 [listing]
 ----
-open-iscsi/stable,now 2.1.11-1+deb13u1 amd64
+open-iscsi/stable,now 2.1.11-1+deb13u2 amd64
 ----
 . 验证位于  `/etc/iscsi/initiatorname.iscsi` 文件中的 iSCSI 启动程序节点名称：
 +
