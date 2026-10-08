@@ -4,7 +4,7 @@ permalink: nvme-ol-10x.html
 keywords: nvme, oracle linux, 10.x, host configuration 
 summary: 适用于 Oracle Linux 10 和 ONTAP 的 NVMe-oF 主机配置 
 ---
-= 配置 Oracle Linux 10.x 和 NVMe-oF 以用于 ONTAP 存储
+= 使用 ONTAP 存储为 NVMe-oF 配置 Oracle Linux 10.x
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

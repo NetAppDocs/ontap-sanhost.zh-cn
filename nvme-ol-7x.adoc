@@ -4,7 +4,7 @@ permalink: nvme-ol-7x.html
 keywords: nvme, linux, oracle, 7.x 
 summary: 为 Oracle Linux 7.x 和ONTAP设置 VMe/FC 主机配置，并提供示例 
 ---
-= 配置 Oracle Linux 7.x 和 NVMe-oF 以用于ONTAP存储
+= 使用 ONTAP 存储为 NVMe-oF 配置 Oracle Linux 7.x
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

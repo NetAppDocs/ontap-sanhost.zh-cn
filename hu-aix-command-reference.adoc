@@ -4,7 +4,7 @@ permalink: hu-aix-command-reference.html
 keywords: host utilities, aix, powervm, vios, 3.1, 7.2, 7.0, netapp, ontap 
 summary: '您可以使用"AIX主机实用程序"示例命令参考使用"主机实用程序"工具对NetApp存储配置进行端到端验证。' 
 ---
-= 使用 AIX Host Utilities 命令验证ONTAP存储配置
+= 适用于 ONTAP 存储配置的 AIX Host Utilities 命令
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

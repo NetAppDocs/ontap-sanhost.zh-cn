@@ -4,7 +4,7 @@ permalink: nvme-ol-supported-features.html
 keywords: nvme, oracle linux, enterprise 
 summary: 了解ONTAP对 Oracle Linux 主机的支持和功能。 
 ---
-= 了解ONTAP对 Oracle Linux 主机的支持和功能。
+= 适用于 Oracle Linux 主机的 ONTAP 支持和功能
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

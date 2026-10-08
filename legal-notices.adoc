@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: legal, notices, copyright, trademarks, patents 
 summary: 法律声明提供对版权声明、商标、专利等的访问。 
 ---
-= 法律声明
+= 适用于 ONTAP 存储的 SAN Host Utilities 的法律声明
 :allow-uri-read: 
 
 

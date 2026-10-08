@@ -4,7 +4,7 @@ permalink: troubleshoot.html
 keywords: host utilities, veritas, infoscale, 8.x, netapp, ontap, vmware, vspehere 
 summary: 您可以为使用FC、FCoE和iSCSI协议的VMware vSphere 8.x版本配置ONTAP SAN主机设置。 
 ---
-= 使用ONTAP存储对 NVMe-oF 进行故障排除（适用于 Linux 主机实用程序）
+= 使用 Linux 主机上的 ONTAP 存储对 NVMe-oF 进行故障排除
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

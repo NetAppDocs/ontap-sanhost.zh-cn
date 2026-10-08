@@ -4,7 +4,7 @@ permalink: hu-hpux-release-notes.html
 keywords: host utilities, hpux, 6.0, netapp, ontap, release, notes 
 summary: 《HPUX Host Utilities 6.0发行说明》 
 ---
-= HP-UX 主机实用程序发行说明
+= 适用于 ONTAP 存储的 HP-UX Host Utilities 发行说明
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 

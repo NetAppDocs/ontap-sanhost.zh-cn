@@ -4,7 +4,7 @@ permalink: nvme-windows-2019.html
 keywords: nvme, windows, enterprise 
 summary: '您可以在运行Windows Server 2019的主机上配置基于光纤通道的NVMe (NVMe/FC)、以便使用ONTAP LUN进行操作。' 
 ---
-= 适用于采用 ONTAP 的 Windows Server 2019 的 NVMe/FC 主机配置
+= 使用 NVMe/FC 为 ONTAP 存储配置 Windows Server 2019
 :hardbreaks:
 :toclevels: 1
 :allow-uri-read: 
