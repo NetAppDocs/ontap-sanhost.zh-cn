@@ -2535,4 +2535,6 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="108d95e5dc2ef949553c9a0fafc69b42" category="sidebar">了解 SAN 工具包</block>
   <block id="99d9fff5cb102bc1af76475056d30628" category="sidebar">了解 FCP 和 iSCSI 配置</block>
   <block id="2577436e0a1529b400f7af13bf054dd3" category="sidebar">了解 NVMe-oF 配置</block>
+  <block id="e00f09f4cda9392c891c49988b80edc8" category="sidebar">SLES-FCP</block>
+  <block id="8becbe3ee64db6f436bf244fb25c7f57" category="sidebar">SLES-NVMe</block>
 </blocks>
