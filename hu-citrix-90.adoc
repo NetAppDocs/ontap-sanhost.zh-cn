@@ -1,0 +1,319 @@
+---
+sidebar: sidebar 
+permalink: hu-citrix-90.html 
+keywords: host utilities, citrix, Xenserver, 9 series, netapp, ontap, san, boot 
+summary: 配置 Citrix Xenserver 9.0 以实现多路径，并针对使用 ONTAP 存储的 FCP 和 iSCSI 协议操作配置特定参数和设置。 
+---
+= 使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 9.0
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+配置 Citrix Xenserver 9.0 以实现多路径，并针对使用 ONTAP 存储的 FCP 和 iSCSI 协议操作配置特定参数和设置。
+
+[NOTE]
+====
+Linux Host Utilities 软件包不支持 Citrix Xenserver 操作系统。
+
+====
+
+
+[[step-1-optionally-enable-san-booting]]
+== 第1步：(可选)启用SAN启动
+
+您可以将主机配置为使用SAN启动来简化部署并提高可扩展性。
+
+.开始之前
+使用link:https://mysupport.netapp.com/matrix/#welcome["互操作性表工具"^]验证您的Linux操作系统、主机总线适配器(HBA)、HBA固件、HBA启动BIOS和ONTAP版本是否支持SAN启动。
+
+.步骤
+. link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["创建 SAN 启动 LUN 并将其映射到主机"^](英文)
+. 在服务器 BIOS 中为 SAN 启动 LUN 映射到的端口启用 SAN 启动。
++
+有关如何启用 HBA BIOS 的信息，请参见供应商专用文档。
+
+. 重新启动主机并验证操作系统是否已启动且正在运行、以验证配置是否成功。
+
+
+
+
+[[step-2-confirm-the-multipath-configuration-for-your-host]]
+== 步骤 2：确认主机的多路径配置
+
+您可以结合 Citrix Xenserver 9.0 使用多路径来管理 ONTAP LUN。
+
+要确保为主机正确配置了多路径、请验证是否已定义此 `/etc/multipath.conf`文件、以及是否已为ONTAP LUN配置了NetApp建议的设置。
+
+.步骤
+. 找到 `/etc/multipath.conf`文件。
++
+如果引用 `/etc/multipath.conf`文件没有 NetApp 设备特定的配置参数，请使用以下自定义 `.conf drop-in`文件添加这些参数。您可以在以下位置找到此文件 `/etc/multipath/conf.d/`：
+
++
+
+NOTE: 请勿对 `/etc/multipath.conf`文件进行更改，因为文件内容可能会在系统更新期间被覆盖。
+
++
+.显示文件内容
+[%collapsible]
+====
+[source, cli]
+----
+$sudo tee -a /etc/multipath/conf.d/custom.conf >/dev/null <<'EOF'
+
+defaults {
+    polling_interval 5
+}
+
+blacklist {
+    wwid <Insert_LUN_wwid_string>
+    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+    devnode "^hd[a-z]"
+    devnode "^cciss.*"
+}
+
+devices {
+    device {
+    vendor "NETAPP"
+    product "LUN.*"
+    user_friendly_names no
+    path_checker "tur"
+    prio "ontap"
+    detect_prio yes
+    path_grouping_policy "group_by_prio"
+    path_selector "service-time 0"
+    failback immediate
+    fast_io_fail_tmo 5
+    dev_loss_tmo infinity
+    no_path_retry queue
+    features "3 queue_if_no_path pg_init_retries 50"
+    flush_on_last_del yes
+    hardware_handler "0"
+    retain_attached_hw_handler yes
+    rr_weight uniform
+  }
+}
+
+EOF
+----
+====
+. 首次配置多路径时，可能需要启用并启动多路径服务才能加载建议的设置：
++
+[source, cli]
+----
+systemctl enable multipathd
+----
++
+[source, cli]
+----
+systemctl start multipathd
+----
+. 每次启动主机时，该 `/etc/multipath/conf.d/custom.conf`文件都会自动加载 NetApp 建议的主机多路径参数作为默认设置。
++
+下表显示了Linux操作系统为ONTAP LUN编译的本机多路径参数设置。
+
++
+.显示参数设置
+[%collapsible]
+====
+[[multipath-parameter-settings]]
+[cols="2"]
+|===
+| 参数 | 正在设置 ... 
+
+
+| detect_prio | 是的。 
+
+
+| dev_los_TMO | " 无限 " 
+
+
+| 故障恢复 | 即时 
+
+
+| fast_io_fail_sMO | 5. 
+
+
+| features | "3 queue_if_no_path pG_init_retries 50" 
+
+
+| flush_on_last_del | 是的。 
+
+
+| 硬件处理程序 | 0 
+
+
+| no_path_retry | 队列 
+
+
+| path_checker | "TUR" 
+
+
+| path_grouping_policy | "Group_by-prio" 
+
+
+| path_selector | " 服务时间 0" 
+
+
+| Polling interval | 5. 
+
+
+| PRIO | ONTAP 
+
+
+| 产品 | LUN 
+
+
+| Retain Attached Hw_handler | 是的。 
+
+
+| rr_weight | " 统一 " 
+
+
+| user_friendly_names | 否 
+
+
+| 供应商 | NetApp 
+|===
+====
+. 验证ONTAP LUN的参数设置和路径状态：
++
+[source, cli]
+----
+multipath -ll
+----
++
+默认多路径参数支持ASA、 AFF和FAS配置。在这些配置中，单个ONTAP LUN 不应需要超过四条路径。存储故障时，路径超过四条可能会导致问题。
+
++
+以下示例输出显示了ASA、AFF或FAS配置中ONTAP LUN的正确参数设置和路径状态。
+
++
+[role="tabbed-block"]
+====
+.ASA配置
+--
+ASA配置可优化指向给定LUN的所有路径、使其保持活动状态。这样可以同时通过所有路径提供I/O操作、从而提高性能。
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+/usr/sbin/mpathutil status
+show topology
+create: 3600a098038315045572b5930646f4b63 dm-1 NETAPP  ,LUN C-Mode
+size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 15:0:0:0  sdb  8:16    active ready running
+  |- 15:0:1:0  sdc  8:32    active ready running
+  |- 16:0:0:0  sdcf 69:48   active ready running
+  `- 16:0:1:0  sdcg 69:64   active ready running
+----
+=====
+--
+.AFF或FAS配置
+--
+AFF 或 FAS 配置应具有两组优先级较高和较低的路径。较高优先级的活动/优化路径由聚合所在的控制器提供。较低优先级的路径是活动的，但未优化，因为它们由不同的控制器提供服务。非优化路径仅在优化路径不可用时使用。
+
+以下示例显示了具有两个主动/优化路径和两个主动/非优化路径的ONTAP LUN的输出：
+
+.显示示例
+[%collapsible]
+=====
+[listing]
+----
+/usr/sbin/mpathutil status
+show topology
+create: 3600a098038315045572b5930646f4b63 dm-1 NETAPP  ,LUN C-Mode
+size=9.0G features='4 queue_if_no_path pg_init_retries 50 retain_attached_hw_handle' hwhandler='1 alua' wp=rw
+|-+- policy='service-time 0' prio=50 status=active
+  |- 15:0:0:0  sdb  8:16    active ready running
+  `- 15:0:1:0  sdc  8:32    active ready running
+`-+- policy='service-time 0' prio=50 status=active
+     |- 16:0:0:0  sdcf 69:48   active ready running
+     `- 16:0:1:0  sdcg 69:64   active ready running
+----
+=====
+--
+====
+
+
+
+
+[[step-3-optionally-exclude-a-device-from-multipathing]]
+== 步骤 3：（可选）从多路径中排除设备
+
+如果需要，您可以将不需要的设备的 WWID 添加到  `/etc/multipath/conf.d/custom.conf` 文件的"blacklist"节中，从而将设备排除在多路径之外。
+
+.步骤
+. 确定WWID：
++
+[source, cli]
+----
+/lib/udev/scsi_id -gud /dev/sda
+----
++
+"sa"是要添加到黑名单中的本地SCSI磁盘。
+
++
+例如，WWID为 `360030057024d0730239134810c0cb833`。
+
+. 将WWID添加到"黑名单"部分：
++
+[source, cli]
+----
+blacklist {
+        wwid   360030057024d0730239134810c0cb833
+        devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+        devnode "^hd[a-z]"
+        devnode "^cciss.*"
+}
+----
+
+
+
+
+[[step-4-customize-multipath-parameters-for-ontap-luns]]
+== 步骤 4：自定义ONTAP LUN 的多路径参数
+
+如果您的主机连接到来自其他供应商的 LUN，并且任何多路径参数设置都被覆盖，则需要通过修改现有节点或在 `/etc/multipath/conf.d/custom.conf`文件中添加专门应用于 ONTAP LUN 的新节点来更正这些设置。您需要在文件中向下滚动，查看适用于您的主机的更改。如果不更正参数，ONTAP LUN 可能无法按预期工作。
+
+
+CAUTION: 您不应覆盖ONTAP LUN的建议参数设置。要获得最佳主机配置性能、需要使用这些设置。有关详细信息、请联系NetApp支持部门、您的操作系统供应商或这两者。
+
+以下示例显示了如何纠正被覆盖的默认值。在此示例中， `custom.conf drop-in` 文件定义了与 ONTAP LUN 不兼容的  `path_checker` 和  `no_path_retry` 的值，并且由于 ONTAP 存储阵列仍连接到主机，因此您无法删除这些参数。相反，您可以通过向  `custom.conf drop-in` 文件中添加专门适用于 ONTAP LUN 的 device 节来纠正  `path_checker` 和  `no_path_retry` 的值。
+
+.显示示例
+[%collapsible]
+====
+[listing, subs="+quotes"]
+----
+defaults {
+   path_checker      *readsector0*
+   no_path_retry     *fail*
+}
+
+devices {
+   device {
+      vendor          "NETAPP"
+      product         "LUN"
+      no_path_retry   *queue*
+      path_checker    *tur*
+   }
+}
+----
+====
+
+
+[[step-5-review-the-known-issues]]
+== 步骤 5：查看已知问题
+
+没有已知问题。

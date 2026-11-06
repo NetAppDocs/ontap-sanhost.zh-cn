@@ -2537,4 +2537,9 @@ FC驱动程序绑定已从更改为<block ref="b9ca0a083600812be33f42f91f00492c"
   <block id="2577436e0a1529b400f7af13bf054dd3" category="sidebar">了解 NVMe-oF 配置</block>
   <block id="e00f09f4cda9392c891c49988b80edc8" category="sidebar">SLES-FCP</block>
   <block id="8becbe3ee64db6f436bf244fb25c7f57" category="sidebar">SLES-NVMe</block>
+  <block id="b69bffb1a1f55594751fbc58f7abb114" category="summary">配置 Citrix Xenserver 9.0 以实现多路径，并针对使用 ONTAP 存储的 FCP 和 iSCSI 协议操作配置特定参数和设置。</block>
+  <block id="f52d84b92b78c6dad322e059e6943904" category="doc">使用 ONTAP 存储为 FCP 和 iSCSI 配置 Citrix Xenserver 9.0</block>
+  <block id="aa6f72aa4dad8dc14f65a49c7b60982a" category="paragraph">您可以结合 Citrix Xenserver 9.0 使用多路径来管理 ONTAP LUN。</block>
+  <block id="3f6d8773170dd1c73493c97ee36bb40a" category="paragraph">AFF 或 FAS 配置应具有两组优先级较高和较低的路径。较高优先级的活动/优化路径由聚合所在的控制器提供。较低优先级的路径是活动的，但未优化，因为它们由不同的控制器提供服务。非优化路径仅在优化路径不可用时使用。</block>
+  <block id="1d5076606adf1177c26a3f206e21498e" category="sidebar">Xenserver 9.0</block>
 </blocks>
